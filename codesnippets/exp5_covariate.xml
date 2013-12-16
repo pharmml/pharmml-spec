@@ -1,0 +1,16 @@
+<CovariateModel blkId="cm1">
+    <Covariate symbId="W">
+        <Continuous>
+            <Transformation>
+                <math:Equation>
+                    <math:Uniop op="log">
+                        <math:Binop op="divide">
+                            <ct:SymbRef symbIdRef="W"/>
+                            <ct:Real>70</ct:Real>
+                        </math:Binop>
+                    </math:Uniop>
+                </math:Equation>
+            </Transformation>
+        </Continuous>
+    </Covariate>
+</CovariateModel>

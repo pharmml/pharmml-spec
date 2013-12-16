@@ -1,0 +1,21 @@
+<!-- type 6 - COMBINED ADDITIVE and POWER MODEL 1 -->
+<ct:FunctionDefinition symbId="combinedAdditivePowerModel1" symbolType="real">
+    <ct:FunctionArgument symbId="a" symbolType="real"/>
+    <ct:FunctionArgument symbId="b" symbolType="real"/>
+    <ct:FunctionArgument symbId="c" symbolType="real"/>
+    <ct:FunctionArgument symbId="f" symbolType="real"/>
+    <ct:Definition>
+        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+            <Binop op="plus">
+                <ct:SymbRef symbIdRef="a"/>
+                <Binop op="times">
+                    <ct:SymbRef symbIdRef="b"/>
+                    <Binop op="power">
+                        <ct:SymbRef symbIdRef="f"/>
+                        <ct:SymbRef symbIdRef="c"/>
+                    </Binop>
+                </Binop>
+            </Binop>
+        </Equation>
+    </ct:Definition>
+</ct:FunctionDefinition>

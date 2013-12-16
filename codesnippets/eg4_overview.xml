@@ -1,0 +1,14 @@
+<PharmML xmlns="http://www.ddmore.eu/Resources/PharmML/1.0"
+    name="Warfarin example - basic PK with covariate"
+    independentVar="t">
+    <!-- Namespaces omitted -->
+    <SymbolDefinition symbId="combined1" symbolType="scalar">
+      <!-- Omitted details -->
+    </SymbolDefinition>
+    <ModelDefinition xmlns="http://www.ddmore.eu/Resources/ModelDefinition/1.0">
+      <!-- Omitted details -->
+    </ModelDefinition>
+    <ModellingSteps xmlns="http://www.ddmore.eu/Resources/ModellingSteps/1.0">
+      <!-- Omitted Details -->
+    </ModellingSteps>
+</PharmML>

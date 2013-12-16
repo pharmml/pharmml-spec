@@ -1,0 +1,15 @@
+<Parameter symbId="ka" transformation="log">
+    <!-- omitted log(ka) expression -->
+    <RandomEffect levelId="indiv" symbId="eta_ka">
+        <Distribution xmlns="http://www.ddmore.eu/Resources/Uncertainty/1.0">
+	  <!-- Omitted N(0, omega_ka) -->
+        </Distribution>
+    </RandomEffect>
+    <Covariate>
+        <math:Var block="c1" symbId="TreatSeq"/>
+        <FixedEffect>
+            <math:Var symbId="beta_ka_treatseq"/>
+            <Category catId="AB"/>
+        </FixedEffect>
+    </Covariate>
+</Parameter>

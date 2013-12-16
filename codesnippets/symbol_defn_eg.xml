@@ -1,0 +1,18 @@
+<SymbolDefinition symbId="combinedErrorModel" symbolType="scalar">
+    <FunctionDefinition>
+        <FunctionArgument symbId="a" symbolType="scalar"/>
+        <FunctionArgument symbId="b" symbolType="scalar"/>
+        <FunctionArgument symbId="f" symbolType="scalar"/>
+        <Definition>
+            <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+                <Binop op="plus">
+                    <Var symbId="a"/>
+                    <Binop op="times">
+                        <Var symbId="b"/>
+                        <Var symbId="f"/>
+                    </Binop>
+                </Binop>
+            </Equation>
+        </Definition>
+    </FunctionDefinition>
+</SymbolDefinition>

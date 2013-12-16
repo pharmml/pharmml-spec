@@ -1,0 +1,21 @@
+<ParametersToEstimate>
+    <Variable block="p1" symbId="Tlag" fixed="false"/>
+    <Variable block="p1" symbId="pop_Tlag" fixed="false">
+        <InitialEstimate>
+            <math:Scalar value="1"/>
+        </InitialEstimate>
+    </Variable>
+    <!-- Some detail omitted -->
+    <Variable block="p1" symbId="pop_ka" fixed="false">
+        <InitialEstimate>
+            <math:Scalar value="1"/>
+        </InitialEstimate>
+        <LowerBound>
+            <math:Scalar value="0"/>
+        </LowerBound>
+        <UpperBound>
+            <math:Scalar value="2"/>
+        </UpperBound>
+    </Variable>
+    <!-- Some detail omitted -->
+</ParametersToEstimate>

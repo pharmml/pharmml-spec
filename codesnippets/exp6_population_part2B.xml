@@ -1,0 +1,11 @@
+<!-- SNIP -->
+<ds:Row>
+    <ct:Id>i6</ct:Id>
+    <ct:Id>a2</ct:Id>
+    <ct:Id>M</ct:Id>
+    <ds:Table>
+        <ds:Row><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
+        <ds:Row><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
+    </ds:Table>
+</ds:Row>
+<!-- SNIP -->

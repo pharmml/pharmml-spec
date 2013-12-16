@@ -1,0 +1,22 @@
+<Observations>
+    <Timepoints>
+        <ct:Vector>
+            <ct:Real>0.5</ct:Real>
+            <ct:Sequence>
+                <ct:Begin><ct:Int>4</ct:Int></ct:Begin>
+                <ct:StepSize><ct:Int>4</ct:Int></ct:StepSize>
+                <ct:End><ct:Int>48</ct:Int></ct:End>
+            </ct:Sequence>
+            <!-- SNIP -->
+            <ct:Sequence>
+                <ct:Begin><ct:Int>192</ct:Int></ct:Begin>
+                <ct:StepSize><ct:Int>4</ct:Int></ct:StepSize>
+                <ct:End><ct:Int>250</ct:Int></ct:End>
+            </ct:Sequence>
+        </ct:Vector>
+    </Timepoints>
+    <Continuous>
+        <ct:SymbRef blkIdRef="main" symbIdRef="Cc"/>
+        <ct:SymbRef blkIdRef="o1" symbIdRef="Cc"/>
+    </Continuous>
+</Observations>

@@ -1,0 +1,26 @@
+<CovariateModel id="c1">
+    <Covariate symbId="Sex">
+        <Categorical>
+            <Category catId="F" name="female"/>
+            <Category catId="M" name="male"/>
+        </Categorical>
+    </Covariate>
+    <Covariate symbId="Treat">
+        <Categorical>
+            <Category catId="A"/>
+            <Category catId="B"/>
+        </Categorical>
+    </Covariate>
+    <Covariate symbId="TreatSeq">
+        <Categorical>
+            <Category catId="AB" name="A-B"/>
+            <Category catId="BA" name="B-A"/>
+        </Categorical>
+    </Covariate>
+    <Covariate symbId="Occasion">
+        <Categorical>
+            <Category catId="occ1" name="1"/>
+            <Category catId="occ2" name="2"/>
+        </Categorical>
+    </Covariate>
+</CovariateModel>

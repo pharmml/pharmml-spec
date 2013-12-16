@@ -1,0 +1,15 @@
+To build the schema documentation follow these steps.
+
+1) Generate schema documentation using Oxygen. Output this in DocBook format.
+
+2) Ensure you have dblatex and latexmk installed (usually installed as part of TexLive).
+
+3) Run the shell script build_schema_defn.sh
+
+You can safely ignore errors such as these: *** Error: 206,3,517,25: invalid calspair
+
+4) If all went well you should have a file called pharmml.pdf that will be included into
+   the main specification document.
+
+Stuart Moodie.
+10 Sep 2013.

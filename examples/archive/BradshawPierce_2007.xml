@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps" name="BradshawPierce"
+    independentVar="t" writtenVersion="0.1">
+    <!-- BLOCK I: MODEL DEFINITION -->
+    <!-- there is only one block here as neither Trial Design nor Modelling Steps are defined in the model description -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <!-- PARAMETER MODEL -->
+        <ParameterModel id="pm1">
+            <Parameter symbId="blood_volume"/>                  <!-- input[0] -->
+            <Parameter symbId="gut_Km1"/>
+            <Parameter symbId="gut_Km2"/>
+            <Parameter symbId="gut_Vmax1"/>
+            <Parameter symbId="gut_Vmax2"/>
+            <Parameter symbId="gut_bindingAffinity"/>
+            <Parameter symbId="gut_bindingCapacity"/>
+            <Parameter symbId="gut_bloodFlow"/>
+            <Parameter symbId="gut_fractionCleared"/>
+            <Parameter symbId="gut_partitionCoefficient"/>
+            <Parameter symbId="gut_volume"/>                    <!-- input[10] -->
+            <Parameter symbId="kidney_Km1"/>
+            <Parameter symbId="kidney_Km2"/>                    <!-- not found: most likely INPUT[121] should stand for INPUT[12]=kidney_Km2 -->
+            <Parameter symbId="kidney_Vmax1"/>
+            <Parameter symbId="kidney_Vmax2"/>
+            <Parameter symbId="kidney_bindingAffinity"/>
+            <Parameter symbId="kidney_bindingCapacity"/>
+            <Parameter symbId="kidney_bloodFlow"/>
+            <Parameter symbId="kidney_fractionCleared"/>
+            <Parameter symbId="kidney_partitionCoefficient"/>
+            <Parameter symbId="kidney_volume"/>                 <!-- input[20] -->
+            <Parameter symbId="liver_Km1"/>
+            <Parameter symbId="liver_Km2"/>
+            <Parameter symbId="liver_Vmax1"/>
+            <Parameter symbId="liver_Vmax2"/>
+            <Parameter symbId="liver_bindingAffinity"/>
+            <Parameter symbId="liver_bindingCapacity"/>
+            <Parameter symbId="liver_fractionCleared"/>
+            <Parameter symbId="liver_hepaticArteryBloodFlow"/>
+            <Parameter symbId="liver_partitionCoefficient"/>
+            <Parameter symbId="liver_volume"/>                  <!-- input[30] -->
+            <Parameter symbId="rapidlyPerfused_bindingAffinity"/>
+            <Parameter symbId="rapidlyPerfused_bindingCapacity"/>
+            <Parameter symbId="rapidlyPerfused_bloodFlow"/>
+            <Parameter symbId="rapidlyPerfused_partitionCoefficient"/>
+            <Parameter symbId="rapidlyPerfused_volume"/>
+            <Parameter symbId="slowlyPerfused_bindingAffinity"/>
+            <Parameter symbId="slowlyPerfused_bindingCapacity"/>
+            <Parameter symbId="slowlyPerfused_bloodFlow"/>
+            <Parameter symbId="slowlyPerfused_partitionCoefficient"/>
+            <Parameter symbId="slowlyPerfused_volume"/>         <!-- input[40] -->
+        </ParameterModel>
+        <!-- STRUCTURAL MODEL - 'globcalc' parameters (A), fluxes and concentrations (B) & ODEs (C) -->
+        <StructuralModel id="sm1">
+            <!-- ******************************************************************************************************** -->
+            <!-- A - 'globcalc' parameters:                                                                               -->
+            <!-- ******************************************************************************************************** -->
+            <!-- globcalc[0] = liver_splanchicBloodFlow -->
+            <!-- liver_splanchicBloodFlow = gut_bloodFlow -->
+            <Variable symbId="liver_splanchicBloodFlow" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Var block="pm1" symbId="gut_bloodFlow"/>
+                </Equation>
+            </Variable>
+            <!-- globcalc[1] = liver_bloodFlow -->
+            <!-- liver_bloodFlow  = (liver_hepaticArteryBloodFlow + liver_splanchicBloodFlow) -->
+            <Variable symbId="liver_bloodFlow" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="plus">
+                        <Var block="pm1" symbId="liver_hepaticArteryBloodFlow"/>
+                        <Var symbId="liver_splanchicBloodFlow"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- globcalc[2] = blood_bloodFlow -->
+            <!-- blood_bloodFlow  = (slowlyPerfused_bloodFlow + kidney_bloodFlow + rapidlyPerfused_bloodFlow + liver_bloodFlow) -->
+            <Variable symbId="blood_bloodFlow" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="plus">
+                        <Var block="pm1" symbId="slowlyPerfused_bloodFlow"/>
+                        <Binop op="plus">
+                            <Var block="pm1" symbId="kidney_bloodFlow"/>
+                            <Binop op="plus">
+                                <Var block="pm1" symbId="rapidlyPerfused_bloodFlow"/>
+                                <Var symbId="liver_splanchicBloodFlow"/>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- ******************************************************************************************************** -->
+            <!-- B - The fluxes and concentrations are further defined, as follows:                                       -->
+            <!-- ******************************************************************************************************** -->
+            <!-- 1.	blood_fluxIn = (slowlyPerfused_fluxOut + kidney_fluxOut + rapidlyPerfused_fluxOut + liver_fluxOut) -->
+            <Variable symbId="blood_fluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="plus">
+                        <Var symbId="slowlyPerfused_fluxOut"/>
+                        <Binop op="plus">
+                            <Var symbId="kidney_fluxOut"/>
+                            <Binop op="plus">
+                                <Var symbId="rapidlyPerfused_fluxOut"/>
+                                <Var symbId="liver_fluxOut"/>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 2.	blood_fluxOut = (blood_concentration * liver_bloodFlow) -->
+            <Variable symbId="blood_fluxOut" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="times">
+                        <Var symbId="blood_concentration"/>
+                        <Var symbId="blood_bloodFlow"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 3.	gut_fluxIn = (gut_bloodFlow* blood_concentration) -->
+            <Variable symbId="gut_fluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="times">
+                        <Var block="pm1" symbId="gut_bloodFlow"/>
+                        <Var symbId="blood_concentration"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 4.	gut_fluxOut = ((gut_bloodFlow * gut_amount) / ((gut_volume * gut_partitionCoefficient) + (gut_bindingCapacity / (gut_bindingAffinity + gut_concentration)))) -->
+            <Variable symbId="gut_fluxOut" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Binop op="times">
+                            <Var block="pm1" symbId="gut_bloodFlow"/>
+                            <Var symbId="gut_amount"/>
+                        </Binop>
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Var block="pm1" symbId="gut_volume"/>
+                                <Var block="pm1" symbId="gut_partitionCoefficient"/>
+                            </Binop>
+                            <Binop op="divide">
+                                <Var block="pm1" symbId="gut_bindingCapacity"/>
+                                <Binop op="plus">
+                                    <Var block="pm1" symbId="gut_bindingAffinity"/>
+                                    <Var symbId="gut_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 5.	gut_concentration = (gut_amount / gut_volume) -->
+            <Variable symbId="gut_concentration" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Var symbId="gut_amount"/>
+                        <Var block="pm1" symbId="gut_volume"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 6.	kidney_fluxIn = (kidney_bloodFlow * blood_concentration) -->
+            <Variable symbId="kidney_fluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="times">
+                        <Var block="pm1" symbId="kidney_bloodFlow"/>
+                        <Var symbId="blood_concentration"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 7.	kidney_fluxOut = ((kidney_bloodFlow * kidney_amount) / ((kidney_volume * kidney_partitionCoefficient) + (kidney_bindingCapacity / (kidney_bindingAffinity + kidney_concentration)))) -->
+            <Variable symbId="kidney_fluxOut" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Binop op="times">
+                            <Var block="pm1" symbId="kidney_bloodFlow"/>
+                            <Var symbId="kidney_amount"/>
+                        </Binop>
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Var block="pm1" symbId="kidney_volume"/>
+                                <Var block="pm1" symbId="kidney_partitionCoefficient"/>
+                            </Binop>
+                            <Binop op="divide">
+                                <Var block="pm1" symbId="kidney_bindingCapacity"/>
+                                <Binop op="plus">
+                                    <Var block="pm1" symbId="kidney_bindingAffinity"/>
+                                    <Var symbId="kidney_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 8.	kidney_concentration = (kidney_amount / kidney_volume) -->
+            <Variable symbId="kidney_concentration" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Var symbId="kidney_amount"/>
+                        <Var block="pm1" symbId="kidney_volume"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 9.	liver_fluxIn = (liver_arterialFluxIn + liver_splanchicFluxIn) -->
+            <Variable symbId="liver_fluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="plus">
+                        <Var symbId="liver_arterialFluxIn"/>
+                        <Var symbId="liver_splanchicFluxIn"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 10. liver_fluxOut = ((liver_splanchicBloodFlow * liver_amount) / ((liver_volume * liver_partitionCoefficient) + (liver_bindingCapacity / (liver_bindingAffinity + liver_concentration)))) -->
+            <Variable symbId="liver_fluxOut" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Binop op="times">
+                            <Var symbId="liver_splanchicBloodFlow"/>
+                            <Var symbId="liver_amount"/>
+                        </Binop>
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Var block="pm1" symbId="liver_volume"/>
+                                <Var block="pm1" symbId="liver_partitionCoefficient"/>
+                            </Binop>
+                            <Binop op="divide">
+                                <Var block="pm1" symbId="liver_bindingCapacity"/>
+                                <Binop op="plus">
+                                    <Var block="pm1" symbId="liver_bindingAffinity"/>
+                                    <Var symbId="liver_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 11. liver_concentration = (liver_amount / liver_volume) -->
+            <Variable symbId="liver_concentration" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Var symbId="liver_amount"/>
+                        <Var block="pm1" symbId="liver_volume"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 12. slowlyPerfused_fluxIn = (slowlyPerfused_bloodFlow * blood_concentration) -->
+            <Variable symbId="slowlyPerfused_fluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="times">
+                        <Var block="pm1" symbId="slowlyPerfused_bloodFlow"/>
+                        <Var symbId="blood_concentration"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 13. slowlyPerfused_fluxOut = ((slowlyPerfused_bloodFlow * slowlyPerfused_amount) / ((slowlyPerfused_volume * slowlyPerfused_partitionCoefficient) + (slowlyPerfused_bindingCapacity / (slowlyPerfused_bindingAffinity + slowlyPerfused_concentration)))) -->
+            <Variable symbId="slowlyPerfused_fluxOut" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Binop op="times">
+                            <Var block="pm1" symbId="slowlyPerfused_bloodFlow"/>
+                            <Var symbId="slowlyPerfused_amount"/>
+                        </Binop>
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Var block="pm1" symbId="slowlyPerfused_volume"/>
+                                <Var block="pm1" symbId="slowlyPerfused_partitionCoefficient"/>
+                            </Binop>
+                            <Binop op="divide">
+                                <Var block="pm1" symbId="slowlyPerfused_bindingCapacity"/>
+                                <Binop op="plus">
+                                    <Var block="pm1" symbId="slowlyPerfused_bindingAffinity"/>
+                                    <Var symbId="slowlyPerfused_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 14. slowlyPerfused_concentration = (slowlyPerfused_amount  / slowlyPerfused_volume) -->
+            <Variable symbId="slowlyPerfused_concentration" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Var symbId="slowlyPerfused_amount"/>
+                        <Var block="pm1" symbId="slowlyPerfused_volume"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 15. rapidlyPerfused_fluxIn = (rapidlyPerfused_bloodFlow * blood_concentration) -->
+            <Variable symbId="rapidlyPerfused_fluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="times">
+                        <Var block="pm1" symbId="rapidlyPerfused_bloodFlow"/>
+                        <Var symbId="blood_concentration"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 16. rapidlyPerfused_fluxOut = ((rapidlyPerfused_bloodFlow * rapidlyPerfused_amount) / ((rapidlyPerfused_volume * rapidlyPerfused_partitionCoefficient) + (rapidlyPerfused_bindingCapacity / (rapidlyPerfused_bindingAffinity + rapidlyPerfused_concentration)))) -->
+            <Variable symbId="rapidlyPerfused_fluxOut" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Binop op="times">
+                            <Var block="pm1" symbId="rapidlyPerfused_bloodFlow"/>
+                            <Var symbId="rapidlyPerfused_amount"/>
+                        </Binop>
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Var block="pm1" symbId="rapidlyPerfused_volume"/>
+                                <Var block="pm1" symbId="rapidlyPerfused_partitionCoefficient"/>
+                            </Binop>
+                            <Binop op="divide">
+                                <Var block="pm1" symbId="rapidlyPerfused_bindingCapacity"/>
+                                <Binop op="plus">
+                                    <Var block="pm1" symbId="rapidlyPerfused_bindingAffinity"/>
+                                    <Var symbId="rapidlyPerfused_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 17. rapidlyPerfused_concentration = (rapidlyPerfused_amount / rapidlyPerfused_volume) -->
+            <Variable symbId="rapidlyPerfused_concentration" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Var symbId="rapidlyPerfused_amount"/>
+                        <Var block="pm1" symbId="rapidlyPerfused_volume"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 18. blood_concentration = (blood_amount / blood_volume) -->
+            <Variable symbId="blood_concentration" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="divide">
+                        <Var symbId="blood_amount"/>
+                        <Var block="pm1" symbId="blood_volume"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 19. liver_arterialFluxIn = (blood_concentration * liver_bloodFlow) -->
+            <Variable symbId="liver_arterialFluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="times">
+                        <Var symbId="blood_concentration"/>
+                        <Var block="pm1" symbId="liver_hepaticArteryBloodFlow"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 20. liver_splanchicFluxIn = gut_fluxOut -->
+            <Variable symbId="liver_splanchicFluxIn" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Var symbId="gut_fluxOut"/>
+                </Equation>
+            </Variable>
+            <!-- ******************************************************************************************************** -->
+            <!-- C - ODEs                                                                                                 -->
+            <!-- ******************************************************************************************************** -->
+            <!-- 1.	d(_state[0])/dt  -->
+            <!-- d(blood_amount)/dt = (blood_fluxIn - blood_fluxOut) -->
+            <Variable symbId="blood_amount" independentVar="t" symbolType="derivative">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="minus">
+                        <Var symbId="blood_fluxIn"/>
+                        <Var symbId="blood_fluxOut"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 2.	d(_state[1])/dt  -->
+            <!-- d(gut_amount)/dt =((((gut_fluxIn - gut_fluxOut) - ((gut_Vmax1 * gut_concentration) / (gut_Km1 + gut_concentration))) - ((gut_Vmax2 * gut_concentration) / (gut_Km2 + gut_concentration))) – (gut_fluxIn * gut_fractionCleared)) -->
+            <Variable symbId="gut_amount" independentVar="t" symbolType="derivative">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="minus">
+                        <Binop op="minus">
+                            <Binop op="minus">
+                                <Binop op="minus">
+                                    <Var symbId="gut_fluxIn"/>
+                                    <Var symbId="gut_fluxOut"/>
+                                </Binop>
+                                <Binop op="divide">
+                                    <Binop op="times">
+                                        <Var block="pm1" symbId="gut_Vmax1"/>
+                                        <Var symbId="gut_concentration"/>
+                                    </Binop>
+                                    <Binop op="plus">
+                                        <Var block="pm1" symbId="gut_Km1"/>
+                                        <Var symbId="gut_concentration"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Binop op="divide">
+                                <Binop op="times">
+                                    <Var block="pm1" symbId="gut_Vmax2"/>
+                                    <Var symbId="gut_concentration"/>
+                                </Binop>
+                                <Binop op="plus">
+                                    <Var block="pm1" symbId="gut_Km2"/>
+                                    <Var symbId="gut_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Binop op="times">
+                            <Var symbId="gut_fluxIn"/>
+                            <Var block="pm1" symbId="gut_fractionCleared"/>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 3.	d(_state[2])/dt  -->
+            <!-- d(kidney_amount)/dt = ((((kidney_fluxIn - kidney_fluxOut) - ((kidney_Vmax1 * kidney_concentration) / (kidney_Km1 + kidney_concentration))) - ((kidney_Vmax2 * kidney_concentration) / (_input[121] = 'kidney_Km2' + kidney_concentration))) – (kidney_fluxIn * kidney_fractionCleared)) -->
+            <Variable symbId="kidney_amount" independentVar="t" symbolType="derivative">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="minus">
+                        <Binop op="minus">
+                            <Binop op="minus">
+                                <Binop op="minus">
+                                    <Var symbId="kidney_fluxIn"/>
+                                    <Var symbId="kidney_fluxOut"/>
+                                </Binop>
+                                <Binop op="divide">
+                                    <Binop op="times">
+                                        <Var block="pm1" symbId="kidney_Vmax1"/>
+                                        <Var symbId="kidney_concentration"/>
+                                    </Binop>
+                                    <Binop op="plus">
+                                        <Var block="pm1" symbId="kidney_Km1"/>
+                                        <Var symbId="kidney_concentration"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Binop op="divide">
+                                <Binop op="times">
+                                    <Var block="pm1" symbId="kidney_Vmax2"/>
+                                    <Var symbId="kidney_concentration"/>
+                                </Binop>
+                                <Binop op="plus">
+                                    <!-- <Var symbId="_input_121"/> -->
+                                    <Var block="pm1" symbId="kidney_Km2"/>
+                                    <Var symbId="kidney_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Binop op="times">
+                            <Var symbId="kidney_fluxIn"/>
+                            <Var block="pm1" symbId="kidney_fractionCleared"/>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 4.	d(_state[3])/dt  -->
+            <!-- d(liver_amount)/dt = ((((liver_fluxIn - liver_fluxOut) - ((liver_Vmax1 * liver_concentration) / (liver_Km1 + liver_concentration))) - ((liver_Vmax2 * liver_concentration) / (liver_Km2 + liver_concentration))) – (liver_fluxIn * liver_fractionCleared)) -->
+            <Variable symbId="liver_amount" independentVar="t" symbolType="derivative">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="minus">
+                        <Binop op="minus">
+                            <Binop op="minus">
+                                <Binop op="minus">
+                                    <Var symbId="liver_fluxIn"/>
+                                    <Var symbId="liver_fluxOut"/>
+                                </Binop>
+                                <Binop op="divide">
+                                    <Binop op="times">
+                                        <Var block="pm1" symbId="liver_Vmax1"/>
+                                        <Var symbId="liver_concentration"/>
+                                    </Binop>
+                                    <Binop op="plus">
+                                        <Var block="pm1" symbId="liver_Km1"/>
+                                        <Var symbId="liver_concentration"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Binop op="divide">
+                                <Binop op="times">
+                                    <Var block="pm1" symbId="liver_Vmax2"/>
+                                    <Var symbId="liver_concentration"/>
+                                </Binop>
+                                <Binop op="plus">
+                                    <Var block="pm1" symbId="liver_Km2"/>
+                                    <Var symbId="liver_concentration"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Binop op="times">
+                            <Var symbId="liver_fluxIn"/>
+                            <Var block="pm1" symbId="liver_fractionCleared"/>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 5.	d(_state[4])/dt  -->
+            <!-- d(rapidlyPerfused_amount)/dt = (rapidlyPerfused_fluxIn - rapidlyPerfused_fluxOut) -->
+            <Variable symbId="rapidlyPerfused_amount" independentVar="t" symbolType="derivative">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="minus">
+                        <Var symbId="rapidlyPerfused_fluxIn"/>
+                        <Var symbId="rapidlyPerfused_fluxOut"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- 6.	d(_state[5])/dt  -->
+            <!-- d(slowlyPerfused_amount)/dt = (slowlyPerfused_fluxIn - slowlyPerfused_fluxOut) -->
+            <Variable symbId="slowlyPerfused_amount" independentVar="t" symbolType="derivative">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="minus">
+                        <Var symbId="slowlyPerfused_fluxIn"/>
+                        <Var symbId="slowlyPerfused_fluxOut"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- TEMPLATE FOR THE COMPLEX ODEs 1,2,3 USED ABOVE -->
+            <!-- 
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                <Binop op="minus">
+                    <Binop op="minus">
+                        <Binop op="minus">
+                            <Binop op="minus">
+                                <Var symbId=""/>
+                                <Var symbId=""/>
+                            </Binop>
+                            <Binop op="divide">
+                                <Binop op="times">
+                                    <Var symbId=""/>
+                                    <Var symbId=""/>
+                                </Binop>
+                                <Binop op="plus">
+                                    <Var symbId=""/>
+                                    <Var symbId=""/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Binop op="divide">
+                            <Binop op="times">
+                                <Var symbId=""/>
+                                <Var symbId=""/>
+                            </Binop>
+                            <Binop op="plus">
+                                <Var symbId=""/>
+                                <Var symbId=""/>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                    <Binop op="times">
+                        <Var symbId=""/>
+                        <Var symbId=""/>
+                    </Binop>
+                </Binop>
+            </Equation>
+             -->
+            <!-- TEMPLATE END -->
+        </StructuralModel>
+    </ModelDefinition>
+</PharmML>

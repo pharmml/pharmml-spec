@@ -1,0 +1,17 @@
+<TreatmentEpoch id="AEp">
+    <TreatmentRef idRef="A"/>
+    <Start>
+        <math:Scalar value="0"/>
+    </Start>
+    <End>
+        <math:Scalar value="100"/>
+    </End>
+    <Occasion levelId="iov1" symbId="occ1">
+        <Begin>
+            <math:Scalar value="0"/>
+        </Begin>
+        <End>
+            <math:Scalar value="100"/>
+        </End>
+    </Occasion>
+</TreatmentEpoch>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
+    name="Example 1 - continuous PK/PD"
+    independentVar="t" writtenVersion="0.1">
+    <SymbolDefinition symbId="constantErrorModel" symbolType="scalar">
+        <FunctionDefinition>
+            <FunctionArgument symbId="a" symbolType="scalar"/>
+            <Definition>
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Var symbId="a"/>                    
+                </Equation>
+            </Definition>
+        </FunctionDefinition>
+    </SymbolDefinition>
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <VariabilityLevel id="indiv"/>
+        <ParameterModel id="pm1">
+            <Parameter symbId="pop_KIN"/>
+            <Parameter symbId="omega_KIN"/>
+            <Parameter symbId="KIN" transformation="log">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Uniop op="ln">
+                        <Var symbId="pop_KIN"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_KIN" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Var symbId="omega_KIN"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- REST OF PARAMETERS -->
+        </ParameterModel>
+        <StructuralModel id="sm1">
+            <Variable symbId="FPG" symbolType="derivative">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="minus">
+                        <Binop op="times">
+                            <Var symbId="KIN"/>
+                            <Binop op="plus">
+                                <Scalar value="1"/>
+                                <Var symbId="PBO"/>
+                            </Binop>
+                        </Binop>
+                        <Binop op="times">
+                            <Binop op="times">
+                                <Var symbId="KOUT"/>
+                                <Binop op="plus">
+                                    <Scalar value="1"/>
+                                    <Binop op="divide">
+                                        <Binop op="times">
+                                            <Var symbId="EMAX"/>
+                                            <Var symbId="CP"/>
+                                        </Binop>
+                                        <Binop op="plus">
+                                            <Var symbId="EC50"/>
+                                            <Var symbId="CP"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Var symbId="FPG"/>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <Variable symbId="nonRBC1" symbolType="derivative">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="minus">
+                        <Var symbId="KINH"/>
+                        <Binop op="times">
+                            <Binop op="plus">
+                                <Var symbId="KTR"/>
+                                <Binop op="times">
+                                    <Var symbId="KGL"/>
+                                    <Binop op="power">
+                                        <Var symbId="FPG"/>
+                                        <Var symbId="GAM"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Var symbId="nonRBC1"/>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- REST OF ODEs -->
+            <Variable symbId="TotalRBC" symbolType="scalar">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="plus">
+                        <Var symbId="nonRBC1"/>
+                        <Var symbId="nonRBC2"/>
+                        <!-- SUM NOT FINISHED................... -->
+                    </Binop>
+                </Equation>
+            </Variable>
+            <Variable symbId="GlycosylatedRBC" symbolType="scalar">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="plus">
+                        <Var symbId="RBC1"/>
+                        <Binop op="plus">
+                            <Var symbId="RBC2"/>
+                            <Binop op="plus">
+                                <Var symbId="RBC3"/>
+                                <Var symbId="RBC4"/>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <Variable symbId="HbA1c" symbolType="scalar">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="times">
+                        <Binop op="divide">
+                            <Var symbId="GlycosylatedRBC"/>
+                            <Var symbId="TotalRBC"/>
+                        </Binop>
+                        <Scalar value="100"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <Variable symbId="Hb" symbolType="scalar">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="divide">
+                        <Var symbId="TotalRBC"/>
+                        <Var symbId="VHb"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+        </StructuralModel>
+        <ObservationModel id="om1">
+            <Continuous symbId="HbA1c_observed">
+                <Var symbId=""/>
+                <ErrorModel>
+                    <Var symbId=""/>
+                </ErrorModel>
+                <RandomEffect>
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                                    <Scalar value="1"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Continuous>
+        </ObservationModel>
+    </ModelDefinition>
+</PharmML>
+
+
+
+

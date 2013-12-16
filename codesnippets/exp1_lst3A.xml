@@ -1,0 +1,10 @@
+<VariabilityModel blkId="model" type="model">
+    <Level symbId="indiv">
+        <ct:Name>Individual Variability</ct:Name>
+    </Level>
+</VariabilityModel>
+<VariabilityModel blkId="obsErr" type="error">
+    <Level symbId="residual">
+        <ct:Name>Residual Error</ct:Name>
+    </Level>
+</VariabilityModel>

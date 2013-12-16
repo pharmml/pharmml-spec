@@ -1,0 +1,8 @@
+<Group id="a1" name="group1">
+    <TreatmentEpochRef idRef="AEp"/>
+    <Washout/>
+    <TreatmentEpochRef idRef="BEp"/>
+    <Individuals levelId="indiv" symbId="i">
+        <math:Scalar value="40"/>
+    </Individuals>
+</Group>

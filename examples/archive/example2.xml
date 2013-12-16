@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:design="http://www.pharmml.org/2013/03/TrialDesign"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    name="CTS1 example - continuous PK/PD"
+    independentVar="t"
+    writtenVersion="0.1">
+    <SymbolDefinition symbId="constantErrorModel" symbolType="scalar">
+        <FunctionDefinition>
+            <FunctionArgument symbId="a" symbolType="scalar"/>
+            <Definition>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Var symbId="a"/>
+                </Equation>
+            </Definition>
+        </FunctionDefinition>
+    </SymbolDefinition>
+    <SymbolDefinition symbId="combinedErrorModel" symbolType="scalar">
+        <FunctionDefinition>
+            <FunctionArgument symbId="a" symbolType="scalar"/>
+            <FunctionArgument symbId="b" symbolType="scalar"/>
+            <FunctionArgument symbId="f" symbolType="scalar"/>
+            <Definition>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="plus">
+                        <Var symbId="a"/>
+                        <Binop op="times">
+                            <Var symbId="b"/>
+                            <Var symbId="f"/>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Definition>
+        </FunctionDefinition>
+    </SymbolDefinition>
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <VariabilityLevel id="indiv"/>
+        <CovariateModel id="c1">
+            <Parameter symbId="pop_W"/>
+            <Parameter symbId="omega_W"/>
+            <Covariate symbId="W">
+                <Continuous>
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="pop_W"/></Equation>
+                        </Mean>
+                        <Variance>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_W"/></Equation>
+                        </Variance>
+                    </Normal>
+                </Distribution>
+                <Transformation>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                        <Uniop op="ln">
+                            <Binop op="divide">
+                                <Var symbId="W"/>
+                                <math:Scalar value="70.0"/>
+                            </Binop>
+                        </Uniop>
+                    </Equation>
+                </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        <ParameterModel id="p1">
+            <Parameter symbId="pop_V"/>
+            <Parameter symbId="omega_V"/>
+            <Parameter symbId="beta_V"/>
+            <Parameter symbId="pop_Cl"/>
+            <Parameter symbId="omega_Cl"/>
+            <Parameter symbId="beta_Cl"/>
+            <Parameter symbId="pop_ka"/>
+            <Parameter symbId="omega_ka"/>
+            <Parameter symbId="pop_Imax"/>
+            <Parameter symbId="omega_Imax"/>
+            <Parameter symbId="pop_Rin"/>
+            <Parameter symbId="omega_Rin"/>
+            <Parameter symbId="pop_kout"/>
+            <Parameter symbId="omega_kout"/>
+            <Parameter symbId="pop_IC50"/>
+            <Parameter symbId="omega_IC50"/>
+            <Parameter symbId="rho_V_Cl"/>
+            <Parameter symbId="V">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_V"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect levelId="indiv" symbId="eta_V"><Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="pop_V"/></Equation>
+                        </Mean>
+                        <Variance>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_V"/></Equation>
+                        </Variance>
+                    </Normal>
+                </Distribution></RandomEffect>
+                <Covariate>
+                    <math:Var block="c1" symbId="W"/>
+                    <FixedEffect>
+                        <math:Var symbId="beta_V"/>
+                    </FixedEffect>
+                </Covariate>
+            </Parameter>
+            <Parameter symbId="Cl">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_Cl"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect levelId="indiv" symbId="eta_Cl">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean><Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="pop_Cl"/></Equation></Mean>
+                            <Variance>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_Cl"/></Equation>
+                            </Variance>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+                <Covariate>
+                    <math:Var block="c1" symbId="W"/>
+                    <FixedEffect>
+                        <math:Var symbId="beta_Cl"/>
+                    </FixedEffect>
+                </Covariate>
+            </Parameter>
+            <Parameter symbId="ka">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_ka"/>
+                    </Uniop>   
+                </Equation>
+                <RandomEffect levelId="indiv" symbId="eta_ka">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <math:Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <Variance>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_ka"/></Equation>
+                            </Variance>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <Parameter symbId="Imax">
+                <math:Equation writtenVersion="0.1">
+                    <math:Uniop op="logit">
+                        <math:Var symbId="pop_Imax"/>
+                    </math:Uniop>
+                </math:Equation>
+                <RandomEffect levelId="indiv" symbId="eta_Imax">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <math:Scalar value="0"/>
+                            </Mean>
+                            <Variance>
+                                <math:Var symbId="omega_Imax"/>
+                            </Variance>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <Parameter symbId="Rin">
+                <math:Equation writtenVersion="0.1">
+                    <math:Uniop op="ln">
+                        <math:Var symbId="pop_Rin"/>
+                    </math:Uniop>
+                </math:Equation>
+                <RandomEffect levelId="indiv" symbId="eta_Rin">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean>
+                            <math:Scalar value="0"/>
+                        </Mean>
+                        <Variance>
+                            <math:Var symbId="omega_Rin"/>
+                        </Variance>
+                    </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <Parameter symbId="kout">
+                <math:Equation writtenVersion="0.1">
+                    <math:Uniop op="ln">
+                        <math:Var symbId="pop_kout"/>
+                    </math:Uniop>
+                </math:Equation>
+                <RandomEffect levelId="indiv" symbId="eta_kout">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <math:Var symbId="pop_kout"/>
+                            </Mean>
+                            <Variance>
+                                <math:Var symbId="omega_kout"/>
+                            </Variance>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <Parameter symbId="IC50">
+                <math:Equation writtenVersion="0.1">
+                    <math:Uniop op="ln">
+                        <math:Var symbId="pop_IC50"/>
+                    </math:Uniop>
+                </math:Equation>
+                <RandomEffect levelId="indiv" symbId="eta_IC50">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <math:Scalar value="0"/>
+                            </Mean>
+                            <Variance>
+                                <math:Var symbId="omega_IC50"/>
+                            </Variance>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <Correlation levelId="indiv">
+                <Param1Var symbId="V"/>
+                <Param2Var symbId="Cl"/>
+                <CorrelationCoefficient>
+                    <math:Var symbId="rho_V_Cl"/>
+                </CorrelationCoefficient>
+            </Correlation>
+        </ParameterModel>
+        <StructuralModel id="main">
+            <Variable symbId="Ac" symbolType="derivative" independentVar="t"/>
+            <Variable symbId="Cc" symbolType="scalar"/>
+            <Variable symbId="E" symbolType="derivative" independentVar="t"/>
+            <Import resource="file://pkmodel_sbml.xml" resourceType="sbml">
+                <Link symbolPtr="ka">
+                    <math:Var block="p1" symbId="ka"/>
+                </Link>
+                <Link symbolPtr="V">
+                    <math:Var block="p1" symbId="V"/>
+                </Link>
+                <Link symbolPtr="CL">
+                    <math:Var block="p1" symbId="CL"/>
+                </Link>
+                <Link symbolPtr="Ac">
+                    <math:Var symbId="Ac"/>
+                </Link>                
+                <Link symbolPtr="C">
+                    <math:Var symbId="Cc"/>
+                </Link>                
+            </Import>
+            <Import resource="file://pdmodel_sbml.xml" resourceType="sbml">
+                <Link symbolPtr="C50">
+                    <math:Var block="p1" symbId="IC50"/>
+                </Link>
+                <Link symbolPtr="Imax">
+                    <math:Var block="p1" symbId="Imax"/>
+                </Link>
+                <Link symbolPtr="kout">
+                    <math:Var block="p1" symbId="kout"/>
+                </Link>
+                <Link symbolPtr="Rin">
+                    <math:Var block="p1" symbId="Rin"/>
+                </Link>
+                <Link symbolPtr="C">
+                    <math:Var symbId="Cc"/>
+                </Link>
+                <Link symbolPtr="E">
+                    <math:Var symbId="E"/>
+                </Link>
+            </Import>
+        </StructuralModel>
+        <ObservationModel id="o1">
+            <Continuous symbId="Cc">
+                <math:Var block="main" symbId="Cc"/>
+                <ErrorModel>
+                    <math:Var symbId="combinedErrorModel"/>
+                    <math:FunctionArgument symbId="a">
+                        <math:Scalar value="0.5"/>
+                    </math:FunctionArgument>
+                    <math:FunctionArgument symbId="b">
+                        <math:Scalar value="0.1"/>
+                    </math:FunctionArgument>
+                    <math:FunctionArgument symbId="f">
+                        <math:Var block="main" symbId="Cc"/>
+                    </math:FunctionArgument>
+                </ErrorModel>
+                <RandomEffect>
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <math:Scalar value="0"/>
+                            </Mean>
+                            <StdDev>
+                                <math:Scalar value="1"/>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Continuous>
+            <Continuous symbId="E">
+                <math:Var block="main" symbId="E"/>
+                <ErrorModel>
+                    <math:Var symbId="constantErrorModel"/>
+                    <math:FunctionArgument symbId="a">
+                        <math:Scalar value="4"/>
+                    </math:FunctionArgument>
+                </ErrorModel>
+                <RandomEffect>
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <math:Scalar value="0"/>
+                            </Mean>
+                            <StdDev>
+                                <math:Scalar value="1"/>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Continuous>
+        </ObservationModel>
+    </ModelDefinition>
+    <Design xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        <Treatment id="t1">
+            <DosingRegimen>
+                <Bolus>
+                    <DoseAmount>
+                        <TargetVar block="main" symbId="Ac"/>
+                        <Amount>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                <Binop op="times">
+                                    <math:Scalar value="0.25"/>
+                                    <Var block="c1" symbId="W"/>
+                                </Binop>
+                            </Equation>
+                        </Amount>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Sequence begin="0" end="192" stepSize="24"/>
+                    </DosingTimes>
+                </Bolus>
+            </DosingRegimen>
+        </Treatment>
+        <Treatment id="t2">
+            <DosingRegimen>
+                <Bolus>
+                    <DoseAmount>
+                        <TargetVar block="main" symbId="Ac"/>
+                        <Amount>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                <Binop op="times">
+                                    <math:Scalar value="0.5"/>
+                                    <Var block="main" symbId="W"/>
+                                </Binop>
+                            </Equation>
+                        </Amount>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Sequence begin="0" end="192" stepSize="48"/>
+                    </DosingTimes>
+                </Bolus>
+            </DosingRegimen>
+        </Treatment>
+        <Treatment id="t3">
+            <DosingRegimen>
+                <Bolus>
+                    <DoseAmount>
+                        <TargetVar block="main" symbId="Ac"/>
+                        <Amount>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                <Binop op="times">
+                                    <math:Scalar value="0.5"/>
+                                    <Var block="main" symbId="W"/>
+                                </Binop>
+                            </Equation>
+                        </Amount>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Sequence begin="0" end="192" stepSize="24"/>
+                    </DosingTimes>
+                </Bolus>
+            </DosingRegimen>
+        </Treatment>
+        <Treatment id="t4">
+            <DosingRegimen>
+                <Bolus>
+                    <DoseAmount>
+                        <TargetVar block="main" symbId="Ac"/>
+                        <Amount>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                <Binop op="times">
+                                    <math:Scalar value="1.0"/>
+                                    <Var block="main" symbId="W"/>
+                                </Binop>
+                            </Equation>
+                        </Amount>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Sequence begin="0" end="192" stepSize="48"/>
+                    </DosingTimes>
+                </Bolus>
+            </DosingRegimen>
+        </Treatment>
+        <TreatmentEpoch id="te1">
+            <TreatmentRef idRef="t1"/>
+        </TreatmentEpoch>
+        <TreatmentEpoch id="te2">
+            <TreatmentRef idRef="t2"/>
+        </TreatmentEpoch>
+        <TreatmentEpoch id="te3">
+            <TreatmentRef idRef="t3"/>
+        </TreatmentEpoch>
+        <TreatmentEpoch id="te4">
+            <TreatmentRef idRef="t4"/>
+        </TreatmentEpoch>
+        <Group id="a1">
+            <TreatmentEpochRef idRef="te1"/>
+            <Individuals levelId="indiv" symbId="i">
+                <math:Scalar value="20"/>
+            </Individuals>
+        </Group>
+        <Group id="a2">
+            <TreatmentEpochRef idRef="te2"/>
+            <Individuals levelId="indiv" symbId="i">
+                <math:Scalar value="20"/>
+            </Individuals>
+        </Group>
+        <Group id="a3">
+            <TreatmentEpochRef idRef="te3"/>
+            <Individuals levelId="indiv" symbId="i">
+                <math:Scalar value="20"/>
+            </Individuals>
+        </Group>
+        <Group id="a4">
+            <TreatmentEpochRef idRef="te4"/>
+            <Individuals levelId="indiv" symbId="i">
+                <math:Scalar value="20"/>
+            </Individuals>
+        </Group>
+    </Design>
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        <SimulationStep  id="s1">
+            <Replicates symbId="r">
+                <math:Scalar value="200"/>
+            </Replicates>
+            <InitialValue block="p1" symbId="pop_W">
+                <math:Scalar value="70.07"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_W">
+                <math:Scalar value="14.09"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="pop_ka">
+                <math:Scalar value="1.0"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_ka">
+                <math:Scalar value="0.6"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="pop_V">
+                <math:Scalar value="8"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_V">
+                <math:Scalar value="0.2"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="pop_Cl">
+                <math:Scalar value="0.13"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_Cl">
+                <math:Scalar value="0.2"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="beta_V">
+                <math:Scalar value="1"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="beta_Cl">
+                <math:Scalar value="0.75"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="rho_V_Cl">
+                <math:Scalar value="0.7"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="pop_Imax">
+                <math:Scalar value="0.9"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_Imax">
+                <math:Scalar value="2"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="pop_IC50">
+                <math:Scalar value="0.4"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_IC50">
+                <math:Scalar value="0.4"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="pop_kout">
+                <math:Scalar value="0.05"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_kout">
+                <math:Scalar value="0.05"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="pop_Rin">
+                <math:Scalar value="5"/>
+            </InitialValue>
+            <InitialValue block="p1" symbId="omega_Rin">
+                <math:Scalar value="0.05"/>
+            </InitialValue>
+            <Observations>
+                <Timepoints>
+                    <ct:Vector>
+                        <math:Scalar value="0.5"/>
+                        <ct:Sequence begin="4" end="48" stepSize="4"/>
+                        <ct:Sequence begin="52" end="192" stepSize="24"/>
+                        <ct:Sequence begin="192" end="250" stepSize="4"/>
+                    </ct:Vector>
+                </Timepoints>
+                <Output>
+                    <math:Var block="main" symbId="Cc"/>
+                </Output>
+            </Observations>
+            <Observations>
+                <Timepoints>
+                    <ct:Sequence begin="0" end="288" stepSize="24"/>
+                </Timepoints>
+                <Output>
+                    <math:Var block="main" symbId="E"/>
+                </Output>
+            </Observations>
+        </SimulationStep>
+        <StepDependencies>
+            <Step idRef="s1"/>
+        </StepDependencies>
+    </ModellingSteps>
+</PharmML>

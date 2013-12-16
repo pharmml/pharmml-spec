@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML" writtenVersion="">
+    <Name>Test</Name>
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <CovariateModel id="c1">
+            <Covariate symbId="W"/>
+        </CovariateModel>
+        <ParameterModel id="p1">
+            <RandomVariable symbId="theta1" levelId="indiv">
+                <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                     <Normal>
+                         <Mean><Scalar xmlns="http://www.pharmml.org/2013/03/Maths">0</Scalar></Mean>
+                         <Variance><Scalar xmlns="http://www.pharmml.org/2013/03/Maths">1</Scalar></Variance>
+                     </Normal>
+                </Distribution>
+            </RandomVariable>
+            <RandomVariable symbId="theta2" levelId="indiv">
+                <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean><Scalar xmlns="http://www.pharmml.org/2013/03/Maths">0</Scalar></Mean>
+                        <Variance><Scalar xmlns="http://www.pharmml.org/2013/03/Maths">1</Scalar></Variance>
+                    </Normal>
+                </Distribution>
+            </RandomVariable>
+            <RandomVariable symbId="theta3" levelId="indiv">
+                <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean><Scalar xmlns="http://www.pharmml.org/2013/03/Maths">0</Scalar></Mean>
+                        <Variance><Scalar xmlns="http://www.pharmml.org/2013/03/Maths">1</Scalar></Variance>
+                    </Normal>
+                </Distribution>
+            </RandomVariable>
+            <Parameter symbId="CL">
+                <Rhs xmlns="http://www.pharmml.org/2013/03/CommonTypes">
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                        <Binop op="times">
+                            <Var block="c1" symbId="W"/>
+                            <Binop op="minus">
+                                <Var symbId="theta1"/>
+                                <Binop op="times">
+                                    <Var symbId="theta2"/>
+                                    <Binop op="divide">
+                                        <Var symbId="Cpss"/>
+                                        <Binop op="plus">
+                                            <Var symbId="theta3"/>
+                                            <Var symbId="Cpss"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </Rhs>
+            </Parameter>
+        </ParameterModel>
+        <StructuralModel id="main">
+            
+        </StructuralModel>
+    </ModelDefinition>
+</PharmML>

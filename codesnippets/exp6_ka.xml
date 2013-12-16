@@ -1,0 +1,31 @@
+<SimpleParameter symbId="omega_ka"/>
+<SimpleParameter symbId="pop_ka"/>
+<RandomVariable symbId="eta_ka">
+    <ct:VariabilityReference>
+        <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+    </ct:VariabilityReference>
+    <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+        <mean><rVal>0</rVal></mean>
+        <stddev><var varId="omega_ka"/></stddev>
+    </NormalDistribution>
+</RandomVariable>
+<IndividualParameter symbId="ka">
+    <GaussianModel>
+        <Transformation>log</Transformation>
+        <LinearCovariate>
+            <PopulationParameter>
+                <ct:Assign><ct:SymbRef symbIdRef="pop_ka"></ct:SymbRef></ct:Assign>
+            </PopulationParameter>
+            <Covariate>
+                <ct:SymbRef blkIdRef="c1" symbIdRef="TreatSeq"/>
+                <FixedEffect>
+                    <ct:SymbRef symbIdRef="beta_ka_treatseq"/>
+                    <Category catId="AB"/>
+                </FixedEffect>
+            </Covariate>
+        </LinearCovariate>
+        <RandomEffects>
+            <ct:SymbRef symbIdRef="eta_ka"/>
+        </RandomEffects>
+    </GaussianModel>
+</IndividualParameter>

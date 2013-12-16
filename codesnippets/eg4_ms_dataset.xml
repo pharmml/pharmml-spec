@@ -1,0 +1,19 @@
+    <ModellingSteps xmlns="http://www.ddmore.eu/Resources/ModellingSteps/1.0">
+        <Variable symbId="dataSet1" symbolType="dataSet">
+            <DataSet xmlns="http://www.ddmore.eu/Resources/CommonTypes/1.0">
+                <Definition>
+                    <Column columnNum="1" columnVar="id"/>
+                    <Column columnNum="2" columnVar="time"/>
+                    <Column columnNum="3" columnVar="wt"/>
+                    <Column columnNum="4" columnVar="age"/>
+                    <Column columnNum="5" columnVar="sex"/>
+                    <Column columnNum="6" columnVar="amt"/>
+                    <Column columnNum="7" columnVar="dvid"/>
+                    <Column columnNum="8" columnVar="dv"/>
+                    <Column columnNum="9" columnVar="mdv"/>
+                </Definition>
+                <ExternalSource url="file://warfarin_conc_pca.csv" format="nonmem"/>
+            </DataSet>
+        </Variable>
+        <EstimationStep id="estTask1">
+	  <!-- Omitted Rest of Estimation Step -->

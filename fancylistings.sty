@@ -1,0 +1,201 @@
+%%
+%% New listing environment based upon the fancyvrb environment. Its role
+%% is to handle the specific `scale' option.
+%% 
+%% Author: Jean-Côme Charpentier.
+%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Verbatim stuff included here
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{hellgelb}{rgb}{1,1,0.9}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{1,0,0}
+\definecolor{colString}{rgb}{0,0.5,0}
+
+% Symbol to put when line wraps
+%\newcommand{\wrapsign}{\hbox{\rm\ensuremath\hookleftarrow}}
+% the above seems to fail for me.
+\newcommand{\wrapsign}{\hbox{\ensuremath\hookleftarrow}}
+
+%
+% Default verbatim layout used if \lstparamset not defined
+%
+\@ifundefined{lstparamset}{
+\lstset{%
+    basicstyle=\ttfamily\footnotesize, %
+    identifierstyle=\color{colIdentifier}, %
+    keywordstyle=\color{colKeys}, %
+    stringstyle=\color{colString}, %
+    breakatwhitespace=true,%
+    commentstyle=\color{colComments}, %
+    tabsize=2, %
+    frame=single, %
+    framerule=0pt, %
+    extendedchars=true, %
+    showspaces=false, %
+    showlines=true, %
+    showstringspaces=false, %
+    numberstyle=\tiny, %
+    breaklines=true, %
+    prebreak={\space\wrapsign}, %
+    backgroundcolor=\color[gray]{0.95}, %
+    breakautoindent=true, %
+    captionpos=b%
+}
+}{
+% Call the user macro that defines the layout
+\lstparamset
+}
+
+%
+% GAP language, derivated from Pascal, has more keywords to highlight
+%
+\lstdefinelanguage[]{GAP}[]{Pascal}{%
+    morekeywords={od,fi,alias}%
+}
+
+% Lengths to compute the listing width from the number of characters
+\newlength{\lstcharwidth}
+\newlength{\lstcharwidthb}
+\newlength{\lstframesep}
+\newlength{\lstwidth}
+\setlength{\lstcharwidth}{\lst@width}
+%\let\lstcharwidth\lst@width
+\setlength{\lstframesep}{\lst@frametextsep}
+
+% % Setup to compute a char width
+\def\lstsetup{\sbox{\z@}{\lstinline!x!}%
+  \settowidth{\lstcharwidth}{\usebox{\z@}}%
+  \sbox{\z@}{\lstinline[basicstyle=\ttfamily]!x!}
+  \settowidth{\lstcharwidthb}{\usebox{\z@}}}
+
+% Environment to render fancyvrb like listings does
+\newenvironment{fvlisting}[1][]
+  {\lstset{fancyvrb,#1}}
+  {\lstset{fancyvrb=false}}
+
+\RequirePackage{fancyvrb}
+\lstset{fancyvrb=true}
+
+\newbox\lstbox
+\newlength{\lstwidthw}
+
+
+%%% New listing option to scale the listing to fit the page width
+\lst@Key{scale}{true}[t]{\lstKV@SetIf{#1}\lst@ifscale}
+
+%%% Remember the original fancyvrb macro to handle options
+\let\FV@UseKeyValuesOrig\FV@UseKeyValues
+
+\def\code{\FV@Environment{}{lstcode}}
+\def\FVB@lstcode{%
+  % Just dump the listing into a file, skip the options used later
+  \let\FV@UseKeyValues\relax
+  \FVB@VerbatimOut{lst.tmp}}
+
+\def\FVE@lstcode{%
+  \FVE@VerbatimOut
+  \let\FV@UseKeyValues\FV@UseKeyValuesOrig
+  % Now, apply the passed options
+  \expandafter\lstset\expandafter{\FV@KeyValues}
+  % Is there any scaling required?
+  \lst@ifscale
+    \lst@ifbreaklines
+      \lstwidthw=\lst@linewidth
+    \else
+      % Force the style to perform a valid fontsize scaling
+      \lstset{basicstyle=\ttfamily}
+      \begin{lrbox}{\lstbox}
+        \lstinputlisting{lst.tmp}%
+      \end{lrbox}
+      \settowidth{\lstwidthw}{\usebox{\lstbox}}
+    \fi
+    \ifdim\lstwidthw>\linewidth
+      % Compute real width with basic font to perform consistent scaling
+      \lst@ifbreaklines
+        \setlength{\lstwidthw}{\lstwidthw*% 
+                               \ratio{\lstcharwidthb}{\lstcharwidth}}
+      \fi
+      \lstset{basicstyle=\ttfamily}
+      \typeout{Listing width <\the\lstwidthw> scaled to fit in <\the\linewidth>}
+      % Compute the width ratio
+      \edef\r@tio{\the\numexpr \linewidth/(\lstwidthw/1000)-1}%
+      \begingroup
+        \@tempdima\f@size pt
+        \typeout{\the\@tempdima}
+        \@tempdima 0.\r@tio\@tempdima
+        \typeout{\the\@tempdima}
+        % interlignage = 1.2 x font size
+        \@tempdimb 1.2\@tempdima
+        % Redefine the fontsize to apply
+        \fontsize{\@tempdima}{\@tempdimb}%
+        % Print out the listing with this new size
+        \lstinputlisting[linewidth=\linewidth]{lst.tmp}%
+      \endgroup
+    \else
+      % The listing fits in the available width, do nothing special
+      \lstinputlisting{lst.tmp}%
+    \fi
+  \else
+    % No scaling, do as usual
+    \lstinputlisting{lst.tmp}
+  \fi
+  %\strut
+}
+\DefineVerbatimEnvironment{lstcode}{lstcode}{}
+
+% Redefine \lst@DeInit to disable page break after the listing
+\def\lst@DeInit{%
+  \lst@XPrintToken
+  \lst@EOLUpdate
+  \global\advance\lst@newlines\m@ne
+  \lst@ifshowlines
+    \lst@DoNewLines
+  \else
+    \setbox\@tempboxa\vbox{\lst@DoNewLines}%
+  \fi
+  \lst@ifdisplaystyle
+    \par\nobreak
+    \removelastskip
+  \fi
+  \lsthk@ExitVars
+  \everypar{}%
+  \lsthk@DeInit
+  \normalbaselines
+  \normalcolor
+  \lst@MakeCaption b%
+  \lst@ifbox
+    \egroup
+    $%
+    \hss
+    \egroup
+    \vrule\@width\lst@maxwidth\@height\z@\@depth\z@
+  \else
+    \lst@ifdisplaystyle
+      \@tempdima\lst@belowskip
+      \ifdim\@tempdima<\z@
+        \par\nobreak
+        \vspace{-\@tempdima}%
+      \else
+        \par\penalty-50
+        \vspace\lst@belowskip
+      \fi
+    \fi
+  \fi
+  \ifx\lst@multicols\@empty\else
+    \def\lst@next{\global\let\@checkend\@gobble
+      \endmulticols
+      \global\let\@checkend\lst@@checkend
+    }%
+    \expandafter\lst@next
+  \fi
+  \ifx\lst@float\relax\else
+    \expandafter\lst@endfloat
+  \fi
+  \endgroup
+} %$

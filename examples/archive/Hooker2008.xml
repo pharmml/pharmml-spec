@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML" writtenVersion="0.2">
+    <Name>Hooker Model</Name>
+    <Description xmlns="http://www.pharmml.org/2013/03/CommonTypes">
+        Hooker et al. "Population Pharmacokinetic Model for
+        Docetaxel in Patients with Varying Degrees
+        of Liver Function: Incorporating Cytochrome
+        P450 3A Activity Measurements" Clinical Pharmacology &amp; Therapeutics 84, 111-118 (July 2008) | doi:10.1038/sj.clpt.6100476
+    </Description>
+    <IndependentVariable symbId="t"/>
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <CovariateModel id="c">
+            <Covariate symbId="BSA">
+                <Continuous/>
+            </Covariate>
+            <Covariate symbId="AAG">
+                <Continuous/>
+            </Covariate>
+            <Covariate symbId="ERMBT">
+                <Continuous/>
+            </Covariate>
+        </CovariateModel>
+        <ParameterModel id="p">
+            <FixedEffect symbId="theta_ERMBT_normalLF">
+                <Covariate>
+                    <ct:SymbRef block="c" symbId="ERMBT"/>
+                </Covariate>
+            </FixedEffect>
+            <Parameter symbId="f_ERMBT_normalLF">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                        <Binop op="plus">
+                            <Scalar>1</Scalar>
+                            <Binop op="times">
+                                <Var symbId="theta_ERMBT_normalLF"/>
+                                <Binop op="minus">
+                                    <Var symbId="ERMBT"/>
+                                    <Var symbId="ERMBT_normalLF"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </Parameter>
+            <FixedEffect symbId="theta_ERMBT_impairedLF">
+                <Covariate>
+                    <ct:SymbRef block="c" symbId="ERMBT"/>
+                </Covariate>
+            </FixedEffect>
+            <Parameter symbId="f_ERMBT_impairedLF">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                        <Binop op="plus">
+                            <Scalar>1</Scalar>
+                            <Binop op="times">
+                                <Var symbId="theta_ERMBT_impairedLF"/>
+                                <Binop op="minus">
+                                    <Var symbId="ERMBT"/>
+                                    <Var symbId="ERMBT_impairedLF"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </Parameter>
+            <FixedEffect symbId="theta_AAG_CL">
+                <Covariate>
+                    <ct:SymbRef block="c" symbId="AAG"/>
+                </Covariate>
+            </FixedEffect>
+            <Parameter symbId="f_AAG">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                        <Binop op="plus">
+                            <Scalar>1</Scalar>
+                            <Binop op="times">
+                                <Var symbId="theta_AAG_CL"/>
+                                <Binop op="minus">
+                                    <Var symbId="AAG"/>
+                                    <Var symbId="AAG_bar"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </Parameter>
+            <Parameter symbId="f_BSA">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                        <Binop op="divide">
+                            <Var symbId="BSA"/>
+                            <Var symbId="BSA_bar"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </Parameter>
+            <RandomVariable symbId="eta_CL">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbId="indiv"/>
+                </ct:VariabilityReference>
+                <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean><Scalar xmlns="http://www.pharmml.org/2013/03/Maths">0</Scalar></Mean>
+                        <Variance><Var xmlns="http://www.pharmml.org/2013/03/Maths" symbId="omega_CL"/></Variance>
+                    </Normal>
+                </Distribution>
+            </RandomVariable>
+            <Parameter symbId="CL">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                        <Piecewise>
+                            <Piece>
+                                <Binop op="times">
+                                    <Uniop op="exp">
+                                        <Var symbId="eta_CL"/>
+                                    </Uniop>
+                                    <Binop op="times">
+                                        <Var symbId="CL_normalLDF"/>
+                                        <Binop op="times">
+                                            <Var symbId="f_BSA"/>
+                                            <Binop op="times">
+                                                <Var symbId="f_AAG"/>
+                                                <Var symbId="f_ERMBT_normalLF"/>
+                                            </Binop>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <Condition writtenVersion="0.1">
+                                    <LogicBinop op="eq">
+                                        <Var symbId="LFG"/>
+                                        <Scalar>1</Scalar>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                            <Piece>
+                                <Binop op="times">
+                                    <Uniop op="exp">
+                                        <Var symbId="eta_CL"/>
+                                    </Uniop>
+                                    <Binop op="times">
+                                        <Var symbId="CL_impairedLF"/>
+                                        <Binop op="times">
+                                            <Var symbId="f_BSA"/>
+                                            <Binop op="times">
+                                                <Var symbId="f_AAG"/>
+                                                <Var symbId="f_ERMBT_impairedLF"/>
+                                            </Binop>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <Condition writtenVersion="0.1">
+                                    <LogicBinop op="gt">
+                                        <Var symbId="LFG"/>
+                                        <Scalar>1</Scalar>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                        </Piecewise>
+                    </Equation>
+                </ct:Assign>
+            </Parameter>
+        </ParameterModel>
+        <StructuralModel id="main">
+            <ct:Variable symbolType="real" symbId="C_tot"/>
+        </StructuralModel>
+    </ModelDefinition>
+</PharmML>

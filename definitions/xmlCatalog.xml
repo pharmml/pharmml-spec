@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+      
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    
+    <system systemId="http://www.pharmml.org/2013/03/Maths" uri="maths.xsd"/>
+    
+    <system
+        systemId="http://www.uncertml.org/3.0" 
+        uri="../uncertweb/UncertML30.xsd"/>
+
+    <system systemId="http://www.pharmml.org/2013/08/Dataset" uri="dataset.xsd"/>
+
+    <system
+        systemId="http://www.pharmml.org/2013/03/PharmML" 
+        uri="pharmml.xsd"/>
+
+    <uri
+        name="http://www.pharmml.org/2013/03/PharmML" 
+        uri="pharmml.xsd"/>
+    
+    <system
+        systemId="http://www.pharmml.org/2013/03/TrialDesign" 
+        uri="trialDesign.xsd"/>
+
+    <!--uri 
+        name="http://www.pharmml.org/2013/03/TrialDesign" 
+        uri="trialDesign.xsd"/-->
+    
+    <system
+        systemId="http://www.pharmml.org/2013/03/CommonTypes" 
+        uri="commonTypes.xsd"/>
+    
+    <!--uri 
+        name="http://www.pharmml.org/2013/03/CommonTypes" 
+        uri="commonTypes.xsd"/-->
+    
+    <system
+        systemId="http://www.pharmml.org/2013/03/ModellingSteps"
+        uri="modellingSteps.xsd"/>
+    
+    <!--uri
+        name="http://www.pharmml.org/2013/03/ModellingSteps"
+        uri="modellingSteps.xsd"/-->
+    
+    <system systemId="http://www.pharmml.org/2013/03/ModelDefinition"
+        uri="modelDefinition.xsd"/>
+    
+    <!--uri name="http://www.pharmml.org/2013/03/ModelDefinition"
+        uri="modelDefinition.xsd"/-->
+    
+</catalog>

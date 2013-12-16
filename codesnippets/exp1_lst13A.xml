@@ -1,0 +1,32 @@
+<Population>
+    <ct:VariabilityReference>
+        <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+    </ct:VariabilityReference>
+    <IndividualTemplate>
+        <IndividualMapping>
+            <ds:ColumnRef columnIdRef="id"/>
+        </IndividualMapping>
+        <ArmMapping>
+            <ds:ColumnRef columnIdRef="arm"/>
+        </ArmMapping>
+        <ReplicateMapping>
+            <ds:ColumnRef columnIdRef="reps"/>
+        </ReplicateMapping>
+    </IndividualTemplate>
+    <ds:DataSet>
+        <ds:Definition>
+            <ds:Column columnId="id" valueType="string" columnNum="1"/>
+            <ds:Column columnId="arm" valueType="string" columnNum="2"/>
+            <ds:Column columnId="reps" valueType="int" columnNum="3"/>
+        </ds:Definition>
+        <ds:Table>
+            <ds:Row>
+                <ct:String>i1</ct:String><ct:String>a1</ct:String><ct:Int>20</ct:Int>
+            </ds:Row>
+            <!-- arms 2 & 3 omitted -->
+            <ds:Row>
+                <ct:String>i4</ct:String><ct:String>a4</ct:String><ct:Int>40</ct:Int>
+            </ds:Row>
+        </ds:Table>
+    </ds:DataSet>
+</Population>

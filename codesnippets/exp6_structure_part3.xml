@@ -1,0 +1,14 @@
+<ObservationsEvent oid="occasions">
+    <ArmRef oidRef="a1"/>
+    <ArmRef oidRef="a2"/>
+    <ct:VariabilityReference>
+        <ct:SymbRef blkIdRef="model" symbIdRef="iov"/>
+    </ct:VariabilityReference>
+    <ObservationGroup oid="occ1">
+        <EpochRef oidRef="ep1"/>
+    </ObservationGroup>
+    <ObservationGroup oid="occ2">
+        <EpochRef oidRef="ep3"/>
+    </ObservationGroup>
+</ObservationsEvent>
+</Structure>

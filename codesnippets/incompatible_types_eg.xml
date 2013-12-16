@@ -1,0 +1,15 @@
+<Variable symbId="a" symbolType="scalar">
+  <Dataset> <!-- ERROR: Initialising a scalar with a dataset type -->
+    ...
+  </Dataset>
+</Variable>
+
+<Variable symbId="b" symbolType="dataset"/> 
+<Variable symbId="c" symbolType="scalar">
+  <m:Equation>
+    <m:Binop op="plus"> <!-- ERROR: Both sides must be a scalar type -->
+      <m:Scalar value="22"/>
+      <m:Var value="b"/>
+    </m:Binop>
+  </m:Equation>
+</Variable>

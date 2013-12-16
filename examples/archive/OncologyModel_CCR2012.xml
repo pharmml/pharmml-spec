@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
+    name="Example 1 - continuous PK/PD"
+    independentVar="t" writtenVersion="0.1">
+    <!-- SYMBOL DEFINITION - RESUIDUAL ERROR MODEL -->
+    <SymbolDefinition symbId="constantErrorModel" symbolType="scalar">
+    <FunctionDefinition>
+        <FunctionArgument symbId="a" symbolType="scalar"/>
+        <Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                <Var symbId="a"/>
+            </Equation>
+        </Definition>
+    </FunctionDefinition>
+    </SymbolDefinition>
+    <!-- BLOCK I: MODEL DEFINITION -->
+    <ModelDefinition  xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <!-- VARIABILITY MODEL -->
+        <VariabilityLevel id="indiv"/>
+        <!-- PARAMETER MODEL -->
+        <ParameterModel id="pm1">
+            <!-- **************************************** -->
+            <!-- PARAMETERS: population values & omegas   -->
+            <!-- **************************************** -->
+            <Parameter symbId="K"/>
+            <Parameter symbId="pop_KDE"/>
+            <Parameter symbId="omega_KDE"/>
+            <Parameter symbId="pop_LAMBDAP"/>
+            <Parameter symbId="omega_LAMBDAP"/>
+            <Parameter symbId="pop_KQPP"/>
+            <Parameter symbId="omega_KQPP"/>
+            <Parameter symbId="pop_KPQ"/>
+            <Parameter symbId="omega_KPQ"/>
+            <Parameter symbId="pop_GAMA"/>
+            <Parameter symbId="omega_GAMA"/>
+            <Parameter symbId="pop_DELTAQP"/>
+            <Parameter symbId="omega_DELTAQP"/>
+            <!-- LAMBDAP log-normal distributed -->
+            <Parameter symbId="LAMBDAP" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                    <Uniop op="ln">
+                        <Var symbId="pop_LAMBDAP"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_LAMBDAP" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Var symbId="omega_LAMBDAP"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- KPQ log-normal distributed -->
+            <Parameter symbId="KPQ" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_KPQ"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_KPQ" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Var symbId="omaga_KPQ"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- GAMA log-normal distributed -->
+            <Parameter symbId="GAMA" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_GAMA"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_GAMA" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Var symbId="omaga_GAMA"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- KQPP log-normal distributed -->
+            <Parameter symbId="KQPP" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_KQPP"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_KQPP" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Var symbId="omaga_KQPP"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- DELTAP log-normal distributed -->
+            <Parameter symbId="DELTAQP" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_DELTAQP"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_DELTAQP" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <Var symbId="omaga_DELTAQP"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- KDE log-normal distributed with -->
+            <!-- pop_KDE to be estimated & omega_KDE=FIXED -->
+            <Parameter symbId="KDE" transformation="log">
+                <Equation writtenVersion="" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Uniop op="ln">
+                        <Var symbId="pop_KDE"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_KDE" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                                    <math:Scalar value="0"/>                                    
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Var symbId="omega_KDE"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- K -->
+            <!-- pop_K=FIXED=100 & omega_K=FIXED=0 -->
+            <Parameter symbId="K" transformation="none">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Scalar value="100"/>
+                </Equation>
+            </Parameter>
+            <!-- **************************************** -->
+            <!-- INITIAL CONDITIONS                       -->
+            <!-- **************************************** -->
+            <Parameter symbId="pop_PT0"/>
+            <Parameter symbId="omega_PT0"/>
+            <Parameter symbId="pop_Q0"/>
+            <Parameter symbId="omega_Q0"/> 
+            <!-- estimate pop_PT0 & omega_PT0 -->           
+            <Parameter symbId="PT0" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                    <Uniop op="ln">
+                        <Var symbId="pop_PT0"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_PT0" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Var symbId="omega_PT0"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- estimate pop_Q0 & omega_Q0 -->           
+            <Parameter symbId="Q0" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                    <Uniop op="ln">
+                        <Var symbId="pop_Q0"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect symbId="eta_Q0" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Var symbId="omega_Q0"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <!-- pop_QP0=0 & omega_QP0=FIXED -->           
+            <Parameter symbId="QP0" transformation="none">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                    <Scalar value="0"/>
+                </Equation>
+                <RandomEffect symbId="eta_QP0" levelId="indiv">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Parameter>
+        </ParameterModel>
+        <!-- STRUCTURAL MODEL - ODEs -->
+        <StructuralModel id="sm1">
+            <!-- dC/dt -->
+            <Variable symbId="C" independentVar="t" symbolType="derivative">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1" >
+                    <Binop op="times">
+                        <Uniop op="minus">
+                            <!-- BLOCK -->
+                            <Var block="pm1" symbId="KDE"/>
+                        </Uniop>
+                        <Var symbId="C"/>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- dPT/dt - TYPE1 -->
+            <Variable symbId="PT" independentVar="t" symbolType="derivative">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="plus">
+                        <Binop op="times">
+                            <Var block="pm1" symbId="LAMBDAP"/>
+                            <Binop op="times">
+                                <Var block="pm1" symbId="PT"/>
+                                <Binop op="minus">
+                                    <Scalar value="1"/>
+                                    <Binop op="divide">
+                                        <Var block="pm1" symbId="PSTAR"/>
+                                        <Var block="pm1" symbId="K"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Var block="pm1" symbId="KQPP"/>
+                                <Var block="pm1" symbId="QP"/>
+                            </Binop>
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <Var block="pm1" symbId="KPQ"/>
+                                    <Var symbId="PT"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Var block="pm1" symbId="GAMA"/>
+                                    <Binop op="times">
+                                        <Var symbId="C"/>
+                                        <Binop op="times">
+                                            <Var block="pm1" symbId="KDE"/>
+                                            <Var block="pm1" symbId="PT"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+           <!-- dQ/dt --> 
+            <Variable symbId="Q" independentVar="t" symbolType="derivative">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="minus">
+                        <Binop op="times">
+                            <Var block="pm1" symbId="KPQ"/>
+                            <Var symbId="PT"/>
+                        </Binop>
+                        <Binop op="times">
+                            <Var block="pm1" symbId="GAMA"/>
+                            <Binop op="times">
+                                <Var symbId="C"/>
+                                <Binop op="times">
+                                    <Var block="pm1" symbId="KDE"/>
+                                    <Var symbId="Q"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- dQP/dt -->
+            <Variable symbId="QP" independentVar="t" symbolType="derivative">
+                <Equation writtenVersion="0.1" xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="minus">
+                        <Binop op="times">
+                            <Var block="pm1" symbId="GAMA"/>
+                            <Binop op="times">
+                                <Var symbId="C"/>
+                                <Binop op="times">
+                                    <Var block="pm1" symbId="KDE"/>
+                                    <Var symbId="Q"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Var block="pm1" symbId="KQPP"/>
+                                <Var symbId="QP"/>
+                            </Binop>
+                            <Binop op="times">
+                                <Var block="pm1" symbId="DELTAQP"/>
+                                <Var symbId="QP"/>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Variable>
+            <!-- PSTAR - algebraic equation -->
+            <Variable symbId="PSTAR" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="plus">
+                        <Var symbId="PT"/>
+                        <Binop op="plus">
+                            <Var symbId="Q"/>
+                            <Var symbId="QP"/>
+                        </Binop>
+                    </Binop>                    
+                </Equation>
+            </Variable>
+            <!-- INITIAL CONDITIONS -->
+            <InitialCondition symbId="C">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Scalar value="0"/>
+                </Equation>
+            </InitialCondition>
+            <InitialCondition symbId="PT">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Var block="pm1" symbId="PT0"/>
+                </Equation>
+            </InitialCondition>
+            <InitialCondition symbId="Q">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Var block="pm1" symbId="Q0"/>
+                </Equation>
+            </InitialCondition>
+            <InitialCondition symbId="QP">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Scalar value="0"/>
+                </Equation>
+            </InitialCondition>
+        </StructuralModel>
+        <!-- OBSERVATION MODEL - PSTAR -->
+        <ObservationModel id="om1">
+            <Parameter symbId="a"/>
+            <Continuous symbId="PSTAR">
+                <math:Var block="sm1" symbId="PSTAR"/>
+                <ErrorModel>
+                    <math:Var symbId="constantErrorModel"/>
+                    <math:FunctionArgument symbId="a">
+                        <math:Scalar value="1"/>
+                    </math:FunctionArgument>
+                    <math:FunctionArgument symbId="f">
+                        <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                            <Var symbId="PSTAR"/>
+                        </math:Equation>
+                    </math:FunctionArgument>
+                </ErrorModel>
+                <RandomEffect>
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="0"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Scalar value="1"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Continuous>
+        </ObservationModel>
+    </ModelDefinition>
+    <!-- BLOCK II: MODELING STEPS -->
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        <!-- EXPERIMENTAL DATA SET -->
+        <Variable symbId="dataSet1" symbolType="dataSet">
+            <DataSet xmlns="http://www.pharmml.org/2013/03/CommonTypes">
+                <Definition>
+                    <Column columnNum="1" columnVar="id"/>
+                    <Column columnNum="2" columnVar="time"/>
+                    <Column columnNum="3" columnVar="amt"/>
+                    <Column columnNum="4" columnVar="dvid"/>
+                    <Column columnNum="5" columnVar="dv"/>
+                    <Column columnNum="6" columnVar="mdv"/>
+                </Definition>
+                <ExternalSource url="file://Ribba_CCR2012.csv" format="nonmem"/>
+            </DataSet>
+        </Variable>
+        <!-- TASK: ESTIMATION STEP -->
+        <EstimationStep id="estTask1">
+            <InitialValue block="om1" symbId="a">
+                <math:Scalar value="0.1"/>
+            </InitialValue>
+            <ObjectiveDataSet dataSetRef="dataSet1">
+                <Mapping columnName="amt">
+                    <DoseVar block="sm1" symbId="D"/>
+                    <Restriction>
+                        <Condition xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                            <LogicBinop op="and">
+                                <LogicUniop op="isDefined">
+                                    <Var symbId="amt"/>
+                                </LogicUniop>                                
+                                <LogicBinop op="gt">
+                                    <Var symbId="dvid"/>
+                                    <Scalar value="0"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Restriction>
+                </Mapping>
+                <Mapping columnName="t">
+                    <math:Var symbId="t"/>
+                </Mapping>
+                <Mapping columnName="id">
+                    <UseVariabilityLevel levelId="indiv"/>
+                </Mapping>
+                <Mapping columnName="dv">
+                    <math:Var block="om1" symbId="PSTAR"/>
+                    <Restriction>
+                        <Condition xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                            <LogicBinop op="and">
+                                <LogicBinop op="eq">
+                                    <Var symbId="mdv"/>
+                                    <Scalar value="0"/>
+                                </LogicBinop>
+                                <LogicBinop op="eq">
+                                    <Var symbId="dvid"/>
+                                    <Scalar value="1"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Restriction>
+                </Mapping>            
+            </ObjectiveDataSet>
+            <!-- PAREMETER and INITIAL CONDITIONS to bet estimated -->
+            <ParametersToEstimate>
+                <!-- ****************************************************** -->
+                <!-- 1. PARAMETERS: individual, population values & omega   -->
+                <!-- ****************************************************** -->
+                <Variable block="om1" symbId="a" fixed="false">
+                    <InitialEstimate>
+                        <Scalar xmlns="http://www.pharmml.org/2013/03/Maths" value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1" symbId="K" fixed="true">
+                    <InitialEstimate>
+                        <Scalar xmlns="http://www.pharmml.org/2013/03/Maths" value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1" symbId="LAMBDAP" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_LAMBDAP" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1"  symbId="omega_LAMBDAP" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1" symbId="KQPP" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_KQPP" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1"  symbId="omega_KQPP" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1" symbId="KPQ" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_KPQ" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1"  symbId="omega_KPQ" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1" symbId="GAMA" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_GAMA" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1"  symbId="omega_GAMA" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1" symbId="DELTAQP" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_DELTAQP" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1"  symbId="omega_DELTAQP" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <!-- KDE log-normal distributed with -->
+                <!-- pop_KDE to be estimated & omega_KDE=FIXED -->
+                <Variable block="pm1" symbId="KDE" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_KDE" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>           
+                <Variable block="pm1" symbId="omega_KDE" fixed="true">
+                    <InitialEstimate>
+                        <Scalar xmlns="http://www.pharmml.org/2013/03/Maths" value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <!-- pop_K=FIXED & omega_K=FIXED - therefore not listed here -->
+                <!-- **************************************************** -->
+                <!-- 2. INITIAL CONDITIONS                                -->
+                <!-- **************************************************** -->
+                <Variable block="pm1" symbId="PT0" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_PT0" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1"  symbId="omega_PT0" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1" symbId="Q0" fixed="false"/>
+                <Variable block="pm1"  symbId="pop_Q0" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="pm1"  symbId="omega_Q0" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.5"/>
+                    </InitialEstimate>
+                </Variable>
+            </ParametersToEstimate>
+            <EstimationOperation opType="estPop"/>
+            <EstimationOperation opType="estIndiv"/>
+        </EstimationStep>
+        <!-- STEPS - HERE ONLY 1 -->
+        <StepDependencies>
+            <Step idRef="estTast1"></Step>
+        </StepDependencies>
+    </ModellingSteps>
+</PharmML>

@@ -1,0 +1,22 @@
+<Variable symbId="d4" symbolType="dataSet">
+    <DataSet xmlns="http://www.ddmore.eu/Resources/CommonTypes/1.0">
+        <Definition>
+            <Column columnNum="1" columnVar="id"/>
+            <Column columnNum="2" columnVar="t"/>
+            <Column columnNum="3" columnVar="Y"/>
+            <Column columnNum="4" columnVar="dose"/>
+        </Definition>
+        <Row>
+            <Cell value="1"/>
+            <Cell value="0"/>
+            <Null/>
+            <Cell value="4"/>
+        </Row>
+        <Row>
+            <Cell value="1"/>
+            <Cell value="0.25"/>
+            <Cell value="2.1243964"/>
+            <Null/>
+        </Row>
+    </DataSet>
+</Variable>

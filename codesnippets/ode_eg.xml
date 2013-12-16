@@ -1,0 +1,15 @@
+<Parameter symbId="ka"/>
+ <Variable symbId="Ad" independentVar="t" symbolType="derivative">
+    <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+        <Binop op="times">
+            <Uniop op="minus">
+                <Var symbId="ka"/>
+            </Uniop>
+            <Var symbId="Ad"/>
+        </Binop>
+    </Equation>
+</Variable>
+
+<InitialCondition symbId="Ad">
+    <math:Scalar value="0"/>
+</InitialCondition>

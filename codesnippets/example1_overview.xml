@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
+    name="Example 1 - continuous PK/PD"
+    independentVar="t" writtenVersion="0.1">
+    <SymbolDefinition symbId="constantErrorModel" symbolType="scalar">
+      <!-- Omitted detail -->
+    </SymbolDefinition>
+    <SymbolDefinition symbId="combinedErrorModel" symbolType="scalar">
+      <!-- Omitted detail -->
+    </SymbolDefinition>
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+      <!-- Omitted detail -->
+    </ModelDefinition>
+    <Design xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+      <!-- Omitted detail -->
+    </Design>
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+      <!-- Omitted detail -->
+    </ModellingSteps>
+</PharmML>

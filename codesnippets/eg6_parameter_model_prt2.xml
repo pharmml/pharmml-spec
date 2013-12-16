@@ -1,0 +1,21 @@
+<Parameter symbId="V" transformation="log">
+    <!-- Omitted log(pop_V) -->
+    <RandomEffect levelId="indiv" symbId="eta_V">
+        <Distribution xmlns="http://www.ddmore.eu/Resources/Uncertainty/1.0">
+	    <!-- Omitted N(0, omega_V) -->
+        </Distribution>
+    </RandomEffect>
+    <RandomEffect levelId="iov1" symbId="kappa_V">
+        <Distribution xmlns="http://www.ddmore.eu/Resources/Uncertainty/1.0">
+	    <!-- Omitted N(0, gamma_V) -->
+        </Distribution>
+    </RandomEffect>
+    <Covariate>
+        <math:Var block="c1" symbId="sex"/>
+        <FixedEffect>
+            <math:Var symbId="beta_V"/>
+            <Category catId="F"/>
+        </FixedEffect>
+    </Covariate>
+    <!-- Omitted Covariates Occasion, Treat and TreatSeq -->
+</Parameter>

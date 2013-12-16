@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.1">
+    <ct:Name>Residual error models - TBS types</ct:Name>
+    <ct:Description>based on document on 'Residual error models and Keizer/Karlsson list'</ct:Description>
+
+    <!-- RESIDUAL ERROR DEFINITION -->
+    <!-- proposed by Matc Karlsson -->
+    <ct:FunctionDefinition symbId="extendedLogG" symbolType="real">
+        <ct:FunctionArgument symbId="a" symbolType="real"/>
+        <ct:FunctionArgument symbId="b" symbolType="real"/>
+        <ct:FunctionArgument symbId="f" symbolType="real"/>
+        <ct:Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Binop op="root">
+                    <ct:Real>2</ct:Real>
+                    <Binop op="plus">
+                        <Binop op="power">
+                            <ct:SymbRef symbIdRef="a"/>
+                            <ct:Real>2</ct:Real>
+                        </Binop>
+                        <Binop op="divide">
+                            <Binop op="power">
+                                <ct:SymbRef symbIdRef="b"/>
+                                <ct:Real>2</ct:Real>
+                            </Binop>
+                            <Binop op="power">
+                                <ct:SymbRef symbIdRef="f"/>
+                                <ct:Real>2</ct:Real>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                </Binop>
+            </Equation>
+        </ct:Definition>
+    </ct:FunctionDefinition>
+
+
+    <!-- MODEL DEFINITION -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <!-- VARIABILITY MODEL -->
+        <VariabilityModel blkId="model" type="model">
+            <Level symbId="indiv"/>
+        </VariabilityModel>
+        
+        <VariabilityModel blkId="obsErr" type="model">
+            <Level symbId="residual"/>            
+        </VariabilityModel>
+        
+        <!-- COVARIATE MODEL -->
+        <CovariateModel blkId="cm1">
+            <Covariate symbId="W">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="W"/>
+                                <ct:Real>70</ct:Real>
+                            </Binop>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        
+        <!-- PARAMETER MODEL -->
+        <ParameterModel blkId="pm1">
+            <SimpleParameter symbId="omega_V"/>
+            <SimpleParameter symbId="omega_V2"/>
+            <SimpleParameter symbId="omega_k"/>
+            <SimpleParameter symbId="omega_k2"/>
+            <SimpleParameter symbId="pop_V"/>
+            <SimpleParameter symbId="pop_V2"/>
+            <SimpleParameter symbId="pop_k"/>
+            <SimpleParameter symbId="pop_k2"/>
+            <!-- V -->
+            <RandomVariable symbId="eta_V">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_V"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="V">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_V"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                        <Covariate>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                            <FixedEffect>
+                                <ct:SymbRef symbIdRef="beta_V"/>
+                            </FixedEffect>
+                        </Covariate>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_V"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- k -->
+            <RandomVariable symbId="eta_k">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_k"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="k">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_k"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_k"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- theta -->
+            <SimpleParameter symbId="theta"/>
+        </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
+        <StructuralModel blkId="sm1">
+            <ct:Variable symbolType="real" symbId="tD"/>
+            <ct:Variable symbolType="real" symbId="D"/>
+            <!-- C1model variable -->
+            <ct:Variable symbolType="real" symbId="C1model">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="D"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V"/>
+                            </Binop>
+                            <Uniop op="exp">
+                                <Binop op="times">
+                                    <Uniop op="minus">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="k"/>
+                                    </Uniop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="time"/>
+                                        <ct:SymbRef symbIdRef="tD"/>
+                                    </Binop>
+                                </Binop>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+            <!-- C1plusTheta stands for the sum f_ij + theta FOR the TBS example -->
+            <ct:Variable symbolType="real" symbId="C1plusTheta">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="C1model"/>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="theta"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+            </StructuralModel>
+        
+        
+        <!-- 2.2.1	Exponential error model - proposed by Mats Karlsson -->
+        <ObservationModel blkId="om1">
+            <SimpleParameter symbId="a"/>
+            <SimpleParameter symbId="b"/>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="C">
+                <Transformation>log</Transformation>
+                <Output>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <FunctionCall>
+                                <ct:SymbRef symbIdRef="extendedLogG"/>
+                                <FunctionArgument symbId="a">
+                                    <ct:SymbRef symbIdRef="a"/>
+                                </FunctionArgument>
+                                <FunctionArgument symbId="b">
+                                    <ct:SymbRef symbIdRef="b"/>
+                                </FunctionArgument>
+                                <FunctionArgument symbId="f">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                </FunctionArgument>
+                            </FunctionCall>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="eps"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+
+        <!-- 2.2.1	Error model - proposed by Beal -->
+        
+        <!-- THIS MODEL CANNOT BE ENCODED FOR NOW -->
+        
+
+
+    </ModelDefinition>
+    
+</PharmML>

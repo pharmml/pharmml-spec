@@ -1,0 +1,1347 @@
+\chapter{Worked Examples}
+\label{chap:worked-egs}
+
+\section{How this chapter is organised}
+
+In developing \pharmml we have found it very useful to explain the
+language using examples. By taking you through some pharmacometric models
+that you are familiar with we also hope to help you understand how they
+correspond to the XML representation in \pharmml. Each example is designed
+to illustrate different aspects of \pharmml and our aim is that by the
+end of this chapter you will understand the language and what it can
+do and --- perhaps equally importantly --- what it cannot do. For
+clarity and to save space we will only show key excerpts from the
+examples, but the complete examples are available and will be
+distributed with this document.
+
+Figure \ref{fig:simEstTasks_List} shows an comparison in the 
+structure to be implemented for a typical simulation and estimation task.
+Boxes underline elements where the structure of \pharmml for these two tasks differs.
+
+\begin{figure}[htb]
+ \centering	
+ \includegraphics[width=0.8\linewidth]{pics/simEstTasks_List}%
+ \caption{PharmML building blocks used in the trial definition for an estimation and simulation task. 
+ Boxes underline elements where the structure of \pharmml for these two tasks differs. (T) indicates 
+ that tabular data structure is used.}
+ \label{fig:simEstTasks_List}
+ \end{figure}
+
+\eglabel{1}
+\section{Example \theexamples: Simulation, PK + PD response}
+\label{sec:eg1}
+
+\subsection{Description}
+
+%\subsubsection{Introduction}
+\label{subsec:exp2_intro}
+
+The following example is based on the CTS1 use case
+\cite{Lavielle:2011}. Both PK (the drug concentration) and PD (the
+drug effect) are simulated. A one compartment PK model is linked to an
+indirect response PD model, see Figure \ref{fig:simplePKPD} for a typical 
+simulation result for one patient.
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics[width=.45\textwidth]{pics/CTS1_smallPKPD}
+\caption{Simulated combined model as defined in the example with PK (blue) and PD (green) time courses for one subject. Here three doses were administered every $48h$.}
+\label{fig:simplePKPD}
+\vspace{-20pt}
+\end{center}
+\end{figure}
+
+\subsubsection{Model Definition}
+
+\paragraph{Structural model}
+This is an oral one compartment model and an indirect response model
+with parameters \var{ka}, \var{V}, \var{CL}, \var{Imax}, \var{IC50},
+\var{Rin} and \var{kout}.
+
+\begin{align}
+k&=\frac{\CL}{V}  \label{eqn:eg1-struct-model}\\
+\frac{dAd}{dt} &=-ka \times Ad  \nonumber\\
+\frac{dAc}{dt}&=ka \times Ad - k \times Ac  \nonumber\\
+\frac{dE}{dt} &=Rin \times \Bigg(1-\frac{\Imax \times \Cc}{\Cc+\IC50}\Bigg)
+- kout \times E \nonumber\\
+\Cc &= \frac{Ac}{V} \nonumber
+\intertext{initial conditions:}
+E(t=0) &= \frac{Rin}{kout}  \label{eqn:eg1-init-conds}\\
+Ad(t=0) &= 0  \nonumber\\
+Ac(t=0) &= 0 \nonumber
+\end{align}
+
+
+\paragraph{Covariate model}
+
+The only covariate is Weight, $W$, and it is a continuous covariate:
+\begin{gather}
+W \sim \mathcal{N}(\pop_{\Weight}, \omega_{\Weight}) \label{eqn:eg1-covariate-defn}
+\intertext{The following transformation is applied:}
+\log(\Weight/70) \label{eqn:eg1-covariate-trans}
+\intertext{and the initial values are:}
+\pop_{\Weight} =70.07, \quad \omega_{\Weight} =14.09 \nonumber
+\end{gather}
+
+\paragraph{Parameter model}
+
+\subparagraph{PK parameters}
+
+The model uses the following individual parameters:
+\begin{description}
+\item[\var{ka}] absorption rate constant
+\item[\var{V}] volume of distribution
+\item[\var{CL}] clearance of elimination
+\end{description}
+All follow a log-normal distribution:
+\begin{align}
+\log(ka_{i}) &=  \log(\pop_{ka}) + \eta_{ka,i}   \label{eqn:eg1-param-ka}\\
+\log(V_i) &= \log(\pop_{V}) + \beta_{1,V}\log(W_i/70) + \eta_{V,i}   \label{eqn:eg1-param-V}\\
+\log(\CL_i) &=  \log(\pop_{\CL}) + \beta_{1,\CL}\log(W_i/70) +
+\eta_{\CL,i} \nonumber
+\end{align}
+where
+\begin{gather*}
+\eta_{ka,i} \sim N(0, \omega_{ka}), \quad \eta_{V,i} \sim N(0,
+\omega_{V}), \quad \eta_{\CL,i} \sim N(0, \omega_{\CL})
+\intertext{with initial values:}
+\pop_{ka}=1,\quad \omega_{ka}=0.6  \qquad \pop_V=8,\quad \omega_V=0.2 \\
+\pop_{\CL}=0.13,\quad \omega_{\CL}=0.2  \qquad \beta_{1,V}=1 , \quad \beta_{1,\CL}=0.75  \\
+\rho_{V,\CL}=0.7\footnotemark
+\end{gather*}
+\footnotetext{Correration coefficient between $\eta_{V,i}$ and $\eta_{\CL,i}$}
+
+\subparagraph{PD parameters}
+
+The model uses the following individual parameters:
+\begin{description}
+\item[\var{Imax}] maximal antagonistic response
+\item[\var{IC50}] concentration giving half the maximal response
+\item[\var{Rin}] input (synthesis) rate
+\item[\var{kout}] output (elimination) rate
+\end{description}
+All follow a log-normal distribution, except \var{Imax}, which follows a logit-normal distribution.
+\begin{align*}
+\logit(Imax_i) =& \logit(\pop_{Imax})  + \eta_{Imax,i}   \\
+\log(\IC50_{i}) =& \log(\pop_{\IC50}) + \eta_{\IC50,i}  \\
+\log(\Rin_i) =& \log(\pop_{\Rin}) + \eta_{\Rin,i}  \\
+\log(\kout_i) =& \log(\pop_{\kout}) + \eta_{\kout,i}
+\end{align*}
+where
+\begin{gather*}
+  \eta_{Imax,i} \sim N(0, \omega_{Imax}), \quad \eta_{\IC50,i} \sim
+  N(0, \omega_{\IC50}), \\
+\eta_{\Rin,i} \sim N(0, \omega_{\Rin}), \quad \eta_{\kout,i} \sim N(0, \omega_{\kout})
+\intertext{with initial values:}
+\pop_{Imax} =0.9,\quad \omega_{Imax}=2  \qquad \pop_{\IC50} =
+0.4,\quad \omega_{\IC50} =0.4  \\
+\pop_{\Rin}=5, \quad \omega_{\Rin}=0.05  \qquad \pop_{\kout} =0.05,
+\quad \omega_{\kout} =0.05
+\end{gather*}
+
+\paragraph{Variance-covariance matrix}
+\label{sec:covariance-matrix}
+The full variance-covariance matrix for the random effects is:
+\begin{gather}
+ \Omega =
+ \begin{pmatrix}
+  \omega_{ka}^2 	& 0 				& 0  				& 0  				& 0  				& 0  				& 0  				\\
+   			  	& \omega_{V}^2	& \omega_{V,\CL} 	& 0  				& 0  				& 0  				& 0  				\\
+  				& 				& \omega_{\CL}^2	& 0  				& 0  				& 0  				& 0  				\\
+ 				&				&   				& \omega_{Imax}^2  & 0  				& 0  				& 0  				\\
+				&   				&   				&   				& \omega_{IC50}^2  & 0  				& 0  				\\
+				&   				&   				&   				&   				& \omega_{Rin}^2 	& 0  				\\
+				&   				&   				&   				&   				&   				& \omega_{kout}^2
+ \end{pmatrix}
+\intertext{where}
+\omega_{V,\CL} = \omega_\var{V} \, \omega_{\CL} \,\rho_{\var{V},\CL}\nonumber
+\label{sec:eg-covariance-mat}
+\end{gather}
+
+\paragraph{Observation model}
+\label{sec:eg1-desc-obs-model}
+
+We apply a residual error model to the output variables \var{Cc} and \var{E}
+from the PK and PD models respectively.
+
+%\begin{table*}[h!]
+\begin{center}
+\begin{tabular*}{0.8\linewidth}{@{\extracolsep{\fill}} >{\bfseries}l l l}\toprule
+Output Variable & \textbf{\itshape Cc} &\textbf{\itshape E}\\\midrule
+Observation Name & Concentration & PCA\\
+Units & $\mg/l$ & $\%$\\
+Type & Continuous & Continuous \\
+Model & Combined & Constant \\
+Parameters & $a = 0.5,\quad b=0.1$ & $a=4$\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Trial Design}
+\label{subsec:exp2_TaskDescription}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\linewidth]{../pics/designPattern_4Arms1Epoch}
+\caption{Design overview: this study consists of four arms and one epoch. The differences between arms lie in the number of subjects, dose amount and times. See table below for the details.}
+\label{fig:designPattern_4Arms1Epoch}
+\end{figure}
+
+Figure \ref{fig:designPattern_4Arms1Epoch} shows the \textit{Structure} of
+this example consisting of four arms and one epoch, meaning there are four treatment
+types for which only one time period needs to be specified.
+
+The dosing regimen for the trial is given for each arm below. Note
+that all dosing is bolus dosing (discrete administration at specific
+times) and all doses are administered to the same compartment.
+
+%\begin{table*}[h!]
+\begin{center}
+\begin{tabular*}{0.9\linewidth}{@{\extracolsep{\fill}} >{\bfseries}l rrrr}\toprule
+Arm & \textbf{1} &\textbf{2} &\textbf{3} & \textbf{4}\\\midrule
+Number of subjects & 20 & 20 & 40 & 40 \\
+Dose target & \var{Ad} & \var{Ad} & \var{Ad} & \var{Ad}\\
+Dosing Amount & 0.25 & 0.5 & 0.5 & 1\\
+Dose Units & $\mg/\kg$  & $\mg/\kg$  & $\mg/\kg$  & $\mg/\kg$ \\
+Dose per kg & yes & yes & yes & yes\\
+Dosing times (h) & 0:24:192 &  0:48:192 &  0:24:192 & 0:48:192 \\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Modelling Steps}
+
+Time of measurement for PK and PD happens according to different
+schedules and these observation time points are produced by the
+simulation. The output variables to be generated by the simulation and
+their associated time points are shown below:
+
+\begin{center}
+\begin{tabular*}{0.9\linewidth}{@{\extracolsep{\fill}} >{\bfseries}l c c}\toprule
+Output Variable & \textbf{\itshape Cc} &\textbf{\itshape E}\\\midrule
+Observation times & [0.5,4 : 4 : 48,52 : 24 : 192,192 : 4 : 250] & 0 : 24 : 288\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\pharmml Document Structure}
+\label{sec:symbol-defn}
+An overview of the model with the key sections collapsed  as shown in this listing
+\inputxml{exp1_lst1.xml}
+illustrates the main sections of the model as described
+in section \ref{sec:structure-overview}. The key points to note are
+the use of the \xatt{independentVar\-iable}  attribute to set the time
+variable to $t$ (c.f.\xspace section \ref{sec:independent-var}), and
+how the element \texttt{Name} defines the name of the model. In addition
+the top-level \texttt{PharmML} element contains a number of attributes
+prefixed \texttt{xmlns}. These are required by the XML Schema standard
+and can be ignored as we go through the examples\footnote{If you
+  want to learn more about the technical aspects of XML and the XML Schema standard
+  used to define \pharmml then we recommend to start here:
+  \url{http://www.w3.org/TR/xmlschema-0/}. And, by the way,
+  \texttt{xmlns} stands for XML namespace.}.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst1.xml}
+%\caption{An overview of the \pharmml document for example \egref{1}.}
+%\label{eg:eg1-overview}
+%\end{listing}
+
+The above listing introduces a concept and XML element that we did not describe
+before: this is the \xelem{FunctionDefinition} element. It defines a function that
+returns a real type as shown in the following listing 
+%\ref{eg:symboldefn}. 
+\inputxml{exp1_lst2.xml}
+
+The function takes three arguments of scalar type and defines the
+function:
+\begin{displaymath}
+\var{combinedError}(a, b, f) = a + bf
+\end{displaymath}
+This function is used to encode the combined error model function used later in
+the observation model (see section \ref{sec:eg1-obs-model}).
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst2.xml}
+%\caption{Function definition using the \xelem{FunctionDefinition} element.}
+%\label{eg:symboldefn}
+%\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsubsection{Units}
+%\label{sec:eg1-units}
+%
+%Listing \ref{eg:eg1-units} shows how we define units for this example, see for details \ref{sec:units}. It is done using the element \xelem{UnitDefinition} and child element \xelem{UnitComponent}. For example $mg$ for tumour mass or $mg/kg$ as dose unit to express the dosing per kilogram of body weight.
+%
+%\begin{listing}[htb]
+%\inputxml{exp1_units.xml}
+%\caption{Examples of the units definition in example \egref{1}.}
+%\label{eg:eg1-units}
+%\end{listing}
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Model Definition}
+
+As you can see in the following listing 
+\inputxml{exp1_lst3.xml}
+
+the model definition section defines the main components that you will see in
+the subsequent examples. Apart from the structural model, all of these
+elements are optional and all follow the scoping rules described in
+section \ref{sec:blocks}.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst3.xml}
+%\caption{Overview of the Model Definition section in example \egref{1}.}
+%\label{eg:eg1-modeldefn-overview}
+%\end{listing}
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst3A.xml}
+%\caption{In example \egref{1} there are two variability models, one related
+%to the IIV and one related to the residual error.}
+%\label{eg:eg1-residualAndIndividual}
+%\end{listing}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Variability Model}
+\label{sec:eg1-variability}
+
+\begin{figure}[ht!]
+\centering
+ \includegraphics[width=120mm]{tree_IOV0}
+\caption{There is only one level of variability in this example -- inter-individual variability.}
+\label{fig:tree_IOV0}
+\end{figure}
+
+From the listing above one can also see that there
+are two variability models defined using the element
+\xelem{Vari\-abilityModel}. This is how we explicitly define the
+level of variability in the model (c.f.\ section
+\ref{sec:variabilityModel}). In this case there is one level of 
+variability, the inter-individual, Figure \ref{fig:tree_IOV0} and the residual
+error model variability, see the following listing \inputxml{exp1_lst3A.xml}
+for the details of the implementation. Please, note that we use two different variability 
+attribute types, \xatt{model} and \xatt{error}. The former stands for random variability
+associated with the parameters, as described in section \ref{sec:variabilityModel}. 
+For this example we are defining one level of variability in the parameter model and this
+corresponds to variability between subjects. The latter stands for residual error variability.
+
+We will explain this more fully below when we look at
+examples with more complex variability models (section
+\ref{eg6:variabilityModel}).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Covariate Model}
+\label{sec:eg1-covariate}
+
+
+The \xelem{CovariateModel} block corresponds to the covariate model
+defined in section \ref{maths:covariate_model}. In this example, as shown
+in this listing \inputxml{exp1_lst4and5.xml}
+we are defining a continuous
+covariate, \var{W}, indicated by the \xelem{Continuous} element and
+the covariate is sampled from a normal distribution as in equation
+\ref{eqn:eg1-covariate-defn}.  The element \xelem{Transformation}
+beneath the definition of the distribution describes the
+transformation applied to this covariate whenever it is used. In this
+case the transformation being applied is defined in
+equation~\ref{eqn:eg1-covariate-trans}.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst4and5.xml}
+%\caption{The Covariate Model}
+%\label{eg:eg1-covariate-model}
+%\end{listing}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Parameter Model}
+\label{sec:eg1-pk}
+All parameters in the current example \egref{1} can be defined
+using the Gaussian model with linear covariates (see section
+\ref{sec:parameterModel}). We will start with a simple case in this
+example, shown in the following listing \inputxml{exp1_lst6.xml}
+the absorption rate constant \var{ka}. 
+First the typical value for \var{ka}, \var{pop\_ka}
+and the standard deviation of the random effect, \var{\omega\_ka}, are
+defined as \xelem{SimpleParameter}'s. Then the random effect \var{eta\_ka}
+is defined, and it follows a normal distribution with mean $0$ and
+standard deviation \var{\omega\_ka}.
+
+Then the actual individual parameter \var{ka} is
+defined with the \xelem{Transformation} attribute set to
+\texttt{log}. This tells us that the parameter is log-transformed. We
+are using the Gaussian model described previously (section
+\ref{maths:parameter-model}), and it follows a log-normal distribution
+with the mean \var{pop\_ka} and the standard deviation
+ \var{omega\_ka}, as shown in equation \ref{eqn:eg1-param-ka}.
+Even though \var{ka} is modelled without a covariate, we still use the
+element \xelem{LinearCovariate}, which contains here logically only the
+typical value element \xelem{PopulationParameter}.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst6.xml}
+%\caption{A simple parameter definition: parameter $ka$.}
+%\label{eg:eg1-param-prt1}
+%\end{listing}
+
+The \xelem{RandomVariable} element is very important here. It tells us
+what the random effect is, and, by assigning a variability level to
+the attribute \xatt{symbIdRef} within the \xelem{VariabilityRef\-erence} element,
+it effectively tells us that the random effect is sampled for every subject.
+The importance of this will become clearer in later examples that describe
+multiple levels of variability. Note that the \xelem{RandomVariable} element
+also defines a new symbol \var{eta\_ka}, which is a parameter.
+
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst7.xml}
+%\caption{A more complicated parameter definition: parameter $V$.}
+%\label{eg:eg1-param-prt2}
+%\end{listing}
+
+Of course not all parameter definitions are so straight forward. In the
+following listing \inputxml{exp1_lst7.xml}
+you can see the definition of a
+parameter, \var{V}, that is related to the covariate, $W$. We do this
+using the element \xelem{Covariate} to indicate there is a
+relationship. Then we reference the specific covariate (using the
+\xelem{SymbRef} element) and describe the fixed effect relating the
+covariate to this parameter: in this case we are referring to the
+parameter \var{beta\_V}. We define here a linear covariate model
+when relating covariates to parameters (c.f.\xspace section
+\ref{maths:covariate_model}), so this example corresponds to
+equation \ref{eqn:eg1-param-V}.
+
+You may have noticed that in equation \ref{eqn:eg1-param-V} the
+covariate term is $\log\left(W/70\right)$ and not \var{W}. Why? Well
+we have applied the covariate transformation defined in
+(\ref{eqn:eg1-covariate-trans}). As we described above (section
+\ref{sec:eg1-covariate}), whenever a covariate is used here we always
+apply any transformation defined in the \xelem{Transformation}
+element.
+
+Having defined the individual and other parameters in the parameter
+model we need to describe the correlation of the random effects, if any.
+As described above (see section \ref{subsec:correlationModel} for
+a complete description) we do this using a covariance matrix.
+In \pharmml, if the random effects of both
+parameters follow a normal distribution, then we assume that the
+diagonal of the covariance matrix can be derived from the variance or
+standard deviation of each parameter (c.f section
+\ref{maths:covariance-mat-derivation}). This is true in our example,
+so we only need to define the parts of the covariance matrix that
+define the correlation between parameters \var{V} and \var{CL}
+as shown in this listing \inputxml{exp1_lst8.xml}
+Notice that with the
+\xatt{symbIdRef} attribute the correlation is associated with the
+variability level defined at the beginning of the model
+definition. This allows us to define a covariance matrix for each
+level of variability in the model and thus to define different
+parameter correlations at each level as well. This single
+\xelem{Correlation} element is all we need to define the covariance
+matrix mentioned above (section \ref{sec:eg-covariance-mat}).
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst8.xml}
+%\caption{The correlation of parameters \var{V} and \var{CL}.}
+%\label{eg:eg1-param-prt3}
+%\end{listing}
+
+You now know most of the structures used to define a parameter in
+\pharmml. As you will see later, these elements can be combined to
+create more complicated parameter models, but these are elaborations
+of this framework.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Structural Model}
+
+In \pharmml the structural model can be described using algebraic
+equations or an ODE system. In this example the
+model is defined as a combination of an ODE system and
+some supporting algebraic equations (c.f.\xspace equation \ref{eqn:eg1-struct-model}).
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst9and10.xml}
+%\caption{A subset of the structural model showing how variables
+%  \var{k} and \var{Ad} are defined and how we specify the initial condition for a
+%  variable defined by an ODE.}
+%\label{eg:eg1-struct-prt1}
+%\end{listing}
+
+The following listing \inputxml{exp1_lst9and10.xml} illustrates how the variable \var{k}
+is defined. We cover this in more detail in chapter
+\ref{chap:lang-overview}, but briefly: \var{k} is defined as having a
+real type and is assigned the result of the expression $CL/V$, which
+are parameters defined in the parameter model, \var{p1}. We can also
+see how the derivative \var{Ad} is defined using the element \xelem{DerivativeVariable}
+(see section \ref{sec:odes} for a more detailed explanation)
+with $t$ as the independent variable. The full ODE defined is:
+\[
+\frac{\mathrm{d}\,\var{Ad}}{\mathrm{d}t} = -\var{ka} \, \var{Ad}
+\]
+where \var{ka} is a parameter defined in the parameter model \var{p1}.
+Finally the \xelem{InitialCondition} element defines
+the initial value for \var{Ad} at time 0, here $Ad(t\!=\!0)\!=\!0$, which is the default initial time
+in \pharmml.
+%\begin{listing}[htb]
+%\inputxml{eg1_struct_model_prt2.xml}
+%\caption{Defining the initial conditions of the model.}
+%\label{eg:eg1-struct-prt2}
+%\end{listing}
+%
+%Since this defines a system of differential equations, we need to
+%define the initial conditions. Second part of listing \ref{eg:eg1-struct-prt1} shows
+%how the initial conditions in equation \ref{eqn:eg1-init-conds} are defined
+%in \pharmml. Very simply the result of a mathematical expression described in
+%\pharmml Maths is assigned to the variables at $t=0$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Observation Model}
+\label{sec:eg1-obs-model}
+
+In this example there are two observations for the continuous
+variables \var{Cc} and \var{E}, which are outputs from the structural
+model. As described above each has a residual error model applied to it.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst11.xml}
+%\caption{The residual error model applied to variable \var{Cc}.}
+%\label{eg:eg1-obs}
+%\end{listing}
+
+The XML is very similar for both variables so in the following listing 
+%\ref{eg:eg1-obs} 
+\inputxml{exp1_lst11.xml}
+we only show how the residual error model for \var{Cc}, the continuous PK variable, is defined.
+First the parameters of the residual error model \var{a} and \var{b} are
+defined using \xelem{SimpleParameter}; here a combined additive
+and proportional error model is applied. Then \var{epsilon\_Cc} as \xelem{RandomVariable}
+of the residual error model with a mean of $0$ and standard deviation \var{sigma\_Cc} is defined
+to be used in the subsequent parts of the model. Note that we need to 
+indicate the type and level of the according random effect which were
+defined in the 'Variability Model' section above. This is done
+using the \xelem{VariabilityReference} 
+
+The subsequent element \xelem{Standard} states that we are defining a standard
+continuous observation model. This means in short that we can define
+an observation model of the form $y_{ij} = f_{ij} + g\times\epsilon_{ij}$
+(for details, see the discussion below and section \ref{sec:observationModel}).
+
+The attribute \xatt{symbId} of \xelem{Standard} defines the name of the
+variable that will hold the result of the applied residual error model.
+The \xelem{Output} element then defines the
+variable in the structural model that the residual error model applies to
+(in this case \var{Cc}). Next we define the actual residual error
+model with the \xelem{ErrorModel} element. The error model is invoked
+by calling the function \var{combinedErrorModel} defined in the symbol
+definition at the beginning of the \pharmml document (see section
+\ref{sec:symbol-defn}). We pass in the appropriate parameter values
+(see section \ref{maths:combined-err-model} for a description of the
+residual error model) and this defines our residual error model.\\
+Finally we use the \xelem{ResidualError} element to reference the
+\var{epsilon\_Cc} specified before.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Residual model implementation}
+Most residual error model types have two or three equivalent forms, by which 
+we mean they have the same variance, although they use one or more residual 
+errors, $\epsilon_{ij}$, see examples in section \ref{subsec:modelExamples}. 
+Other types contain two or more predictions from the structural model, \var{f_{ij}}. 
+From a computational point of view it makes a lot of sense to reflect such 
+differences in the language structure.
+This was the motivation to allow for the implementation of two types of observation models
+\begin{itemize}
+\item
+\xelem{Standard} -- any observation model of the form
+\begin{align*}
+	u(y_{ij}) = u(f_{ij}) + g\times\epsilon_{ij}
+\end{align*}
+which can be defined using exactly one of the following items
+\begin{itemize}
+\item
+a transformation, $u$, e.g. \var{log} or \var{logit}
+\item
+one structural model prediction, \var{f_{ij}}
+\item
+one standard deviation function, \var{g}
+\item
+one random variable, $\epsilon_{ij}$
+\end{itemize}
+\item
+\xelem{General} -- using any number of the items listed above and arbitrary functional relationship between them.
+\end{itemize}
+This chapter contains more examples illustrating these constructs.
+
+%We described in chapter \ref{chap:mathsdefn} (section
+%\ref{sec:residualErrorModel}) how we currently assume the residual
+%error model to be of the form $g\epsilon$, where $g$ is the error
+%model and $\epsilon$ is a random value sampled from a probability
+%distribution. In \pharmml (listing \ref{eg:eg1-obs}) the
+%\xelem{RandomEffect} element defines $\epsilon$. This element is
+%similar to its namesake in the parameter model in that it describes a
+%probability distribution, but in this case it is not associated with a
+%level of variability nor do we assign it symbol name. In the listing
+%the distribution was omitted to save space, but it is defined in
+%exactly the same way as it is in the parameter model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Trial Design}
+\subsubsection{Structure}
+
+In this fairly simple case, there is only one epoch and four arms, \var{Arm\_1}, \var{Arm\_2} etc.,
+cf. Figure \ref{fig:designPattern_4Arms1Epoch}.
+The resulting four cells \var{Cell\_1}, \var{Cell\_2} etc. each correspond
+to one arm and contain one segment.
+Figure \ref{fig:CellSegmentEpochArm_example1} (right) illustrates the inter-relationship between
+cells, arms, epochs and segments. Here a segment consists of one activity --
+a certain type of treatment. In general, a segment can contain more
+than one activity. Dosing regimen can be defined for different
+compartments in the structural model. In this example there are four
+treatments with one dosing regimen per treatment.
+
+\begin{figure}[htbp!]
+\centering
+\includegraphics[width=0.7\linewidth]{pics/CellSegmentEpochArm_example1}
+\caption{(left) General cell hierarchy; (right) How it is applied in example \egref{1}.
+There is only one epoch and four arms, \var{Arm\_1}, \var{Arm\_2} etc.
+The resulting four cells \var{Cell\_1}, \var{Cell\_2}, etc. each correspond
+to one arm and contain one segment. See the listing bellow for how
+these features are implemented and structured.}
+\label{fig:CellSegmentEpochArm_example1}
+\end{figure}
+
+%The treatment in \pharmml is used to describe the dosing regimen
+%applied to the subjects in the trial. A treatment can contain more
+%than one dosing regimen and drugs can be administered to different
+%compartments in the structural model. In this example there are four
+%treatments with one dosing regimen per treatment.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst12.xml}
+%\caption{A treatment with bolus dosing.}
+%\label{eg:eg1-treatment}
+%\end{listing}
+
+%\ref{eg:eg1-treatment} 
+In the following listing 
+\inputxml{exp1_lst12.xml} we show an activity defined for \var{Arm\_1},
+here treatment in the form of a bolus administration: the others are very similar.
+The \xelem{Activity} element is given an identifier, ``\texttt{d1}'',
+and the element \xelem{Bolus} defines a
+bolus administration\footnote{Bolus and infusion are the only types of
+dosing regimen permitted. We make no distinction between oral and IV
+administration as such differences are handled by the structural
+model used.}.  \xelem{DoseAmount} defines the amount of drug to be
+administered. The are basically two options here. Either the dose is assigned
+to the variable defined by an ODE, such is the case here, for which we use
+\xatt{inputType="target"} attribute or the dosing variable \var{D} as in algebraic
+equations. 
+Additionally, in this case the administration is adjusted for body
+weight using the expression $0.25W$. The element \xelem{SymbIdRef}
+defines the target of dosing. This effectively defines an input
+function that adds the dose amount
+to the variable \var{Ad} at the specified dosing time. The dosing
+times themselves are given by the \xelem{DosingTimes} element as the
+sequence $0:24:192$.
+% (see section \ref{sec:arrays} for more information about sequences).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsubsection{Treatment Epoch and Group}
+
+%In this example (listing \ref{exp1_lst13}) the purpose of the
+%Treatment Epoch is not clear. In general the treatment epoch provides
+%a time-frame that dosing times are relative to, and this permits us to
+%define more complex trial design structures as you will see in later
+%examples. However, in this simple example no time-frame is defined so
+%it is assumed to be the interval $[0, \inf]$ (see section
+%\ref{maths:epoch-defn}). The epoch can contain one or more treatments,
+%which are referenced using the \xelem{TreatmentRef} element.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst13.xml}
+%\caption{Arm, cell, epoch and segment/activity definition (see Figure
+%\ref{fig:CellSegmentEpochArm_example1} for the relationship between
+%these elements).}
+%\label{exp1_lst13}
+%\end{listing}
+
+Once the segments with their according treatments/activities are defined, we can define epochs using the
+element \xelem{Epoch} with their start and stopping time along with their order.
+After the arms are specified, the \xelem{Cell} element is used to put all of the components together, see this listing 
+\inputxml{exp1_lst13.xml}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Population}
+
+The \xelem{Population} is the second and in the case of a simulation example,
+also the last block in the trial design definition. As explained in chapter \ref{sec:CTS}
+this is the place to define the number of subjects per study arm, constant
+or time-varying covariates and other properties, if available.
+In this particular case covariates are simulated according to 
+the definition in eq.\ref{eqn:eg1-covariate-defn}. This is the reason the following table with 
+population data will have only three columns. (In case of estimation the covariates would have to 
+be listed explicitly in this table as well, this will be described in the next example \ref{sec:eg4})\\
+The definition of the table is in the \xelem{IndividualTemplate} block where the columns
+\var{id}, \var{arm} and \var{reps} are specified, see the following listing 
+\inputxml{exp1_lst13A.xml}
+Using the \var{reps} variable allows us
+to shorten the definition in cases where all other features are the same across subjects in
+an arm, which is the case here. Here four arms with 20, 20, 40 and 40 subjects, respectively, are defined.
+An alternative would be to list all subjects explicitly, in which case only two columns would be
+sufficient, \var{id} and \var{arm}.\\
+In the estimation case another block \xelem{IndividualDosing} would have to be defined as next.
+This will be explained in the following example \ref{sec:eg4}.
+
+%The trial group, defined by the \xelem{Group} element, brings together
+%the epochs (referred to by the \xelem{TreatmentEpochRef} element) and the
+%individuals (or subjects) in the trial. We define the number of
+%individuals in the trial using the \xelem{Individuals} element and we
+%also assign them a variable, \var{i}. This variable can be used to refer
+%to the individuals within this group (see example \egref{5} in section
+%\ref{sec:eg4}) and will also be useful when \pharmml is extended
+%to describe the export of results to a file. Note that for the purposes
+%of variable scoping the \xelem{Group} element defines a block and so
+%this variable must be referred to as: \verb|<math:Var block="a1" symbId="i"/>|
+
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst13A.xml}
+%\caption{Population definition.}
+%\label{eg:eg1-population}
+%\end{listing}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Modelling Steps}
+\label{sec:eg1-modelingSteps}
+
+\subsubsection{Simulation settings and dependencies}
+
+In the following listing \inputxml{exp1_lst14.xml}
+you can see the structure of the
+\xelem{ModellingSteps} section of \pharmml.  In this example we are
+describing a simulated model and so use the \xelem{SimulationStep}
+element.
+
+%The step is given an ``\texttt{oid}'' identifier, ``\texttt{s1}'', and then we
+%specify the number of times the simulation is to be executed (number
+%of replicates) using the \xelem{Replicates} element. A variable name
+%is defined here (of scalar type), in this case \var{r}, that is holds
+%the number of the current replicate. This variable is not currently
+%used by the rest of the simulation, block, but the intention is that
+%it will become useful in the future when describing the export of
+%results within \pharmml. In the meantime this variable is likely to be
+%useful for software tools as it gives a recognisable variable name to
+%describe the replicates in an implementation based on this \pharmml
+%document.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst14.xml}
+%\caption{Simulations steps in outline.}
+%\label{eg:eg1-ms-deps}
+%\end{listing}
+
+The first part of the simulation block sets initial values for
+parameters in the model and defines the outputs of the simulation. We
+will go into more detail on these elements below. Then at the end of
+the modelling steps block is the \xelem{StepDependencies}
+element. This describes the ordering of the steps in the modelling
+steps section (see section \ref{sec:stepdeps}), but in this case it is
+redundant as we only have one step in this example.
+
+\subsubsection{Initial Values}
+
+The code snippet in listing \inputxml{exp1_lst15.xml}
+shows how we set
+initial values. Very simply we refer to a previously defined variable,
+here the typical value for a covariate \var{pop\_W}, or parameter and then assign
+it a numerical value within the \xelem{VariableAssignment} element.
+In this example the value for \var{omega_W} is
+calculated from a mathematical expression, which is allowed, if this expression
+resolves to a numerical value.  The order of the \xelem{VariableAssignment}
+elements is not significant and the ordering is based on variable
+dependencies (as described in section \ref{sec:symbolScoping} on page
+\pageref{sec:symbolScoping}).
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst15.xml}
+%\caption{Assigning initial values in the simulation step.}
+%\label{eg:eg1-ms-init-vals}
+%\end{listing}
+
+\subsubsection{Observations}
+
+Typically, what drives a simulation task are its outputs. You only
+need to simulate the parts of your system that produce the required
+outputs and for as long as you wish to observe those outputs. In
+\pharmml we use the \xelem{Observations} element to do this job, as
+you can see in this listing \inputxml{exp1_lst16.xml}
+In this example we define
+a set of time points, $0.5, 4:4:48, 52:24:192, 192:4:250$, and the
+variables we would like to see simulated at those points in time. You
+can define one or more output variables here using the \xelem{Continuous}
+element. It is noteworthy here that by choosing the \var{Cc} defined
+in both the structural model (``\texttt{main}'') and observation
+model (``\texttt{o1}'') blocks we can show the output of the
+structural model with and without the residual error applied.
+
+%\begin{listing}[htb]
+%\inputxml{exp1_lst16.xml}
+%\caption{Defining output observations of the simulation.}
+%\label{eg:eg1-ms-obs}
+%\end{listing}
+
+%\clearpage
+%%\newpage
+
+
+% BONATE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\eglabel{2}
+\section{Example \theexamples: Simulation with steady state dosing}
+\label{sec:eg2}
+
+\subsection{Description}
+
+The following example is taken from \cite{Bonate:2011fk}, p.535, and represents another simple example for a PK simulation. However, here we discuss a system under steady state resulting from a twice daily dosing in 50 adult subjects who received a dose of 100 mg per administration. The drug concentration follows a 1-comp model with first order absorption with a proportional residual error model.
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics[width=.45\textwidth]{pics/Bonate_Css_proportionalError}
+\caption{Simulated PK model as defined in the example for 10 subjects.}
+\label{fig:BonatePK}
+\vspace{-20pt}
+\end{center}
+\end{figure}
+The only essential new aspect compared to the previous example is the fact
+that we have here so called steady-state administration. For this to be defined
+one needs to provide the time point of the last dosing event and the dose interval.
+
+\subsubsection{Variability model}
+The variability structure is identical to that in the previous example -- there is only
+one level of subject related variability, see Figure \ref{fig:tree_IOV0}.
+
+\subsubsection{Parameter model}
+
+The model uses the following parameters:
+
+\begin{align*}
+\theta_{1,i} &=  \pop_{\theta_1} + \eta_{\theta_1,i}   \\
+\log(V_i) &= \log(\pop_{V}) + \eta_{V,i}   \\
+\theta_2 &= 0.75 \\
+CL_i &= \theta_{1,i} \Big(\frac{W_i}{70}\Big)^{\theta_2} \\
+K_a &= 0.5
+\end{align*}
+where
+\begin{gather*}
+\eta_{\theta_{1,i}} \sim N(0, \omega_{\theta_1}), \quad \eta_{V,i} \sim N(0,\omega_{V})
+\intertext{and with}
+\pop_{\theta_1}=25,\quad \omega_{\theta_1}=5  \quad \pop_V=250,\quad \omega_V=100.
+\end{gather*}
+
+\subsubsection{Covariate model}
+%\begin{align*}
+%\Covariates &: \Weight/70  \\
+%\CovariatesType &: \Continuous  \\
+%\CovariatesFile &: e.g. \textit{some\_filename.txt}  \\
+%\Weight &\sim  \mbox{logNormal}(pop_{\Weight}, \omega_{\Weight}); \quad \pop_{\Weight}=80,\quad \omega_{\Weight}=9.6 
+%\end{align*}
+
+Body weight is the only covariate used in this model. It is used in the model
+for the individual clearance only.
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{lr}\toprule
+ & \textbf{Weight} \\\midrule
+Type & Continues \\
+Transformation & $(\Weight/70)^{\theta_2}$ \\
+Distribution & Normal \\
+Mean, $pop_{\Weight}$ & 80 \\
+Standard deviation, $\omega_{\Weight}$ & 9.6 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Covariates overview.}
+\label{tab:CovariatesOverview}
+\end{table}
+
+
+\subsubsection{Structural model}
+\begin{align*}
+k &= \frac{CL}{V} \\
+C_{SS}(t) &= \frac{D}{V}\frac{K_a}{K_a - k} \bigg(\frac{e^{-k (t-t_D)}}{1-e^{-k \tau}}-\frac{e^{-K_a (t-t_D)}}{1-e^{-K_a\tau}}\bigg) 
+\end{align*}
+
+\subsubsection{Observation model}
+
+We apply a residual error models to the output variable \var{C_{SS}}.
+
+%\noindent
+\begin{center}
+\begin{tabular*}{0.6\textwidth}{@{\extracolsep{\fill}} >{\bfseries}l l}\toprule
+Output Variable  & \textbf{\itshape $C_{SS}$} \\\midrule
+Observations Name & Concentration\\
+Units & $\mg/l$ \\
+Observations Type & Continuous \\
+Residual Error Model & Proportional \\
+Error Model Parameters & $b=0.1$\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Trial design}
+
+Table below summarises the information about the design in this example. 
+
+%\noindent
+\begin{center}
+\begin{tabular*}{0.45\textwidth}{@{\extracolsep{\fill}} >{\bfseries}l r}\toprule
+Arm & \textbf{1} \\\midrule
+Number of subjects & 50\\
+Dose variable & \var{D} \\
+Dosing Amount & 100 \\
+Dose Units & $\mg$  \\
+Dose per kg & no \\
+Dosing times (h) & 0\\
+Dose intervals (h) & 12\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Simulation Step}
+The concentration $C_{SS}$ is going to be read out at equidistant time points
+after the dosing:
+\begin{center}
+\begin{tabular*}{0.6\linewidth}{@{\extracolsep{\fill}} >{\bfseries}l c}\toprule
+Output Variable & \textbf{\itshape $C_{SS}$}\\
+Observation times & 0,1,2,3,4,5,6,7,8,9,10,11,12\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+\subsection{Structural model}
+In the last example we defined the structural model by using an ODE system. 
+Here, we implement an algebraic formula for the calculation of the drug
+concentration in steady-state, \var{C_{SS}}, as shown in the following listing
+\inputxml{bonate_sm1_part1.xml}
+Consequently, we use for \var{C_{SS}} the \xelem{Variable}, instead of \xelem{DerivativeVariable},
+element as in the previous example which is of \xatt{real} type.
+
+\subsection{Trial design model}
+\subsubsection{Structure}
+
+Figure \ref{fig:designPatternBonate} shows the \textit{Structure} of
+this simple example consisting of 1 arm and one epoch, meaning one treatment
+type for everybody.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.7\linewidth]{../pics/OneArmOneEpoch_Bonate}
+\caption{Design overview: this study consists of one arm and one epoch.}
+\label{fig:designPatternBonate}
+\end{figure}
+
+\begin{table}[htdp!]
+\begin{center}
+\begin{tabular}{ccccccc}
+\hline
+Segment&Activity & Treatment & DoseTime & DoseSize & Target Variable \\
+\hline
+TA& bolusOR &  OR bolus & 0 & 100 & D \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Segment/activity overview.}
+\label{tab:segementActivity_Ribba}
+\end{table}
+
+\begin{table}[htdp!]
+\begin{center}
+\begin{tabular}{ccc}
+\hline
+Epoch & Start time & End time \\
+\hline
+Treatment Epoch & 0 &  12  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Epoch definition -- there is only one epoch here.}
+\label{fig:Bonate:epochDef}
+\end{table}
+
+While the implementation of epoch, arm, cell and segment is analog to that in the 
+previous example, the \xelem{Activity} element contains new items. After we 
+defined \xelem{DoseAmount} as before as well, the steady-state administration 
+is easily implemented using the \xelem{SteadyState} with last doing event as
+\xelem{EndTime} and the dose interval as \xelem{Interval} as can be seen 
+in the following listing \inputxml{bonate_activity.xml}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\eglabel{4}
+\section{Example \theexamples: Estimation, Warfarin PK}
+\label{sec:eg4}
+
+\subsection{Description}
+
+This model describes the PK of the drug Warfarin and corresponds to
+the \ddmore WP3 use case Warfarin\_PK\_PRED\footnote{\raggedright Available via Interface Europe: \url{https://cp1.interfaceurope.eu/LotusQuickr/ddmore/PageLibraryC125786900388659.nsf/h_Toc/92be13faec1b58390525670800167238/?OpenDocument\#{type=0\&unid=5801C48FC6C39BB141257B2A007D6F31}}}. 
+
+\subsubsection{Structural model}
+
+The model is a one compartment model with first-order absorption with
+lag time and first-order elimination.
+
+\begin{description}
+\item[\itshape D] Dosing variable.
+\item[\itshape t\textsubscript{D}] Time of the dose.
+\item[\itshape C] Concentration of drug in the compartment.
+\end{description}
+\begin{align*}
+k &= \frac{\CL}{V}\\
+C(t) &= \begin{cases}
+  0 & \text{if } \quad t - t_D < \Tlag \\
+  \frac{D}{V}\frac{k_a}{k_a-k}\left[e^{-k\,
+       \left(t-t_D-T_{lag}\right)}-e^{-k_a \, \left(t-t_D-T_{lag}\right)}\right] &
+  \text{otherwise}
+\end{cases}
+\end{align*}
+
+
+\subsubsection{Covariate model}
+
+%The covariate is Weight, $W$, a continuous covariate with the following transformation applied:
+%\begin{gather}
+%%W \sim \mathcal{N}(\pop_{\Weight}, \omega_{\Weight})
+%\log(\Weight/70) \nonumber
+%%\intertext{initial values:}
+%%\pop_{\Weight} =70.07, \quad \omega_{\Weight} =14.09 \nonumber
+%\end{gather}
+%
+Body weight, $W$, is the only continue covariate used in this model. It is used in the model
+for the individual clearance and volume.
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{lr}\toprule
+ & \textbf{Weight} \\\midrule
+Type & Continues \\
+Transformation & $\log(\Weight/70)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Covariates overview.}
+\label{tab:CovariatesOverview}
+\end{table}
+
+
+
+
+\subsubsection{Parameters}
+
+\paragraph{PK Parameters}
+
+The following PK parameters are used in the model:
+\begin{description}
+\item[\Tlag] The lag time.
+\item[\ka] The absorption rate constant.
+\item[\var{V}] The volume of distribution.
+\item[\CL] Clearance of elimination.
+\end{description}
+
+\begin{align*}
+\intertext{The parameters are defined as follows:}
+\log(\Tlag) &= \log(pop\_\Tlag) + \eta_\Tlag\\
+\log(\ka) &= \log(pop\_\ka) + \eta_\ka\\
+\log(\var{V}) &= \log(pop\_\var{V}) + \beta_{1,V} \log(W_i/70) + \eta_\var{V}\\
+\log(\CL) &= \log(pop\_\CL) + \beta_{1,\CL} \log(W_i/70) + \eta_\CL
+\end{align*}
+where
+\begin{gather*}
+\eta_\Tlag \sim \mathcal{N}(0, \omega_{\Tlag}), \quad \eta_\ka \sim \mathcal{N}(0, \omega_{\ka}),\\
+\eta_\var{V} \sim  \mathcal{N}(0, \omega_{V}), \quad \eta_\CL \sim \mathcal{N}(0, \omega_{\CL})
+\end{gather*}
+Note please that, in this case, $\beta_{1,V}=0.75$ and $\beta_{1,CL}=1$, i.e. are fixed and will not be estimated.
+
+\paragraph{Variance-covariance matrix}
+The full variance-covariance matrix for the random effects is :
+\begin{equation*}
+ \Omega =
+ \begin{pmatrix}
+  \omega_{Tlag}^2 	& 0 				& 0                                 & 0  \\
+   			  	& \omega_{\ka}^2	& 0                                 & 0  \\
+  				& 				& \omega_{\var{V}}^2     & 0  \\
+ 				&				&                                    & \omega_{\CL}^2 \\
+ \end{pmatrix}
+%\label{sec:eg-covariance-mat}
+\end{equation*}
+
+\subsubsection{Observation model}
+
+We apply a residual error models to the output variable \var{C}.
+
+%\noindent
+\begin{center}
+\begin{tabular*}{0.6\textwidth}{@{\extracolsep{\fill}} >{\bfseries}l l}\toprule
+Output Variable  & \textbf{\itshape C} \\\midrule
+Observations Name & Concentration\\
+Units & $\mg/l$ \\
+Observations Type & Continuous \\
+Residual Error Model & Combined2 \\
+Error Model Parameters & $a = 0.1,\quad b=0.1$\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+\subsubsection{Trial Design}
+\label{sec:eg4-trial-design}
+
+The dosing regimen for the trial is given below --- there is only one
+for each arm. Note that all dosing is bolus dosing (discrete
+administration at specific times) and all doses are administered to
+the same compartment.
+
+%\noindent
+\begin{center}
+\begin{tabular*}{0.45\textwidth}{@{\extracolsep{\fill}} >{\bfseries}l r}\toprule
+Arm & \textbf{1} \\\midrule
+Number of subjects & 33\\
+Dose variable & \var{D} \\
+Dosing Amount & 100 \\
+Dose Units & $\mg$  \\
+Dose per kg & no \\
+Dosing times (h) & 0\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+% The trial is has just one study group of 33 individuals.
+% \begin{align*}
+% \DoseTime (t_D)&= 0    \\
+% \TimeUnit&= h
+% \intertext{Dosing is adjusted to body weight}
+% \DoseSize&= 100  \\
+% \DosePerKg&=\no   \\
+% \DoseUnit&=\mg
+% \intertext{Time of measurement for PK}
+% \ObservationTime&= 0.5,1,2,3,6,9,24,36,48,72,96,120
+% \end{align*}
+
+\subsubsection{Modelling Steps}
+
+The observations for the output variable is shown below. These
+time-points correspond to those define in the data-file. The task to
+be performed is a parameter estimation which will involved the
+following steps:
+\begin{itemize}
+\item Estimation of population paramaters.
+\item Estimation of Fisher information matrix.
+\item Estimation of the individual parameters.
+\end{itemize}
+
+%\noindent
+\begin{center}
+\begin{tabular*}{0.6\linewidth}{@{\extracolsep{\fill}} >{\bfseries}l c}\toprule
+Output Variable & \textbf{\itshape C}\\
+Observation times & 0.5,1,2,3,6,9,24,36,48,72,96,120\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.7\linewidth]{../pics/designPattern_1Arm1Epoch}
+\caption{Design overview: this study consists of one arm and one epoch.}
+\label{fig:designPattern_1Arm1Epoch}
+\end{figure}
+
+Figure \ref{fig:designPattern_1Arm1Epoch} shows the \textit{Structure} of
+this simple example consisting of 1 arm and one epoch, meaning one treatment
+type for everybody.
+
+%
+% The output variable is:
+% \begin{description}
+% \item[\var{C}] Concentration in the central compartment, in this case
+%     the bloodstream.
+% \end{description}
+
+\subsection{Overview}
+
+This our first estimation case. From figure \ref{fig:simEstTasks_List} 
+it follows that we can expect significant differences in the Trial Design and Modelling Steps
+sections compared to the previous simulation case.
+
+%, see listing \ref{fig:exp5_modelOverview}
+%for an overview.
+
+Accordingly, the Model Definition is very similar to that in the
+previous example.  The main \pharmml feature we have not seen
+previously is the algebraic structural model (i.e., the model is not
+defined as a system of ODEs). The XML is too long to show here and is
+similar to the examples shown previously (section \ref{sec:maths}). If
+you are interested then please consult the full example associated
+with this specification.
+
+We will start with the description of the Trail design. Note that because
+every subject receives the same dosing regimen, this can be encoded 
+in the \xelem{Activity} block. Otherwise we would have to define the 
+individual dosing regimens in the \xelem{IndividualDosing} element, see
+section \ref{subsubsec:Ribba_indivDosing} in example \ref{sec:Ribba} how
+this is done.
+
+%\begin{listing}[htb]
+%\inputxml{exp5_modelOverview.xml}
+%\caption{Defining the complete model.}
+%\label{fig:exp5_modelOverview}
+%\end{listing}
+
+
+\subsection{Trial Design}
+\label{eg4_subsec:trialDesign}
+\subsubsection{Structure}
+
+As explained in the chapter \ref{sec:CTS} on trial design, we base the following 
+structure on the CDISC standard Study Design Model \cite{CDISC:2011a}. 
+The design elements are contained in the \xelem{Structure} block and you can see 
+in following listing \inputxml{exp5_structure.xml}
+how the study is constructed of a single epoch, 
+with a single arm and a single cell that contains a single segment. Note, though 
+that this structure is not hierarchical and the \xelem{Cell} element joins the arm, 
+epoch and segments together. 
+
+The last section of the structure, the \xelem{Activity} element, is of interest for 
+the discussion. This is because, as already mentioned above, the administration
+and dosing regimen is identical for every patient. The dose amount is $D=100\; mg$ 
+and the dose time is $t_D=0$.
+As in the previous example, the structural model is defined using an algebraic
+function with the dosing variable \var{D} which means the \xelem{DoseAmount} element
+has the attribute \xatt{inputType="dose"}. Additionally the dosing time variable \var{tD} is
+referenced here and initialised. 
+
+
+%\begin{listing}[htb]
+%\inputxml{exp5_structure.xml}
+%\caption{Structure overview.}
+%\label{lst:exp5_structure}
+%\end{listing}
+
+\subsubsection{Population}
+
+This is the place where we describe the individuals in the study, which 
+\var{Arm} they belong to and any possible individual characteristics, such as 
+body weight, age and other covariates. In this example we only know the
+body weight of the subjects. 
+We define the known attributes of all individuals using the 
+\xelem{IndividualTemplate} and then map each individual to this template 
+using a \xelem{Dataset}. In the following listing \inputxml{exp5_population.xml}
+you can see how this 
+is implemented in \pharmml. Column \var{2} in the table is equal for
+every subject because they all belong to one arm, here denoted as \var{a1}.
+
+%\begin{listing}[htb]
+%\inputxml{exp5_population.xml}
+%\caption{Population overview.}
+%\label{fig:exp5_population}
+%\end{listing}
+
+\subsection{Modelling Steps}
+
+\subsubsection{Objective data}
+
+The biggest advantage of the current specification is that we do not have
+to define the design in the data file. After the structure of the trial is defined
+as above we just need to encode the measured experimental data, here the time 
+and the independent variable, the concentration values. To achieve that we 
+define a table in \xelem{Dataset} with columns: \var{ID}, \var{time} and 
+\var{dv} and populate it with given experimental values, see \xelem{ObjectiveDataSet} block 
+in the following listing \inputxml{exp5_objDataSet.xml}
+Before that we have to make sure that these values are correctly mapped to 
+variable used in the model which is implemented in the \xelem{VariableMapping}
+element. Accordingly, we define the identifier \var{ID} and 
+define the variable mapping. Here the \var{time} as in the data is mapped 
+to model time \var{t} and the measured concentration is mapped to the 
+variable \var{C} as in the observation model.
+
+
+%\begin{listing}[htb]
+%\inputxml{exp5_objDataSet.xml}
+%\caption{Objective dataset overview.}
+%\label{fig:exp5_objDataSet}
+%\end{listing}	
+
+\subsubsection{Parameter estimation}
+
+
+In a parameter estimation you do not necessarily want to estimate all
+the parameters in your model or you may wish to define bounds within
+which your parameter should be estimated, or provide an initial
+estimate.  The \xelem{ParametersToEstimate} element controls this. As
+you can see in the following listing \inputxml{exp5_paramEstimation.xml}
+we use a \xelem{ParameterEstimation} element that refers to the parameter in
+the model definition.  In its simplest form you can decide whether the
+parameter is to be estimated by setting the \xatt{fixed} attribute
+(false indicates the parameter should be estimated). If a parameter is
+not defined here, then it is assumed that it will not be estimated, in
+which case it would be assigned an initial value elsewhere in the
+PharmML document.  One of the validation rules (see chapter
+\ref{chapter:validation}) is that every parameter has to be
+initialised. 
+%This can happen either in the \xelem{ParameterModel},
+%\xelem{ObservationModel} or in this \xelem{ParametersToEstimate} block.
+ 
+
+%\subsubsection{Operation}
+%
+%\begin{listing}[htb]
+%\inputxml{exp5_operation.xml}
+%\caption{Operation overview.}
+%\label{fig:exp5_operation}
+%\end{listing}
+
+
+\subsubsection{Step dependencies}
+
+Then at the end of the \xelem{ModellingSteps} block is the \xelem{StepDependencies} element. 
+This describes the ordering of the steps in the modelling process, but in this case it is 
+almost trivial as we only have one step in this example:
+\inputxml{exp5_steps.xml}
+
+
+%\begin{listing}[htb]
+%\inputxml{exp5_steps.xml}
+%\caption{Step dependencies overview.}
+%\label{fig:exp5_steps}
+%\end{listing}
+
+
+
+
+
+
+\input{input/explanatory_examples_prt2}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../moml-specification"
+%%% End:
+
+
+

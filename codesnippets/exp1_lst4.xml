@@ -1,0 +1,15 @@
+<CovariateModel blkId="c1">
+    <SimpleParameter symbId="pop_W"/>
+    <SimpleParameter symbId="omega_W"/>
+    <Covariate symbId="W">
+        <Continuous>
+            <NormalDistribution xmlns="http://www.uncertml.org/3.0" 
+                definition="http://www.uncertml.org/distributions/normal">
+                <mean>
+                    <var varId="pop_W"/>
+                </mean>
+                <variance>
+                    <var varId="omega_W"/>
+                </variance>
+            </NormalDistribution>
+            <!-- see next listing... -->

@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:design="http://www.pharmml.org/2013/03/TrialDesign"
+    name="Warfarin example - basic PK with covariate"
+    independentVar="t" writtenVersion="0.1">
+
+    <SymbolDefinition symbId="combinedErrorModel" symbolType="scalar">
+        <FunctionDefinition>
+            <FunctionArgument symbId="a" symbolType="scalar"/>
+            <FunctionArgument symbId="b" symbolType="scalar"/>
+            <FunctionArgument symbId="f" symbolType="scalar"/>
+            <Definition>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Binop op="plus">
+                        <Var symbId="a"/>
+                        <Binop op="times">
+                            <Var symbId="b"/>
+                            <Var symbId="f"/>
+                        </Binop>
+                    </Binop>
+                </Equation>
+            </Definition>
+        </FunctionDefinition>
+    </SymbolDefinition>
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <VariabilityLevel id="indiv"/>
+        <CovariateModel id="c1">
+            <Covariate symbId="W">
+                <Continuous>
+                    <!-- It is obligatory to define  -->
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Var symbId="pop_W"/>
+                                </Equation>
+                            </Mean>
+                            <StdDev>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                    <Var symbId="omega_W"/>
+                                </Equation>
+                            </StdDev>
+                        </Normal>
+                    </Distribution>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                            <Uniop op="ln">
+                                <Binop op="divide">
+                                    <Var symbId="W"/>
+                                    <math:Scalar value="70"/>
+                                </Binop>
+                            </Uniop>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        <ParameterModel id="p1">
+            <Parameter symbId="Tlag" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_Tlag"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect levelId="indiv" symbId="eta_Tlag">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                <math:Scalar value="0"/>
+                            </Equation>
+                        </Mean>
+                        <StdDev>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_Tlag"/></Equation>
+                        </StdDev>
+                    </Normal>
+                </Distribution></RandomEffect>
+            </Parameter>
+            <Parameter symbId="ka" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_ka"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect levelId="indiv" symbId="ka_eta">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                <math:Scalar value="0"/>
+                            </Equation>
+                        </Mean>
+                        <StdDev>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_ka"/></Equation>
+                        </StdDev>
+                    </Normal>
+                </Distribution>
+                </RandomEffect>
+            </Parameter>
+            <Parameter symbId="V" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_V"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect levelId="indiv" symbId="eta_V">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                                <math:Scalar value="0"/>
+                            </Equation>
+                        </Mean>
+                        <StdDev>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_v"/></Equation>
+                        </StdDev>
+                    </Normal>
+                </Distribution></RandomEffect>
+            </Parameter>
+            <Parameter symbId="CL" transformation="log">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Uniop op="ln">
+                        <Var symbId="pop_CL"/>
+                    </Uniop>
+                </Equation>
+                <RandomEffect levelId="indiv" symbId="eta_CL">
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                    <Normal>
+                        <Mean>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><math:Scalar value="0"/></Equation>
+                        </Mean>
+                        <StdDev>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><Var symbId="omega_CL"/></Equation>
+                        </StdDev>
+                    </Normal>
+                </Distribution></RandomEffect>
+            </Parameter>
+        </ParameterModel>
+        <StructuralModel id="main">
+            <Variable symbId="D" symbolType="scalar" />
+            <Variable symbId="k" symbolType="scalar">
+                <math:Equation writtenVersion="0.1">
+                    <math:Binop op="divide">
+                        <math:Var block="p1" symbId="CL"/>
+                        <math:Var block="p1" symbId="V"/>
+                    </math:Binop>
+                </math:Equation>
+            </Variable>
+            <Variable symbId="C" symbolType="scalar">
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                    <Piecewise>
+                        <Piece>
+                            <Scalar value="0"/>
+                            <Condition writtenVersion="0.1">
+                                <LogicBinop op="lt">
+                                    <Binop op="minus">
+                                        <Var symbId="t"/>
+                                        <Var block="p1" symbId="tD"/>
+                                    </Binop>
+                                    <Var block="p1" symbId="Tlag"/>
+                                </LogicBinop>
+                            </Condition>
+                        </Piece>
+                        <Piece>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="times">
+                                        <Var symbId="D"/>
+                                        <Var block="p1" symbId="ka"/>
+                                    </Binop>
+                                    <Binop op="times">
+                                        <Var block="p1" symbId="V"/>
+                                        <Binop op="minus">
+                                            <Var block="p1" symbId="ka"/>
+                                            <Var symbId="k"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <Uniop op="exp">
+                                        <Binop op="times">
+                                            <Uniop op="minus">
+                                                <Var symbId="k"/>
+                                            </Uniop>
+                                            <Binop op="minus">
+                                                <Binop op="minus">
+                                                    <Var symbId="t"/>
+                                                    <Var block="p1" symbId="tD"/>
+                                                </Binop>
+                                                <Var block="p1" symbId="Tlag"/>
+                                            </Binop>
+                                        </Binop>
+                                    </Uniop>
+                                    <Uniop op="exp">
+                                        <Binop op="times">
+                                            <Uniop op="minus">
+                                                <Var block="p1" symbId="ka"/>
+                                            </Uniop>
+                                            <Binop op="minus">
+                                                <Binop op="minus">
+                                                    <Var symbId="t"/>
+                                                    <Var block="p1" symbId="tD"/>
+                                                </Binop>
+                                                <Var block="p1" symbId="Tlag"/>
+                                            </Binop>
+                                        </Binop>
+                                    </Uniop>
+                                </Binop>
+                            </Binop>
+                            <Condition writtenVersion="0.1">
+                                <Otherwise/>
+                            </Condition>
+                        </Piece>
+                    </Piecewise>
+                </Equation>
+            </Variable>
+        </StructuralModel>
+        <ObservationModel id="o1">
+            <Continuous symbId="C">
+                <math:Var symbId="C"/>
+                <ErrorModel>
+                    <math:Var symbId="combined2ErrorModel"/>
+                    <math:FunctionArgument symbId="a">
+                        <math:Scalar value="1"/>
+                    </math:FunctionArgument>
+                    <math:FunctionArgument symbId="b">
+                        <math:Scalar value="1"/>
+                    </math:FunctionArgument>
+                    <math:FunctionArgument symbId="f">
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                            <Var symbId="C"/>
+                        </Equation>
+                    </math:FunctionArgument>
+                </ErrorModel>
+                <RandomEffect>
+                    <Distribution xmlns="http://www.pharmml.org/2013/03/Uncertainty" writtenVersion="0.1">
+                        <Normal>
+                            <Mean><Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><math:Scalar value="0"/></Equation></Mean>
+                            <StdDev><Equation xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1"><math:Scalar value="1"/></Equation></StdDev>
+                        </Normal>
+                    </Distribution>
+                </RandomEffect>
+            </Continuous>
+        </ObservationModel>
+    </ModelDefinition>
+    <Design xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        <Treatment id="t1">
+            <DosingRegimen>
+                <Bolus>
+                    <DoseAmount>
+                        <DoseVar block="main" symbId="D"/>
+                    </DoseAmount>
+                </Bolus>
+            </DosingRegimen>
+        </Treatment>
+        <TreatmentEpoch id="te1">
+            <TreatmentRef idRef="t1"/>
+        </TreatmentEpoch>
+        <Group id="a1">
+            <TreatmentEpochRef idRef="te1"/>
+            <Individuals levelId="indiv" symbId="i"/>
+        </Group>
+    </Design>
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        <Variable symbId="dataSet1" symbolType="dataSet">
+            <DataSet xmlns="http://www.pharmml.org/2013/03/CommonTypes">
+                <Definition>
+                    <Column columnNum="1" columnVar="id"/>
+                    <Column columnNum="2" columnVar="time"/>
+                    <Column columnNum="3" columnVar="wt"/>
+                    <Column columnNum="4" columnVar="age"/>
+                    <Column columnNum="5" columnVar="sex"/>
+                    <Column columnNum="6" columnVar="amt"/>
+                    <Column columnNum="7" columnVar="dv"/>
+                </Definition>
+                <ExternalSource url="file://warfpk.csv" format="csv"/>
+            </DataSet>
+        </Variable>
+        <EstimationStep id="estTask1">
+            <InitialValue symbId="a">
+                <math:Scalar value="0.1"/>
+            </InitialValue>
+            <InitialValue symbId="b">
+                <math:Scalar value="0.1"/>
+            </InitialValue>
+            <ObjectiveDataSet dataSetRef="dataSet1">
+                <Mapping columnName="amt">
+                    <DoseVar block="main" symbId="D"/>
+                    <Restriction>
+                        <Condition xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                            <LogicBinop op="and">
+                                <LogicUniop op="isDefined">
+                                    <Var symbId="amt"/>
+                                </LogicUniop>                                
+                                <LogicBinop op="gt">
+                                    <Var symbId="dvid"/>
+                                    <Scalar value="0"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Restriction>
+                </Mapping>
+                <Mapping columnName="t">
+                    <math:Var symbId="t"/>
+                </Mapping>
+                <Mapping columnName="id">
+                    <UseVariabilityNode block="a1" symbId="i"/>
+                </Mapping>
+                <Mapping columnName="wt">
+                    <math:Var block="c1" symbId="W"/>
+                </Mapping>
+                <Mapping columnName="dv">
+                    <math:Var block="o1" symbId="C"/>
+                    <Restriction>
+                        <Condition xmlns="http://www.pharmml.org/2013/03/Maths" writtenVersion="0.1">
+                            <LogicBinop op="and">
+                                <LogicBinop op="eq">
+                                    <Var symbId="mdv"/>
+                                    <Scalar value="0"/>
+                                </LogicBinop>
+                                <LogicBinop op="eq">
+                                    <Var symbId="dvid"/>
+                                    <Scalar value="1"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Restriction>
+                </Mapping>
+            </ObjectiveDataSet>
+            <ParametersToEstimate>
+                <!-- only estimate if defined here. -->
+                <Variable block="p1" symbId="Tlag" fixed="false"/>
+                <Variable block="p1" symbId="pop_Tlag" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="p1" symbId="omega_Tlag" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="p1" symbId="ka" fixed="false"/>
+                <Variable block="p1" symbId="pop_ka" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="1"/>
+                    </InitialEstimate>
+                    <LowerBound>
+                        <math:Scalar value="0"/>
+                    </LowerBound>
+                    <UpperBound>
+                        <math:Scalar value="2"/>
+                    </UpperBound>
+                </Variable>
+                <Variable block="p1" symbId="omega_ka" fixed="true">
+                    <InitialEstimate>
+                        <math:Scalar value="0.1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="p1" symbId="V" fixed="false"/>
+                <!-- No vars specified then init val assumed to be zero -->
+                <Variable block="p1" symbId="pop_V" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="10"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="p1" symbId="omega_V" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="p1" symbId="CL" fixed="false"/>
+                <Variable block="p1" symbId="pop_CL" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.1"/>
+                    </InitialEstimate>
+                </Variable>
+                <Variable block="p1" symbId="oemga_CL" fixed="false">
+                    <InitialEstimate>
+                        <math:Scalar value="0.1"/>
+                    </InitialEstimate>
+                </Variable>
+            </ParametersToEstimate>
+            <EstimationOperation opType="estPop"/>
+            <EstimationOperation opType="estFIM"/>
+            <EstimationOperation opType="estIndiv"/>
+        </EstimationStep>
+        <StepDependencies>
+            <Step idRef="estTask1"/>
+        </StepDependencies>
+    </ModellingSteps>
+</PharmML>

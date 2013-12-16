@@ -1,0 +1,42 @@
+<IndividualParameter symbId="V">
+    <GaussianModel>
+        <Transformation>log</Transformation>
+        <LinearCovariate>
+            <PopulationParameter>
+                <ct:Assign><ct:SymbRef symbIdRef="pop_ka"></ct:SymbRef></ct:Assign>
+            </PopulationParameter>
+            <Covariate>
+                <ct:SymbRef blkIdRef="c1" symbIdRef="sex"/>
+                <FixedEffect>
+                    <ct:SymbRef symbIdRef="beta_V"/>
+                    <Category catId="F"/>
+                </FixedEffect>
+            </Covariate>
+            <Covariate>
+                <ct:SymbRef blkIdRef="c1" symbIdRef="Occasion"/>
+                <FixedEffect>
+                    <ct:SymbRef symbIdRef="beta_V_occ1"/>
+                    <Category catId="occ1"/>
+                </FixedEffect>
+            </Covariate>
+            <Covariate>
+                <ct:SymbRef blkIdRef="c1" symbIdRef="Treat"/>
+                <FixedEffect>
+                    <ct:SymbRef symbIdRef="beta_V_treat"/>
+                    <Category catId="A"/>
+                </FixedEffect>
+            </Covariate>
+            <Covariate>
+                <ct:SymbRef blkIdRef="c1" symbIdRef="TreatSeq"/>
+                <FixedEffect>
+                    <ct:SymbRef symbIdRef="beta_V_treatseq"/>
+                    <Category catId="AB"/>
+                </FixedEffect>
+            </Covariate>
+        </LinearCovariate>
+        <RandomEffects>
+            <ct:SymbRef symbIdRef="eta_V"/>
+            <ct:SymbRef symbIdRef="kappa_V"/>
+        </RandomEffects>
+    </GaussianModel>
+</IndividualParameter>

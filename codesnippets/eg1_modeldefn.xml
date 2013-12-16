@@ -1,0 +1,15 @@
+<ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+    <VariabilityLevel id="indiv"/>
+    <CovariateModel id="c1">
+      <!-- Details omitted -->
+    </CovariateModel>
+    <ParameterModel id="p1">
+      <!-- Details omitted -->
+    </ParameterModel>
+    <StructuralModel id="main" writtenVersion="0.1">
+      <!-- Details omitted -->
+    </StructuralModel>
+    <ObservationModel id="o1">
+      <!-- Details omitted -->
+    </ObservationModel>
+</ModelDefinition>

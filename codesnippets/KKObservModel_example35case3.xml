@@ -1,0 +1,77 @@
+<!-- 3.5 Residual error magnitude varying with covariates and time - 3.5.1	case 3  (not in the K/K list) -->
+<ObservationModel blkId="om1.9">
+    <SimpleParameter symbId="TIME"/>
+    <SimpleParameter symbId="ID"/>
+    <SimpleParameter symbId="sigma1"/>
+    <SimpleParameter symbId="sigma2"/>
+    <RandomVariable symbId="eps1">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <var varId="sigma1"/>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <RandomVariable symbId="eps2">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <var varId="sigma2"/>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <General symbId="C">
+        <ct:Assign>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Piecewise>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="C1model"/>
+                            <ct:SymbRef symbIdRef="eps1"/>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="leq">
+                                    <ct:SymbRef symbIdRef="TIME"/>
+                                    <ct:Real>10</ct:Real>
+                                </LogicBinop>
+                                <LogicBinop op="eq">
+                                    <ct:SymbRef symbIdRef="ID"/>
+                                    <ct:Real>1</ct:Real>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="C1model"/>
+                            <ct:SymbRef symbIdRef="eps2"/>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="gt">
+                                    <ct:SymbRef symbIdRef="TIME"/>
+                                    <ct:Real>10</ct:Real>
+                                </LogicBinop>
+                                <LogicBinop op="eq">
+                                    <ct:SymbRef symbIdRef="ID"/>
+                                    <ct:Real>1</ct:Real>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                </Piecewise>
+            </Equation>
+        </ct:Assign>
+    </General>
+</ObservationModel>

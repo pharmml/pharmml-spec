@@ -1,0 +1,31 @@
+<SimDataSet dataSetRef="d1">
+    <Mapping columnName="id">
+        <UseVariabilityLevel block="indiv"/>
+    </Mapping>
+    <Mapping columnName="time">
+        <math:Var symbId="t"/>
+    </Mapping>
+    <Mapping columnName="dose">
+        <TargetVar block="main" symbId="Ac"/>                    
+        <Restriction>
+            <Condition xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+                <LogicBinop op="eq">
+                    <Var symbId="eid"/>
+                    <Scalar value="1"/>
+                </LogicBinop>
+            </Condition>
+        </Restriction>
+    </Mapping>
+    <Mapping columnName="eid">
+        <Output>
+            <math:Var block="main" symbId="Cc"/>
+        </Output>
+        <Restriction>
+            <Condition xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+                <LogicBinop op="eq">
+                    <Var symbId="eid"/>
+                    <Scalar value="2"/>
+                </LogicBinop>
+            </Condition>
+        </Restriction>
+    </Mapping>

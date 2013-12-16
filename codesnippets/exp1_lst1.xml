@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML 
+    http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
+    xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
+    writtenVersion="0.1">
+    <ct:Name>Example 1 - continuous PK/PD</ct:Name>
+    <IndependentVariable symbId="t"/>
+    <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
+        symbId="constantErrorModel" symbolType="real">
+        <!-- omitted details -->
+    </FunctionDefinition>
+    <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
+        symbId="combinedErrorModel" symbolType="real">
+        <!-- omitted details -->
+    </FunctionDefinition>
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        <!-- omitted details -->
+    </ModelDefinition>
+    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        <!-- omitted details -->
+    </TrialDesign>
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        <!-- omitted details -->
+    </ModellingSteps>
+</PharmML>

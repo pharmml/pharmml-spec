@@ -1,0 +1,11 @@
+<ModellingSteps xmlns="http://www.ddmore.eu/Resources/ModellingSteps/1.0">
+    <SimulationStep id="s1">
+        <Replicates symbId="r">
+            <math:Scalar value="200"/>
+        </Replicates>
+	<!-- Omitted Initial Values and Observations -->
+    </SimulationStep>
+    <StepDependencies>
+        <Step idRef="s1"/>
+    </StepDependencies>
+</ModellingSteps>

@@ -1,0 +1,499 @@
+%\renewcommand*{\descriptionlabel}[1]{\hspace\labelsep\normalfont\sffamily #1}
+\newenvironment{features}{%
+\firmlists\begin{description}}%
+{\end{description}}
+\newcommand\feat[1]{\item[-- \normalfont\itshape #1]}
+
+
+\chapter{Features supported by \pharmml}
+\label{chap:scope}
+
+
+\section{Introduction}
+
+The scope of pharmacometric models is very wide, as such models can be empirical as well as
+mechanistic; describe continuous as well as discrete data types; and be deterministic, stochastic
+or a mixture of both. It is a challenging endeavour to accommodate this variety of possibilities
+under one computational standard, therefore it is indispensable to split the task into multiple
+steps of subsequent specifications and to define precisely the scope of every release.
+
+In this chapter we define the scope of the functionality in
+\pharmml. In particular what information a \pharmml document can
+represent and what it cannot. As is common practise in software
+engineering we have described the functionality as a set of
+``features''. These features are said to be \emph{current} if they are
+provided by this release of \pharmml, \emph{planned} if they are not
+in the current version, but planned for a future release.
+% and \emph{not  include} if we wish to highlight the fact that we believe \pharmml
+%will not include this feature. 
+It is important to remember that this
+specification is just the beginning of \pharmml and over time we
+expect many of the features currently out of scope to be provided by
+future releases of the language.
+
+The language is organised into three sections, which we believe naturally
+describe the logical organisation of a pharmacometric model and its
+associated tasks. Consequently we have grouped the features to match this
+organisation. The sections are:
+\begin{description}
+\item[Model Definition] A description of the model, incl.\ the structural model, the model
+  parameters, relevant covariates, the variability components, and the observations.
+\item[Trial Design] A description of the design of a clinical trial associated with the model
+  (for example a trial from which data is available to estimate the parameters of the model or
+  a trial to be simulated with the model).
+\item[Modelling Steps] A description of steps or tasks performed with
+  the model. Typically this describes how the model has been used, for
+  example to estimate its parameters or to perform a simulation.
+\end{description}
+
+
+\section{Current Features}
+
+\subsection{General}
+
+\begin{features}
+\feat{Metadata annotation} Provides support to enable metadata
+descriptions of the \pharmml document.
+\feat{Extension mechanism} Provides support to enable the extension of
+the \pharmml document.
+\end{features}
+
+\subsection{Model Definition}
+
+\subsubsection{Structural Model}
+
+\pharmml can encode:
+\begin{features}
+\feat{A structural model defined by a set of algebraic equations.} Typically the explicit solution to a simple PK model, or a dose-response model.
+\feat{A structural model defined by a system of ODEs with initial conditions.} Such systems of ODEs can include algebraic equations as well.
+\feat{A structural model defined in \sbml format.}
+\feat{A structural model from an external resource or library.}
+\feat{Standard PK models} Including those encoded by Monolix \cite{Bertrand:2008} or PREDPP in NONMEM \cite{PREDPP:2011}.
+\feat{Standard PD models.} Including those defined by Monolix \cite{Bertrand:2008}.
+\end{features}
+
+\subsubsection{Covariate Model}
+
+\pharmml can encode:
+\begin{features}
+\feat{Continuous covariates.} These can be sampled from a probability distribution and used with an applied transformation.
+\feat{Categorical covariates.} These can also be sampled from a probability distribution.
+\end{features}
+
+\subsubsection{Parameter Model}
+
+%\footnote{As described in detail in section \ref{maths:parameter-model}, the current specification allows encoding of models that are linear in the transformed parameter, which covers the majority of cases in practical applications. This approach is
+%flexible in that one can encode any type of parameter with a distribution that is normal up to a transformation, i.e.
+%normal (identity transformation), log-normal (natural logarithm) or logit-normal (logit tranformation).}
+
+\pharmml can encode:
+\begin{features}
+\feat{The population mean/typical value for a parameter.}
+\feat{Linear covariate model.}
+\feat{Random effects at arbitrary levels of variability.}
+\feat{Correlation of the random effects, described by a correlation or covariance matrix.}
+\feat{Non-linear parameter models, such as those described in \cite{Keizer:2011aa}.}
+\end{features}
+
+\subsubsection{Variability Model}
+
+\pharmml supports the following levels of variability:
+\begin{features}
+\feat{Between-Subject Variability (BSV).} Aka inter-individual variability (IIV).
+\feat{Inter-Occasion Variability (IOV).} Such as within-subject variability.
+\feat{Higher levels of variability above BSV.} Such as variability between countries or centres.
+\feat{Lower levels of variability below IOV.} Such as variability between sub-occasions within occasions.
+\end{features}
+
+\subsubsection{Observations Model}
+
+\pharmml currently only supports the following observation model:
+\begin{features}
+\feat{Continuous observation model.} A residual error model applied to one or more variables in the structural model.
+\feat{Autocorrelation of the residual errors in a continuous observation model.}
+\end{features}
+
+\subsection{Trial Design}
+
+\pharmml can encode the following features of a trial design \emph{explicitly}\footnote{As
+opposed to the implicit trial design definition present within a data file.}:
+\begin{features}
+\feat{Bolus dosing.}
+\feat{Infusion dosing.}
+\feat{Multiple dosing regimens including mixed bolus and infusion.}
+\feat{Repeated dosing.}
+\feat{Dosing at arbitrary time points.}
+\feat{Steady state dosing.}
+\feat{Dosing to more than one compartment.}
+\feat{Cross-over designs.}
+\feat{Parallel designs.}
+\feat{Washout periods.}
+\feat{Run-in periods.}
+\feat{Occasions -- defined by time interval within a treatment epoch.}
+\feat{Trials with different centres or other levels of organisation above study groups (aka arms)}
+\end{features}
+
+\subsection{Modelling Steps}
+
+\pharmml can encode the following features related to the task(s) associated with a model:
+\begin{features}
+\feat{Estimation utilising the maximum likelihood principle.}
+\feat{Simulation of the model}
+\end{features}
+
+
+\section{Planned Features}
+
+\subsection{General}
+
+\begin{features}
+\feat{Units} Support for unit definitions and unit consistency
+checking.
+\end{features}
+
+\subsection{Model Definition}
+
+\subsubsection{Covariate Model}
+
+\pharmml does not support the following covariate related features:
+\begin{features}
+\feat{Conditional distributions of continuous covariates.}
+\feat{Clusters of categorical covariates.}
+\feat{Selection/exclusion criteria for covariates.}
+\end{features}
+
+\subsubsection{Structural Model}
+
+\pharmml does not support the following model types:
+\begin{features}
+\feat{(Hidden) Markov models.}
+\feat{Delay Differential Equations (DDEs).}
+\feat{Partial Differential Equations (PDEs).}
+\feat{Stochastic Differential Equations (SDEs).}
+\end{features}
+
+\subsubsection{Observations Model}
+
+\pharmml does not support the following types of observation models:
+\begin{features}
+\feat{Count data models.} Poisson, negative binomial, zero-inflated Poisson models etc.
+\feat{Nominal and ordered categorical models.} Logistic regression, proportional odds models etc.
+\feat{Time-to-event models.} Parametric (e.g.\ exponential, Gompertz, Weibull) or semi-parametric Cox models.
+\end{features}
+
+\subsection{Trial Design}
+
+\pharmml cannot encode the following features in a trial design:
+\begin{features}
+\feat{Reset of all or single compartments.}
+\end{features}
+
+\subsection{Modelling Steps}
+
+\pharmml cannot encode the following features related to the task(s) associated with a model:
+\begin{features}
+\feat{Bayesian inference methods.}
+%Methods such as Maximum a posteriori (MAP) or Bayesian inference sing Gibbs sampling methods used in tools of the BUGS-family (winBUGS \cite{Lunn:2002aa}, openBUGS \cite{Lunn:2009fk}) or JAGS \cite{JAGS:2003aa}.
+\feat{Writing estimation results to a file or other external resource.}
+\feat{Writing simulation results to a file or other external resource.}
+\feat{Exchange of results from one modelling step to another.} Currently it is not possible to pass on the results of an estimation task to a subsequent estimation step.
+\feat{Model exploration} Tasks such as sensitivity analysis are not
+supported.
+\feat{Optimal design}
+\end{features}
+
+%\section{Features not Included}
+%
+%\subsection{Model Definition}
+%
+%\subsubsection{Structural Model}
+%
+%\pharmml cannot encode:
+%\begin{features}
+%\feat{Higher order differential equations.}
+%\feat{Delay Differential Equations (DDEs).}
+%\feat{Partial Differential Equations (PDEs).}
+%\feat{Stochastic Differential Equations (SDEs).}
+%\feat{(Hidden) Markov models.}
+%\end{features}
+
+%\subsubsection{Covariate Model}
+%
+%\pharmml cannot encode:
+%\begin{features}
+%\feat{Conditional distributions of continuous covariates.}
+%\feat{Clusters of categorical covariates.}
+%\feat{Selection/exclusion criteria for covariates.}
+%\end{features}
+
+
+
+% \begin{itemize}
+% \item
+% ODE based, standard 1-, 2- or 3-compartmental or physiology based PK (PBPK) models
+% \begin{itemize}
+% \item
+% defined explicitly as a system of ODE's
+% \item
+% defined as an SBML model
+% \end{itemize}
+% \item
+% algebraic expressions, if analytic solutions are available, e.g. one-compartmental oral model, see section \ref{sec:structuralModel}
+% \item
+% using library models, e.g. Monolix \cite{Bertrand:2008} or PREDPP \cite{PREDPP:2011}
+% \end{itemize}
+
+% \paragraph{Continuous PD models}
+% \begin{itemize}
+% \item
+% ODE based -- e.g. turnover models
+% \item
+% algebraic -- e.g. Emax-models
+% \item
+% using library models, e.g. Monolix \cite{Bertrand:2008}
+% \end{itemize}
+
+
+% \section{MS Intro}
+
+% Any part of human and animal anatomy and physiology can be subject to pathological changes and eventually diseases. The scope of pharmacometric models, dealing with virtually any type of such cases, is therefore almost without precedence in science. The models can be
+% \begin{itemize}
+% \item
+% phenomenological or mechanistic
+% \item
+% they have to cope both with continuous and discrete data types
+% \item
+% they are deterministic, stochastic or mixture of both
+% \item
+% they cover all levels of complexity from the molecular to organ and whole body level
+% \end{itemize}
+% It is a challenging endeavour to accommodate this variety of possibilities under one computational standard but thanks excellent use cases and other documents created and provided by our DDMoRe partners it seams possible. However it is indispensable to split the task into multiple steps of subsequent specifications and to define precisely the scope of every release. This is exactly the goal of this chapter.
+
+
+% \section{Components of a pharmacometric model}
+% In the context of PharmML a typical pharmacometric model can be decomposed into the following components
+% \begin{itemize}
+% \item
+% Data model
+% \item
+% Trial design model
+% \item
+% Structural model
+% \item
+% Parameter model
+% \begin{itemize}
+% \item
+% Covariate model
+% \item
+% Variability model
+% \item
+% Correlation of random effects
+% \end{itemize}
+% \item
+% Residual error model
+% \item
+% Observation model
+% \item
+% Task model
+% \end{itemize}
+% In the following sections we describe each of these components briefly and list features which are implemented in the current specification and those which will be included in future releases (the latter listed in the subsections \textit{\textbf{Out of scope}}).
+
+% \section{Features in and outside of current scope}
+
+% \subsection{Data model}
+
+% Coming soon...
+
+
+% \subparagraph{Out of scope}
+% \begin{itemize}
+% \item
+% trials with different centres or other levels of organisation above study groups (aka arms)
+% \item
+% levels of variability below one level of inter-occasion variability
+% \item
+% dose escalation methods, e.g. accelerated titration designs or pharmacologically guided dose escalation
+% \item
+% complex dosing models, e.g. Higuchi or Weibull release models
+% \item
+% reset of all or single compartments
+% \item
+% output compartment definition
+% \end{itemize}
+
+% \subsection{Structural model}
+% In the current specification only continuous models are considered and any model which can be formulated using
+% as system of ordinary differential equations (ODE) or algebraic equations can be implemented. More precisely, the following options are available
+% \paragraph{PK models}
+
+% \begin{itemize}
+% \item
+% ODE based, standard 1-, 2- or 3-compartmental or physiology based PK (PBPK) models
+% \begin{itemize}
+% \item
+% defined explicitly as a system of ODE's
+% \item
+% defined as an SBML model
+% \end{itemize}
+% \item
+% algebraic expressions, if analytic solutions are available, e.g. one-compartmental oral model, see section \ref{sec:structuralModel}
+% \item
+% using library models, e.g. Monolix \cite{Bertrand:2008} or PREDPP \cite{PREDPP:2011}
+% \end{itemize}
+
+% \paragraph{Continuous PD models}
+% \begin{itemize}
+% \item
+% ODE based -- e.g. turnover models
+% \item
+% algebraic -- e.g. Emax-models
+% \item
+% using library models, e.g. Monolix \cite{Bertrand:2008}
+% \end{itemize}
+
+% \subparagraph{Out of scope}
+% The following model types or approaches are planned for a subsequent release
+% \begin{itemize}
+% \item
+% Discrete data models
+% \begin{itemize}
+% \item
+% nominal and ordered categorical models e.g. logistic regression, proportional odds models etc.
+% \item
+% count data models, e.g. Poisson, negative binomial, zero-inflated Poisson models etc.
+% \item
+% time-to-event models, e.g. parametric (e.g. exponential, Gompertz, Weibull) or semi-parametric Cox model
+% \end{itemize}
+% \item
+% (Hidden) Markov models
+% \item
+% stochastic differential equations (SDE)
+% \item
+% delay differential equations (SDE)
+% \item
+% partial differential equations (PDE)
+% \end{itemize}
+
+
+% \subsection{Parameter model}
+% As described in detail in section \ref{sec:parameterModel}, the current specification allows for encoding of
+% models which are linear in the transformed parameter which covers a majority of cases in practical applications.
+% This approach is flexible in that one can encode any type of parameter which distribution is normal up to a transformation,
+% i.e. normal (identity transformation), log-normal (natural logarithm) or logit-normal (logit tranformation).\\
+% The parameter model consists of the following elements
+% \begin{itemize}
+% \item
+% population/typical value for the parameter
+% \item
+% continuous and categorical covariate model (covariates can be sampled from probability distributions)
+% %---- estimating categorical distribution from external data file \\
+% %---- sampling from known categorical distribution \\
+% \item
+% random effects of arbitrary level, see section \ref{sec:variabilityModel} for details
+% \item
+% correlation of random effects, described by a correlation or covariance matrix
+% \end{itemize}
+
+% \subparagraph{Out of scope}
+% The following features are planned for a subsequent release:
+% \begin{itemize}
+% \item
+% non-linear parameter models, such as those described in \cite{Keizer:2011aa}
+% \item
+% autocorrelation of residual errors
+% \item
+% clusters of categorical covariates
+% \item
+% conditional distributions of continuous covariates
+% \item
+% selection/exclusion criteria for covariates
+% \end{itemize}
+
+
+% \subsection{Residual error model}
+% PharmML is flexible with respect to defining residual error models. Currently this can be done
+% only explicitly as there is no external library, see section \ref{sec:residualErrorModel}.
+% For a future release the creation of an external library is planned.
+
+% \subsection{Observation model}
+% The following information can be stored in PharmML
+% \begin{itemize}
+% \item
+% model variable to be observed, both for continuous PK or PD models
+% \item
+% time points for every model varaiable at which predictions are to be estimated
+% \end{itemize}
+
+% \subsection{Task model}
+% This model describes a combination of the operations one can perform on the model, such as:
+% \begin{itemize}
+% \item
+% simulation of a trial design, defined explicitly in PharmML or encoded in a data file
+% \item
+% estimation of population or individual parameters
+% \begin{itemize}
+% \item
+% using the trial design designed in PharmML and objective data encoded in a data file
+% \item
+% using the trial design and objective data encoded in a data file
+% \end{itemize}
+% \item
+% model exploration, e.g. sensitivity analysis
+% \end{itemize}
+
+% \subparagraph{Out of scope}
+% \begin{itemize}
+% \item
+% export of simulation results to an external file
+% \item
+% export of estimation results to an external file
+% \item
+% transfer of results from one modelling step to another, for example transferring estimation results to a simulation step
+% \end{itemize}
+
+
+% \paragraph{Inference methods supported in PharmML}
+% In general the current specification is restricted to estimation methods utilising the maximum likelihood principle. Not in the scope are Bayesian inference methods such as Maximum a posteriori (MAP) or Bayesian inference sing Gibbs sampling methods used in tools of the BUGS-family (winBUGS \cite{Lunn:2002aa}, openBUGS \cite{Lunn:2009fk}) or JAGS \cite{JAGS:2003aa}.
+
+
+
+% %\paragraph{Covariate model}
+% %Covariate model is barely covered so far. See also \cite{Keizer:2011aa}. Missing are following features:\\
+% %For categorical covariates:\\
+% %-- categorical distribution of categorical covariates \\
+% %---- estimating categorical distribution from external data file \\
+% %---- sampling from known categorical distribution \\
+% %---- clusters of categorical covariates \\
+% %For continuous covariates:\\
+% %-- power-normal distribution for continuous covariates \\
+% %---- estimating parameters $\lambda$,$\mu$,$\sigma$ from external data file \\
+% %---- sampling from known power-normal distribution \\
+% %---- conditional distribution of continuous covariates \\
+% %------ none \\
+% %------ defined \\
+% %------ to be estimated \\
+% %---- selecting criteria for continuous covariates \\
+% %---- dependent distribution of continuous covariates \\
+% %---- correlated continuous covariates \\
+% %For both types: \\
+% %-- selection/exclusion criteria missing \\
+% %
+% %\subsection{Observation model}
+% %- Name\\
+% %- Units\\
+% %- Observation types - continuous/discrete\\
+% %- Symbol of predicted output\\
+% %
+% %\subsection{Task model}
+% %-- Combination of tasks, e.g.\\
+% %1. estimate distribution of covariate from experimental data\\
+% %2. Simulation task using the estimated PDF
+% %
+% %
+% %\subsection{Not covered so far}
+% %- correlation of residual errors \\
+% %---- number models of relevant models identified and described in Use Case document\\
+% %
+
+
+% \input{input/features.tex}

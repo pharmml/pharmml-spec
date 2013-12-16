@@ -1,0 +1,45 @@
+<IndividualTemplate>
+    <IndividualMapping>
+        <ds:ColumnRef columnIdRef="id"/>
+    </IndividualMapping>
+    <ArmMapping>
+        <ds:ColumnRef columnIdRef="arm"/>
+    </ArmMapping>
+    <CovariateMapping>
+        <ds:ColumnRef columnIdRef="sex"/>
+        <ct:SymbRef blkIdRef="c1" symbIdRef="Sex"/>
+    </CovariateMapping>
+    <IVDependentMapping>
+        <ds:ColumnRef columnIdRef="treat-tab"/>
+        <EpochMapping>
+            <ds:ColumnRef columnIdRef="epoch"/>
+        </EpochMapping>
+        <CovariateMapping>
+            <ds:ColumnRef columnIdRef="treat"></ds:ColumnRef>
+            <ct:SymbRef blkIdRef="c1" symbIdRef="Treat"/>
+        </CovariateMapping>
+    </IVDependentMapping>
+</IndividualTemplate>
+<ds:DataSet>
+    <ds:Definition>
+        <ds:Column columnId="id" valueType="id" columnNum="1"/>
+        <ds:Column columnId="arm" valueType="id" columnNum="2"/>
+        <ds:Column columnId="sex" valueType="id" columnNum="3"/>
+        <ds:Table tableId="treat-tab" columnNum="4">
+            <ds:Definition>
+                <ds:Column columnId="epoch" valueType="id" columnNum="1"/>
+                <ds:Column columnId="treat" valueType="id" columnNum="2"/>
+            </ds:Definition>
+        </ds:Table>
+    </ds:Definition>
+    <ds:Table>
+        <ds:Row>
+            <ct:Id>i1</ct:Id>
+            <ct:Id>a1</ct:Id>
+            <ct:Id>M</ct:Id>
+            <ds:Table>
+                <ds:Row><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                <ds:Row><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
+            </ds:Table>
+        </ds:Row>
+        <!-- SNIP -->

@@ -1,0 +1,11 @@
+window_sizes 1153 777 296 851 584 136
+diagrams
+  active  classdiagram_ref 128045 // Main
+    1170 666 100 4 12 0
+end
+show_stereotypes
+selected classdiagram_ref 128045 // Main
+open
+  classview_ref 128045 // Design
+end
+end

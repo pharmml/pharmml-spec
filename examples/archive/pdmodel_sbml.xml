@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1">
+    <model>
+        <listOfParameters>
+            <parameter id="Rin" constant="true"/>
+            <parameter id="Imax" constant="true"/>
+            <parameter id="C50" constant="true"/>
+            <parameter id="kout" constant="true"/>
+        </listOfParameters>
+        <listOfCompartments>
+            <compartment id="default" constant="true"/>
+        </listOfCompartments>
+        <listOfSpecies>
+            <species id="C" constant="false" compartment="default"
+                hasOnlySubstanceUnits="true" boundaryCondition="true"/>
+            <species id="E" constant="false" compartment="default"
+                hasOnlySubstanceUnits="true" boundaryCondition="true"/>
+        </listOfSpecies>
+        <listOfRules>
+            <rateRule variable="E">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <times/>
+                            <ci>Rin</ci>
+                            <apply>
+                                <minus/>
+                                <cn>1</cn>
+                                <apply>
+                                    <divide/>
+                                    <apply>
+                                        <times/>
+                                        <ci>Imax</ci>
+                                        <ci>C</ci>
+                                    </apply>
+                                    <apply>
+                                        <plus/>
+                                        <ci>C</ci>
+                                        <ci>C50</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <times/>
+                            <ci>kout</ci>
+                            <ci>E</ci>
+                        </apply>
+                    </apply>
+                </math>
+            </rateRule>
+        </listOfRules>
+        <listOfInitialAssignments>
+            <initialAssignment symbol="E">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <divide/>
+                        <ci>Rin</ci>
+                        <ci>kout</ci>
+                    </apply>
+                </math>
+            </initialAssignment>
+        </listOfInitialAssignments>
+    </model>
+</sbml>

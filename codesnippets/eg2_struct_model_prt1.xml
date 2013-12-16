@@ -1,0 +1,21 @@
+<StructuralModel id="main">
+    <Variable symbId="Ac" symbolType="derivative" independentVar="t"/>
+    <Variable symbId="Cc" symbolType="scalar"/>
+    <Variable symbId="E" symbolType="derivative" independentVar="t"/>
+    <Import resource="file://pkmodel_sbml.xml" resourceType="sbml">
+        <Link symbolPtr="ka">
+            <math:Var block="p1" symbId="ka"/>
+        </Link>
+        <Link symbolPtr="V">
+            <math:Var block="p1" symbId="V"/>
+        </Link>
+        <Link symbolPtr="CL">
+            <math:Var block="p1" symbId="CL"/>
+        </Link>
+        <Link symbolPtr="Ac">
+            <math:Var symbId="Ac"/>
+        </Link>                
+        <Link symbolPtr="C">
+            <math:Var symbId="Cc"/>
+        </Link>                
+    </Import>

@@ -1,0 +1,26 @@
+<!-- BLOCK II: TRIAL DEFINITION -->
+<TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+    
+    <!-- STRUCTURE -->
+    <Structure>
+        <Epoch oid="epoch1">
+            <Order>1</Order>
+        </Epoch>
+        <Arm oid="arm1"/>
+        <Cell oid="cell1">
+            <EpochRef oidRef="epoch1"/>
+            <ArmRef oidRef="arm1"/>
+            <SegmentRef oidRef="TA"/>
+        </Cell>
+        <Segment oid="TA">
+            <ActivityRef oidRef="bolusIV"/>
+        </Segment>
+        <Activity oid="bolusIV">
+            <Bolus>
+                <DoseAmount inputType="target">
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
+                </DoseAmount>
+            </Bolus>
+        </Activity>
+    </Structure> 
+    

@@ -1,0 +1,7 @@
+<!-- type 1 - ADDITIVE MODEL -->
+<ct:FunctionDefinition symbId="additiveErrorModel" symbolType="real">
+    <ct:FunctionArgument symbId="a" symbolType="real"/>
+    <ct:Definition>
+        <ct:SymbRef symbIdRef="a"/>
+    </ct:Definition>
+</ct:FunctionDefinition>

@@ -1,0 +1,32 @@
+\section{Residual error model}
+\label{sec:residualErrorModel}
+\label{maths:error_model}
+\label{maths:combined-err-model}
+
+In this section we consider different forms of the residual error, i.e. about $g$ in the term
+\begin{eqnarray}
+g(x_{ij}, \psi_{i}, \xi) \epsilon_{ij} \nonumber
+\end{eqnarray}
+of the eq.\ref{eq:nlmeModel} with $\epsilon_{ij} \sim N(0, 1)$, i.e. a standardised random variable. 
+The residual errors are part of the \textit{Observations Model}, see section \ref{sec:eg1-obs-model} for detailed discussion. 
+The following table contains some of the models which can be implemented in \pharmml:
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{l c c}
+Model name & $g$ & $\xi$ \\
+\hline \hline 
+Constant error model & $a$ & $a$ \\
+Proportional error model & $bf$ & $b$ \\
+Combined error model & $a + bf$ & $a,b$ \\
+Alternative combined error model 1& $\sqrt{a^2 + b^2f^2}$ & $a,b$ \\
+Alternative combined error model 2 & $a + bf^c$ & $a, b, c$ 
+\end{tabular}
+\end{center}
+\caption{Examples of residual error models which can be implemented in \pharmml.}
+\label{tab:residualModels}
+\end{table}%
+
+
+
+

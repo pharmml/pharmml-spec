@@ -1,0 +1,35 @@
+<Activity oid="d1">
+    <Bolus>
+        <DoseAmount inputType="dose">
+            <ct:SymbRef blkIdRef="main" symbIdRef="D"></ct:SymbRef>
+            <ct:Assign>
+                <ct:Real>4</ct:Real>
+            </ct:Assign>
+        </DoseAmount>
+        <DosingTimes>
+            <ct:SymbRef symbIdRef="Dt"/>                <!-- should be tD? --> <!-- missing blkIdRef="main"? -->
+            <ct:Assign>
+                <ct:Vector><ct:Real>0</ct:Real></ct:Vector>
+            </ct:Assign>
+        </DosingTimes>
+    </Bolus>
+</Activity>
+<Activity oid="d2">
+    <Bolus>
+        <DoseAmount inputType="dose">
+            <ct:SymbRef blkIdRef="main" symbIdRef="D"/>
+            <ct:Assign>
+                <ct:Real>4</ct:Real>
+            </ct:Assign>
+        </DoseAmount>
+        <DosingTimes>
+            <ct:SymbRef symbIdRef="Dt"/>                <!-- should be tD? --> <!-- missing blkIdRef="main"? -->
+            <ct:Assign>
+                <ct:Vector><ct:Real>0</ct:Real></ct:Vector>
+            </ct:Assign>
+        </DosingTimes>
+    </Bolus>
+</Activity>
+<Activity oid="w1">
+    <Washout/>
+</Activity>

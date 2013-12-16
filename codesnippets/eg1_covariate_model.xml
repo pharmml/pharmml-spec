@@ -1,0 +1,21 @@
+<VariabilityLevel id="indiv"/>
+<CovariateModel id="c1">
+    <Parameter symbId="pop_W"/>
+    <Parameter symbId="omega_W"/>
+    <Covariate symbId="W">
+        <Continuous>
+            <Distribution xmlns="http://www.ddmore.eu/Resources/Uncertainty/1.0">
+                <Normal>
+                    <Mean>
+                        <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+                            <Var symbId="pop_W"/>
+                        </Equation>
+                    </Mean>
+                    <StdDev>
+                        <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+                            <Var symbId="omega_W"/>
+                        </Equation>
+                    </StdDev>
+                </Normal>
+            </Distribution>
+	    <!-- continues in next listing -->

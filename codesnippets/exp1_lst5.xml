@@ -1,0 +1,14 @@
+            <!-- continuation... -->
+            <Transformation>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Uniop op="log">
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="W"/>
+                            <ct:Real>70.0</ct:Real>
+                        </Binop>
+                    </Uniop>
+                </Equation>
+            </Transformation>
+        </Continuous>
+    </Covariate>
+</CovariateModel>

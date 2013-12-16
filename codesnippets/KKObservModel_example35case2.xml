@@ -1,0 +1,69 @@
+<!-- 3.5 Residual error magnitude varying with covariates and time - 3.5.1	case 2 -->
+<ObservationModel blkId="om1.8">
+    <!-- theta1,2,3 & 5 -->
+    <SimpleParameter symbId="theta1"/>
+    <SimpleParameter symbId="theta2"/>
+    <SimpleParameter symbId="theta3"/>
+    <SimpleParameter symbId="theta5"/>
+    <!-- TT -->
+    <SimpleParameter symbId="TT">
+        <ct:Assign>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <ct:SymbRef symbIdRef="theta5"/>
+            </Equation>
+        </ct:Assign>
+    </SimpleParameter>
+    <RandomVariable symbId="eps">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <prVal>1</prVal>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <Standard symbId="C">
+        <Output>
+            <ct:SymbRef symbIdRef="C1model"/>
+        </Output>
+        <ErrorModel>
+            <ct:Assign>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Binop op="times">
+                        <FunctionCall>
+                            <ct:SymbRef symbIdRef="typicalW"/>
+                            <FunctionArgument symbId="a">
+                                <ct:SymbRef symbIdRef="theta1"/>
+                            </FunctionArgument>
+                            <FunctionArgument symbId="b">
+                                <ct:SymbRef symbIdRef="theta2"/>
+                            </FunctionArgument>
+                            <FunctionArgument symbId="f">
+                                <ct:SymbRef symbIdRef="C1model"/>
+                            </FunctionArgument>
+                        </FunctionCall>
+                        <FunctionCall>
+                            <ct:SymbRef symbIdRef="FACT"/>
+                            <FunctionArgument symbId="firstValue">
+                                <ct:Real>1</ct:Real>
+                            </FunctionArgument>
+                            <FunctionArgument symbId="secondValue">
+                                <ct:SymbRef symbIdRef="theta3"/>
+                            </FunctionArgument>
+                            <FunctionArgument symbId="firstCond">
+                                <ct:SymbRef symbIdRef="TT"/>
+                            </FunctionArgument>
+                        </FunctionCall>
+                    </Binop>
+                </Equation>
+            </ct:Assign>
+        </ErrorModel>
+        <ResidualError>
+            <ct:SymbRef symbIdRef="dsds"/>
+        </ResidualError>
+    </Standard>
+</ObservationModel>

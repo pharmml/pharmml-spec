@@ -1,0 +1,20 @@
+<Activity oid="d1">
+    <Bolus>
+        <DoseAmount inputType="dose">
+            <ct:SymbRef blkIdRef="main" symbIdRef="D"/>
+            <ct:Assign>
+                <ct:Real>150</ct:Real>
+            </ct:Assign>
+        </DoseAmount>
+        <DosingTimes>
+            <ct:SymbRef blkIdRef="main" symbIdRef="tD"/>
+            <ct:Assign>
+                <ct:Sequence>
+                    <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
+                    <ct:StepSize><ct:Real>12</ct:Real></ct:StepSize>
+                    <ct:End><ct:Real>72</ct:Real></ct:End>
+                </ct:Sequence>
+            </ct:Assign>
+        </DosingTimes>
+    </Bolus>
+</Activity>

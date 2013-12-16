@@ -1,0 +1,108 @@
+<!-- 3.1.3	Alternative representation (not on the K/K list) -->
+<ObservationModel blkId="om1.3">
+    <!-- a - error parameter with IIV -->
+    <SimpleParameter symbId="omega_a"/>
+    <SimpleParameter symbId="pop_a"/>
+    <RandomVariable symbId="eta_a">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <var varId="omega_a"/>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <IndividualParameter symbId="a">
+        <GaussianModel>
+            <Transformation>log</Transformation>
+            <LinearCovariate>
+                <PopulationParameter>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <ct:SymbRef symbIdRef="pop_a"/>
+                        </Equation>
+                    </ct:Assign>
+                </PopulationParameter>
+            </LinearCovariate>
+            <RandomEffects>
+                <ct:SymbRef symbIdRef="eta_a"/>
+            </RandomEffects>
+        </GaussianModel>
+    </IndividualParameter>
+    <!-- b - error parameter with IIV -->
+    <SimpleParameter symbId="omega_b"/>
+    <SimpleParameter symbId="pop_b"/>
+    <RandomVariable symbId="eta_b">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <var varId="omega_b"/>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <IndividualParameter symbId="b">
+        <GaussianModel>
+            <Transformation>log</Transformation>
+            <LinearCovariate>
+                <PopulationParameter>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <ct:SymbRef symbIdRef="pop_b"/>
+                        </Equation>
+                    </ct:Assign>
+                </PopulationParameter>
+            </LinearCovariate>
+            <RandomEffects>
+                <ct:SymbRef symbIdRef="eta_b"/>
+            </RandomEffects>
+        </GaussianModel>
+    </IndividualParameter>
+    <RandomVariable symbId="eps">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal> 
+            </mean>
+            <stddev>
+                <prVal>1</prVal> 
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <Standard symbId="C">
+        <Output>
+            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+        </Output>
+        <ErrorModel>
+            <ct:Assign>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <FunctionCall>
+                        <ct:SymbRef symbIdRef="typicalW"/>
+                        <FunctionArgument symbId="a">
+                            <ct:SymbRef symbIdRef="a"/>
+                        </FunctionArgument>
+                        <FunctionArgument symbId="b">
+                            <ct:SymbRef symbIdRef="b"/>
+                        </FunctionArgument>
+                        <FunctionArgument symbId="f">
+                            <ct:SymbRef symbIdRef="C1model"/>
+                        </FunctionArgument>
+                    </FunctionCall>
+                </Equation>
+            </ct:Assign>
+        </ErrorModel>
+        <ResidualError>
+            <ct:SymbRef symbIdRef="eps"/>
+        </ResidualError>
+    </Standard>
+</ObservationModel>

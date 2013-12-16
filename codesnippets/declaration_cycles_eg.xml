@@ -1,0 +1,11 @@
+<!-- ERROR: The declaration below creates a cycle -->
+<Variable symbId="d" symbolType="scalar">
+    <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+        <Var symbId="e"/>
+    </Equation>
+</Variable>
+<Variable symbId="e" symbolType="scalar">
+    <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+        <Var symbId="d"/>
+    </Equation>
+</Variable>

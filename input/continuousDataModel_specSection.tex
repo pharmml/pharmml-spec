@@ -1,0 +1,27 @@
+\section{Continuous data model}
+\label{sec:continuousDataModel}
+A general nonlinear mixed effects model for continuous data for $N$ subjects and $n_i$ measurements per subject $i$ reads as follows (\cite{Lavielle:2012b}):
+\begin{align}
+ \underbrace{ y_{ij}}_{\text{\parbox{2cm}{\centering Experimental \\[-4pt]  data}}} =
+ \underbrace{ f(x_{ij}, \psi_{i})}_{\text{\parbox{2.5cm}{\centering Model \\[-4pt]  prediction}}} + 
+ \underbrace{ g(x_{ij}, \psi_{i}, \xi) \; \epsilon_{ij}}_{\text{\parbox{3cm}{\centering Error}}} 
+\quad 1\le i \le N, \quad 1\le j \le n_i \label{eq:nlmeModel}
+ \end{align}
+with
+\begin{itemize}
+\item
+$y_{ij}$ -- $j^{th}$ observation for subject $i$
+\item
+$f$ -- structural model prediction
+\item
+$x_{ij}$ -- regression variables, e.g. $time$ or $concentration$
+\item
+$\psi_{i}$ -- individual parameters
+\item
+$\epsilon_{ij}$ -- residual error
+\item
+$g$ -- standard deviation of the residual error
+\item 
+$\xi$ -- parameters of the residual model
+\end{itemize}
+With $\epsilon_{ij}$ being normal distributed with mean 0 and variance 1, $y_{ij}$ is also normally distributed with mean $ f(x_{ij}, \psi_{i})$ and the standard deviation $g(x_{ij}, \psi_{i}, \xi)$. 

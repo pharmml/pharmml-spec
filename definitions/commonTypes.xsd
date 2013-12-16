@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2013 European Molecular Biology Laboratory, Heidelberg,
+Germany and Novo Nordisk A/S, Bagsvaerd, Denmark.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except in compliance with the License.  You may
+obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+     
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing
+permissions and limitations under the License.
+-->    
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    targetNamespace="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:distrib="http://www.uncertml.org/3.0" xmlns:maths="http://www.pharmml.org/2013/03/Maths"
+    version="0.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:import namespace="http://www.pharmml.org/2013/03/Maths"
+        schemaLocation="http://www.pharmml.org/2013/03/Maths"/>
+    
+    
+    <!--
+        Simple Types
+      -->
+    <xs:simpleType name="SymbolTypeType">
+        <xs:annotation>
+            <xs:documentation>Defines the symbol types. Restricted to the available types.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="int"/>
+            <xs:enumeration value="real"/>
+            <xs:enumeration value="boolean"/>
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="id"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SymbolIdType">
+        <xs:annotation>
+            <xs:documentation>Type for symbols identifiers.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
+    <xs:simpleType name="BlockIdType">
+        <xs:annotation>
+            <xs:documentation>Type for block identifiers.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
+    <xs:simpleType name="oidType">
+        <xs:annotation>
+            <xs:documentation>Type for OID identifiers.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
+    <!--xs:simpleType name="UnitIdType">
+        <xs:annotation>
+            <xs:documentation>Unit identifier.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="ct:SymbolIdType"/>
+    </xs:simpleType-->
+    <!--xs:simpleType name="BasicUnitType">
+        <xs:annotation>
+            <xs:documentation>Defines the basic unit name and restricts it to the appropriate permitted values.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName">
+            <xs:enumeration value="second"/>
+            <xs:enumeration value="metre"/>
+            <xs:enumeration value="kilogram"/>
+            <xs:enumeration value="ampere"/>
+            <xs:enumeration value="kelvin"/>
+            <xs:enumeration value="mole"/>
+            <xs:enumeration value="candela"/>
+            <xs:enumeration value="dimensionless"/>
+        </xs:restriction>
+    </xs:simpleType-->
+    <xs:simpleType name="IdType">
+        <xs:annotation>
+            <xs:documentation>Type of the element identifier.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
+    
+    <!-- 
+        Complex Types
+     -->
+    <xs:complexType name="IntValueType">
+        <xs:annotation>
+            <xs:documentation>Integer value.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:integer">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+                <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="RealValueType">
+        <xs:annotation>
+            <xs:documentation>Real value.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:double">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+                <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="StringValueType">
+        <xs:annotation>
+            <xs:documentation>String value.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+                <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="BooleanType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                A Boolean type.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TrueBooleanType">
+        <xs:annotation>
+            <xs:documentation>A literal Boolean value for true.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:BooleanType">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="FalseBooleanType">
+        <xs:annotation>
+            <xs:documentation>A literal Boolean value for false.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:BooleanType">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="IdValueType">
+        <xs:annotation>
+            <xs:documentation>
+                A literal Id value. This has a type of `id'.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:NCName">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!--xs:complexType name="UnitRefType">
+        <xs:annotation>
+            <xs:documentation>A unit refernce type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attributeGroup ref="ct:UnitReferenceGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType-->
+    <!--xs:complexType name="BasicUnitRefType">
+        <xs:annotation>
+            <xs:documentation>Defines a basic unit refernce type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="basicUnit" type="ct:BasicUnitType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The id of the basic unit being referenced</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType -->
+    <!--xs:complexType name="UnitComponentType">
+        <xs:annotation>
+            <xs:documentation>The unit component definition.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice>
+                <xs:element ref="ct:BasicUnitRef"/>
+                <xs:element ref="ct:UnitRef"/>
+            </xs:choice>
+            <xs:element name="Exponent" type="ct:IntValueType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The exponent of the base unit.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Scale" type="ct:IntValueType">
+                <xs:annotation>
+                    <xs:documentation>The scale of the base unit.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Multiplier" type="ct:RealValueType">
+                <xs:annotation>
+                    <xs:documentation>The multiplier of the base unit.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="UnitDefinitionType">
+        <xs:annotation>
+            <xs:documentation>The unit definition.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Symbol"/>
+                    <xs:element maxOccurs="unbounded" name="UnitComponent"
+                        type="ct:UnitComponentType">
+                        <xs:annotation>
+                            <xs:documentation>A component of the unit definition. These are combined to beild up the unit definition. The complete unit definition is the product of its UnitComponents. For example the definition of velocity may have two components m and s^-1 then the unit is m * s^-1.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="unitId" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The id of the unit being defined.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType-->
+    <xs:complexType abstract="true" name="PharmMLRootType">
+        <xs:annotation>
+            <xs:documentation>Root type of all elements and types defining elements in PharmML.</xs:documentation>
+        </xs:annotation>
+        <xs:group ref="ct:RootElementGroup"/>
+        <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+    </xs:complexType>
+    <xs:complexType name="OidRefType">
+        <xs:annotation>
+            <xs:documentation>Type used by element referencing an OID.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attributeGroup ref="ct:OidRefGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SymbolRefType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="blkIdRef" type="ct:BlockIdType">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Block.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="symbIdRef" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Symbol.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ScalarRhs">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="maths:Equation">
+                        <xs:annotation>
+                            <xs:documentation>A mathematical expression.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A variable reference.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType block="" mixed="false" name="AnnotationType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="Rhs">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="maths:Equation">
+                        <xs:annotation>
+                            <xs:documentation>A mathematical expression.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A variable reference.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Sequence"/>
+                    <xs:element ref="ct:Vector"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SequenceType">
+        <xs:annotation>
+            <xs:documentation>The definition of a uniform sequence of numbers. Conceptually is has two forms. The first form takes an initial number, a step size and the last number. The sequence starts at the first
+number and a new value, incremented by the step size, is added to the sequence until this value exceeds
+the end value. In the second the step size is incremented r times, where r is the number of repetitions.                   
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Begin" type="ct:Rhs">
+                        <xs:annotation>
+                            <xs:documentation>The initial value of the sequence.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="StepSize" type="ct:Rhs">
+                        <xs:annotation>
+                            <xs:documentation>The amount incremented to get the next value in the sequence. The step size can be negative</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="End" type="ct:Rhs">
+                            <xs:annotation>
+                                <xs:documentation>The maximum possible value of the sequence.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Repetitions" type="ct:Rhs">
+                            <xs:annotation>
+                                <xs:documentation>The number of times to incrememnt the sequence by the step size.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="VectorType">
+        <xs:annotation>
+            <xs:documentation>The definition of a non-uniform sequence of numbers. The vector is an ordered list of
+            values. The values of the sequence element are inserted into the vector at the point of definition.
+            For example, take the vector (the [] brackets denote a sequence): 0, 4, [0:1:3], 33. Inserting the 
+            sequence gives us the vector of values: 0, 4, 0, 1, 2, 3, 33. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Sequence">
+                        <xs:annotation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CommonVariableDefinitionType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                An abstract type defining the comment properties of a variable definition.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Symbol"/>
+                    <!--xs:element minOccurs="0" ref="ct:UnitRef"/-->
+                </xs:sequence>
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id used to define the variable.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="VariableDefinitionType">
+        <xs:annotation>
+            <xs:documentation>A standard variable definition. Elements defined unsing this XML Schema Type have a Symbol type
+                in addition to other common variable definition properties.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:CommonVariableDefinitionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialise the variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The type of the variable.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="IndependentVariableReferenceType">
+        <xs:annotation>
+            <xs:documentation>References the independent variable.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="ct:SymbRef">
+                <xs:annotation>
+                    <xs:documentation>References the independent variable symbol.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InitialConditionType">
+        <xs:annotation>
+            <xs:documentation>The initial condition of the derivative variable.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>The initial value assigned to the derivative.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DerivativeVariableType">
+        <xs:annotation>
+            <xs:documentation>The type specifying a derivative variable.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:CommonVariableDefinitionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>The symbol id used to define the variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="IndependentVariable"
+                        type="ct:IndependentVariableReferenceType">
+                        <xs:annotation>
+                            <xs:documentation>The independent variable of the derivative.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="InitialCondition" type="ct:InitialConditionType">
+                        <xs:annotation>
+                            <xs:documentation>The value of the initial condition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required" fixed="real">
+                    <xs:annotation>
+                        <xs:documentation>The symbol type of a derivative variable is always set to be a real.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="FunctionDefinitionType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines a function that can be used elsewhere in the PharmML document.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:CommonVariableDefinitionType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="FunctionArgument"
+                        type="ct:FuncParameterDefinitionType">
+                        <xs:annotation>
+                            <xs:documentation>The argument (parameter) to the function.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Definition" type="ct:ScalarRhs">
+                        <xs:annotation>
+                            <xs:documentation>The body of the function defintion.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            The type of the function definition.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="FuncParameterDefinitionType">
+        <xs:annotation>
+            <xs:documentation>Defines a function argument defintion type. The function argument has a symbol identifier, an optional name and a type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:CommonVariableDefinitionType">
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            The type of the function definition.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="LevelReferenceType">
+        <xs:annotation>
+            <xs:documentation>
+                A reference to a variability level.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SymbolNameType">
+        <xs:annotation>
+            <xs:documentation>Type defining the name of the symbol in a form suitable for display. Currently this should be plain text and not include any markup.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="ct:SymbolIdType">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="NameType">
+        <xs:annotation>
+            <xs:documentation>Type specifying a descriptive name that
+                can be displayed and so sshould be human readable.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="VariableAssignmentType">
+        <xs:annotation>
+            <xs:documentation>A type that specifies a variable assignment.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>The variable to be assigned to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>The right-hand side of the assignment.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AssignType">
+        <xs:annotation>
+            <xs:documentation>The type specifies an assignment of a value(s) or equation to another element in the PharmML document.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:Rhs"/>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <!--
+        Attribute Groups
+        -->
+    
+    <xs:attributeGroup name="BlockDefnGroup">
+        <xs:annotation>
+            <xs:documentation>Grouping of attributes used to define a block.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="blkId" type="ct:BlockIdType" use="required"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="SymbolDefinitionGroup">
+        <xs:annotation>
+            <xs:documentation>Grouping of attributes used to define a symbol.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="OidDefnGroup">
+        <xs:annotation>
+            <xs:documentation>Grouping of attributed used to define an OID.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="oid" type="ct:oidType" use="required"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="OidRefGroup">
+        <xs:annotation>
+            <xs:documentation>Grouping of attributes used to reference an OID.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="oidRef" type="ct:oidType" use="required"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="RootAttributesGroup">
+        <xs:annotation>
+            <xs:documentation>Grouping of attributed to be found in all elements in the schema.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="ct:IdType">
+            <xs:annotation>
+                <xs:documentation>The element identifier.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <!--xs:attributeGroup name="UnitDefinitionGroup">
+        <xs:annotation>
+            <xs:documentation>Attributes used in a unit definition.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="unitId" type="ct:UnitIdType" use="required">
+            <xs:annotation>
+                <xs:documentation>The identifier of the unit being declared.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="UnitReferenceGroup">
+        <xs:annotation>
+            <xs:documentation>Attributes used in a unit reference.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="unitId" type="ct:UnitIdType" use="optional">
+            <xs:annotation>
+                <xs:documentation>The identifier of the unit being referenced.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup-->
+    
+    
+    <!--
+        Element Groups
+        -->
+    
+    <xs:group name="RootElementGroup">
+        <xs:annotation>
+            <xs:documentation>Grouping of elements to be found as children of all elements in the schema.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" ref="ct:Description"/>
+        </xs:sequence>
+    </xs:group>
+
+
+    <!--
+        Elements
+        -->
+    
+    <xs:element name="OidRef" type="ct:OidRefType">
+        <xs:annotation>
+            <xs:documentation>
+                An element that provides a reference to an OID.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Scalar" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                An element that defines a scalar value. This element is abstract the specific scalar elements are specified by the
+                substitution group.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Int" substitutionGroup="ct:Scalar" type="ct:IntValueType">
+        <xs:annotation>
+            <xs:documentation>
+                The element defines an integer value. It is a scalar.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Real" substitutionGroup="ct:Scalar" type="ct:RealValueType">
+        <xs:annotation>
+            <xs:documentation>
+                The element defines an real value. It is a scalar.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="String" substitutionGroup="ct:Scalar" type="ct:StringValueType">
+        <xs:annotation>
+            <xs:documentation>
+                The element defines an string value. It is a scalar.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Id" substitutionGroup="ct:Scalar" type="ct:IdValueType">
+        <xs:annotation>
+            <xs:documentation>
+                Element defines a value of type Id.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Boolean" type="ct:BooleanType"  substitutionGroup="ct:Scalar" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                This abstract element defines an Booelan value.
+            </xs:documentation>
+        </xs:annotation>
+        <!--xs:complexType>
+            <xs:group ref="ct:RootElementGroup"/>
+            <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+        </xs:complexType-->
+    </xs:element>
+    <xs:element name="True" type="ct:TrueBooleanType" substitutionGroup="ct:Boolean">
+        <xs:annotation>
+            <xs:documentation>
+                This element defines a TRUE Booelan value.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="False" type="ct:FalseBooleanType" substitutionGroup="ct:Boolean">
+        <xs:annotation>
+            <xs:documentation>
+                This element defines a FALSE Booelan value.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Symbol" type="ct:SymbolNameType">
+        <xs:annotation>
+            <xs:documentation>Element defining the name of the symbol.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="SymbRef" type="ct:SymbolRefType">
+        <xs:annotation>
+            <xs:documentation>Element references a symbol defined elsewhere in the document.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Description" type="ct:AnnotationType">
+        <xs:annotation>
+            <xs:documentation>Element provides additional documentation about its parent element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Name" type="ct:NameType">
+        <xs:annotation>
+            <xs:documentation>Element defines a human readable/display name for its parent element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element abstract="true" name="Arrays">
+        <xs:annotation>
+            <xs:documentation>An abstract element that defines an array of values.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Sequence" type="ct:SequenceType" substitutionGroup="ct:Arrays">
+        <xs:annotation>
+            <xs:documentation>Element defines a uniform sequence of values.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Vector" type="ct:VectorType" substitutionGroup="ct:Arrays">
+        <xs:annotation>
+            <xs:documentation>Element deines a vector of values.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element abstract="true" name="CommonVariable" type="ct:CommonVariableDefinitionType">
+        <xs:annotation>
+            <xs:documentation>An abstract element that defines a variety of variable declarations. The possible variable declarations are
+                defined by the substitution group.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Variable" type="ct:VariableDefinitionType" substitutionGroup="ct:CommonVariable">
+        <xs:annotation>
+            <xs:documentation>Element specifies a standard variable definition.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="DerivativeVariable" substitutionGroup="ct:CommonVariable" type="ct:DerivativeVariableType">
+        <xs:annotation>
+            <xs:documentation>Element specifies a derivative variable definition.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="VariableAssignment" type="ct:VariableAssignmentType">
+        <xs:annotation>
+            <xs:documentation>Element specifies a variable assignment.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Assign" type="ct:Rhs">
+        <xs:annotation>
+            <xs:documentation>This element indicates that the value(s) or equation defined by its child elements are to be assigned to its parent element.
+                It is the equivalent of an assignment operator.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="VariabilityReference" type="ct:LevelReferenceType">
+        <xs:annotation>
+            <xs:documentation>The element provides a reference to a variability level. It associates its parent element with the reference variability level.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="FunctionDefinition" type="ct:FunctionDefinitionType">
+        <xs:annotation>
+            <xs:documentation>This element defines a function within the PharmML document.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!--xs:element name="BasicUnitRef" type="ct:BasicUnitRefType">
+        <xs:annotation>
+            <xs:documentation>Element used to reference a basic unit.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="UnitRef" type="ct:UnitRefType">
+        <xs:annotation>
+            <xs:documentation>Element used to reference a unit definition.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="UnitDefinition" type="ct:UnitDefinitionType">
+        <xs:annotation>
+            <xs:documentation>Element used to define a unit.</xs:documentation>
+        </xs:annotation>
+    </xs:element-->
+</xs:schema>

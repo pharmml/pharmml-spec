@@ -1,0 +1,29 @@
+<ParameterModel blkId="p1">
+    <!-- V -->
+    <SimpleParameter symbId="beta_V"/>
+    <SimpleParameter symbId="pop_V"/>
+    <SimpleParameter symbId="omega_V"/>
+    <RandomVariable symbId="eta_V">
+        <!-- identical to previous example -->
+    </RandomVariable>
+    <IndividualParameter symbId="V">
+        <GaussianModel>
+            <Transformation>log</Transformation>
+            <LinearCovariate>
+                <PopulationParameter>
+                    <ct:Assign>
+                        <ct:SymbRef symbIdRef="pop_V"/>
+                    </ct:Assign>
+                </PopulationParameter>
+                <Covariate>
+                    <ct:SymbRef blkIdRef="c1" symbIdRef="W"/>
+                    <FixedEffect>
+                        <ct:SymbRef symbIdRef="beta_V"/>
+                    </FixedEffect>
+                </Covariate>
+            </LinearCovariate>
+            <RandomEffects>
+                <ct:SymbRef symbIdRef="eta_V"/>
+            </RandomEffects>
+        </GaussianModel>
+    </IndividualParameter>

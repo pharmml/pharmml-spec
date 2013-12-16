@@ -1,0 +1,23 @@
+<ObservationModel id="o1">
+    <Continuous symbId="Cc">
+        <math:Var block="main" symbId="Cc"/>
+        <ErrorModel>
+            <math:Var symbId="combinedErrorModel"/>
+            <math:FunctionArgument symbId="a">
+                <math:Scalar value="0.5"/>
+            </math:FunctionArgument>
+            <math:FunctionArgument symbId="b">
+                <math:Scalar value="0.1"/>
+            </math:FunctionArgument>
+            <math:FunctionArgument symbId="f">
+                <math:Equation>
+                    <math:Var symbId="Cc"/>
+                </math:Equation>
+            </math:FunctionArgument>
+        </ErrorModel>
+        <RandomEffect>
+	  <!-- Definition of Normal Distribution N(0, 1) is omitted -->
+        </RandomEffect>
+    </Continuous>
+    <!-- Residual error model for E is omitted -->
+</ObservationModel>

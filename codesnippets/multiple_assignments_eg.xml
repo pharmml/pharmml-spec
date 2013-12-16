@@ -1,0 +1,17 @@
+<Variable symbId="a" symbolType="scalar"/> <!-- Symbol defined, but no initialised -->
+
+  ...
+
+<!-- Incorrect -->
+<!-- Duplicate initial assignments here. -->
+<InitialValue symbId="a">
+  <math:Scalar value="0"/>
+</InitialValue>
+<InitialValue symbId="a">   
+  <math:Equation>
+    <math:Binop op="plus">
+      <math:Var value="a"/>
+      <math:Scalar value="10"/>
+    </math:Binop>
+  </math:Equation>
+</InitialValue>

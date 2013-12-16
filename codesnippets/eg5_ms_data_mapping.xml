@@ -1,0 +1,10 @@
+<EstimationStep id="estTask1">
+    <!-- Omitted initial values -->
+    <ObjectiveDataSet dataSetRef="dataSet1">
+	<!-- Omitted some mappings -->
+        <Mapping columnName="id">
+            <math:Var block="a1" symbId="i"/>
+        </Mapping>
+    </ObjectiveDataSet>
+	<!-- Omitted rest of EstimationStep -->
+</EstimationStep>

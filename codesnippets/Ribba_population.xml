@@ -1,0 +1,28 @@
+<!-- POPULATION -->
+<Population> 
+    <IndividualTemplate> 
+        <IndividualMapping> 
+            <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/> 
+        </IndividualMapping> 
+        <ArmMapping> 
+            <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/> 
+        </ArmMapping> 
+        <ReplicateMapping> 
+            <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="REP"/> 
+        </ReplicateMapping>
+    </IndividualTemplate>
+    <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+        <Definition>
+            <Column columnId="ID" valueType="string" columnNum="1"/> 
+            <Column columnId="ARM" valueType="string" columnNum="2"/> 
+            <Column columnId="REP" valueType="int" columnNum="3"/> 
+        </Definition>
+        <Table>
+            <Row>
+                <ct:String>i</ct:String>
+                <ct:String>a1</ct:String>
+                <ct:Int>21</ct:Int>
+            </Row>
+        </Table>
+    </DataSet>
+</Population>

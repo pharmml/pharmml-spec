@@ -1,0 +1,58 @@
+<!-- FUNCTION FACT for 3.5.1. case 2 -->
+<ct:FunctionDefinition symbId="FACT" symbolType="real">
+    <ct:FunctionArgument symbId="firstValue" symbolType="real"/>
+    <ct:FunctionArgument symbId="secondValue" symbolType="real"/>
+    <ct:FunctionArgument symbId="firstCond" symbolType="real"/>
+    <ct:FunctionArgument symbId="IDV" symbolType="real"/>
+    <ct:Definition>
+        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+            <Piecewise>
+                <Piece>
+                    <ct:Real>1</ct:Real>
+                    <Condition>
+                        <LogicBinop op="gt">
+                            <ct:SymbRef symbIdRef="IDV"/>
+                            <ct:SymbRef symbIdRef="firstCond"/>
+                        </LogicBinop>
+                    </Condition>
+                </Piece>
+                <Piece>
+                    <ct:SymbRef symbIdRef="secondValue"/>
+                    <Condition>
+                        <Otherwise/>
+                    </Condition>
+                </Piece>
+            </Piecewise>
+        </Equation>
+    </ct:Definition>
+</ct:FunctionDefinition>
+
+<!-- FUNCTION FOR 'TYPICAL' W = sqrt(a^2 + b^2 f^2) -->
+<ct:FunctionDefinition symbId="typicalW" symbolType="real">
+    <ct:FunctionArgument symbId="a" symbolType="real"/>
+    <ct:FunctionArgument symbId="b" symbolType="real"/>
+    <ct:FunctionArgument symbId="f" symbolType="real"/>
+    <ct:Definition> 
+        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+            <Binop op="root">
+                <Binop op="plus">
+                    <Binop op="power">
+                        <ct:SymbRef symbIdRef="a"/>
+                        <ct:Int>2</ct:Int>
+                    </Binop>
+                    <Binop op="times">
+                        <Binop op="power">
+                            <ct:SymbRef symbIdRef="b"/>
+                            <ct:Int>2</ct:Int>
+                        </Binop>
+                        <Binop op="power">
+                            <ct:SymbRef symbIdRef="f"/>
+                            <ct:Int>2</ct:Int>
+                        </Binop>
+                    </Binop>
+                </Binop>
+                <ct:Real>2</ct:Real>
+            </Binop>
+        </Equation>
+    </ct:Definition>
+</ct:FunctionDefinition>

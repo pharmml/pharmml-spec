@@ -1,0 +1,25 @@
+<SimpleParameter symbId="pop_V"/>
+<SimpleParameter symbId="omega_V"/>
+<SimpleParameter symbId="gamma_V"/>
+<SimpleParameter symbId="beta_V"/>
+<SimpleParameter symbId="beta_V_occ1"/>
+<SimpleParameter symbId="beta_V_Treat"/>
+<SimpleParameter symbId="beta_V_TreatSet"/>
+<RandomVariable symbId="eta_V">
+    <ct:VariabilityReference>
+        <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+    </ct:VariabilityReference>
+    <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+        <mean><rVal>0</rVal></mean>
+        <stddev><var varId="omega_V"/></stddev>
+    </NormalDistribution>
+</RandomVariable>
+<RandomVariable symbId="kappa_V">
+    <ct:VariabilityReference>
+        <ct:SymbRef blkIdRef="model" symbIdRef="iov1"/>
+    </ct:VariabilityReference>
+    <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+        <mean><rVal>0</rVal></mean>
+        <stddev><var varId="omega_ka"/></stddev>
+    </NormalDistribution>
+</RandomVariable>

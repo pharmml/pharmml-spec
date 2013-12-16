@@ -1,0 +1,16 @@
+<Observations>
+    <Timepoints>
+        <ct:Vector>
+            <math:Scalar value="0.5"/>
+            <ct:Sequence begin="4" end="48" stepSize="4"/>
+            <ct:Sequence begin="52" end="192" stepSize="24"/>
+            <ct:Sequence begin="192" end="250" stepSize="4"/>
+        </ct:Vector>
+    </Timepoints>
+    <Output>
+        <math:Var block="main" symbId="Cc"/>
+    </Output>
+    <Output>
+        <math:Var block="o1" symbId="Cc"/>
+    </Output>
+</Observations>

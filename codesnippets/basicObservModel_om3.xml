@@ -1,0 +1,44 @@
+<!-- type 3 - COMBINED ADDITIVE and PROPORTIONAL MODEL 1 -->
+<ObservationModel blkId="om3">
+    <SimpleParameter symbId="a"/>
+    <SimpleParameter symbId="b"/>
+    <RandomVariable symbId="eps">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <prVal>1</prVal>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <Standard symbId="C1">
+        <Output>
+            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+        </Output>
+        <ErrorModel>
+            <ct:Assign>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <FunctionCall>
+                        <ct:SymbRef symbIdRef="combinedAdditiveProportionalModel1"/>
+                        <FunctionArgument symbId="a">
+                            <ct:SymbRef symbIdRef="a"/>
+                        </FunctionArgument>
+                        <FunctionArgument symbId="b">
+                            <ct:SymbRef symbIdRef="b"/>
+                        </FunctionArgument>
+                        <FunctionArgument symbId="f">
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                        </FunctionArgument>
+                    </FunctionCall>
+                </Equation>
+            </ct:Assign>
+        </ErrorModel>
+        <ResidualError>
+            <ct:SymbRef symbIdRef="eps"/>
+        </ResidualError>
+    </Standard>
+</ObservationModel>

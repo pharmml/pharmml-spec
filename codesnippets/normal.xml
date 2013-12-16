@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Distribution xmlns="http://www.ddmore.eu/Resources/Uncertainty/1.0"/>
+    <!-- Omitted namespace declarations -->
+    <Normal>
+        <Mean>
+            <m:Scalar value="0"/>
+        </Mean>
+        <StdDev>
+            <m:Scalar value="1"/>
+        </StdDev>
+    </Normal>
+</Distribution>

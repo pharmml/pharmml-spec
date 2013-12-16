@@ -1,0 +1,14 @@
+<EstimationStep id="estTask1">
+    <InitialValue block="o1" symbId="a">
+      <!-- Initial values go here -->
+    </InitialValue>
+    <ObjectiveDataSet dataSetRef="dataSet1">
+      <!-- Mapping of objective data to the model -->
+    </ObjectiveDataSet>
+    <ParametersToEstimate>
+      <!-- Specify the parameters to estimate -->
+    </ParametersToEstimate>
+    <EstimationOperation opType="estPop"/>
+    <EstimationOperation opType="estFIM"/>
+    <EstimationOperation opType="estIndiv"/>
+</EstimationStep>

@@ -1,0 +1,26 @@
+<ParameterModel id="p1">
+    <Parameter symbId="pop_ka"/>
+    <Parameter symbId="omega_ka"/>
+    <Parameter symbId="ka" transformation="log">
+        <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+            <Uniop op="ln">
+                <Var symbId="pop_ka"/>
+            </Uniop>
+        </Equation>
+        <RandomEffect levelId="indiv" symbId="eta_ka">
+            <Distribution xmlns="http://www.ddmore.eu/Resources/Uncertainty/1.0">
+                <Normal>
+                    <Mean>
+                        <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+                            <math:Scalar value="0"/>
+                        </Equation>
+                    </Mean>
+                    <StdDev>
+                        <Equation xmlns="http://www.ddmore.eu/Resources/Maths/1.0">
+                            <Var symbId="omega_ka"/>
+                        </Equation>
+                    </StdDev>
+                </Normal>
+            </Distribution>
+        </RandomEffect>
+    </Parameter>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    attributeFormDefault="unqualified"
+    targetNamespace="http://www.pharmml.org/2013/03/TrialStructure"
+    xmlns:st="http://www.pharmml.org/2013/03/TrialStructure"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes">
+    <xs:import namespace="http://www.pharmml.org/2013/03/CommonTypes"
+        xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+        schemaLocation="http://www.pharmml.org/2013/03/CommonTypes"/>
+    <xs:simpleType name="oidType">
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
+    <xs:complexType name="DosingVariableType">
+        <xs:sequence>
+            <xs:choice minOccurs="1">
+                <xs:element name="DoseVar" type="ct:SymbolRefType">
+                    <xs:annotation>
+                        <xs:documentation>Defines the dosing variable. This is the variable that explicitly defines the dose - often D in a PK model.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="TargetVar" type="ct:SymbolRefType">
+                    <xs:annotation>
+                        <xs:documentation>Defines the variable (or compartment) that the dose will be added to at the specified dosing times. This is typically used when the structural model is a system of ODEs and the taregt variable is a derivative.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+            <xs:element minOccurs="0" ref="ct:Assign">
+                <xs:annotation>
+                    <xs:documentation>The amount of dose to be applied at dosing time.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TreatmentType">
+        <xs:annotation>
+            <xs:documentation>Describes a treatment, by which we mean one or more regimens that can be appied to a subject.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="st:ActivityType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Name"/>
+                    <xs:element minOccurs="0" ref="ct:Description"/>
+                    <xs:element maxOccurs="unbounded" ref="st:DosingRegimen">
+                        <xs:annotation>
+                            <xs:documentation>The dosing regimen to apply to a subject.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DosingRegimenType" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="st:ActivityType"> </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BolusType">
+        <xs:complexContent>
+            <xs:extension base="st:DosingRegimenType">
+                <xs:sequence>
+                    <xs:element name="DoseAmount" type="st:DosingVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Dosing information.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice minOccurs="0">
+                        <xs:element name="SteadyState" type="st:SteadyStateType">
+                            <xs:annotation>
+                                <xs:documentation>Steady state bolus dosing.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="DosingTimes" type="ct:TimepointsType">
+                            <xs:annotation>
+                                <xs:documentation>The dosing times.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="InfusionType">
+        <xs:complexContent>
+            <xs:extension base="st:DosingRegimenType">
+                <xs:sequence>
+                    <xs:element name="DoseAmount" type="st:DosingVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Dosing information.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice minOccurs="0">
+                        <xs:element name="SteadyState" type="st:SteadyStateType">
+                            <xs:annotation>
+                                <xs:documentation>Steady state infusion dosing.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="DosingTimes" type="ct:TimepointsType">
+                            <xs:annotation>
+                                <xs:documentation>The dosing times.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element name="Duration" type="ct:ScalarRhs" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>The duration of the infusion.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element abstract="true" name="DosingRegimen" substitutionGroup="st:Activity"
+        type="st:DosingRegimenType"/>
+    <xs:element name="Bolus" substitutionGroup="st:DosingRegimen" type="st:BolusType"/>
+    <xs:element name="Infusion" substitutionGroup="st:DosingRegimen" type="st:InfusionType"/>
+    <xs:complexType name="SteadyStateType">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="EndTime" type="ct:ScalarRhs">
+                <xs:annotation>
+                    <xs:documentation>The start of dosing.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Interval" type="ct:ScalarRhs">
+                <xs:annotation>
+                    <xs:documentation>The dosing period.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WashoutType">
+        <xs:complexContent>
+            <xs:extension base="st:ActivityType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Order" type="ct:IntValueType"/>
+    <xs:complexType name="ActivityType" abstract="true">
+        <xs:attributeGroup ref="st:oidDefGroup"/>
+    </xs:complexType>
+    <xs:complexType name="ActivityRefType">
+        <xs:attributeGroup ref="st:oidRefGroup"/>
+    </xs:complexType>
+    <xs:complexType name="SegmentRefType">
+        <xs:attributeGroup ref="st:oidRefGroup"/>
+    </xs:complexType>
+    <xs:complexType name="ArmRefType">
+        <xs:attributeGroup ref="st:oidRefGroup"/>
+    </xs:complexType>
+    <xs:element abstract="true" name="Activity" type="st:ActivityType"/>
+    <xs:element name="Washout" substitutionGroup="st:Activity" type="st:WashoutType"/>
+    <xs:attributeGroup name="oidDefGroup">
+        <xs:attribute name="oid" type="st:oidType" use="required"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="oidRefGroup">
+        <xs:attribute name="oid" type="st:oidType" use="required"/>
+    </xs:attributeGroup>
+    <xs:complexType abstract="true" name="StudyEventType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="ArmRef" type="st:ArmRefType"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="st:oidDefGroup"/>
+    </xs:complexType>
+    <xs:complexType name="OutputType">
+        <xs:sequence>
+            <xs:element ref="ct:SymbRef">
+                <xs:annotation>
+                    <xs:documentation>The reference to the output variable.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element abstract="true" name="StudyEvent" type="st:StudyEventType"/>
+    <xs:complexType name="ObservationsType">
+        <xs:complexContent>
+            <xs:extension base="st:StudyEventType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:VariabilityReference"/>
+                    <xs:element minOccurs="1" name="Start">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="ct:Real"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="1" name="End">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="ct:Real"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="ObservationsEvent" substitutionGroup="st:StudyEvent"
+        type="st:ObservationsType"/>
+    <xs:element name="TrialDesign">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Structure">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Epoch">
+                                <xs:complexType>
+                                    <xs:sequence minOccurs="1">
+                                        <xs:element minOccurs="0" name="Start">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element ref="ct:Real"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="End">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element ref="ct:Real"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element ref="st:Order"/>
+                                    </xs:sequence>
+                                    <xs:attributeGroup ref="st:oidDefGroup"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element maxOccurs="unbounded" name="Arm">
+                                <xs:complexType>
+                                    <xs:attributeGroup ref="st:oidDefGroup"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element maxOccurs="unbounded" name="Cell">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="EpochRef">
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="st:oidRefGroup"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="ArmRef">
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="st:oidRefGroup"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element maxOccurs="unbounded" name="SegmentRef"
+                                            type="st:SegmentRefType"/>
+                                    </xs:sequence>
+                                    <xs:attributeGroup ref="st:oidDefGroup"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Segment" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="ActivityRef"
+                                            type="st:ActivityRefType"/>
+                                    </xs:sequence>
+                                    <xs:attributeGroup ref="st:oidDefGroup"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element maxOccurs="unbounded" ref="st:Activity"/>
+                            <xs:element maxOccurs="unbounded" ref="st:StudyEvent" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Population">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="Demographic"/>
+                            <xs:element maxOccurs="unbounded" name="Individual">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" ref="ct:VariabilityReference"/>
+                                        <xs:element name="ArmRef" type="st:ArmRefType"/>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="Covariate">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element ref="ct:SymbRef"/>
+                                                  <xs:element ref="ct:Assign"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="Demographic">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element ref="ct:SymbRef"/>
+                                                  <xs:element ref="ct:Assign"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attributeGroup ref="st:oidDefGroup"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="DosingTable">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ActivityRef" type="st:ActivityRefType"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="1" name="Mapping">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="ColumnRef">
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="st:oidRefGroup"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="type" use="required">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:NCName">
+                                                <xs:enumeration value="indiv"/>
+                                                <xs:enumeration value="bolus"/>
+                                                <xs:enumeration value="infusion"/>
+                                                <xs:enumeration value="steadystate"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element ref="ct:DataSet"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

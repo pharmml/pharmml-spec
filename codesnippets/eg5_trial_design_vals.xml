@@ -1,0 +1,24 @@
+<Design xmlns="http://www.ddmore.eu/Resources/TrialDesign/1.0">
+    <Treatment id="t1">
+        <DosingRegimen>
+            <Bolus>
+                <DoseAmount>
+                    <DoseVar block="main" symbId="D"/>
+                    <Amount>
+                        <math:Scalar value="20"/>
+                    </Amount>
+                </DoseAmount>
+                <DosingTimes>
+                    <ct:Sequence begin="0" stepSize="10" repetitions="10"/>
+                </DosingTimes>
+            </Bolus>
+        </DosingRegimen>
+    </Treatment>
+    <!-- Omitted TreatmentEpoch -->
+    <Group id="a1">
+        <TreatmentEpochRef idRef="te1"/>
+        <Individuals symbId="i">
+            <math:Scalar value="20"/>
+        </Individuals>
+    </Group>
+</Design>

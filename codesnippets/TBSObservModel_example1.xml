@@ -1,0 +1,74 @@
+<!-- 2.2.1	Exponential error model - proposed by Mats Karlsson -->
+<ct:FunctionDefinition symbId="extendedLogG" symbolType="real">
+    <ct:FunctionArgument symbId="a" symbolType="real"/>
+    <ct:FunctionArgument symbId="b" symbolType="real"/>
+    <ct:FunctionArgument symbId="f" symbolType="real"/>
+    <ct:Definition>
+        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+            <Binop op="root">
+                <ct:Real>2</ct:Real>
+                <Binop op="plus">
+                    <Binop op="power">
+                        <ct:SymbRef symbIdRef="a"/>
+                        <ct:Real>2</ct:Real>
+                    </Binop>
+                    <Binop op="divide">
+                        <Binop op="power">
+                            <ct:SymbRef symbIdRef="b"/>
+                            <ct:Real>2</ct:Real>
+                        </Binop>
+                        <Binop op="power">
+                            <ct:SymbRef symbIdRef="f"/>
+                            <ct:Real>2</ct:Real>
+                        </Binop>
+                    </Binop>
+                </Binop>
+            </Binop>
+        </Equation>
+    </ct:Definition>
+</ct:FunctionDefinition>
+
+<ObservationModel blkId="om1">
+    <SimpleParameter symbId="a"/>
+    <SimpleParameter symbId="b"/>
+    <RandomVariable symbId="eps">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <prVal>1</prVal>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <Standard symbId="C">
+        <Transformation>log</Transformation>
+        <Output>
+            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+        </Output>
+        <ErrorModel>
+            <ct:Assign>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <FunctionCall>
+                        <ct:SymbRef symbIdRef="extendedLogG"/>
+                        <FunctionArgument symbId="a">
+                            <ct:SymbRef symbIdRef="a"/>
+                        </FunctionArgument>
+                        <FunctionArgument symbId="b">
+                            <ct:SymbRef symbIdRef="b"/>
+                        </FunctionArgument>
+                        <FunctionArgument symbId="f">
+                            <ct:SymbRef symbIdRef="C1model"/>
+                        </FunctionArgument>
+                    </FunctionCall>
+                </Equation>
+            </ct:Assign>
+        </ErrorModel>
+        <ResidualError>
+            <ct:SymbRef symbIdRef="eps"/>
+        </ResidualError>
+    </Standard>
+</ObservationModel>

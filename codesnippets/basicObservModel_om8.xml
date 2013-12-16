@@ -1,0 +1,64 @@
+<!-- type 8 - TWO TYPES OF MEASUREMENTS MODEL -->
+<ObservationModel blkId="om8">
+    <SimpleParameter symbId="sigma1"/>
+    <SimpleParameter symbId="sigma2"/>
+    <SimpleParameter symbId="ASY"/>
+    <RandomVariable symbId="eps1">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal>
+            </mean>
+            <stddev>
+                <var varId="sigma1"/>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <RandomVariable symbId="eps2">
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+        </ct:VariabilityReference>
+        <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+            <mean>
+                <rVal>0</rVal> 
+            </mean>
+            <stddev>
+                <var varId="sigma2"/>
+            </stddev>
+        </NormalDistribution>
+    </RandomVariable>
+    <General symbId="C1">
+        <ct:Assign>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Piecewise>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                            <ct:SymbRef symbIdRef="eps1"/>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="eq">
+                                <ct:SymbRef symbIdRef="ASY"/>
+                                <ct:Int>1</ct:Int>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                            <ct:SymbRef symbIdRef="eps2"/>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="eq">
+                                <ct:SymbRef symbIdRef="ASY"/>
+                                <ct:Int>2</ct:Int>
+                            </LogicBinop>
+                        </Condition>                                        
+                    </Piece>
+                </Piecewise>
+            </Equation>
+        </ct:Assign>
+    </General>
+</ObservationModel> 
