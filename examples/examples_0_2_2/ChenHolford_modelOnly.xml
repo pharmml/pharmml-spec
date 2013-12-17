@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.2.1">
+    
+    <ct:Name>Example 6 - Chen, Holford model - model only</ct:Name>
+    
+    <IndependentVariable symbId="t"/>
+
+    <!-- MODEL DEFINITION -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <!-- VARIABILITY MODEL -->
+        <VariabilityModel blkId="randomErrorModel" type="model">
+            <Level symbId="occasion">
+                <ParentLevel>
+                    <ct:SymbRef symbIdRef="trial"/>
+                </ParentLevel>
+            </Level>
+            <Level symbId="trial">
+                <ParentLevel>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ParentLevel>
+            </Level>
+            <Level symbId="subject"/>
+        </VariabilityModel>
+
+        <VariabilityModel blkId="residualError" type="error">
+            <Level symbId="residual"/>
+        </VariabilityModel>
+        
+        <!-- COVARIATE MODEL -->
+        <CovariateModel blkId="cm1">
+            <SimpleParameter symbId="W"/>
+            <Covariate symbId="W_cov">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Uniop op="log">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="W"/>
+                                    <ct:Real>70</ct:Real>
+                                </Binop>                                
+                            </Uniop>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        
+        <!-- PARAMETER MODEL -->
+        <ParameterModel blkId="pm1">
+            <!-- CL -->
+            <SimpleParameter symbId="omega_Cl"/>
+            <SimpleParameter symbId="pop_CL"/>
+            <RandomVariable symbId="eta_CL">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_CL"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="CL">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_CL"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_CL"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+        </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
+        <StructuralModel blkId="sm1">
+            <!-- Ac -->
+            <ct:DerivativeVariable symbolType="real" symbId="Ac">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">  
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="Rsyn"/>
+                                    <ct:SymbRef symbIdRef="CL"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="V1"/>
+                            </Binop>
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <Binop op="divide">
+                                        <ct:SymbRef symbIdRef="Q"/>
+                                        <ct:SymbRef symbIdRef="V2"/>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="Ap"/>
+                                </Binop>
+                                <Binop op="minus">
+                                    <Binop op="times">
+                                        <Binop op="divide">
+                                            <ct:SymbRef symbIdRef="Q"/>
+                                            <ct:SymbRef symbIdRef="V1"/>
+                                        </Binop>
+                                        <ct:SymbRef symbIdRef="Ac"/>
+                                    </Binop>
+                                    <Binop op="times">
+                                        <Binop op="divide">
+                                            <ct:SymbRef symbIdRef="CL"/>
+                                            <ct:SymbRef symbIdRef="V1"/>
+                                        </Binop>
+                                        <ct:SymbRef symbIdRef="Ac"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:DerivativeVariable>
+            <!-- Ap -->
+            <ct:DerivativeVariable symbId="Ap" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="Q"/>
+                                    <ct:SymbRef symbIdRef="V1"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="Ac"/>
+                            </Binop>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="Q"/>
+                                    <ct:SymbRef symbIdRef="V2"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="Ap"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:DerivativeVariable>
+            <!-- C -->
+            <ct:Variable symbolType="real" symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="Ac"/>
+                            <ct:SymbRef symbIdRef="V1"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+        </StructuralModel>
+        
+        <!-- OBSERVATION MODEL -->
+        <ObservationModel blkId="om1">
+            <SimpleParameter symbId="a"/>
+            <SimpleParameter symbId="b"/>
+            <RandomVariable symbId="eta1">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="residualError"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><prVal>1</prVal></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eta2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="residualError"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><prVal>1</prVal></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="C_obs">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
+                            <Binop op="plus">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="a"/>
+                                    <ct:SymbRef symbIdRef="eta1"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="b"/>
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
+                                        <ct:SymbRef symbIdRef="eta2"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+        
+    </ModelDefinition>
+    
+</PharmML>
+

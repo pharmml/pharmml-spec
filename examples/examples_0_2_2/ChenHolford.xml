@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.2.1">
+    
+    <ct:Name>Example 6 - Chen, Holford model</ct:Name>
+    
+    <IndependentVariable symbId="t"/>
+
+    <!-- MODEL DEFINITION -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <!-- VARIABILITY MODEL -->
+        <VariabilityModel blkId="randomErrorModel" type="model">
+            <Level symbId="occasion">
+                <ParentLevel>
+                    <ct:SymbRef symbIdRef="trial"/>
+                </ParentLevel>
+            </Level>
+            <Level symbId="trial">
+                <ParentLevel>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ParentLevel>
+            </Level>
+            <Level symbId="subject"/>
+        </VariabilityModel>
+
+        <VariabilityModel blkId="residualError" type="error">
+            <Level symbId="residual"/>
+        </VariabilityModel>
+        
+        <!-- COVARIATE MODEL -->
+        <CovariateModel blkId="cm1">
+            <SimpleParameter symbId="W"/>
+            <Covariate symbId="W_cov">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="W"/>
+                                <ct:Real>70</ct:Real>
+                            </Binop>                                
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        
+        <!-- PARAMETER MODEL -->
+        <ParameterModel blkId="pm1">
+            <!-- CL -->
+            <SimpleParameter symbId="omega_Cl"/>
+            <SimpleParameter symbId="pop_CL"/>
+            <RandomVariable symbId="eta_CL">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_CL"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="CL">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_CL"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_CL"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+        </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
+        <StructuralModel blkId="sm1">
+            <!-- Ac -->
+            <ct:DerivativeVariable symbolType="real" symbId="Ac">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">  
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="Rsyn"/>
+                                    <ct:SymbRef symbIdRef="CL"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="V1"/>
+                            </Binop>
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <Binop op="divide">
+                                        <ct:SymbRef symbIdRef="Q"/>
+                                        <ct:SymbRef symbIdRef="V2"/>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="Ap"/>
+                                </Binop>
+                                <Binop op="minus">
+                                    <Binop op="times">
+                                        <Binop op="divide">
+                                            <ct:SymbRef symbIdRef="Q"/>
+                                            <ct:SymbRef symbIdRef="V1"/>
+                                        </Binop>
+                                        <ct:SymbRef symbIdRef="Ac"/>
+                                    </Binop>
+                                    <Binop op="times">
+                                        <Binop op="divide">
+                                            <ct:SymbRef symbIdRef="CL"/>
+                                            <ct:SymbRef symbIdRef="V1"/>
+                                        </Binop>
+                                        <ct:SymbRef symbIdRef="Ac"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:DerivativeVariable>
+            <!-- Ap -->
+            <ct:DerivativeVariable symbId="Ap" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="Q"/>
+                                    <ct:SymbRef symbIdRef="V1"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="Ac"/>
+                            </Binop>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="Q"/>
+                                    <ct:SymbRef symbIdRef="V2"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="Ap"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:DerivativeVariable>
+            <!-- C -->
+            <ct:Variable symbolType="real" symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="Ac"/>
+                            <ct:SymbRef symbIdRef="V1"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+        </StructuralModel>
+        
+        <!-- OBSERVATION MODEL -->
+        <ObservationModel blkId="om1">
+            <SimpleParameter symbId="a"/>
+            <SimpleParameter symbId="b"/>
+            <RandomVariable symbId="eta1">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="residualError"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><prVal>1</prVal></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eta2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="residualError"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><prVal>1</prVal></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="C_obs">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
+                            <Binop op="plus">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="a"/>
+                                    <ct:SymbRef symbIdRef="eta1"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="b"/>
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
+                                        <ct:SymbRef symbIdRef="eta2"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+        
+    </ModelDefinition>
+    
+    
+    <!-- TRIAL DESIGN -->
+    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+
+        <!-- STRUCTURE -->
+        <Structure>
+            <!-- EPOCH -->
+            <!-- 1 epoch - month 0: [0, 90] -->
+            <!-- 2 epoch - month 6: [408, 499] -->
+            <!-- 3 epoch - month 12: [908, 999] -->
+            <!-- 4 epoch - month 24: [1908, 1999] -->
+            <!-- 5 epoch - month 48: [3908, 3999] -->
+            
+            <!-- Epoch 1 -->
+            <Epoch oid="epoch1"> 
+                <Start> 
+                    <ct:Real>0</ct:Real> 
+                </Start>
+                <End>
+                    <ct:Real>90</ct:Real>
+                </End>
+                <Order>1</Order>
+            </Epoch>
+            <!-- Epoch 2 -->
+            <Epoch oid="epoch2"> 
+                <Start> 
+                    <ct:Real>408</ct:Real> 
+                </Start>
+                <End>
+                    <ct:Real>499</ct:Real>
+                </End>
+                <Order>2</Order>
+            </Epoch>
+            <!-- Epoch 3 -->
+            <Epoch oid="epoch3"> 
+                <Start> 
+                    <ct:Real>908</ct:Real> 
+                </Start>
+                <End>
+                    <ct:Real>999</ct:Real>
+                </End>
+                <Order>3</Order>
+            </Epoch>
+            <!-- Epoch 4 -->
+            <Epoch oid="epoch4"> 
+                <Start> 
+                    <ct:Real>1908</ct:Real> 
+                </Start>
+                <End>
+                    <ct:Real>1999</ct:Real>
+                </End>
+                <Order>4</Order>
+            </Epoch>
+            <!-- Epoch 5 -->
+            <Epoch oid="epoch5"> 
+                <Start> 
+                    <ct:Real>3908</ct:Real> 
+                </Start>
+                <End>
+                    <ct:Real>3999</ct:Real>
+                </End>
+                <Order>5</Order>
+            </Epoch>
+            
+            <!-- ARM -->
+            <Arm oid="arm1"/>
+            
+            <!-- CELL -->
+            <!-- Cell 1 -->
+            <Cell oid="cell1">
+                <EpochRef oidRef="epoch1"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="segment1"/>
+            </Cell>
+            <!-- Cell 2 -->
+            <Cell oid="cell2">
+                <EpochRef oidRef="epoch2"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="segment2"/>
+            </Cell>
+            <!-- Cell 3 -->
+            <Cell oid="cell3">
+                <EpochRef oidRef="epoch3"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="segment2"/>
+            </Cell>
+            <!-- Cell 4 -->
+            <Cell oid="cell4">
+                <EpochRef oidRef="epoch4"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="segment2"/>
+            </Cell>
+            <!-- Cell 5 -->
+            <Cell oid="cell5">
+                <EpochRef oidRef="epoch5"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="segment2"/>
+            </Cell>
+            
+            <!-- SEGMENT -->
+            <!-- Segment 1 -->
+            <Segment oid="segment1">
+                <ActivityRef oidRef="INF1"/>
+            </Segment>
+            <!-- Segment 2 -->
+            <Segment oid="segment2">
+                <ActivityRef oidRef="INF1"/>
+                <ActivityRef oidRef="INF2"/>
+            </Segment>
+            
+            <!-- ACTIVITY -->
+            <!-- INF1 -->
+            <Activity oid="INF1">                                       <!-- INF1 = Exogenous infusion -->
+                <ForcingFct>
+                    either
+                    <Maths></Maths>
+                    or
+                    <LookupTable></LookupTable>
+                </ForcingFct>
+                <Infusion>
+                    <DoseAmount inputType="target">
+                        <ct:SymbRef symbIdRef="Ac"/>                    <!-- Amount and infusion starting times defined in IndividualDosing -->
+                    </DoseAmount>
+                    <Duration>
+                        <ct:Assign>
+                            <ct:SymbRef symbIdRef="TTK0"/>
+                        </ct:Assign>
+                    </Duration>
+                </Infusion>
+            </Activity>
+            
+            <!-- INF2 -->                                               <!-- INF2 = Oral administration related infusion -->
+            <Activity oid="INF2">
+                <Infusion>
+                    <DoseAmount inputType="target">
+                        <ct:SymbRef symbIdRef="Ac"/>
+                    </DoseAmount>
+                    <SteadyState>
+                        <EndTime>
+                            <ct:Assign>
+                                <ct:Real>0</ct:Real>                    <!-- ????????????????????? -->
+                            </ct:Assign> 
+                        </EndTime>
+                    </SteadyState>
+                    <Rate>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="times">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>  <!-- ????????????????????? -->
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>  <!-- ????????????????????? -->
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </Rate>
+                </Infusion>
+            </Activity>
+            
+            <!-- ObsEvents = Occasions - here 5 'Trials' - at 0, 6, 12, 24 and 48 months -->
+            <ObservationsEvent oid="Trial">
+                <ArmRef oidRef="arm1"/>
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="trial"/>
+                </ct:VariabilityReference>
+                <ObservationGroup oid="Trial1">
+                    <EpochRef oidRef="epoch1"/>
+                </ObservationGroup>
+                <ObservationGroup oid="Trial2">
+                    <EpochRef oidRef="epoch2"/>
+                </ObservationGroup>
+                <ObservationGroup oid="Trial3">
+                    <EpochRef oidRef="epoch3"/>
+                </ObservationGroup>
+                <ObservationGroup oid="Trial4">
+                    <EpochRef oidRef="epoch4"/>
+                </ObservationGroup>
+                <ObservationGroup oid="Trial5">
+                    <EpochRef oidRef="epoch5"/>
+                </ObservationGroup>
+            </ObservationsEvent>
+            
+            <!-- ObsEvents = Occasions - here 10 'Occasions' - 2 during each Trial -->
+            <!-- OCCASIONS 1-2 -->
+            <ObservationsEvent oid="Occasion"> 
+                <ArmRef oidRef="arm1"/>
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="occasion"/>
+                </ct:VariabilityReference>
+                <ObservationGroup oid="Occasion1">                      <!-- Occasions 1-2 during month 0 - 1st/2nd infusion-->
+                    <Period>
+                        <Start>
+                            <ct:Real>0</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>72</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <ObservationGroup oid="Occasion2">
+                    <Period>
+                        <Start>
+                            <ct:Real>72</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>77</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <!-- MONTH 6 -->
+                <ObservationGroup oid="Occasion3">                      <!-- Occasions 3-4 during month 6 - 1st/2nd infusion-->
+                    <Period>
+                        <Start>
+                            <ct:Real>409</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>481</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <ObservationGroup oid="Occasion4">
+                    <Period>
+                        <Start>
+                            <ct:Real>481</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>486</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <!-- MONTH 12 -->
+                <ObservationGroup oid="Occasion5">                      <!-- Occasions 5-6 during month 12 - 1st/2nd infusion-->
+                    <Period>
+                        <Start>
+                            <ct:Real>909</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>981</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <ObservationGroup oid="Occasion6">
+                    <Period>
+                        <Start>
+                            <ct:Real>981</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>986</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <!-- MONTH 24 -->
+                <ObservationGroup oid="Occasion7">                      <!-- Occasions 7-8 during month 24 - 1st/2nd infusion-->
+                    <Period>
+                        <Start>
+                            <ct:Real>1909</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>1981</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <ObservationGroup oid="Occasion8">
+                    <Period>
+                        <Start>
+                            <ct:Real>1981</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>1986</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <!-- MONTH 48 -->
+                <ObservationGroup oid="Occasion9">                      <!-- Occasions 9-10 during month 48 - 1st/2nd infusion-->
+                    <Period>
+                        <Start>
+                            <ct:Real>3909</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>3981</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+                <ObservationGroup oid="Occasion10">
+                    <Period>
+                        <Start>
+                            <ct:Real>3981</ct:Real>
+                        </Start>
+                        <End>
+                            <ct:Real>3986</ct:Real>
+                        </End>
+                    </Period>
+                </ObservationGroup>
+            </ObservationsEvent>
+        </Structure>
+
+        <!-- POPULATION -->
+        <Population>
+            <IndividualTemplate>
+                <IndividualMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
+                </IndividualMapping>
+                <ArmMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/>
+                </ArmMapping>
+                <IVDependentMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="weight_timedep"/>
+                    <EpochMapping>
+                        <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="EPOCH"/>
+                    </EpochMapping>
+                    <CovariateMapping>
+                        <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"/>
+                        <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                    </CovariateMapping>
+                </IVDependentMapping>
+            </IndividualTemplate>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" valueType="id" columnNum="1"/>
+                    <Column columnId="ARM" valueType="id" columnNum="2"/>
+                    <Table tableId="weight_timedep" columnNum="3">
+                        <Definition>
+                            <Column columnId="EPOCH" valueType="id" columnNum="1"/>
+                            <Column columnId="WEIGHT" valueType="real" columnNum="2"/>
+                        </Definition>
+                    </Table>
+                    <Column columnId="W" valueType="real" columnNum="3"/>
+                </Definition>
+                <Table>
+                    <Row>
+                        <ct:Id>i1</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 1 -->
+                        <Table>
+                            <Row><ct:Id>epoch1</ct:Id><ct:Real>73</ct:Real></Row>
+                            <Row><ct:Id>epoch2</ct:Id><ct:Real>70</ct:Real></Row>
+                            <Row><ct:Id>epoch3</ct:Id><ct:Real>73</ct:Real></Row>
+                            <Row><ct:Id>epoch4</ct:Id><ct:Real>71</ct:Real></Row>
+                            <Row><ct:Id>epoch5</ct:Id><ct:Real>69</ct:Real></Row>
+                        </Table>
+                    </Row>
+                    <Row>
+                        <ct:Id>i2</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 2 -->
+                        <Table>
+                            <Row><ct:Id>epoch1</ct:Id><ct:Real>70</ct:Real></Row>
+                            <Row><ct:Id>epoch2</ct:Id><ct:Real>75</ct:Real></Row>
+                            <Row><ct:Id>epoch3</ct:Id><ct:Real>72</ct:Real></Row>
+                            <Row><ct:Id>epoch4</ct:Id><ct:Real>78</ct:Real></Row>
+                            <Row><ct:Id>epoch5</ct:Id><ct:Real>70</ct:Real></Row>
+                        </Table>
+                    </Row>
+                    <Row><ct:Id>i3</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 3 -->
+                        <Table>
+                            <Row><ct:Id>epoch1</ct:Id><ct:Real>56</ct:Real></Row>
+                            <Row><ct:Id>epoch2</ct:Id><ct:Real>60</ct:Real></Row>
+                            <Row><ct:Id>epoch3</ct:Id><ct:Real>57</ct:Real></Row>
+                            <Row><ct:Id>epoch4</ct:Id><ct:Real>61</ct:Real></Row>
+                            <Row><ct:Id>epoch5</ct:Id><ct:Real>59</ct:Real></Row>
+                        </Table>
+                    </Row>
+                    <!-- SKIP -->
+                    <Row><ct:Id>i20</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 20 -->
+                        <Table>
+                            <Row><ct:Id>epoch1</ct:Id><ct:Real>85</ct:Real></Row>
+                            <Row><ct:Id>epoch2</ct:Id><ct:Real>89</ct:Real></Row>
+                            <Row><ct:Id>epoch3</ct:Id><ct:Real>82</ct:Real></Row>
+                            <Row><ct:Id>epoch4</ct:Id><ct:Real>86</ct:Real></Row>
+                            <Row><ct:Id>epoch5</ct:Id><ct:Real>84</ct:Real></Row>
+                        </Table>
+                    </Row>                    
+                </Table>
+            </DataSet>
+        </Population>
+        
+        <!-- IndividualDosing INF1 -->
+        <IndividualDosing>
+            <ActivityRef oidRef="INF1"/>
+            <IndividualRef columnIdRef="ID"/>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" valueType="id" columnNum="1"></Column>
+                    <Column columnId="TIME" valueType="real" columnNum="2"></Column>
+                    <Column columnId="AMT" valueType="real" columnNum="3"></Column>
+                </Definition>
+                <Table>
+                    <!-- SUBJECT 1 -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>0</ct:Real><ct:Real>740.37</ct:Real></Row>              <!-- month 0, 1st infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>72</ct:Real><ct:Real>740.37</ct:Real></Row>             <!-- month 0, 2nd infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>409</ct:Real><ct:Real>709.94</ct:Real></Row>            <!-- month 6, 1st infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>481</ct:Real><ct:Real>709.94</ct:Real></Row>            <!-- month 6, 2nd infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>909</ct:Real><ct:Real>740.37</ct:Real></Row>           <!-- month 12, 1st infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>981</ct:Real><ct:Real>740.37</ct:Real></Row>           <!-- month 12, 2nd infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>1909</ct:Real><ct:Real>720.28</ct:Real></Row>           <!-- month 24, 1st infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>1981</ct:Real><ct:Real>720.28</ct:Real></Row>           <!-- month 24, 2nd infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>3909</ct:Real><ct:Real>699.8</ct:Real></Row>          <!-- month 48, 1st infusion -->
+                    <Row><ct:Id>id1</ct:Id><ct:Real>3981</ct:Real><ct:Real>699.8</ct:Real></Row>          <!-- month 48, 2nd infusion -->
+                    <!-- SKIP -->
+                    <!-- ... -->
+                    <!-- ... -->
+                </Table>
+            </DataSet>
+        </IndividualDosing>
+
+        <!-- IndividualDosing INF2 -->
+        <IndividualDosing>
+            <ActivityRef oidRef="INF2"/>
+            <IndividualRef columnIdRef="ID"/>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" valueType="real" columnNum="1"></Column>
+                    <Column columnId="INFSTART" valueType="real" columnNum="2"></Column>
+                    <Column columnId="INFEND" valueType="real" columnNum="3"></Column>
+                </Definition>
+                <Table>
+                    <!-- SUBJECT 1 -->
+                    <Row><ct:Id>i1</ct:Id><ct:Real>2</ct:Real><ct:Real>72</ct:Real></Row>
+                    <Row><ct:Id>i1</ct:Id><ct:Real>74</ct:Real><ct:Real>4320</ct:Real></Row>
+                    <Row><ct:Id>i1</ct:Id><ct:Real>4322</ct:Real><ct:Real>4392</ct:Real></Row>
+                    <!-- ... -->
+                    <Row><ct:Id>i1</ct:Id><ct:Real>17282</ct:Real><ct:Real>17352</ct:Real></Row>
+                    <!-- ... -->
+                    <!-- SUBJECT 20 -->
+                    <Row><ct:Id>i20</ct:Id><ct:Real>2</ct:Real><ct:Real>72</ct:Real></Row>
+                    <Row><ct:Id>i20</ct:Id><ct:Real>74</ct:Real><ct:Real>4320</ct:Real></Row>
+                    <Row><ct:Id>i20</ct:Id><ct:Real>4322</ct:Real><ct:Real>4392</ct:Real></Row>
+                    <!-- ... -->
+                    <Row><ct:Id>i20</ct:Id><ct:Real>17282</ct:Real><ct:Real>17352</ct:Real></Row>
+                    <!-- ... -->
+                </Table>
+            </DataSet>
+        </IndividualDosing>
+        
+    </TrialDesign>
+    
+</PharmML>
+
