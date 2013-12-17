@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2013 European Molecular Biology Laboratory, Heidelberg,
+Germany and Novo Nordisk A/S, Bagsvaerd, Denmark.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except in compliance with the License.  You may
+obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+     
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing
+permissions and limitations under the License.
+-->    
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.pharmml.org/2013/08/Dataset"
+    xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    targetNamespace="http://www.pharmml.org/2013/08/Dataset" elementFormDefault="qualified">
+    <xs:import namespace="http://www.pharmml.org/2013/03/CommonTypes"
+        schemaLocation="http://www.pharmml.org/2013/03/CommonTypes"/>
+    <xs:annotation>
+        <xs:documentation>The schema defines the dataset and it related structures used in a PharmML document.</xs:documentation>
+    </xs:annotation>
+
+    <!--
+        Simple Types
+        -->
+    <xs:simpleType name="ColumnValueTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying the permitted column types. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="ct:SymbolTypeType">
+            <xs:annotation>
+                <xs:documentation>
+                    The permitted column types are the same as the permitted symbol types.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!--
+        Complex Types
+        -->
+    <xs:complexType name="ColumnRefType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specified a reference to a column in a dataset.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to a column in a nested table. This assumes that the columnIdRef
+                                in this type refers to a netsted table. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="columnIdRef" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Refers to a column in a dataset. This can be a column or a nested table.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DataSetTableType">
+        <xs:annotation>
+            <xs:documentation>
+                The type specifies the content of a dataset or nested table.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Row" type="ds:DatasetRowType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        A row in the dataset.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DataSetType">
+        <xs:annotation>
+            <xs:documentation>
+                The type specifying the dataset. The dataset is decribed in more detail in the Language Overview section of the specification.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="Definition"/>
+                    <xs:element ref="ds:Table">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Nested table definition.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ColumnsDefinitionType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifies all the columns in a dataset or nested table.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element maxOccurs="1" name="Column" type="ds:ColumnDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a column in the dataset.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Table" type="ds:DataSetTableDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a nested table.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DataSetTableDefnType">
+        <xs:annotation>
+            <xs:documentation>
+                Type that specifies the definition of a nested table. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ds:CommonColumnDefnType">
+                <xs:sequence maxOccurs="1">
+                    <xs:element maxOccurs="1" ref="Definition"/>
+                </xs:sequence>
+                <xs:attribute name="tableId" type="ct:oidType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            The identifier of the nested table column.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CommonColumnDefnType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="columnNum" type="xs:positiveInteger" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ColumnDefnType">
+        <xs:complexContent>
+            <xs:extension base="CommonColumnDefnType">
+                <xs:attribute name="columnId" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The name to give the column.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+        <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
+    </xs:complexType>
+    <xs:complexType name="DatasetRowType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a row of values in the dataset. The row contains a cell which is
+                a scalar value, null or a nested table.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice maxOccurs="unbounded">
+            <xs:element maxOccurs="1" ref="ct:Scalar">
+                <xs:annotation>
+                    <xs:documentation>A cell with a scalar value.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element ref="ds:Table">
+                <xs:annotation>
+                    <xs:documentation>
+                        A cell that is a nested table.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <!--xs:complexType name="NullCellType">
+        <xs:annotation>
+            <xs:documentation>
+                A type that specifes a NULL value.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:complexType-->
+
+
+
+    <!--
+        Elements
+        -->
+    <xs:element name="ColumnRef" type="ds:ColumnRefType">
+        <xs:annotation>
+            <xs:documentation>
+                Element to a column in a dataset or nested table. 
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Table" type="ds:DataSetTableType">
+        <xs:annotation>
+            <xs:documentation>
+                Element specifies the content of the dataset or nested table.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Definition" type="ColumnsDefinitionType">
+        <xs:annotation>
+            <xs:documentation>
+                Defines the columns and nested tables in a dataset or nested table.                
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="DataSet" type="ds:DataSetType">
+        <xs:annotation>
+            <xs:documentation>
+                This element specifies a dataset in PharmML. Its children define its structure and the
+                data associate with it. More information about the dataset can be found in the Language
+                Overview chapter in the PharmML specification.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>
