@@ -1,7 +1,0 @@
-<Correlation levelId="indiv">
-    <Param1VareRef symbId="V"/>
-    <Param2VareRef symbId="Cl"/>
-    <CorrelationCoefficient>
-        <math:Var symbId="rho_V_Cl"/>
-    </CorrelationCoefficient>
-</Correlation>

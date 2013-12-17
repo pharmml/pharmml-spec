@@ -1,9 +1,0 @@
-<TreatmentEpoch id="te1">
-    <TreatmentRef idRef="t1"/>
-</TreatmentEpoch>
-<Group id="a1">
-    <TreatmentEpochRef idRef="te1"/>
-    <Individuals symbId="i">
-        <math:Scalar value="20"/>
-    </Individuals>
-</Group>

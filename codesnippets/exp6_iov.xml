@@ -1,8 +1,0 @@
-<VariabilityModel blkId="model" type="model">
-    <Level symbId="indiv"/>
-    <Level symbId="iov1">
-        <ParentLevel>
-            <ct:SymbRef symbIdRef="indiv"/>
-        </ParentLevel>
-    </Level>
-</VariabilityModel>
