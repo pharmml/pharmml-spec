@@ -34,8 +34,7 @@
         
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
-            <SimpleParameter symbId="W"/>
-            <Covariate symbId="W_cov">
+            <Covariate symbId="W">
                 <Continuous>
                     <Transformation>
                         <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
@@ -48,17 +47,26 @@
                 </Continuous>
             </Covariate>
         </CovariateModel>
+        <CovariateModel blkId="cm2">
+            <Covariate symbId="SEX">
+                <Categorical>
+                    <Category catId="F"/>
+                </Categorical>
+            </Covariate>
+        </CovariateModel>
         
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
             <!-- CL -->
             <SimpleParameter symbId="omega_Cl"/>
             <SimpleParameter symbId="pop_CL"/>
+            <SimpleParameter symbId="beta_CL"/>
             <RandomVariable symbId="eta_CL">
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="subject"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" 
+                    definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal>
                     </mean>
@@ -68,19 +76,29 @@
                 </NormalDistribution>
             </RandomVariable>
             <IndividualParameter symbId="CL">
-                <GaussianModel>
-                    <Transformation>log</Transformation>
-                    <LinearCovariate>
-                        <PopulationParameter>
-                            <ct:Assign>
-                                <ct:SymbRef symbIdRef="pop_CL"/>
-                            </ct:Assign>
-                        </PopulationParameter>
-                    </LinearCovariate>
-                    <RandomEffects>
-                        <ct:SymbRef symbIdRef="eta_CL"/>
-                    </RandomEffects>
-                </GaussianModel>
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="pop_CL"/>
+                            <Binop op="times">
+                                <Binop op="power">
+                                    <ct:SymbRef symbIdRef="W"/>
+                                    <ct:SymbRef symbIdRef="beta_CL_W"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Uniop op="exp">
+                                        <Binop op="times">
+                                            <ct:SymbRef symbIdRef="beta_CL_SEX"/>
+                                            <ct:SymbRef blkIdRef="cm2" symbIdRef="SEX"/>
+                                        </Binop>
+                                    </Uniop>
+                                    <Binop op="times"></Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        
+                    </Equation>                   
+                </ct:Assign>
             </IndividualParameter>
         </ParameterModel>
         
@@ -325,12 +343,6 @@
             <!-- ACTIVITY -->
             <!-- INF1 -->
             <Activity oid="INF1">                                       <!-- INF1 = Exogenous infusion -->
-                <ForcingFct>
-                    either
-                    <Maths></Maths>
-                    or
-                    <LookupTable></LookupTable>
-                </ForcingFct>
                 <Infusion>
                     <DoseAmount inputType="target">
                         <ct:SymbRef symbIdRef="Ac"/>                    <!-- Amount and infusion starting times defined in IndividualDosing -->
@@ -352,7 +364,7 @@
                     <SteadyState>
                         <EndTime>
                             <ct:Assign>
-                                <ct:Real>0</ct:Real>                    <!-- ????????????????????? -->
+                                <ct:Real>0</ct:Real> 
                             </ct:Assign> 
                         </EndTime>
                     </SteadyState>
@@ -360,8 +372,8 @@
                         <ct:Assign>
                             <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                                 <Binop op="times">
-                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>  <!-- ????????????????????? -->
-                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>  <!-- ????????????????????? -->
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/> 
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/> 
                                 </Binop>
                             </Equation>
                         </ct:Assign>
@@ -399,6 +411,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="occasion"/>
                 </ct:VariabilityReference>
+                <!-- MONTH 0 -->
                 <ObservationGroup oid="Occasion1">                      <!-- Occasions 1-2 during month 0 - 1st/2nd infusion-->
                     <Period>
                         <Start>
