@@ -34,6 +34,7 @@
         
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
+            <!-- WEIGHT -->
             <Covariate symbId="W">
                 <Continuous>
                     <Transformation>
@@ -47,10 +48,34 @@
                 </Continuous>
             </Covariate>
         </CovariateModel>
+        <!-- SEX -->
         <CovariateModel blkId="cm2">
             <Covariate symbId="SEX">
                 <Categorical>
                     <Category catId="F"/>
+                </Categorical>
+            </Covariate>
+        </CovariateModel>
+        <!-- AGE -->
+        <CovariateModel blkId="cm3">
+            <Covariate symbId="AGE">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="minus">
+                                <ct:SymbRef symbIdRef="AGE"/>
+                                <ct:Real>60</ct:Real>
+                            </Binop>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        <!-- DD -->
+        <CovariateModel blkId="cm4">
+            <Covariate symbId="DD">
+                <Categorical>
+                    <Category catId="YES"/>
                 </Categorical>
             </Covariate>
         </CovariateModel>
@@ -60,21 +85,41 @@
             <!-- CL -->
             <SimpleParameter symbId="omega_Cl"/>
             <SimpleParameter symbId="pop_CL"/>
-            <SimpleParameter symbId="beta_CL"/>
-            <RandomVariable symbId="eta_CL">
+            <SimpleParameter symbId="beta_CL_W"/>
+            <SimpleParameter symbId="beta_CL_SEX"/>
+            <SimpleParameter symbId="beta_CL_AGE"/>
+            <SimpleParameter symbId="beta_CL_DD"/>
+            <!-- eta_CL_indiv -->
+            <RandomVariable symbId="eta_CL_indiv">
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="subject"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" 
-                    definition="http://www.uncertml.org/distributions/normal">
-                    <mean>
-                        <rVal>0</rVal>
-                    </mean>
-                    <stddev>
-                        <var varId="omega_CL"/>
-                    </stddev>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_CL"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
+            <!-- eta_CL_trial -->
+            <RandomVariable symbId="eta_CL_trial">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="trial"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_CL"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- eta_CL_occasion -->
+            <RandomVariable symbId="eta_CL_occasion">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="occasion"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_CL"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- CL -->
             <IndividualParameter symbId="CL">
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
@@ -92,16 +137,43 @@
                                             <ct:SymbRef blkIdRef="cm2" symbIdRef="SEX"/>
                                         </Binop>
                                     </Uniop>
-                                    <Binop op="times"></Binop>
+                                    <Binop op="times">
+                                        <Uniop op="exp">
+                                            <Binop op="times">
+                                                <ct:SymbRef symbIdRef="beta_CL_AGE"/>
+                                                <ct:SymbRef blkIdRef="cm3" symbIdRef="AGE"/>
+                                            </Binop>
+                                        </Uniop>
+                                        <Binop op="times">
+                                            <Uniop op="exp">
+                                                <Binop op="times">
+                                                    <ct:SymbRef symbIdRef="beta_CL_DD"/>
+                                                    <ct:SymbRef blkIdRef="cm4" symbIdRef="DD"/>
+                                                </Binop>                                                
+                                            </Uniop>
+                                            <Binop op="times">
+                                                <Uniop op="exp">
+                                                    <ct:SymbRef symbIdRef="eta_indiv"/>
+                                                </Uniop>
+                                                <Binop op="times">
+                                                    <Uniop op="exp">
+                                                        <ct:SymbRef symbIdRef="eta_trial"/>
+                                                    </Uniop>
+                                                    <Uniop op="exp">
+                                                        <ct:SymbRef symbIdRef="eta_occasion"/>
+                                                    </Uniop>
+                                                </Binop>
+                                            </Binop>
+                                        </Binop>
+                                    </Binop>
                                 </Binop>
                             </Binop>
                         </Binop>
-                        
                     </Equation>                   
                 </ct:Assign>
             </IndividualParameter>
         </ParameterModel>
-        
+                
         <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="sm1">
             <!-- Ac -->
@@ -634,6 +706,12 @@
                     <Column columnId="INFSTART" valueType="real" columnNum="2"></Column>
                     <Column columnId="INFEND" valueType="real" columnNum="3"></Column>
                 </Definition>
+                <ImportData>
+                    <name>the_file_name</name>
+                    <url>http://www.your.domain.name/files</url>
+                    <format>CSV</format>
+                    <delimiter>COMMA</delimiter>
+                </ImportData>
                 <Table>
                     <!-- SUBJECT 1 -->
                     <Row><ct:Id>i1</ct:Id><ct:Real>2</ct:Real><ct:Real>72</ct:Real></Row>

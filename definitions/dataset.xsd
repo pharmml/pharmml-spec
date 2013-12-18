@@ -74,6 +74,94 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <xs:element name="ImportData" type="ImportDataType">
+        <xs:annotation>
+            <xs:documentation>
+                Element specifies the details for the import data file.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <!-- new type for external data -->
+    <xs:complexType name="ImportDataType">
+        <xs:annotation>
+            <xs:documentation>This is a new data type</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="name">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="url" type="xs:string"/>
+                    <xs:element name="format" type="xs:string" fixed="CSV">
+                        <xs:annotation>
+                            <xs:documentation>
+                                only CSV format is allowed
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="delimiter">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="TAB">
+                                    <xs:annotation>
+                                        <xs:documentation>Tab '\t' as delimiter</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="SPACE">
+                                    <xs:annotation>
+                                        <xs:documentation>Space ' ' as delimiter</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="COMMA">
+                                    <xs:annotation>
+                                        <xs:documentation>Comma ',' as delimiter</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+<!--    <xs:complexType name="ImportDataType" >
+        <xs:attribute name="id" type="ct:IdType" use="required">
+            <xs:annotation>
+                <xs:documentation>
+                    This is new data type
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:sequence>
+            <xs:element name="name">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[a-zA-Z0-9]"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="url" type="xs:string"/>
+            <xs:element name="format" type="xs:string" fixed="CSV"/>
+            <xs:element name="delimiter">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="TAB"/>
+                        <xs:enumeration value="SPACE"/>
+                        <xs:enumeration value="COMMA"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+-->    
     <xs:complexType name="DataSetTableType">
         <xs:annotation>
             <xs:documentation>
@@ -90,6 +178,8 @@ permissions and limitations under the License.
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+    
+    <!-- extended by ImportDataType -->
     <xs:complexType name="DataSetType">
         <xs:annotation>
             <xs:documentation>
@@ -100,17 +190,27 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element ref="Definition"/>
-                    <xs:element ref="ds:Table">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Nested table definition.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:choice>
+                        <xs:element ref="ds:Table">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Nested table definition.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ds:ImportData" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Import datafile
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
     <xs:complexType name="ColumnsDefinitionType">
         <xs:annotation>
             <xs:documentation>
