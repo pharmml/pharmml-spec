@@ -86,27 +86,43 @@ permissions and limitations under the License.
     <!-- new type for external data -->
     <xs:complexType name="ImportDataType">
         <xs:annotation>
-            <xs:documentation>This is a new data type</xs:documentation>
+            <xs:documentation>This is a data type for external data files.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="name">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The name of the import data file.
+                            </xs:documentation>
+                        </xs:annotation>                        
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-                    <xs:element name="url" type="xs:string"/>
+                    <xs:element name="url" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The URL of the import data file.
+                            </xs:documentation>
+                        </xs:annotation>                        
+                    </xs:element>
                     <xs:element name="format" type="xs:string" fixed="CSV">
                         <xs:annotation>
                             <xs:documentation>
-                                only CSV format is allowed
+                                Only CSV format is allowed with Tab, Comma or Space as delimiters.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="delimiter">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Only Tab, Comma or Space as delimiters are allowed.
+                            </xs:documentation>
+                        </xs:annotation>
                         <xs:simpleType>
                             <xs:restriction base="xs:token">
                                 <xs:enumeration value="TAB">
