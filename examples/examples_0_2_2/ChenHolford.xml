@@ -82,85 +82,87 @@
         
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
-            <!-- CL -->
-            <SimpleParameter symbId="omega_Cl"/>
-            <SimpleParameter symbId="pop_CL"/>
-            <SimpleParameter symbId="beta_CL_W"/>
-            <SimpleParameter symbId="beta_CL_SEX"/>
-            <SimpleParameter symbId="beta_CL_AGE"/>
-            <SimpleParameter symbId="beta_CL_DD"/>
-            <!-- eta_CL_indiv -->
-            <RandomVariable symbId="eta_CL_indiv">
+            <!-- V -->
+            <SimpleParameter symbId="omega_V"/>
+            <SimpleParameter symbId="kappa1_V"/>
+            <SimpleParameter symbId="kappa2_V"/>
+            <SimpleParameter symbId="pop_V"/>
+            <SimpleParameter symbId="beta_V_W"/>
+            <SimpleParameter symbId="beta_V_SEX"/>
+            <SimpleParameter symbId="beta_V_AGE"/>
+            <SimpleParameter symbId="beta_V_DD"/>
+            <!-- eta_V_indiv -->
+            <RandomVariable symbId="eta_V_indiv">
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
-                    <stddev><var varId="omega_CL"/></stddev>
+                    <stddev><var varId="omega_V"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <!-- eta_CL_trial -->
-            <RandomVariable symbId="eta_CL_trial">
+            <!-- eta_V_trial -->
+            <RandomVariable symbId="eta_V_trial">
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
-                    <stddev><var varId="omega_CL"/></stddev>
+                    <stddev><var varId="kappa1_V"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <!-- eta_CL_occasion -->
-            <RandomVariable symbId="eta_CL_occasion">
+            <!-- eta_V_occasion -->
+            <RandomVariable symbId="eta_V_occasion">
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
-                    <stddev><var varId="omega_CL"/></stddev>
+                    <stddev><var varId="kappa2_V"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <!-- CL -->
-            <IndividualParameter symbId="CL">
+            <!-- V -->
+            <IndividualParameter symbId="V">
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="times">
-                            <ct:SymbRef symbIdRef="pop_CL"/>
+                            <ct:SymbRef symbIdRef="pop_V"/>
                             <Binop op="times">
                                 <Binop op="power">
                                     <ct:SymbRef symbIdRef="W"/>
-                                    <ct:SymbRef symbIdRef="beta_CL_W"/>
+                                    <ct:SymbRef symbIdRef="beta_V_W"/>
                                 </Binop>
                                 <Binop op="times">
                                     <Uniop op="exp">
                                         <Binop op="times">
-                                            <ct:SymbRef symbIdRef="beta_CL_SEX"/>
+                                            <ct:SymbRef symbIdRef="beta_V_SEX"/>
                                             <ct:SymbRef blkIdRef="cm2" symbIdRef="SEX"/>
                                         </Binop>
                                     </Uniop>
                                     <Binop op="times">
                                         <Uniop op="exp">
                                             <Binop op="times">
-                                                <ct:SymbRef symbIdRef="beta_CL_AGE"/>
+                                                <ct:SymbRef symbIdRef="beta_V_AGE"/>
                                                 <ct:SymbRef blkIdRef="cm3" symbIdRef="AGE"/>
                                             </Binop>
                                         </Uniop>
                                         <Binop op="times">
                                             <Uniop op="exp">
                                                 <Binop op="times">
-                                                    <ct:SymbRef symbIdRef="beta_CL_DD"/>
+                                                    <ct:SymbRef symbIdRef="beta_V_DD"/>
                                                     <ct:SymbRef blkIdRef="cm4" symbIdRef="DD"/>
                                                 </Binop>                                                
                                             </Uniop>
                                             <Binop op="times">
                                                 <Uniop op="exp">
-                                                    <ct:SymbRef symbIdRef="eta_indiv"/>
+                                                    <ct:SymbRef symbIdRef="eta_V_indiv"/>
                                                 </Uniop>
                                                 <Binop op="times">
                                                     <Uniop op="exp">
-                                                        <ct:SymbRef symbIdRef="eta_trial"/>
+                                                        <ct:SymbRef symbIdRef="eta_V_trial"/>
                                                     </Uniop>
                                                     <Uniop op="exp">
-                                                        <ct:SymbRef symbIdRef="eta_occasion"/>
+                                                        <ct:SymbRef symbIdRef="eta_V_occasion"/>
                                                     </Uniop>
                                                 </Binop>
                                             </Binop>
@@ -706,12 +708,12 @@
                     <Column columnId="INFSTART" valueType="real" columnNum="2"></Column>
                     <Column columnId="INFEND" valueType="real" columnNum="3"></Column>
                 </Definition>
-                <ImportData>
+<!--                <ImportData oid="dataFile1">
                     <name>the_file_name</name>
                     <url>http://www.your.domain.name/files</url>
                     <format>CSV</format>
                     <delimiter>COMMA</delimiter>
-                </ImportData>
+                </ImportData>--> 
                 <Table>
                     <!-- SUBJECT 1 -->
                     <Row><ct:Id>i1</ct:Id><ct:Real>2</ct:Real><ct:Real>72</ct:Real></Row>
@@ -730,8 +732,95 @@
                 </Table>
             </DataSet>
         </IndividualDosing>
-        
     </TrialDesign>
     
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        <EstimationStep oid="estStep">
+            <ObjectiveDataSet>
+                <IndividualMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
+                </IndividualMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </VariableMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
+                </VariableMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" valueType="real" columnNum="3"/>
+                    </Definition>
+                    <Table>
+                        <!-- SUBJECT 1 -->
+                        <Row><ct:Id>id1</ct:Id><ct:Real>0</ct:Real><ct:Real>140</ct:Real></Row>
+                        <Row><ct:Id>id1</ct:Id><ct:Real>10</ct:Real><ct:Real>140</ct:Real></Row>
+                        <Row><ct:Id>id1</ct:Id><ct:Real>20</ct:Real><ct:Real>140</ct:Real></Row>
+                        <Row><ct:Id>id1</ct:Id><ct:Real>30</ct:Real><ct:Real>140</ct:Real></Row>
+                        <!-- ... -->
+                    </Table>
+                </DataSet>
+            </ObjectiveDataSet>
+            <ParametersToEstimate>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_V"/>
+                    <InitialEstimate>
+                        <ct:Real>5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_V"/>
+                    <InitialEstimate>
+                        <ct:Real>5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="kappa1_V"/>
+                    <InitialEstimate>
+                        <ct:Real>5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="kappa2_V"/>
+                    <InitialEstimate>
+                        <ct:Real>5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V_W"/>
+                    <InitialEstimate>
+                        <ct:Real>.5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V_SEX"/>
+                    <InitialEstimate>
+                        <ct:Real>.5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V_AGE"/>
+                    <InitialEstimate>
+                        <ct:Real>.5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V_DD"/>
+                    <InitialEstimate>
+                        <ct:Real>.5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+            </ParametersToEstimate>
+            <Operation order="1" opType="estPop"/>
+        </EstimationStep>
+        <StepDependencies>
+            <Step>
+                <ct:OidRef oidRef="estStep"/>
+            </Step>
+        </StepDependencies>
+    </ModellingSteps>
 </PharmML>
 

@@ -143,41 +143,12 @@ permissions and limitations under the License.
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-                </xs:sequence>                
+                </xs:sequence>         
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-<!--    <xs:complexType name="ImportDataType" >
-        <xs:attribute name="id" type="ct:IdType" use="required">
-            <xs:annotation>
-                <xs:documentation>
-                    This is new data type
-                </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-        <xs:sequence>
-            <xs:element name="name">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[a-zA-Z0-9]"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="url" type="xs:string"/>
-            <xs:element name="format" type="xs:string" fixed="CSV"/>
-            <xs:element name="delimiter">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="TAB"/>
-                        <xs:enumeration value="SPACE"/>
-                        <xs:enumeration value="COMMA"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
--->    
     <xs:complexType name="DataSetTableType">
         <xs:annotation>
             <xs:documentation>
@@ -195,7 +166,7 @@ permissions and limitations under the License.
         </xs:sequence>
     </xs:complexType>
     
-    <!-- extended by ImportDataType -->
+    <!-- extended by 'ImportDataType' element -->
     <xs:complexType name="DataSetType">
         <xs:annotation>
             <xs:documentation>
@@ -207,14 +178,14 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="Definition"/>
                     <xs:choice>
-                        <xs:element ref="ds:Table">
+                        <xs:element ref="ds:Table" maxOccurs="2">
                             <xs:annotation>
                                 <xs:documentation>
                                     Nested table definition.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element ref="ds:ImportData" maxOccurs="1">
+                        <xs:element ref="ds:ImportData" maxOccurs="2">
                             <xs:annotation>
                                 <xs:documentation>
                                     Import datafile
