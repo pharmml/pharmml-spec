@@ -9,23 +9,23 @@
     <ct:Name>Example 6 - Chen, Holford model - model only</ct:Name>
     
     <IndependentVariable symbId="t"/>
-
-    <!-- MODEL DEFINITION -->
+    
+  <!-- MODEL DEFINITION -->
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
         <VariabilityModel blkId="randomErrorModel" type="model">
-            <Level symbId="subject"/>
-            <Level symbId="trial">
-                <ParentLevel>
-                    <ct:SymbRef symbIdRef="subject"/>
-                </ParentLevel>
-            </Level>
             <Level symbId="occasion">
                 <ParentLevel>
                     <ct:SymbRef symbIdRef="trial"/>
                 </ParentLevel>
             </Level>
+            <Level symbId="trial">
+                <ParentLevel>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ParentLevel>
+            </Level>
+            <Level symbId="subject"/>
         </VariabilityModel>
 
         <VariabilityModel blkId="residualError" type="error">
@@ -33,8 +33,8 @@
         </VariabilityModel>
         
         <!-- COVARIATE MODEL -->
+        <!-- WEIGHT -->
         <CovariateModel blkId="cm1">
-            <!-- WEIGHT -->
             <Covariate symbId="W">
                 <Continuous>
                     <Transformation>
@@ -82,13 +82,245 @@
         
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
+            <!-- TTK0 -->
+            <SimpleParameter symbId="omega_TTK0"/>
+            <SimpleParameter symbId="pop_TTK0"/>
+            <RandomVariable symbId="eta_TTK0">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_TTK0"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="TTK0">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_TTK0"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_TTK0"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- Rsyn -->
+            <SimpleParameter symbId="omega_Rsyn"/>
+            <SimpleParameter symbId="pop_Rsyn"/>
+            <RandomVariable symbId="eta_Rsyn">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_Rsyn"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="Rsyn">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_Rsyn"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_Rsyn"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- Css -->
+            <SimpleParameter symbId="omega_Css"/>
+            <SimpleParameter symbId="pop_Css"/>
+            <RandomVariable symbId="eta_Css">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_Css"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="Css">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_Css"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_Css"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <!-- V1 -->
+            <SimpleParameter symbId="omega_V1"/>
+            <SimpleParameter symbId="kappa1_V1"/>
+            <SimpleParameter symbId="kappa2_V1"/>
+            <SimpleParameter symbId="pop_V1"/>
+            <SimpleParameter symbId="beta_V1_W"/>
+            <SimpleParameter symbId="beta_V1_SEX"/>
+            <SimpleParameter symbId="beta_V1_AGE"/>
+            <SimpleParameter symbId="beta_V1_DD"/>
+            <!-- eta_V1_indiv -->
+            <RandomVariable symbId="eta_V1_indiv">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_V1"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- eta_V1_trial -->
+            <RandomVariable symbId="eta_V1_trial">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="trial"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="kappa1_V1"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- eta_V1_occasion -->
+            <RandomVariable symbId="eta_V1_occasion">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="occasion"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="kappa2_V1"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- V1 -->
+            <IndividualParameter symbId="V1">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="pop_V1"/>
+                            <Binop op="times">
+                                <Binop op="power">
+                                    <ct:SymbRef symbIdRef="W"/>
+                                    <ct:SymbRef symbIdRef="beta_V1_W"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Uniop op="exp">
+                                        <Binop op="times">
+                                            <ct:SymbRef symbIdRef="beta_V1_SEX"/>
+                                            <ct:SymbRef blkIdRef="cm2" symbIdRef="SEX"/>
+                                        </Binop>
+                                    </Uniop>
+                                    <Binop op="times">
+                                        <Uniop op="exp">
+                                            <Binop op="times">
+                                                <ct:SymbRef symbIdRef="beta_V1_AGE"/>
+                                                <ct:SymbRef blkIdRef="cm3" symbIdRef="AGE"/>
+                                            </Binop>
+                                        </Uniop>
+                                        <Binop op="times">
+                                            <Uniop op="exp">
+                                                <Binop op="times">
+                                                    <ct:SymbRef symbIdRef="beta_V1_DD"/>
+                                                    <ct:SymbRef blkIdRef="cm4" symbIdRef="DD"/>
+                                                </Binop>                                                
+                                            </Uniop>
+                                            <Binop op="times">
+                                                <Uniop op="exp">
+                                                    <ct:SymbRef symbIdRef="eta_V1_indiv"/>
+                                                </Uniop>
+                                                <Binop op="times">
+                                                    <Uniop op="exp">
+                                                        <ct:SymbRef symbIdRef="eta_V1_trial"/>
+                                                    </Uniop>
+                                                    <Uniop op="exp">
+                                                        <ct:SymbRef symbIdRef="eta_V1_occasion"/>
+                                                    </Uniop>
+                                                </Binop>
+                                            </Binop>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>                   
+                </ct:Assign>
+            </IndividualParameter>
+
+            <!-- V2 -->
+            <SimpleParameter symbId="omega_V2"/>
+            <SimpleParameter symbId="kappa1_V2"/>
+            <SimpleParameter symbId="kappa2_V2"/>
+            <SimpleParameter symbId="pop_V2"/>
+            <!-- eta_V2_indiv -->
+            <RandomVariable symbId="eta_V2_indiv">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_V2"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- eta_V2_trial -->
+            <RandomVariable symbId="eta_V2_trial">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="trial"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="kappa1_V2"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- eta_V2_occasion -->
+            <RandomVariable symbId="eta_V2_occasion">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="occasion"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="kappa2_V2"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- V2 -->
+            <IndividualParameter symbId="V2">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="pop_V2"/>
+                            <Binop op="times">
+                                <Uniop op="exp">
+                                    <ct:SymbRef symbIdRef="eta_V2_indiv"/>
+                                </Uniop>
+                                <Binop op="times">
+                                    <Uniop op="exp">
+                                        <ct:SymbRef symbIdRef="eta_V2_trial"/>
+                                    </Uniop>
+                                    <Uniop op="exp">
+                                        <ct:SymbRef symbIdRef="eta_V2_occasion"/>
+                                    </Uniop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>                   
+                </ct:Assign>
+            </IndividualParameter>
+            
             <!-- CL -->
-            <SimpleParameter symbId="omega_Cl"/>
+            <SimpleParameter symbId="omega_CL"/>
+            <SimpleParameter symbId="kappa1_CL"/>
+            <SimpleParameter symbId="kappa2_CL"/>
             <SimpleParameter symbId="pop_CL"/>
-            <SimpleParameter symbId="beta_CL_W"/>
-            <SimpleParameter symbId="beta_CL_SEX"/>
-            <SimpleParameter symbId="beta_CL_AGE"/>
-            <SimpleParameter symbId="beta_CL_DD"/>
             <!-- eta_CL_indiv -->
             <RandomVariable symbId="eta_CL_indiv">
                 <ct:VariabilityReference>
@@ -106,7 +338,7 @@
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
-                    <stddev><var varId="omega_CL"/></stddev>
+                    <stddev><var varId="kappa1_CL"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
             <!-- eta_CL_occasion -->
@@ -116,7 +348,7 @@
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
-                    <stddev><var varId="omega_CL"/></stddev>
+                    <stddev><var varId="kappa2_CL"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
             <!-- CL -->
@@ -126,54 +358,84 @@
                         <Binop op="times">
                             <ct:SymbRef symbIdRef="pop_CL"/>
                             <Binop op="times">
-                                <Binop op="power">
-                                    <ct:SymbRef symbIdRef="W"/>
-                                    <ct:SymbRef symbIdRef="beta_CL_W"/>
-                                </Binop>
+                                <Uniop op="exp">
+                                    <ct:SymbRef symbIdRef="eta_CL_indiv"/>
+                                </Uniop>
                                 <Binop op="times">
                                     <Uniop op="exp">
-                                        <Binop op="times">
-                                            <ct:SymbRef symbIdRef="beta_CL_SEX"/>
-                                            <ct:SymbRef blkIdRef="cm2" symbIdRef="SEX"/>
-                                        </Binop>
+                                        <ct:SymbRef symbIdRef="eta_CL_trial"/>
                                     </Uniop>
-                                    <Binop op="times">
-                                        <Uniop op="exp">
-                                            <Binop op="times">
-                                                <ct:SymbRef symbIdRef="beta_CL_AGE"/>
-                                                <ct:SymbRef blkIdRef="cm3" symbIdRef="AGE"/>
-                                            </Binop>
-                                        </Uniop>
-                                        <Binop op="times">
-                                            <Uniop op="exp">
-                                                <Binop op="times">
-                                                    <ct:SymbRef symbIdRef="beta_CL_DD"/>
-                                                    <ct:SymbRef blkIdRef="cm4" symbIdRef="DD"/>
-                                                </Binop>                                                
-                                            </Uniop>
-                                            <Binop op="times">
-                                                <Uniop op="exp">
-                                                    <ct:SymbRef symbIdRef="eta_indiv"/>
-                                                </Uniop>
-                                                <Binop op="times">
-                                                    <Uniop op="exp">
-                                                        <ct:SymbRef symbIdRef="eta_trial"/>
-                                                    </Uniop>
-                                                    <Uniop op="exp">
-                                                        <ct:SymbRef symbIdRef="eta_occasion"/>
-                                                    </Uniop>
-                                                </Binop>
-                                            </Binop>
-                                        </Binop>
-                                    </Binop>
+                                    <Uniop op="exp">
+                                        <ct:SymbRef symbIdRef="eta_CL_occasion"/>
+                                    </Uniop>
                                 </Binop>
                             </Binop>
                         </Binop>
                     </Equation>                   
                 </ct:Assign>
             </IndividualParameter>
+            
+            <!-- Q -->
+            <SimpleParameter symbId="omega_Q"/>
+            <SimpleParameter symbId="kappa1_Q"/>
+            <SimpleParameter symbId="kappa2_Q"/>
+            <SimpleParameter symbId="pop_Q"/>
+            <!-- eta_Q_indiv -->
+            <RandomVariable symbId="eta_Q_indiv">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="subject"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_Q"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- eta_Q_trial -->
+            <RandomVariable symbId="eta_Q_trial">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="trial"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="kappa1_Q"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- eta_Q_occasion -->
+            <RandomVariable symbId="eta_Q_occasion">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="occasion"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="kappa2_Q"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- Q -->
+            <IndividualParameter symbId="Q">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="pop_Q"/>
+                            <Binop op="times">
+                                <Uniop op="exp">
+                                    <ct:SymbRef symbIdRef="eta_Q_indiv"/>
+                                </Uniop>
+                                <Binop op="times">
+                                    <Uniop op="exp">
+                                        <ct:SymbRef symbIdRef="eta_Q_trial"/>
+                                    </Uniop>
+                                    <Uniop op="exp">
+                                        <ct:SymbRef symbIdRef="eta_Q_occasion"/>
+                                    </Uniop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>                   
+                </ct:Assign>
+            </IndividualParameter>
+            
         </ParameterModel>
-        
+                
         <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="sm1">
             <!-- Ac -->
@@ -183,31 +445,31 @@
                         <Binop op="plus">
                             <Binop op="times">
                                 <Binop op="divide">
-                                    <ct:SymbRef symbIdRef="Rsyn"/>
-                                    <ct:SymbRef symbIdRef="CL"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Rsyn"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
                                 </Binop>
-                                <ct:SymbRef symbIdRef="V1"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
                             </Binop>
                             <Binop op="minus">
                                 <Binop op="times">
                                     <Binop op="divide">
-                                        <ct:SymbRef symbIdRef="Q"/>
-                                        <ct:SymbRef symbIdRef="V2"/>
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="Q"/>
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="V2"/>
                                     </Binop>
                                     <ct:SymbRef symbIdRef="Ap"/>
                                 </Binop>
                                 <Binop op="minus">
                                     <Binop op="times">
                                         <Binop op="divide">
-                                            <ct:SymbRef symbIdRef="Q"/>
-                                            <ct:SymbRef symbIdRef="V1"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Q"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
                                         </Binop>
                                         <ct:SymbRef symbIdRef="Ac"/>
                                     </Binop>
                                     <Binop op="times">
                                         <Binop op="divide">
-                                            <ct:SymbRef symbIdRef="CL"/>
-                                            <ct:SymbRef symbIdRef="V1"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
                                         </Binop>
                                         <ct:SymbRef symbIdRef="Ac"/>
                                     </Binop>
@@ -225,15 +487,15 @@
                         <Binop op="minus">
                             <Binop op="times">
                                 <Binop op="divide">
-                                    <ct:SymbRef symbIdRef="Q"/>
-                                    <ct:SymbRef symbIdRef="V1"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Q"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
                                 </Binop>
                                 <ct:SymbRef symbIdRef="Ac"/>
                             </Binop>
                             <Binop op="times">
                                 <Binop op="divide">
-                                    <ct:SymbRef symbIdRef="Q"/>
-                                    <ct:SymbRef symbIdRef="V2"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Q"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="V2"/>
                                 </Binop>
                                 <ct:SymbRef symbIdRef="Ap"/>
                             </Binop>
@@ -247,7 +509,7 @@
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="divide">
                             <ct:SymbRef symbIdRef="Ac"/>
-                            <ct:SymbRef symbIdRef="V1"/>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
                         </Binop>
                     </Equation>
                 </ct:Assign>
@@ -258,7 +520,7 @@
         <ObservationModel blkId="om1">
             <SimpleParameter symbId="a"/>
             <SimpleParameter symbId="b"/>
-            <RandomVariable symbId="eta1">
+            <RandomVariable symbId="epsilon1">
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="residualError"/>
                 </ct:VariabilityReference>
@@ -267,7 +529,7 @@
                     <stddev><prVal>1</prVal></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <RandomVariable symbId="eta2">
+            <RandomVariable symbId="epsilon2">
                 <ct:VariabilityReference>
                     <ct:SymbRef symbIdRef="residualError"/>
                 </ct:VariabilityReference>
@@ -284,13 +546,13 @@
                             <Binop op="plus">
                                 <Binop op="times">
                                     <ct:SymbRef symbIdRef="a"/>
-                                    <ct:SymbRef symbIdRef="eta1"/>
+                                    <ct:SymbRef symbIdRef="epsilon1"/>
                                 </Binop>
                                 <Binop op="times">
                                     <ct:SymbRef symbIdRef="b"/>
                                     <Binop op="times">
                                         <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
-                                        <ct:SymbRef symbIdRef="eta2"/>
+                                        <ct:SymbRef symbIdRef="epsilon2"/>
                                     </Binop>
                                 </Binop>
                             </Binop>
@@ -301,6 +563,7 @@
         </ObservationModel>
         
     </ModelDefinition>
+    
     
 </PharmML>
 

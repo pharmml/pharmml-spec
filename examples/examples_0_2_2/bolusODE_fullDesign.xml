@@ -9,7 +9,7 @@
     
     <Name xmlns="http://www.pharmml.org/2013/03/CommonTypes">Bolus administration with an ODE system - full design</Name>
     
-    <Description xmlns="http://www.pharmml.org/2013/03/CommonTypes">This is a basic model implementation in PharmML - can serve as a template for encoding of a new model</Description>
+    <Description xmlns="http://www.pharmml.org/2013/03/CommonTypes">This is an example for a basic model implementation in PharmML - can serve as a template for encoding of a new model</Description>
     
     <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="t">
