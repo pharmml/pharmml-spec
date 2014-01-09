@@ -36,6 +36,22 @@
             <Level symbId="residual"/>
         </VariabilityModel>
         
+        <!-- COVARIATE MODEL -->
+        <CovariateModel blkId="cm1">
+            <Covariate symbId="W">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="W"/>
+                                <ct:Real>70</ct:Real>
+                            </Binop>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
             <!-- ka -->
@@ -257,6 +273,13 @@
                 <ArmMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"></ColumnRef>
                 </ArmMapping>
+                <CovariateMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"></ColumnRef>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+<!--                    <Interpolation>
+                            <Method name="constant"/>
+                    </Interpolation>-->
+                </CovariateMapping>
             </IndividualTemplate>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
@@ -284,6 +307,10 @@
                 <VariableMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"></ColumnRef>
                     <ct:SymbRef symbIdRef="t"/>
+                </VariableMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="Y_obs"/>
                 </VariableMapping>
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>

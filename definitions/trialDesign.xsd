@@ -758,6 +758,24 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <xs:complexType name="CovariateMappingType_extendedByInterpolation">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the mapping of a covariate to the values sepcified in a column of the dataset.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:extension base="design:PopulationMappingType">
+                        <xs:sequence>
+                            <xs:element ref="ct:SymbRef"/>
+                        </xs:sequence>
+                    </xs:extension>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <xs:complexType name="DemographicMappingType">
         <xs:annotation>
             <xs:documentation>
