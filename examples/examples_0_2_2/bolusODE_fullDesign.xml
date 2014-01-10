@@ -276,7 +276,10 @@
                 <CovariateMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"></ColumnRef>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-<!--                    <Interpolation>
+                    <Interpolation xmlns="http://www.pharmml.org/2013/08/Dataset">
+                        <InterpolationAlgorithm>linear</InterpolationAlgorithm>
+                    </Interpolation>
+                    <!--                    <Interpolation>
                             <Method name="constant"/>
                     </Interpolation>-->
                 </CovariateMapping>
@@ -294,7 +297,6 @@
                 </Table>
             </DataSet>
         </Population>
-        
     </TrialDesign>
     
     <!-- MODELING STEPS -->

@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
 
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.2.1">
+    writtenVersion="0.2.2">
     
     <ct:Name>Example 6 - Chan, Holford model</ct:Name>
     
