@@ -72,7 +72,8 @@ permissions and limitations under the License.
         Complex Types
         -->
 
-    <xs:complexType name="DosingVariableType">
+    <!--    original "DosingVariableType"
+        <xs:complexType name="DosingVariableType">
         <xs:annotation>
             <xs:documentation>
                 The type that specifies a dosing variable.
@@ -94,6 +95,37 @@ permissions and limitations under the License.
         </xs:sequence>
         <xs:attributeGroup ref="design:doseVarAttGroup"/>
     </xs:complexType>
+-->    
+    
+    <!-- TEST -->
+    <xs:complexType name="DosingVariableType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that specifies a dosing variable.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The name of the variable that is the dose administered to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>The amount of dose to be applied at dosing time.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attributeGroup ref="design:doseVarAttGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="TreatmentType">
         <xs:annotation>
             <xs:documentation>Describes a treatment, by which we mean one or more regimens that can be appied to a subject.</xs:documentation>
@@ -112,14 +144,32 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="DosingRegimenType" abstract="true">
+    
+    <!-- the original "DosingRegimenType"
+        <xs:complexType name="DosingRegimenType" abstract="true">
         <xs:annotation>
             <xs:documentation>
                 Defines a dosing regimen type.
             </xs:documentation>
         </xs:annotation>
     </xs:complexType>
-    <xs:complexType name="DosingTimesPointsType">
+-->    
+
+    <!-- TEST -->
+    <xs:complexType name="DosingRegimenType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                Defines a dosing regimen type.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!--  original "DosingTimesPointsType"
+        <xs:complexType name="DosingTimesPointsType">
         <xs:annotation>
             <xs:documentation>
                 Defines the dosing timepoints.
@@ -142,6 +192,38 @@ permissions and limitations under the License.
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+-->
+
+    <!-- TEST -->
+    <xs:complexType name="DosingTimesPointsType">
+        <xs:annotation>
+            <xs:documentation>
+                Defines the dosing timepoints.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                References the variable to be assigned the dosing time.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The dosing time or times to be assigned to the dosing regimen.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="BolusType">
         <xs:annotation>
             <xs:documentation>
@@ -216,7 +298,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="SteadyStateParameterType">
+    
+    <!-- original "SteadyStateParameterType"
+        <xs:complexType name="SteadyStateParameterType">
         <xs:annotation>
             <xs:documentation>
                 Type that defines a paremeter used by steady state dosing.
@@ -233,7 +317,34 @@ permissions and limitations under the License.
             <xs:element ref="ct:Assign"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="SteadyStateType">
+-->
+
+    <!-- TEST -->
+    <xs:complexType name="SteadyStateParameterType">
+        <xs:annotation>
+            <xs:documentation>
+                Type that defines a paremeter used by steady state dosing.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Reference to a dteady state dosing time variable. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!--    original "SteadyStateType"
+        <xs:complexType name="SteadyStateType">
         <xs:annotation>
             <xs:documentation>
                Type that specifies steady state dosing.
@@ -252,14 +363,58 @@ permissions and limitations under the License.
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+-->
+    
+    <!-- TEST -->
+    <xs:complexType name="SteadyStateType">
+        <xs:annotation>
+            <xs:documentation>
+                Type that specifies steady state dosing.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" name="EndTime" type="design:SteadyStateParameterType">
+                        <xs:annotation>
+                            <xs:documentation>The last dosing time.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Interval" type="design:SteadyStateParameterType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>The dosing period.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+
+    <!-- original "WashoutType"
+        <xs:complexType name="WashoutType">
+        <xs:annotation>
+            <xs:documentation>
+                A type that defines a washout epoch. When this applies the system is reinitialised.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:complexType>-->
+    
+    <!-- TEST -->
     <xs:complexType name="WashoutType">
         <xs:annotation>
             <xs:documentation>
                 A type that defines a washout epoch. When this applies the system is reinitialised.
             </xs:documentation>
         </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType"/>
+        </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="ActivityType" abstract="false">
+    <!-- /TEST -->
+    
+    <!-- THE ORIGINAL "ActivityType"
+      <xs:complexType name="ActivityType" abstract="false">
         <xs:annotation>
             <xs:documentation>
                 An activity that occurs during dosing. 
@@ -270,7 +425,27 @@ permissions and limitations under the License.
             <xs:element ref="design:Washout"/>
         </xs:choice>
         <xs:attributeGroup ref="ct:OidDefnGroup"/>
+    </xs:complexType>-->
+    <!-- TEST -->
+    <xs:complexType name="ActivityType" abstract="false">
+        <xs:annotation>
+            <xs:documentation>
+                An activity that occurs during dosing. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:choice>                        
+                        <xs:element ref="design:DosingRegimen"/>
+                        <xs:element ref="design:Washout"/>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType abstract="true" name="StudyEventType">
         <xs:annotation>
             <xs:documentation>
@@ -756,7 +931,7 @@ permissions and limitations under the License.
             <xs:extension base="design:PopulationMappingType">
                 <xs:sequence>
                     <xs:element ref="ct:SymbRef"/>
-                    <xs:element ref="ds:Interpolation"/>
+                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
