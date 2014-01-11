@@ -467,12 +467,21 @@ the end value. In the second the step size is incremented r times, where r is th
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="ct:Assign">
+                    <xs:element minOccurs="0" name="InitialValue">
                         <xs:annotation>
                             <xs:documentation>The initial value.</xs:documentation>
                         </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="ct:Assign">
+                                    <xs:annotation>
+                                        <xs:documentation>The initial value.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
                     </xs:element>
-                    <xs:element minOccurs="0" name="InitialConditionTime">
+                    <xs:element minOccurs="0" name="InitialTime">
                         <xs:annotation>
                             <xs:documentation>The value of the initial condition time.</xs:documentation>
                         </xs:annotation>
@@ -480,7 +489,7 @@ the end value. In the second the step size is incremented r times, where r is th
                             <xs:sequence>
                                 <xs:element ref="ct:Assign">
                                     <xs:annotation>
-                                        <xs:documentation>The initial time value.</xs:documentation>
+                                        <xs:documentation>The initial time.</xs:documentation>
                                     </xs:annotation>
                                 </xs:element>
                             </xs:sequence>
