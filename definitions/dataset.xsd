@@ -177,22 +177,15 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element ref="Definition"/>
-                    <xs:choice>
-                        <xs:element ref="ds:Table" maxOccurs="2">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Nested table definition.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element ref="ds:ImportData" maxOccurs="2">
+                    <xs:sequence>
+                        <xs:element ref="ds:ImportData" maxOccurs="1">
                             <xs:annotation>
                                 <xs:documentation>
                                     Import datafile
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                    </xs:choice>
+                    </xs:sequence>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -269,13 +262,15 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Table" type="ds:DataSetTableDefnType">
+                    <!-- TEST -->
+<!--                    <xs:element name="Table" type="ds:DataSetTableDefnType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a nested table.
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
