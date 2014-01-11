@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
 
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.2.2">
+    writtenVersion="0.2.2" id="i1">
     
     <ct:Name>Example 6 - Chan, Holford model</ct:Name>
     
@@ -442,14 +442,6 @@
             <ct:DerivativeVariable symbolType="real" symbId="Ac">
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">  
-                        <Binop op="plus">
-                            <Binop op="times">
-                                <Binop op="divide">
-                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Rsyn"/>
-                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
-                                </Binop>
-                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
-                            </Binop>
                             <Binop op="minus">
                                 <Binop op="times">
                                     <Binop op="divide">
@@ -475,18 +467,80 @@
                                     </Binop>
                                 </Binop>
                             </Binop>
-                        </Binop>
                     </Equation>
                 </ct:Assign>
                 <ct:IndependentVariable>
                     <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:Real>0</ct:Real>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">                          
+                                <Piecewise>
+                                    <Piece>
+                                        <ct:Real>0</ct:Real>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>0</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>409</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>909</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>1909</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>3909</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                </Piecewise>
+                            </Equation>
+                        </ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
+            
             <!-- Ap -->
             <ct:DerivativeVariable symbId="Ap" symbolType="real">
                 <ct:Assign>
@@ -509,14 +563,94 @@
                         </Binop>
                     </Equation>
                 </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="time"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">                          
+                                <Piecewise>
+                                    <Piece>
+                                        <ct:Real>0</ct:Real>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>0</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V2"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>409</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V2"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>909</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V2"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>1909</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                    <Piece>
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Css"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V2"/>
+                                        </Binop>
+                                        <Condition>
+                                            <LogicBinop op="eq">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:Real>3909</ct:Real>
+                                            </LogicBinop>
+                                        </Condition>
+                                    </Piece>
+                                </Piecewise>
+                            </Equation>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
             </ct:DerivativeVariable>
+            
             <!-- C -->
             <ct:Variable symbolType="real" symbId="C">
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-                        <Binop op="divide">
-                            <ct:SymbRef symbIdRef="Ac"/>
-                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Rsyn"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
+                                </Binop>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
+                            </Binop>
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="Ac"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V1"/>
+                            </Binop>
                         </Binop>
                     </Equation>
                 </ct:Assign>
@@ -839,70 +973,27 @@
                 <ArmMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/>
                 </ArmMapping>
-                <IVDependentMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="weight_timedep"/>
-                    <EpochMapping>
-                        <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="EPOCH"/>
-                    </EpochMapping>
-                    <CovariateMapping>
-                        <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"/>
-                        <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                    </CovariateMapping>
-                </IVDependentMapping>
+                <EpochMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="EPOCH"/>
+                </EpochMapping>
+                <CovariateMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                </CovariateMapping>
             </IndividualTemplate>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" valueType="id" columnNum="1"/>
                     <Column columnId="ARM" valueType="id" columnNum="2"/>
-                    <Table tableId="weight_timedep" columnNum="3">
-                        <Definition>
-                            <Column columnId="EPOCH" valueType="id" columnNum="1"/>
-                            <Column columnId="WEIGHT" valueType="real" columnNum="2"/>
-                        </Definition>
-                    </Table>
-                    <Column columnId="W" valueType="real" columnNum="3"/>
+                    <Column columnId="EPOCH" valueType="id" columnNum="3"/>
+                    <Column columnId="WEIGHT" valueType="real" columnNum="4"/>
                 </Definition>
-                <Table>
-                    <Row>
-                        <ct:Id>i1</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 1 -->
-                        <Table>
-                            <Row><ct:Id>epoch1</ct:Id><ct:Real>73</ct:Real></Row>
-                            <Row><ct:Id>epoch2</ct:Id><ct:Real>70</ct:Real></Row>
-                            <Row><ct:Id>epoch3</ct:Id><ct:Real>73</ct:Real></Row>
-                            <Row><ct:Id>epoch4</ct:Id><ct:Real>71</ct:Real></Row>
-                            <Row><ct:Id>epoch5</ct:Id><ct:Real>69</ct:Real></Row>
-                        </Table>
-                    </Row>
-                    <Row>
-                        <ct:Id>i2</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 2 -->
-                        <Table>
-                            <Row><ct:Id>epoch1</ct:Id><ct:Real>70</ct:Real></Row>
-                            <Row><ct:Id>epoch2</ct:Id><ct:Real>75</ct:Real></Row>
-                            <Row><ct:Id>epoch3</ct:Id><ct:Real>72</ct:Real></Row>
-                            <Row><ct:Id>epoch4</ct:Id><ct:Real>78</ct:Real></Row>
-                            <Row><ct:Id>epoch5</ct:Id><ct:Real>70</ct:Real></Row>
-                        </Table>
-                    </Row>
-                    <Row><ct:Id>i3</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 3 -->
-                        <Table>
-                            <Row><ct:Id>epoch1</ct:Id><ct:Real>56</ct:Real></Row>
-                            <Row><ct:Id>epoch2</ct:Id><ct:Real>60</ct:Real></Row>
-                            <Row><ct:Id>epoch3</ct:Id><ct:Real>57</ct:Real></Row>
-                            <Row><ct:Id>epoch4</ct:Id><ct:Real>61</ct:Real></Row>
-                            <Row><ct:Id>epoch5</ct:Id><ct:Real>59</ct:Real></Row>
-                        </Table>
-                    </Row>
-                    <!-- SKIP -->
-                    <Row><ct:Id>i20</ct:Id><ct:Id>arm1</ct:Id>                                <!-- subject 20 -->
-                        <Table>
-                            <Row><ct:Id>epoch1</ct:Id><ct:Real>85</ct:Real></Row>
-                            <Row><ct:Id>epoch2</ct:Id><ct:Real>89</ct:Real></Row>
-                            <Row><ct:Id>epoch3</ct:Id><ct:Real>82</ct:Real></Row>
-                            <Row><ct:Id>epoch4</ct:Id><ct:Real>86</ct:Real></Row>
-                            <Row><ct:Id>epoch5</ct:Id><ct:Real>84</ct:Real></Row>
-                        </Table>
-                    </Row>                    
-                </Table>
+                <ImportData oid="covariateData">
+                    <name>522_sim_covariates</name>
+                    <url>../examples_0_2_2/datastes/</url>
+                    <format>CSV</format>
+                    <delimiter>COMMA</delimiter>
+                </ImportData>
             </DataSet>
         </Population>
         
@@ -918,22 +1009,12 @@
                     <Column columnId="TIME" valueType="real" columnNum="2"></Column>
                     <Column columnId="AMT" valueType="real" columnNum="3"></Column>
                 </Definition>
-                <Table>
-                    <!-- SUBJECT 1 -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>0</ct:Real><ct:Real>740.37</ct:Real></Row>              <!-- month 0, 1st infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>72</ct:Real><ct:Real>740.37</ct:Real></Row>             <!-- month 0, 2nd infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>409</ct:Real><ct:Real>709.94</ct:Real></Row>            <!-- month 6, 1st infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>481</ct:Real><ct:Real>709.94</ct:Real></Row>            <!-- month 6, 2nd infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>909</ct:Real><ct:Real>740.37</ct:Real></Row>           <!-- month 12, 1st infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>981</ct:Real><ct:Real>740.37</ct:Real></Row>           <!-- month 12, 2nd infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>1909</ct:Real><ct:Real>720.28</ct:Real></Row>           <!-- month 24, 1st infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>1981</ct:Real><ct:Real>720.28</ct:Real></Row>           <!-- month 24, 2nd infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>3909</ct:Real><ct:Real>699.8</ct:Real></Row>          <!-- month 48, 1st infusion -->
-                    <Row><ct:Id>id1</ct:Id><ct:Real>3981</ct:Real><ct:Real>699.8</ct:Real></Row>          <!-- month 48, 2nd infusion -->
-                    <!-- SKIP -->
-                    <!-- ... -->
-                    <!-- ... -->
-                </Table>
+                <ImportData oid="dosingData">
+                    <name>522_sim_dosing</name>
+                    <url>../examples_0_2_2/datasets/</url>
+                    <format>CSV</format>
+                    <delimiter>COMMA</delimiter>
+                </ImportData>
             </DataSet>
         </IndividualDosing>
     </TrialDesign>
@@ -952,55 +1033,23 @@
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
                 </VariableMapping>
-<!--                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                    <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <Column columnId="DV" valueType="real" columnNum="3"/>
-                        <Column columnId="MDV" valueType="real" columnNum="4"/>
-                    </Definition>
-                    <Table>
-                        <!-\- SUBJECT 1 -\->
-                        <Row><ct:Id>id1</ct:Id><ct:Real>0</ct:Real><ct:Real>0.46</ct:Real><ct:Real>0</ct:Real></Row>
-                        <Row><ct:Id>id1</ct:Id><ct:Real>.5</ct:Real><ct:Real>0</ct:Real><ct:Real>1</ct:Real></Row>
-                        <Row><ct:Id>id1</ct:Id><ct:Real>1</ct:Real><ct:Real>6.11</ct:Real></Row>
-                        <Row><ct:Id>id1</ct:Id><ct:Real>1.5</ct:Real><ct:Real>7.38</ct:Real></Row>
-                        <Row><ct:Id>id1</ct:Id><ct:Real>2</ct:Real><ct:Real>7.73</ct:Real></Row>
-                        <!-\- ... -\->
-                        <!-\- ... -\->
-                    </Table>
--->                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                    <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <Column columnId="DV" valueType="real" columnNum="3"/>
-                    </Definition>
-                    <Table>
-                        <!-- SUBJECT 1 -->
-                        <Row><ct:Id>id1</ct:Id><ct:Real>0</ct:Real><ct:Real>0.46</ct:Real></Row>
-                        <Row><ct:Id>id1</ct:Id><ct:Real>1</ct:Real><ct:Real>6.11</ct:Real></Row>
-                        <Row><ct:Id>id1</ct:Id><ct:Real>1.5</ct:Real><ct:Real>7.38</ct:Real></Row>
-                        <Row><ct:Id>id1</ct:Id><ct:Real>2</ct:Real><ct:Real>7.73</ct:Real></Row>
-                        <!-- ... -->
-                        <!-- ... -->
-                    </Table>
-                </DataSet>
-            </ObjectiveDataSet>
-            
-            <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
-                </IndividualMapping>
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"></Column>
+                        <Column columnId="ID" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" valueType="real" columnNum="3"/>
+                        <Column columnId="FLAG" valueType="int" columnNum="4"/>
                     </Definition>
-                    <Table>
-                        <Row><ct:Id>i1</ct:Id></Row>
-                    </Table>
+                    <ImportData oid="observationData">
+                        <name>522_sim_observation</name>
+                        <url>../examples_0_2_2/datasets/</url>
+                        <format>CSV</format>
+                        <delimiter>COMMA</delimiter>
+                    </ImportData>
                 </DataSet>
             </ObjectiveDataSet>
             
+            <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_V"/>
