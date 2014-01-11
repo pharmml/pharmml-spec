@@ -440,7 +440,9 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="InitialConditionType">
+        
+    <!--  original "InitialConditionType"  
+        <xs:complexType name="InitialConditionType">
         <xs:annotation>
             <xs:documentation>The initial condition of the derivative variable.</xs:documentation>
         </xs:annotation>
@@ -455,7 +457,41 @@ the end value. In the second the step size is incremented r times, where r is th
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    
+    <!-- TEST -->
+    <xs:complexType name="InitialConditionType">
+        <xs:annotation>
+            <xs:documentation>The initial condition of the derivative variable.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>The initial value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="InitialConditionTime">
+                        <xs:annotation>
+                            <xs:documentation>The value of the initial condition time.</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="ct:Assign">
+                                    <xs:annotation>
+                                        <xs:documentation>The initial time value.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="DerivativeVariableType">
         <xs:annotation>
             <xs:documentation>The type specifying a derivative variable.</xs:documentation>

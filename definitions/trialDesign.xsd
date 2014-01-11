@@ -494,7 +494,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="StudyTimePointType">
+    
+        <xs:complexType name="StudyTimePointType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the timepoint in a study.
@@ -508,6 +509,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
     <xs:complexType name="StudyPeriodType">
         <xs:annotation>
             <xs:documentation>
@@ -535,6 +537,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
     <xs:complexType name="ObservationsGroupType">
         <xs:annotation>
             <xs:documentation>
