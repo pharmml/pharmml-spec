@@ -177,7 +177,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element ref="Definition"/>
-                    <xs:sequence>
+                    <xs:choice>
                         <xs:element ref="ds:ImportData" maxOccurs="1">
                             <xs:annotation>
                                 <xs:documentation>
@@ -185,7 +185,14 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                    </xs:sequence>
+                        <xs:element ref="ds:Table" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Defines a data table.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -335,13 +342,6 @@ permissions and limitations under the License.
             <xs:element maxOccurs="1" ref="ct:Scalar">
                 <xs:annotation>
                     <xs:documentation>A cell with a scalar value.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element ref="ds:Table">
-                <xs:annotation>
-                    <xs:documentation>
-                        A cell that is a nested table.
-                    </xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:choice>
