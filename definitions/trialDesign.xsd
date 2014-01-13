@@ -867,7 +867,8 @@ permissions and limitations under the License.
             <xs:extension base="design:PopulationMappingType"> </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="IndependentVariableDependentMappingType">
+    <!-- TEST -->
+<!--    <xs:complexType name="IndependentVariableDependentMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the mapping of indendent variable dependent properties.    
@@ -901,7 +902,8 @@ permissions and limitations under the License.
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
-    </xs:complexType>
+    </xs:complexType>-->
+    <!-- /TEST -->
     <xs:complexType name="IndependentVariableMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -1009,7 +1011,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="EpochMapping" type="design:EpochMappingType">
+                    <xs:element minOccurs="0" name="EpochMapping" type="design:EpochMappingType">
                         <xs:annotation>
                             <xs:documentation>
                                 Maps the epoch to a column in the dataset. The epoch defines the time period in which this
@@ -1025,8 +1027,14 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    
                     <!-- TEST -->
+                    <xs:element minOccurs="0" ref="design:ReplicateMapping">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Maps the replicates to the dataset. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
 <!--                    <xs:element maxOccurs="unbounded" minOccurs="0" name="IVDependentMapping"
                         type="design:IndependentVariableDependentMappingType">
                         <xs:annotation>
@@ -1036,14 +1044,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>-->
                     <!-- /TEST --> 
-                    
-                    <xs:element minOccurs="0" ref="design:ReplicateMapping">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Maps the replicates to the dataset. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

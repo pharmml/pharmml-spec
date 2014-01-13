@@ -210,7 +210,7 @@ permissions and limitations under the License.
                     <xs:annotation>
                         <xs:documentation>The type specifying interpolation algorithm. Can be applied for covariates or other data.</xs:documentation>
                     </xs:annotation>
-                    <xs:element name="InterpolationAlgorithm">
+                    <xs:element name="Algorithm">
                         <xs:simpleType>
                             <xs:restriction base="xs:token">
                                 <xs:enumeration value="nearest">
