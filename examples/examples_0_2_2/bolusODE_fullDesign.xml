@@ -123,6 +123,8 @@
             <!-- D -->
             <SimpleParameter symbId="D"/>
             
+            <ct:Variable symbolType="real" symbId="Cc"/>
+            
             <!-- dA/dt -->
             <ct:DerivativeVariable symbolType="real" symbId="A">
                 <ct:Assign>
@@ -297,6 +299,17 @@
                 </Table>
             </DataSet>
         </Population>
+        
+<!--        <!-\- INDIVIDUAL DOSING IF NECESSARY -\->
+        <IndividualDosing>
+            <ActivityRef oidRef=""></ActivityRef>
+            <IndividualRef columnIdRef=""></IndividualRef>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition></Definition>
+            </DataSet>
+        </IndividualDosing>
+-->        
+
     </TrialDesign>
     
     <!-- MODELING STEPS -->

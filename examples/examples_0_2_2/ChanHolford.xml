@@ -979,6 +979,9 @@
                 <CovariateMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                    <Interpolation xmlns="http://www.pharmml.org/2013/08/Dataset">
+                        <Algorithm>linear</Algorithm>
+                    </Interpolation>
                 </CovariateMapping>
             </IndividualTemplate>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
