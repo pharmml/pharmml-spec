@@ -96,11 +96,11 @@ permissions and limitations under the License.
                             <xs:enumeration value="factorial"/>
                             <xs:enumeration value="factln"/>            <!-- new FACTLN = ln(factorial(n)) = ln(n!) -->
                             <xs:enumeration value="gammaln"/>           <!-- new GAMMALN = ln(Gamma function) -->
-                            <xs:enumeration value="ln"/>                <!-- new unary oparetor LN - natural logarithm -->
+                            <xs:enumeration value="ln"/>                <!-- new LN - natural logarithm -->
                             <xs:enumeration value="log"/>
                             <xs:enumeration value="logistic"/>
                             <xs:enumeration value="logit"/>
-                            <xs:enumeration value="invlogit"/>          <!-- new invLogit = 1 / (1 + exp(-x)) -->
+                            <xs:enumeration value="normcdf"/>           <!-- new NORMCDF - cumulative distribution function of the normal distribution -->
                             <xs:enumeration value="probit"/>
                             <xs:enumeration value="minus"/>
                             <xs:enumeration value="sqrt"/>              <!-- new SQRT - square root -->
