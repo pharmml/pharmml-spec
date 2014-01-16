@@ -14,7 +14,7 @@
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="randomEffectModel" type="parameterVariability">
+        <VariabilityModel blkId="randomError" type="parameterVariability">
             <Level symbId="occasion">
                 <ParentLevel>
                     <ct:SymbRef symbIdRef="trial"/>
@@ -87,7 +87,7 @@
             <SimpleParameter symbId="pop_TTK0"/>
             <RandomVariable symbId="eta_TTK0">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -114,7 +114,7 @@
             <SimpleParameter symbId="pop_Rsyn"/>
             <RandomVariable symbId="eta_Rsyn">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -141,7 +141,7 @@
             <SimpleParameter symbId="pop_Css"/>
             <RandomVariable symbId="eta_Css">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -176,7 +176,7 @@
             <!-- eta_V1_indiv -->
             <RandomVariable symbId="eta_V1_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -196,7 +196,7 @@
             <!-- eta_V1_occasion -->
             <RandomVariable symbId="eta_V1_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -265,7 +265,7 @@
             <!-- eta_V2_indiv -->
             <RandomVariable symbId="eta_V2_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -275,7 +275,7 @@
             <!-- eta_V2_trial -->
             <RandomVariable symbId="eta_V2_trial">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="trial"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -285,7 +285,7 @@
             <!-- eta_V2_occasion -->
             <RandomVariable symbId="eta_V2_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -324,7 +324,7 @@
             <!-- eta_CL_indiv -->
             <RandomVariable symbId="eta_CL_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -334,7 +334,7 @@
             <!-- eta_CL_trial -->
             <RandomVariable symbId="eta_CL_trial">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="trial"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -344,7 +344,7 @@
             <!-- eta_CL_occasion -->
             <RandomVariable symbId="eta_CL_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -383,7 +383,7 @@
             <!-- eta_Q_indiv -->
             <RandomVariable symbId="eta_Q_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -393,7 +393,7 @@
             <!-- eta_Q_trial -->
             <RandomVariable symbId="eta_Q_trial">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="trial"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -403,7 +403,7 @@
             <!-- eta_Q_occasion -->
             <RandomVariable symbId="eta_Q_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -663,7 +663,7 @@
             <SimpleParameter symbId="b"/>
             <RandomVariable symbId="epsilon1">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="resError"/>
+                    <ct:SymbRef symbIdRef="residual"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -672,7 +672,7 @@
             </RandomVariable>
             <RandomVariable symbId="epsilon2">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="resError"/>
+                    <ct:SymbRef symbIdRef="residual"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -830,7 +830,7 @@
             <ObservationsEvent oid="Trial">
                 <ArmRef oidRef="arm1"/>
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="trial"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <ObservationGroup oid="Trial1">
                     <EpochRef oidRef="epoch1"/>
@@ -854,7 +854,7 @@
             <ObservationsEvent oid="Occasion"> 
                 <ArmRef oidRef="arm1"/>
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <!-- MONTH 0 -->
                 <ObservationGroup oid="Occasion1">                      <!-- Occasions 1-2 during month 0 - 1st/2nd infusion-->
