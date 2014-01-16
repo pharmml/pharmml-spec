@@ -66,6 +66,8 @@ permissions and limitations under the License.
                     <xs:enumeration value="power"/>
                     <xs:enumeration value="logx"/>
                     <xs:enumeration value="root"/>
+                    <xs:enumeration value="min"/>                       <!-- new MIN(a,b) function -->
+                    <xs:enumeration value="max"/>                       <!-- new MAX(a,b) function -->
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -89,10 +91,19 @@ permissions and limitations under the License.
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
+                            <xs:enumeration value="abs"/>
                             <xs:enumeration value="exp"/>
-                            <xs:enumeration value="log"/>
-                            <xs:enumeration value="minus"/>
                             <xs:enumeration value="factorial"/>
+                            <xs:enumeration value="factln"/>            <!-- new FACTLN = ln(factorial(n)) = ln(n!) -->
+                            <xs:enumeration value="gammaln"/>           <!-- new GAMMALN = ln(Gamma function) -->
+                            <xs:enumeration value="ln"/>                <!-- new unary oparetor LN - natural logarithm -->
+                            <xs:enumeration value="log"/>
+                            <xs:enumeration value="logistic"/>
+                            <xs:enumeration value="logit"/>
+                            <xs:enumeration value="invlogit"/>          <!-- new invLogit = 1 / (1 + exp(-x)) -->
+                            <xs:enumeration value="probit"/>
+                            <xs:enumeration value="minus"/>
+                            <xs:enumeration value="sqrt"/>              <!-- new SQRT - square root -->
                             <xs:enumeration value="sin"/>
                             <xs:enumeration value="cos"/>
                             <xs:enumeration value="tan"/>
@@ -118,11 +129,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="arccsch"/>
                             <xs:enumeration value="arccoth"/>
                             <xs:enumeration value="floor"/>
-                            <xs:enumeration value="abs"/>
                             <xs:enumeration value="ceiling"/>
-                            <xs:enumeration value="logistic"/>
-                            <xs:enumeration value="logit"/>
-                            <xs:enumeration value="probit"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
