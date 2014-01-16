@@ -282,7 +282,10 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="DataSetTableDefnType">
+    
+    <!-- TEST -->
+<!-- TYPE for NESTED TABLE - not used anymore
+        <xs:complexType name="DataSetTableDefnType">
         <xs:annotation>
             <xs:documentation>
                 Type that specifies the definition of a nested table. 
@@ -302,7 +305,9 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
+    <!-- /TEST -->
+    
     <xs:complexType name="CommonColumnDefnType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
