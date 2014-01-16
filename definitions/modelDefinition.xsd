@@ -42,17 +42,17 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:NCName">
-            <xs:enumeration value="error">
+            <xs:enumeration value="residualError">
                 <xs:annotation>
                     <xs:documentation>
                         Residual error variability.
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="model">
+            <xs:enumeration value="parameterVariability">
                 <xs:annotation>
                     <xs:documentation>
-                        Model variability.
+                        Parameter variability - random effects.
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>

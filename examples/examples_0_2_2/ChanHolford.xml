@@ -14,7 +14,7 @@
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="randomErrorModel" type="model">
+        <VariabilityModel blkId="randomEffectModel" type="parameterVariability">
             <Level symbId="occasion">
                 <ParentLevel>
                     <ct:SymbRef symbIdRef="trial"/>
@@ -28,7 +28,7 @@
             <Level symbId="subject"/>
         </VariabilityModel>
 
-        <VariabilityModel blkId="residualError" type="error">
+        <VariabilityModel blkId="resError" type="residualError">
             <Level symbId="residual"/>
         </VariabilityModel>
         
@@ -663,7 +663,7 @@
             <SimpleParameter symbId="b"/>
             <RandomVariable symbId="epsilon1">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="residualError"/>
+                    <ct:SymbRef symbIdRef="resError"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -672,7 +672,7 @@
             </RandomVariable>
             <RandomVariable symbId="epsilon2">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="residualError"/>
+                    <ct:SymbRef symbIdRef="resError"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
