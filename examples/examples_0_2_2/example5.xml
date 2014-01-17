@@ -25,11 +25,11 @@
     <ModelDefinition  xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="model" type="model"> 
+        <VariabilityModel blkId="model" type="parameterVariability"> 
             <Level symbId="indiv"/>
         </VariabilityModel>
         
-        <VariabilityModel blkId="obsErr" type="error"> 
+        <VariabilityModel blkId="obsErr" type="residualError"> 
             <Level symbId="residual"/>
         </VariabilityModel>
         
@@ -298,9 +298,11 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="C0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="C0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -351,9 +353,11 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="P0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="P0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -380,9 +384,11 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="Q0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Q0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -418,9 +424,11 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="QP0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="QP0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
 
@@ -517,6 +525,9 @@
         
         <!-- POPULATION -->
         <Population> 
+            <ct:VariabilityReference>
+                <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+            </ct:VariabilityReference>
             <IndividualTemplate> 
                 <IndividualMapping> 
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/> 
