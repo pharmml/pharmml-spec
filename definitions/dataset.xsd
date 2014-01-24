@@ -198,6 +198,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
     <xs:element name="Interpolation" type="InterpolationType">
         <xs:annotation>
             <xs:documentation>
@@ -205,6 +206,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- /TEST -->
     
     <!-- new type for interpolation -->
     <xs:complexType name="InterpolationType">
@@ -248,6 +250,9 @@ permissions and limitations under the License.
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>                    
+<!-- TEST -->
+                    <!--                    <xs:element name="InterpIndepVar"/>-->
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -269,45 +274,12 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-<!--                    <xs:element name="Table" type="ds:DataSetTableDefnType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines a nested table.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
-<!-- TYPE for NESTED TABLE - not used anymore
-        <xs:complexType name="DataSetTableDefnType">
-        <xs:annotation>
-            <xs:documentation>
-                Type that specifies the definition of a nested table. 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ds:CommonColumnDefnType">
-                <xs:sequence maxOccurs="1">
-                    <xs:element maxOccurs="1" ref="Definition"/>
-                </xs:sequence>
-                <xs:attribute name="tableId" type="ct:oidType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>
-                            The identifier of the nested table column.
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /TEST -->
-    
+
     <xs:complexType name="CommonColumnDefnType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">

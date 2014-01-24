@@ -41,15 +41,6 @@
             </Covariate>
         </CovariateModel>
         
-        <CovariateModel blkId="cm2">
-            <Covariate symbId="sex">
-                <Categorical>
-                    <Category catId="F"/>
-                    <Category catId="M"/>
-                </Categorical>
-            </Covariate>
-        </CovariateModel>
-        
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
             
@@ -388,15 +379,15 @@
             <Segment oid="segment1">
                 <ActivityRef oidRef="d1"/>
             </Segment>
-            <Activity oid="d1" id="i2">
-                <Bolus id="i3">
-                    <DoseAmount inputType="dose" id="i5">
+            <Activity oid="d1">
+                <Bolus>
+                    <DoseAmount inputType="dose">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
                         <ct:Assign>
                             <ct:Real>100</ct:Real>
                         </ct:Assign>
                     </DoseAmount>
-                    <DosingTimes id="i6">
+                    <DosingTimes>
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="tD"/>
                         <ct:Assign>
                             <ct:Real>0</ct:Real>
@@ -416,8 +407,8 @@
                     <ds:ColumnRef columnIdRef="ARM"/>
                 </ArmMapping>
                 <CovariateMapping>
-                    <ds:ColumnRef columnIdRef="SEX"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="sex"/>
+                    <ds:ColumnRef columnIdRef="WEIGHT"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                     <ds:Interpolation>
                         <ds:Algorithm>linear</ds:Algorithm>
                         <!-- TEST -->
@@ -432,10 +423,9 @@
                     <ds:Column columnId="ID" valueType="id" columnNum="1"/>
                     <ds:Column columnId="ARM" valueType="id" columnNum="2"/>
                     <ds:Column columnId="WEIGHT" valueType="real" columnNum="3"/>
-                    <ds:Column columnId="SEX" valueType="string" columnNum="4"/>
                 </ds:Definition>
                 <ds:Table>
-                    <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Real>70.1</ct:Real><ct:String>F</ct:String></ds:Row>
+                    <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Real>70.1</ct:Real></ds:Row>
                     <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Real>60.0</ct:Real></ds:Row>
                     <ds:Row><ct:Id>i3</ct:Id><ct:Id>a1</ct:Id><ct:Real>93.2</ct:Real></ds:Row>
                     <ds:Row><ct:Id>i4</ct:Id><ct:Id>a1</ct:Id><ct:Real>85.7</ct:Real></ds:Row>
