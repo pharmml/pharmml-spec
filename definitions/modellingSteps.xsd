@@ -555,20 +555,29 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" ref="msteps:CommonModellingStep">
+                <xs:choice>
+                    <xs:element name="NONMEM" type="msteps:NONMEMtype">
                         <xs:annotation>
                             <xs:documentation>
-                                A modelling step.                
+                                NONMEM - dataset, task settings etc.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="StepDependencies" type="msteps:StepDependencyType">
-                        <xs:annotation>
-                            <xs:documentation>Defines dependencies between steps.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" ref="msteps:CommonModellingStep">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A modelling step.                
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="StepDependencies" type="msteps:StepDependencyType">
+                            <xs:annotation>
+                                <xs:documentation>Defines dependencies between steps.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -596,6 +605,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- new NONMEMtype -->
     
     <!--
         Elements
