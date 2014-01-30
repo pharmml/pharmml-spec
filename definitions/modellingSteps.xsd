@@ -518,6 +518,35 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+<!--    original 'ModellingStepsType'
+        <xs:complexType name="ModellingStepsType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the modelling steps section.                 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="msteps:CommonModellingStep">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A modelling step.                
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="StepDependencies" type="msteps:StepDependencyType">
+                        <xs:annotation>
+                            <xs:documentation>Defines dependencies between steps.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>-->
+
+    <!-- TEST -->
     <xs:complexType name="ModellingStepsType">
         <xs:annotation>
             <xs:documentation>
@@ -537,6 +566,30 @@ permissions and limitations under the License.
                     <xs:element name="StepDependencies" type="msteps:StepDependencyType">
                         <xs:annotation>
                             <xs:documentation>Defines dependencies between steps.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- new NONMEMtype -->
+    <xs:complexType name="NONMEMtype">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the NONMEM type data and task settings.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ds:DataSet">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
