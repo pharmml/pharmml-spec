@@ -303,6 +303,11 @@
                             <ct:SymbRef blkIdRef="pm1" symbIdRef="C0"/>
                         </ct:Assign>
                     </ct:InitialValue>
+                    <ct:InitialTime>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialTime>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
