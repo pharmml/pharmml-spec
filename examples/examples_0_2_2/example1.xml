@@ -39,7 +39,9 @@
             </Equation>
         </Definition>
     </FunctionDefinition>
+    
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+    
         <VariabilityModel blkId="randEffect" type="parameterVariability">
             <Level symbId="indiv">
                 <ct:Name>Individual Variability</ct:Name>
@@ -50,6 +52,7 @@
                 <ct:Name>Residual Error</ct:Name>
             </Level>
         </VariabilityModel>
+        
         <CovariateModel blkId="c1">
             <SimpleParameter symbId="pop_W"/>
             <SimpleParameter symbId="omega_W"/>
@@ -83,7 +86,7 @@
             <SimpleParameter symbId="omega_V"/>
             <RandomVariable symbId="eta_V">
                 <ct:VariabilityReference>
-                   <ct:SymbRef blkIdRef="randEffect" symbIdRef="level"/>
+                   <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
