@@ -287,11 +287,12 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
     <xs:complexType name="EquationType">
         <xs:annotation>
             <xs:documentation>Complex Type that defines a mathematical equation.</xs:documentation>
         </xs:annotation>
-        <xs:choice maxOccurs="unbounded">
+        <xs:choice>                                                               <!-- changed from unbounded to 1 -->
             <xs:element ref="ct:Scalar"/>
             <xs:element maxOccurs="1" minOccurs="1" ref="ct:SymbRef"/>
             <xs:element ref="math:Binop"/>
@@ -304,6 +305,7 @@ permissions and limitations under the License.
             <xs:element ref="math:FunctionCall"/>
         </xs:choice>
     </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="FunctionCallType">
         <xs:annotation>
             <xs:documentation>A type defining a function call.</xs:documentation>
