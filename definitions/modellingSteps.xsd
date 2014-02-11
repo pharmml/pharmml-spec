@@ -519,8 +519,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-<!--    original 'ModellingStepsType'
-        <xs:complexType name="ModellingStepsType">
+    <xs:complexType name="ModellingStepsType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the modelling steps section.                 
@@ -544,9 +543,9 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>-->
+    </xs:complexType>
 
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="ModellingStepsType">
         <xs:annotation>
             <xs:documentation>
@@ -581,7 +580,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <!-- new NONMEMtype -->
     <xs:complexType name="NONMEMtype">
