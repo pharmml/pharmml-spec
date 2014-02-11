@@ -429,6 +429,28 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="CovariateMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining a maping to a covariate in the model. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="msteps:MappingType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType abstract="true" name="MappingType">
         <xs:annotation>
             <xs:documentation>
@@ -590,44 +612,44 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!--<!-\- TEST -\->
-    <xs:complexType name="ModellingStepsType">
+    
+    <!-- just a TEMPLATE FOR NONMEMtype based on 'DatasetMappingType' -->
+    <xs:complexType name="TEMPLATE">
         <xs:annotation>
             <xs:documentation>
-                A type defining the modelling steps section.                 
+                Type defining  a mapping of objective data to the model.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element name="NONMEM" type="msteps:NONMEMtype">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment">
                         <xs:annotation>
                             <xs:documentation>
-                                NONMEM - dataset, task settings etc.
+                                Initialises a variable.  
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" ref="msteps:CommonModellingStep">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A modelling step.                
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="StepDependencies" type="msteps:StepDependencyType">
-                            <xs:annotation>
-                                <xs:documentation>Defines dependencies between steps.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:choice>
+                    <xs:element maxOccurs="unbounded" ref="msteps:Mapping">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing objective data. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:DataSet">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The dataset containing the objective data.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-\- /TEST -\->-->
-    
+    <!-- TEMPLATE FOR NONMEMtype -->
+
     <!-- new NONMEMtype -->
     <xs:complexType name="NONMEMdataSetType">
         <xs:annotation>
@@ -638,6 +660,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="msteps:Mapping">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing objective data. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element ref="ds:DataSet">
                         <xs:annotation>
                             <xs:documentation>
@@ -677,6 +706,14 @@ permissions and limitations under the License.
     </xs:element>
     <xs:element name="VariableMapping" substitutionGroup="msteps:Mapping"
         type="msteps:VariableMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies a mapping to a variable in the model.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="CovariateMapping" substitutionGroup="msteps:Mapping"
+        type="msteps:CovariateMappingType">
         <xs:annotation>
             <xs:documentation>
                 Specifies a mapping to a variable in the model.
