@@ -209,7 +209,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="EstimationStepType">
+    
+<!--    ORIGINAL code
+        <xs:complexType name="EstimationStepType">
         <xs:annotation>
             <xs:documentation>
                 Type defining the estimation step.
@@ -240,7 +242,51 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    
+    <!-- TEST -->
+    <xs:complexType name="EstimationStepType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining the estimation step.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="msteps:ModellingStepType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
+                            maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                        
+                        <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType"
+                            maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>Defines the NONMEM format datset and its mapping with optional code injection.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                        
+                    </xs:choice>
+                    <xs:element maxOccurs="1" minOccurs="1" name="ParametersToEstimate"
+                        type="msteps:ToEstimateType">
+                        <xs:annotation>
+                            <xs:documentation>Specified the parameters of the model to be estimated.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" ref="msteps:Operation">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The estimation operation. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="OperationPropertyType">
         <xs:annotation>
             <xs:documentation>
@@ -583,7 +629,7 @@ permissions and limitations under the License.
     <!-\- /TEST -\->-->
     
     <!-- new NONMEMtype -->
-    <xs:complexType name="NONMEMtype">
+    <xs:complexType name="NONMEMdataSetType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the NONMEM type data and task settings.                
