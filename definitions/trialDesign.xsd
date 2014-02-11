@@ -726,7 +726,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="design:PopulationMappingType"> </xs:extension>
+            <xs:extension base="design:PopulationMappingType"/> 
         </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="IndependentVariableMappingType">
