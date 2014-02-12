@@ -653,8 +653,8 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- new NONMEMtype -->
     
-    <!-- TEST - new type for CodeMappingType based on 'MappingType' -->
-    <xs:complexType name="CodeMappingType">
+    <!-- TEST - new type for NMVariableMappingType based on 'MappingType' -->
+    <xs:complexType name="NMVariableMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type that defines variable/parameter, used in the NONMEM injected code, to be mapped to the model or dataset.
@@ -702,13 +702,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="Mapping" type="msteps:CodeMappingType">
+                    <xs:element maxOccurs="unbounded" name="NMVariableMapping" type="msteps:NMVariableMappingType">
                         <xs:annotation>
                             <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="NONMEMcode" type="xs:string"/>
-<!--                    <xs:element name="NONMEMcodeInjection" type="msteps:NONMEMcodeInjectionType"/>-->
+<!--                    <xs:element name="NONMEMcode" type="xs:string"/>-->
+                    <xs:element name="NONMEMcode" type="msteps:NONMEMcodeInjectionType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -728,6 +728,49 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    
+    <!-- TEST -->
+    <xs:complexType name="NONMEMcodeInjectionType">
+        <xs:annotation>
+            <xs:documentation>
+                Defines the NONMEM CDATA code injection containing element.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <!-- variable mapping type - NONMEMvariableType -->
+                    <xs:element name="NMVariable" maxOccurs="unbounded" type="msteps:NONMEMvariableType"/>
+                    <xs:element name="Code" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Original NONMEM code.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    <!-- /TEST -->
+    
+    <xs:complexType name="NONMEMvariableType">
+        <xs:annotation>
+            <xs:documentation>
+                NONMEM variable Type.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="symbId" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The variable symbol to map NONMEM variables.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
     
     <!--
         Elements
