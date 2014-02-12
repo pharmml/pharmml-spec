@@ -431,10 +431,38 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
-    <xs:complexType name="CovariateMappingType">
+    <xs:complexType name="NMCovariateMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type defining a maping to a covariate in the model. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="msteps:NMMappingType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="NMIndividualMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining the mapping of a dataset to the individual.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="msteps:NMMappingType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="NMVariableMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining a maping to a variable in the model. 
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -677,8 +705,8 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- new NONMEMtype -->
     
-    <!-- TEST - new type for NMVariableMappingType based on 'MappingType' -->
-    <xs:complexType name="NMVariableMappingType">
+    <!-- TEST - new type for NMsymbolMappingType based on 'MappingType' -->
+    <xs:complexType name="NMsymbolMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type that defines variable/parameter, used in the NONMEM injected code, to be mapped to the model or dataset.
@@ -726,7 +754,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="NMVariableMapping" type="msteps:NMVariableMappingType">
+                    <xs:element maxOccurs="unbounded" name="NMsymbolMapping" type="msteps:NMsymbolMappingType">
                         <xs:annotation>
                             <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
                         </xs:annotation>
@@ -762,8 +790,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- variable mapping type - NONMEMvariableType -->
-                    <xs:element name="NMVariable" maxOccurs="unbounded" type="msteps:NONMEMvariableType"/>
+                    <!-- variable mapping type - NONMEMsymbolType -->
+                    <xs:element name="NMsymbol" maxOccurs="unbounded" type="msteps:NONMEMsymbolType"/>
                     <xs:element name="Code" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>
@@ -778,7 +806,7 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="NONMEMvariableType">
+    <xs:complexType name="NONMEMsymbolType">
         <xs:annotation>
             <xs:documentation>
                 NONMEM variable Type.
@@ -830,16 +858,32 @@ permissions and limitations under the License.
     </xs:element>
     
     <!-- TEST -->
-    <xs:element name="CovariateMapping" substitutionGroup="msteps:NMMapping"
-        type="msteps:CovariateMappingType">
+    <xs:element name="NMCovariateMapping" substitutionGroup="msteps:NMMapping"
+        type="msteps:NMCovariateMappingType">
         <xs:annotation>
             <xs:documentation>
                 Specifies a mapping to a variable in the model.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
-    
+    <xs:element name="NMIndividualMapping" substitutionGroup="msteps:NMMapping"
+        type="msteps:NMIndividualMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies the mapping to the individual.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="NMVariableMapping" substitutionGroup="msteps:NMMapping"
+        type="msteps:NMVariableMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies a mapping to a variable in the model.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- TEST -->
+
     <xs:element name="Mapping" type="msteps:MappingType" abstract="true">
         <xs:annotation>
             <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
