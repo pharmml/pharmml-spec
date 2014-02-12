@@ -709,7 +709,7 @@ permissions and limitations under the License.
     <xs:complexType name="NMsymbolMappingType">
         <xs:annotation>
             <xs:documentation>
-                Type that defines variable/parameter, used in the NONMEM injected code, to be mapped to the model or dataset.
+                Type that defines variable/parameter, used in the NMTRAN injected code, to be mapped to the model or dataset.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -748,7 +748,7 @@ permissions and limitations under the License.
     <xs:complexType name="CodeInjectionType">
         <xs:annotation>
             <xs:documentation>
-                Type that defines the NONMEM code injection.
+                Type that defines the NMTRAN code injection.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -759,8 +759,8 @@ permissions and limitations under the License.
                             <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="NONMEMcode" type="xs:string"/>-->
-                    <xs:element name="NONMEMcode" type="msteps:NONMEMcodeInjectionType"/>
+<!--                    <xs:element name="NMTRANcode" type="xs:string"/>-->
+                    <xs:element name="NMTRANcode" type="msteps:NMTRANcodeInjectionType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -781,21 +781,21 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="NONMEMcodeInjectionType">
+    <xs:complexType name="NMTRANcodeInjectionType">
         <xs:annotation>
             <xs:documentation>
-                Defines the NONMEM CDATA code injection containing element.
+                Defines the NMTRAN CDATA code injection containing element.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- variable mapping type - NONMEMsymbolType -->
-                    <xs:element name="NMsymbol" maxOccurs="unbounded" type="msteps:NONMEMsymbolType"/>
+                    <!-- variable mapping type - NMTRANsymbolType -->
+                    <xs:element name="NMsymbol" maxOccurs="unbounded" type="msteps:NMTRANsymbolType"/>
                     <xs:element name="Code" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>
-                                Original NONMEM code.
+                                Original NMTRAN code.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
@@ -806,17 +806,17 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="NONMEMsymbolType">
+    <xs:complexType name="NMTRANsymbolType">
         <xs:annotation>
             <xs:documentation>
-                NONMEM variable Type.
+                NMTRAN variable Type.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:attribute name="symbId" use="required">
                     <xs:annotation>
-                        <xs:documentation>The variable symbol to map NONMEM variables.</xs:documentation>
+                        <xs:documentation>The variable symbol to map NMTRAN variables.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
