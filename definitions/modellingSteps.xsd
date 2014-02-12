@@ -754,6 +754,7 @@ permissions and limitations under the License.
     </xs:complexType>    
     <!-- /TEST -->
     
+    <!-- TEST -->
     <xs:complexType name="NONMEMvariableType">
         <xs:annotation>
             <xs:documentation>
@@ -770,7 +771,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-        
+    <!-- /TEST -->
+    
     
     <!--
         Elements
