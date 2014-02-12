@@ -438,7 +438,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="msteps:MappingType">
+            <xs:extension base="msteps:NMMappingType">
                 <xs:sequence>
                     <xs:element minOccurs="1" ref="ct:SymbRef">
                         <xs:annotation>
@@ -471,6 +471,30 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST new type based on MappingType-->
+    <xs:complexType abstract="true" name="NMMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Abstract type that defines a NONMEM datset mapping.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The column reference to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="DatasetMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -624,7 +648,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" ref="msteps:Mapping">
+                    <xs:element maxOccurs="unbounded" ref="msteps:NMMapping">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines mapping to the dataset containing objective data. 
@@ -723,11 +747,10 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="msteps:MappingType"/>
+            <xs:extension base="msteps:NMMappingType"/>
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-    
     
     <!-- TEST -->
     <xs:complexType name="NONMEMcodeInjectionType">
@@ -805,7 +828,9 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="CovariateMapping" substitutionGroup="msteps:Mapping"
+    
+    <!-- TEST -->
+    <xs:element name="CovariateMapping" substitutionGroup="msteps:NMMapping"
         type="msteps:CovariateMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -813,14 +838,16 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- /TEST -->
+    
     <xs:element name="Mapping" type="msteps:MappingType" abstract="true">
         <xs:annotation>
             <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
         </xs:annotation>
     </xs:element>
     
-    <!-- TEST ????????????????? -->
-    <xs:element name="NMMapping" type="msteps:MappingType" abstract="true">
+    <!-- TEST new Type for NONMEM dataset mapping -->
+    <xs:element name="NMMapping" type="msteps:NMMappingType" abstract="true">
         <xs:annotation>
             <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
         </xs:annotation>
