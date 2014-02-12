@@ -693,16 +693,35 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="ParameterMapping" type="msteps:ParameterMappingType">
+                    <xs:element maxOccurs="unbounded" name="ParameterMapping" type="msteps:ParameterMappingType">
                         <xs:annotation>
                             <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- PLACE HOLDER FOR INJECTED CODE -->
+                    <xs:element name="NONMEMcode" type="xs:string"/>
+<!--                    <xs:element name="NONMEMcodeInjection" type="msteps:NONMEMcodeInjectionType"/>-->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    <!-- /TEST -->
+    </xs:complexType>    
+    <!-- /TEST -->
+    
+    <!--<!-\- TEST -\->
+    <xs:complexType name="NONMEMcodeInjectionType">
+        <xs:annotation>
+            <xs:documentation>
+                Defines the NONMEM CDATA code injection containing element.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="NONMEMcode" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    <!-\- /TEST -\->-->
     
     
 <!--    <xs:complexType name="VariableMappingType">
@@ -768,6 +787,13 @@ permissions and limitations under the License.
             <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="NMMapping" type="msteps:MappingType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="Timepoints" type="msteps:TimepointsType"/>
     <xs:element abstract="true" name="CommonModellingStep" type="msteps:ModellingStepType">
         <xs:annotation>
