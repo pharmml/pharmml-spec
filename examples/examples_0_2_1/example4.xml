@@ -48,6 +48,7 @@
             <Level symbId="resErr"/>
         </VariabilityModel>
         
+        <!-- COVARIATE MODEL -->
         <CovariateModel blkId="c1">
             <Covariate symbId="Sex">
                 <Categorical>
@@ -86,7 +87,10 @@
                 </Categorical>
             </Covariate>
         </CovariateModel>
+
+        <!-- PARAMETER MODEL -->
         <ParameterModel blkId="p1">
+            <!-- ka -->
             <SimpleParameter symbId="omega_ka"/>
             <SimpleParameter symbId="pop_ka"/>
             <RandomVariable symbId="eta_ka">
@@ -118,6 +122,7 @@
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
+            <!-- V -->
             <SimpleParameter symbId="pop_V"/>
             <SimpleParameter symbId="omega_V"/>
             <SimpleParameter symbId="gamma_V"/>
@@ -185,6 +190,7 @@
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
+            <!-- CL -->
             <SimpleParameter symbId="omega_CL"/>
             <SimpleParameter symbId="gamma_CL"/>
             <SimpleParameter symbId="pop_CL"/>
@@ -237,6 +243,8 @@
                 </GaussianModel>
             </IndividualParameter>
         </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="main">
             <ct:Variable symbolType="real" symbId="D"/>
             <ct:Variable symbolType="real" symbId="tD"/>
@@ -286,6 +294,8 @@
                 </ct:Assign>
             </ct:Variable>
         </StructuralModel>
+        
+        <!-- OBSERVATION MODEL -->
         <ObservationModel blkId="o1">
             <SimpleParameter symbId="a"/>
             <SimpleParameter symbId="b"/>
@@ -328,7 +338,11 @@
             </Standard>
         </ObservationModel>
     </ModelDefinition>
+    
+    <!-- TRIAL DESIGN -->
     <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+
+        <!-- STRUCTURE -->
         <Structure>
             <Epoch oid="ep1">
                 <Start>
@@ -473,6 +487,8 @@
                 </ObservationGroup>
             </ObservationsEvent-->
         </Structure>
+
+        <!-- POPULATION -->
         <Population>
             <ct:VariabilityReference>
                 <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
@@ -606,8 +622,14 @@
             </ds:DataSet>
         </Population>
     </TrialDesign>
+    
+    <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+
+        <!-- ESTIMATION -->
         <EstimationStep oid="e1">
+
+            <!-- OBJECTIVE DATA -->
             <ObjectiveDataSet>
                 <IndividualMapping>
                     <ds:ColumnRef columnIdRef="id"/>
@@ -633,6 +655,8 @@
                     </ds:Table>
                 </ds:DataSet>
             </ObjectiveDataSet>
+
+            <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate id="e1">
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="p1" symbIdRef="pop_ka"></ct:SymbRef>
@@ -683,6 +707,8 @@
                     </InitialEstimate>
                 </ParameterEstimation>
             </ParametersToEstimate>
+
+            <!-- OPERATION -->
             <Operation order="1" opType="estPop">
                 <ct:Description>Estimate the population parameters in the model.</ct:Description>
                 <Property name="someProperty">
@@ -701,6 +727,8 @@
                 <ct:Description>Estimate conditional values for the individual parameters.</ct:Description>
             </Operation>
         </EstimationStep>
+        
+        <!-- STEP DEPENDENCIES -->
         <StepDependencies>
             <Step>
                 <ct:OidRef oidRef="e1"/>
