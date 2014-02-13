@@ -8,11 +8,14 @@
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
-    writtenVersion="0.1">
+    writtenVersion="0.2.1">
     
+    <!-- MODEL NAME -->
     <ct:Name>Example 3 - basic Warfarin PK estimation with covariate W</ct:Name>
     
+    <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="t"/>
+    
     <!-- FUNCTION DEFINITION -->
     <ct:FunctionDefinition  xmlns="http://www.pharmml.org/2013/03/CommonTypes" 
         symbId="combinedErrorModel" symbolType="real">
@@ -34,13 +37,16 @@
 
     <!-- MODEL DEFINITION -->
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="model" type="model">
+        <VariabilityModel blkId="modelVar" type="model">
             <Level symbId="indiv"/>
         </VariabilityModel>
+        
         <VariabilityModel blkId="obsErr" type="error">
             <Level symbId="residual"/>
         </VariabilityModel>
+        
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
             <Covariate symbId="W">
@@ -58,6 +64,7 @@
                 </Continuous>
             </Covariate>
         </CovariateModel>
+        
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
             <SimpleParameter symbId="pop_Tlag"/>
@@ -75,7 +82,7 @@
             <!-- Tlag -->
             <RandomVariable symbId="eta_Tlag">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
                     <mean>
@@ -103,7 +110,7 @@
             <!-- ka -->
             <RandomVariable symbId="eta_ka">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
                     <mean>
@@ -131,7 +138,7 @@
             <!-- V -->
             <RandomVariable symbId="eta_V">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
                     <mean>
@@ -165,7 +172,7 @@
             <!-- CL -->
             <RandomVariable symbId="eta_CL">
                 <ct:VariabilityReference>
-                    <ct:SymbRef symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
                     <mean>
@@ -197,6 +204,7 @@
                 </GaussianModel>
             </IndividualParameter>
         </ParameterModel>
+        
         <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="sm1">
             <SimpleParameter symbId="D"/>
@@ -284,6 +292,7 @@
                 </ct:Assign>
             </ct:Variable>
         </StructuralModel>
+        
         <!-- OBSERVATION MODEL -->
         <ObservationModel blkId="om1">
             <SimpleParameter symbId="a"/>
@@ -301,7 +310,7 @@
                     </stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <Standard symbId="C">
+            <Standard symbId="C_obs">
                 <Output>
                     <ct:SymbRef symbIdRef="C"/>
                 </Output>
@@ -332,6 +341,7 @@
     
     <!-- TRIAL DESIGN -->
     <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        
         <!-- STRUCTURE -->
         <Structure>
             <Epoch oid="epoch1">
@@ -365,6 +375,7 @@
                 </Bolus>
             </Activity>
         </Structure>
+        
         <!-- POPULATION -->
         <Population>
             <IndividualTemplate>
@@ -397,8 +408,10 @@
             </ds:DataSet>
         </Population>
     </TrialDesign>
+    
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
         <!-- ESTIMATION -->
         <EstimationStep oid="estimStep1">
             <!-- OBJECTIVE DATA -->
@@ -412,7 +425,7 @@
                 </VariableMapping>
                 <VariableMapping>
                     <ds:ColumnRef columnIdRef="dv"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="C"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
                 </VariableMapping>
                 <ds:DataSet>
                     <ds:Definition>
@@ -433,6 +446,7 @@
                     </ds:Table>
                 </ds:DataSet>
             </ObjectiveDataSet>
+            
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate>
                 <!-- V -->
@@ -502,6 +516,7 @@
                     </mstep:InitialEstimate>
                 </ParameterEstimation>                
             </ParametersToEstimate>
+            
             <!-- OPERATION -->
             <Operation order="1" opType="estPop">
                 <ct:Description>Estimate the population parameters in the model.</ct:Description>
@@ -521,6 +536,7 @@
             <Operation order="2" opType="estFIM"/>
             <Operation order="3" opType="estIndiv"/>
         </EstimationStep>
+        
         <!-- STEP DEPENDENCIES -->
         <mstep:StepDependencies>
             <mstep:Step>
