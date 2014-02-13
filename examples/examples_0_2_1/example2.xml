@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
     xmlns:math="http://www.pharmml.org/2013/03/Maths"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.1">
+    writtenVersion="0.2.1">
     
     <ct:Name>Example 2 - simulation continuous PK (Bonate 2012)</ct:Name>
     
@@ -22,8 +22,10 @@
             </math:Equation>
         </ct:Definition>
     </ct:FunctionDefinition>
+    
     <!-- model definition -->
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
         <!-- variability model -->
         <VariabilityModel blkId="modelVar" type="model">
             <Level symbId="indiv"></Level>
@@ -31,6 +33,7 @@
         <VariabilityModel blkId="obsVar" type="error">
             <Level symbId="resErr"/>
         </VariabilityModel>
+        
         <!-- covariate model -->
         <CovariateModel blkId="cm1">
             <SimpleParameter symbId="pop_Weight">
@@ -66,7 +69,8 @@
                     </Transformation>
                 </Continuous>
             </Covariate>
-        </CovariateModel>       
+        </CovariateModel>
+        
         <!-- parameter model -->
         <ParameterModel blkId="pm1">
             <SimpleParameter symbId="Ka"/>
@@ -75,7 +79,8 @@
             <SimpleParameter symbId="pop_theta1"/>
             <SimpleParameter symbId="omega_theta1"/>
             <SimpleParameter symbId="pop_V"/>
-            <SimpleParameter symbId="omega_V"/>            
+            <SimpleParameter symbId="omega_V"/> 
+            
             <!-- CL -->
             <SimpleParameter symbId="CL">
                 <ct:Assign>
@@ -87,6 +92,7 @@
                     </Equation>
                 </ct:Assign>
             </SimpleParameter>
+            
             <!-- theta1 -->
             <RandomVariable symbId="eta_theta1">
                 <ct:VariabilityReference>
@@ -116,6 +122,7 @@
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
+            
             <!-- V -->
             <RandomVariable symbId="eta_V">
                 <ct:VariabilityReference>
@@ -146,6 +153,7 @@
                 </GaussianModel>
             </IndividualParameter>
         </ParameterModel>
+        
         <!-- structural model -->
         <StructuralModel blkId="sm1">
             <ct:Variable symbolType="real" symbId="D"/>
@@ -233,6 +241,7 @@
                 </ct:Assign>
             </ct:Variable>
         </StructuralModel>
+        
         <!-- observation model -->
         <ObservationModel blkId="om1">
             <SimpleParameter symbId="b"/>
@@ -249,7 +258,7 @@
                     </stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <Standard symbId="Css">
+            <Standard symbId="Css_obs">
                 <Output>
                     <ct:SymbRef blkIdRef="sm1" symbIdRef="Css"/>
                 </Output>
@@ -274,8 +283,10 @@
             </Standard>
         </ObservationModel>
     </ModelDefinition>
+    
     <!-- trial design -->
     <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        
         <!-- structure -->
         <Structure>
             <Epoch oid="epoch1">
@@ -321,6 +332,7 @@
                 </Bolus>
             </Activity>
         </Structure>
+        
         <!-- population -->
         <Population>
             <!-- Define the variability level associated with the
@@ -351,6 +363,7 @@
             </DataSet>
         </Population>
     </TrialDesign>
+    
     <!-- modelling steps -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         <!-- simulation steps -->
@@ -411,10 +424,11 @@
                     </ct:Sequence>
                 </Timepoints>
                 <Continuous>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="Css"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="Css_obs"/>
                 </Continuous>
             </Observations>
         </SimulationStep>
+        
         <!-- step dependencies -->
         <StepDependencies>
             <Step>
