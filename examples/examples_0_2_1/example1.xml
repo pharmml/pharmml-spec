@@ -417,7 +417,7 @@
                     </ct:Assign>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
-            <ct:DerivativeVariable symbId="Cc" symbolType="real">
+            <ct:Variable symbId="Cc" symbolType="real">
                 <ct:Description>Concentration</ct:Description>
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
@@ -427,7 +427,7 @@
                         </Binop>
                     </Equation>
                 </ct:Assign>
-            </ct:DerivativeVariable>
+            </ct:Variable>
         </StructuralModel>
         
         <!-- observation model for E -->
