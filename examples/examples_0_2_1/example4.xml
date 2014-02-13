@@ -44,7 +44,7 @@
                 </ParentLevel>
             </Level>
         </VariabilityModel>
-        <VariabilityModel blkId="obs" type="error">
+        <VariabilityModel blkId="obsErr" type="error">
             <Level symbId="resErr"/>
         </VariabilityModel>
         
@@ -301,7 +301,7 @@
             <SimpleParameter symbId="b"/>
             <RandomVariable symbId="epsilon_Cc">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="obs" symbIdRef="resErr"/>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="resErr"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
