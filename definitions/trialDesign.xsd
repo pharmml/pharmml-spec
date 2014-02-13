@@ -100,6 +100,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST if necessary -->
     <xs:complexType name="TreatmentType">
         <xs:annotation>
             <xs:documentation>Describes a treatment, by which we mean one or more regimens that can be appied to a subject.</xs:documentation>
@@ -290,6 +291,137 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- new LookupTable type -->
+    <xs:complexType name="LookupTableType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the LookupTable data and mapping.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="design:LookupTableMapping">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing LookupTable. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:DataSet">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- new LookupTabletype -->
+    
+    <!-- TEST -->
+    <xs:element name="LookupTableIndividualMapping" substitutionGroup="design:LookupTableMapping"
+        type="design:LookupTableIndividualMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies the mapping to the individual in the lookup table.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="LookupTableArmMapping" substitutionGroup="design:LookupTableMapping"
+        type="design:LookupTableArmMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies a mapping to a variable in the model from the lookup table.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="LookupTableVariableMapping" substitutionGroup="design:LookupTableMapping"
+        type="design:LookupTableVariableMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies a mapping to a variable in the model from the lookup table.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- TEST -->
+    
+    <!-- TEST new Type for LOOKUP TABLE mapping -->
+    <xs:element name="LookupTableMapping" type="design:LookupTableMappingType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>Defines mappings between the lookup table and the model.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="LookupTableIndividualMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining the mapping of the lookup table to the individual.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="design:LookupTableMappingType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="LookupTableArmMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the mapping of the arm to the lookup table.   
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="design:LookupTableMappingType"/> 
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="LookupTableVariableMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining a maping to a variable in the model. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="design:LookupTableMappingType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST new type based on MappingType-->
+    <xs:complexType abstract="true" name="LookupTableMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Abstract type that defines lookup table mapping.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The column reference to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="ActivityType" abstract="false">
         <xs:annotation>
             <xs:documentation>
@@ -299,7 +431,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:choice>                        
+                    <xs:choice>
+                        <xs:element ref="design:LookupTable"/>
                         <xs:element ref="design:DosingRegimen"/>
                         <xs:element ref="design:Washout"/>
                     </xs:choice>
@@ -998,6 +1131,15 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST new type for lookup-table -->
+    <xs:element name="LookupTable" type="design:LookupTableType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies data set coming from a lookup-table.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="ObservationsEvent" substitutionGroup="design:StudyEvent"
         type="design:ObservationsType">
         <xs:annotation>

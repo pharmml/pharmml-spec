@@ -521,7 +521,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-- /TEST -->   
     
     <xs:complexType name="DatasetMappingType">
         <xs:annotation>
@@ -705,6 +705,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- new NONMEMtype -->
     
+    
     <!-- TEST - new type for NMsymbolMappingType based on 'MappingType' -->
     <xs:complexType name="NMsymbolMappingType">
         <xs:annotation>
@@ -882,7 +883,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
+    <!-- /TEST -->
 
     <xs:element name="Mapping" type="msteps:MappingType" abstract="true">
         <xs:annotation>
@@ -897,7 +898,7 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
-    
+        
     <xs:element name="Timepoints" type="msteps:TimepointsType"/>
     <xs:element abstract="true" name="CommonModellingStep" type="msteps:ModellingStepType">
         <xs:annotation>
