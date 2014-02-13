@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.1">
+    writtenVersion="0.2.1">
     
     <!-- MODEL NAME -->
     <ct:Name>Example 5 - estimation for growth tumor model (Ribba et al. 2012)</ct:Name>
