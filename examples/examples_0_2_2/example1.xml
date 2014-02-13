@@ -13,6 +13,7 @@
     <ct:Name>Example 1 - simulation continuous PK/PD</ct:Name>
     
     <IndependentVariable symbId="t"/>
+    
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="constantErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>
@@ -22,6 +23,7 @@
             </Equation>
         </Definition>
     </FunctionDefinition>
+    
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="combinedErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>

@@ -6,9 +6,12 @@
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     writtenVersion="0.2.1">
     
+    <!-- model name -->
     <ct:Name>Example 2 - simulation continuous PK (Bonate 2012)</ct:Name>
     
+    <!-- independent variable -->
     <IndependentVariable symbId="t"/>
+    
     <!-- residual errors model definition  -->
     <ct:FunctionDefinition symbolType="real" symbId="proportional">
         <ct:FunctionArgument symbolType="real" symbId="b"/>
