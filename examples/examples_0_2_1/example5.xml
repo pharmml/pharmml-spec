@@ -5,12 +5,13 @@
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     writtenVersion="0.1">
     
+    <!-- MODEL NAME -->
     <ct:Name>Example 5 - estimation for growth tumor model (Ribba et al. 2012)</ct:Name>
     
     <ct:Description>based on A Tumor Growth Inhibition Model for Low-Grade Glioma Treated with Chemotherapy or Radiotherapy
         Benjamin Ribba, Gentian Kaloshi, Mathieu Peyre, et al. Clin Cancer Res Published OnlineFirst July 3, 2012.</ct:Description>
     
-    <!-- intependent variable -->
+    <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="time"/>
 
     <!-- SYMBOL DEFINITION - RESUIDUAL ERROR MODEL -->
@@ -25,7 +26,7 @@
     <ModelDefinition  xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="model" type="model"> 
+        <VariabilityModel blkId="modelVar" type="model"> 
             <Level symbId="indiv"/>
         </VariabilityModel>
         
@@ -45,7 +46,7 @@
             <SimpleParameter symbId="omega_P0"/>
             <RandomVariable symbId="eta_P0">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" 
                     definition="http://www.uncertml.org/distributions/normal">
@@ -73,7 +74,7 @@
             <SimpleParameter symbId="omega_Q0"/>
             <RandomVariable symbId="eta_Q0">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -130,7 +131,7 @@
             <!-- LAMBDAP log-normal distributed -->
             <RandomVariable symbId="eta_LAMBDAP">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
@@ -160,7 +161,7 @@
             <!-- KQPP log-normal distributed -->
             <RandomVariable symbId="eta_KQPP">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
@@ -190,7 +191,7 @@
             <!-- KPQ log-normal distributed -->
             <RandomVariable symbId="eta_KPQ">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
@@ -220,7 +221,7 @@
             <!-- GAMMA log-normal distributed -->
             <RandomVariable symbId="eta_GAMMA">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
@@ -250,7 +251,7 @@
             <!-- DELTAQP log-normal distributed -->
             <RandomVariable symbId="eta_DELTAQP">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
