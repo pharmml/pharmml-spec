@@ -460,7 +460,7 @@
                     </stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <Standard symbId="PSTAR">
+            <Standard symbId="PSTAR_obs">
                 <Output>
                     <ct:SymbRef blkIdRef="sm1" symbIdRef="PSTAR"/>
                 </Output>
@@ -594,7 +594,7 @@
                 </VariableMapping>
                 <VariableMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR_obs"/>
                 </VariableMapping>
                 
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
