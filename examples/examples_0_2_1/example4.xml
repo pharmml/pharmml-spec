@@ -6,11 +6,15 @@
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
     xmlns:design="http://www.pharmml.org/2013/03/TrialDesign"
-    writtenVersion="0.1">
+    writtenVersion="0.2.1">
     
+    <!-- MODEL NAME -->
     <ct:Name>Example 4 - estimation with IOV1 and with covariates</ct:Name>
 
+    <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="t"/>
+
+    <!-- FUNCTION DEFINITION -->
     <ct:FunctionDefinition symbId="combinedErrorModel" symbolType="real">
         <ct:FunctionArgument symbId="a" symbolType="real"/>
         <ct:FunctionArgument symbId="b" symbolType="real"/>
@@ -27,18 +31,23 @@
             </Equation>
         </ct:Definition>
     </ct:FunctionDefinition>
+    
+    <!-- MODEL DEFINITION -->
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
-        <VariabilityModel blkId="model" type="model">
+    
+        <!-- VARIABILITY MODEL -->
+        <VariabilityModel blkId="modelVar" type="model">
             <Level symbId="indiv"/>
             <Level symbId="iov1">
                 <ParentLevel>
-                    <ct:SymbRef symbIdRef="model"/>
+                    <ct:SymbRef symbIdRef="indiv"/>
                 </ParentLevel>
             </Level>
         </VariabilityModel>
         <VariabilityModel blkId="obs" type="error">
             <Level symbId="resErr"/>
         </VariabilityModel>
+        
         <CovariateModel blkId="c1">
             <Covariate symbId="Sex">
                 <Categorical>
@@ -82,7 +91,7 @@
             <SimpleParameter symbId="pop_ka"/>
             <RandomVariable symbId="eta_ka">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
@@ -118,7 +127,7 @@
             <SimpleParameter symbId="beta_V_TreatSet"/>
             <RandomVariable symbId="eta_V">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
@@ -127,7 +136,7 @@
             </RandomVariable>
             <RandomVariable symbId="kappa_V">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="iov1"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="iov1"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
@@ -183,7 +192,7 @@
             <SimpleParameter symbId="beta_CL"/>
             <RandomVariable symbId="eta_CL">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
@@ -192,7 +201,7 @@
             </RandomVariable>
             <RandomVariable symbId="kappa_CL">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="iov1"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="iov1"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
@@ -433,7 +442,7 @@
                 <ArmRef oidRef="a1"/>
                 <ArmRef oidRef="a2"/>
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="iov"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="iov"/>
                 </ct:VariabilityReference>
                 <ObservationGroup oid="occ1">
                     <EpochRef oidRef="ep1"/>
@@ -447,7 +456,7 @@
                 <ArmRef oidRef="a1"/>
                 <ArmRef oidRef="a2"/>
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="model" symbIdRef="iov"/>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="iov"/>
                 </ct:VariabilityReference>
                 <ObservationGroup oid="occ1">
                     <Period>
@@ -466,7 +475,7 @@
         </Structure>
         <Population>
             <ct:VariabilityReference>
-                <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
             </ct:VariabilityReference>
             <IndividualTemplate>
                 <IndividualMapping>
