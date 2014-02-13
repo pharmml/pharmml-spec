@@ -296,7 +296,7 @@
         </StructuralModel>
         
         <!-- OBSERVATION MODEL -->
-        <ObservationModel blkId="o1">
+        <ObservationModel blkId="om1">
             <SimpleParameter symbId="a"/>
             <SimpleParameter symbId="b"/>
             <RandomVariable symbId="epsilon_Cc">
@@ -308,7 +308,7 @@
                     <stddev><prVal>1</prVal></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <Standard symbId="Cc"> 
+            <Standard symbId="Cc_obs"> 
                 <Output>
                     <ct:SymbRef blkIdRef="main" symbIdRef="Cc"/>
                 </Output>
@@ -495,35 +495,35 @@
             </ct:VariabilityReference>
             <IndividualTemplate>
                 <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="id"/>
+                    <ds:ColumnRef columnIdRef="ID"/>
                 </IndividualMapping>
                 <ArmMapping>
-                    <ds:ColumnRef columnIdRef="arm"/>
+                    <ds:ColumnRef columnIdRef="ARM"/>
                 </ArmMapping>
                 <CovariateMapping>
-                    <ds:ColumnRef columnIdRef="sex"/>
+                    <ds:ColumnRef columnIdRef="SEX"/>
                     <ct:SymbRef blkIdRef="c1" symbIdRef="Sex"/>
                 </CovariateMapping>
                 <IVDependentMapping>
                     <ds:ColumnRef columnIdRef="treat-tab"/>
                     <EpochMapping>
-                        <ds:ColumnRef columnIdRef="epoch"/>
+                        <ds:ColumnRef columnIdRef="EPOCH"/>
                     </EpochMapping>
                     <CovariateMapping>
-                        <ds:ColumnRef columnIdRef="treat"></ds:ColumnRef>
+                        <ds:ColumnRef columnIdRef="TREAT"></ds:ColumnRef>
                         <ct:SymbRef blkIdRef="c1" symbIdRef="Treat"/>
                     </CovariateMapping>
                 </IVDependentMapping>
             </IndividualTemplate>
             <ds:DataSet>
                 <ds:Definition>
-                    <ds:Column columnId="id" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="arm" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="sex" valueType="id" columnNum="3"/>
+                    <ds:Column columnId="ID" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="ARM" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="SEX" valueType="id" columnNum="3"/>
                     <ds:Table tableId="treat-tab" columnNum="4">
                         <ds:Definition>
-                            <ds:Column columnId="epoch" valueType="id" columnNum="1"/>
-                            <ds:Column columnId="treat" valueType="id" columnNum="2"/>
+                            <ds:Column columnId="EPOCH" valueType="id" columnNum="1"/>
+                            <ds:Column columnId="TREAT" valueType="id" columnNum="2"/>
                         </ds:Definition>
                     </ds:Table>
                 </ds:Definition>
@@ -632,20 +632,20 @@
             <!-- OBJECTIVE DATA -->
             <ObjectiveDataSet>
                 <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="id"/>
+                    <ds:ColumnRef columnIdRef="ID"/>
                 </IndividualMapping>
                 <VariableMapping>
                     <ds:ColumnRef columnIdRef="Y"/>
-                    <ct:SymbRef blkIdRef="o1" symbIdRef="Cc"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="Cc_obs"/>
                 </VariableMapping>
                 <VariableMapping>
-                    <ds:ColumnRef columnIdRef="time"/>
+                    <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
                 </VariableMapping>
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnNum="1" columnId="id" valueType="id"/>
-                        <ds:Column columnNum="2" columnId="time" valueType="real"/>
+                        <ds:Column columnNum="1" columnId="ID" valueType="id"/>
+                        <ds:Column columnNum="2" columnId="TIME" valueType="real"/>
                         <ds:Column columnNum="3" columnId="Y" valueType="real"/>
                     </ds:Definition>
                     <ds:Table>
