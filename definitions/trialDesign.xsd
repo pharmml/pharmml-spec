@@ -43,24 +43,31 @@ permissions and limitations under the License.
         Simple Types
         -->
 
-    <xs:simpleType name="DoseInputTypeType">
+    <xs:simpleType name="DoseInputTargetType">
         <xs:annotation>
             <xs:documentation>
                 Defines the dosing input type.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:NCName">
-            <xs:enumeration value="dose">
+            <xs:enumeration value="parameter">
                 <xs:annotation>
                     <xs:documentation>
-                        Dose is assigned to a dosing variable.
+                        Dose is assigned to a dosing variable, e.g. D.
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="target">
+            <xs:enumeration value="derivativeVariable">
                 <xs:annotation>
                     <xs:documentation>
-                        Dose is an input to a system of ODEs. 
+                        Dose is an input to a variable defined with an ODE. 
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="variable">
+                <xs:annotation>
+                    <xs:documentation>
+                        Dose is an input to a system via a variable.
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
@@ -1074,11 +1081,10 @@ permissions and limitations under the License.
         -->
 
     <xs:attributeGroup name="doseVarAttGroup">
-        <xs:attribute name="inputType" use="required" type="design:DoseInputTypeType">
+        <xs:attribute name="inputTarget" use="required" type="design:DoseInputTargetType">
             <xs:annotation>
                 <xs:documentation>
-                    Specifies the type of dosing. Is it assigned to a variable or is it an input
-                    to a system of ODEs.
+                    Specifies the type of dosing. Is it assigned to a dose parameter, a variable or is it an input to an ODE.
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
