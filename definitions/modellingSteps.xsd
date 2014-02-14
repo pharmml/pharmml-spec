@@ -468,7 +468,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:NMMappingType">
                 <xs:sequence>
-                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                    <xs:element minOccurs="0" ref="ct:SymbRef">
                         <xs:annotation>
                             <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                         </xs:annotation>
