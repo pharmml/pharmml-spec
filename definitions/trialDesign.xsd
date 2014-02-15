@@ -354,6 +354,14 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <xs:element name="LookupTableTargetMapping" substitutionGroup="design:LookupTableMapping"
+        type="design:LookupTableTargetMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies a mapping to a variable in the model from the lookup table.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <!-- TEST -->
     
     <!-- TEST new Type for LOOKUP TABLE mapping -->
@@ -385,6 +393,31 @@ permissions and limitations under the License.
             <xs:extension base="design:LookupTableMappingType"/> 
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    
+    <!--<!-\- TEST working but without inputTarget attribute-\->
+    <xs:complexType name="LookupTableVariableMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining a maping to a variable in the model. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="design:LookupTableMappingType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-\- /TEST -\->-->
+    
+    <!-- TEST working but without inputTarget attribute-->
     <xs:complexType name="LookupTableVariableMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -406,6 +439,29 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    <!-- TEST new type for TargetVariable with inputTarget attribute-->
+    <xs:complexType name="LookupTableTargetMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining a maping to a variable in the model. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="design:LookupTableMappingType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
+                </xs:sequence>
+                <xs:attributeGroup ref="design:doseVarAttGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+        
     <!-- TEST new type based on MappingType-->
     <xs:complexType abstract="true" name="LookupTableMappingType">
         <xs:annotation>
@@ -1075,7 +1131,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-
+    
     <!--
         Attribute Groups
         -->
