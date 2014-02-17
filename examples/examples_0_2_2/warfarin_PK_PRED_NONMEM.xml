@@ -395,7 +395,7 @@
                 </NMVariableMapping>
                 <NMVariableMapping>
                     <ds:ColumnRef columnIdRef="dv"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="Cc"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
                 </NMVariableMapping>
                 <NMCovariateMapping>
                     <ds:ColumnRef columnIdRef="wt"/>
@@ -447,7 +447,6 @@
                 </ds:DataSet>            
             </NONMEMdataSet>
             
-
             <ParametersToEstimate>
                 <ParameterEstimation>
                     <ct:SymbRef symbIdRef="CL"/>
@@ -455,6 +454,7 @@
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
+                <!-- other parameters to be estmated... -->
             </ParametersToEstimate>
             <Operation order="1" opType="estPop"/>
         </EstimationStep>

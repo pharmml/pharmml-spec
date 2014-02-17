@@ -8,7 +8,7 @@
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
-    writtenVersion="0.2.1">
+    writtenVersion="0.2.2" id="i1">
     
     <ct:Name>Testing PK with look-up table</ct:Name>
     
@@ -56,7 +56,7 @@
             </Level>
         </VariabilityModel>
 
-        <CovariateModel blkId="c1">
+        <CovariateModel blkId="cm1">
             <SimpleParameter symbId="pop_W"/>
             <SimpleParameter symbId="omega_W"/>
             <Covariate symbId="W">
@@ -279,18 +279,6 @@
             </Segment>
             <Activity oid="d1">
 
-<!--                <Bolus>
-                    <DoseAmount inputTarget="parameter">
-                        <ct:SymbRef symbIdRef="D"/>
-                    </DoseAmount>
-                    <DosingTimes>
-                        <ct:Assign>
-                            <ct:Real>10</ct:Real>
-                        </ct:Assign>
-                    </DosingTimes>
-                </Bolus>-->
-                
-
                 <LookupTable>
                     
                     <LookupTableIndividualMapping>
@@ -372,28 +360,32 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
-<!--        <EstimationStep oid="e1">
+        <EstimationStep oid="estimStep1">
+            <!-- DUMMY dataset -->
             <NONMEMdataSet>
                 <NMIndividualMapping>
-                    <ds:ColumnRef columnIdRef=""></ds:ColumnRef>
+                    <ds:ColumnRef columnIdRef="ID"/>
                 </NMIndividualMapping>
                 <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef=""></ds:ColumnRef>
-                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                    <ds:ColumnRef columnIdRef="TIME"></ds:ColumnRef>
+                    <ct:SymbRef symbIdRef="t"/>
                 </NMVariableMapping>
                 <NMCovariateMapping>
-                    <ds:ColumnRef columnIdRef=""></ds:ColumnRef>
-                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                    <ds:ColumnRef columnIdRef="WEIGHT"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                 </NMCovariateMapping>
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnId="" valueType="" columnNum=""></ds:Column>
+                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="TIME" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="DV" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="WEIGHT" valueType="real" columnNum="4"/>
                     </ds:Definition>
-                    <ds:ImportData oid="">
-                        <ds:name></ds:name>
-                        <ds:url></ds:url>
-                        <ds:format></ds:format>
-                        <ds:delimiter></ds:delimiter>
+                    <ds:ImportData oid="importData">
+                        <ds:name>dataSetName</ds:name>
+                        <ds:url>file:///../datasets/</ds:url>
+                        <ds:format>CSV</ds:format>
+                        <ds:delimiter>COMMA</ds:delimiter>
                     </ds:ImportData>
                 </ds:DataSet>
             </NONMEMdataSet>
@@ -401,9 +393,10 @@
                 <ParameterEstimation>
                     <ct:SymbRef symbIdRef="k"/>
                 </ParameterEstimation>
+                <!-- other parameters to be stimated... -->
             </ParametersToEstimate>
             <Operation order="1" opType="estPop"/>
-        </EstimationStep>-->
+        </EstimationStep>
         
         <SimulationStep oid="s1">
             <ct:VariableAssignment>
@@ -469,6 +462,9 @@
             </Observations>
         </SimulationStep>
         <StepDependencies>
+            <Step>
+                <ct:OidRef oidRef="estimStep1"></ct:OidRef>
+            </Step>
             <Step>
                 <ct:OidRef oidRef="s1"/>
             </Step>

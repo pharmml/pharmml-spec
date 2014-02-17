@@ -711,28 +711,58 @@
     
     
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
         <EstimationStep oid="estStep">
            
             <!-- NONMEM OBJECTIVE DATA -->
             <NONMEMdataSet>
+                <!-- NM dataset mapping -->
                 <NMIndividualMapping>
                     <ds:ColumnRef columnIdRef="ID"/>
                 </NMIndividualMapping>
                 <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="TIME"/>
-                    <ct:SymbRef symbIdRef="t"/>
+                    <ds:ColumnRef columnIdRef="MONTH"/>
                 </NMVariableMapping>
                 <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="DV"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
+                    <ds:ColumnRef columnIdRef="TRIAL"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="OCC"/>
                 </NMVariableMapping>
                 <NMCovariateMapping>
                     <ds:ColumnRef columnIdRef="WTKG"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                 </NMCovariateMapping>
-                <!-- other mapping left out 
-                it has to be decided whether new mapping types are necessary-->
-                
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="PREV"/>
+                </NMVariableMapping>                
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="TIME"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="AMT"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="RATE"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="SS"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="II"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="CMT"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="DV"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="MDV"/>
+                </NMVariableMapping>
+                <!-- Dataset definition -->
                 <ds:DataSet>
                     <ds:Definition>
                         <ds:Column columnId="ID" valueType="id" columnNum="1"/>
@@ -757,6 +787,7 @@
                         <ds:delimiter>COMMA</ds:delimiter>
                     </ds:ImportData>
                 </ds:DataSet>
+                <!-- Code injection -->
                 <CodeInjection>
                     <NMsymbolMapping>
                         <ct:SymbRef symbIdRef="TTK0"/>
@@ -774,9 +805,12 @@
                         <ct:SymbRef symbIdRef="CL"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
                     </NMsymbolMapping>
-                    <!-- 
-                    Do mappings for R1, D1 make sense???
-                    -->
+                    <NMsymbolMapping>                           <!-- Do mappings for R1, D1 make sense? -->
+                        <ct:SymbRef symbIdRef="D1"/>
+                    </NMsymbolMapping>
+                    <NMsymbolMapping>
+                        <ct:SymbRef symbIdRef="R1"/>
+                    </NMsymbolMapping>
                     <NMTRANcode>
                         <NMsymbol symbId="PRED"/>
                         <NMsymbol symbId="EVID"/>
