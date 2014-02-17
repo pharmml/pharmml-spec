@@ -28,8 +28,10 @@
             <Level symbId="residual"/>
         </VariabilityModel>
         
+        
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
+            <!-- W -->
             <Covariate symbId="W">
                 <Continuous>
                     <Transformation>
@@ -39,8 +41,26 @@
                     </Transformation>
                 </Continuous>
             </Covariate>
+            <!-- AGE -->
+            <Covariate symbId="AGE">
+                <Continuous>
+                    <Transformation>
+                        <math:Equation>
+                            <ct:SymbRef symbIdRef="AGE"/>
+                        </math:Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+            <!-- SEX -->
+            <Covariate symbId="SEX">
+                <Categorical>
+                    <Category catId="F">
+                        <ct:Name>Female</ct:Name>
+                    </Category>
+                </Categorical>
+            </Covariate>
         </CovariateModel>
-        
+                
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
             
@@ -362,116 +382,88 @@
     
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
-
-        <EstimationStep oid="estStep1">
-            <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef=""></ds:ColumnRef>
-                </IndividualMapping>
-                <VariableMapping>
-                    <ds:ColumnRef columnIdRef=""></ds:ColumnRef>
-                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
-                </VariableMapping>
+        
+        <EstimationStep oid="estimStep1">
+            
+            <NONMEMdataSet>
+                <NMIndividualMapping>
+                    <ds:ColumnRef columnIdRef="ID"/>
+                </NMIndividualMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="dv"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="Cc"/>
+                </NMVariableMapping>
+                <NMCovariateMapping>
+                    <ds:ColumnRef columnIdRef="wt"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                </NMCovariateMapping>
+                <NMCovariateMapping>
+                    <ds:ColumnRef columnIdRef="age"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="AGE"/>
+                </NMCovariateMapping>
+                <NMCovariateMapping>
+                    <ds:ColumnRef columnIdRef="sex"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
+                </NMCovariateMapping>
+                <!-- dose, amt, d as NMVariableMapping 
+                SECOND argument optional -->
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="amt"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="dvid"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="dv"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="mdv"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="amt"/>
+                </NMVariableMapping>
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnId="" valueType="" columnNum=""></ds:Column>
+                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="time" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="wt" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="age" valueType="real" columnNum="4"/>
+                        <ds:Column columnId="sex" valueType="int" columnNum="5"/>
+                        <ds:Column columnId="amt" valueType="real" columnNum="6"/>
+                        <ds:Column columnId="dvid" valueType="real" columnNum="7"/>
+                        <ds:Column columnId="dv" valueType="real" columnNum="8"/>
+                        <ds:Column columnId="mdv" valueType="real" columnNum="9"/>
                     </ds:Definition>
-                </ds:DataSet>
-            </ObjectiveDataSet>
+                    <ds:ImportData oid="id1">
+                        <ds:name>warfarin_conc_pca</ds:name>
+                        <ds:url>file:///../examples_0_2_2/datasets/</ds:url>
+                        <ds:format>CSV</ds:format>
+                        <ds:delimiter>COMMA</ds:delimiter>
+                    </ds:ImportData>
+                </ds:DataSet>            
+            </NONMEMdataSet>
+            
+
             <ParametersToEstimate>
                 <ParameterEstimation>
-                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                    <ct:SymbRef symbIdRef="CL"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
                 </ParameterEstimation>
             </ParametersToEstimate>
-            <Operation order="" opType=""></Operation>
-            <NONMEMDataSet>                                             <!-- new type - extension of the 'ObjectiveDataSet' type -->
-                <VariableMapping>                                       <!-- is there already -->
-                    <ds:ColumnRef columnIdRef="TIME"/>
-                    <ct:SymbRef symbIdRef="t"/>
-                </VariableMapping>
-                <VariableMapping>
-                    <ds:ColumnRef columnIdRef="DV"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="C"/>
-                </VariableMapping>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </IndividualMapping>
-                <CovariateMatting>                                      <!-- needs to be defined for this 'NONMEMDataSet' -->
-                    WT
-                    W "cm1"
-                </CovariateMatting>
-                <CovariateMatting>
-                    SEX
-                    SEX "cm1"
-                </CovariateMatting>
-                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                    <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <Column columnId="WT" valueType="real" columnNum="3"/>
-                        <Column columnId="AGE" valueType="real" columnNum="4"/>
-                        <Column columnId="SEX" valueType="int" columnNum="5"/>
-                        <Column columnId="AMT" valueType="real" columnNum="6"/>
-                        <Column columnId="DVID" valueType="int" columnNum="7"/>
-                        <Column columnId="DV" valueType="real" columnNum="8"/>
-                        <Column columnId="MDV" valueType="int" columnNum="9"/>
-                    </Definition>
-                    <ImportData oid="expData">
-                        <name>warfarin_conc_pca</name>
-                        <url>./examples/</url>
-                        <format>CSV</format>
-                        <delimiter>COMMA</delimiter>
-                    </ImportData>
-                </DataSet>
-            </NONMEMDataSet>
-            <ParametersToEstimate>
-                <ParameterEstimation>
-                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
-                </ParameterEstimation>
-            </ParametersToEstimate>
-            <CodeInjection>                                             <!-- needs to be defined for this 'NONMEMDataSet' -->
-                <PARAMETERMAPPING>                                      <!-- needs to be defined for this 'NONMEMDataSet' -->
-                    ttk0
-                    TTK0 "pm1"
-                </PARAMETERMAPPING>
-                <PARAMETERMAPPING>
-                    css
-                    CSS "pm1"
-                </PARAMETERMAPPING>
-                if (PREV==0) {
-                D1=TTK0
-                } else {
-                R1=CL*CSS
-                }
-            </CodeInjection>
-            <Operation order="1" opType="estIndiv"/>
+            <Operation order="1" opType="estPop"/>
         </EstimationStep>
         
-        <TargetDataSet>
-            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" valueType="real" columnNum="2"/>
-                    <Column columnId="WT" valueType="real" columnNum="3"/>
-                    <Column columnId="AGE" valueType="real" columnNum="4"/>
-                    <Column columnId="SEX" valueType="int" columnNum="5"/>
-                    <Column columnId="AMT" valueType="real" columnNum="6"/>
-                    <Column columnId="DVID" valueType="int" columnNum="7"/>
-                    <Column columnId="DV" valueType="real" columnNum="8"/>
-                    <Column columnId="MDV" valueType="int" columnNum="9"/>
-                </Definition>
-                <ImportData oid="expData">
-                    <name>warfarin_conc_pca</name>
-                    <url>./examples/</url>
-                    <format>CSV</format>
-                    <delimiter>COMMA</delimiter>
-                </ImportData>
-            </DataSet>
-            
-            <CodeInjection>
+        <StepDependencies>
+            <Step>
+                <ct:OidRef oidRef="estimStep1"/>
+            </Step>
+        </StepDependencies>
                 
-            </CodeInjection>
-        </TargetDataSet>
-        
     </ModellingSteps>
 </PharmML>
