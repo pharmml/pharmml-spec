@@ -97,7 +97,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="omega_ka"/></stddev>
                 </NormalDistribution>
@@ -134,7 +134,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="omega_V"/></stddev>
                 </NormalDistribution>
@@ -143,7 +143,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="iov1"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="omega_ka"/></stddev>
                 </NormalDistribution>
@@ -200,7 +200,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="omega_CL"/></stddev>
                 </NormalDistribution>
@@ -209,7 +209,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="iov1"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="gamma_CL"/></stddev>
                 </NormalDistribution>
@@ -303,7 +303,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="obsErr" symbIdRef="resErr"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><prVal>1</prVal></stddev>
                 </NormalDistribution>

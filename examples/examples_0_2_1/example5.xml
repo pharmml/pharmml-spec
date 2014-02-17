@@ -48,8 +48,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" 
-                    definition="http://www.uncertml.org/distributions/normal">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="omega_P0"/></stddev>
                 </NormalDistribution>
@@ -448,9 +447,6 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
                 </ct:VariabilityReference>
-                <!-- SLM: The definition is not the version, but the URL of the web definitions.
-                    It should be definition="http://www.uncertml.org/distributions/normal"
-                    -->
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal>

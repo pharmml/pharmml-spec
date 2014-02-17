@@ -51,7 +51,7 @@
             </SimpleParameter>
             <Covariate symbId="Weight">
                 <Continuous>
-                    <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                    <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                         <mean>
                             <var varId="pop_Weight"/>
                         </mean>
@@ -101,7 +101,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal>
                     </mean>
@@ -131,7 +131,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal>
                     </mean>
@@ -252,7 +252,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="obsVar" symbIdRef="resErr"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal>
                     </mean>
