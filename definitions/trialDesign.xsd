@@ -342,7 +342,7 @@ permissions and limitations under the License.
         type="design:LookupTableArmMappingType">
         <xs:annotation>
             <xs:documentation>
-                Specifies a mapping to a variable in the model from the lookup table.
+                Specifies a mapping to an arm in the trial design from the lookup table.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -358,7 +358,7 @@ permissions and limitations under the License.
         type="design:LookupTableTargetMappingType">
         <xs:annotation>
             <xs:documentation>
-                Specifies a mapping to a variable in the model from the lookup table.
+                Specifies a mapping to a target variable in the model from the lookup table.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
