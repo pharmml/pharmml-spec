@@ -13,7 +13,6 @@
     <ct:Name>Example 1 - simulation continuous PK/PD</ct:Name>
     
     <IndependentVariable symbId="t"/>
-    
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="constantErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>
@@ -23,7 +22,6 @@
             </Equation>
         </Definition>
     </FunctionDefinition>
-    
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="combinedErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>
@@ -41,9 +39,7 @@
             </Equation>
         </Definition>
     </FunctionDefinition>
-    
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
-    
         <VariabilityModel blkId="randEffect" type="parameterVariability">
             <Level symbId="indiv">
                 <ct:Name>Individual Variability</ct:Name>
@@ -54,7 +50,6 @@
                 <ct:Name>Residual Error</ct:Name>
             </Level>
         </VariabilityModel>
-        
         <CovariateModel blkId="c1">
             <SimpleParameter symbId="pop_W"/>
             <SimpleParameter symbId="omega_W"/>
@@ -88,7 +83,7 @@
             <SimpleParameter symbId="omega_V"/>
             <RandomVariable symbId="eta_V">
                 <ct:VariabilityReference>
-                   <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+                   <ct:SymbRef blkIdRef="randEffect" symbIdRef="level"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
                     <mean><rVal>0</rVal></mean>
@@ -178,8 +173,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0"
-                    definition="http://www.uncertml.org/distributions/normal">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="omega_Cl"/></stddev>
                 </NormalDistribution>
@@ -670,6 +664,32 @@
     
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
+        
+<!--        <EstimationStep oid="">
+            <ObjectiveDataSet>
+                <IndividualMapping>
+                    <ds:ColumnRef columnIdRef=""></ds:ColumnRef>
+                </IndividualMapping>
+                <VariableMapping>
+                    <ds:ColumnRef columnIdRef=""></ds:ColumnRef>
+                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                </VariableMapping>
+                <
+                <ds:DataSet>
+                    <ds:Definition>
+                        <ds:Column columnId="" valueType="" columnNum=""></ds:Column>
+                    </ds:Definition>
+                </ds:DataSet>
+            </ObjectiveDataSet>
+            <ParametersToEstimate>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                </ParameterEstimation>
+            </ParametersToEstimate>
+            <Operation order="" opType=""></Operation>
+        </EstimationStep>-->
+        
         <SimulationStep oid="s1">
             <ct:VariableAssignment>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="pop_W"/>
