@@ -395,6 +395,21 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    <!-- TEST -->
+    <xs:complexType name="LookupTableEpochMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining a mapping from the epoch to values in the column of a lookup table.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="design:PopulationMappingType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    
+    
     <!--<!-\- TEST working but without inputTarget attribute-\->
     <xs:complexType name="LookupTableVariableMappingType">
         <xs:annotation>
