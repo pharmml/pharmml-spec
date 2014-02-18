@@ -12,8 +12,10 @@
     
     <ct:Name>Testing PK with look-up table</ct:Name>
     
+    <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="t"/>
     
+    <!-- FUNCTION DEFINITION -->
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="constantErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>
@@ -24,26 +26,10 @@
         </Definition>
     </FunctionDefinition>
 
-    <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
-        symbId="combinedErrorModel" symbolType="real">
-        <FunctionArgument symbId="a" symbolType="real"/>
-        <FunctionArgument symbId="b" symbolType="real"/>
-        <FunctionArgument symbId="f" symbolType="real"/>
-        <Definition>
-            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-                <Binop op="plus">
-                    <ct:SymbRef symbIdRef="a"/>
-                    <Binop op="times">
-                        <ct:SymbRef symbIdRef="b"/>
-                        <ct:SymbRef symbIdRef="f"/>
-                    </Binop>
-                </Binop>
-            </Equation>
-        </Definition>
-    </FunctionDefinition>
-
+    <!-- MODEL DEFINITION -->
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
 
+        <!-- VARIABILITY MODEL -->
         <VariabilityModel blkId="randEffect" type="parameterVariability">
             <Level symbId="indiv">
                 <ct:Name>Individual Variability</ct:Name>
@@ -56,6 +42,7 @@
             </Level>
         </VariabilityModel>
 
+        <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
             <SimpleParameter symbId="pop_W"/>
             <SimpleParameter symbId="omega_W"/>
@@ -83,6 +70,7 @@
             </Covariate>
         </CovariateModel>
         
+        <!-- PARAMETER MODEL -->
         <ParameterModel blkId="p1">
 
             <!-- Rin -->
@@ -206,18 +194,6 @@
                         </Binop>
                     </Equation>
                 </ct:Assign>
-                <ct:IndependentVariable>
-                    <ct:SymbRef symbIdRef="t"/>
-                </ct:IndependentVariable>
-                <ct:InitialCondition>
-                    <ct:InitialValue>
-                        <ct:Assign>
-                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-                                <ct:Real>0</ct:Real>
-                            </Equation>
-                        </ct:Assign>
-                    </ct:InitialValue>
-                </ct:InitialCondition>
             </ct:DerivativeVariable>
         </StructuralModel>
 
@@ -234,7 +210,7 @@
                     <stddev><var varId="sigma_E"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <General symbId="E">
+            <General symbId="E_obs">
                 <ct:Assign>
                     <math:Equation>
                         <math:Binop op="plus">
@@ -255,6 +231,7 @@
         </ObservationModel>
     </ModelDefinition>
     
+    <!-- TRIAL DESIGN -->
     <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
         
         <!-- STRUCTURE -->
@@ -280,34 +257,40 @@
             <Activity oid="d1">
 
                 <LookupTable>
-                    
-                    <LookupTableIndividualMapping>
+                    <!-- MAPPING -->
+                    <LookupTableIndividualMapping>                                          <!-- INDIVIDUAL mapping -->
                         <ds:ColumnRef columnIdRef="ID"/>
                     </LookupTableIndividualMapping>
 
-                    <LookupTableArmMapping>
+                    <LookupTableArmMapping>                                                 <!-- ARM mapping -->
                         <ds:ColumnRef columnIdRef="ARM"/>
                     </LookupTableArmMapping>
                     
-                    <LookupTableVariableMapping>
+                    <LookupTableEpochMapping>                                               <!-- EPOCH mapping -->
+                        <ds:ColumnRef columnIdRef="EPOCH"/>
+                    </LookupTableEpochMapping>
+                    
+                    <LookupTableVariableMapping>                                            <!-- VARIABLE mapping -->
                         <ds:ColumnRef columnIdRef="TIME"/>
                         <ct:SymbRef symbIdRef="t"/>
                     </LookupTableVariableMapping>
                         
-                    <LookupTableTargetMapping inputTarget="variable">
-                        <ds:ColumnRef columnIdRef="Cc_interpol"/>
+                    <LookupTableTargetMapping inputTarget="variable">                       <!-- TARGET mapping -->
+                        <ds:ColumnRef columnIdRef="C"/>
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
                         <ds:Interpolation>
                             <ds:Algorithm>linear</ds:Algorithm>
                         </ds:Interpolation>
                     </LookupTableTargetMapping>
-                    
+
+                    <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
                             <ds:Column columnId="ID" valueType="id" columnNum="1"/>
                             <ds:Column columnId="TIME" valueType="real" columnNum="2"/>
-                            <ds:Column columnId="ARM" valueType="real" columnNum="3"/>
-                            <ds:Column columnId="Cc_interpol" valueType="real" columnNum="4"/>
+                            <ds:Column columnId="EPOCH" valueType="real" columnNum="3"/>
+                            <ds:Column columnId="ARM" valueType="real" columnNum="4"/>
+                            <ds:Column columnId="C" valueType="real" columnNum="5"/>
                         </ds:Definition>
                         <ds:ImportData oid="importData">
                             <ds:name>Cc_lookupTable</ds:name>
@@ -360,8 +343,10 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
+        <!-- ESTIMATION STEP -->
         <EstimationStep oid="estimStep1">
-            <!-- DUMMY dataset -->
+            
+            <!-- NONMME dataset -->
             <NONMEMdataSet>
                 <NMIndividualMapping>
                     <ds:ColumnRef columnIdRef="ID"/>
@@ -461,6 +446,8 @@
                 </Continuous>
             </Observations>
         </SimulationStep>
+        
+        <!-- STEP DEPENDENCIES -->
         <StepDependencies>
             <Step>
                 <ct:OidRef oidRef="estimStep1"></ct:OidRef>

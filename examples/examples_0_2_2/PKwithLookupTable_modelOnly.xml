@@ -10,10 +10,12 @@
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
     writtenVersion="0.2.1">
     
-    <ct:Name>Testing PK with look-up table - model only</ct:Name>
+    <ct:Name>Testing PK with look-up table</ct:Name>
     
+    <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="t"/>
-
+    
+    <!-- FUNCTION DEFINITION -->
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="constantErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>
@@ -23,40 +25,25 @@
             </Equation>
         </Definition>
     </FunctionDefinition>
-    
-    <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
-        symbId="combinedErrorModel" symbolType="real">
-        <FunctionArgument symbId="a" symbolType="real"/>
-        <FunctionArgument symbId="b" symbolType="real"/>
-        <FunctionArgument symbId="f" symbolType="real"/>
-        <Definition>
-            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-                <Binop op="plus">
-                    <ct:SymbRef symbIdRef="a"/>
-                    <Binop op="times">
-                        <ct:SymbRef symbIdRef="b"/>
-                        <ct:SymbRef symbIdRef="f"/>
-                    </Binop>
-                </Binop>
-            </Equation>
-        </Definition>
-    </FunctionDefinition>
-    
+
+    <!-- MODEL DEFINITION -->
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
-        
+
+        <!-- VARIABILITY MODEL -->
         <VariabilityModel blkId="randEffect" type="parameterVariability">
             <Level symbId="indiv">
                 <ct:Name>Individual Variability</ct:Name>
             </Level>
         </VariabilityModel>
-        
+
         <VariabilityModel blkId="obsErr" type="residualError">
             <Level symbId="residual">
                 <ct:Name>Residual Error</ct:Name>
             </Level>
         </VariabilityModel>
-        
-        <CovariateModel blkId="c1">
+
+        <!-- COVARIATE MODEL -->
+        <CovariateModel blkId="cm1">
             <SimpleParameter symbId="pop_W"/>
             <SimpleParameter symbId="omega_W"/>
             <Covariate symbId="W">
@@ -83,6 +70,7 @@
             </Covariate>
         </CovariateModel>
         
+        <!-- PARAMETER MODEL -->
         <ParameterModel blkId="p1">
 
             <!-- Rin -->
@@ -117,8 +105,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0"
-                    definition="http://www.uncertml.org/distributions/normal">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
                     <stddev><var varId="omega_kout"/></stddev>
                 </NormalDistribution>
@@ -171,20 +158,6 @@
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
-            <Correlation>
-                <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
-                </ct:VariabilityReference>
-                <RandomVariable1>
-                    <ct:SymbRef symbIdRef="eta_V"/>
-                </RandomVariable1>
-                <RandomVariable2>
-                    <ct:SymbRef symbIdRef="eta_Cl"/>
-                </RandomVariable2>
-                <CorrelationCoefficient>
-                    <ct:SymbRef symbIdRef="rho_V_Cl"/>
-                </CorrelationCoefficient>
-            </Correlation>
         </ParameterModel>
         
         <!-- STRUCTURAL MODEL -->
@@ -249,7 +222,7 @@
                     <stddev><var varId="sigma_E"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <General symbId="E">
+            <General symbId="E_obs">
                 <ct:Assign>
                     <math:Equation>
                         <math:Binop op="plus">
