@@ -346,6 +346,16 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- added later -->
+    <xs:element name="LookupTableEpochMapping" substitutionGroup="design:LookupTableMapping"
+        type="design:LookupTableEpochMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies a mapping to an epoch in the trial design from the lookup table.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /added later -->
     <xs:element name="LookupTableVariableMapping" substitutionGroup="design:LookupTableMapping"
         type="design:LookupTableVariableMappingType">
         <xs:annotation>
@@ -403,7 +413,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="design:PopulationMappingType"/>
+            <xs:extension base="design:LookupTableMappingType"/>
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
