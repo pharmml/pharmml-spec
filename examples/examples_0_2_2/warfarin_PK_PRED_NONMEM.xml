@@ -409,16 +409,11 @@
                     <ds:ColumnRef columnIdRef="sex"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
                 </NMCovariateMapping>
-                <!-- dose, amt, d as NMVariableMapping 
-                SECOND argument optional -->
                 <NMVariableMapping>
                     <ds:ColumnRef columnIdRef="amt"/>
                 </NMVariableMapping>
                 <NMVariableMapping>
                     <ds:ColumnRef columnIdRef="dvid"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="dv"/>
                 </NMVariableMapping>
                 <NMVariableMapping>
                     <ds:ColumnRef columnIdRef="mdv"/>
