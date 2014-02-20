@@ -47,6 +47,7 @@
             <Level symbId="residual"/>
         </VariabilityModel>
         
+        
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
             <Covariate symbId="W">
@@ -64,6 +65,7 @@
                 </Continuous>
             </Covariate>
         </CovariateModel>
+        
         
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
@@ -297,6 +299,7 @@
         <ObservationModel blkId="om1">
             <SimpleParameter symbId="a"/>
             <SimpleParameter symbId="b"/>
+            <SimpleParameter symbId="sigma"/>
             <RandomVariable symbId="epsilon_C">
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
@@ -514,7 +517,16 @@
                     <mstep:InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </mstep:InitialEstimate>
+                </ParameterEstimation>               
+                
+                <!-- sigma -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="sigma"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </mstep:InitialEstimate>
                 </ParameterEstimation>                
+                
             </ParametersToEstimate>
             
             <!-- OPERATION -->
