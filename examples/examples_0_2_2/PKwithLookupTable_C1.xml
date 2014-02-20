@@ -198,7 +198,7 @@
         </StructuralModel>
 
         <!-- OBSERVATION MODEL -->
-        <ObservationModel blkId="o1">
+        <ObservationModel blkId="om1">
             <SimpleParameter symbId="a"/>
             <RandomVariable symbId="epsilon_E">
                 <ct:VariabilityReference>
@@ -278,11 +278,14 @@
                     <LookupTableTargetMapping inputTarget="variable">                       <!-- TARGET mapping -->
                         <ds:ColumnRef columnIdRef="C"/>
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
-                        <ds:Interpolation>
-                            <ds:Algorithm>linear</ds:Algorithm>
-                        </ds:Interpolation>
+                        <Interpolation>
+                            <Algorithm>linear</Algorithm>
+                            <InterpIndepVar>
+                                <ct:SymbRef symbIdRef="t"/>
+                            </InterpIndepVar>
+                        </Interpolation>
                     </LookupTableTargetMapping>
-
+                                        
                     <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
@@ -319,9 +322,12 @@
                 <CovariateMapping>
                     <ds:ColumnRef columnIdRef="weight"/>
                     <ct:SymbRef symbIdRef="W"/>
-                    <ds:Interpolation>
-                        <ds:Algorithm>linear</ds:Algorithm>
-                    </ds:Interpolation>
+                    <Interpolation>
+                        <Algorithm>linear</Algorithm>
+                        <InterpIndepVar>
+                            <ct:SymbRef symbIdRef="t"/>
+                        </InterpIndepVar>
+                    </Interpolation>
                 </CovariateMapping>
                 <ReplicateMapping>
                     <ds:ColumnRef columnIdRef="reps"/>
@@ -353,8 +359,12 @@
                     <ds:ColumnRef columnIdRef="ID"/>
                 </NMIndividualMapping>
                 <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="TIME"></ds:ColumnRef>
+                    <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="DV"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="E"/>
                 </NMVariableMapping>
                 <NMCovariateMapping>
                     <ds:ColumnRef columnIdRef="WEIGHT"/>
@@ -443,7 +453,7 @@
                     </ct:Sequence>
                 </Timepoints>
                 <Continuous>
-                    <ct:SymbRef blkIdRef="o1" symbIdRef="E"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="E"/>
                 </Continuous>
             </Observations>
         </SimulationStep>
