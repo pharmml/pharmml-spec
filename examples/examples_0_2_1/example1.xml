@@ -228,9 +228,9 @@
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="times">
-                            <ct:SymbRef symbIdRef="pop_R_in"/>
+                            <ct:SymbRef symbIdRef="pop_Rin"/>
                             <Uniop op="exp">
-                                <ct:SymbRef symbIdRef="eta_R_in"/>
+                                <ct:SymbRef symbIdRef="eta_Rin"/>
                             </Uniop>
                         </Binop>
                     </Equation>
