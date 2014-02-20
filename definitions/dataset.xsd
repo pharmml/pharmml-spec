@@ -198,7 +198,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
    
-    
     <xs:complexType name="ColumnsDefinitionType">
         <xs:annotation>
             <xs:documentation>
@@ -219,7 +218,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
 
     <xs:complexType name="CommonColumnDefnType">
         <xs:complexContent>
