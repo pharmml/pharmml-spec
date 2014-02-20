@@ -145,7 +145,7 @@
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
-                    <stddev><var varId="omega_ka"/></stddev>
+                    <stddev><var varId="gamma_V"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
             <IndividualParameter symbId="V">
@@ -153,7 +153,7 @@
                     <Transformation>log</Transformation>
                     <LinearCovariate>
                         <PopulationParameter>
-                            <ct:Assign><ct:SymbRef symbIdRef="pop_ka"/></ct:Assign>
+                            <ct:Assign><ct:SymbRef symbIdRef="pop_V"/></ct:Assign>
                         </PopulationParameter>
                         <Covariate>
                             <ct:SymbRef blkIdRef="c1" symbIdRef="sex"/>
@@ -659,7 +659,7 @@
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate id="e1">
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="pop_ka"></ct:SymbRef>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="pop_ka"/>
                     <InitialEstimate fixed="true">
                         <ct:Real>1.5</ct:Real>
                     </InitialEstimate>
@@ -695,6 +695,18 @@
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL"/>
+                    <InitialEstimate>
+                        <ct:Real>0</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL_occ1"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
                     <ct:SymbRef blkIdRef="p1" symbIdRef="gamma_V"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
@@ -706,7 +718,12 @@
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
-                
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V_occ1"/>
                     <InitialEstimate>
@@ -726,18 +743,17 @@
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL_occ1"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="a"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="b"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
-                
                 
             </ParametersToEstimate>
 
