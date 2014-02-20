@@ -479,7 +479,7 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
+                    <xs:element ref="design:Interpolation" minOccurs="0"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="design:doseVarAttGroup"/>
             </xs:extension>
@@ -982,7 +982,7 @@ permissions and limitations under the License.
             <xs:extension base="design:PopulationMappingType">
                 <xs:sequence>
                     <xs:element ref="ct:SymbRef"/>
-                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
+                    <xs:element ref="design:Interpolation" minOccurs="0"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1011,6 +1011,65 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    <!-- TEST moved from dataset -->
+    <xs:element name="Interpolation" type="design:InterpolationType">
+        <xs:annotation>
+            <xs:documentation>
+                Element specifies the interpolation algorithms.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    
+    <!-- new type for interpolation; also moved from dataset-->
+    <xs:complexType name="InterpolationType">
+        <xs:annotation>
+            <xs:documentation>This is an interpolation algorithm definition element.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:annotation>
+                        <xs:documentation>The type specifying interpolation algorithm. Can be applied for covariates or other data.</xs:documentation>
+                    </xs:annotation>
+                    <xs:element name="Algorithm">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="constant">
+                                    <xs:annotation>
+                                        <xs:documentation>Constant/Nearest-neighbor interpolation</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="linear">
+                                    <xs:annotation>
+                                        <xs:documentation>Linear interpolation</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="polynomial">
+                                    <xs:annotation>
+                                        <xs:documentation>Polynomial interpolation</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="spline">
+                                    <xs:annotation>
+                                        <xs:documentation>Spline interpolation</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="pchip">
+                                    <xs:annotation>
+                                        <xs:documentation>Piecewise Cubic Hermite Interpolating Polynomial interpolation</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>                    
+                    <!-- TEST newest eddition-->
+                    <xs:element name="InterpIndepVar" type="design:InterpolationIVType"/>
+                    <!-- /TEST -->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
 <!--    <!-\- new type for the purposes of interpolation support -\-> <!-\- SO FAR IDENTICAL TO THE TYPE ABOVE -\->
     <xs:complexType name="CovariateMappingType_test">
