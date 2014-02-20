@@ -129,7 +129,7 @@
             <SimpleParameter symbId="beta_V"/>
             <SimpleParameter symbId="beta_V_occ1"/>
             <SimpleParameter symbId="beta_V_Treat"/>
-            <SimpleParameter symbId="beta_V_TreatSet"/>
+            <SimpleParameter symbId="beta_V_TreatSeq"/>
             <RandomVariable symbId="eta_V">
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
@@ -172,14 +172,14 @@
                         <Covariate>
                             <ct:SymbRef blkIdRef="c1" symbIdRef="Treat"/>
                             <FixedEffect>
-                                <ct:SymbRef symbIdRef="beta_V_treat"/>
+                                <ct:SymbRef symbIdRef="beta_V_Treat"/>
                                 <Category catId="A"/>
                             </FixedEffect>
                         </Covariate>
                         <Covariate>
                             <ct:SymbRef blkIdRef="c1" symbIdRef="TreatSeq"/>
                             <FixedEffect>
-                                <ct:SymbRef symbIdRef="beta_V_treatseq"/>
+                                <ct:SymbRef symbIdRef="beta_V_TreatSeq"/>
                                 <Category catId="AB"/>
                             </FixedEffect>
                         </Covariate>
@@ -706,6 +706,39 @@
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
+                
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V_occ1"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V_Treat"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V_TreatSeq"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL_occ1"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                
             </ParametersToEstimate>
 
             <!-- OPERATION -->
