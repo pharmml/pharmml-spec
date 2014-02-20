@@ -73,8 +73,6 @@
             <SimpleParameter symbId="omega_Tlag"/>
             <SimpleParameter symbId="pop_ka"/>
             <SimpleParameter symbId="omega_ka"/>
-            <SimpleParameter symbId="pop_Tlag"/>
-            <SimpleParameter symbId="omega_Tlag"/>
             <SimpleParameter symbId="pop_V"/>
             <SimpleParameter symbId="omega_V"/>
             <SimpleParameter symbId="beta_V"/>
@@ -465,6 +463,12 @@
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>
                 <!-- CL -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_CL"/>
@@ -474,6 +478,12 @@
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_CL"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_CL"/>
                     <mstep:InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </mstep:InitialEstimate>
