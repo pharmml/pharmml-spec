@@ -457,7 +457,7 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
+<!--                    <xs:element ref="ds:Interpolation" minOccurs="0"/>-->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -987,6 +987,30 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST for Interpolation Independent Variable type -->
+    <xs:complexType name="InterpolationIVType">
+        <xs:annotation>
+            <xs:documentation>
+                Type that defines Interpolation Independent Variable.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The symbol reference to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
 
 <!--    <!-\- new type for the purposes of interpolation support -\-> <!-\- SO FAR IDENTICAL TO THE TYPE ABOVE -\->
     <xs:complexType name="CovariateMappingType_test">
