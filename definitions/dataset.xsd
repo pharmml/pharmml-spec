@@ -197,66 +197,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    <!-- TEST -->
-    <xs:element name="Interpolation" type="InterpolationType">
-        <xs:annotation>
-            <xs:documentation>
-                Element specifies the interpolation algorithms.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <!-- /TEST -->
-    
-    <!-- new type for interpolation -->
-    <xs:complexType name="InterpolationType">
-        <xs:annotation>
-            <xs:documentation>This is an interpolation algorithm definition element.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:annotation>
-                        <xs:documentation>The type specifying interpolation algorithm. Can be applied for covariates or other data.</xs:documentation>
-                    </xs:annotation>
-                    <xs:element name="Algorithm">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:token">
-                                <xs:enumeration value="constant">
-                                    <xs:annotation>
-                                        <xs:documentation>Constant/Nearest-neighbor interpolation</xs:documentation>
-                                    </xs:annotation>
-                                </xs:enumeration>
-                                <xs:enumeration value="linear">
-                                    <xs:annotation>
-                                        <xs:documentation>Linear interpolation</xs:documentation>
-                                    </xs:annotation>
-                                </xs:enumeration>
-                                <xs:enumeration value="polynomial">
-                                    <xs:annotation>
-                                        <xs:documentation>Polynomial interpolation</xs:documentation>
-                                    </xs:annotation>
-                                </xs:enumeration>
-                                <xs:enumeration value="spline">
-                                    <xs:annotation>
-                                        <xs:documentation>Spline interpolation</xs:documentation>
-                                    </xs:annotation>
-                                </xs:enumeration>
-                                <xs:enumeration value="pchip">
-                                    <xs:annotation>
-                                        <xs:documentation>Piecewise Cubic Hermite Interpolating Polynomial interpolation</xs:documentation>
-                                    </xs:annotation>
-                                </xs:enumeration>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>                    
-<!-- TEST -->
-                    <!--                    <xs:element name="InterpIndepVar"/>-->
-                    <!-- /TEST -->
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+   
     
     <xs:complexType name="ColumnsDefinitionType">
         <xs:annotation>
