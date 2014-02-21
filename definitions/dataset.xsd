@@ -287,8 +287,26 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
                 <xs:restriction base="xs:Name">
-                    <xs:enumeration value="abs"/>
-                    <xs:enumeration value="exp"/>
+                    <xs:enumeration value="id"/>
+                    <xs:enumeration value="dv"/>
+                    <xs:enumeration value="idv"/>
+                    <xs:enumeration value="dosing"/>
+                    <xs:enumeration value="dvid"/>
+                    <xs:enumeration value="covariate"/>
+                    <xs:enumeration value="reg"/>
+                    <xs:enumeration value="time"/>
+                    <xs:enumeration value="accasion"/>
+                    <xs:enumeration value="adm"/>
+                    <xs:enumeration value="censoring"/>
+                    <xs:enumeration value="limit"/>
+                    <xs:enumeration value="rate"/>
+                    <xs:enumeration value="tinf"/>
+                    <xs:enumeration value="ss"/>
+                    <xs:enumeration value="addl"/>
+                    <xs:enumeration value="ii"/>
+                    <xs:enumeration value="mdv"/>
+                    <xs:enumeration value="evid"/>
+                    <xs:enumeration value="prev"/>
                 </xs:restriction>
     </xs:simpleType>
     
