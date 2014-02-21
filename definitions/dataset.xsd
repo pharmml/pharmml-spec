@@ -238,6 +238,15 @@ permissions and limitations under the License.
                         <xs:documentation>The name to give the column.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                
+                <!-- new atrribute 'columnType = id, dv, covariate, etc.' -->
+                <xs:attribute name="columnType" type="ds:ColumnTypeType" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>The column type for this column.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                
+                
                 <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
@@ -270,8 +279,19 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:complexType-->
 
-
-
+<!--new ColumnTypeType-->
+    <xs:simpleType name="ColumnTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                Type for columnType = id, dv, covariate etc.
+            </xs:documentation>
+        </xs:annotation>
+                <xs:restriction base="xs:Name">
+                    <xs:enumeration value="abs"/>
+                    <xs:enumeration value="exp"/>
+                </xs:restriction>
+    </xs:simpleType>
+    
     <!--
         Elements
         -->
