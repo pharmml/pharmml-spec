@@ -706,8 +706,8 @@ permissions and limitations under the License.
     <!-- new NONMEMtype -->
     
     
-    <!-- TEST - new type for NMsymbolMappingType based on 'MappingType' -->
-    <xs:complexType name="NMsymbolMappingType">
+    <!-- TEST - new type for SymbolMappingType based on 'MappingType' -->
+    <xs:complexType name="SymbolMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type that defines variable/parameter, used in the NMTRAN injected code, to be mapped to the model or dataset.
@@ -755,7 +755,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="NMsymbolMapping" type="msteps:NMsymbolMappingType">
+                    <xs:element maxOccurs="unbounded" name="SymbolMapping" type="msteps:SymbolMappingType">
                         <xs:annotation>
                             <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
                         </xs:annotation>
@@ -792,7 +792,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- variable mapping type - NMTRANsymbolType -->
-                    <xs:element name="NMsymbol" maxOccurs="unbounded" type="msteps:NMTRANsymbolType"/>
+                    <xs:element name="Symbol" maxOccurs="unbounded" type="msteps:NMTRANsymbolType"/>
                     <xs:element name="Code" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>
