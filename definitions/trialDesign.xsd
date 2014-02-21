@@ -1045,11 +1045,6 @@ permissions and limitations under the License.
                                         <xs:documentation>Linear interpolation</xs:documentation>
                                     </xs:annotation>
                                 </xs:enumeration>
-                                <xs:enumeration value="polynomial">
-                                    <xs:annotation>
-                                        <xs:documentation>Polynomial interpolation</xs:documentation>
-                                    </xs:annotation>
-                                </xs:enumeration>
                                 <xs:enumeration value="spline">
                                     <xs:annotation>
                                         <xs:documentation>Spline interpolation</xs:documentation>
