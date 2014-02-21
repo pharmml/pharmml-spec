@@ -307,6 +307,8 @@ permissions and limitations under the License.
                     <xs:enumeration value="mdv"/>
                     <xs:enumeration value="evid"/>
                     <xs:enumeration value="prev"/>
+                    <xs:enumeration value="arm"/>
+                    <xs:enumeration value="epoch"/>
                 </xs:restriction>
     </xs:simpleType>
     
