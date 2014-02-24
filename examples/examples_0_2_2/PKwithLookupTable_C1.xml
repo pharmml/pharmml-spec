@@ -164,10 +164,17 @@
         <StructuralModel blkId="sm1">
 
             <!-- TARGET FOR LOOKUP DATA REFERENCE -->
-            <ct:Variable symbolType="real" symbId="Cc"/>
+            <ct:Variable symbolType="real" symbId="Cc">
+<!--                <Interpolation>
+                    <Algorithm>linear</Algorithm>
+                    <InterpIndepVar>
+                        <ct:SymbRef symbIdRef="t"/>
+                    </InterpIndepVar>
+                </Interpolation>-->
+            </ct:Variable>
 
             <ct:DerivativeVariable symbId="E" symbolType="real">
-                <ct:Description>PCA</ct:Description>
+                <ct:Description>Effect</ct:Description>
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="minus">
@@ -355,27 +362,24 @@
             
             <!-- NONMME dataset -->
             <NONMEMdataSet>
-                <NMIndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </NMIndividualMapping>
-                <NMVariableMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="DV"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="E"/>
-                </NMVariableMapping>
-                <NMCovariateMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="WEIGHT"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </NMCovariateMapping>
+                </ColumnMapping>
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="DV" valueType="real" columnNum="3"/>
-                        <ds:Column columnId="WEIGHT" valueType="real" columnNum="4"/>
+                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="4"/>
                     </ds:Definition>
                     <ds:ImportData oid="importData">
                         <ds:name>dataSetName</ds:name>
