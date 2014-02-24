@@ -883,6 +883,45 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+
+    <!-- create ColumnMapping -->
+    <xs:element name="ColumnMapping" type="msteps:ColumnMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Specifies a mapping to a variable in the model.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /create ColumnMapping -->
+    
+    <!-- TEST new type for ColumnMappingType -->
+    <xs:complexType name="ColumnMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that defines a NONMEM column mapping.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The column reference to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->   
+    
     <!-- /TEST -->
 
     <xs:element name="Mapping" type="msteps:MappingType" abstract="true">
