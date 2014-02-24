@@ -50,12 +50,7 @@
                 <Continuous>
                     <Transformation>
                         <math:Equation>
-                            <math:Uniop op="log">
-                                <math:Binop op="divide">
-                                    <ct:SymbRef symbIdRef="W"/>
-                                    <ct:Real>70</ct:Real>
-                                </math:Binop>
-                            </math:Uniop>
+                            <ct:SymbRef symbIdRef="W"/>
                         </math:Equation>
                     </Transformation>
                 </Continuous>
@@ -345,54 +340,47 @@
             
             <!-- NONMEM OBJECTIVE DATA -->
             <NONMEMdataSet>
-                <NMIndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </NMIndividualMapping>
-                <NMVariableMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="time"/>
                     <ct:SymbRef symbIdRef="t"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="dv"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="Cc"/>
-                </NMVariableMapping>
-                <NMCovariateMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="wt"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </NMCovariateMapping>
+                </ColumnMapping>
                 <!-- same for Age, Sex as above-->
                 <!-- dose, amt, d as NMVariableMapping 
                 SECOND argument optional-->
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="amt"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="MDV"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="EVID"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="amt"/>
-                </NMVariableMapping>
                 <!-- same for SEX and AGE as NMCovariateMapping-->
                 
                 <!--
+                14 Feb
                 no specific types, everything as   NMVariableMapping
                 etc. -->
                 
+                <!-- 
+                20 Feb -> change in strategy: one mapping type "ColumnMapping"
+                with 20+ columnType={id, idv, dvid, covariate, .....}
+                
+                clarify prev
+                -->
+                
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="time" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="wt" valueType="real" columnNum="3"/>
-                        <ds:Column columnId="age" valueType="real" columnNum="4"/>
-                        <ds:Column columnId="sex" valueType="int" columnNum="5"/>
-                        <ds:Column columnId="amt" valueType="real" columnNum="6"/>
-                        <ds:Column columnId="dvid" valueType="real" columnNum="7"/>
-                        <ds:Column columnId="dv" valueType="real" columnNum="8"/>
-                        <ds:Column columnId="mdv" valueType="real" columnNum="9"/>
-                        <ds:Column columnId="PREV" valueType="real" columnNum="10"/>                        
+                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="time" columnType="time" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="wt" columnType="covariate" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="age" columnType="covariate" valueType="real" columnNum="4"/>
+                        <ds:Column columnId="sex" columnType="covariate" valueType="int" columnNum="5"/>
+                        <ds:Column columnId="amt" columnType="dosing" valueType="real" columnNum="6"/>
+                        <ds:Column columnId="dvid" columnType="dvid" valueType="real" columnNum="7"/>
+                        <ds:Column columnId="dv" columnType="dv" valueType="real" columnNum="8"/>
+                        <ds:Column columnId="mdv" columnType="mdv" valueType="real" columnNum="9"/>
+                        <ds:Column columnId="PREV" columnType="prev" valueType="real" columnNum="10"/>                        
                     </ds:Definition>
                     <ds:ImportData oid="id1">
                         <ds:name>warfarin_conc_pca</ds:name>
@@ -402,29 +390,29 @@
                     </ds:ImportData>
                 </ds:DataSet>
                 <CodeInjection>
-                    <NMsymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="PREV"/>
                         <ds:ColumnRef columnIdRef="PREV"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>
+                    </SymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="CSS"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>
+                    </SymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="CL"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>
+                    </SymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="TTK0"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
-                    </NMsymbolMapping>
+                    </SymbolMapping>
                     <NMTRANcode>
-                        <NMsymbol symbId="PREV"/>
-                        <NMsymbol symbId="D1"/>
-                        <NMsymbol symbId="R1"/>
-                        <NMsymbol symbId="CL"/>
-                        <NMsymbol symbId="CSS"/>
-                        <NMsymbol symbId="TTK0"/>
+                        <Symbol symbId="PREV"/>
+                        <Symbol symbId="D1"/>
+                        <Symbol symbId="R1"/>
+                        <Symbol symbId="CL"/>
+                        <Symbol symbId="CSS"/>
+                        <Symbol symbId="TTK0"/>
                         <Code>
                             <![CDATA[
                                   if (PREV==0) {
