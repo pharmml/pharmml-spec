@@ -430,7 +430,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="NMCovariateMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -477,7 +477,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <xs:complexType abstract="true" name="MappingType">
         <xs:annotation>
@@ -676,7 +676,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" ref="msteps:NMMapping">
+                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="msteps:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines mapping to the dataset containing objective data. 
@@ -858,7 +858,7 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
-    <!-- TEST -->
+<!--    <!-\- TEST -\->
     <xs:element name="NMCovariateMapping" substitutionGroup="msteps:NMMapping"
         type="msteps:NMCovariateMappingType">
         <xs:annotation>
@@ -882,17 +882,8 @@ permissions and limitations under the License.
                 Specifies a mapping to a variable in the model.
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
 
-    <!-- create ColumnMapping -->
-    <xs:element name="ColumnMapping" type="msteps:ColumnMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Specifies a mapping to a variable in the model.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <!-- /create ColumnMapping -->
     
     <!-- TEST new type for ColumnMappingType -->
     <xs:complexType name="ColumnMappingType">
@@ -930,13 +921,13 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
-    <!-- TEST new Type for NONMEM dataset mapping -->
+    <!--<!-\- TEST new Type for NONMEM dataset mapping -\->
     <xs:element name="NMMapping" type="msteps:NMMappingType" abstract="true">
         <xs:annotation>
             <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
         
     <xs:element name="Timepoints" type="msteps:TimepointsType"/>
     <xs:element abstract="true" name="CommonModellingStep" type="msteps:ModellingStepType">
