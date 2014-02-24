@@ -312,10 +312,10 @@
                 </NormalDistribution>
             </RandomVariable>
             <Standard symbId="C_obs">
-                <Output>
+                <Output> <!-- f -->
                     <ct:SymbRef symbIdRef="C"/>
                 </Output>
-                <ErrorModel>
+                <ErrorModel>    <!-- g -->
                     <ct:Assign>
                         <math:Equation>
                             <math:FunctionCall>
@@ -333,7 +333,7 @@
                         </math:Equation>
                     </ct:Assign>
                 </ErrorModel>
-                <ResidualError>
+                <ResidualError> <!-- eps -->
                     <ct:SymbRef symbIdRef="epsilon_C"/>
                 </ResidualError>
             </Standard>
@@ -528,7 +528,6 @@
                         <ct:Real>1</ct:Real>
                     </mstep:InitialEstimate>
                 </ParameterEstimation>               
-                
                 <!-- sigma -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="sigma"/>
