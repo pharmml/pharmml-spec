@@ -71,6 +71,7 @@
             <SimpleParameter symbId="pop_CL"/>
             <SimpleParameter symbId="omega_CL"/>
             <SimpleParameter symbId="beta_CL"/>
+            
             <!-- Tlag -->
             <RandomVariable symbId="eta_Tlag">
                 <ct:VariabilityReference>
@@ -99,6 +100,7 @@
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
+            
             <!-- ka -->
             <RandomVariable symbId="eta_ka">
                 <ct:VariabilityReference>
@@ -127,6 +129,7 @@
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
+            
             <!-- V -->
             <RandomVariable symbId="eta_V">
                 <ct:VariabilityReference>
@@ -161,6 +164,7 @@
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
+            
             <!-- CL -->
             <RandomVariable symbId="eta_CL">
                 <ct:VariabilityReference>
@@ -380,7 +384,7 @@
                         <ds:Column columnId="dvid" columnType="dvid" valueType="real" columnNum="7"/>
                         <ds:Column columnId="dv" columnType="dv" valueType="real" columnNum="8"/>
                         <ds:Column columnId="mdv" columnType="mdv" valueType="real" columnNum="9"/>
-                        <ds:Column columnId="PREV" columnType="prev" valueType="real" columnNum="10"/>                        
+                        <ds:Column columnId="PREV" columnType="covariate" valueType="real" columnNum="10"/>                        
                     </ds:Definition>
                     <ds:ImportData oid="id1">
                         <ds:name>warfarin_conc_pca</ds:name>
@@ -390,10 +394,6 @@
                     </ds:ImportData>
                 </ds:DataSet>
                 <CodeInjection>
-                    <SymbolMapping>
-                        <ct:SymbRef symbIdRef="PREV"/>
-                        <ds:ColumnRef columnIdRef="PREV"/>
-                    </SymbolMapping>
                     <SymbolMapping>
                         <ct:SymbRef symbIdRef="CSS"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>

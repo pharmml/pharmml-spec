@@ -563,11 +563,7 @@
                     <Column columnId="REP" columnType="replicate" valueType="int" columnNum="3"/> 
                 </Definition>
                 <Table>
-                    <Row>
-                        <ct:Id>i</ct:Id>
-                        <ct:Id>arm1</ct:Id>
-                        <ct:Int>21</ct:Int>
-                    </Row>
+                    <Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Int>21</ct:Int></Row>
                 </Table>
             </DataSet>
         </Population>
