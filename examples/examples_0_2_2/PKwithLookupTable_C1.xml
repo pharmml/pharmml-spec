@@ -165,12 +165,12 @@
 
             <!-- TARGET FOR LOOKUP DATA REFERENCE -->
             <ct:Variable symbolType="real" symbId="Cc">
-<!--                <Interpolation>
+                <Interpolation>
                     <Algorithm>linear</Algorithm>
                     <InterpIndepVar>
                         <ct:SymbRef symbIdRef="t"/>
                     </InterpIndepVar>
-                </Interpolation>-->
+                </Interpolation>
             </ct:Variable>
 
             <ct:DerivativeVariable symbId="E" symbolType="real">
@@ -265,23 +265,17 @@
 
                 <LookupTable>
                     <!-- MAPPING -->
-                    <!-- REMOVED 1-1 mappings -> still to do: reduce to ONE mapping type -->
+                    <!-- REMOVED 1-1 mappings -> still to do: reduce to ONE mapping type: ColumnMapping -->
                     
-                    <LookupTableVariableMapping>                                            <!-- VARIABLE mapping -->
+                    <ColumnMapping>                                            <!-- VARIABLE mapping -->
                         <ds:ColumnRef columnIdRef="TIME"/>
                         <ct:SymbRef symbIdRef="t"/>
-                    </LookupTableVariableMapping>
+                    </ColumnMapping>
                         
-                    <LookupTableTargetMapping inputTarget="variable">                       <!-- TARGET mapping -->
+                    <ColumnMapping inputTarget="variable">                       <!-- TARGET mapping -->
                         <ds:ColumnRef columnIdRef="C"/>
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
-                        <Interpolation>
-                            <Algorithm>linear</Algorithm>
-                            <InterpIndepVar>
-                                <ct:SymbRef symbIdRef="t"/>
-                            </InterpIndepVar>
-                        </Interpolation>
-                    </LookupTableTargetMapping>
+                    </ColumnMapping>
                                         
                     <!-- DATASET -->
                     <ds:DataSet>
