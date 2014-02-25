@@ -279,6 +279,35 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:complexType-->
 
+
+    <!-- TEST new type for ColumnMappingType moved from 'modellingSteps.xsd' -->
+    <xs:complexType name="ColumnMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that defines a NONMEM column mapping.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The column reference to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->   
+    
 <!--new ColumnTypeType-->
     <xs:simpleType name="ColumnTypeType">
         <xs:annotation>
