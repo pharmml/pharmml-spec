@@ -1080,24 +1080,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-<!--    <!-\- new type for the purposes of interpolation support -\-> <!-\- SO FAR IDENTICAL TO THE TYPE ABOVE -\->
-    <xs:complexType name="CovariateMappingType_test">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining the mapping of a covariate to the values sepcified in a column of the dataset.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="design:PopulationMappingType">
-                <xs:sequence>
-                    <xs:element ref="ct:SymbRef"/>
-                    <xs:element ref="ds:Interpolation"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
--->
    
     <xs:complexType name="DemographicMappingType">
         <xs:annotation>
