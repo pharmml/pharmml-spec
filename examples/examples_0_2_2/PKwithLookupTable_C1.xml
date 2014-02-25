@@ -265,7 +265,7 @@
             </Segment>
             <Activity oid="d1">
 
-                <LookupTable>
+                <LookupTable  inputTarget="variable">
                     <!-- MAPPING -->
                     <!-- REMOVED 1-1 mappings -> still to do: reduce to ONE mapping type: ColumnMapping -->
                     
@@ -274,7 +274,7 @@
                         <ct:SymbRef symbIdRef="t"/>
                     </ColumnMapping>
                         
-                    <ColumnMapping inputTarget="variable">                       <!-- TARGET mapping -->
+                    <ColumnMapping>                       <!-- TARGET mapping -->
                         <ds:ColumnRef columnIdRef="C"/>
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
                     </ColumnMapping>

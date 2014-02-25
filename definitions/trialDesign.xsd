@@ -442,7 +442,7 @@ permissions and limitations under the License.
                                 the study.
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>                    
 <!--                    <xs:element name="CodeInjection" minOccurs="0" type="msteps:CodeInjectionType">
                         <xs:annotation>
                             <xs:documentation>
@@ -452,6 +452,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>-->
                 </xs:sequence>
+                <xs:attributeGroup ref="design:doseVarAttGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
