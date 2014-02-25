@@ -558,9 +558,9 @@
             </IndividualTemplate>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/> 
-                    <Column columnId="ARM" valueType="id" columnNum="2"/> 
-                    <Column columnId="REP" valueType="int" columnNum="3"/> 
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
+                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/> 
+                    <Column columnId="REP" columnType="replicate" valueType="int" columnNum="3"/> 
                 </Definition>
                 <Table>
                     <Row>

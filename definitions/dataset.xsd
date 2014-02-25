@@ -338,6 +338,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="prev"/>
                     <xs:enumeration value="arm"/>
                     <xs:enumeration value="epoch"/>
+                    <xs:enumeration value="replicate"/>
                 </xs:restriction>
     </xs:simpleType>
     
