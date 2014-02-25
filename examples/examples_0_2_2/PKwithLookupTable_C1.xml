@@ -165,12 +165,14 @@
 
             <!-- TARGET FOR LOOKUP DATA REFERENCE -->
             <ct:Variable symbolType="real" symbId="Cc">
-                <Interpolation>
-                    <Algorithm>linear</Algorithm>
-                    <InterpIndepVar>
-                        <ct:SymbRef symbIdRef="t"/>
-                    </InterpIndepVar>
-                </Interpolation>
+                <ct:Assign>
+                    <ct:Interpolation>
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="t"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
+                </ct:Assign>
             </ct:Variable>
 
             <ct:DerivativeVariable symbId="E" symbolType="real">
@@ -313,12 +315,12 @@
                 <CovariateMapping>
                     <ds:ColumnRef columnIdRef="weight"/>
                     <ct:SymbRef symbIdRef="W"/>
-                    <Interpolation>
-                        <Algorithm>linear</Algorithm>
-                        <InterpIndepVar>
+                    <ct:Interpolation>
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
                             <ct:SymbRef symbIdRef="t"/>
-                        </InterpIndepVar>
-                    </Interpolation>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
                 </CovariateMapping>
                 <ReplicateMapping>
                     <ds:ColumnRef columnIdRef="reps"/>
