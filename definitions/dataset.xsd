@@ -254,7 +254,6 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-        <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
     </xs:complexType>
     <xs:complexType name="DatasetRowType">
         <xs:annotation>

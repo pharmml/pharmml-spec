@@ -51,7 +51,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>
-                <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -66,7 +65,6 @@ permissions and limitations under the License.
             <xs:sequence>
                 <xs:element ref="ct:Name"/>
                 <xs:element minOccurs="0" ref="ct:Description"/>
-                <!--xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:UnitDefinition"/-->
                 <xs:element minOccurs="0" name="IndependentVariable"
                     type="mml:IndependentVariableType"> </xs:element>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:FunctionDefinition">

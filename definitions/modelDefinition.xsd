@@ -241,7 +241,6 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
-                    <!--xs:element minOccurs="0" ref="ct:UnitRef"/-->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>
             </xs:extension>
@@ -324,7 +323,6 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
-                    <!--xs:element minOccurs="0" ref="ct:UnitRef"/-->
                 </xs:sequence>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
@@ -545,7 +543,6 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
-                    <!--xs:element minOccurs="0" ref="ct:UnitRef"/-->
                     <xs:choice>
                         <xs:element name="Continuous" type="mdef:ContinuousCovariateType">
                             <xs:annotation>

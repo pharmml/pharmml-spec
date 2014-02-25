@@ -339,7 +339,6 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- new NONMEMtype -->
     
-    
     <xs:complexType name="ActivityType" abstract="false">
         <xs:annotation>
             <xs:documentation>

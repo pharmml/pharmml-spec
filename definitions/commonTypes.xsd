@@ -58,27 +58,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-    <!--xs:simpleType name="UnitIdType">
-        <xs:annotation>
-            <xs:documentation>Unit identifier.</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="ct:SymbolIdType"/>
-    </xs:simpleType-->
-    <!--xs:simpleType name="BasicUnitType">
-        <xs:annotation>
-            <xs:documentation>Defines the basic unit name and restricts it to the appropriate permitted values.</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:NCName">
-            <xs:enumeration value="second"/>
-            <xs:enumeration value="metre"/>
-            <xs:enumeration value="kilogram"/>
-            <xs:enumeration value="ampere"/>
-            <xs:enumeration value="kelvin"/>
-            <xs:enumeration value="mole"/>
-            <xs:enumeration value="candela"/>
-            <xs:enumeration value="dimensionless"/>
-        </xs:restriction>
-    </xs:simpleType-->
     <xs:simpleType name="IdType">
         <xs:annotation>
             <xs:documentation>Type of the element identifier.</xs:documentation>
@@ -96,7 +75,6 @@ permissions and limitations under the License.
         <xs:simpleContent>
             <xs:extension base="xs:integer">
                 <xs:attributeGroup ref="ct:RootAttributesGroup"/>
-                <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -107,7 +85,6 @@ permissions and limitations under the License.
         <xs:simpleContent>
             <xs:extension base="xs:double">
                 <xs:attributeGroup ref="ct:RootAttributesGroup"/>
-                <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -118,7 +95,6 @@ permissions and limitations under the License.
         <xs:simpleContent>
             <xs:extension base="xs:string">
                 <xs:attributeGroup ref="ct:RootAttributesGroup"/>
-                <!--xs:attributeGroup ref="ct:UnitReferenceGroup"/-->
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -163,79 +139,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
-    <!--xs:complexType name="UnitRefType">
-        <xs:annotation>
-            <xs:documentation>A unit refernce type.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:attributeGroup ref="ct:UnitReferenceGroup"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType-->
-    <!--xs:complexType name="BasicUnitRefType">
-        <xs:annotation>
-            <xs:documentation>Defines a basic unit refernce type.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="basicUnit" type="ct:BasicUnitType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The id of the basic unit being referenced</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType -->
-    <!--xs:complexType name="UnitComponentType">
-        <xs:annotation>
-            <xs:documentation>The unit component definition.</xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:choice>
-                <xs:element ref="ct:BasicUnitRef"/>
-                <xs:element ref="ct:UnitRef"/>
-            </xs:choice>
-            <xs:element name="Exponent" type="ct:IntValueType" minOccurs="0">
-                <xs:annotation>
-                    <xs:documentation>The exponent of the base unit.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element minOccurs="0" name="Scale" type="ct:IntValueType">
-                <xs:annotation>
-                    <xs:documentation>The scale of the base unit.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element minOccurs="0" name="Multiplier" type="ct:RealValueType">
-                <xs:annotation>
-                    <xs:documentation>The multiplier of the base unit.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="UnitDefinitionType">
-        <xs:annotation>
-            <xs:documentation>The unit definition.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Symbol"/>
-                    <xs:element maxOccurs="unbounded" name="UnitComponent"
-                        type="ct:UnitComponentType">
-                        <xs:annotation>
-                            <xs:documentation>A component of the unit definition. These are combined to beild up the unit definition. The complete unit definition is the product of its UnitComponents. For example the definition of velocity may have two components m and s^-1 then the unit is m * s^-1.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-                <xs:attribute name="unitId" type="ct:SymbolIdType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The id of the unit being defined.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType-->
     <xs:complexType abstract="true" name="PharmMLRootType">
         <xs:annotation>
             <xs:documentation>Root type of all elements and types defining elements in PharmML.</xs:documentation>
@@ -398,7 +301,6 @@ the end value. In the second the step size is incremented r times, where r is th
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
-                    <!--xs:element minOccurs="0" ref="ct:UnitRef"/-->
                 </xs:sequence>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
@@ -778,28 +680,7 @@ the end value. In the second the step size is incremented r times, where r is th
                 <xs:documentation>The element identifier.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
-    </xs:attributeGroup>
-    <!--xs:attributeGroup name="UnitDefinitionGroup">
-        <xs:annotation>
-            <xs:documentation>Attributes used in a unit definition.</xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="unitId" type="ct:UnitIdType" use="required">
-            <xs:annotation>
-                <xs:documentation>The identifier of the unit being declared.</xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-    </xs:attributeGroup>
-    <xs:attributeGroup name="UnitReferenceGroup">
-        <xs:annotation>
-            <xs:documentation>Attributes used in a unit reference.</xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="unitId" type="ct:UnitIdType" use="optional">
-            <xs:annotation>
-                <xs:documentation>The identifier of the unit being referenced.</xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-    </xs:attributeGroup-->
-    
+    </xs:attributeGroup>    
     
     <!--
         Element Groups
@@ -959,19 +840,4 @@ the end value. In the second the step size is incremented r times, where r is th
             <xs:documentation>This element defines a function within the PharmML document.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!--xs:element name="BasicUnitRef" type="ct:BasicUnitRefType">
-        <xs:annotation>
-            <xs:documentation>Element used to reference a basic unit.</xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <xs:element name="UnitRef" type="ct:UnitRefType">
-        <xs:annotation>
-            <xs:documentation>Element used to reference a unit definition.</xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <xs:element name="UnitDefinition" type="ct:UnitDefinitionType">
-        <xs:annotation>
-            <xs:documentation>Element used to define a unit.</xs:documentation>
-        </xs:annotation>
-    </xs:element-->
 </xs:schema>
