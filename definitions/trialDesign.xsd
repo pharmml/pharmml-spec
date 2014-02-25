@@ -298,7 +298,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- new LookupTable type -->
+    <!--<!-\- new LookupTable type -\->
     <xs:complexType name="LookupTableType">
         <xs:annotation>
             <xs:documentation>
@@ -327,9 +327,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- new LookupTabletype -->
+    <!-\- new LookupTabletype -\->-->
     
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:element name="LookupTableIndividualMapping" substitutionGroup="design:LookupTableMapping"
         type="design:LookupTableIndividualMappingType">
         <xs:annotation>
@@ -346,7 +346,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- added later -->
+    <!-\- added later -\->
     <xs:element name="LookupTableEpochMapping" substitutionGroup="design:LookupTableMapping"
         type="design:LookupTableEpochMappingType">
         <xs:annotation>
@@ -355,7 +355,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /added later -->
+    <!-\- /added later -\->
     <xs:element name="LookupTableVariableMapping" substitutionGroup="design:LookupTableMapping"
         type="design:LookupTableVariableMappingType">
         <xs:annotation>
@@ -372,17 +372,17 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
+    <!-\- TEST -\->-->
     
-    <!-- TEST new Type for LOOKUP TABLE mapping -->
+    <!--<!-\- TEST new Type for LOOKUP TABLE mapping -\->
     <xs:element name="LookupTableMapping" type="design:LookupTableMappingType" abstract="true">
         <xs:annotation>
             <xs:documentation>Defines mappings between the lookup table and the model.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="LookupTableIndividualMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -403,9 +403,9 @@ permissions and limitations under the License.
             <xs:extension base="design:LookupTableMappingType"/> 
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->
     
-    <!-- TEST -->
+    <!-\- TEST -\->
     <xs:complexType name="LookupTableEpochMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -416,33 +416,49 @@ permissions and limitations under the License.
             <xs:extension base="design:LookupTableMappingType"/>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    
-    
-    <!--<!-\- TEST working but without inputTarget attribute-\->
-    <xs:complexType name="LookupTableVariableMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining a maping to a variable in the model. 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="design:LookupTableMappingType">
-                <xs:sequence>
-                    <xs:element minOccurs="1" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ds:Interpolation" minOccurs="0"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     <!-\- /TEST -\->-->
     
-    <!-- TEST working but without inputTarget attribute-->
+    <!-- new LookupTableType based on NONMEMdataSetType -->
+    <xs:complexType name="LookupTableType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the NONMEM type data and task settings.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing objective data. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:DataSet">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+<!--                    <xs:element name="CodeInjection" minOccurs="0" type="msteps:CodeInjectionType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>-->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- new NONMEMtype -->
+    
+    
+<!--    <!-\- TEST working but without inputTarget attribute-\->
     <xs:complexType name="LookupTableVariableMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -457,14 +473,13 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element ref="ds:Interpolation" minOccurs="0"/>-->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->
     
-    <!-- TEST new type for TargetVariable with inputTarget attribute-->
+    <!-\- TEST new type for TargetVariable with inputTarget attribute-\->
     <xs:complexType name="LookupTableTargetMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -485,9 +500,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->
         
-    <!-- TEST new type based on MappingType-->
+    <!-\- TEST new type based on MappingType-\->
     <xs:complexType abstract="true" name="LookupTableMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -508,36 +523,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    
-    <!-- TEST new type for ColumnMappingType -->
-    <xs:complexType name="ColumnMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                The type that defines a NONMEM column mapping.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ds:ColumnRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The column reference to map to.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="1" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->   
+    <!-\- /TEST -\->-->
     
     <xs:complexType name="ActivityType" abstract="false">
         <xs:annotation>
