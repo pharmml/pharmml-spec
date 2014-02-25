@@ -8,10 +8,12 @@
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
-    writtenVersion="0.1">
+    writtenVersion="0.2.2" id="i1">
     
+    <!-- MODEL NAME -->
     <ct:Name>Example 3 - basic Warfarin PK estimation with covariate W</ct:Name>
     
+    <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="t"/>
     
     <!-- FUNCTION DEFINITION -->
@@ -40,9 +42,11 @@
         <VariabilityModel blkId="randEffect" type="parameterVariability">
             <Level symbId="indiv"/>
         </VariabilityModel>
+        
         <VariabilityModel blkId="resErr" type="residualError">
             <Level symbId="residual"/>
         </VariabilityModel>
+        
         
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
@@ -62,14 +66,13 @@
             </Covariate>
         </CovariateModel>
         
+        
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
             <SimpleParameter symbId="pop_Tlag"/>
             <SimpleParameter symbId="omega_Tlag"/>
             <SimpleParameter symbId="pop_ka"/>
             <SimpleParameter symbId="omega_ka"/>
-            <SimpleParameter symbId="pop_Tlag"/>
-            <SimpleParameter symbId="omega_Tlag"/>
             <SimpleParameter symbId="pop_V"/>
             <SimpleParameter symbId="omega_V"/>
             <SimpleParameter symbId="beta_V"/>
@@ -81,7 +84,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal></mean>
                     <stddev>
@@ -109,7 +112,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal></mean>
                     <stddev>
@@ -137,7 +140,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal></mean>
                     <stddev>
@@ -171,7 +174,7 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal></mean>
                     <stddev>
@@ -294,11 +297,12 @@
         <ObservationModel blkId="om1">
             <SimpleParameter symbId="a"/>
             <SimpleParameter symbId="b"/>
+            <SimpleParameter symbId="sigma"/>
             <RandomVariable symbId="epsilon_C">
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="resErr" symbIdRef="residual"/>
                 </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="0.1">
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean>
                         <rVal>0</rVal>
                     </mean>
@@ -307,11 +311,11 @@
                     </stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <Standard symbId="C">
-                <Output>
+            <Standard symbId="C_obs">           <!-- y = f + g*eps -->
+                <Output>                        <!-- f -->
                     <ct:SymbRef symbIdRef="C"/>
                 </Output>
-                <ErrorModel>
+                <ErrorModel>                    <!-- g -->
                     <ct:Assign>
                         <math:Equation>
                             <math:FunctionCall>
@@ -329,7 +333,7 @@
                         </math:Equation>
                     </ct:Assign>
                 </ErrorModel>
-                <ResidualError>
+                <ResidualError>                 <!-- eps -->
                     <ct:SymbRef symbIdRef="epsilon_C"/>
                 </ResidualError>
             </Standard>
@@ -357,7 +361,7 @@
             </Segment>
             <Activity oid="d1">
                 <Bolus>
-                    <DoseAmount inputType="dose">
+                    <DoseAmount inputTarget="parameter">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
                         <ct:Assign>
                             <ct:Real>100</ct:Real>
@@ -414,7 +418,6 @@
         
         <!-- ESTIMATION -->
         <EstimationStep oid="estimStep1">
-            
             <!-- OBJECTIVE DATA -->
             <ObjectiveDataSet>
                 <IndividualMapping>
@@ -426,7 +429,7 @@
                 </VariableMapping>
                 <VariableMapping>
                     <ds:ColumnRef columnIdRef="dv"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="C"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
                 </VariableMapping>
                 <ds:DataSet>
                     <ds:Definition>
@@ -463,6 +466,12 @@
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>
                 <!-- CL -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_CL"/>
@@ -472,6 +481,12 @@
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_CL"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_CL"/>
                     <mstep:InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </mstep:InitialEstimate>
@@ -515,7 +530,15 @@
                     <mstep:InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </mstep:InitialEstimate>
+                </ParameterEstimation>               
+                <!-- sigma -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="sigma"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </mstep:InitialEstimate>
                 </ParameterEstimation>                
+                
             </ParametersToEstimate>
             
             <!-- OPERATION -->

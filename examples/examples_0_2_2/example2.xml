@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
     xmlns:math="http://www.pharmml.org/2013/03/Maths"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.1">
+    writtenVersion="0.2.2" id="i1">                                                 <!-- 0.2.2 -->
     
     <ct:Name>Example 2 - simulation continuous PK (Bonate 2012)</ct:Name>
     
@@ -256,7 +256,7 @@
                     </stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <Standard symbId="Css">
+            <Standard symbId="Css_obs">
                 <Output>
                     <ct:SymbRef blkIdRef="sm1" symbIdRef="Css"/>
                 </Output>
@@ -307,7 +307,7 @@
             </Segment>
             <Activity oid="bolusOR">
                 <Bolus>
-                    <DoseAmount inputType="dose">
+                    <DoseAmount inputTarget="parameter">                                <!-- 0.2.2 -->
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
                         <ct:Assign>
                             <ct:Real>100</ct:Real>
@@ -422,7 +422,7 @@
                     </ct:Sequence>
                 </Timepoints>
                 <Continuous>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="Css"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="Css_obs"/>
                 </Continuous>
             </Observations>
         </SimulationStep>
