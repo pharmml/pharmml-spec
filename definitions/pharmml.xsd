@@ -23,8 +23,7 @@ permissions and limitations under the License.
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     xmlns:msteps="http://www.pharmml.org/2013/03/ModellingSteps"
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition" version="0.1"
-    elementFormDefault="qualified" attributeFormDefault="unqualified"
-    xmlns:unit="http://www.pharmml.org/2013/08/Units">
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <xs:import namespace="http://www.pharmml.org/2013/03/Maths"
         schemaLocation="http://www.pharmml.org/2013/03/Maths"/>
