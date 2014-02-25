@@ -491,7 +491,7 @@
             </ct:Variable>
 
             <ct:DerivativeVariable symbId="E" symbolType="real">
-                <ct:Description>PCA</ct:Description>
+                <ct:Description>Effect</ct:Description>
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="minus">
