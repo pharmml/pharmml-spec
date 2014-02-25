@@ -162,7 +162,7 @@
         
         <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="sm1">
-
+            
             <!-- TARGET FOR LOOKUP DATA REFERENCE -->
             <ct:Variable symbolType="real" symbId="Cc">
                 <ct:Assign>
@@ -265,7 +265,7 @@
             </Segment>
             <Activity oid="d1">
 
-                <LookupTable  inputTarget="variable">
+                <LookupTable inputTarget="variable">
                     <!-- MAPPING -->
                     <ColumnMapping> 
                         <ds:ColumnRef columnIdRef="TIME"/>
@@ -449,7 +449,7 @@
         <!-- STEP DEPENDENCIES -->
         <StepDependencies>
             <Step>
-                <ct:OidRef oidRef="estimStep1"></ct:OidRef>
+                <ct:OidRef oidRef="estimStep1"/>
             </Step>
             <Step>
                 <ct:OidRef oidRef="s1"/>
