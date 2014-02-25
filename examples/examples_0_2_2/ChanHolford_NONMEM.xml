@@ -442,6 +442,7 @@
                 
         <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="sm1">
+            
             <!-- Ac -->
             <ct:DerivativeVariable symbolType="real" symbId="Ac">
                 <ct:Assign>
@@ -718,68 +719,35 @@
             <!-- NONMEM OBJECTIVE DATA -->
             <NONMEMdataSet>
                 <!-- NM dataset mapping -->
-                <NMIndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </NMIndividualMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="MONTH"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="TRIAL"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="OCC"/>
-                </NMVariableMapping>
-                <NMCovariateMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="WTKG"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </NMCovariateMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="PREV"/>
-                </NMVariableMapping>                
-                <NMVariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="AMT"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="RATE"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="SS"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="II"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="CMT"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="DV"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="MDV"/>
-                </NMVariableMapping>
+                </ColumnMapping>
                 <!-- Dataset definition -->
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="MONTH" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="TRIAL" valueType="real" columnNum="3"/>
-                        <ds:Column columnId="OCC" valueType="real" columnNum="4"/>
-                        <ds:Column columnId="WTKG" valueType="real" columnNum="5"/>
-                        <ds:Column columnId="PREV" valueType="real" columnNum="6"/>
-                        <ds:Column columnId="TIME" valueType="real" columnNum="7"/>
-                        <ds:Column columnId="AMT" valueType="real" columnNum="8"/>
-                        <ds:Column columnId="RATE" valueType="real" columnNum="9"/>
-                        <ds:Column columnId="SS" valueType="real" columnNum="10"/>
-                        <ds:Column columnId="II" valueType="real" columnNum="11"/>
+                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="MONTH" columnType="covariate" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="TRIAL" columnType="covariate" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="OCC" columnType="occasion" valueType="real" columnNum="4"/>
+                        <ds:Column columnId="WTKG" columnType="covariate" valueType="real" columnNum="5"/>
+                        <ds:Column columnId="PREV" columnType="covariate" valueType="real" columnNum="6"/>
+                        <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="7"/>
+                        <ds:Column columnId="AMT" columnType="dosing" valueType="real" columnNum="8"/>
+                        <ds:Column columnId="RATE" columnType="rate" valueType="real" columnNum="9"/>
+                        <ds:Column columnId="SS" columnType="ss" valueType="real" columnNum="10"/>
+                        <ds:Column columnId="II" columnType="ii" valueType="real" columnNum="11"/>
                         <ds:Column columnId="CMT" valueType="real" columnNum="12"/>
-                        <ds:Column columnId="DV" valueType="real" columnNum="13"/>
-                        <ds:Column columnId="MDV" valueType="real" columnNum="14"/>
+                        <ds:Column columnId="DV" columnType="dv" valueType="real" columnNum="13"/>
+                        <ds:Column columnId="MDV" columnType="mdv" valueType="real" columnNum="14"/>
                     </ds:Definition>
                     <ds:ImportData oid="id1">
                         <ds:name>dataFileName</ds:name>
@@ -790,34 +758,29 @@
                 </ds:DataSet>
                 <!-- Code injection -->
                 <CodeInjection>
-                    <NMsymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="TTK0"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>
+                    </SymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="CSS"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>
+                    </SymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="PRED"/>
                         <ds:ColumnRef columnIdRef="PRED"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>
+                    </SymbolMapping>
+                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="CL"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>                           <!-- Do mappings for R1, D1 make sense? -->
-                        <ct:SymbRef symbIdRef="D1"/>
-                    </NMsymbolMapping>
-                    <NMsymbolMapping>
-                        <ct:SymbRef symbIdRef="R1"/>
-                    </NMsymbolMapping>
+                    </SymbolMapping>
                     <NMTRANcode>
-                        <NMsymbol symbId="PRED"/>
-                        <NMsymbol symbId="EVID"/>
-                        <NMsymbol symbId="TTK0"/>
-                        <NMsymbol symbId="D1"/>
-                        <NMsymbol symbId="R1"/>
+                        <Symbol symbId="PRED"/>
+                        <Symbol symbId="CSS"/>
+                        <Symbol symbId="EVID"/>
+                        <Symbol symbId="TTK0"/>
+                        <Symbol symbId="D1"/>
+                        <Symbol symbId="R1"/>
                         <Code>
                             <![CDATA[
                                 if (PRED==0) {
@@ -891,4 +854,16 @@
         </StepDependencies>
     </ModellingSteps>
 </PharmML>
+
+<!--<ExternalInputTarget>
+    <Target>Simcyp</Target>
+    <FileName>inputFile</FileName>
+    
+</ExternalInputTarget>
+
+<ExternalOutputTarget>
+    <Target>Simcyp</Target>
+    <FileName>outputFile</FileName>
+    
+</ExternalOutputTarget>-->
 
