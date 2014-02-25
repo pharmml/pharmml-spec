@@ -1041,7 +1041,6 @@
                         <Column columnId="ID" valueType="id" columnNum="1"/>
                         <Column columnId="TIME" valueType="real" columnNum="2"/>
                         <Column columnId="DV" valueType="real" columnNum="3"/>
-                        <Column columnId="FLAG" valueType="int" columnNum="4"/>
                     </Definition>
                     <ImportData oid="observationData">
                         <name>522_sim_observation</name>
