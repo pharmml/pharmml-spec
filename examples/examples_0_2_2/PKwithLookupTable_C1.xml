@@ -265,17 +265,7 @@
 
                 <LookupTable>
                     <!-- MAPPING -->
-                    <LookupTableIndividualMapping>                                          <!-- INDIVIDUAL mapping -->
-                        <ds:ColumnRef columnIdRef="ID"/>
-                    </LookupTableIndividualMapping>
-
-                    <LookupTableArmMapping>                                                 <!-- ARM mapping -->
-                        <ds:ColumnRef columnIdRef="ARM"/>
-                    </LookupTableArmMapping>
-                    
-                    <LookupTableEpochMapping>                                               <!-- EPOCH mapping -->
-                        <ds:ColumnRef columnIdRef="EPOCH"/>
-                    </LookupTableEpochMapping>
+                    <!-- REMOVED 1-1 mappings -> still to do: reduce to ONE mapping type -->
                     
                     <LookupTableVariableMapping>                                            <!-- VARIABLE mapping -->
                         <ds:ColumnRef columnIdRef="TIME"/>
@@ -296,11 +286,11 @@
                     <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
-                            <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                            <ds:Column columnId="TIME" valueType="real" columnNum="2"/>
-                            <ds:Column columnId="EPOCH" valueType="real" columnNum="3"/>
-                            <ds:Column columnId="ARM" valueType="real" columnNum="4"/>
-                            <ds:Column columnId="C" valueType="real" columnNum="5"/>
+                            <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                            <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                            <ds:Column columnId="EPOCH" columnType="epoch" valueType="real" columnNum="3"/>
+                            <ds:Column columnId="ARM" columnType="arm" valueType="real" columnNum="4"/>
+                            <ds:Column columnId="C" columnType="dv" valueType="real" columnNum="5"/>
                         </ds:Definition>
                         <ds:ImportData oid="importData">
                             <ds:name>Cc_lookupTable</ds:name>
