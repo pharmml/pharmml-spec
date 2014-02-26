@@ -522,8 +522,41 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->   
-    
+
+    <!-- new DatasetMappingType based on design:LookupTableType !!! doseVarAttGroup REMOVED - not necesary here-->
     <xs:complexType name="DatasetMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining type data and task settings.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing objective data. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:DataSet">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- new NONMEMtype -->
+    
+    
+<!--  Original - commented out for now
+        <xs:complexType name="DatasetMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type defining  a mapping of objective data to the model.
@@ -556,7 +589,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <xs:complexType name="TimepointsType">
         <xs:annotation>
             <xs:documentation>
