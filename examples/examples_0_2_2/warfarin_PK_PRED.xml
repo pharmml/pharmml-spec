@@ -381,7 +381,7 @@
             </Segment>
             <Activity oid="d1">
                 <Bolus>
-                    <DoseAmount inputType="dose">
+                    <DoseAmount inputTarget="parameter">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
                         <ct:Assign>
                             <ct:Real>100</ct:Real>
@@ -409,13 +409,6 @@
                 <CovariateMapping>
                     <ds:ColumnRef columnIdRef="WEIGHT"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                    <ds:Interpolation>
-                        <ds:Algorithm>linear</ds:Algorithm>
-                        <!-- TEST -->
-<!--                        <!-\- DEFAULT IS IntependentVariable -\->
-                        <ds:InterpIndepVar blkIdRef="sm1" symbIdRef="C"/>-->
-                        <!-- /TEST -->
-                    </ds:Interpolation>
                 </CovariateMapping>
             </IndividualTemplate>
             <ds:DataSet>
