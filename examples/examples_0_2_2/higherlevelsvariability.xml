@@ -8,9 +8,10 @@
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
-    writtenVersion="0.1">
+    writtenVersion="0.2.2" id="i1">
+    
     <ct:Name>Example of higher levels of variability - continuous PK/PD</ct:Name>
-    <ct:UnitDefinition unitId="h">
+<!--    <ct:UnitDefinition unitId="h">
         <ct:UnitComponent>
             <ct:BasicUnitRef basicUnit="second"/>
             <ct:Exponent>1</ct:Exponent>
@@ -53,8 +54,10 @@
         <ct:UnitComponent>
             <ct:BasicUnitRef basicUnit="dimensionless"/>
         </ct:UnitComponent>
-    </ct:UnitDefinition>
-    <IndependentVariable symbId="t" unitId="h"/>
+    </ct:UnitDefinition>-->
+    
+    <IndependentVariable symbId="t"/>
+    
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="constantErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>
@@ -64,6 +67,7 @@
             </Equation>
         </Definition>
     </FunctionDefinition>
+    
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="combinedErrorModel" symbolType="real">
         <FunctionArgument symbId="a" symbolType="real"/>
@@ -81,8 +85,9 @@
             </Equation>
         </Definition>
     </FunctionDefinition>
+    
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
-        <VariabilityModel id="e1" blkId="model">
+        <VariabilityModel blkId="model" type="parameterVariability">
             <Level symbId="country">
                 <ct:Name>Country</ct:Name>
             </Level>
@@ -99,7 +104,8 @@
                 </ParentLevel>
             </Level>
         </VariabilityModel>
-        <VariabilityModel blkId="obsErr">
+        
+        <VariabilityModel blkId="obsErr" type="residualError">
             <Level symbId="residual">
                 <ct:Name>Residual Error</ct:Name>
                 <ParentLevel>
@@ -107,15 +113,11 @@
                 </ParentLevel>
             </Level>
         </VariabilityModel>
-        <CovariateModel blkId="c1">
-            <SimpleParameter symbId="pop_W">
-                <ct:UnitRef unitId="kg"/>
-            </SimpleParameter>
-            <SimpleParameter symbId="omega_W">
-                <ct:UnitRef unitId="kg"/>
-            </SimpleParameter>
+        
+        <CovariateModel blkId="cm1">
+            <SimpleParameter symbId="pop_W"/>
+            <SimpleParameter symbId="omega_W"/>
             <Covariate symbId="W">
-                <ct:UnitRef unitId="kg"/>
                 <Continuous>
                     <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                         <mean>
@@ -138,19 +140,16 @@
                 </Continuous>
             </Covariate>
         </CovariateModel>
-        <ParameterModel blkId="p1">
+        
+        <ParameterModel blkId="pm1">
             <!-- V -->
             <SimpleParameter symbId="beta_V">
-                <ct:UnitRef unitId="l"/>
             </SimpleParameter>
             <SimpleParameter symbId="pop_V">
-                <ct:UnitRef unitId="l"/>
             </SimpleParameter>
             <SimpleParameter symbId="omega_V">
-                <ct:UnitRef unitId="l"/>
             </SimpleParameter>
             <RandomVariable symbId="eta_V">
-                <ct:UnitRef unitId="l"/>
                 <ct:VariabilityReference>
                    <ct:SymbRef blkIdRef="model" symbIdRef="level"/>
                 </ct:VariabilityReference>
@@ -160,7 +159,6 @@
                 </NormalDistribution>                            
             </RandomVariable>
             <IndividualParameter symbId="V">
-                <ct:UnitRef unitId="l"/>
                 <GaussianModel>
                     <Transformation>log</Transformation>
                     <LinearCovariate>
@@ -170,7 +168,7 @@
                             </ct:Assign>
                         </PopulationParameter>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="W"></ct:SymbRef>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="W"></ct:SymbRef>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_V"></ct:SymbRef>
                             </FixedEffect>
@@ -257,7 +255,7 @@
                             <ct:Assign><ct:SymbRef symbIdRef="pop_Cl"></ct:SymbRef></ct:Assign>
                         </PopulationParameter>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="W"></ct:SymbRef>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="W"></ct:SymbRef>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_Cl"/>
                             </FixedEffect>
@@ -285,9 +283,9 @@
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="times">
-                            <ct:SymbRef symbIdRef="pop_R_in"/>
+                            <ct:SymbRef symbIdRef="pop_Rin"/>
                             <Uniop op="exp">
-                                <ct:SymbRef symbIdRef="eta_R_in"/>
+                                <ct:SymbRef symbIdRef="eta_Rin"/>
                             </Uniop>
                         </Binop>
                     </Equation>
@@ -386,24 +384,26 @@
                 </CorrelationCoefficient>
             </Correlation>
         </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="main">
             <ct:Variable symbId="k" symbolType="real">
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="divide">
-                            <ct:SymbRef blkIdRef="p1" symbIdRef="Cl"/>
-                            <ct:SymbRef blkIdRef="p1" symbIdRef="V"/>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Cl"/>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V"/>
                         </Binop>
                     </Equation>
                 </ct:Assign>
             </ct:Variable>
+            <!-- Ad -->
             <ct:DerivativeVariable symbId="Ad" symbolType="real">
-                <ct:UnitRef unitId="mg"/>
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="times">
                             <Uniop op="minus">
-                                <ct:SymbRef blkIdRef="p1" symbIdRef="ka"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"/>
                             </Uniop>
                             <ct:SymbRef symbIdRef="Ad"/>
                         </Binop>
@@ -413,15 +413,18 @@
                     <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign><ct:Real>0</ct:Real></ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign><ct:Real>0</ct:Real></ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
+            <!-- Ac -->
             <ct:DerivativeVariable symbId="Ac" symbolType="real">
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="minus">
                             <Binop op="times">
-                                <ct:SymbRef blkIdRef="p1" symbIdRef="ka"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"/>
                                 <ct:SymbRef symbIdRef="Ad"/>
                             </Binop>
                             <Binop op="times">
@@ -435,33 +438,35 @@
                     <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign><ct:Real>0</ct:Real></ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign><ct:Real>0</ct:Real></ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
+            <!-- E -->
             <ct:DerivativeVariable symbId="E" symbolType="real">
                 <ct:Description>PCA</ct:Description>
-                <ct:UnitRef unitId="percent"/>
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="minus">
                             <Binop op="times">
-                                <ct:SymbRef blkIdRef="p1" symbIdRef="Rin"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="Rin"/>
                                 <Binop op="minus">
                                     <ct:Real>1</ct:Real>
                                     <Binop op="divide">
                                         <Binop op="times">
-                                            <ct:SymbRef blkIdRef="p1" symbIdRef="Imax"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Imax"/>
                                             <ct:SymbRef symbIdRef="Cc"/>
                                         </Binop>
                                         <Binop op="plus">
                                             <ct:SymbRef symbIdRef="Cc"/>
-                                            <ct:SymbRef blkIdRef="p1" symbIdRef="IC50"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="IC50"/>
                                         </Binop>
                                     </Binop>
                                 </Binop>
                             </Binop>
                             <Binop op="times">
-                                <ct:SymbRef blkIdRef="p1" symbIdRef="kout"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="kout"/>
                                 <ct:SymbRef symbIdRef="E"/>
                             </Binop>
                         </Binop>
@@ -471,19 +476,20 @@
                     <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-                            <Binop op="divide">
-                                <ct:SymbRef symbIdRef="Rin"/>
-                                <ct:SymbRef symbIdRef="kout"/>
-                            </Binop>
-                        </Equation>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="Rin"/>
+                                    <ct:SymbRef symbIdRef="kout"/>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             <ct:DerivativeVariable symbId="Cc" symbolType="real">
                 <ct:Description>Concentration</ct:Description>
-                <ct:UnitRef unitId="mg_l-1"></ct:UnitRef>
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="divide">
@@ -494,11 +500,12 @@
                 </ct:Assign>
             </ct:DerivativeVariable>
         </StructuralModel>
-        <ObservationModel blkId="o1">
+        
+        <!-- OBSERVATION MODEL -->
+        <ObservationModel blkId="om1">
             <SimpleParameter symbId="a1"/>
             <SimpleParameter symbId="b1"/>
             <RandomVariable symbId="epsilon_Cc">
-                <ct:UnitRef unitId="mg_l-1"/>
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
                 </ct:VariabilityReference>
@@ -508,8 +515,7 @@
                     <stddev><var varId="omega_Cc"/></stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <Standard symbId="Cc">
-                <ct:UnitRef unitId="mg_l-1"/>
+            <Standard symbId="Cc_obs">
                 <Output>
                     <ct:SymbRef blkIdRef="main" symbIdRef="Cc"></ct:SymbRef>
                 </Output>
@@ -538,11 +544,11 @@
                 </ResidualError>
             </Standard>
         </ObservationModel>
-        <ObservationModel blkId="o2">
+        
+        <ObservationModel blkId="om2">
             <SimpleParameter symbId="a2"/>
             <SimpleParameter symbId="g_C_E"/>
             <RandomVariable symbId="epsilon_E">
-                <ct:UnitRef unitId="percent"/>
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
                 </ct:VariabilityReference>
@@ -557,7 +563,7 @@
                     <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
                 </ct:VariabilityReference>
                 <RandomVariable1>
-                    <ct:SymbRef blkIdRef="o1" symbIdRef="epsilon_C"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="epsilon_C"/>
                 </RandomVariable1>
                 <RandomVariable2>
                     <ct:SymbRef symbIdRef="epsilon_E"/>
@@ -566,8 +572,7 @@
                     <ct:SymbRef symbIdRef="g_C_E"/>
                 </Covariance>
             </Correlation>
-            <General symbId="E">
-                <ct:UnitRef unitId="percent"/>
+            <General symbId="E_obs">
                 <ct:Assign>
                     <math:Equation>
                         <math:Binop op="plus">
@@ -586,6 +591,7 @@
                 </ct:Assign>
             </General>
         </ObservationModel>
+        
         <ObservationModel blkId="example">
             <SimpleParameter symbId="pop_a"/>
             <RandomVariable symbId="eta_a">
@@ -601,9 +607,9 @@
                 <ct:Assign>
                     <math:Equation>
                         <math:Binop op="times">
-                            <ct:SymbRef symbIdRef="pop_a"></ct:SymbRef>
+                            <ct:SymbRef symbIdRef="pop_a"/>
                             <math:Uniop op="exp">
-                                <ct:SymbRef symbIdRef="eta_a"></ct:SymbRef>
+                                <ct:SymbRef symbIdRef="eta_a"/>
                             </math:Uniop>
                         </math:Binop>
                     </math:Equation>
@@ -623,9 +629,9 @@
                 <ct:Assign>
                     <math:Equation>
                         <math:Binop op="times">
-                            <ct:SymbRef symbIdRef="pop_b"></ct:SymbRef>
+                            <ct:SymbRef symbIdRef="pop_b"/>
                             <math:Uniop op="exp">
-                                <ct:SymbRef symbIdRef="eta_b"></ct:SymbRef>
+                                <ct:SymbRef symbIdRef="eta_b"/>
                             </math:Uniop>
                         </math:Binop>
                     </math:Equation>
@@ -680,9 +686,17 @@
             </Standard>
         </ObservationModel>
     </ModelDefinition>
+    
+    <!-- TRIAL DESIGN -->
     <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
         <Structure>
             <Epoch oid="e1">
+                <Start>
+                    <ct:Real>0</ct:Real>
+                </Start>
+                <End>
+                    <ct:Real>100</ct:Real>
+                </End>
                 <Order>1</Order>
             </Epoch>
             <Arm oid="a1"/>
@@ -723,13 +737,13 @@
             </Segment>
             <Activity oid="d1">
                 <Bolus>
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="derivativeVariable">
                         <ct:SymbRef blkIdRef="main" symbIdRef="Ad"/>
                         <ct:Assign>
                             <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                                 <Binop op="times">
-                                    <ct:Real unitId="mg_kg-1">0.25</ct:Real>
-                                    <ct:SymbRef blkIdRef="c1" symbIdRef="W"/>
+                                    <ct:Real>0.25</ct:Real>
+                                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                                 </Binop>
                             </Equation>
                         </ct:Assign>
@@ -737,9 +751,9 @@
                     <DosingTimes>
                         <ct:Assign>
                             <ct:Sequence>
-                                <ct:Begin><ct:Int unitId="h">0</ct:Int></ct:Begin>
-                                <ct:StepSize><ct:Int unitId="h">24</ct:Int></ct:StepSize>
-                                <ct:End><ct:Int unitId="h">192</ct:Int></ct:End>
+                                <ct:Begin><ct:Int>0</ct:Int></ct:Begin>
+                                <ct:StepSize><ct:Int>24</ct:Int></ct:StepSize>
+                                <ct:End><ct:Int>192</ct:Int></ct:End>
                             </ct:Sequence>
                         </ct:Assign>
                     </DosingTimes>
@@ -747,13 +761,13 @@
             </Activity>
             <Activity oid="d2">
                 <Bolus>
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="derivativeVariable">
                         <ct:SymbRef blkIdRef="main" symbIdRef="Ac"/>
                         <ct:Assign>
                             <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                                 <Binop op="times">
                                     <ct:Real>0.5</ct:Real>
-                                    <ct:SymbRef blkIdRef="c1" symbIdRef="W"/>
+                                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                                 </Binop>
                             </Equation>
                         </ct:Assign>
@@ -771,13 +785,13 @@
             </Activity>
             <Activity oid="d3">
                 <Bolus>
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="derivativeVariable">
                         <ct:SymbRef blkIdRef="main" symbIdRef="Ad"/>
                         <ct:Assign>
                             <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                                 <Binop op="times">
                                     <ct:Real>0.5</ct:Real>
-                                    <ct:SymbRef blkIdRef="c1" symbIdRef="W"/>
+                                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                                 </Binop>
                             </Equation>
                         </ct:Assign>
@@ -795,13 +809,13 @@
             </Activity>
             <Activity oid="d4">
                 <Bolus>
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="derivativeVariable">
                         <ct:SymbRef symbIdRef="Ad"/>
                         <ct:Assign>
                             <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                                 <Binop op="times">
                                     <ct:Real>1</ct:Real>
-                                    <ct:SymbRef blkIdRef="c1" symbIdRef="W"/>
+                                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                                 </Binop>
                             </Equation>
                         </ct:Assign>
@@ -823,48 +837,33 @@
             <ct:VariabilityReference>
                 <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
             </ct:VariabilityReference>
+            
             <Demographic oid="country">
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="model" symbIdRef="country"/>
                 </ct:VariabilityReference>
                 <ct:String>UK</ct:String>
                 <ct:String>US</ct:String>
-                <ds:ColumnRef columnIdRef="cty"></ds:ColumnRef>
+                <ds:ColumnRef columnIdRef="cty"/>
             </Demographic>
+            
             <Demographic oid="centre">
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="model" symbIdRef="centre"/>
                 </ct:VariabilityReference>
                 <ct:String>centre1</ct:String>
                 <ct:String>centre2</ct:String>
+                <ds:ColumnRef columnIdRef="ctr"/>
             </Demographic>
-            <IndividualTemplate>
-                <IndividualMapping><!-- Need to add rule about what is the key of the dataset -->
-                    <ds:ColumnRef  columnIdRef="id"/>
-                </IndividualMapping>
-                <ArmMapping>
-                    <ds:ColumnRef  columnIdRef="arm"/>
-                </ArmMapping>
-                <DemographicMapping>
-                    <ds:ColumnRef  columnIdRef="cty"></ds:ColumnRef >
-                    <ct:OidRef oidRef="country"/>
-                </DemographicMapping>
-                <DemographicMapping>
-                    <ds:ColumnRef  columnIdRef="ctr"></ds:ColumnRef >
-                    <ct:OidRef oidRef="centre"/>
-                </DemographicMapping>
-                <ReplicateMapping>
-                    <ds:ColumnRef  columnIdRef="reps"/>
-                </ReplicateMapping>
-            </IndividualTemplate>
+            
             <ds:DataSet>
-            <ds:Definition>
-                <ds:Column columnId="id" valueType="string" columnNum="1"/>
-                <ds:Column columnId="arm" valueType="string" columnNum="2"/>
-                <ds:Column columnId="cty" valueType="string" columnNum="3"/>
-                <ds:Column columnId="ctr" valueType="string" columnNum="4"/>
-                <ds:Column columnId="reps" valueType="int" columnNum="5"/>
-            </ds:Definition>
+                <ds:Definition>
+                    <ds:Column columnId="id" columnType="id" valueType="string" columnNum="1"/>
+                    <ds:Column columnId="arm" columnType="arm" valueType="string" columnNum="2"/>
+                    <ds:Column columnId="cty" columnType="demographic" valueType="string" columnNum="3"/>
+                    <ds:Column columnId="ctr" columnType="demographic" valueType="string" columnNum="4"/>
+                    <ds:Column columnId="reps" columnType="replicate" valueType="int" columnNum="5"/>
+                </ds:Definition>
                 <ds:Table>
                     <ds:Row>
                         <ct:String>i1</ct:String><ct:String>a1</ct:String><ct:String>UK</ct:String><ct:String>centre1</ct:String><ct:Int>20</ct:Int>
@@ -882,17 +881,21 @@
             </ds:DataSet>            
         </Population>
     </TrialDesign>
+    
+    <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         <SimulationStep oid="s1">
+            
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="c1" symbIdRef="pop_W"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="pop_W"/>
                 <ct:Assign>
                     <ct:Real>70.07</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
+            
             <ct:VariableAssignment>
                 <ct:Description>This is the: c1.omega_W = 1409/100</ct:Description>
-                <ct:SymbRef blkIdRef="c1" symbIdRef="omega_W"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="omega_W"/>
                 <ct:Assign>
                     <math:Equation>
                         <!-- 1409/100 = 14.09 -->
@@ -903,163 +906,152 @@
                     </math:Equation>
                 </ct:Assign>
             </ct:VariableAssignment>
+            
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="c1" symbIdRef="omega_W"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="omega_W"/>
                 <ct:Assign>
                     <ct:Real>1.0</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_ka"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_ka"/>
                 <ct:Assign>
                     <ct:Real>0.6</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_V"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_V"/>
                 <ct:Assign>
                     <ct:Real>8</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_V"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_V"/>
                 <ct:Assign>
                     <ct:Real>0.2</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_Cl"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Cl"/>
                 <ct:Assign>
                     <ct:Real>0.13</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_Cl"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Cl"/>
                 <ct:Assign>
                     <ct:Real>0.2</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V"/>
                 <ct:Assign>
                     <ct:Real>1</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="beta_Cl"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_Cl"/>
                 <ct:Assign>
                     <ct:Real>0.75</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="rho_V_Cl"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="rho_V_Cl"/>
                 <ct:Assign>
                     <ct:Real>0.7</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_Imax"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Imax"/>
                 <ct:Assign>
                     <ct:Real>0.9</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_Imax"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Imax"/>
                 <ct:Assign>
                     <ct:Real>2</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_IC50"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_IC50"/>
                 <ct:Assign>
                     <ct:Real>0.4</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_IC50"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_IC50"/>
                 <ct:Assign>
                     <ct:Real>0.4</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_kout"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_kout"/>
                 <ct:Assign>
                     <ct:Real>0.05</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_kout"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_kout"/>
                 <ct:Assign>
                     <ct:Real>0.05</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_Rin"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Rin"/>
                 <ct:Assign>
                     <ct:Real>5</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_Rin"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Rin"/>
                 <ct:Assign>
                     <ct:Real>0.05</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
+            
+            <!-- OBSERVATIONS -->
             <Observations>
-                <Forall>
+                <Timepoints>
                     <ct:Sequence>
-                        <ct:Begin><ct:Int>1</ct:Int></ct:Begin>
-                        <ct:StepSize><ct:Int>1</ct:Int></ct:StepSize>
-                        <ct:Repetitions><ct:Int>200</ct:Int></ct:Repetitions>
+                        <ct:Begin><ct:Int>0</ct:Int></ct:Begin>
+                        <ct:StepSize><ct:Int>24</ct:Int></ct:StepSize>
+                        <ct:End><ct:Int>288</ct:Int></ct:End>
                     </ct:Sequence>
-                    <ct:SymbRef symbIdRef="r"/>
-                    <Timepoints>
-                        <ct:Sequence>
-                            <ct:Begin><ct:Int>0</ct:Int></ct:Begin>
-                            <ct:StepSize><ct:Int>24</ct:Int></ct:StepSize>
-                            <ct:End><ct:Int>288</ct:Int></ct:End>
-                        </ct:Sequence>
-                    </Timepoints>
-                </Forall>
+                </Timepoints>
                 <Continuous>
-                    <ct:SymbRef blkIdRef="o1" symbIdRef="E"/>
+                    <ct:SymbRef blkIdRef="om2" symbIdRef="E_obs"/>
                 </Continuous>
             </Observations>
+
             <Observations>
-                <Forall>
-                    <ct:Sequence>
-                        <ct:Begin><ct:Int>1</ct:Int></ct:Begin>
-                        <ct:StepSize><ct:Int>1</ct:Int></ct:StepSize>
-                        <ct:Repetitions><ct:Int>200</ct:Int></ct:Repetitions>
-                    </ct:Sequence>
-                    <ct:SymbRef symbIdRef="r"/>
-                    <Timepoints>
-                        <ct:Vector>
-                            <ct:Real>0.5</ct:Real>
-                            <ct:Sequence>
-                                <ct:Begin><ct:Int>4</ct:Int></ct:Begin>
-                                <ct:StepSize><ct:Int>4</ct:Int></ct:StepSize>
-                                <ct:End><ct:Int>48</ct:Int></ct:End>
-                            </ct:Sequence>
-                            <ct:Sequence>
-                                <ct:Begin><ct:Int>52</ct:Int></ct:Begin>
-                                <ct:StepSize><ct:Int>24</ct:Int></ct:StepSize>
-                                <ct:End><ct:Int>192</ct:Int></ct:End>
-                            </ct:Sequence>
-                            <ct:Sequence>
-                                <ct:Begin><ct:Int>192</ct:Int></ct:Begin>
-                                <ct:StepSize><ct:Int>4</ct:Int></ct:StepSize>
-                                <ct:End><ct:Int>250</ct:Int></ct:End>
-                            </ct:Sequence>
-                        </ct:Vector>
-                    </Timepoints>
-                </Forall>
+                <Timepoints>
+                    <ct:Vector>
+                        <ct:Real>0.5</ct:Real>
+                        <ct:Sequence>
+                            <ct:Begin><ct:Int>4</ct:Int></ct:Begin>
+                            <ct:StepSize><ct:Int>4</ct:Int></ct:StepSize>
+                            <ct:End><ct:Int>48</ct:Int></ct:End>
+                        </ct:Sequence>
+                        <ct:Sequence>
+                            <ct:Begin><ct:Int>52</ct:Int></ct:Begin>
+                            <ct:StepSize><ct:Int>24</ct:Int></ct:StepSize>
+                            <ct:End><ct:Int>192</ct:Int></ct:End>
+                        </ct:Sequence>
+                        <ct:Sequence>
+                            <ct:Begin><ct:Int>192</ct:Int></ct:Begin>
+                            <ct:StepSize><ct:Int>4</ct:Int></ct:StepSize>
+                            <ct:End><ct:Int>250</ct:Int></ct:End>
+                        </ct:Sequence>
+                    </ct:Vector>
+                </Timepoints>
                 <Continuous>
                     <ct:SymbRef blkIdRef="main" symbIdRef="Cc"/>
-                    <ct:SymbRef blkIdRef="o1" symbIdRef="Cc"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="Cc_obs"/>
                 </Continuous>
             </Observations>
         </SimulationStep>
+
         <StepDependencies>
             <Step>
                 <ct:OidRef oidRef="s1"/>
