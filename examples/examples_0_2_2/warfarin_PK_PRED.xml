@@ -37,6 +37,12 @@
                             <ct:SymbRef symbIdRef="W"/>
                         </math:Equation>
                     </Transformation>
+<!--                    <ct:Interpolation>                                  Not in the model, just testing
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="Age"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>-->
                 </Continuous>
             </Covariate>
         </CovariateModel>
