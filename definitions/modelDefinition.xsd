@@ -589,7 +589,7 @@ permissions and limitations under the License.
                     <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <!-- TEST Interpolation goes here -->
+            <!-- TEST extension: Interpolation goes here -->
             <xs:element ref="ct:Interpolation" minOccurs="0"/>
             <!-- /TEST -->
         </xs:sequence>
