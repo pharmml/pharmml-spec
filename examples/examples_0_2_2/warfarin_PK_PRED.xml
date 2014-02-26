@@ -424,23 +424,17 @@
         
         <!-- POPULATION -->
         <Population>
-            <IndividualTemplate>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </IndividualMapping>
-                <ArmMapping>
-                    <ds:ColumnRef columnIdRef="ARM"/>
-                </ArmMapping>
-                <CovariateMapping>
-                    <ds:ColumnRef columnIdRef="WEIGHT"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </CovariateMapping>
-            </IndividualTemplate>
+            
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="WEIGHT"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+            </ColumnMapping>
+            
             <ds:DataSet>
                 <ds:Definition>
-                    <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="ARM" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="WEIGHT" valueType="real" columnNum="3"/>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
                 </ds:Definition>
                 <ds:Table>
                     <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Real>70.1</ct:Real></ds:Row>

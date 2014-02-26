@@ -66,6 +66,12 @@
                             </Uniop>
                         </Equation>
                     </Transformation>
+                    <ct:Interpolation>
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="t"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
                 </Continuous>
             </Covariate>
         </CovariateModel>
@@ -313,33 +319,18 @@
             <ct:VariabilityReference>
                 <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
             </ct:VariabilityReference>
-            <IndividualTemplate>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="id"/>
-                </IndividualMapping>
-                <ArmMapping>
-                    <ds:ColumnRef columnIdRef="arm"/>
-                </ArmMapping>
-                <CovariateMapping>
-                    <ds:ColumnRef columnIdRef="weight"/>
-                    <ct:SymbRef symbIdRef="W"/>
-                    <ct:Interpolation>
-                        <ct:Algorithm>linear</ct:Algorithm>
-                        <ct:InterpIndepVar>
-                            <ct:SymbRef symbIdRef="t"/>
-                        </ct:InterpIndepVar>
-                    </ct:Interpolation>
-                </CovariateMapping>
-                <ReplicateMapping>
-                    <ds:ColumnRef columnIdRef="reps"/>
-                </ReplicateMapping>
-            </IndividualTemplate>
+            
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="weight"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+            </ColumnMapping>
+            
             <ds:DataSet>
                 <ds:Definition>
-                    <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="ARM" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="WEIGHT" valueType="real" columnNum="3"/>
-                    <ds:Column columnId="REPS" valueType="int" columnNum="4"/>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
+                    <ds:Column columnId="REPS" columnType="replicate" valueType="int" columnNum="4"/>
                 </ds:Definition>
                 <ds:Table>
                     <ds:Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Real>20</ct:Real></ds:Row>
