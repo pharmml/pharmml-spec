@@ -552,6 +552,10 @@
                 <ArmMapping> 
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/> 
                 </ArmMapping> 
+                <DemographicMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef=""></ColumnRef>
+                    <ct:OidRef oidRef=""></ct:OidRef>
+                </DemographicMapping>
                 <ReplicateMapping> 
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="REP"/> 
                 </ReplicateMapping>
@@ -570,13 +574,19 @@
 
         <!-- INDIVUIDUAL DOSING -->
         <IndividualDosing>
+            
             <ActivityRef oidRef="bolusIV"/>
-            <IndividualRef columnIdRef="ID"/>
+            
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
+                <ct:SymbRef symbIdRef="t"/>
+            </ColumnMapping>
+            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" valueType="real" columnNum="2"/>
-                    <Column columnId="DOSE" valueType="real" columnNum="5"/>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                    <Column columnId="DOSE" columnType="dosing" valueType="real" columnNum="5"/>
                 </Definition>
                 <ImportData oid="PCV_dosingData">
                     <name>RIBBA2012_PCV_dosing</name>
@@ -602,7 +612,6 @@
                     3	45.87	1
                     4	3.7	1
                     4	5.51	1 -->
-                
             </DataSet>
         </IndividualDosing>
     </TrialDesign>
