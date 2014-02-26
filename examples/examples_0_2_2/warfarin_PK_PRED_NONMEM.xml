@@ -27,8 +27,7 @@
         <VariabilityModel blkId="obsErr" type="residualError">
             <Level symbId="residual"/>
         </VariabilityModel>
-        
-        
+                
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
             <!-- W -->
@@ -427,18 +426,116 @@
                 </ds:DataSet>            
             </NONMEMdataSet>
             
+            <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate>
+                <!-- V -->
                 <ParameterEstimation>
-                    <ct:SymbRef symbIdRef="CL"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_V"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>8</ct:Real>
+                    </InitialEstimate>
+                    <LowerBound>
+                        <ct:Real>0.001</ct:Real>
+                    </LowerBound>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_V"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
-                <!-- other parameters to be estmated... -->
+                <!-- CL -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_CL"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.1</ct:Real>
+                    </InitialEstimate>
+                    <LowerBound>
+                        <ct:Real>0.001</ct:Real>
+                    </LowerBound>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_CL"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>0.1</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>
+                <!-- rho_CL_V -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="rho_CL_V"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.01</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <!-- Tlag -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Tlag"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                    <LowerBound>
+                        <ct:Real>0.001</ct:Real>
+                    </LowerBound>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Tlag"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>0.1</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>
+                <!-- ka -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_ka"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>2</ct:Real>
+                    </InitialEstimate>
+                    <LowerBound>
+                        <ct:Real>0.001</ct:Real>
+                    </LowerBound>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_ka"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>1</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>                
+                <!-- sigma_add -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="sigma_add"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.05</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <!-- sigma_prop -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="sigma_prop"/>
+                    <mstep:InitialEstimate fixed="false">
+                        <ct:Real>0.01</ct:Real>
+                    </mstep:InitialEstimate>
+                </ParameterEstimation>                
             </ParametersToEstimate>
-            <Operation order="1" opType="estPop"/>
+            
+            <!-- OPERATION -->
+            <Operation order="1" opType="estPop">
+                <ct:Description>Estimate the population parameters in the model.</ct:Description>
+                <Property name="software-tool-name">
+                    <ct:Assign>
+                        <ct:String>NONMEM</ct:String>
+                    </ct:Assign>
+                </Property>
+                <Property name="software-tool-version">
+                    <ct:Assign>
+                        <ct:Real>7.3</ct:Real>
+                    </ct:Assign>
+                </Property>
+                <Algorithm definition="FOCEI">
+                </Algorithm>
+            </Operation>
+            <Operation order="2" opType="estFIM"/>
+            <Operation order="3" opType="estIndiv"/>
         </EstimationStep>
         
+        <!-- STEP DEPENDENCIES -->
         <StepDependencies>
             <Step>
                 <ct:OidRef oidRef="estimStep1"/>

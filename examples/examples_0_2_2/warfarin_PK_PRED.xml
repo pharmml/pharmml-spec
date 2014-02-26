@@ -30,6 +30,7 @@
         
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
+            <!-- W -->
             <Covariate symbId="W">
                 <Continuous>
                     <Transformation>
@@ -44,6 +45,24 @@
                         </ct:InterpIndepVar>
                     </ct:Interpolation>-->
                 </Continuous>
+            </Covariate>
+            <!-- AGE -->
+            <Covariate symbId="AGE">
+                <Continuous>
+                    <Transformation>
+                        <math:Equation>
+                            <ct:SymbRef symbIdRef="AGE"/>
+                        </math:Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+            <!-- SEX -->
+            <Covariate symbId="SEX">
+                <Categorical>
+                    <Category catId="F">
+                        <ct:Name>Female</ct:Name>
+                    </Category>
+                </Categorical>
             </Covariate>
         </CovariateModel>
         
@@ -475,38 +494,6 @@
                 </ds:DataSet>
             </ObjectiveDataSet>
             
-<!--            <!-\- OBJECTIVE DATA -\->
-            <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </IndividualMapping>
-                <VariableMapping>
-                    <ds:ColumnRef columnIdRef="TIME"/>
-                    <ct:SymbRef symbIdRef="t"/>
-                </VariableMapping>
-                <VariableMapping>
-                    <ds:ColumnRef columnIdRef="DV"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="C"/>
-                </VariableMapping>
-                <ds:DataSet>
-                    <ds:Definition>
-                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="DV" valueType="real" columnNum="3"/>
-                    </ds:Definition>
-                    <ds:Table>
-                        <!-\- SUBJECT 1 -\->
-                        <ds:Row><ct:Id>i1</ct:Id><ct:Real>0.5</ct:Real><ct:Real>0</ct:Real></ds:Row>
-                        <ds:Row><ct:Id>i1</ct:Id><ct:Real>1</ct:Real><ct:Real>1.9</ct:Real></ds:Row>
-                        <ds:Row><ct:Id>i1</ct:Id><ct:Real>2</ct:Real><ct:Real>3.3</ct:Real></ds:Row>
-                        <ds:Row><ct:Id>i1</ct:Id><ct:Real>3</ct:Real><ct:Real>6.6</ct:Real></ds:Row>
-                        <ds:Row><ct:Id>i1</ct:Id><ct:Real>6</ct:Real><ct:Real>9.1</ct:Real></ds:Row>
-                        <ds:Row><ct:Id>i1</ct:Id><ct:Real>9</ct:Real><ct:Real>10.8</ct:Real></ds:Row>
-                        <!-\- SUBJECT 2 -\->
-                        <!-\- SNIP -\->
-                    </ds:Table>
-                </ds:DataSet>
-            </ObjectiveDataSet>-->
             
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate>
@@ -618,10 +605,11 @@
         </EstimationStep>
         
         <!-- STEP DEPENDENCIES -->
-        <mstep:StepDependencies>
-            <mstep:Step>
+        <StepDependencies>
+            <Step>
                 <ct:OidRef oidRef="estimStep1"/>
-            </mstep:Step>
-        </mstep:StepDependencies>
+            </Step>
+        </StepDependencies>
+
     </ModellingSteps>
 </PharmML>
