@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.2.1">
+
+    <ct:Name>Rocchetti - CCP 2013</ct:Name>
+    
+    <ct:Description>TGI - drug combination</ct:Description>
+    
+    <!-- intependent variable -->
+    <IndependentVariable symbId="t"/>
+    
+    <ct:FunctionDefinition symbolType="real" symbId="proportionalErrorModel">
+        <ct:FunctionArgument symbolType="real" symbId="b"/>
+        <ct:FunctionArgument symbolType="real" symbId="f"/>
+        <ct:Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Binop op="times">
+                    <ct:SymbRef symbIdRef="b"/>
+                    <ct:SymbRef symbIdRef="f"/>
+                </Binop>
+            </Equation>
+        </ct:Definition>
+    </ct:FunctionDefinition>
+    
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <VariabilityModel blkId="resErrorModel" type="error"> 
+            <Level symbId="residual"/>
+        </VariabilityModel>
+        
+        <ParameterModel blkId="pm1">
+            
+            <SimpleParameter symbId="ka_A">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:Real>24</ct:Real> <!-- hours -->
+                            <Binop op="divide">
+                                <Uniop op="log">
+                                    <ct:Real>2</ct:Real>
+                                </Uniop>
+                                <ct:Real>6.19</ct:Real> <!-- t1/2 in hours -->
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="ke_A">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Uniop op="log">
+                                <ct:Real>2</ct:Real>
+                            </Uniop>
+                            <ct:Real>6.05</ct:Real> <!-- t1/2 in hours -->
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="FV1_A"> <!-- Kg/L -->
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:Real>1</ct:Real>
+                            <ct:Real>0.119</ct:Real> <!-- L/Kg -->
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="ka_B">
+                <ct:Assign>
+                    <ct:Real>18.8</ct:Real> <!-- day-1 -->
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="ke_B"> <!-- day-1 -->
+                <ct:Assign>
+                    <ct:Real>49.2</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="k21"> <!-- day-1 -->
+                <ct:Assign>
+                    <ct:Real>10.4</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="k12"> <!-- day-1 -->
+                <ct:Assign>
+                    <ct:Real>141.1</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="FV1_B"> <!-- Kg/L -->
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:Real>1</ct:Real>
+                            <ct:Real>2.13</ct:Real> <!-- L/Kg -->
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="k2"/>
+            
+            
+            <SimpleParameter symbId="lambda0"/>
+            <SimpleParameter symbId="lambda1"/>
+            <SimpleParameter symbId="k1"/>
+            <SimpleParameter symbId="IC50"/>
+            <SimpleParameter symbId="IC50combo"/>
+            <SimpleParameter symbId="w0"/>
+            <SimpleParameter symbId="Emax">
+                <ct:Assign>
+                    <ct:Real>1</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="psi">
+                <ct:Assign>
+                    <ct:Real>20</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+        </ParameterModel>
+        
+        <StructuralModel blkId="sm1">
+            <SimpleParameter symbId="D_A"/>
+            <SimpleParameter symbId="D_B"/>
+
+            <ct:DerivativeVariable symbId="C0_A" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="FV1_A" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="D_A"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="ka_A" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="C0_A"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="C1_A" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="ka_A" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="C0_A"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="ke_A" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="C1_A"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:Variable symbId="cA" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <ct:SymbRef symbIdRef="C1_A"/>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+            
+            <ct:DerivativeVariable symbId="C0_B" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="FV1_B" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="D_B"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="ka_B" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="C0_B"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="C1_B" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="ka_B" blkIdRef="pm1"/>
+                                    <ct:SymbRef symbIdRef="C0_B"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Binop op="plus">
+                                        <ct:SymbRef symbIdRef="k12" blkIdRef="pm1"/>
+                                        <ct:SymbRef symbIdRef="ke_B" blkIdRef="pm1"/>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="C1_B"/>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k21" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="C2_B"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="C2_B" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k12" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="C1_B"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k21" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="C2_B"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:Variable symbolType="real" symbId="cB">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <ct:SymbRef symbIdRef="C1_B"/>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+                        
+            <ct:DerivativeVariable symbId="Z0" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="times">
+                                        <ct:SymbRef symbIdRef="lambda0" blkIdRef="pm1"/>
+                                        <ct:SymbRef symbIdRef="Z0"/>
+                                    </Binop>
+                                    <Binop op="power">
+                                        <Binop op="plus">
+                                            <ct:Real>1</ct:Real>
+                                            <Binop op="power">
+                                                <Binop op="times">
+                                                    <Binop op="divide">
+                                                        <ct:SymbRef symbIdRef="lambda0" blkIdRef="pm1"/>
+                                                        <ct:SymbRef symbIdRef="lambda1" blkIdRef="pm1"/>
+                                                    </Binop>
+                                                    <ct:SymbRef symbIdRef="W"/>
+                                                </Binop>
+                                                <ct:SymbRef symbIdRef="psi" blkIdRef="pm1"/>
+                                            </Binop>
+                                        </Binop>
+                                        <Binop op="divide">
+                                            <ct:Real>1</ct:Real>
+                                            <ct:SymbRef symbIdRef="psi" blkIdRef="pm1"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:Real>1</ct:Real>
+                                    <Binop op="divide">
+                                        <Binop op="times">
+                                            <ct:SymbRef symbIdRef="Emax" blkIdRef="pm1"/>
+                                            <ct:SymbRef symbIdRef="cA"/>
+                                        </Binop>
+                                        <Binop op="plus">
+                                            <ct:SymbRef symbIdRef="IC50" blkIdRef="pm1"/>
+                                            <ct:SymbRef symbIdRef="cA"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k2inh"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="cB"/>
+                                    <ct:SymbRef symbIdRef="Z0"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:SymbRef symbIdRef="w0" blkIdRef="pm1"/>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="Z1" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="k2inh"/>
+                                    <ct:SymbRef symbIdRef="cB"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="Z0"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k1" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="Z1"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="Z2" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k1" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="Z1"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k1" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="Z2"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable><ct:SymbRef symbIdRef="t"></ct:SymbRef></ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign><ct:Real>0</ct:Real></ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="Z3" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k1" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="Z2"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="k1" blkIdRef="pm1"/>
+                                <ct:SymbRef symbIdRef="Z3"/>
+                            </Binop>
+                        </Binop>  
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:Variable symbId="W" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <Binop op="plus">
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="Z0"/>
+                                    <ct:SymbRef symbIdRef="Z1"/>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="Z2"/>
+                            </Binop>	
+                            <ct:SymbRef symbIdRef="Z3"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+            
+            <ct:Variable symbolType="real" symbId="k2inh">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="k2" blkIdRef="pm1"/>
+                            <Binop op="minus">
+                                <ct:Real>1</ct:Real>
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="cA"/>
+                                    <Binop op="plus">
+                                        <ct:SymbRef symbIdRef="IC50combo" blkIdRef="pm1"/>
+                                        <ct:SymbRef symbIdRef="cA"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+            
+        </StructuralModel>
+        
+        
+        <ObservationModel blkId="om1">
+            <SimpleParameter symbId="CV"/>
+            
+            <RandomVariable symbId="epsilon">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="resErrorModel" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <prVal>1</prVal>
+                    </variance>                    
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="y">
+                <Output>
+                    <ct:SymbRef symbIdRef="W" blkIdRef="sm1"/>
+                </Output>
+                <!-- Assegno b ed f del proportionalErrorModel(f è la predizione del modello) -->
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <FunctionCall>
+                                <ct:SymbRef symbIdRef="proportionalErrorModel"/>
+                                <FunctionArgument symbId="b">
+                                    <ct:SymbRef symbIdRef="CV"/>
+                                </FunctionArgument>
+                                <FunctionArgument symbId="f">
+                                    <ct:SymbRef symbIdRef="W" blkIdRef="sm1"/>
+                                </FunctionArgument>
+                            </FunctionCall>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="epsilon"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+    </ModelDefinition>
+    
+    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        <Structure>
+            <Epoch oid="e1">
+                <Start>
+                    <ct:Real>0</ct:Real>
+                </Start>
+                <End>
+                    <ct:Real>56</ct:Real>
+                </End>
+                <Order>1</Order>
+            </Epoch>
+            <Arm oid="combination"/>
+            <Cell oid="c1">
+                <EpochRef oidRef="e1"/>
+                <ArmRef oidRef="combination"/>
+                <SegmentRef oidRef="s1"/>
+            </Cell>
+            <Segment oid="s1">
+                <ActivityRef oidRef="NMSP937"/>
+                <ActivityRef oidRef="Bevacizumab"/>
+            </Segment>
+            <Activity oid="Bevacizumab">
+                <Bolus>
+                    <DoseAmount inputType="dose">
+                        <ct:SymbRef symbIdRef="D_A" blkIdRef="sm1"/>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:Real>20</ct:Real> <!-- mg/Kg -->
+                                    <ct:Real>149</ct:Real> <!-- kDa -->
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </DoseAmount>  
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Sequence>
+                                <ct:Begin><ct:Int>8</ct:Int></ct:Begin>
+                                <ct:StepSize><ct:Int>4</ct:Int></ct:StepSize>
+                                <ct:End><ct:Int>20</ct:Int></ct:End>
+                            </ct:Sequence>
+                        </ct:Assign>
+                    </DosingTimes>
+                </Bolus>
+            </Activity>    
+            <Activity oid="NMSP937">
+                <Bolus>
+                    <DoseAmount inputType="dose">
+                        <ct:SymbRef symbIdRef="D_B" blkIdRef="sm1"/>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:Real>45</ct:Real> <!-- mg/Kg -->
+                                    <ct:Real>0.523</ct:Real> <!-- kDa -->
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Vector>
+                                <ct:Real>9</ct:Real>
+                                <ct:Real>10</ct:Real>
+                                <ct:Real>11</ct:Real>
+                                <ct:Real>13</ct:Real>
+                                <ct:Real>14</ct:Real>
+                                <ct:Real>15</ct:Real>
+                                <ct:Real>17</ct:Real>
+                                <ct:Real>18</ct:Real>
+                                <ct:Real>19</ct:Real>
+                            </ct:Vector>                          
+                        </ct:Assign>
+                    </DosingTimes>
+                </Bolus>
+            </Activity>
+        </Structure>                
+        
+        <Population>
+            <IndividualTemplate>
+                <IndividualMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
+                </IndividualMapping>
+                <ArmMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/>
+                </ArmMapping>
+            </IndividualTemplate>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" valueType="id" columnNum="1"/>
+                    <Column columnId="ARM" valueType="id" columnNum="2"/>
+                </Definition>
+                <Table>
+                    <Row>
+                        <ct:Id>i1</ct:Id>
+                        <ct:Id>combination</ct:Id>
+                    </Row>
+                </Table>
+            </DataSet>
+        </Population>
+        
+    </TrialDesign>
+    
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
+        <SimulationStep oid="sim1">
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="lambda0" blkIdRef="pm1"/>
+                <ct:Assign>
+                    <ct:Real>0.140</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="lambda1" blkIdRef="pm1"/>
+                <ct:Assign>
+                    <ct:Real>0.129</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="w0" blkIdRef="pm1"/>
+                <ct:Assign>
+                    <ct:Real>0.062</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="k1" blkIdRef="pm1"/>
+                <ct:Assign>
+                    <ct:Real>3.54</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="k2" blkIdRef="pm1"/>
+                <ct:Assign>
+                    <ct:Real>0.221</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="IC50" blkIdRef="pm1"/>
+                <ct:Assign>
+                    <ct:Real>2.02</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="IC50combo" blkIdRef="pm1"/>
+                <ct:Assign>
+                    <ct:Real>3.6</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="CV" blkIdRef="om1"/>
+                <ct:Assign>
+                    <ct:Real>0.1</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <Observations>
+                <Timepoints>
+                    <ct:Vector>
+                        <ct:Sequence>
+                            <ct:Begin><ct:Int>0</ct:Int></ct:Begin>
+                            <ct:StepSize><ct:Int>1</ct:Int></ct:StepSize>
+                            <ct:End><ct:Int>56</ct:Int></ct:End>
+                        </ct:Sequence>
+                    </ct:Vector>
+                </Timepoints>
+                <Continuous>
+                    <ct:SymbRef symbIdRef="W" blkIdRef="sm1"/>
+                    <ct:SymbRef symbIdRef="y" blkIdRef="om1"/>
+                </Continuous>
+            </Observations>
+        </SimulationStep>
+
+
+
+        <!-- Stima -->
+        <EstimationStep oid="est1">
+            <!-- Data Set per la stima -->
+            <ObjectiveDataSet>
+                <IndividualMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
+                </IndividualMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                    <!-- tempo variabile globale non specifico il blocco di riferimento -->
+                </VariableMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="weight"/>
+                    <ct:SymbRef symbIdRef="W" blkIdRef="sm1"/>
+                </VariableMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" valueType="id" columnNum="1"/>
+                        <Column columnId="time" valueType="real" columnNum="2"/>
+                        <Column columnId="weight" valueType="real" columnNum="3"/>
+                    </Definition>
+                    <Table>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>7</ct:Real><ct:Real>0.2594</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>9</ct:Real><ct:Real>0.2111</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>10</ct:Real><ct:Real>0.2610</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>14</ct:Real><ct:Real>0.2057</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>17</ct:Real><ct:Real>0.2734</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>20</ct:Real><ct:Real>0.1454</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>22</ct:Real><ct:Real>0.0869</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>25</ct:Real><ct:Real>0.2496</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>28</ct:Real><ct:Real>0.2990</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>33</ct:Real><ct:Real>0.4666</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>40</ct:Real><ct:Real>1.1534</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>46</ct:Real><ct:Real>1.7754</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>56</ct:Real><ct:Real>3.0610</ct:Real></Row>
+                    </Table>
+                </DataSet>
+            </ObjectiveDataSet>
+            <ParametersToEstimate>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="lambda0" blkIdRef="pm1"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>0.140</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="lambda1" blkIdRef="pm1"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>0.129</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>   
+                    <ct:SymbRef symbIdRef="w0" blkIdRef="pm1"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>0.062</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="k1" blkIdRef="pm1"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>3.54</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="k2" blkIdRef="pm1"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>0.221</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="IC50" blkIdRef="pm1"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>2.02</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="IC50combo" blkIdRef="pm1"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>7</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="CV" blkIdRef="om1"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+            </ParametersToEstimate>
+            
+            <Operation order="1" opType="estIndiv"/>
+        </EstimationStep>
+        
+        <StepDependencies>
+            <Step>
+                <ct:OidRef oidRef="est1"/>
+            </Step>
+            <Step>
+                <ct:OidRef oidRef="sim1"/>
+            </Step>
+        </StepDependencies>
+        
+    </ModellingSteps>
+    
+</PharmML>
+
