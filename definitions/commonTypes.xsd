@@ -224,7 +224,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Vector"/>
                     <!-- TEST -->
-                    <xs:element ref="ct:Interpolation"/>
+                    <xs:element ref="ct:Interpolation"/> 
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
