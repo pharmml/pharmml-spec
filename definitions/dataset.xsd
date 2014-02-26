@@ -321,6 +321,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="arm"/>
                     <xs:enumeration value="censoring"/>
                     <xs:enumeration value="covariate"/>
+                    <xs:enumeration value="demographic"/>
                     <xs:enumeration value="dose"/>
                     <xs:enumeration value="doseAmount"/>
                     <xs:enumeration value="dosingTime"/>
