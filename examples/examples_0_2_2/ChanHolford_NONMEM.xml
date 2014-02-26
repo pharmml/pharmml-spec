@@ -718,6 +718,7 @@
            
             <!-- NONMEM OBJECTIVE DATA -->
             <NONMEMdataSet>
+                
                 <!-- NM dataset mapping -->
                 <ColumnMapping>
                     <ds:ColumnRef columnIdRef="WTKG"/>
@@ -731,6 +732,7 @@
                     <ds:ColumnRef columnIdRef="DV"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
                 </ColumnMapping>
+                
                 <!-- Dataset definition -->
                 <ds:DataSet>
                     <ds:Definition>
@@ -741,7 +743,7 @@
                         <ds:Column columnId="WTKG" columnType="covariate" valueType="real" columnNum="5"/>
                         <ds:Column columnId="PREV" columnType="covariate" valueType="real" columnNum="6"/>
                         <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="7"/>
-                        <ds:Column columnId="AMT" columnType="dosing" valueType="real" columnNum="8"/>
+                        <ds:Column columnId="AMT" columnType="dose" valueType="real" columnNum="8"/>
                         <ds:Column columnId="RATE" columnType="rate" valueType="real" columnNum="9"/>
                         <ds:Column columnId="SS" columnType="ss" valueType="real" columnNum="10"/>
                         <ds:Column columnId="II" columnType="ii" valueType="real" columnNum="11"/>
