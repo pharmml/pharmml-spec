@@ -279,7 +279,8 @@ permissions and limitations under the License.
     </xs:complexType-->
 
 
-    <!-- TEST new type for ColumnMappingType moved from 'modellingSteps.xsd' -->
+    <!-- TEST new type for ColumnMappingType moved from 'modellingSteps.xsd' 
+    now used in: NONMEMdataSet, LookupTable, IndividualDosing -->
     <xs:complexType name="ColumnMappingType">
         <xs:annotation>
             <xs:documentation>
