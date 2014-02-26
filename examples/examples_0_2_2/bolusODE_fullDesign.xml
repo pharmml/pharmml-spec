@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML file:/Users/mjswat/Projects/ddmore_usecases/specFolder/definitions/pharmml.xsd" 
     
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.2.1">
+    writtenVersion="0.2.2" id="i1">
     
     
     <Name xmlns="http://www.pharmml.org/2013/03/CommonTypes">Bolus administration with an ODE system - full design</Name>
@@ -28,11 +28,11 @@
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="randEffect" type="model">
+        <VariabilityModel blkId="randEffect" type="parameterVariability">
             <Level symbId="indiv"/>
         </VariabilityModel>
         
-        <VariabilityModel blkId="obsErr" type="error">
+        <VariabilityModel blkId="obsErr" type="residualError">
             <Level symbId="residual"/>
         </VariabilityModel>
         
@@ -48,6 +48,12 @@
                             </Binop>
                         </Equation>
                     </Transformation>
+                    <ct:Interpolation>
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="t"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
                 </Continuous>
             </Covariate>
         </CovariateModel>
@@ -251,7 +257,7 @@
             </Segment>
             <Activity oid="bolusIV">
                 <Bolus>
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="derivativeVariable">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="A"/>
                         <ct:Assign>
                             <ct:SymbRef symbIdRef="D"/>
@@ -268,24 +274,12 @@
         
         <!-- POPULATION -->
         <Population>
-            <IndividualTemplate>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"></ColumnRef>
-                </IndividualMapping>
-                <ArmMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"></ColumnRef>
-                </ArmMapping>
-                <CovariateMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"></ColumnRef>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                    <Interpolation xmlns="http://www.pharmml.org/2013/08/Dataset">
-                        <InterpolationAlgorithm>linear</InterpolationAlgorithm>
-                    </Interpolation>
-                    <!--                    <Interpolation>
-                            <Method name="constant"/>
-                    </Interpolation>-->
-                </CovariateMapping>
-            </IndividualTemplate>
+            
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="WEIGHT"></ColumnRef>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+            </ColumnMapping>
+            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" valueType="id" columnNum="1"/>
@@ -300,38 +294,29 @@
             </DataSet>
         </Population>
         
-<!--        <!-\- INDIVIDUAL DOSING IF NECESSARY -\->
-        <IndividualDosing>
-            <ActivityRef oidRef=""></ActivityRef>
-            <IndividualRef columnIdRef=""></IndividualRef>
-            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                <Definition></Definition>
-            </DataSet>
-        </IndividualDosing>
--->        
-
     </TrialDesign>
     
     <!-- MODELING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         <EstimationStep oid="estStep">
+            
             <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
-                </IndividualMapping>
-                <VariableMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"></ColumnRef>
+                
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
-                </VariableMapping>
-                <VariableMapping>
+                </ColumnMapping>
+                
+                <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="Y_obs"/>
-                </VariableMapping>
+                </ColumnMapping>
+                
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <Column columnId="DV" valueType="real" columnNum="3"/>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
                     </Definition>
                     <Table>
                             <!-- SUBJECT 1 -->
