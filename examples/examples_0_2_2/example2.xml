@@ -333,27 +333,16 @@
         
         <!-- population -->
         <Population>
-            <!-- Define the variability level associated with the
-                population -->
+            <!-- Define the variability level associated with the population -->
             <ct:VariabilityReference>
                 <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
             </ct:VariabilityReference>
-            <IndividualTemplate>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="id"/>
-                </IndividualMapping>
-                <ArmMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="arm"/>
-                </ArmMapping>
-                <ReplicateMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="rep"/>
-                </ReplicateMapping>
-            </IndividualTemplate>
+            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="id" valueType="id" columnNum="1"/>
-                    <Column columnId="arm" valueType="id" columnNum="2"/>
-                    <Column columnId="rep" valueType="int" columnNum="3"/>
+                    <Column columnId="id" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="arm" columnType="arm" valueType="id" columnNum="2"/>
+                    <Column columnId="rep" columnType="replicate" valueType="int" columnNum="3"/>
                 </Definition>
                 <Table>
                     <Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Int>50</ct:Int></Row>

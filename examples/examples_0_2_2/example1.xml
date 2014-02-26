@@ -658,25 +658,16 @@
         
         <!-- population -->
         <Population>
+
             <ct:VariabilityReference>
                 <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
             </ct:VariabilityReference>
-            <IndividualTemplate>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="id"/>
-                </IndividualMapping>
-                <ArmMapping>
-                    <ds:ColumnRef columnIdRef="arm"/>
-                </ArmMapping>
-                <ReplicateMapping>
-                    <ds:ColumnRef columnIdRef="reps"/>
-                </ReplicateMapping>
-            </IndividualTemplate>
+            
             <ds:DataSet>
                 <ds:Definition>
-                    <ds:Column columnId="id" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="arm" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="reps" valueType="int" columnNum="3"/>
+                    <ds:Column columnId="id" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="arm" columnType="arm" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="reps" columnType="replicate" valueType="int" columnNum="3"/>
                 </ds:Definition>
                 <ds:Table>
                     <ds:Row>
