@@ -552,10 +552,6 @@
                 <ArmMapping> 
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/> 
                 </ArmMapping> 
-                <DemographicMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef=""></ColumnRef>
-                    <ct:OidRef oidRef=""></ct:OidRef>
-                </DemographicMapping>
                 <ReplicateMapping> 
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="REP"/> 
                 </ReplicateMapping>
@@ -585,8 +581,8 @@
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
-                    <Column columnId="DOSE" columnType="dosing" valueType="real" columnNum="5"/>
+                    <Column columnId="TIME" columnType="dosingTime" valueType="real" columnNum="2"/>
+                    <Column columnId="DOSE" columnType="doseAmount" valueType="real" columnNum="3"/>
                 </Definition>
                 <ImportData oid="PCV_dosingData">
                     <name>RIBBA2012_PCV_dosing</name>

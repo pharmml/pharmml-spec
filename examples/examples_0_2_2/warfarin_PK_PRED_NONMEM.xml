@@ -412,7 +412,7 @@
                         <ds:Column columnId="WT" columnType="covariate" valueType="real" columnNum="3"/>
                         <ds:Column columnId="AGE" columnType="covariate" valueType="real" columnNum="4"/>
                         <ds:Column columnId="SEX" columnType="covariate" valueType="int" columnNum="5"/>
-                        <ds:Column columnId="AMT" columnType="dosing" valueType="real" columnNum="6"/>
+                        <ds:Column columnId="AMT" columnType="dose" valueType="real" columnNum="6"/>
                         <ds:Column columnId="DVID" columnType="dvid" valueType="real" columnNum="7"/>
                         <ds:Column columnId="DV" columnType="dv" valueType="real" columnNum="8"/>
                         <ds:Column columnId="MDV" columnType="mdv" valueType="real" columnNum="9"/>

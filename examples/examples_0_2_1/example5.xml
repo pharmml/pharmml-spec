@@ -545,6 +545,8 @@
         <IndividualDosing>
             <ActivityRef oidRef="bolusIV"/>
             <IndividualRef columnIdRef="ID"/>
+            <DoseAmount columnIdRef="DOSE"/>
+            <DosingTime columnIdRef="TIME"/>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" valueType="id" columnNum="1"/>
