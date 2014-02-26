@@ -1,0 +1,948 @@
+
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xspace}
+\pagestyle{headings}
+%\usepackage[margin=1.2in]{geometry}
+\usepackage[total={6in,9.5in}, top=1.5in, left=.8in, includefoot]{geometry}
+\usepackage{float}
+\restylefloat{table}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.58}
+\definecolor{attributeColor}{rgb}{0.96,0.517,0.29}
+\definecolor{darkgreen}{rgb}{0,.392,0}
+\definecolor{stringColor}{rgb}{0.6,0.2,0}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+%  numbers=left,
+%  stepnumber=5
+}
+
+\lstdefinelanguage{XML}
+{
+  basicstyle=\ttfamily\footnotesize,
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  moredelim=[s][\bfseries\color{darkblue}]{<}{\ },
+  moredelim=[s][\bfseries\color{darkblue}]{</}{>},
+  moredelim=[l][\bfseries\color{darkblue}]{/>},
+  moredelim=[l][\bfseries\color{darkblue}]{>},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!--}{-->},
+  morecomment=[s]{<![CDATA[}{]]>},
+  commentstyle=\color{darkgreen},
+  stringstyle=\color{stringColor},
+  identifierstyle=\color{red},
+  keywordstyle=\color{attributeColor},
+  morekeywords={oid,columnId,columnIdRef,symbId,symbolType,op,columnNum,valueType,inputTarget,blkId,blkIdRef,symbIdRef,xmlns,version,type,VariableMapping,IndividualMapping, NONMEMdataSet} % list your attributes here
+}
+
+\lstdefinelanguage{NONMEMdataSet}
+{
+  basicstyle=\ttfamily\footnotesize,
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  moredelim=[s][\bfseries\color{darkblue}]{<}{\ },
+  moredelim=[s][\bfseries\color{darkblue}]{</}{>},
+  moredelim=[l][\bfseries\color{darkblue}]{/>},
+  moredelim=[l][\bfseries\color{darkblue}]{>},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!--}{-->},
+  morecomment=[s]{<![CDATA[}{]]>},
+  commentstyle=\color{darkgreen},
+  stringstyle=\color{stringColor},
+  identifierstyle=\color{black},
+  keywordstyle=\color{attributeColor},
+  morekeywords={kjkj} % list your attributes here
+}
+
+\author{MJS, SM}
+\date{\today}
+%\title{Extension for PharmML 0.2.2}
+\title{NONMEM format dataset support for PharmML 0.2.2}
+
+
+\newcommand{\cellml}{CellML\xspace}
+\newcommand{\sbml}{SBML\xspace}
+\newcommand{\sedml}{SED-ML\xspace}
+\newcommand{\mathml}{MathML\xspace}
+\newcommand{\uncertml}{UncertML\xspace}
+\newcommand{\pharmml}{PharmML\xspace}
+\newcommand{\xelem}[1]{\texttt{<#1>}\index{XML Element!\texttt{<#1>}}}
+\newcommand{\xatt}[1]{\texttt{#1}\index{XML Attribute!\texttt{#1}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{External data files support}
+to do ....
+
+\section{NONMEM-format dataset support}
+%The reference and mapping to the external NONMEM-format dataset is discussed in connection with an estimation task i.e. one located in the \xelem{EstimationStep}, within \xelem{ModellingSteps}, but it can be defined in \xelem{SimulationStep} as well if necessary. 
+
+At first the mapping of the columns of the data file to the according elements in the \xelem{ModelDefinition} 
+will be described, then the dataset reference will be discussed and how to handle NMTRAN code injection. 
+The warfarin dataset is used for the first two sections, \emph{warfarin\_conc\_pca.csv}:
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{lllllllll}
+  \hline
+\#ID	& time	& wt	& age	& sex	& amt	& dvid	& dv	& mdv \\
+1	& 0	& 66.7	& 50	& 1	& 100	& 0	& .	& 1 \\
+1	& 0	& 66.7	& 50	& 1	& .	& 2	& .	& 1 \\
+1	& 0.5	& 66.7	& 50	& 1	& .	& 1	& 0	& 0 \\
+...\\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
+The Chan et al. dataset will be used in the last section to explain the code injection.
+
+\subsection{Structure in nutshell}
+The support for NONMEM datasets is an extension of the \xelem{EstimationStep} blocks and is located 
+in the \xelem{NONMEMdataSet} element. It consists of three parts:
+\begin{itemize}
+\item
+Part I -- Mapping of the variables defined in the dataset (with three types - individual, covariate, general variable)
+\item
+Part II -- Dataset (as inline data or external files)
+\item
+Part III -- Code injection (with symbol mapping)
+\end{itemize}
+
+\subsection{Part I -- Mapping of the columns in dataset}
+Three types of mapping types are proposed:
+\begin{itemize}
+\item
+subject -- \xelem{NMIndividualMapping}
+\item
+covariates -- \xelem{NMCovariateMapping}
+\item 
+variables -- \xelem{NMVariableMapping}
+\end{itemize}
+which assumes that the translator from \emph{NN} tool $\rightarrow$ PharmML will be able to recognise 
+these general categories. 
+ 
+ 
+% 
+%\subsubsection{Mapping of not model related variables, flags or parameters}
+%The updated proposal is to NOT use additional type for mapping, e.g.
+%\begin{lstlisting}     
+%                <MDVMapping>
+%                    <ds:ColumnRef columnIdRef="MDV"/>
+%                </MDVMapping>
+%                <DOSEMapping>
+%                    <ds:ColumnRef columnIdRef="DOSE"/>
+%                </DosingMapping>
+%                <EVIDMapping>
+%                    <ds:ColumnRef columnIdRef="EVID"/>
+%                </EVIDMapping>
+%\end{lstlisting}
+%but to use only those three types described at the beginning of this section. i.e. \xelem{NMIndividualMapping} for \emph{subject}, \xelem{NMCovariateMapping} for \emph{covariates} and \xelem{NMVariableMapping} for all other \emph{flags, parameters} and \emph{variables}.
+%
+
+ 
+The following code illustrates the mapping of dataset columns to the variables and covariates as used 
+in the model definition and other NONMEM format typical symbols/flags and variables, such as \emph{dvid}, 
+\emph{mdv} etc. The identifier \emph{ID} is mapped to itself as there are no \emph{ID}'s in the model, 
+similar holds for \emph{dvid}, \emph{mdv} etc.
+
+\lstset{language=XML}
+\begin{lstlisting}
+<!-- MODELLING STEPS -->
+<ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+    
+    <!-- ESTIMATION -->
+    <EstimationStep oid="estimStep1">
+        
+        <!-- NONMEM OBJECTIVE DATA -->
+            <NONMEMdataSet>
+                <!-- subject ID -->
+                <NMIndividualMapping>
+                    <ds:ColumnRef columnIdRef="ID"/>
+                </NMIndividualMapping>
+                <!-- time, wt, age, sex and dv can be mapped to variables/parameters in the model -->
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </NMVariableMapping>
+                <NMCovariateMapping>
+                    <ds:ColumnRef columnIdRef="wt"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                </NMCovariateMapping>
+                <NMCovariateMapping>
+                    <ds:ColumnRef columnIdRef="age"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="AGE"/>
+                </NMCovariateMapping>
+                <NMCovariateMapping>
+                    <ds:ColumnRef columnIdRef="sex"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
+                </NMCovariateMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="dv"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
+                </NMVariableMapping>
+                <!-- the following variables cannot be mapped to any model element and are optional-->
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="amt"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="dvid"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="mdv"/>
+                </NMVariableMapping>
+                \end{lstlisting}
+
+\begin{description}
+\item[Note 1] The three types could be simplified to just one, dependent on the capability of the translator. 
+\item[Note 2] For variables not appearing in the ModelDefinition the mapping is not mandatory.
+\end{description}
+
+\subsubsection{Reserved headers in Monolix}
+The following list collects main headers identified by Monolix (User Guide, version 4.2.2) 
+%but as discussed below in the Chan/Holford model there can be many other column names:
+\begin{itemize}
+\item
+ID (or \#ID, I) -- subject identifiers
+\item
+TIME (or T) -- time
+\item
+AMT (or DOSE, D) -- dose
+\item
+X (or REG, XX) -- any regression variable
+\item
+Y (or DV, CONC) -- observations
+\item
+YTYPE (or ITYPE, TYPE, DVID) -- for the type of observations when there are several types of observations (1 for the first type, 2 for the second type, ...). YTYPE is not necessary in the case of a single output.
+\item
+COV -- continuos covariates 
+\item
+CAT -- categorical covariates
+\item
+OCCASION (or OCC) -- occasions
+\item
+ADM -- type of administration
+\item
+CENS -- left-censored data. Can be -1 to represent right-censored data.
+\item
+LIMIT for interval-censored data. It gives the lower limit while Y gives the upper limit.
+\item
+RATE (or R) -- infusion rate
+\item
+TINF -- infusion duration
+\item
+SS -- steady-state (requires column II)
+\item
+ADDL -- number of additional doses  (requires column II)
+\item
+II (or TAU) -- inter-dose interval
+\item
+MDV (Missing Dependent Variable). MDV= 0 if the row contains an observation and MDV=1 otherwise. MDV is not necessary if a dot is used to say when a row does not contain any measurement (Y=дсе). You can use MDV=2 to include times for regression variables updates and for prediction evaluation
+\item
+EVID -- Dose events. EVID is not necessary if DOSE=дсе is used when a row does not contain any dose information. EVID=4 resets the system to the initial state.
+\end{itemize}
+%
+%\begin{description}
+%\item[Question 1] NONMEM allows any string to be used in the header, correct? 
+%This has consequences for the translation from MDL/NMTRAN to PharmML because, if the answer is \emph{yes}, the translation tool will not know what arbitrary names stand for.
+%\end{description}
+
+\subsection{Part II -- Referencing NONMEM dataset}
+This part is fairly straightforward. The structure is that of an externalised dataset. The columns are defined 
+by providing the attributes for the column identifier, value type and column number. Then the file name, 
+URL, format and delimiter are provided.
+
+\begin{lstlisting}
+                <ds:DataSet>
+                    <ds:Definition>
+                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="time" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="wt" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="age" valueType="real" columnNum="4"/>
+                        <ds:Column columnId="sex" valueType="int" columnNum="5"/>
+                        <ds:Column columnId="amt" valueType="real" columnNum="6"/>
+                        <ds:Column columnId="dvid" valueType="real" columnNum="7"/>
+                        <ds:Column columnId="dv" valueType="real" columnNum="8"/>
+                        <ds:Column columnId="mdv" valueType="real" columnNum="9"/>
+                    </ds:Definition>
+                    <ds:ImportData oid="id1">
+                        <ds:name>warfarin_conc_pca</ds:name>
+                        <ds:url>file:///../examples_0_2_2/datasets/</ds:url>
+                        <ds:format>CSV</ds:format>
+                        <ds:delimiter>COMMA</ds:delimiter>
+                    </ds:ImportData>
+                </ds:DataSet>            
+            </NONMEMdataSet>
+\end{lstlisting}
+Only one file format is allowed so far, the \emph{CSV}, with four different \emph{delimiters}: \emph{COMMA}, \emph{SPACE} and \emph{TAB}.
+
+                 
+\subsection{Part III -- NMTRAN code injection (Chan et al.)}
+This section goes beyond the standard models, such as the previous one, and deals with cases 
+when the model and dataset are strongly interconnected. Not only does the dosing come from 
+the datafile but also certain model relevant information is stored in the data. For example, additionally 
+to the usual MDL encoding, NMTRAN code needs to be passed 'as is' to the target tool via PharmML, 
+i.e. in this case the following code
+\lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+      if (PREV==0) {
+         D1=TTK0
+      } else {
+         R1=CL*CSS
+      }
+\end{lstlisting}
+which contains links between certain \emph{flags}, e.g. PREV, encoded in the dataset and the 
+model definition and parameters.
+
+This NMTRAN code is right now part of MDL but we think that this needs to be marked as target 
+code and handled by MDL so that the translator knows which part is NONMEM-specific and 
+needs to be passed without any interpretation.
+
+The above example exemplifies so called \emph{events} which appear in the Chan/Holford model. 
+Below the first few rows of the according dataset are listed:
+
+\begin{table}[ht]
+\begin{center}
+\scriptsize
+\begin{tabular}{llllllllllllllll}
+  \hline
+\#ID& MONTH& TRIAL& OCC& WTKG& PREV& TIME& AMT& RATE& SS& II& CMT& DV& MDV \\
+552& 0& 1& 1& 73& 1& 0& 0& 0& 1& 0& 1& .& 1 \\
+552& 0& 1& 1& 73& 0& 0& 0& 0& 0& 0& 1& 0.46& 0 \\
+552& 0& 1& 1& 73& 0& 0& 740.37& -2& 0& 0& 1& .& 1\\
+552& 0& 1& 1& 73& 0& 0.25& 0& 0& 0& 0& 1& .& 1\\
+552& 0& 1& 1& 73& 0& 0.5& 0& 0& 0& 0& 1& .& 1 \\
+... & ... & ... & ... & ... & ... & ... & ... & ... & ... & ... & ... & ... & ... \\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+Part I and II of the code are analog to the previous example. Here, as explained before, three 
+mapping types are considered. All columns other then \emph{subject} and \emph{covariate} related, 
+such as \emph{OCC, PREV, SS} will be mapped using the \xelem{NMVariableMapping}. 
+To support other types, one would require a very smart translator able to recognise of these 
+names and their meaning.
+ 
+\lstset{language=XML}
+\begin{lstlisting}
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        <EstimationStep oid="estStep">
+           
+           <!-- NONMEM OBJECTIVE DATA -->
+            <NONMEMdataSet>
+                <!-- NM dataset mapping -->
+                <NMIndividualMapping>
+                    <ds:ColumnRef columnIdRef="ID"/>
+                </NMIndividualMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="MONTH"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="TRIAL"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="OCC"/>
+                </NMVariableMapping>
+                <NMCovariateMapping>
+                    <ds:ColumnRef columnIdRef="WTKG"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                </NMCovariateMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="PREV"/>
+                </NMVariableMapping>                
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="TIME"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="AMT"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="RATE"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="SS"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="II"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="CMT"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="DV"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
+                </NMVariableMapping>
+                <NMVariableMapping>
+                    <ds:ColumnRef columnIdRef="MDV"/>
+                </NMVariableMapping>
+                <!-- Dataset definition -->
+                <ds:DataSet>
+                    <ds:Definition>
+                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="MONTH" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="TRIAL" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="OCC" valueType="real" columnNum="4"/>
+                        <ds:Column columnId="WTKG" valueType="real" columnNum="5"/>
+                        <ds:Column columnId="PREV" valueType="real" columnNum="6"/>
+                        <ds:Column columnId="TIME" valueType="real" columnNum="7"/>
+                        <ds:Column columnId="AMT" valueType="real" columnNum="8"/>
+                        <ds:Column columnId="RATE" valueType="real" columnNum="9"/>
+                        <ds:Column columnId="SS" valueType="real" columnNum="10"/>
+                        <ds:Column columnId="II" valueType="real" columnNum="11"/>
+                        <ds:Column columnId="CMT" valueType="real" columnNum="12"/>
+                        <ds:Column columnId="DV" valueType="real" columnNum="13"/>
+                        <ds:Column columnId="MDV" valueType="real" columnNum="14"/>
+                    </ds:Definition>
+                    <ds:ImportData oid="id1">
+                        <ds:name>dataFileName</ds:name>
+                        <ds:url>./../examples_0_2_2/datasets/</ds:url>
+                        <ds:format>CSV</ds:format>
+                        <ds:delimiter>COMMA</ds:delimiter>
+                    </ds:ImportData>
+                </ds:DataSet>
+                \end{lstlisting}
+
+The following is new and specific to Part III.
+The first section of the following listing shows again a mapping, this time it is about the variables/parameters 
+used in the NMTRAN code to be injected. Some of them are model related, others are just indicators for NONMEM 
+to perform a particular operation. 
+
+\lstset{language=XML}
+\begin{lstlisting}
+                <!-- Code injection -->
+                <CodeInjection>
+                    <!-- TTK0, CSS and CL are mapped to the ParameterModel 'pm1' -->
+                    <NMsymbolMapping>
+                        <ct:SymbRef symbIdRef="TTK0"/>	
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
+                    </NMsymbolMapping>
+                    <NMsymbolMapping>
+                        <ct:SymbRef symbIdRef="CSS"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>
+                    </NMsymbolMapping>
+                    <NMsymbolMapping>
+                        <ct:SymbRef symbIdRef="CL"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
+                    </NMsymbolMapping>
+                    <!-- PRED is mapped to the dataset column define above -->
+                    <NMsymbolMapping>
+                        <ct:SymbRef symbIdRef="PRED"/>
+                        <ds:ColumnRef columnIdRef="PRED"/>
+                    </NMsymbolMapping>
+                    <NMsymbolMapping> 
+                        <ct:SymbRef symbIdRef="D1"/>
+                    </NMsymbolMapping>
+                    <NMsymbolMapping>
+                        <ct:SymbRef symbIdRef="R1"/>
+                    </NMsymbolMapping>
+                    <NMTRANcode>
+                        <!-- The following symbols are extracted from the injected code below -->
+                        <NMsymbol symbId="PRED"/>
+                        <NMsymbol symbId="EVID"/>
+                        <NMsymbol symbId="TTK0"/>
+                        <NMsymbol symbId="D1"/>
+                        <NMsymbol symbId="R1"/>
+                        <Code>
+                            <![CDATA[
+                                if (PRED==0) {
+                                D1=TTK0
+                                } else {
+                                R1=CL*CSS
+                                }                    
+                                ]]>
+                        </Code>
+                    </NMTRANcode>
+                </CodeInjection>
+            </NONMEMdataSet>
+\end{lstlisting}
+
+The code is stored in the \xelem{![CDATA[]]}, a structure which makes sure that everything inside it is 
+ignored by the language parser and passed 'as is'.
+
+The mapping of the parameters \emph{TTK0}, \emph{CSS, CL} and the flag \emph{PRED} are shown 
+among others. Note that the first three are mapped to the according parameters in the 
+\xelem{ParameterModel}, the last one, \emph{PRED}, to the column in the above dataset/table. 
+So far only one general \xelem{NMSymbolMapping} element is defined based on the assumption 
+that automatic distinction between parameters, flags and other symbols is not doable in general. 
+The \xelem{NMTRANcode} section at the end starts with a list of all symbols appearing in the 
+NMTRAN code which provides the ground for the \xelem{NMSymbolMapping} mapping. The last 
+question to discuss is:
+\begin{description}
+\item[Question] Do mappings e.g. for R1, D1 make sense?
+\item[Answer] The easiest solution, for now, would be to extract all symbols out of the target code, 
+which however might result in a high number of non-sensical mappings. 
+\item[Alternatively] MDL should deal with it by making sure that the target code passed to PharmML 
+follows well defined rules and grammar.
+\end{description}
+
+\section{Lookup table with data}
+
+\begin{table}[ht!]
+\begin{center}
+
+\begin{tabular}{ll | ll | l}
+  \hline
+Type	 & Setup/Input  & TrialDesign & Target/ModelDefinition & Comments \\ 
+  \hline
+  \hline
+  & \multicolumn{4}{ c }{\textbf{General time-varying input}} \\
+  \hline
+C1 	& Experimental data \&  	& -- Data as lookup table 		& -- Structural model 			& No \emph{Input} parameters  \\ [-.25ex]
+	& Interpolation type 		& -- Interpolation type, e.g.:	&with \emph{Input}				& to be estimated \\ [-.25ex]	
+	& from list	 			& \emph{constant}, \emph{linear}, \emph{cubic} etc.  & 			& \\ [-.25ex]
+	& 					& -- Reference to \emph{Input}&  							& \\ [-.25ex]
+	& 					& 						& 							& \\ [+1ex]
+C2	& Experimental data \& 	& -- Data as lookup table 		& -- Structural model  			& No \emph{Input} parameters  \\ [-.25ex] 
+	& User-defined input		& -- Reference to \emph{Input}	& with \emph{Input} 				& to be estimated \\ [-.25ex]
+	& function			 	& 						& -- \emph{Input} as piece-wise	& \\ [-.25ex] 
+	&   					&  						& function  					& \\ [-.25ex]
+	& 					&  						&  							& \\  [1ex]
+C3	& Data unavailable 		& 						& -- Structural model  			& Estimation of \emph{Input}  \\  [-.25ex] 
+	& User-defined input 	& 						& with \emph{Input} 				& parameters is \\ [-.25ex] 
+	& function			  	& 						& -- \emph{Input} as piece-wise  	& of interest \\  [-.25ex]
+	&					&						& function  					& \\  [-.25ex]
+	& 					& 						& -- \emph{Input} parameters in  	& \\  [-.25ex] 
+	&					& 						& Parameter model 				& \\  [.5ex]
+   \hline
+\end{tabular}
+\end{center}
+\caption{The table summarises possible configurations of what is given as input, column \emph{Setup/Input} and how it can be structured and implemented, columns \emph{TrialDesign} and \emph{Target/ModelDefinition}.}
+\end{table}
+
+\subsection{Case C1}
+The main ingredients in this case are 
+\begin{itemize}
+\item
+Cc -- measured drug concentration encoded as a variable in the model
+\lstset{language=XML}
+\begin{lstlisting}
+            <!-- TARGET FOR LOOKUP DATA REFERENCE -->
+            <ct:Variable symbolType="real" symbId="Cc"/>
+                <ct:Assign>
+                    <ct:Interpolation>
+                        <ct:Algorithm>constant</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="t"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
+                </ct:Assign>
+            </ct:Variable>
+
+\end{lstlisting}
+
+is given as a lookup table defined in the \emph{TrialDesign}
+\begin{table}[H]
+\begin{center}
+\scriptsize
+\begin{tabular}{lllll}
+  \hline
+ID & TIME & EPOCH & ARM & Cc \\
+  \hline
+1& 10& 1& 1 & 10 \\
+1& 20& 1& 1 & 12 \\
+... & ... & ... & ... & ...\\
+1& 10& 2& 1 & 6 \\
+1& 20& 2& 1 & 12 \\
+... & ... & ... & ... & ...\\
+2& 10& 1& 1 & 2 \\
+2& 20& 1& 1 & 4 \\
+2& 40& 1& 1 & 7 \\
+... & ... & ... & ... & ...\\
+  \hline
+\end{tabular}
+\caption{Lookup table, first few data records from \emph{Cc\_lookupTable.csv} dataset.}
+%\label{tab:lookupData}
+\end{center}
+\end{table}
+
+\item
+Interpolation type chosen from a list: \emph{\{constant, linear, spline, pchip\}}
+\item
+E -- effect model given by an ODE
+\begin{align}
+\frac{dE}{dt}=Rin \times \Big(1- \frac{Imax \times Cc}{Cc+IC_{50}}\Big) - kout \times E		\nonumber
+\end{align}
+\lstset{language=XML}
+\begin{lstlisting}
+            <!-- EFFECT MODEL with TARGET 'Cc' -->
+            <ct:DerivativeVariable symbId="E" symbolType="real">
+                <ct:Description>PCA</ct:Description>
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        ...
+                           <Binop op="times">
+                                 <ct:SymbRef blkIdRef="p1" symbIdRef="Imax"/>
+                                 <ct:SymbRef symbIdRef="Cc"/>
+                           </Binop>
+                        ...
+\end{lstlisting}
+\end{itemize}
+In order to make the connection between the column names in the dataset and the according variables in the \xelem{TrialDesign} and \xelem{ModelDefinition}, following mappings are defined
+\begin{itemize}
+\item
+Individual mapping -- to identify the subject in the dataset.
+\item
+Arm mapping -- to assign subjects to the appropriate arm.
+\item
+Epoch mapping -- to assign subjects to the appropriate epoch.
+\item
+Variable mapping -- to assign the variable with respect to which the interpolation is performed.
+\item
+Target mapping -- to assign the interpolated variable.
+\end{itemize}
+as shown in the first part of the following code:
+
+CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE CHENGE-TO-NEW-TYPE
+
+\lstset{language=XML}
+\begin{lstlisting}
+            <Activity oid="d1">
+               <LookupTable>
+               
+                    <!-- MAPPING -->
+                    <!-- INDIVIDUAL mapping -->
+                    <LookupTableIndividualMapping> 
+                        <ds:ColumnRef columnIdRef="ID"/>
+                    </LookupTableIndividualMapping>
+		    <!-- ARM mapping -->
+                    <LookupTableArmMapping>
+                        <ds:ColumnRef columnIdRef="ARM"/>
+                    </LookupTableArmMapping>
+                    <!-- EPOCH mapping -->
+                    <LookupTableEpochMapping>
+                    <ds:ColumnRef columnIdRef="EPOCH"/>
+                    </LookupTableEpochMapping>
+                    <!-- VARIABLE  mapping -->
+                    <LookupTableVariableMapping>
+                        <ds:ColumnRef columnIdRef="TIME"/>
+                        <ct:SymbRef symbIdRef="t"/>
+                    </LookupTableVariableMapping>
+                    <!-- TARGET mapping -->
+                    <LookupTableTargetMapping inputTarget="variable">                       		
+                        <ds:ColumnRef columnIdRef="Cc"/>
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                        <ds:Interpolation>
+                            <ds:Algorithm>linear</ds:Algorithm>
+                        </ds:Interpolation>
+                    </LookupTableTargetMapping>
+
+                    <!-- DATASET -->
+                    <ds:DataSet>
+                        <ds:Definition>
+                            <ds:Column columnId="ID" valueType="id" columnNum="1"/>
+                            <ds:Column columnId="TIME" valueType="real" columnNum="2"/>
+                            <ds:Column columnId="ARM" valueType="id" columnNum="3"/>
+                            <ds:Column columnId="EPOCH" valueType="real" columnNum="4"/>
+                            <ds:Column columnId="Cc" valueType="real" columnNum="5"/>
+                        </ds:Definition>
+                        <ds:ImportData oid="importData">
+                            <ds:name>Cc_lookupTable</ds:name>
+                            <ds:url>file:///../../datasets/</ds:url>
+                            <ds:format>CSV</ds:format>
+                            <ds:delimiter>COMMA</ds:delimiter>
+                        </ds:ImportData>
+                    </ds:DataSet>
+                </LookupTable>                
+            </Activity>
+\end{lstlisting}
+The second part of the above listing, \xelem{DataSet}, follows the same rules as described in the section about the externalised datasets.
+
+\subsection{Case C2}
+In this case we model is defined as 
+
+\begin{itemize}
+\item
+Cc -- measured drug concentration encoded as a variable in the model which is defined by the user-defined interpolation function, here \emph{MyInterpolationFunction(...)}
+\lstset{language=XML}
+\begin{lstlisting}
+            <!-- USER-DEFINED TARGET FOR LOOKUP DATA REFERENCE -->
+            <ct:Variable symbolType="real" symbId="Cc">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:FunctionCall>
+                            <ct:SymbRef symbIdRef="MyInterpolationFunction"/>
+                            <!-- SKIP -->
+                        </math:FunctionCall>
+                    </math:Equation>
+                </ct:Assign>
+            </ct:Variable>
+\end{lstlisting}
+
+is given as a lookup table defined in the \emph{TrialDesign}
+\begin{table}[H]
+\begin{center}
+\scriptsize
+\begin{tabular}{lllll}
+  \hline
+ID & TIME & EPOCH & ARM & Cc \\
+  \hline
+1& 10& 1& 1 & 10 \\
+1& 20& 1& 1 & 12 \\
+... & ... & ... & ... & ...\\
+1& 10& 2& 1 & 6 \\
+1& 20& 2& 1 & 12 \\
+... & ... & ... & ... & ...\\
+2& 10& 1& 1 & 2 \\
+2& 20& 1& 1 & 4 \\
+2& 40& 1& 1 & 7 \\
+... & ... & ... & ... & ...\\
+  \hline
+\end{tabular}
+\caption{Lookup table, first few data records from \emph{Cc\_lookupTable.csv} dataset.}
+%\label{tab:lookupData}
+\end{center}
+\end{table}
+
+\item
+Interpolation function for \emph{Cc}
+
+\begin{align}
+Cc(t) =     \left\{ \begin{array}{rcl}
+         k_{i-1} + \frac{k_i - k_{i-1}}{t_i - t_{i-1}} (t - t_{i-1}) & \mbox{for} & t_{i-1} <= t < t_i, i = 1\ldots7 \nonumber \\ 
+         0 & \mbox{for} & else \nonumber
+             \end{array}\right.
+\end{align}
+
+is defined in the \emph{StructuralModel}, e.g.
+
+\lstset{language=XML}
+\begin{lstlisting}
+    <!-- FUNCTION DEFINITION -->
+    <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
+        symbId="MyInterpolationFunction" symbolType="real">
+        <!-- SKIP -->
+    </FunctionDefinition>
+\end{lstlisting}
+
+\item
+E -- effect model given by an ODE
+\begin{align}
+\frac{dE}{dt}=Rin \times \Big(1- \frac{Imax \times Cc}{Cc+IC_{50}}\Big) - kout \times E		\nonumber
+\end{align}
+\lstset{language=XML}
+\begin{lstlisting}
+            <!-- EFFECT MODEL with TARGET 'Cc' -->
+            <ct:DerivativeVariable symbId="E" symbolType="real">
+                <ct:Description>PCA</ct:Description>
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        ...
+                           <Binop op="times">
+                                 <ct:SymbRef blkIdRef="p1" symbIdRef="Imax"/>
+                                 <ct:SymbRef symbIdRef="Cc"/>
+                           </Binop>
+                        ...
+\end{lstlisting}
+\end{itemize}
+The complete code for the user-defined function, without the repetitive middle section for time points \emph{t2 ... t5}, is given in the following listing
+\lstset{language=XML}
+\begin{lstlisting}
+    <!-- FUNCTION DEFINITION -->
+    <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
+        symbId="MyInterpolationFunction" symbolType="real">
+        <FunctionArgument symbId="time" symbolType="real"/>
+        <FunctionArgument symbId="k0" symbolType="real"/>
+        <FunctionArgument symbId="k1" symbolType="real"/>
+        <!-- SKIP -->    
+        <FunctionArgument symbId="k7" symbolType="real"/>
+        <FunctionArgument symbId="t0" symbolType="real"/>
+        <FunctionArgument symbId="t1" symbolType="real"/>
+        <!-- SKIP -->    
+        <FunctionArgument symbId="t7" symbolType="real"/>
+
+        <Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Piecewise>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k0"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k1"/>
+                                        <ct:SymbRef symbIdRef="k0"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t1"/>
+                                        <ct:SymbRef symbIdRef="t0"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t0"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t0"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t1"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <!-- SKIP -->                    
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k6"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k7"/>
+                                        <ct:SymbRef symbIdRef="k6"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t7"/>
+                                        <ct:SymbRef symbIdRef="t6"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t6"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t6"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t7"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>                
+                </Piecewise>
+            </Equation>
+        </Definition>
+    </FunctionDefinition>
+\end{lstlisting}
+The following listing shows how the user-defined interpolation function \emph{MyInterpolationFunction} is then referenced in the model
+\lstset{language=XML}
+\begin{lstlisting}
+        <StructuralModel blkId="sm1">
+
+            <!-- TARGET FOR LOOKUP DATA REFERENCE -->
+            <ct:Variable symbolType="real" symbId="Cc">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:FunctionCall>
+                            <ct:SymbRef symbIdRef="MyInterpolationFunction"/>
+                            <math:FunctionArgument symbId="time">
+                                <ct:SymbRef symbIdRef="t"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k0">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k0"/>
+                            </math:FunctionArgument>
+                            <!-- SKIP -->     
+                            <math:FunctionArgument symbId="t7">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t7"/>
+                            </math:FunctionArgument>
+                        </math:FunctionCall>
+                    </math:Equation>
+                </ct:Assign>
+            </ct:Variable>
+\end{lstlisting}
+
+The last part is the \emph{Lookup table} definition and mapping, identical to the previous example with the exception that no interpolation type is define for the \emph{Target} variable:
+
+\lstset{language=XML}
+\begin{lstlisting}
+            <Activity oid="d1">
+               <LookupTable>
+               
+                    <!-- MAPPING -->
+                    <!-- SKIP --> 
+			<!-- this part is identical to the code in C1 case -->
+                    <!-- SKIP --> 
+
+                    <!-- TARGET mapping -->
+                    <LookupTableTargetMapping inputTarget="variable">                       		
+                        <ds:ColumnRef columnIdRef="Cc"/>
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                    </LookupTableTargetMapping>
+
+                    <!-- DATASET -->
+                    <!-- SKIP --> 
+			<!-- this part is identical to the code in C1 case -->
+                    <!-- SKIP --> 
+
+                </LookupTable>                
+            </Activity>
+\end{lstlisting}
+
+
+
+\bibliography{pharmml-specification}
+\end{document}
+
+
+
+
+
+
+%TEMPLATES 
+%% 1. Template for table with figures
+%\begin{figure}[htbp]
+%\centering
+%\begin{tabular}{cc}
+% \includegraphics[width=80mm]{pics/pic1} & 
+% \includegraphics[width=80mm]{pics/pic2} \\
+% \includegraphics[width=80mm]{pics/pic3} &
+% \includegraphics[width=80mm]{pics/pic4}
+%\end{tabular}
+%\caption{about the figure}
+%\label{figTable:labelText}
+%\end{figure}
+
+%\begin{table}[ht]
+%\begin{center}
+%\begin{tabular}{rrrrrrrrrrr}
+%  \hline
+% & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ 
+%  \hline
+%1 & 0.24 & -1.47 & -0.56 & 0.24 & 0.71 & 1.23 & 0.44 & 0.40 & 1.10 & 1.84 \\ 
+%   \hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+ 
+
+%\begin{figure}[htb!]
+%\centering
+%  \includegraphics[width=105mm]{}
+% \caption{}
+% \label{fig:myplot}
+%\end{figure}
+
+%PIECE-WISE
+%f(z) =     \left\{ \begin{array}{rcl}
+%         value1 & \mbox{for} & condition1 \\ 
+%         value1 & \mbox{for} & condition1
+%             \end{array}\right.
