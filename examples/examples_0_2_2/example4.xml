@@ -555,22 +555,21 @@
 
             <!-- OBJECTIVE DATA -->
             <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </IndividualMapping>
-                <VariableMapping>
+
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="Y"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="Cc_obs"/>
-                </VariableMapping>
-                <VariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
-                </VariableMapping>
+                </ColumnMapping>
+                
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnNum="1" columnId="ID" valueType="id"/>
-                        <ds:Column columnNum="2" columnId="TIME" valueType="real"/>
-                        <ds:Column columnNum="3" columnId="Y" valueType="real"/>
+                        <ds:Column columnNum="1" columnId="ID" columnType="id" valueType="id"/>
+                        <ds:Column columnNum="2" columnId="TIME" columnType="time" valueType="real"/>
+                        <ds:Column columnNum="3" columnId="Y" columnType="dv" valueType="real"/>
                     </ds:Definition>
                     <ds:Table>
                         <ds:Row>

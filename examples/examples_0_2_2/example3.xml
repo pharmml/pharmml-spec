@@ -418,24 +418,23 @@
         
         <!-- ESTIMATION -->
         <EstimationStep oid="estimStep1">
+            
             <!-- OBJECTIVE DATA -->
             <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </IndividualMapping>
-                <VariableMapping>
+                
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="time"/>
                     <ct:SymbRef symbIdRef="t"/>
-                </VariableMapping>
-                <VariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="dv"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
-                </VariableMapping>
+                </ColumnMapping>
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="time" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="dv" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
                     </ds:Definition>
                     <ds:Table>
                         <!-- SUBJECT 1 -->
