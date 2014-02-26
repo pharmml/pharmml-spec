@@ -6,7 +6,7 @@
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
     xmlns:design="http://www.pharmml.org/2013/03/TrialDesign"
-    writtenVersion="0.2.2" id="i1">                                                 <!-- 0.2.2 -->
+    writtenVersion="0.2.2" id="i1">
     
     <!-- MODEL NAME -->
     <ct:Name>Example 4 - estimation with IOV1 and with covariates</ct:Name>
@@ -50,7 +50,7 @@
         </VariabilityModel>
         
         <!-- COVARIATE MODEL -->
-        <CovariateModel blkId="c1">
+        <CovariateModel blkId="cm1">
             <Covariate symbId="Sex">
                 <Categorical>
                     <Category catId="F">
@@ -90,7 +90,7 @@
         </CovariateModel>
 
         <!-- PARAMETER MODEL -->
-        <ParameterModel blkId="p1">
+        <ParameterModel blkId="pm1">
             <!-- ka -->
             <SimpleParameter symbId="omega_ka"/>
             <SimpleParameter symbId="pop_ka"/>
@@ -111,7 +111,7 @@
                             <ct:Assign><ct:SymbRef symbIdRef="pop_ka"/></ct:Assign>
                         </PopulationParameter>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="TreatSeq"/>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="TreatSeq"/>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_ka_treatseq"/>
                                 <Category catId="AB"/>
@@ -157,28 +157,28 @@
                             <ct:Assign><ct:SymbRef symbIdRef="pop_V"/></ct:Assign>
                         </PopulationParameter>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="sex"/>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="sex"/>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_V"/>
                                 <Category catId="F"/>
                             </FixedEffect>
                         </Covariate>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="Occasion"/>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="Occasion"/>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_V_occ1"/>
                                 <Category catId="occ1"/>
                             </FixedEffect>
                         </Covariate>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="Treat"/>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="Treat"/>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_V_Treat"/>
                                 <Category catId="A"/>
                             </FixedEffect>
                         </Covariate>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="TreatSeq"/>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="TreatSeq"/>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_V_TreatSeq"/>
                                 <Category catId="AB"/>
@@ -223,14 +223,14 @@
                             <ct:Assign><ct:SymbRef symbIdRef="pop_CL"/></ct:Assign>
                         </PopulationParameter>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="sex"/>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="sex"/>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_CL"/>
                                 <Category catId="F"/>
                             </FixedEffect>
                         </Covariate>
                         <Covariate>
-                            <ct:SymbRef blkIdRef="c1" symbIdRef="Occasion"/>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="Occasion"/>
                             <FixedEffect>
                                 <ct:SymbRef symbIdRef="beta_CL_occ1"/>
                                 <Category catId="occ1"/>
@@ -246,7 +246,7 @@
         </ParameterModel>
         
         <!-- STRUCTURAL MODEL -->
-        <StructuralModel blkId="main">
+        <StructuralModel blkId="sm1">
             <ct:Variable symbolType="real" symbId="D"/>
             <ct:Variable symbolType="real" symbId="tD"/>
             <ct:Variable symbolType="real" symbId="Cc">
@@ -255,21 +255,21 @@
                         <Binop op="times">
                             <Binop op="divide">
                                 <ct:SymbRef symbIdRef="D"/>
-                                <ct:SymbRef blkIdRef="p1" symbIdRef="V"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V"/>
                             </Binop>
                             <Binop op="times">
                                 <Binop op="divide">
-                                    <ct:SymbRef blkIdRef="p1" symbIdRef="ka"/>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"/>
                                     <Binop op="minus">
-                                        <ct:SymbRef blkIdRef="p1" symbIdRef="ka"/>
-                                        <ct:SymbRef blkIdRef="p1" symbIdRef="k"/>
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"/>
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="k"/>
                                     </Binop>
                                 </Binop>
                                 <Binop op="minus">
                                     <Uniop op="exp">
                                         <Binop op="times">
                                             <Uniop op="minus">
-                                                <ct:SymbRef blkIdRef="p1" symbIdRef="k"/>
+                                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k"/>
                                             </Uniop>
                                             <Binop op="minus">
                                                 <ct:SymbRef symbIdRef="t"/>
@@ -280,7 +280,7 @@
                                     <Uniop op="exp">
                                         <Binop op="times">
                                             <Uniop op="minus">
-                                                <ct:SymbRef blkIdRef="p1" symbIdRef="ka"/>
+                                                <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"/>
                                             </Uniop>
                                             <Binop op="minus">
                                                 <ct:SymbRef symbIdRef="t"/>
@@ -311,7 +311,7 @@
             </RandomVariable>
             <Standard symbId="Cc_obs"> 
                 <Output>
-                    <ct:SymbRef blkIdRef="main" symbIdRef="Cc"/>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
                 </Output>
                 <ErrorModel>
                     <ct:Assign>
@@ -411,14 +411,14 @@
             </Segment>
             <Activity oid="d1">
                 <Bolus>
-                    <DoseAmount inputTarget="parameter">                                        <!-- 0.2.2 -->
-                        <ct:SymbRef blkIdRef="main" symbIdRef="D"/>
+                    <DoseAmount inputTarget="parameter"> 
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
                         <ct:Assign>
                             <ct:Real>150</ct:Real>
                         </ct:Assign>
                     </DoseAmount>
                     <DosingTimes>
-                        <ct:SymbRef blkIdRef="main" symbIdRef="tD"/>
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="tD"/>
                         <ct:Assign>
                             <ct:Sequence>
                                 <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
@@ -431,14 +431,14 @@
             </Activity>
             <Activity oid="d2">
                 <Bolus>
-                    <DoseAmount inputTarget="parameter">                                        <!-- 0.2.2 -->
-                        <ct:SymbRef blkIdRef="main" symbIdRef="D"/>
+                    <DoseAmount inputTarget="parameter"> 
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
                         <ct:Assign>
                             <ct:Real>100</ct:Real>
                         </ct:Assign>
                     </DoseAmount>
                     <DosingTimes>
-                        <ct:SymbRef blkIdRef="main" symbIdRef="tD"/>
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="tD"/>
                         <ct:Assign>
                             <ct:Sequence>
                                 <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
@@ -506,11 +506,11 @@
                 </EpochMapping>                
                 <CovariateMapping>
                     <ds:ColumnRef columnIdRef="SEX"/>
-                    <ct:SymbRef blkIdRef="c1" symbIdRef="Sex"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="Sex"/>
                 </CovariateMapping>
                 <CovariateMapping>
                     <ds:ColumnRef columnIdRef="TREAT"/>
-                    <ct:SymbRef blkIdRef="c1" symbIdRef="Treat"/>
+                    <ct:SymbRef blkIdRef="cm1" symbIdRef="Treat"/>
                 </CovariateMapping>
             </IndividualTemplate>
             <ds:DataSet>
@@ -582,85 +582,85 @@
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate id="e1">
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="pop_ka"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_ka"/>
                     <InitialEstimate fixed="true">
                         <ct:Real>1.5</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="omega_ka"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_ka"/>
                     <InitialEstimate fixed="false">
                         <ct:Real>0</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="pop_V"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_V"/>
                     <InitialEstimate>
                         <ct:Real>0.5</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="omega_V"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_V"/>
                     <InitialEstimate>
                         <ct:Real>0</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="pop_CL"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_CL"/>
                     <InitialEstimate>
                         <ct:Real>0.5</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="omega_CL"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_CL"/>
                     <InitialEstimate>
                         <ct:Real>0</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_CL"/>
                     <InitialEstimate>
                         <ct:Real>0</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_CL_occ1"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_CL_occ1"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="gamma_V"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma_V"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="gamma_CL"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma_CL"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V_occ1"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V_occ1"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V_Treat"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V_Treat"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="p1" symbIdRef="beta_V_TreatSeq"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_V_TreatSeq"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
