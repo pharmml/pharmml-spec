@@ -406,7 +406,7 @@ permissions and limitations under the License.
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:choice>
-                                    <xs:element name="RandomEffects" maxOccurs="1"
+                                    <xs:element name="RandomEffects" minOccurs="1" maxOccurs="unbounded"
                                         type="mdef:ParameterRandomEffectType">
                                         <xs:annotation>
                                             <xs:documentation>The random effects (eta) used in the gaussian parameter model.</xs:documentation>
