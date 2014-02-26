@@ -690,7 +690,7 @@ permissions and limitations under the License.
                     </xs:element>-->
                     
                     <!-- instead ColumnMapping needed here -->
-                    <xs:element name="ColumnMapping" minOccurs="0" type="ds:ColumnMappingType">
+                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines mapping to the dataset containing population data. 
