@@ -899,13 +899,24 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="IndividualRef" type="ds:ColumnRefType">
+                    <!-- not needed anymore -->
+<!--                    <xs:element name="IndividualRef" type="ds:ColumnRefType">
                         <xs:annotation>
                             <xs:documentation>
                                 Refers to the subject in the study that this dosing regimen is applied to. 
                             </xs:documentation>
                         </xs:annotation>
+                    </xs:element>-->
+                    <!-- / not needed anymore -->
+                    <!-- TEST -->
+                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing objective data. 
+                            </xs:documentation>
+                        </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="DoseAmount" type="ds:ColumnRefType">
                         <xs:annotation>
                             <xs:documentation>
