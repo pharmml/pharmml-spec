@@ -271,12 +271,22 @@
                         <ds:ColumnRef columnIdRef="TIME"/>
                         <ct:SymbRef symbIdRef="t"/>
                     </ColumnMapping>
-                        
+                    
+                    <ColumnMapping>
+                        <ds:ColumnRef columnIdRef="EPOCH"/>
+                        <ct:SymbRef symbIdRef="e1"/>
+                    </ColumnMapping>
+                    
+                    <ColumnMapping>
+                        <ds:ColumnRef columnIdRef="ARM"/>
+                        <ct:SymbRef symbIdRef="a1"/>
+                    </ColumnMapping>
+                    
                     <ColumnMapping> 
                         <ds:ColumnRef columnIdRef="C"/>
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
                     </ColumnMapping>
-                                        
+                    
                     <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
