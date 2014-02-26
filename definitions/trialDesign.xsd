@@ -678,7 +678,9 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element minOccurs="0" maxOccurs="1" name="IndividualTemplate"
+<!--  removed, most mappings replaced by columnType, ColumnRef from DemographicMapping moved to <Demographic>
+              
+                        <xs:element minOccurs="0" maxOccurs="1" name="IndividualTemplate"
                         type="design:IndividualDefinitionType">
                         <xs:annotation>
                             <xs:documentation>
