@@ -917,7 +917,8 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
-                    <xs:element minOccurs="0" name="DoseAmount" type="ds:ColumnRefType">
+<!--                NOT NECESSARY ANYMORE after introducing columnType
+                        <xs:element minOccurs="0" name="DoseAmount" type="ds:ColumnRefType">
                         <xs:annotation>
                             <xs:documentation>
                                 Specifies the amount of dose. 
@@ -958,7 +959,7 @@ permissions and limitations under the License.
                                 Specifies the period in steady state dosing. 
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     <xs:element ref="ds:DataSet">
                         <xs:annotation>
                             <xs:documentation>
