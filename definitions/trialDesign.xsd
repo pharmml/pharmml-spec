@@ -323,15 +323,7 @@ permissions and limitations under the License.
                                 the study.
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>                    
-<!--                    <xs:element name="CodeInjection" minOccurs="0" type="msteps:CodeInjectionType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Instantiates the individual template defined above with data for each subject within
-                                the study.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
+                    </xs:element>
                 </xs:sequence>
                 <xs:attributeGroup ref="design:doseVarAttGroup"/>
             </xs:extension>
