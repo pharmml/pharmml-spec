@@ -690,7 +690,7 @@ permissions and limitations under the License.
                     </xs:element>-->
                     
                     <!-- instead ColumnMapping needed here -->
-                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                    <xs:element name="ColumnMapping" minOccurs="0" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines mapping to the dataset containing population data. 
@@ -774,7 +774,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="IndividualMappingType">
+    
+<!--  REDUNDANT
+        <xs:complexType name="IndividualMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the mapping of the individual identifier to the dataset.   
@@ -783,8 +785,10 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="design:PopulationMappingType"/>
         </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="ArmMappingType">
+    </xs:complexType>-->
+    
+    <!-- REDUNDANT
+        <xs:complexType name="ArmMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the mapping of the arm to the dataset.   
@@ -793,7 +797,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="design:PopulationMappingType"/> 
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
+    
     <xs:complexType name="IndependentVariableMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -804,7 +809,9 @@ permissions and limitations under the License.
             <xs:extension base="design:PopulationMappingType"/>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="EpochMappingType">
+    
+<!--  REDUNDANT
+        <xs:complexType name="EpochMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining a mapping from the epoch to values in the column of a dataset.
@@ -813,7 +820,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="design:PopulationMappingType"/>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
 
     <!-- extended with interpolation support -->
     <xs:complexType name="CovariateMappingType">
@@ -1075,21 +1082,24 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="IndividualMapping" type="design:IndividualMappingType">
+    
+<!--  REDUNDANT
+        <xs:element name="IndividualMapping" type="design:IndividualMappingType">
         <xs:annotation>
             <xs:documentation>
                 Maps the individual to the dataset.  
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
     
-    <xs:element name="ArmMapping" type="design:ArmMappingType">
+<!--  REDUNDANT
+        <xs:element name="ArmMapping" type="design:ArmMappingType">
         <xs:annotation>
             <xs:documentation>
                 Maps the arm to the dataset.
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
         
     <xs:element abstract="true" name="AttributeMapping">
         <xs:annotation>
