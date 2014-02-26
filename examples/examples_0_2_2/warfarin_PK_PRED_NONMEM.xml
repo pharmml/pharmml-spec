@@ -386,52 +386,37 @@
         <EstimationStep oid="estimStep1">
             
             <NONMEMdataSet>
-                <NMIndividualMapping>
-                    <ds:ColumnRef columnIdRef="ID"/>
-                </NMIndividualMapping>
-                <NMVariableMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="time"/>
                     <ct:SymbRef symbIdRef="t"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="dv"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
-                </NMVariableMapping>
-                <NMCovariateMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="wt"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </NMCovariateMapping>
-                <NMCovariateMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="age"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="AGE"/>
-                </NMCovariateMapping>
-                <NMCovariateMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ds:ColumnRef columnIdRef="sex"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
-                </NMCovariateMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="amt"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="dvid"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="mdv"/>
-                </NMVariableMapping>
-                <NMVariableMapping>
-                    <ds:ColumnRef columnIdRef="amt"/>
-                </NMVariableMapping>
+                </ColumnMapping>
                 <ds:DataSet>
                     <ds:Definition>
-                        <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="time" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="wt" valueType="real" columnNum="3"/>
-                        <ds:Column columnId="age" valueType="real" columnNum="4"/>
-                        <ds:Column columnId="sex" valueType="int" columnNum="5"/>
-                        <ds:Column columnId="amt" valueType="real" columnNum="6"/>
-                        <ds:Column columnId="dvid" valueType="real" columnNum="7"/>
-                        <ds:Column columnId="dv" valueType="real" columnNum="8"/>
-                        <ds:Column columnId="mdv" valueType="real" columnNum="9"/>
+                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <ds:Column columnId="time" columnType="time" valueType="real" columnNum="2"/>
+                        <ds:Column columnId="wt" columnType="covariate" valueType="real" columnNum="3"/>
+                        <ds:Column columnId="age" columnType="covariate" valueType="real" columnNum="4"/>
+                        <ds:Column columnId="sex" columnType="covariate" valueType="int" columnNum="5"/>
+                        <ds:Column columnId="amt" columnType="dosing" valueType="real" columnNum="6"/>
+                        <ds:Column columnId="dvid" columnType="dvid" valueType="real" columnNum="7"/>
+                        <ds:Column columnId="dv" columnType="dv" valueType="real" columnNum="8"/>
+                        <ds:Column columnId="mdv" columnType="mdv" valueType="real" columnNum="9"/>
                     </ds:Definition>
                     <ds:ImportData oid="id1">
                         <ds:name>warfarin_conc_pca</ds:name>
