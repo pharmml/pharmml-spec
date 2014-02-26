@@ -822,7 +822,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>-->
 
-    <!-- extended with interpolation support -->
+<!-- REDUNDANT
+        <!-\- extended with interpolation support -\->
     <xs:complexType name="CovariateMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -837,10 +838,11 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
    
-    <xs:complexType name="DemographicMappingType">
+<!-- REDUNDANT
+        <xs:complexType name="DemographicMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the mapping of a demographic attribute to the values sepcified in a column of the dataset.
@@ -865,7 +867,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="design:PopulationMappingType"/>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
+    
 <!--  removed, most mappings replaced by columnType, ColumnRef from DemographicMapping moved to Demographic
         <xs:complexType name="IndividualDefinitionType">
         <xs:annotation>
@@ -1101,36 +1104,42 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>-->
         
-    <xs:element abstract="true" name="AttributeMapping">
+<!-- REDUNDANT
+        <xs:element abstract="true" name="AttributeMapping">
         <xs:annotation>
             <xs:documentation>
                 Maps attributes to the dataset. 
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
-    <xs:element name="CovariateMapping" type="design:CovariateMappingType" abstract="false"
+    </xs:element>-->
+    
+<!-- REDUNDANT
+        <xs:element name="CovariateMapping" type="design:CovariateMappingType" abstract="false"
         substitutionGroup="design:AttributeMapping">
         <xs:annotation>
             <xs:documentation>
                 Mapping to covariates in the dataset. 
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
-    <xs:element name="DemographicMapping" type="design:DemographicMappingType"
+    </xs:element>-->
+    <!-- REDUNDANT
+        <xs:element name="DemographicMapping" type="design:DemographicMappingType"
         substitutionGroup="design:AttributeMapping">
         <xs:annotation>
             <xs:documentation>
                 Mapping to demographics in the dataset. 
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
-    <xs:element name="ReplicateMapping" type="design:ReplicateMappingType">
+    </xs:element>-->
+    
+<!-- REDUNDANT   <xs:element name="ReplicateMapping" type="design:ReplicateMappingType">
         <xs:annotation>
             <xs:documentation>
                 Mapping to replicates in the dataset. 
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
+    
     <xs:element name="TrialDesign" type="design:TrialDesignType">
         <xs:annotation>
             <xs:documentation>
