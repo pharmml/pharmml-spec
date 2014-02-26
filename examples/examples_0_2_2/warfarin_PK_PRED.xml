@@ -462,6 +462,7 @@
         <EstimationStep oid="estimStep1">
             
             <ObjectiveDataSet>
+                
                 <ColumnMapping>
                     <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
@@ -470,6 +471,7 @@
                     <ds:ColumnRef columnIdRef="DV"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
                 </ColumnMapping>
+                
                 <ds:DataSet>
                     <ds:Definition>
                         <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
