@@ -669,7 +669,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="Demographic"
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="Demographic"
                         type="design:DemographicType">
                         <xs:annotation>
                             <xs:documentation>
