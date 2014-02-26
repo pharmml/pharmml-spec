@@ -60,15 +60,14 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ds:ColumnRef">
                         <xs:annotation>
                             <xs:documentation>
-                                Refers to a column in a nested table. This assumes that the columnIdRef
-                                in this type refers to a netsted table. 
+                                Refers to a column in a table. 
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
                 <xs:attribute name="columnIdRef" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
-                        <xs:documentation>Refers to a column in a dataset. This can be a column or a nested table.</xs:documentation>
+                        <xs:documentation>Refers to a column in a dataset.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
@@ -152,7 +151,7 @@ permissions and limitations under the License.
     <xs:complexType name="DataSetTableType">
         <xs:annotation>
             <xs:documentation>
-                The type specifies the content of a dataset or nested table.
+                The type specifies the content of a dataset.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -201,7 +200,7 @@ permissions and limitations under the License.
     <xs:complexType name="ColumnsDefinitionType">
         <xs:annotation>
             <xs:documentation>
-                Type specifies all the columns in a dataset or nested table.
+                Type specifies all the columns in a dataset.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -259,7 +258,7 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>
                 This type specifies a row of values in the dataset. The row contains a cell which is
-                a scalar value, null or a nested table.
+                a scalar value, null.
             </xs:documentation>
         </xs:annotation>
         <xs:choice maxOccurs="unbounded">
