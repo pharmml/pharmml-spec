@@ -10,7 +10,7 @@
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
     writtenVersion="0.2.2">
     
-    <ct:Name>Example 3 - basic Warfarin PK estimation with covariate W</ct:Name>
+    <ct:Name>Example 3 - basic Warfarin PK estimation with covariate W - with NONMEM dataset</ct:Name>
     
     <IndependentVariable symbId="t"/>
     

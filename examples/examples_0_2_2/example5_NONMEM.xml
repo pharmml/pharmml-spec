@@ -6,7 +6,7 @@
     writtenVersion="0.2.1">
     
     <!-- MODEL NAME -->
-    <ct:Name>Example 5 - estimation for growth tumor model (Ribba et al. 2012)</ct:Name>
+    <ct:Name>Example 5 - estimation for growth tumor model - with NONMEM dataset</ct:Name>
     
     <ct:Description>based on A Tumor Growth Inhibition Model for Low-Grade Glioma Treated with Chemotherapy or Radiotherapy
         Benjamin Ribba, Gentian Kaloshi, Mathieu Peyre, et al. Clin Cancer Res Published OnlineFirst July 3, 2012.</ct:Description>
