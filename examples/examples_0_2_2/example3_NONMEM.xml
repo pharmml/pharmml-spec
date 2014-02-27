@@ -356,22 +356,6 @@
                     <ds:ColumnRef columnIdRef="wt"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                 </ColumnMapping>
-                <!-- same for Age, Sex as above-->
-                <!-- dose, amt, d as NMVariableMapping 
-                SECOND argument optional-->
-                <!-- same for SEX and AGE as NMCovariateMapping-->
-                
-                <!--
-                14 Feb
-                no specific types, everything as   NMVariableMapping
-                etc. -->
-                
-                <!-- 
-                20 Feb -> change in strategy: one mapping type "ColumnMapping"
-                with 20+ columnType={id, idv, dvid, covariate, .....}
-                
-                clarify prev
-                -->
                 
                 <ds:DataSet>
                     <ds:Definition>
@@ -384,7 +368,6 @@
                         <ds:Column columnId="dvid" columnType="dvid" valueType="real" columnNum="7"/>
                         <ds:Column columnId="dv" columnType="dv" valueType="real" columnNum="8"/>
                         <ds:Column columnId="mdv" columnType="mdv" valueType="real" columnNum="9"/>
-                        <ds:Column columnId="PREV" columnType="covariate" valueType="real" columnNum="10"/>                        
                     </ds:Definition>
                     <ds:ImportData oid="id1">
                         <ds:name>warfarin_conc_pca</ds:name>
