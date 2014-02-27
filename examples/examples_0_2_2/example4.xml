@@ -342,7 +342,7 @@
     
     <!-- TRIAL DESIGN -->
     <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
-
+        
         <!-- STRUCTURE -->
         <Structure>
             <Epoch oid="ep1">
@@ -488,67 +488,67 @@
                 </ObservationGroup>
             </ObservationsEvent-->
         </Structure>
-
+        
         <!-- POPULATION -->
         <Population>
             
             <ct:VariabilityReference>
                 <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
             </ct:VariabilityReference>
-            
-            <ColumnMapping>
-                <ds:ColumnRef columnIdRef="SEX"/>
-                <ct:SymbRef blkIdRef="cm1" symbIdRef="Sex"/>
-            </ColumnMapping>
-            
-            <ColumnMapping>
-                <ds:ColumnRef columnIdRef="TREAT"/>
-                <ct:SymbRef blkIdRef="cm1" symbIdRef="Treat"/>
-            </ColumnMapping>            
-
-            <ds:DataSet>
-                <ds:Definition>
-                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="SEX" columnType="covariate" valueType="id" columnNum="3"/>
-                    <ds:Column columnId="EPOCH" columnType="epoch" valueType="id" columnNum="4"/>
-                    <ds:Column columnId="TREAT" columnType="covariate" valueType="id" columnNum="5"/>
-                </ds:Definition>
-                <ds:Table>
-                    <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i3</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i3</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i4</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i4</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i5</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i5</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i6</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i6</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i7</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i7</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i8</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i8</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i9</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i9</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i10</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
-                    <ds:Row><ct:Id>i10</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
-                </ds:Table>
-            </ds:DataSet>
+                    
+                    <ColumnMapping>
+                        <ds:ColumnRef columnIdRef="SEX"/>
+                        <ct:SymbRef blkIdRef="cm1" symbIdRef="Sex"/>
+                    </ColumnMapping>
+                    
+                    <ColumnMapping>
+                        <ds:ColumnRef columnIdRef="TREAT"/>
+                        <ct:SymbRef blkIdRef="cm1" symbIdRef="Treat"/>
+                    </ColumnMapping>            
+ 
+                    <ds:DataSet>
+                        <ds:Definition>
+                            <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                            <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                            <ds:Column columnId="SEX" columnType="covariate" valueType="id" columnNum="3"/>
+                            <ds:Column columnId="EPOCH" columnType="epoch" valueType="id" columnNum="4"/>
+                            <ds:Column columnId="TREAT" columnType="covariate" valueType="id" columnNum="5"/>
+                        </ds:Definition>
+                        <ds:Table>
+                            <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i3</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i3</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i4</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i4</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i5</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i5</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i6</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i6</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i7</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i7</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i8</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i8</ct:Id><ct:Id>a2</ct:Id><ct:Id>F</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i9</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i9</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i10</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id><ct:Id>B</ct:Id></ds:Row>
+                            <ds:Row><ct:Id>i10</ct:Id><ct:Id>a2</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id><ct:Id>A</ct:Id></ds:Row>
+                        </ds:Table>
+                    </ds:DataSet>
         </Population>
     </TrialDesign>
     
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
-
+        
         <!-- ESTIMATION -->
         <EstimationStep oid="e1">
-
+            
             <!-- OBJECTIVE DATA -->
             <ObjectiveDataSet>
-
+                
                 <ColumnMapping>
                     <ds:ColumnRef columnIdRef="Y"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="Cc_obs"/>
@@ -563,7 +563,7 @@
                         <ds:Column columnNum="1" columnId="ID" columnType="id" valueType="id"/>
                         <ds:Column columnNum="2" columnId="TIME" columnType="time" valueType="real"/>
                         <ds:Column columnNum="3" columnId="Y" columnType="dv" valueType="real"/>
-                    </ds:Definition>
+                    </ds:Definition>                    
                     <ds:Table>
                         <ds:Row>
                             <ct:Id>i1</ct:Id><ct:Real>0</ct:Real><ct:Real>0</ct:Real>
