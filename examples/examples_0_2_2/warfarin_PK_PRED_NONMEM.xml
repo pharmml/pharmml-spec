@@ -360,7 +360,7 @@
                     </stddev>
                 </NormalDistribution>
             </RandomVariable>
-            <General symbId="C_obs">
+            <General symbId="C_obs">        <!-- C_obs = C*(1 + epsilon_prop) + epsilon_add -->
                 <ct:Assign>
                     <math:Equation>
                         <math:Binop op="plus">
@@ -386,23 +386,23 @@
             
             <NONMEMdataSet>
                 <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="time"/>
+                    <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
                 </ColumnMapping>
                 <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="dv"/>
+                    <ds:ColumnRef columnIdRef="DV"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
                 </ColumnMapping>
                 <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="wt"/>
+                    <ds:ColumnRef columnIdRef="WT"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
                 </ColumnMapping>
                 <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="age"/>
+                    <ds:ColumnRef columnIdRef="AGE"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="AGE"/>
                 </ColumnMapping>
                 <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="sex"/>
+                    <ds:ColumnRef columnIdRef="SEX"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
                 </ColumnMapping>
                 <ds:DataSet>
