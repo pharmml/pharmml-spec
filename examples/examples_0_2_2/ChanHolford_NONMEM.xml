@@ -754,7 +754,7 @@
                         <ds:Column columnId="MDV" columnType="mdv" valueType="real" columnNum="14"/>
                     </ds:Definition>
                     <ds:ImportData oid="id1">
-                        <ds:name>dataFileName</ds:name>
+                        <ds:name>warfarin_conc_pca</ds:name>
                         <ds:url>./../examples_0_2_2/datasets/</ds:url>
                         <ds:format>CSV</ds:format>
                         <ds:delimiter>COMMA</ds:delimiter>
@@ -762,6 +762,7 @@
                 </ds:DataSet>
                 <!-- Code injection -->
                 <CodeInjection>
+                    <!-- TTK0, CSS and CL are mapped to the ParameterModel 'pm1' -->
                     <SymbolMapping>
                         <ct:SymbRef symbIdRef="TTK0"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
@@ -771,18 +772,20 @@
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>
                     </SymbolMapping>
                     <SymbolMapping>
-                        <ct:SymbRef symbIdRef="PRED"/>
-                        <ds:ColumnRef columnIdRef="PRED"/>
-                    </SymbolMapping>
-                    <SymbolMapping>
                         <ct:SymbRef symbIdRef="CL"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
                     </SymbolMapping>
+                    <!-- PRED is mapped to the dataset column define above -->
+                    <SymbolMapping>
+                        <ct:SymbRef symbIdRef="PRED"/>
+                        <ds:ColumnRef columnIdRef="PRED"/>
+                    </SymbolMapping>
+                    <!-- The following symbols are extracted from the injected code -->
                     <NMTRANcode>
-                        <Symbol symbId="PRED"/>
                         <Symbol symbId="CSS"/>
-                        <Symbol symbId="EVID"/>
                         <Symbol symbId="TTK0"/>
+                        <Symbol symbId="CL"/>
+                        <Symbol symbId="PRED"/>
                         <Symbol symbId="D1"/>
                         <Symbol symbId="R1"/>
                         <Code>
