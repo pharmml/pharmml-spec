@@ -324,6 +324,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="dose"/>
                     <xs:enumeration value="doseAmount"/>
                     <xs:enumeration value="dosingTime"/>
+                    <xs:enumeration value="duration"/>
                     <xs:enumeration value="dv"/>
                     <xs:enumeration value="dvid"/>
                     <xs:enumeration value="epoch"/>
@@ -331,7 +332,6 @@ permissions and limitations under the License.
                     <xs:enumeration value="id"/>
                     <xs:enumeration value="idv"/>
                     <xs:enumeration value="ii"/>
-                    <xs:enumeration value="infDuration"/>
                     <xs:enumeration value="limit"/>
                     <xs:enumeration value="mdv"/>
                     <xs:enumeration value="occasion"/>
