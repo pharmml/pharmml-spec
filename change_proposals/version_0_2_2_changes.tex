@@ -114,7 +114,7 @@ This has number of disadvantages, therefore an externalisation of datasets is su
 upcoming release. As shown in the following listing, the external data set can be specified 
 alternatively in the new \xelem{ImportData} element, instead of \xelem{Table}, by providing the file name, URL, file format 
 and delimiter. Only one file format is allowed so far, the \emph{character-separated value}, 
-\emph{CSV}, with three delimiters: \emph{COMMA}, \emph{SPACE} and \emph{TAB}.
+\emph{CSV}, with three delimiters: \xatt{COMMA}, \xatt{SPACE} and \xatt{TAB}.
 The template for this reads:
 \lstset{language=XML}
 \begin{lstlisting}
@@ -225,8 +225,8 @@ such as \xelem{CovariateModel  blkId="cm1"} or \xelem{ObservationModel blkId="om
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
                 </ColumnMapping>
                 \end{lstlisting}
-All other symbols/flags and variables, such as \emph{dvid}, \emph{mdv} etc. not used in the 
-model will not be mapped. Instead, to assign meaning to these variables, the attribute 
+All other symbols/flags and variables, such as \xatt{DVID}, \xatt{MDV} etc. not used directly
+in the model definition will not be mapped. Instead, to assign meaning to these variables, the attribute 
 \xatt{columnType} is used in the column definition in the \xelem{DataSet}, similar to the attribute 
 \xatt{use} in MDL. See next section for more details.
 
@@ -347,8 +347,8 @@ Additionally there are few PharmML specific types the user can chose from to ass
 to \xatt{columnType}, see Table \ref{tab:PharmML_columnTypes}. 
 They correspond to one of the symbols/elements in the \xelem{TrialDesign}, i.e. when the 
 study design is defined explicitly and not completely by the NONMEM dataset. Accordingly 
-these attribute values should be used in tables used in blocks \xelem{Population}, 
-\xelem{ObjectiveDataSet} and \xelem{IndividualDosing}.
+these attribute values should be used in tables specified in blocks \xelem{Population}, 
+\xelem{ObjectiveDataSet} or \xelem{IndividualDosing}.
 
 \begin{table}[ht]
 \begin{center}
@@ -373,9 +373,16 @@ ssPeriod &     steady-state administration interval \\
 
                  
 \subsection{Part III -- NMTRAN code injection (Chan et al.)}
+To understand the purpose of this module, it is helpful to consider the following \cite{Chan:2005fk} example first.
+
+
+
+
 This section goes beyond the standard models, such as the previous one, and deals with cases 
 when the model and dataset are strongly interconnected. Not only does the dosing come from 
-the datafile but also certain model relevant information is stored in the data. For example, additionally 
+the datafile but also certain model relevant information is stored in the data. 
+
+For example, additionally 
 to the usual MDL encoding, NMTRAN code needs to be passed 'as is' to the target tool via PharmML, 
 i.e. in this case the following code
 \lstset{language=NONMEMdataSet}
@@ -386,11 +393,11 @@ i.e. in this case the following code
          R1=CL*CSS
       }
 \end{lstlisting}
-which contains links between certain \emph{flags}, e.g. '1' in PREV or '-2' RATE, encoded in the dataset and the 
+which contains links between certain \emph{flags}, e.g. $PREV=1$ or $RATE=-2$, encoded in the dataset and the 
 model definition and parameters.
 
 This NMTRAN code is right now part of MDL but we think that this needs to be marked as target 
-code and handled by MDL so that the translator knows which part is NONMEM-specific and 
+code and handled as such by MDL so that the translator knows which part is NONMEM-specific and 
 needs to be passed without any interpretation.
 
 The above example exemplifies so called \emph{events} which appear in the Chan/Holford model. 
@@ -414,9 +421,8 @@ Below the first few rows of the according dataset are listed:
 \end{table}
 
 
-Part I and II of the code are analog to the previous example. Only columns appearing in the \xelem{ModelDefinition} 
-will be mapped using the generic \xelem{ColumnMapping}. All other have an appropriate attribute \xatt{columnType}
-which identifies each column.
+The first two parts of the code, i.e. mapping of dataset columns and referencing of the NONMEM file, are analog to the previous example. Only symbols appearing in the \xelem{ModelDefinition} 
+will be mapped using the generic \xelem{ColumnMapping} element. All other symbols, appearing in the dataset but not in the model, have an appropriate attribute \xatt{columnType} which identifies their type.
  
 \lstset{language=XML}
 \begin{lstlisting}
@@ -468,8 +474,8 @@ which identifies each column.
 \end{lstlisting}
 
 The following is new and specific to Part III.
-The first section of the following listing shows again a mapping, this time it is about the variables/parameters 
-used in the NMTRAN code to be injected. Some of them are model related, others are just indicators for NONMEM 
+The first section of the next listing shows again a mapping, this time it is about the variables/parameters 
+used in the NMTRAN injected code. Some of them are model related, others are just indicators for NONMEM 
 to perform a particular operation. (For now, the general rule is that we don't distinguish between them -- unless 
 a translator from from NMTRAN/MDL to PharmML will provide this information.)
 
@@ -479,9 +485,15 @@ Note that the three parameters are mapped to the according symbols in the
 As before we use one general \xelem{SymbolMapping} element. 
 
 The final \xelem{NMTRANcode} section starts with a list of all symbols appearing in the NMTRAN 
-code which provides the ground for the above \xelem{SymbolMapping} mapping. 
+code which provides the ground for the above \xelem{SymbolMapping} mapping. Then, the code is 
+stored in the \xelem{![CDATA[]]}, a structure which makes sure that everything inside it is 
+ignored by the language parser and passed 'as is'.
+
 \lstset{language=XML}
 \begin{lstlisting}
+		...
+		</ds:DataSet>
+		
                 <!-- Code injection -->
                 <CodeInjection>
                     <!-- TTK0, CSS and CL are mapped to the ParameterModel 'pm1' -->
@@ -497,7 +509,7 @@ code which provides the ground for the above \xelem{SymbolMapping} mapping.
                         <ct:SymbRef symbIdRef="CL"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
                     </SymbolMapping>
-                    <!-- PRED is mapped to the dataset column define above -->
+                    <!-- PRED is mapped to the dataset column -->
                     <SymbolMapping>
                         <ct:SymbRef symbIdRef="PRED"/>
                         <ds:ColumnRef columnIdRef="PRED"/>
@@ -524,10 +536,6 @@ code which provides the ground for the above \xelem{SymbolMapping} mapping.
             </NONMEMdataSet>
 \end{lstlisting}
 
-Then, the code is stored in the \xelem{![CDATA[]]}, a structure which makes sure that everything inside it is 
-ignored by the language parser and passed 'as is'.
-
-The last question to discuss is:
 \begin{description}
 \item[Question] Are mappings of e.g. R1, D1 required?
 \item[Answer] The easiest solution, for now, would be to extract all symbols out of the target code. 
@@ -575,7 +583,7 @@ C3	& Data unavailable 		& 						& -- Structural model  			& Estimation of \emph{
    \hline
 \end{tabular}
 \end{center}
-\caption{The table summarises possible configurations of what is given as input, column \emph{Setup/Input} and how it can be structured and implemented, columns \emph{TrialDesign} and \emph{Target/ModelDefinition}.}
+\caption{The table summarises possible configurations of what is given as input, column \emph{Setup/Input} and how it can be structured and implemented, columns \xelem{TrialDesign} and \emph{Target/ModelDefinition}.}
 \label{tab:C1C2C2}
 \end{table}
 
@@ -602,7 +610,7 @@ chosen from a list: \emph{\{constant, linear, spline, pchip\}}
 
 \end{lstlisting}
 
-\emph{Cc} is given as a lookup table defined in the \emph{TrialDesign}
+\emph{Cc} is given as a lookup table defined in the \xelem{TrialDesign}
 \begin{table}[H]
 \begin{center}
 \scriptsize
@@ -631,6 +639,7 @@ e.g. an effect model containing the target variable \emph{Cc}
 \begin{align}
 \frac{dE}{dt}=Rin \times \Big(1- \frac{Imax \times Cc}{Cc+IC_{50}}\Big) - kout \times E		\nonumber
 \end{align}
+which implementation shows the following snip set 
 \lstset{language=XML}
 \begin{lstlisting}
             <!-- EFFECT MODEL with TARGET 'Cc' -->
@@ -708,7 +717,7 @@ the user-defined interpolation function, here \emph{MyInterpolationFunction(...)
             </ct:Variable>
 \end{lstlisting}
 
-is given as a lookup table defined in the \emph{TrialDesign}
+is given as a lookup table defined in the \xelem{TrialDesign}
 \begin{table}[H]
 \begin{center}
 \scriptsize
@@ -743,7 +752,7 @@ Cc(t) =     \left\{ \begin{array}{rcl}
              \end{array}\right.
 \end{align}
 
-is defined in the \emph{StructuralModel}, e.g.
+is defined in the \xelem{StructuralModel}, e.g.
 
 \lstset{language=XML}
 \begin{lstlisting}
@@ -759,6 +768,7 @@ e.g. an effect model containing the target variable \emph{Cc}
 \begin{align}
 \frac{dE}{dt}=Rin \times \Big(1- \frac{Imax \times Cc}{Cc+IC_{50}}\Big) - kout \times E		\nonumber
 \end{align}
+which implementation shows the following snip set 
 \lstset{language=XML}
 \begin{lstlisting}
             <!-- EFFECT MODEL with TARGET 'Cc' -->
@@ -893,33 +903,7 @@ The following listing shows how the just defined interpolation function is then 
             </ct:Variable>
 \end{lstlisting}
 
-The last part is the \emph{Lookup table} definition and mapping, identical to the previous example with the exception that no interpolation type is define for the \emph{Target} variable:
-
-\lstset{language=XML}
-\begin{lstlisting}
-            <Activity oid="d1">
-               <LookupTable>
-               
-                    <!-- MAPPING -->
-                    <!-- SKIP --> 
-			<!-- this part is identical to the code in C1 case -->
-                    <!-- SKIP --> 
-
-                    <!-- TARGET mapping -->
-                    <LookupTableTargetMapping inputTarget="variable">                       		
-                        <ds:ColumnRef columnIdRef="Cc"/>
-                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
-                    </LookupTableTargetMapping>
-
-                    <!-- DATASET -->
-                    <!-- SKIP --> 
-			<!-- this part is identical to the code in C1 case -->
-                    <!-- SKIP --> 
-
-                </LookupTable>                
-            </Activity>
-\end{lstlisting}
-
+The last part, the \xelem{LookupTable} definition and mapping, is identical to the previous example and will be skipped here.
 
 
 \bibliography{pharmml-specification}
