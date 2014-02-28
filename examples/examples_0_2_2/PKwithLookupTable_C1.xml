@@ -442,7 +442,7 @@
                     </ct:Sequence>
                 </Timepoints>
                 <Continuous>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="E"/>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="E_obs"/>
                 </Continuous>
             </Observations>
         </SimulationStep>
