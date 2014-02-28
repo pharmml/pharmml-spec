@@ -77,7 +77,7 @@
         </CovariateModel>
         
         <!-- PARAMETER MODEL -->
-        <ParameterModel blkId="p1">
+        <ParameterModel blkId="pm1">
 
             <!-- Rin -->
             <SimpleParameter symbId="pop_Rin"/>
@@ -187,23 +187,23 @@
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="minus">
                             <Binop op="times">
-                                <ct:SymbRef blkIdRef="p1" symbIdRef="Rin"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="Rin"/>
                                 <Binop op="minus">
                                     <ct:Real>1</ct:Real>
                                     <Binop op="divide">
                                         <Binop op="times">
-                                            <ct:SymbRef blkIdRef="p1" symbIdRef="Imax"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Imax"/>
                                             <ct:SymbRef symbIdRef="Cc"/>
                                         </Binop>
                                         <Binop op="plus">
                                             <ct:SymbRef symbIdRef="Cc"/>
-                                            <ct:SymbRef blkIdRef="p1" symbIdRef="IC50"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="IC50"/>
                                         </Binop>
                                     </Binop>
                                 </Binop>
                             </Binop>
                             <Binop op="times">
-                                <ct:SymbRef blkIdRef="p1" symbIdRef="kout"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="kout"/>
                                 <ct:SymbRef symbIdRef="E"/>
                             </Binop>
                         </Binop>
@@ -278,18 +278,8 @@
                         <ct:SymbRef symbIdRef="t"/>
                     </ColumnMapping>
                     
-                    <ColumnMapping>
-                        <ds:ColumnRef columnIdRef="EPOCH"/>
-                        <ct:SymbRef symbIdRef="e1"/>
-                    </ColumnMapping>
-                    
-                    <ColumnMapping>
-                        <ds:ColumnRef columnIdRef="ARM"/>
-                        <ct:SymbRef symbIdRef="a1"/>
-                    </ColumnMapping>
-                    
                     <ColumnMapping> 
-                        <ds:ColumnRef columnIdRef="C"/>
+                        <ds:ColumnRef columnIdRef="Cc"/>
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
                     </ColumnMapping>
                     
@@ -300,7 +290,7 @@
                             <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
                             <ds:Column columnId="EPOCH" columnType="epoch" valueType="real" columnNum="3"/>
                             <ds:Column columnId="ARM" columnType="arm" valueType="real" columnNum="4"/>
-                            <ds:Column columnId="C" columnType="dv" valueType="real" columnNum="5"/>
+                            <ds:Column columnId="Cc" columnType="dv" valueType="real" columnNum="5"/>
                         </ds:Definition>
                         <ds:ImportData oid="importData">
                             <ds:name>Cc_lookupTable</ds:name>
@@ -310,9 +300,9 @@
                         </ds:ImportData>
                     </ds:DataSet>
                 </LookupTable>
-                
             </Activity>
         </Structure>
+        
         
         <!-- POPULATION -->
         <Population>
@@ -321,16 +311,15 @@
             </ct:VariabilityReference>
             
             <ColumnMapping>
-                <ds:ColumnRef columnIdRef="weight"/>
+                <ds:ColumnRef columnIdRef="WEIGHT"/>
                 <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
             </ColumnMapping>
             
             <ds:DataSet>
                 <ds:Definition>
-                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
-                    <ds:Column columnId="REPS" columnType="replicate" valueType="int" columnNum="4"/>
+                    <ds:Column columnId="ID" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="ARM" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="WEIGHT" valueType="real" columnNum="3"/>
                 </ds:Definition>
                 <ds:Table>
                     <ds:Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Real>20</ct:Real></ds:Row>
@@ -342,92 +331,51 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
-        <!-- ESTIMATION STEP -->
-        <EstimationStep oid="estimStep1">
-            
-            <!-- NONMME dataset -->
-            <NONMEMdataSet>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="TIME"/>
-                    <ct:SymbRef symbIdRef="t"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="DV"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="E"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="WEIGHT"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </ColumnMapping>
-                <ds:DataSet>
-                    <ds:Definition>
-                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
-                        <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="4"/>
-                    </ds:Definition>
-                    <ds:ImportData oid="importData">
-                        <ds:name>dataSetName</ds:name>
-                        <ds:url>file:///../datasets/</ds:url>
-                        <ds:format>CSV</ds:format>
-                        <ds:delimiter>COMMA</ds:delimiter>
-                    </ds:ImportData>
-                </ds:DataSet>
-            </NONMEMdataSet>
-            <ParametersToEstimate>
-                <ParameterEstimation>
-                    <ct:SymbRef symbIdRef="k"/>
-                </ParameterEstimation>
-                <!-- other parameters to be stimated... -->
-            </ParametersToEstimate>
-            <Operation order="1" opType="estPop"/>
-        </EstimationStep>
-        
         <SimulationStep oid="s1">
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_Imax"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Imax"/>
                 <ct:Assign>
                     <ct:Real>0.9</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_Imax"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Imax"/>
                 <ct:Assign>
                     <ct:Real>2</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_IC50"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_IC50"/>
                 <ct:Assign>
                     <ct:Real>0.4</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_IC50"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_IC50"/>
                 <ct:Assign>
                     <ct:Real>0.4</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_kout"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_kout"/>
                 <ct:Assign>
                     <ct:Real>0.05</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_kout"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_kout"/>
                 <ct:Assign>
                     <ct:Real>0.05</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="pop_Rin"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Rin"/>
                 <ct:Assign>
                     <ct:Real>5</ct:Real>
                 </ct:Assign>
             </ct:VariableAssignment>
             <ct:VariableAssignment>
-                <ct:SymbRef blkIdRef="p1" symbIdRef="omega_Rin"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Rin"/>
                 <ct:Assign>
                     <ct:Real>0.05</ct:Real>
                 </ct:Assign>
@@ -449,9 +397,6 @@
         
         <!-- STEP DEPENDENCIES -->
         <StepDependencies>
-            <Step>
-                <ct:OidRef oidRef="estimStep1"/>
-            </Step>
             <Step>
                 <ct:OidRef oidRef="s1"/>
             </Step>
