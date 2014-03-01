@@ -6,13 +6,13 @@
     writtenVersion="0.2.2" id="i1">
     
     <!-- MODEL NAME -->
-    <ct:Name>Example 5 - estimation for growth tumor model</ct:Name>
+    <ct:Name>Example 5 - estimation for growth tumor model - with NONMEM dataset</ct:Name>
     
     <ct:Description>based on A Tumor Growth Inhibition Model for Low-Grade Glioma Treated with Chemotherapy or Radiotherapy
         Benjamin Ribba, Gentian Kaloshi, Mathieu Peyre, et al. Clin Cancer Res Published OnlineFirst July 3, 2012.</ct:Description>
     
     <!-- INDEPENDENT VARIABLE -->
-    <IndependentVariable symbId="time"/>
+    <IndependentVariable symbId="t"/>
 
     <!-- SYMBOL DEFINITION - RESUIDUAL ERROR MODEL -->
     <ct:FunctionDefinition symbId="constantErrorModel" symbolType="real">
@@ -295,7 +295,7 @@
                     </Equation>
                 </ct:Assign>
                 <ct:IndependentVariable>
-                    <ct:SymbRef symbIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
                     <ct:InitialValue>
@@ -355,7 +355,7 @@
                     </Equation>
                 </ct:Assign>
                 <ct:IndependentVariable>
-                    <ct:SymbRef symbIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
                     <ct:InitialValue>
@@ -391,7 +391,7 @@
                     </Equation>
                 </ct:Assign>
                 <ct:IndependentVariable>
-                    <ct:SymbRef symbIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
                     <ct:InitialValue>
@@ -436,7 +436,7 @@
                     </Equation>
                 </ct:Assign>
                 <ct:IndependentVariable>
-                    <ct:SymbRef symbIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
                     <ct:InitialValue>
@@ -508,115 +508,18 @@
 
     </ModelDefinition>
     
-    <!-- BLOCK II: TRIAL DEFINITION -->
-    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
-        
-        <!-- STRUCTURE -->
-        <Structure>
-            <Epoch oid="epoch1">
-                <Start>
-                    <ct:Real>0</ct:Real>
-                </Start>
-                <End>
-                    <ct:Real>200</ct:Real>
-                </End>
-                <Order>1</Order>
-            </Epoch>
-            <Arm oid="arm1"/>
-            <Cell oid="cell1">
-                <EpochRef oidRef="epoch1"/>
-                <ArmRef oidRef="arm1"/>
-                <SegmentRef oidRef="TA"/>
-            </Cell>
-            <Segment oid="TA">
-                <ActivityRef oidRef="bolusIV"/>
-            </Segment>
-            <Activity oid="bolusIV">
-                <Bolus>
-                    <DoseAmount inputTarget="derivativeVariable">
-                        <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
-                    </DoseAmount>
-                </Bolus>
-            </Activity>
-        </Structure> 
-        
-        <!-- POPULATION -->
-        <Population> 
-            <ct:VariabilityReference>
-                <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
-            </ct:VariabilityReference>
-            
-            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                <Definition>
-                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
-                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/> 
-                    <Column columnId="REP" columnType="replicate" valueType="int" columnNum="3"/> 
-                </Definition>
-                <Table>
-                    <Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Int>21</ct:Int></Row>
-                </Table>
-            </DataSet>
-        </Population>
-
-        <!-- INDIVUIDUAL DOSING -->
-        <IndividualDosing>
-            
-            <ActivityRef oidRef="bolusIV"/>
-            
-            <ColumnMapping>
-                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
-                <ct:SymbRef symbIdRef="t"/>
-            </ColumnMapping>
-            
-            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                <Definition>
-                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" columnType="dosingTime" valueType="real" columnNum="2"/>
-                    <Column columnId="DOSE" columnType="doseAmount" valueType="real" columnNum="3"/>
-                </Definition>
-                <ImportData oid="PCV_dosingData">
-                    <name>RIBBA2012_PCV_dosing</name>
-                    <url>file:///examples/examples_0_2_2/</url>
-                    <format>CSV</format>
-                    <delimiter>COMMA</delimiter>
-                </ImportData>
-                <!--    THE DATA SNIPSET FROM THE EXTERNAL FILE 'RIBBA2012_PCV_dosing' 
-                    ID	TIME	DOSE
-                    1	54.57	1
-                    1	59.77	1
-                    2	12	1
-                    2	14.09	1
-                    2	16.17	1
-                    2	18.26	1
-                    2	20.35	1
-                    2	22.43	1
-                    3	36.1	1
-                    3	38.05	1
-                    3	40.01	1
-                    3	41.96	1
-                    3	43.91	1
-                    3	45.87	1
-                    4	3.7	1
-                    4	5.51	1 -->
-            </DataSet>
-        </IndividualDosing>
-    </TrialDesign>
-    
     <!-- BLOCK III: MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
         <!-- ESTIMATION STEP -->
         <EstimationStep oid="estTask1">
             
-            <ObjectiveDataSet>
-            
+            <NONMEMdataSet>
+<!--            <TargetToolName>SYIMCYP</TargetToolName>-->
+               
                 <ColumnMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
-                    <ct:SymbRef symbIdRef="time"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR_obs"/>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="LIVER_VOLUME"/>
+                    <ct:SymbRef symbIdRef="LiverVolume"/>
                 </ColumnMapping>
                 
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
@@ -624,36 +527,59 @@
                         <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
                         <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
                         <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
+                        <Column columnId="MDV" columnType="mdv" valueType="int" columnNum="4"/>
+                        <Column columnId="DOSE" columnType="dose" valueType="real" columnNum="5"/>
+                        <Column columnId="EVID" columnType="evid" valueType="int" columnNum="6"/>
                     </Definition>
-                    <ImportData oid="PCV_observationData">
-                        <name>RIBBA2012_PCV_observations</name>
-                        <url>file:///examples/examples_0_2_2/</url>
+                    <ImportData oid="importNONMEM">
+                        <name>RIBBA2012_PCV</name>
+                        <url>file:///</url>
                         <format>CSV</format>
                         <delimiter>COMMA</delimiter>
                     </ImportData>
-                    <!--    THE DATA SNIPSET FROM THE EXTERNAL FILE 'RIBBA2012_PCV_observations' 
-                    ID	TIME	DV
-                    1	3.43	45.7
-                    1	5.3	48.03
-                    1	42.13	71.34
-                    1	52.63	79.3
-                    1	57.53	72.3
-                    1	63.3	72.07
-                    1	68.97	70.24
-                    1	76.53	66.81
-                    1	94.53	60.48
-                    1	106.1	62
-                    1	116.23	72.04
-                    1	121.87	90.16
-                    2	0	50.17
-                    2	11.07	61.68
-                    2	14.17	52.82
-                    2	16.6	53.36
-                    2	19.33	53.28
-                    2	25.13	48.3 -->
-                    
                 </DataSet>
-            </ObjectiveDataSet>
+                <CodeInjection>
+                    <SymbolMapping>
+                        <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                    </SymbolMapping>
+                    <NMTRANcode>
+                        <Symbol symbId=""></Symbol>
+                        <Code>
+                            <![CDATA[
+                            blub1 = blub2
+                            ]]>
+                        </Code>
+                    </NMTRANcode>
+                </CodeInjection>
+            </NONMEMdataSet>
+            
+            
+<!--            
+            <NONMEMdataSet>
+                
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ColumnMapping>
+
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
+                        <Column columnId="MDV" columnType="mdv" valueType="int" columnNum="4"/>
+                        <Column columnId="DOSE" columnType="dose" valueType="real" columnNum="5"/>
+                        <Column columnId="EVID" columnType="evid" valueType="int" columnNum="6"/>
+                    </Definition>
+                    <ImportData oid="importNONMEM">
+                        <name>RIBBA2012_PCV</name>
+                        <url>file:///</url>
+                        <format>CSV</format>
+                        <delimiter>COMMA</delimiter>
+                    </ImportData>
+                </DataSet>
+            </NONMEMdataSet>-->
+            
             <ParametersToEstimate>
                 <!-- INITIAL CONDITIONS -->
                 <!-- P0 -->
