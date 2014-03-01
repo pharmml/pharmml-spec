@@ -538,13 +538,18 @@
                     </ImportData>
                 </DataSet>
                 <CodeInjection>
-                    <NMTRANcode>
+                    <SymbolMapping>
+                        <ct:SymbRef symbIdRef="df"/>
+                        <ct:SymbRef symbIdRef="fdff"/>
+                    </SymbolMapping>
+                    <TargetCode>
+                        <Symbol symbId="danke"/>
                         <Code>
                             <![CDATA[
                             danke = gracias
                             ]]>
                         </Code>
-                    </NMTRANcode>
+                    </TargetCode>
                 </CodeInjection>
             </NONMEMdataSet>
             
