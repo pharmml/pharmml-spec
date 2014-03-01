@@ -469,7 +469,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->                    
+                    <!--<!-\- TEST -\->                    
                     <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
                         <xs:annotation>
                             <xs:documentation>
@@ -477,7 +477,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->                    
+                    <!-\- /TEST -\->-->                    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
