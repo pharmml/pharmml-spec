@@ -318,6 +318,18 @@
             </Covariate>
         </CovariateModel>
         
+        <CovariateModel blkId="cm2">
+            <Covariate symbId="Sex">
+                <Categorical>
+                    <Category catId="M">
+                        <Probability>
+                            <ct:Real>0.5</ct:Real>
+                        </Probability>
+                    </Category>
+                </Categorical>
+            </Covariate>
+        </CovariateModel>
+        
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">
             <!-- Interpolatin parameters -->
@@ -613,6 +625,7 @@
             </Activity>
         </Structure>
         
+
         <!-- POPULATION -->
         <Population>
             <ct:VariabilityReference>
@@ -626,9 +639,10 @@
 
             <ds:DataSet>
                 <ds:Definition>
-                    <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="ARM" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="WEIGHT" valueType="real" columnNum="3"/>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
+                    <ds:Column columnId="SEX" columnType="covariate" valueType="real" columnNum="4"/>
                 </ds:Definition>
                 <ds:Table>
                     <ds:Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Real>20</ct:Real></ds:Row>
