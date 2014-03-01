@@ -726,11 +726,11 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- new NONMEMtype -->
     
-    <!-- new TargetToolType -->
+    <!-- new TargetToolType - based on NONMEMtype -->
     <xs:complexType name="TargetToolType">
         <xs:annotation>
             <xs:documentation>
-                A type defining the NONMEM type data and task settings.                
+                A type defining the target tool type data and task settings.                
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -775,7 +775,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- new NONMEMtype -->
+    <!-- new TargetToolType -->
     
     <!-- TEST - new type for SymbolMappingType based on 'MappingType' -->
     <xs:complexType name="SymbolMappingType">
