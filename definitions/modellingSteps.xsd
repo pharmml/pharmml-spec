@@ -717,7 +717,12 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- new TargetToolType -->
-                    
+                    <xs:element name="TargetToolData" type="msteps:TargetToolType"
+                        maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                        
                     <!-- /new TargetToolType -->
                     <xs:element name="StepDependencies" type="msteps:StepDependencyType">
                         <xs:annotation>
@@ -770,6 +775,44 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- new NONMEMtype -->
     
+    <!-- new TargetToolType -->
+    <xs:complexType name="TargetToolType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the NONMEM type data and task settings.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="ColumnMapping" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing objective data. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:DataSet">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="CodeInjection" minOccurs="0" type="msteps:CodeInjectionType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- new NONMEMtype -->
     
     <!-- TEST - new type for SymbolMappingType based on 'MappingType' -->
     <xs:complexType name="SymbolMappingType">
