@@ -781,7 +781,7 @@
                         <ds:ColumnRef columnIdRef="PRED"/>
                     </SymbolMapping>
                     <!-- The following symbols are extracted from the injected code -->
-                    <NMTRANcode>
+                    <TargetCode>
                         <Symbol symbId="CSS"/>
                         <Symbol symbId="TTK0"/>
                         <Symbol symbId="CL"/>
@@ -797,7 +797,7 @@
                                 }                    
                             ]]>
                         </Code>
-                    </NMTRANcode>
+                    </TargetCode>
                 </CodeInjection>
             </NONMEMdataSet>
             

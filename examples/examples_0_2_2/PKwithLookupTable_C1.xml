@@ -272,6 +272,7 @@
             <Activity oid="d1">
 
                 <LookupTable inputTarget="variable">
+                    
                     <!-- MAPPING -->
                     <ColumnMapping> 
                         <ds:ColumnRef columnIdRef="TIME"/>

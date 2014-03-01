@@ -389,7 +389,7 @@
                         <ct:SymbRef symbIdRef="TTK0"/>
                         <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
                     </SymbolMapping>
-                    <NMTRANcode>
+                    <TargetCode>
                         <Symbol symbId="PREV"/>
                         <Symbol symbId="D1"/>
                         <Symbol symbId="R1"/>
@@ -405,7 +405,7 @@
                                   }
                             ]]>
                         </Code>
-                    </NMTRANcode>
+                    </TargetCode>
                 </CodeInjection>
             </NONMEMdataSet>
 
