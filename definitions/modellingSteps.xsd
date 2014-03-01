@@ -757,14 +757,14 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:choice>
-                        <xs:element minOccurs="0" ref="ct:SymbRef">
+                        <xs:element minOccurs="1" ref="ct:SymbRef">
                             <xs:annotation>
                                 <xs:documentation>
                                     The model parameter reference to map to.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element minOccurs="0" ref="ds:ColumnRef">
+                        <xs:element minOccurs="1" ref="ds:ColumnRef">
                             <xs:annotation>
                                 <xs:documentation>
                                     The column reference to map to.
@@ -825,7 +825,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- variable mapping type - NMTRANsymbolType -->
-                    <xs:element name="Symbol" maxOccurs="unbounded" type="msteps:NMTRANsymbolType"/>
+                    <xs:element name="Symbol" minOccurs="0" maxOccurs="unbounded" type="msteps:NMTRANsymbolType"/>
                     <xs:element name="Code" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>
