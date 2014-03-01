@@ -814,7 +814,7 @@ permissions and limitations under the License.
     <xs:complexType name="CodeInjectionType">
         <xs:annotation>
             <xs:documentation>
-                Type that defines the NMTRAN code injection.
+                Type that defines the target tool code injection.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -836,7 +836,7 @@ permissions and limitations under the License.
     <xs:complexType name="GenericCodeType">
         <xs:annotation>
             <xs:documentation>
-                Defines the NMTRAN CDATA code injection containing element.
+                Defines the target tool CDATA code injection containing element.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
