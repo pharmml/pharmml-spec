@@ -800,20 +800,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>    
     <!-- /TEST -->
-    
-    <!-- TEST -->
-    <xs:complexType name="DosingMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining the dosing.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="msteps:NMMappingType"/>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
-    
+        
     <!-- TEST -->
     <xs:complexType name="NMTRANcodeInjectionType">
         <xs:annotation>
