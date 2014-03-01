@@ -825,8 +825,7 @@ permissions and limitations under the License.
                             <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="NMTRANcode" type="xs:string"/>-->
-                    <xs:element name="NMTRANcode" type="msteps:GenericCodeType"/>
+                    <xs:element name="TargetCode" type="msteps:GenericCodeType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
