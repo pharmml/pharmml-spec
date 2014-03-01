@@ -511,218 +511,37 @@
     <!-- BLOCK III: MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
-        <!-- ESTIMATION STEP -->
-        <EstimationStep oid="estTask1">
-            
-            <NONMEMdataSet>
-<!--            <TargetToolName>SIMCYP</TargetToolName>-->
-               
-                <ColumnMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="LIVER_VOLUME"/>
-                    <ct:SymbRef symbIdRef="LiverVolume"/>
-                </ColumnMapping>
-                
-                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                    <Definition>
-                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
-                        <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
-                        <Column columnId="MDV" columnType="mdv" valueType="int" columnNum="4"/>
-                        <Column columnId="DOSE" columnType="dose" valueType="real" columnNum="5"/>
-                        <Column columnId="EVID" columnType="evid" valueType="int" columnNum="6"/>
-                    </Definition>
-                    <ImportData oid="importNONMEM">
-                        <name>RIBBA2012_PCV</name>
-                        <url>file:///</url>
-                        <format>CSV</format>
-                        <delimiter>COMMA</delimiter>
-                    </ImportData>
-                </DataSet>
-                <CodeInjection>
-                    <SymbolMapping>
-                        <ct:SymbRef symbIdRef="tesekkurederim"/>
-                        <ct:SymbRef symbIdRef="spasibo"/>
-                    </SymbolMapping>
-                    <NMTRANcode>
-                        <Code>
-                            <![CDATA[
-                            danke = gracias
-                            ]]>
-                        </Code>
-                    </NMTRANcode>
-                </CodeInjection>
-            </NONMEMdataSet>
-            
-            
-<!--            
-            <NONMEMdataSet>
-                
-                <ColumnMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
-                    <ct:SymbRef symbIdRef="t"/>
-                </ColumnMapping>
+        <TargetToolData id="i2">
 
-                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
-                    <Definition>
-                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
-                        <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
-                        <Column columnId="MDV" columnType="mdv" valueType="int" columnNum="4"/>
-                        <Column columnId="DOSE" columnType="dose" valueType="real" columnNum="5"/>
-                        <Column columnId="EVID" columnType="evid" valueType="int" columnNum="6"/>
-                    </Definition>
-                    <ImportData oid="importNONMEM">
-                        <name>RIBBA2012_PCV</name>
-                        <url>file:///</url>
-                        <format>CSV</format>
-                        <delimiter>COMMA</delimiter>
-                    </ImportData>
-                </DataSet>
-            </NONMEMdataSet>-->
+            <TargetToolName>SIMCYP</TargetToolName>
+
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="LiverVolume"/>
+                <ct:SymbRef symbIdRef="liver_volume"/>
+            </ColumnMapping>
             
-            <ParametersToEstimate>
-                <!-- INITIAL CONDITIONS -->
-                <!-- P0 -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_P0"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_P0"/>
-                    <InitialEstimate>
-                        <ct:Real>0.5</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <!-- Q0 -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Q0"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Q0"/>
-                    <InitialEstimate>
-                        <ct:Real>0.5</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-                <!-- RESIDUAL ERROR PARAMETER -->
-                <!-- a -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="a"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-                <!-- STRUCTURAL PARAMETERS and RANDOM EFFECTS -->
-                <!-- LAMBDAP -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_LAMBDAP"/>
-                    <InitialEstimate>
-                        <ct:Real>10</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_LAMBDAP"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-                <!-- KDE -->
-                <!-- omega_KDE is fixed, see pm1 -->
-                <!-- only pop_KDE to be estimated -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KDE"/>
-                    <InitialEstimate>
-                        <ct:Real>10</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-
-                <!-- KQPP -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KQPP"/>
-                    <InitialEstimate>
-                        <ct:Real>10</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KQPP"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-                <!-- LAMBDAP -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_LAMBDAP"/>
-                    <InitialEstimate>
-                        <ct:Real>10</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_LAMBDAP"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-                <!-- KPQ -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KQP"/>
-                    <InitialEstimate>
-                        <ct:Real>10</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KQP"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-                <!-- GAMMA -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_GAMMA"/>
-                    <InitialEstimate>
-                        <ct:Real>10</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_GAMMA"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-                <!-- DELTAQP -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_DELTAQP"/>
-                    <InitialEstimate>
-                        <ct:Real>10</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_DELTAQP"/>
-                    <InitialEstimate>
-                        <ct:Real>1</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
-            </ParametersToEstimate>
-            <Operation order="1" opType="estPop"/>
-            <Operation order="2" opType="estIndiv"/>
-        </EstimationStep>
-
-        <!-- STEP DEPENDENCIES -->
-        <StepDependencies>
-            <Step>
-                <ct:OidRef oidRef="estTask1"/>
-            </Step>
-        </StepDependencies>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="LiverVolume" columnType="undefined" valueType="real" columnNum="2"/>
+                </Definition>
+                <ImportData oid="importData1">
+                    <name>soemFileName</name>
+                    <url>file:///here</url>
+                    <format>CSV</format>
+                    <delimiter>COMMA</delimiter>
+                </ImportData>
+            </DataSet>
+            <CodeInjection>
+                <TargetCode>
+                    <Code>
+                        <![CDATA[
+                        danke=spasibo
+                        ]]>
+                    </Code>
+                </TargetCode>
+            </CodeInjection>
+        </TargetToolData>
+        
     </ModellingSteps>
 </PharmML>
