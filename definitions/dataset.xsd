@@ -342,6 +342,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="ssEndTime"/>
                     <xs:enumeration value="ssPeriod"/>
                     <xs:enumeration value="time"/>
+                    <xs:enumeration value="undefined"/>
                 </xs:restriction>
     </xs:simpleType>
     
