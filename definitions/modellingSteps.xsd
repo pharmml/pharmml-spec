@@ -843,8 +843,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- variable mapping type - NMTRANsymbolType -->
-                    <xs:element name="Symbol" minOccurs="0" maxOccurs="unbounded" type="msteps:NMTRANsymbolType"/>
+                    <!-- variable mapping type - using TargetToolSymbolType (instead of previously used NMTRANsymbolType) -->
+                    <xs:element name="Symbol" minOccurs="0" maxOccurs="unbounded" type="msteps:TargetToolSymbolType"/>
                     <xs:element name="Code" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>
@@ -858,25 +858,26 @@ permissions and limitations under the License.
     </xs:complexType>    
     <!-- /TEST -->
     
+    
     <!-- TEST -->
-    <xs:complexType name="NMTRANsymbolType">
+    <xs:complexType name="TargetToolSymbolType">
         <xs:annotation>
             <xs:documentation>
-                NMTRAN variable type.
+                Target tool variable type.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:attribute name="symbId" use="required">
                     <xs:annotation>
-                        <xs:documentation>The variable symbol to map NMTRAN variables.</xs:documentation>
+                        <xs:documentation>The variable symbol to map target tool variables.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-
+    
     
     <!--
         Elements
