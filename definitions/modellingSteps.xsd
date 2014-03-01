@@ -672,7 +672,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="ModellingStepsType">
+    <!-- original type "ModellingStepsType"
+        <xs:complexType name="ModellingStepsType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the modelling steps section.                 
@@ -696,7 +697,38 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+
+    <!-- TEST -->
+    <xs:complexType name="ModellingStepsType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the modelling steps section.                 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="msteps:CommonModellingStep">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A modelling step.                
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- new TargetToolType -->
+                    
+                    <!-- /new TargetToolType -->
+                    <xs:element name="StepDependencies" type="msteps:StepDependencyType">
+                        <xs:annotation>
+                            <xs:documentation>Defines dependencies between steps.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     
 
     <!-- new NONMEMtype -->
@@ -794,7 +826,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
 <!--                    <xs:element name="NMTRANcode" type="xs:string"/>-->
-                    <xs:element name="NMTRANcode" type="msteps:NMTRANcodeInjectionType"/>
+                    <xs:element name="NMTRANcode" type="msteps:GenericCodeType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -802,7 +834,7 @@ permissions and limitations under the License.
     <!-- /TEST -->
         
     <!-- TEST -->
-    <xs:complexType name="NMTRANcodeInjectionType">
+    <xs:complexType name="GenericCodeType">
         <xs:annotation>
             <xs:documentation>
                 Defines the NMTRAN CDATA code injection containing element.
@@ -830,7 +862,7 @@ permissions and limitations under the License.
     <xs:complexType name="NMTRANsymbolType">
         <xs:annotation>
             <xs:documentation>
-                NMTRAN variable Type.
+                NMTRAN variable type.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -844,7 +876,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-    
+
     
     <!--
         Elements
