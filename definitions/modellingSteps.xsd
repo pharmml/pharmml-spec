@@ -430,54 +430,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!--<!-\- TEST -\->
-    <xs:complexType name="NMCovariateMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining a maping to a covariate in the model. 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="msteps:NMMappingType">
-                <xs:sequence>
-                    <xs:element minOccurs="1" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="NMIndividualMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining the mapping of a dataset to the individual.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="msteps:NMMappingType"/>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="NMVariableMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining a maping to a variable in the model. 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="msteps:NMMappingType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-\- /TEST -\->-->
     
     <xs:complexType abstract="true" name="MappingType">
         <xs:annotation>
@@ -716,14 +668,14 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>                        
                     <!-- /new TargetToolType -->
-                    <xs:element maxOccurs="unbounded" ref="msteps:CommonModellingStep">
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:CommonModellingStep">
                         <xs:annotation>
                             <xs:documentation>
                                 A modelling step.                
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="StepDependencies" type="msteps:StepDependencyType">
+                    <xs:element minOccurs="0" name="StepDependencies" type="msteps:StepDependencyType">
                         <xs:annotation>
                             <xs:documentation>Defines dependencies between steps.</xs:documentation>
                         </xs:annotation>
