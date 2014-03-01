@@ -788,7 +788,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="SymbolMapping" type="msteps:SymbolMappingType">
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="SymbolMapping" type="msteps:SymbolMappingType">
                         <xs:annotation>
                             <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
                         </xs:annotation>
