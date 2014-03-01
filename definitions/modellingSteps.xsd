@@ -741,7 +741,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                    <xs:element name="ColumnMapping" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines mapping to the dataset containing objective data. 
@@ -848,7 +848,7 @@ permissions and limitations under the License.
                     <xs:element name="Code" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>
-                                Original NMTRAN code.
+                                Original target tool code.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
