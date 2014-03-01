@@ -515,7 +515,7 @@
         <EstimationStep oid="estTask1">
             
             <NONMEMdataSet>
-<!--            <TargetToolName>SYIMCYP</TargetToolName>-->
+<!--            <TargetToolName>SIMCYP</TargetToolName>-->
                
                 <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="LIVER_VOLUME"/>
@@ -540,13 +540,13 @@
                 </DataSet>
                 <CodeInjection>
                     <SymbolMapping>
-                        <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                        <ct:SymbRef symbIdRef="tesekkurederim"/>
+                        <ct:SymbRef symbIdRef="spasibo"/>
                     </SymbolMapping>
                     <NMTRANcode>
-                        <Symbol symbId=""></Symbol>
                         <Code>
                             <![CDATA[
-                            blub1 = blub2
+                            danke = gracias
                             ]]>
                         </Code>
                     </NMTRANcode>

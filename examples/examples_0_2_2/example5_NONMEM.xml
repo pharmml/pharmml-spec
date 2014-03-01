@@ -537,6 +537,15 @@
                         <delimiter>COMMA</delimiter>
                     </ImportData>
                 </DataSet>
+                <CodeInjection>
+                    <NMTRANcode>
+                        <Code>
+                            <![CDATA[
+                            danke = gracias
+                            ]]>
+                        </Code>
+                    </NMTRANcode>
+                </CodeInjection>
             </NONMEMdataSet>
             
             <ParametersToEstimate>
