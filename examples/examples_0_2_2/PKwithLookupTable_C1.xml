@@ -318,9 +318,9 @@
             
             <ds:DataSet>
                 <ds:Definition>
-                    <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                    <ds:Column columnId="ARM" valueType="id" columnNum="2"/>
-                    <ds:Column columnId="WEIGHT" valueType="real" columnNum="3"/>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
                 </ds:Definition>
                 <ds:Table>
                     <ds:Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Real>20</ct:Real></ds:Row>

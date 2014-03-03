@@ -345,7 +345,7 @@
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
 
         <!-- ESTIMATION -->
-        <EstimationStep oid="e1">
+        <EstimationStep oid="e1">       
 
             <!-- OBJECTIVE DATA -->
             <NONMEMdataSet>
@@ -392,6 +392,14 @@
                         <ds:delimiter>COMMA</ds:delimiter>
                     </ds:ImportData>
                 </ds:DataSet>
+                <CodeInjection>
+                    <TargetCode>
+                        <Code>
+                            <![CDATA[
+                            dsfsdfdf]]>
+                        </Code>
+                    </TargetCode>
+                </CodeInjection>
             </NONMEMdataSet>
             
             <!-- PARAMETERS TO ESTIMATE -->
