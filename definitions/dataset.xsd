@@ -196,6 +196,39 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- based on DataSetType - a version for TargeTool with optional Definition -->
+    <xs:complexType name="TargetToolDataSetType">
+        <xs:annotation>
+            <xs:documentation>
+                The type specifying the dataset for target tools. This type has optional 'Definition', otherwise identical with 'DataSetType'.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="Definition"/>
+                    <xs:choice>
+                        <xs:element ref="ds:ImportData" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Import datafile
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ds:Table" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Defines a data table.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
    
     <xs:complexType name="ColumnsDefinitionType">
         <xs:annotation>
@@ -374,9 +407,18 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>
                 This element specifies a dataset in PharmML. Its children define its structure and the
-                data associate with it. More information about the dataset can be found in the Language
-                Overview chapter in the PharmML specification.
+                data associate with it.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST TargetToolData - absed on DataSetType -->
+    <xs:element name="TargetToolData" type="ds:TargetToolDataSetType">
+        <xs:annotation>
+            <xs:documentation>
+                This element specifies a target tool dataset in PharmML. Its children define its structure and the
+                data associate with it. 
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
 </xs:schema>

@@ -662,7 +662,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- new TargetToolType -->
-                    <xs:element name="TargetToolData" type="msteps:TargetToolType" minOccurs="0" maxOccurs="1">
+                    <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="1">
                         <xs:annotation>
                             <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
                         </xs:annotation>
@@ -755,7 +755,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ds:DataSet">
+                    <xs:element ref="ds:TargetToolData">
                         <xs:annotation>
                             <xs:documentation>
                                 Instantiates the individual template defined above with data for each subject within
