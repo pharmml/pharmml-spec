@@ -933,15 +933,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- not needed anymore -->
-<!--                    <xs:element name="IndividualRef" type="ds:ColumnRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the subject in the study that this dosing regimen is applied to. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- / not needed anymore -->
                     <!-- TEST -->
                     <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
                         <xs:annotation>
@@ -951,49 +942,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
-<!--                NOT NECESSARY ANYMORE after introducing columnType
-                        <xs:element minOccurs="0" name="DoseAmount" type="ds:ColumnRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Specifies the amount of dose. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="0" name="DosingTime" type="ds:ColumnRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Specifies the dosing time. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="0" name="Rate" type="ds:ColumnRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Specifies the rate of infusion. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="0" name="Duration" type="ds:ColumnRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Specifies the duration of infusion. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="0" name="SSEndTime" type="ds:ColumnRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Specifies the last dosing time in steady state dosing. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="0" name="SSPeriod" type="ds:ColumnRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Specifies the period in steady state dosing. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
                     <xs:element ref="ds:DataSet">
                         <xs:annotation>
                             <xs:documentation>
