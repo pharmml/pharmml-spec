@@ -272,7 +272,7 @@ permissions and limitations under the License.
                 </xs:attribute>
                 
                 <!-- new atrribute 'columnType = id, dv, covariate, etc.' -->
-                <xs:attribute name="columnType" type="ds:ColumnTypeType" use="optional">
+                <xs:attribute name="columnType" type="ds:ColumnTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The column type for this column.</xs:documentation>
                     </xs:annotation>
