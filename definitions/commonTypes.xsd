@@ -610,6 +610,11 @@ the end value. In the second the step size is incremented r times, where r is th
                     <xs:element name="Algorithm">
                         <xs:simpleType>
                             <xs:restriction base="xs:token">
+                                <xs:enumeration value="constant">
+                                    <xs:annotation>
+                                        <xs:documentation>Constant interpolation</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
                                 <xs:enumeration value="nearest">
                                     <xs:annotation>
                                         <xs:documentation>Nearest-neighbor interpolation</xs:documentation>
