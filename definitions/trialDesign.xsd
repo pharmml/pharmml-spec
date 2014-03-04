@@ -309,23 +309,19 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="TargetMapping">
+                    <xs:element name="ColumnMapping" minOccurs="0" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
-                                Mapping of the independent and dependent interpolation variable.
+                                Defines mapping to the dataset containing objective data. 
                             </xs:documentation>
                         </xs:annotation>
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="ColumnMapping" minOccurs="1" maxOccurs="2" type="ds:ColumnMappingType">
-                                    <xs:annotation>
-                                        <xs:documentation>
-                                            Defines mapping to the dataset containing objective data. 
-                                        </xs:documentation>
-                                    </xs:annotation>
-                                </xs:element>                        
-                            </xs:sequence>                        
-                        </xs:complexType>
+                    </xs:element>                        
+                    <xs:element name="Target" type="design:TargetMappingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Definition of mapping between lookup table variable and target in the model.
+                            </xs:documentation>
+                        </xs:annotation>
                     </xs:element>
                     <xs:element ref="ds:DataSet">
                         <xs:annotation>
@@ -336,11 +332,36 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attributeGroup ref="design:doseVarAttGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <!-- new NONMEMtype -->
+    
+    <!-- new type for TargetMapping -->
+    <xs:complexType name="TargetMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Mapping of the lookup table variables.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:sequence>
+                        <xs:element name="ColumnMapping" minOccurs="1" maxOccurs="2" type="ds:ColumnMappingType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Defines mapping to the dataset containing objective data. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                        
+                    </xs:sequence>                        
+                </xs:sequence>
+                <xs:attributeGroup ref="design:doseVarAttGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /new type for TargetMapping -->
     
     <xs:complexType name="ActivityType" abstract="false">
         <xs:annotation>
