@@ -333,6 +333,18 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
+        <TargetTool oid="someOID">
+            <TargetToolName>R</TargetToolName>
+            
+            <ds:TargetToolData>
+                <ds:ImportTargetData oid="itt">
+                    <ds:name>someName</ds:name>
+                    <ds:url>someURL</ds:url>
+                </ds:ImportTargetData>
+            </ds:TargetToolData>
+            
+        </TargetTool>
+        
         <SimulationStep oid="s1">
             <ct:VariableAssignment>
                 <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Imax"/>
