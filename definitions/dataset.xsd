@@ -426,7 +426,7 @@ permissions and limitations under the License.
     <xs:simpleType name="ColumnTypeType">
         <xs:annotation>
             <xs:documentation>
-                Type for columnType = id, dv, covariate etc.
+                Type for attribute columnType = id, dv, covariate etc.
             </xs:documentation>
         </xs:annotation>
                 <xs:restriction base="xs:Name">
@@ -437,8 +437,6 @@ permissions and limitations under the License.
                     <xs:enumeration value="covariate"/>
                     <xs:enumeration value="demographic"/>
                     <xs:enumeration value="dose"/>
-<!--                    <xs:enumeration value="doseAmount"/>
-                    <xs:enumeration value="dosingTime"/>-->
                     <xs:enumeration value="duration"/>
                     <xs:enumeration value="dv"/>
                     <xs:enumeration value="dvid"/>
