@@ -271,19 +271,20 @@
             </Segment>
             <Activity oid="d1">
 
-                <LookupTable inputTarget="variable">
+                <LookupTable>
                     
-                    <!-- MAPPING -->
-                    <ColumnMapping> 
+                    <ColumnMapping>
                         <ds:ColumnRef columnIdRef="TIME"/>
                         <ct:SymbRef symbIdRef="t"/>
                     </ColumnMapping>
                     
-                    <ColumnMapping> 
-                        <ds:ColumnRef columnIdRef="Cc"/>
-                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
-                    </ColumnMapping>
-                    
+                    <Target inputTarget="variable">
+                        <ColumnMapping> 
+                            <ds:ColumnRef columnIdRef="Cc"/>
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                        </ColumnMapping>
+                    </Target>
+                   
                     <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
