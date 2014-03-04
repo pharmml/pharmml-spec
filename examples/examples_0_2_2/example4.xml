@@ -552,8 +552,8 @@
                 <ColumnMapping>
                     <ds:ColumnRef columnIdRef="Y"/>
                     <ct:SymbRef blkIdRef="om1" symbIdRef="Cc_obs"/>
-                </ColumnMapping>
-                <ColumnMapping>
+                </ColumnMapping>                
+                <ColumnMapping>               
                     <ds:ColumnRef columnIdRef="TIME"/>
                     <ct:SymbRef symbIdRef="t"/>
                 </ColumnMapping>
