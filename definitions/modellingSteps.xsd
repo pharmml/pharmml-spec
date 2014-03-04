@@ -452,7 +452,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST new type based on MappingType-->
+    <!--<!-\- NOT USED ANYMORE - TEST new type based on MappingType-\->
     <xs:complexType abstract="true" name="NMMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -473,7 +473,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->   
+    <!-\- /TEST -\->-->   
 
     <!-- new DatasetMappingType based on design:LookupTableType !!! doseVarAttGroup REMOVED - not necesary here-->
     <xs:complexType name="DatasetMappingType">
@@ -781,7 +781,7 @@ permissions and limitations under the License.
     <xs:complexType name="SymbolMappingType">
         <xs:annotation>
             <xs:documentation>
-                Type that defines variable/parameter, used in the NMTRAN injected code, to be mapped to the model or dataset.
+                Type that defines variable/parameter, used in the injected code, to be mapped to the model or dataset.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
