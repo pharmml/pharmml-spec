@@ -1006,8 +1006,8 @@
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" columnType="dosingTime" valueType="real" columnNum="2"/>
-                    <Column columnId="AMT" columnType="doseAmount" valueType="real" columnNum="3"/>
+                    <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                    <Column columnId="AMT" columnType="dose" valueType="real" columnNum="3"/>
                 </Definition>
                 <ImportData oid="dosingData">
                     <name>522_sim_dosing</name>

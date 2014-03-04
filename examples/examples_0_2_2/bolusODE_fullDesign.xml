@@ -280,15 +280,16 @@
                 <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
             </ColumnMapping>
             
+            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/>
-                    <Column columnId="ARM" valueType="id" columnNum="2"/>
-                    <Column columnId="REP" valueType="real" columnNum="3"/>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                    <Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
                 </Definition>
                 <Table>
                     <Row>
-                        <ct:Id>i1</ct:Id><ct:Id>arm1</ct:Id><ct:Real>20</ct:Real>
+                        <ct:Id>i1</ct:Id><ct:Id>arm1</ct:Id><ct:Real>120</ct:Real>
                     </Row>
                 </Table>
             </DataSet>
