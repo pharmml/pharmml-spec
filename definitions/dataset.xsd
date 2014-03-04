@@ -174,7 +174,7 @@ permissions and limitations under the License.
                         </xs:annotation>                        
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
-                                <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
+                                <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_.]*"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
