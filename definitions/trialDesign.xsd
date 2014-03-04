@@ -309,12 +309,23 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                    <xs:element name="TargetMapping">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines mapping to the dataset containing objective data. 
+                                Mapping of the independent and dependent interpolation variable.
                             </xs:documentation>
                         </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="ColumnMapping" minOccurs="1" maxOccurs="2" type="ds:ColumnMappingType">
+                                    <xs:annotation>
+                                        <xs:documentation>
+                                            Defines mapping to the dataset containing objective data. 
+                                        </xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>                        
+                            </xs:sequence>                        
+                        </xs:complexType>
                     </xs:element>
                     <xs:element ref="ds:DataSet">
                         <xs:annotation>
