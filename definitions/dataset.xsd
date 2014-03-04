@@ -82,16 +82,6 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
-    <!-- based on ImportData -->
-    <xs:element name="ImportTargetData" type="ImportTargetDataType">
-        <xs:annotation>
-            <xs:documentation>
-                Element specifies the details for the import target data file.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <!-- /based on ImportData -->
-    
     <!-- new type for external data -->
     <xs:complexType name="ImportDataType">
         <xs:annotation>
@@ -157,6 +147,16 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- based on ImportData -->
+    <xs:element name="ImportTargetData" type="ImportTargetDataType">
+        <xs:annotation>
+            <xs:documentation>
+                Element specifies the details for the import target data file.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /based on ImportData -->
     
     <!-- based on ImportDataType-->
     <xs:complexType name="ImportTargetDataType">
@@ -493,7 +493,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST TargetToolData - absed on DataSetType -->
+    <!-- TEST TargetToolData - based on DataSetType -->
     <xs:element name="TargetToolData" type="ds:TargetToolDataSetType">
         <xs:annotation>
             <xs:documentation>
