@@ -82,6 +82,16 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
+    <!-- based on ImportData -->
+    <xs:element name="ImportTargetData" type="ImportTargetDataType">
+        <xs:annotation>
+            <xs:documentation>
+                Element specifies the details for the import target data file.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /based on ImportData -->
+    
     <!-- new type for external data -->
     <xs:complexType name="ImportDataType">
         <xs:annotation>
@@ -148,6 +158,78 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- based on ImportDataType-->
+    <xs:complexType name="ImportTargetDataType">
+        <xs:annotation>
+            <xs:documentation>This is a data type for external data files.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="name">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The name of the import data file.
+                            </xs:documentation>
+                        </xs:annotation>                        
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="url" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The URL of the import data file.
+                            </xs:documentation>
+                        </xs:annotation>                        
+                    </xs:element>
+                    <xs:element name="format" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Any dataformat is allowed.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="delimiter" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Only Tab, Comma or Space as delimiters are allowed.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="TAB">
+                                    <xs:annotation>
+                                        <xs:documentation>Tab '\t' as delimiter</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="SPACE">
+                                    <xs:annotation>
+                                        <xs:documentation>Space ' ' as delimiter</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="COMMA">
+                                    <xs:annotation>
+                                        <xs:documentation>Comma ',' as delimiter</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>         
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!--  -->
+    
     <xs:complexType name="DataSetTableType">
         <xs:annotation>
             <xs:documentation>
@@ -209,7 +291,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="Definition"/>
                     <xs:choice>
-                        <xs:element ref="ds:ImportData" maxOccurs="1">
+                        <xs:element ref="ds:ImportTargetData" maxOccurs="1">
                             <xs:annotation>
                                 <xs:documentation>
                                     Import datafile
