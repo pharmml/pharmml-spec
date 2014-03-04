@@ -68,8 +68,8 @@
 
 \author{MJS, SM}
 \date{\today}
-%\title{Extension for PharmML 0.2.2}
-\title{NONMEM format dataset support for PharmML 0.2.2}
+\title{Changes in PharmML 0.3}
+%\title{NONMEM format dataset support for PharmML 0.2.2}
 
 
 \newcommand{\cellml}{CellML\xspace}
@@ -87,7 +87,7 @@
 
 \tableofcontents
 
-\section{External data file support}
+\section{Externalisation of data files}
 So far, only inline storage of data was supported, for example covariates were stored in the following 
 table in the \xelem{Population} block:
 
@@ -137,7 +137,7 @@ For example:
         </ds:Definition>
     <ds:ImportData oid="id1">
         <ds:name>warfarin_conc_pca</ds:name>
-        <ds:url>./../examples_0_2_2/datasets/</ds:url>
+        <ds:url>file:///examples_0_2_2/datasets/</ds:url>
         <ds:format>CSV</ds:format>
         <ds:delimiter>COMMA</ds:delimiter>
     </ds:ImportData>
@@ -358,8 +358,8 @@ these attribute values should be used in tables specified in blocks \xelem{Popul
   \hline
 arm &     study arm \\
 demographic &     demographic type \\
-doseAmount &     dose amount \\
-dosingTime &     time of dosing \\
+%doseAmount &     dose amount \\
+%dosingTime &     time of dosing \\
 epoch &     study epoch \\
 replicate &     in cases when subjects are assumed identical \\
 ssEndTime &     steady-state administration end time \\
@@ -371,16 +371,48 @@ ssPeriod &     steady-state administration interval \\
 \end{center}
 \end{table}
 
-                 
+Additionally to values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes}, the \xatt{undefined} value can be used, this is most likely to be utilised when defining external tools datasets.
+       
 \subsection{Part III -- NMTRAN code injection (Chan et al.)}
 To understand the purpose of this module, it is helpful to consider the following \cite{Chan:2005fk} example first.
 
-
-
+%"Exogenous oral levodopa was modeled by a steady state infusion with constant but unknown rate, which ended at the start of the first levodopa infusion of each trial. The rate of steady state infusion (R1) was calculated from: R1 = CL ¥ Css\_pre"
+%
+%This is encoded in the data file using flag '-1' (starting with month 6) in the RATE column, e.g.
+%
+%\lstset{language=NONMEMdataSet}
+%\begin{lstlisting}
+%\#ID	MONTH	TRIAL	OCC	WTKG	PREV	TIME	AMT	RATE	SS	II	CMT	DV	MDV
+%552	6	2	3	70	2	409	0	-1	1	0	1	.	1
+%\end{lstlisting}
+%
+%and the unknown rate, specified in the 'R1' in the NMTRAN code:
+%
+%\lstset{language=NONMEMdataSet}
+%\begin{lstlisting}
+%  IF (PREV.EQ.0) THEN
+%É
+%  ELSE
+%     R1=CL*CSS
+%  ENDIF
+%\end{lstlisting}
+%
 
 This section goes beyond the standard models, such as the previous one, and deals with cases 
 when the model and dataset are strongly interconnected. Not only does the dosing come from 
 the datafile but also certain model relevant information is stored in the data. 
+
+
+Place 
+
+to 
+
+describe
+
+the 
+
+model
+\\
 
 For example, additionally 
 to the usual MDL encoding, NMTRAN code needs to be passed 'as is' to the target tool via PharmML, 
@@ -484,7 +516,7 @@ Note that the three parameters are mapped to the according symbols in the
 \xelem{ParameterModel}, but the last one, \emph{PRED}, to the column in the above dataset. 
 As before we use one general \xelem{SymbolMapping} element. 
 
-The final \xelem{NMTRANcode} section starts with a list of all symbols appearing in the NMTRAN 
+The final \xelem{TargetCode} section starts with a list of all symbols appearing in the NMTRAN 
 code which provides the ground for the above \xelem{SymbolMapping} mapping. Then, the code is 
 stored in the \xelem{![CDATA[]]}, a structure which makes sure that everything inside it is 
 ignored by the language parser and passed 'as is'.
@@ -515,7 +547,7 @@ ignored by the language parser and passed 'as is'.
                         <ds:ColumnRef columnIdRef="PRED"/>
                     </SymbolMapping>
                     <!-- The following symbols are extracted from the injected code -->
-                    <NMTRANcode>
+                    <TargetCode>
                         <Symbol symbId="CSS"/>
                         <Symbol symbId="TTK0"/>
                         <Symbol symbId="CL"/>
@@ -531,7 +563,7 @@ ignored by the language parser and passed 'as is'.
                                 }                    
                             ]]>
                         </Code>
-                    </NMTRANcode>
+                    </TargetCode>
                 </CodeInjection>
             </NONMEMdataSet>
 \end{lstlisting}
@@ -542,6 +574,37 @@ ignored by the language parser and passed 'as is'.
 \item[Alternatively] MDL should deal with it by making sure that the target code passed to PharmML 
 follows well defined rules and grammar.
 \end{description}
+
+
+\section{External tools support}
+
+\subsection{Minimal form of external tools support}
+\begin{itemize}
+\item
+object identifier
+\item
+target tool name
+\item
+target tool data import with file name and URL only
+\end{itemize}
+
+
+\lstset{language=XML}
+\begin{lstlisting}
+
+        <TargetTool oid="someOID">
+            <TargetToolName>R</TargetToolName>
+            
+            <ds:TargetToolData>
+                <ds:ImportTargetData oid="itt">
+                    <ds:name>someName</ds:name>
+                    <ds:url>someURL</ds:url>
+                </ds:ImportTargetData>
+            </ds:TargetToolData>
+            
+        </TargetTool>
+\end{lstlisting}
+
 
 \section{Lookup table as new input type}
 Table \ref{tab:C1C2C2} gives an overview of new options provided. In the first two cases experimental 
@@ -592,7 +655,7 @@ The main ingredients in this case are
 \begin{itemize}
 \item
 \emph{Cc} -- measured drug concentration encoded as a variable in the model AND interpolation type 
-chosen from a list: \emph{\{constant, linear, spline, pchip\}}
+chosen from a list: \emph{\{constant, linear, spline, pchip, cubic\}}
 
 \lstset{language=XML}
 \begin{lstlisting}
@@ -906,6 +969,41 @@ The following listing shows how the just defined interpolation function is then 
 The last part, the \xelem{LookupTable} definition and mapping, is identical to the previous example and will be skipped here.
 
 
+\section{Other changes}
+
+\subsection{Nested tables removed}
+
+\subsection{New attribute \xatt{columnType} in the \xelem{DataSet}/\xelem{Definition}}
+
+\subsection{Simplified/unified mapping in all dataset types}
+
+\subsection{Interpolation support for covariates or model variables}
+
+\subsection{The notation of initial conditions for ODE's is extended}
+
+\subsection{Add missing mathematical functions}
+
+\subsection{Renamed attributes}
+
+a. \xatt{type} attribute values in the \xelem{VariabilityReference}
+- \xatt{model} $\longrightarrow$ \xatt{parameterVariability}
+- \xatt{error} $\longrightarrow$ \xatt{residualError}
+
+b. \xatt{inputType} attribute in \xelem{DoseAmount}
+\xatt{inputType} $\longrightarrow$ \xatt{inputTarget}
+and its values
+- \xatt{target} $\longrightarrow$ \xatt{derivativeVariable}
+- \xatt{dose} $\longrightarrow$ \xatt{parameter}
+plus new type introduced (can also be used in the new \xelem{LookupTable}):
+- \xatt{variable}
+
+
+\subsection{Multiple random errors allowed in the Gaussian model}
+
+\subsection{Missing metadata 'is' added}
+
+
+\bibliographystyle{plain}
 \bibliography{pharmml-specification}
 \end{document}
 
