@@ -309,6 +309,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    
                     <xs:element name="ColumnMapping" minOccurs="0" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
