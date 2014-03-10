@@ -381,7 +381,7 @@
             </Cell>
             <Cell oid="c2">
                 <EpochRef oidRef="ep1" />
-                <ArmRef oidRef="a1"/>
+                <ArmRef oidRef="a2"/>
                 <SegmentRef oidRef="tb"/>
             </Cell>
             <Cell oid="c3">
