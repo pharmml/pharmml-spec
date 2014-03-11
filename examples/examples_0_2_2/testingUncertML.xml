@@ -429,7 +429,7 @@
                         <un:prVal>5</un:prVal>
                     </un:truncationUpperInclusiveBoundIG>
                 </un:NormalInverseGammaDistribution>-->
-                <un:MultivariateNormalDistribution definition="http://www.uncertml.org/...">
+<!--                <un:MultivariateNormalDistribution definition="http://www.uncertml.org/...">
                     <un:meanVector>
                         <un:val><un:rVal>.5</un:rVal></un:val>
                         <un:val><un:rVal>.7</un:rVal></un:val>
@@ -442,7 +442,7 @@
                             <un:val><un:rVal>4</un:rVal></un:val>
                         </un:value>
                     </un:covarianceMatrix>
-                </un:MultivariateNormalDistribution>
+                </un:MultivariateNormalDistribution>-->
 <!--                <un:MultivariateNormalDistribution definition="http://www.uncertml.org/...">
                     <un:meanVector>
                         <un:arrayVar varId=""/>
@@ -691,7 +691,7 @@
                         <un:nVal>15</un:nVal>
                     </un:truncationUpperInclusiveBound>
                 </un:PoissonDistribution>-->
-                <un:PoissonDistribution definition="http://www.uncertml.org/...">
+<!--                <un:PoissonDistribution definition="http://www.uncertml.org/...">
                     <un:rate>
                         <un:var varId="RATE"/>
                     </un:rate>
@@ -701,7 +701,7 @@
                     <un:truncationUpperInclusiveBound>
                         <un:var varId="tUIB"/>
                     </un:truncationUpperInclusiveBound>
-                </un:PoissonDistribution>
+                </un:PoissonDistribution>-->
                 
                 <!--                <un:MultinomialDistribution definition="http://www.uncertml.org/...">
                     <un:numberOfTrials>
@@ -744,7 +744,7 @@
                     </un:scaleMatrix>
                 </un:WishartDistribution>-->
                 
-                <un:DiscreteMultivariateMixtureModel definition="http://www.uncertml.org/distributions/...">
+<!--                <un:DiscreteMultivariateMixtureModel definition="http://www.uncertml.org/distributions/...">
                     <un:component weight=".3">
                         <un:WishartDistribution definition="http://www.uncertml.org/distributions/...">
                             <un:degreesOfFreedom>
@@ -775,7 +775,8 @@
                             </un:scaleMatrix>
                         </un:WishartDistribution>
                     </un:component>
-                </un:DiscreteMultivariateMixtureModel>
+                </un:DiscreteMultivariateMixtureModel>-->
+                
                 <!--                <un:DiscreteMultivariateMixtureModel definition="http://www.uncertml.org/...">
                     <un:component weight=".3">
                         <un:WishartDistribution definition="http://www.uncertml.org/...">
@@ -832,7 +833,8 @@
                         </un:probability>
                     </un:categoryProb>
                 </un:CategoricalDistribution>-->
-                <un:CategoricalUnivariateMixtureModel definition="http://www.uncertml.org/...">
+
+ <!--               <un:CategoricalUnivariateMixtureModel definition="http://www.uncertml.org/...">
                     <un:component weight=".2">
                         <un:BernoulliDistribution definition="http://www.uncertml.org/...">
                             <un:categoryProb definition="http://www.uncertml.org/...">
@@ -887,7 +889,7 @@
                             </un:categoryProb>
                         </un:CategoricalDistribution>
                     </un:component>
-                </un:CategoricalMultivariateMixtureModel>
+                </un:CategoricalMultivariateMixtureModel>-->
                 
                 <!-- STATISTICS -->
                 
@@ -961,14 +963,14 @@
                         <un:val><un:rVal>.5</un:rVal></un:val>
                     </un:value>
                 </un:CovarianceMatrix>-->
-                <un:CovarianceMatrix dimension="2" definition="">
+<!--                <un:CovarianceMatrix dimension="2" definition="">
                     <un:value>
                         <un:val><un:var varId="variance1"/></un:val>
                         <un:val><un:var varId="covariance12"/></un:val>
                         <un:val><un:var varId="covariance21"/></un:val>
                         <un:val><un:var varId="variance2"/></un:val>
                     </un:value>
-                </un:CovarianceMatrix>
+                </un:CovarianceMatrix>-->
                 
 <!--                <un:ConfusionMatrix definition="http://www.uncertml.org/...">
                     <un:sourceCategories>
@@ -998,7 +1000,7 @@
                         <un:arrayVar varId="CatDogRabbit_Matrix"/>
                     </un:counts>
                 </un:ConfusionMatrix>-->
-                <un:ConfusionMatrix definition="http://www.uncertml.org/...">
+<!--                <un:ConfusionMatrix definition="http://www.uncertml.org/...">
                     <un:sourceCategories>
                         <un:var varId="Cat"/>
                         <un:var varId="Dog"/>
@@ -1014,7 +1016,7 @@
                         <un:var varId="DC"/><un:var varId="DD"/><un:var varId="DR"/>
                         <un:var varId="RC"/><un:var varId="RD"/><un:var varId="RR"/>
                     </un:counts>
-                </un:ConfusionMatrix>
+                </un:ConfusionMatrix>-->
                 
 
 

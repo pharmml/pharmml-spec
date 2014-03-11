@@ -692,7 +692,7 @@
         
         <!-- simulation steps -->
         <SimulationStep oid="s1">
-            
+
             <ct:VariableAssignment>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="pop_W"/>
                 <ct:Assign>

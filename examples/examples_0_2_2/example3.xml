@@ -406,16 +406,44 @@
             </ds:DataSet>
         </Population>
     </TrialDesign>
+   
     
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
+        <NONMEMdataSet oid="NMoid">
+            <ds:DataSet>
+                <ds:Definition>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                </ds:Definition>
+                <ds:ImportData oid="sd">
+                    <ds:name>dsd</ds:name>
+                    <ds:url>ds</ds:url>
+                    <ds:format>CSV</ds:format>
+                    <ds:delimiter>COMMA</ds:delimiter>
+                </ds:ImportData>
+            </ds:DataSet>
+        </NONMEMdataSet>
+        
+        <TargetTool oid="targetTooloid">
+            <TargetToolName>dasd</TargetToolName>
+            <ds:TargetToolData>
+                <ds:ImportTargetData oid="sdd">
+                    <ds:name>dsds</ds:name>
+                    <ds:url>sadas</ds:url>
+                </ds:ImportTargetData>
+            </ds:TargetToolData>
+        </TargetTool>
+                        
+        
         <!-- ESTIMATION -->
         <EstimationStep oid="estimStep1">
             
-            <!-- OBJECTIVE DATA -->
+            <TargetToolReference>
+                <ct:OidRef oidRef="NMoid"/>
+            </TargetToolReference>
+            
             <ObjectiveDataSet>
-                
                 <ColumnMapping>
                     <ds:ColumnRef columnIdRef="time"/>
                     <ct:SymbRef symbIdRef="t"/>
@@ -443,7 +471,7 @@
                     </ds:Table>
                 </ds:DataSet>
             </ObjectiveDataSet>
-            
+                        
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate>
                 <!-- V -->

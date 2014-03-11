@@ -344,63 +344,69 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
 
+
+        <!-- OBJECTIVE DATA -->
+        <NONMEMdataSet oid="NMoid">
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="TIME"/>
+                <ct:SymbRef symbIdRef="t"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="Y"/>
+                <ct:SymbRef blkIdRef="om1" symbIdRef="Cc_obs"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="SEX"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="Sex"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="TREAT"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="Treat"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="TREATSEQ"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="TreatSeq"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="OCCASION"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="Occasion"/>
+            </ColumnMapping>
+            
+            <ds:DataSet>
+                <ds:Definition>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="3"/>
+                    <ds:Column columnId="SEX" columnType="covariate" valueType="id" columnNum="4"/>
+                    <ds:Column columnId="TREAT" columnType="covariate" valueType="id" columnNum="5"/>
+                    <ds:Column columnId="TREATSEQ" columnType="covariate" valueType="id" columnNum="6"/>
+                    <ds:Column columnId="OCCASION" columnType="covariate" valueType="id" columnNum="7"/>
+                    <ds:Column columnId="Y" columnType="dv" valueType="real" columnNum="8"/>
+                </ds:Definition>
+                <ds:ImportData oid="importNONMEM">
+                    <ds:name>dummyName</ds:name>
+                    <ds:url>file://examples_0_2_2/datasets/</ds:url>
+                    <ds:format>CSV</ds:format>
+                    <ds:delimiter>COMMA</ds:delimiter>
+                </ds:ImportData>
+            </ds:DataSet>
+            <CodeInjection>
+                <TargetCode>
+                    <Code>
+                        <![CDATA[
+                            dsfsdfdf]]>
+                    </Code>
+                </TargetCode>
+            </CodeInjection>
+        </NONMEMdataSet>
+        
+        
         <!-- ESTIMATION -->
         <EstimationStep oid="e1">       
-
-            <!-- OBJECTIVE DATA -->
-            <NONMEMdataSet>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="TIME"/>
-                    <ct:SymbRef symbIdRef="t"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="Y"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="Cc_obs"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="SEX"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="Sex"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="TREAT"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="Treat"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="TREATSEQ"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="TreatSeq"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="OCCASION"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="Occasion"/>
-                </ColumnMapping>
-                
-                <ds:DataSet>
-                    <ds:Definition>
-                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="3"/>
-                        <ds:Column columnId="SEX" columnType="covariate" valueType="id" columnNum="4"/>
-                        <ds:Column columnId="TREAT" columnType="covariate" valueType="id" columnNum="5"/>
-                        <ds:Column columnId="TREATSEQ" columnType="covariate" valueType="id" columnNum="6"/>
-                        <ds:Column columnId="OCCASION" columnType="covariate" valueType="id" columnNum="7"/>
-                        <ds:Column columnId="Y" columnType="dv" valueType="real" columnNum="8"/>
-                    </ds:Definition>
-                    <ds:ImportData oid="importNONMEM">
-                        <ds:name>dummyName</ds:name>
-                        <ds:url>file://examples_0_2_2/datasets/</ds:url>
-                        <ds:format>CSV</ds:format>
-                        <ds:delimiter>COMMA</ds:delimiter>
-                    </ds:ImportData>
-                </ds:DataSet>
-                <CodeInjection>
-                    <TargetCode>
-                        <Code>
-                            <![CDATA[
-                            dsfsdfdf]]>
-                        </Code>
-                    </TargetCode>
-                </CodeInjection>
-            </NONMEMdataSet>
+            
+            <TargetToolReference>
+                <ct:OidRef oidRef="NMoid"/>                
+            </TargetToolReference>
             
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate id="e1">

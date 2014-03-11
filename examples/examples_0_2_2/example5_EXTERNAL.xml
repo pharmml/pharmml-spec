@@ -511,35 +511,69 @@
     <!-- BLOCK III: MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
+        <TargetTool oid="TARGETTOOLoid">
+            <TargetToolName>R</TargetToolName>
+            <TargetToolData xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <ImportTargetData oid="fdf">
+                    <name>sddff.xls</name>
+                    <url>file://sdsd</url>
+                </ImportTargetData>
+            </TargetToolData>
+        </TargetTool>
+
+<!--alternatively NONMEMdataSet here
+ <!-\-       <NONMEMdataSet NEW attribute  oid="NONMEMoid">
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="" columnType="" valueType="" columnNum=""></Column>
+                </Definition>
+            </DataSet>
+        </NONMEMdataSet>-\->-->
         
-        <EstimationStep oid="">
-            <TargetTool>
-                <TargetToolName>PFIM</TargetToolName>
-                
-                <TargetToolData xmlns="http://www.pharmml.org/2013/08/Dataset">
-                    <ImportData oid="fdf">
-                        <name>df.R</name>
-                        <url>file:///</url>
-                    </ImportData>
-                </TargetToolData>
-            </TargetTool>
+        <EstimationStep oid="estStep1">
             
+            <TargetToolReference>
+                <ct:OidRef oidRef="TARGETTOOLoid"/>
+            </TargetToolReference>            
+            
+            <ParametersToEstimate>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="V"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+            </ParametersToEstimate>
+            <Operation order="1" opType="estPop"/>
         </EstimationStep>
         
-        <OED>
-            <TargetTool>
-                <TargetToolName>PFIM</TargetToolName>
-                
-                <TargetToolData xmlns="http://www.pharmml.org/2013/08/Dataset">
-                    <ImportData oid="fdf">
-                        <name>df.R</name>
-                        <url>file:///</url>
-                    </ImportData>
-                </TargetToolData>
-            </TargetTool>
-         </OED>
- 
- 
+        <SimulationStep oid="step1">
+            
+            <TargetToolReference>
+                <ct:OidRef oidRef="TARGETTOOLoid"/>
+            </TargetToolReference>            
+            
+            <Observations>
+                <Timepoints>
+                    <ct:Sequence>
+                        <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
+                        <ct:StepSize><ct:Real>1</ct:Real></ct:StepSize>
+                        <ct:End><ct:Real>2</ct:Real></ct:End>
+                    </ct:Sequence>
+                </Timepoints>
+                <Continuous>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR"/>
+                </Continuous>
+            </Observations>
+        </SimulationStep>
+        
+        <StepDependencies>
+            <Step>
+                <ct:OidRef oidRef="estStep1"></ct:OidRef>
+            </Step>
+        </StepDependencies>
+        
+        
     </ModellingSteps>
 
 </PharmML>

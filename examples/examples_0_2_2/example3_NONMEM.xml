@@ -338,77 +338,80 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
-        <!-- ESTIMATION -->
-        <EstimationStep oid="estimStep1">
+        <!-- NONMEM OBJECTIVE DATA -->
+        <NONMEMdataSet oid="NMoid">
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="time"/>
+                <ct:SymbRef symbIdRef="t"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="dv"/>
+                <ct:SymbRef blkIdRef="om1" symbIdRef="Cc"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="wt"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+            </ColumnMapping>
             
-            
-            <!-- NONMEM OBJECTIVE DATA -->
-            <NONMEMdataSet>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="time"/>
-                    <ct:SymbRef symbIdRef="t"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="dv"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="Cc"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="wt"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </ColumnMapping>
-                
-                <ds:DataSet>
-                    <ds:Definition>
-                        <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                        <ds:Column columnId="time" columnType="time" valueType="real" columnNum="2"/>
-                        <ds:Column columnId="wt" columnType="covariate" valueType="real" columnNum="3"/>
-                        <ds:Column columnId="age" columnType="covariate" valueType="real" columnNum="4"/>
-                        <ds:Column columnId="sex" columnType="covariate" valueType="int" columnNum="5"/>
-                        <ds:Column columnId="amt" columnType="dose" valueType="real" columnNum="6"/>
-                        <ds:Column columnId="dvid" columnType="dvid" valueType="real" columnNum="7"/>
-                        <ds:Column columnId="dv" columnType="dv" valueType="real" columnNum="8"/>
-                        <ds:Column columnId="mdv" columnType="mdv" valueType="real" columnNum="9"/>
-                    </ds:Definition>
-                    <ds:ImportData oid="id1">
-                        <ds:name>warfarin_conc_pca</ds:name>
-                        <ds:url>file:///../examples_0_2_2/datasets/</ds:url>
-                        <ds:format>CSV</ds:format>
-                        <ds:delimiter>COMMA</ds:delimiter>
-                    </ds:ImportData>
-                </ds:DataSet>
-                <CodeInjection>
-                    <SymbolMapping>
-                        <ct:SymbRef symbIdRef="CSS"/>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>
-                    </SymbolMapping>
-                    <SymbolMapping>
-                        <ct:SymbRef symbIdRef="CL"/>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
-                    </SymbolMapping>
-                    <SymbolMapping>
-                        <ct:SymbRef symbIdRef="TTK0"/>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
-                    </SymbolMapping>
-                    <TargetCode>
-                        <Symbol symbId="PREV"/>
-                        <Symbol symbId="D1"/>
-                        <Symbol symbId="R1"/>
-                        <Symbol symbId="CL"/>
-                        <Symbol symbId="CSS"/>
-                        <Symbol symbId="TTK0"/>
-                        <Code>
-                            <![CDATA[
+            <ds:DataSet>
+                <ds:Definition>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="time" columnType="time" valueType="real" columnNum="2"/>
+                    <ds:Column columnId="wt" columnType="covariate" valueType="real" columnNum="3"/>
+                    <ds:Column columnId="age" columnType="covariate" valueType="real" columnNum="4"/>
+                    <ds:Column columnId="sex" columnType="covariate" valueType="int" columnNum="5"/>
+                    <ds:Column columnId="amt" columnType="dose" valueType="real" columnNum="6"/>
+                    <ds:Column columnId="dvid" columnType="dvid" valueType="real" columnNum="7"/>
+                    <ds:Column columnId="dv" columnType="dv" valueType="real" columnNum="8"/>
+                    <ds:Column columnId="mdv" columnType="mdv" valueType="real" columnNum="9"/>
+                </ds:Definition>
+                <ds:ImportData oid="id1">
+                    <ds:name>warfarin_conc_pca</ds:name>
+                    <ds:url>file:///../examples_0_2_2/datasets/</ds:url>
+                    <ds:format>CSV</ds:format>
+                    <ds:delimiter>COMMA</ds:delimiter>
+                </ds:ImportData>
+            </ds:DataSet>
+            <CodeInjection>
+                <SymbolMapping>
+                    <ct:SymbRef symbIdRef="CSS"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>
+                </SymbolMapping>
+                <SymbolMapping>
+                    <ct:SymbRef symbIdRef="CL"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
+                </SymbolMapping>
+                <SymbolMapping>
+                    <ct:SymbRef symbIdRef="TTK0"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
+                </SymbolMapping>
+                <TargetCode>
+                    <Symbol symbId="PREV"/>
+                    <Symbol symbId="D1"/>
+                    <Symbol symbId="R1"/>
+                    <Symbol symbId="CL"/>
+                    <Symbol symbId="CSS"/>
+                    <Symbol symbId="TTK0"/>
+                    <Code>
+                        <![CDATA[
                                   if (PREV==0) {
                                      D1=TTK0
                                   } else {
                                      R1=CL*CSS
                                   }
                             ]]>
-                        </Code>
-                    </TargetCode>
-                </CodeInjection>
-            </NONMEMdataSet>
-
+                    </Code>
+                </TargetCode>
+            </CodeInjection>
+        </NONMEMdataSet>
+        
+        
+        <!-- ESTIMATION -->
+        <EstimationStep oid="estimStep1">
+            
+            <TargetToolReference>
+                <ct:OidRef oidRef="NMoid"></ct:OidRef>
+            </TargetToolReference>
             
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate>

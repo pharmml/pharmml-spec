@@ -8,6 +8,7 @@
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:un="http://www.uncertml.org/3.0"
     writtenVersion="0.2.2" id="i1">
     
     <ct:Name>Testing PK with look-up table</ct:Name>
@@ -270,9 +271,9 @@
                 <ActivityRef oidRef="d1"/>
             </Segment>
             <Activity oid="d1">
-
+                                
                 <LookupTable>
-                    
+                    <!-- MAPPING -->
                     <ColumnMapping>
                         <ds:ColumnRef columnIdRef="TIME"/>
                         <ct:SymbRef symbIdRef="t"/>
@@ -284,15 +285,13 @@
                             <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
                         </ColumnMapping>
                     </Target>
-                   
+                    
                     <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
                             <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
                             <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
-                            <ds:Column columnId="EPOCH" columnType="epoch" valueType="real" columnNum="3"/>
-                            <ds:Column columnId="ARM" columnType="arm" valueType="real" columnNum="4"/>
-                            <ds:Column columnId="Cc" columnType="dv" valueType="real" columnNum="5"/>
+                            <ds:Column columnId="Cc" columnType="dv" valueType="real" columnNum="3"/>
                         </ds:Definition>
                         <ds:ImportData oid="importData">
                             <ds:name>Cc_lookupTable</ds:name>
@@ -333,7 +332,7 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
-        <TargetTool oid="someOID">
+        <TargetTool oid="someOID">                  <!-- JUST TESTING -->
             <TargetToolName>R</TargetToolName>
             
             <ds:TargetToolData>
@@ -346,6 +345,11 @@
         </TargetTool>
         
         <SimulationStep oid="s1">
+            
+            <TargetToolReference>
+                <ct:OidRef oidRef="someOID"/>
+            </TargetToolReference>
+                        
             <ct:VariableAssignment>
                 <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Imax"/>
                 <ct:Assign>
