@@ -469,15 +469,59 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!--<!-\- TEST -\->                    
-                    <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
+                    <!-- TEST -->               
+                    <!-- OTHER DISTRIBUTIONS -->
+<!--                    <xs:element ref="distrib:AbstractContinuousMultivariateDistribution">
                         <xs:annotation>
                             <xs:documentation>
-                                A categorical univariate probability distribution, defined by UncertML, that describes this random variable. 
+                                A ...
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                    <xs:element ref="distrib:AbstractDiscreteUnivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A ...
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-\- /TEST -\->-->                    
+                    <xs:element ref="distrib:AbstractDiscreteMultivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A ...
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A ... 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="distrib:AbstractCategoricalMultivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A ... 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-\- STATISTICS -\->
+                    <xs:element ref="distrib:AbstractSummaryStatistic">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A ... 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="distrib:AbstractMetric">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A ... 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>-->
+                    <!-- /TEST -->                    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
