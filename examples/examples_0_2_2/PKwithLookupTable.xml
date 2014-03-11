@@ -164,7 +164,16 @@
         <StructuralModel blkId="sm1">
 
             <!-- TARGET FOR LOOKUP DATA REFERENCE -->
-            <ct:Variable symbolType="real" symbId="Cc"/>
+            <ct:Variable symbolType="real" symbId="Cc">
+                <ct:Assign>
+                    <ct:Interpolation>
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="t"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
+                </ct:Assign>
+            </ct:Variable>
 
             <ct:DerivativeVariable symbId="E" symbolType="real">
                 <ct:Description>PCA</ct:Description>
@@ -257,40 +266,29 @@
             <Activity oid="d1">
 
                 <LookupTable>
+                    
                     <!-- MAPPING -->
-                    <LookupTableIndividualMapping>                                          <!-- INDIVIDUAL mapping -->
-                        <ds:ColumnRef columnIdRef="ID"/>
-                    </LookupTableIndividualMapping>
-
-                    <LookupTableArmMapping>                                                 <!-- ARM mapping -->
-                        <ds:ColumnRef columnIdRef="ARM"/>
-                    </LookupTableArmMapping>
                     
-                    <LookupTableEpochMapping>                                               <!-- EPOCH mapping -->
-                        <ds:ColumnRef columnIdRef="EPOCH"/>
-                    </LookupTableEpochMapping>
-                    
-                    <LookupTableVariableMapping>                                            <!-- VARIABLE mapping -->
+                    <ColumnMapping>                                            <!-- VARIABLE mapping -->
                         <ds:ColumnRef columnIdRef="TIME"/>
                         <ct:SymbRef symbIdRef="t"/>
-                    </LookupTableVariableMapping>
-                        
-                    <LookupTableTargetMapping inputTarget="variable">                       <!-- TARGET mapping -->
-                        <ds:ColumnRef columnIdRef="C"/>
-                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
-                        <ds:Interpolation>
-                            <ds:Algorithm>linear</ds:Algorithm>
-                        </ds:Interpolation>
-                    </LookupTableTargetMapping>
-
+                    </ColumnMapping>
+                     
+                     <Target inputTarget="variable">
+                         <ColumnMapping>
+                             <ds:ColumnRef columnIdRef="C"/>
+                             <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                         </ColumnMapping>
+                     </Target>
+                    
                     <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
-                            <ds:Column columnId="ID" valueType="id" columnNum="1"/>
-                            <ds:Column columnId="TIME" valueType="real" columnNum="2"/>
-                            <ds:Column columnId="EPOCH" valueType="real" columnNum="3"/>
-                            <ds:Column columnId="ARM" valueType="real" columnNum="4"/>
-                            <ds:Column columnId="C" valueType="real" columnNum="5"/>
+                            <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                            <ds:Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
+                            <ds:Column columnId="EPOCH" columnType="epoch" valueType="real" columnNum="3"/>
+                            <ds:Column columnId="ARM" columnType="arm" valueType="real" columnNum="4"/>
+                            <ds:Column columnId="C" columnType="dv" valueType="real" columnNum="5"/>
                         </ds:Definition>
                         <ds:ImportData oid="importData">
                             <ds:name>Cc_lookupTable</ds:name>
