@@ -254,20 +254,21 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:ModellingStepType">
                 <xs:sequence>
-                    <xs:choice>
-                        <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
-                            maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>                        
+                    <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
+                        maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                        
+                    <!-- following element moved to ModellingStepsType, lines 672+ -->
+<!--                    <xs:choice>
                         <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType"
                             maxOccurs="1">
                             <xs:annotation>
                                 <xs:documentation>Defines the NONMEM format datset and its mapping with optional code injection.</xs:documentation>
                             </xs:annotation>
                         </xs:element>                        
-                    </xs:choice>
+                    </xs:choice>-->
                     <xs:element maxOccurs="1" minOccurs="1" name="ParametersToEstimate"
                         type="msteps:ToEstimateType">
                         <xs:annotation>
@@ -661,13 +662,22 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- new TargetToolType -->
-                    <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>                        
-                    <!-- /new TargetToolType -->
+                    <xs:sequence>
+                        <!-- moved from line 258-270; sequence changed -->
+                        <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>Defines the NONMEM format datset and its mapping with optional code injection.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                                            
+                        <!-- /moved from line 258-270 -->
+                        <!-- new TargetToolType -->
+                        <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                        
+                        <!-- /new TargetToolType -->
+                    </xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:CommonModellingStep">
                         <xs:annotation>
                             <xs:documentation>
