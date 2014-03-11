@@ -91,9 +91,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:ModellingStepType">
                 <xs:sequence>
-                    <!-- REFERENCE TO TOOL  -->
-                    <xs:element name="TargetToolReference" type="msteps:TargetToolReferenceType"/>
-                    <!-- /REFERENCE TO TOOL  -->
+                    <!--<!-\- REFERENCE TO TOOL  -\->
+                    <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
+                    <!-\- /REFERENCE TO TOOL  -\->-->
                     <xs:element name="Observations" minOccurs="1" maxOccurs="unbounded"
                         type="msteps:ObservationsType">
                         <xs:annotation>
@@ -257,17 +257,16 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:ModellingStepType">
                 <xs:sequence>
-                    <xs:choice>
-                        <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
-                            maxOccurs="unbounded">
+                    <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- REFERENCE TO TOOL  -->
+<!--                    <xs:choice>
+                    </xs:choice>-->
+                        <!--<!-\- REFERENCE TO TOOL  -\->
                         <xs:element name="TargetToolReference" type="msteps:TargetToolReferenceType"/>
-                        <!-- /REFERENCE TO TOOL  -->
-                    </xs:choice>
+                        <!-\- /REFERENCE TO TOOL  -\->-->
                     <!-- following element moved to ModellingStepsType, lines 672+ -->
 <!--                    <xs:choice>
                         <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType"
@@ -641,6 +640,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- REFERENCE TO TOOL  -->
+                    <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
+                    <!-- /REFERENCE TO TOOL  -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
