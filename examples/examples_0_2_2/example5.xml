@@ -607,9 +607,9 @@
         
         <!-- ESTIMATION STEP -->
         <EstimationStep oid="estTask1">
-            
+
             <ObjectiveDataSet>
-            
+                
                 <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
                     <ct:SymbRef symbIdRef="time"/>
@@ -655,6 +655,7 @@
                     
                 </DataSet>
             </ObjectiveDataSet>
+            
             <ParametersToEstimate>
                 <!-- INITIAL CONDITIONS -->
                 <!-- P0 -->
