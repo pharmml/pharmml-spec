@@ -299,7 +299,7 @@ permissions and limitations under the License.
     </xs:complexType>
     
     
-    <!-- new LookupTableType based on NONMEMdataSetType -->
+    <!-- new LookupTableType based on NONMEM..dataSet..Type -->
     <xs:complexType name="LookupTableType">
         <xs:annotation>
             <xs:documentation>
