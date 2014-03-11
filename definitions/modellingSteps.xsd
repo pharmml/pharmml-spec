@@ -91,6 +91,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:ModellingStepType">
                 <xs:sequence>
+                    <!-- REFERENCE TO TOOL  -->
+                    <xs:element name="TargetToolReference" type="msteps:TargetToolReferenceType"/>
+                    <!-- /REFERENCE TO TOOL  -->
                     <xs:element name="Observations" minOccurs="1" maxOccurs="unbounded"
                         type="msteps:ObservationsType">
                         <xs:annotation>
@@ -254,12 +257,17 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:ModellingStepType">
                 <xs:sequence>
-                    <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
-                        maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>                        
+                    <xs:choice>
+                        <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
+                            maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- REFERENCE TO TOOL  -->
+                        <xs:element name="TargetToolReference" type="msteps:TargetToolReferenceType"/>
+                        <!-- /REFERENCE TO TOOL  -->
+                    </xs:choice>
                     <!-- following element moved to ModellingStepsType, lines 672+ -->
 <!--                    <xs:choice>
                         <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType"
@@ -287,6 +295,21 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
+    
+    <xs:complexType name="TargetToolReferenceType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining reference to target tool.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:OidRef"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     <xs:complexType name="OperationPropertyType">
         <xs:annotation>
@@ -731,6 +754,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
