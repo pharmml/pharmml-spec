@@ -89,7 +89,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="msteps:ModellingStepType">
+            <xs:extension base="msteps:CommonModellingStepType">
                 <xs:sequence>
                     <!--<!-\- REFERENCE TO TOOL  -\->
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
@@ -221,7 +221,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="msteps:ModellingStepType">
+            <xs:extension base="msteps:CommonModellingStepType">
                 <xs:sequence>
                     <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
                         maxOccurs="unbounded">
@@ -255,7 +255,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="msteps:ModellingStepType">
+            <xs:extension base="msteps:CommonModellingStepType">
                 <xs:sequence>
                     <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
                             <xs:annotation>
@@ -631,7 +631,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="ModellingStepType" abstract="true">
+    
+    <xs:complexType name="CommonModellingStepType" abstract="true">
         <xs:annotation>
             <xs:documentation>
                 Abstract type specifying the common features of a modelling step.                 
@@ -996,7 +997,7 @@ permissions and limitations under the License.
     <!-\- /TEST -\->-->
         
     <xs:element name="Timepoints" type="msteps:TimepointsType"/>
-    <xs:element abstract="true" name="CommonModellingStep" type="msteps:ModellingStepType">
+    <xs:element abstract="true" name="CommonModellingStep" type="msteps:CommonModellingStepType">
         <xs:annotation>
             <xs:documentation>
                 Any modeling step.                   
