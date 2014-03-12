@@ -66,7 +66,7 @@
   morekeywords={kjkj} % list your attributes here
 }
 
-\author{MJS, SM}
+\author{MJS, SM, NIKR}
 \date{\today}
 \title{Changes in PharmML 0.3}
 %\title{NONMEM format dataset support for PharmML 0.2.2}
@@ -577,33 +577,72 @@ follows well defined rules and grammar.
 
 
 \section{External tools support}
+It has been requested that PharmML supports external data sets. This is now the case. 
 
 \subsection{Minimal form of external tools support}
+Following items can be implemented to provide the minimum information needed for an external target tool support
 \begin{itemize}
 \item
-object identifier
+object identifier -- can used to reference the tool from a task in the \xelem{ModellingSteps}
 \item
 target tool name
 \item
-target tool data import with file name and URL only
+URL
 \end{itemize}
 
 
 \lstset{language=XML}
 \begin{lstlisting}
-
-        <TargetTool oid="someOID">
-            <TargetToolName>R</TargetToolName>
+        <TargetTool oid="target1">
+            <TargetToolName>SIMCYP</TargetToolName>
             
-            <ds:TargetToolData>
-                <ds:ImportTargetData oid="itt">
-                    <ds:name>someName</ds:name>
-                    <ds:url>someURL</ds:url>
-                </ds:ImportTargetData>
-            </ds:TargetToolData>
-            
+            <TargetToolData xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <ImportTargetData oid="importData">
+                    <name>myFileName</name>
+                    <url>file:///myFolder</url>
+                </ImportTargetData>
+            </TargetToolData>
         </TargetTool>
 \end{lstlisting}
+
+\subsection{More complex scenario of external tools support}
+
+\lstset{language=XML}
+\begin{lstlisting}
+        <TargetTool oid="target2">
+            <TargetToolName>SIMCYP</TargetToolName>
+
+            <TargetToolData xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" columnType="id" valueType="real" columnNum="1"/>
+                    <Column columnId="V_GUT_LUMEN" columnType="undefined" valueType="real" columnNum="2"/>
+                    <Column columnId="Q_GUT_LUMEN" columnType="undefined" valueType="real" columnNum="3"/>
+                </Definition>
+                <ImportTargetData oid="importAnatomicalData">
+                    <name>myData.xls</name>
+                    <url>file:///myFolder/</url>
+                    <format>XLS</format>
+                </ImportTargetData>
+            </TargetToolData>
+            <CodeInjection>
+                <SymbolMapping>
+                    <ct:SymbRef symbIdRef="V_gut_lumen"/>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="V_GUT_LUMEN"/>
+                </SymbolMapping>
+                <SymbolMapping>
+                    <ct:SymbRef symbIdRef="Q_gut_lumen"/>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="Q_GUT_LUMEN"/>
+                </SymbolMapping>
+                <TargetCode>
+                    <Code>
+                        <![CDATA[
+                          C_gut_lumen  = Q_gut_lumen  / V_gut_lumen;
+                          ]]>
+                    </Code>
+                </TargetCode>
+            </CodeInjection>
+        </TargetTool>
+        \end{lstlisting}
 
 
 \section{Lookup table as new input type}
@@ -611,9 +650,10 @@ Table \ref{tab:C1C2C2} gives an overview of new options provided. In the first t
 data is known and provided in form of a lookup table. For example, the PK profile has been measured 
 but not model has been estimated so the data has to be connected to a subsequent PD model using
 an interpolation method. In case \emph{C1} the user can chose from a list of known algorithms, e.g.
-\{nearest, linear, spline, chip, cubic \}\footnote{The choice is based on the interpolation algorithms 
+\{nearest, linear, spline, chip, cubic \}\footnote{The choice is mainly based on the interpolation algorithms 
 provided by MATLAB, section \emph{interp1:1-D data interpolation (table lookup)}' 
-\url{http://www.mathworks.co.uk/help/matlab/ref/interp1.html}}. In case \emph{C2} the interpolation 
+\url{http://www.mathworks.co.uk/help/matlab/ref/interp1.html}. Additionally the \emph{constant} algorithm type is supported.}. 
+In case \emph{C2} the interpolation 
 is an arbitrary user-defined piece-wise function. In case \emph{C3} not data is available but the 
 parameters of an user-defined function are estimated based on the model only.
 
@@ -630,8 +670,8 @@ Type	 & Setup/Input  & TrialDesign & Target/ModelDefinition & Comments \\
   \hline
 C1 	& Experimental data \&  	& -- Data as lookup table 		& -- Structural model 			& No \emph{Input} parameters  \\ [-.25ex]
 	& Interpolation type 		& -- Reference to \emph{Input}	& with \emph{Input}				& to be estimated \\ [-.25ex]	
-	& from list	 			&						& -- Interpolation type, e.g.:		& \\ [-.25ex]
-	& 					& 						&  \emph{nearest}, \emph{linear}, \emph{pchip} etc. & \\ [1ex]
+	& from list	 			&						& -- Interpolation type, e.g.		& \\ [-.25ex]
+	& 					& 						&  \emph{constant}, \emph{linear} etc. & \\ [1ex]
 C2	& Experimental data \& 	& -- Data as lookup table 		& -- Structural model  			& No \emph{Input} parameters  \\ [-.25ex] 
 	& User-defined input		& -- Reference to \emph{Input}	& with \emph{Input} 				& to be estimated \\ [-.25ex]
 	& function			 	& 						& -- \emph{Input} as piece-wise	& \\ [-.25ex] 
@@ -651,11 +691,12 @@ C3	& Data unavailable 		& 						& -- Structural model  			& Estimation of \emph{
 \end{table}
 
 \subsection{Case C1}
+\label{subsec:caseC1}
 The main ingredients in this case are 
 \begin{itemize}
 \item
 \emph{Cc} -- measured drug concentration encoded as a variable in the model AND interpolation type 
-chosen from a list: \emph{\{constant, linear, spline, pchip, cubic\}}
+chosen from a list: \emph{\{constant, linear, nearest, spline, pchip, cubic\}}
 
 \lstset{language=XML}
 \begin{lstlisting}
@@ -722,26 +763,26 @@ In order to make the connection between the column names in the dataset and the 
 
 \lstset{language=XML}
 \begin{lstlisting}
-                <LookupTable inputTarget="variable">
+                <LookupTable>
                     <!-- MAPPING -->
-                    <ColumnMapping> 
+                    <ColumnMapping>
                         <ds:ColumnRef columnIdRef="TIME"/>
                         <ct:SymbRef symbIdRef="t"/>
                     </ColumnMapping>
                     
-                    <ColumnMapping> 
-                        <ds:ColumnRef columnIdRef="C"/>
-                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
-                    </ColumnMapping>
+                    <Target inputTarget="variable">
+                        <ColumnMapping> 
+                            <ds:ColumnRef columnIdRef="Cc"/>
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                        </ColumnMapping>
+                    </Target>
                     
                     <!-- DATASET -->
                     <ds:DataSet>
                         <ds:Definition>
                             <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
                             <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
-                            <ds:Column columnId="EPOCH" columnType="epoch" valueType="real" columnNum="3"/>
-                            <ds:Column columnId="ARM" columnType="arm" valueType="real" columnNum="4"/>
-                            <ds:Column columnId="Cc" columnType="dv" valueType="real" columnNum="5"/>
+                            <ds:Column columnId="Cc" columnType="dv" valueType="real" columnNum="3"/>
                         </ds:Definition>
                         <ds:ImportData oid="importData">
                             <ds:name>Cc_lookupTable</ds:name>
@@ -751,20 +792,20 @@ In order to make the connection between the column names in the dataset and the 
                         </ds:ImportData>
                     </ds:DataSet>
                 </LookupTable>
-\end{lstlisting}
-Note, that the \xatt{inputTarget="variable"} attribute in the \xelem{LookupTable} tag points that the following input target is of the type \emph{variable},
-which stands for a general input target, beside variables defined by an ODE or a dose variable, e.g. D.
+                \end{lstlisting}
+Note, that the \xatt{inputTarget="variable"} attribute in the \xelem{Target} tag points that the 
+target variable, \emph{Cc}, is a general input target, see also discussion in section \ref{subsec:inputTarget}.
  
 The last part of the above listing, \xelem{DataSet}, follows the same rules as described 
 in the section about the externalised datasets.
 
 \subsection{Case C2}
-In this case we model is defined as 
+In this case the model is defined by specifying
 
 \begin{itemize}
 \item
-Cc -- measured drug concentration encoded as a variable in the model which is defined by 
-the user-defined interpolation function, here \emph{MyInterpolationFunction(...)}
+Cc -- measured drug concentration encoded in the model as an user-defined interpolation 
+function, here \emph{MyInterpolationFunction(...)}
 \lstset{language=XML}
 \begin{lstlisting}
             <!-- USER-DEFINED TARGET FOR LOOKUP DATA REFERENCE -->
@@ -779,8 +820,7 @@ the user-defined interpolation function, here \emph{MyInterpolationFunction(...)
                 </ct:Assign>
             </ct:Variable>
 \end{lstlisting}
-
-is given as a lookup table defined in the \xelem{TrialDesign}
+and for which experimental data is provided in a lookup table in the \xelem{TrialDesign} block
 \begin{table}[H]
 \begin{center}
 \scriptsize
@@ -831,7 +871,7 @@ e.g. an effect model containing the target variable \emph{Cc}
 \begin{align}
 \frac{dE}{dt}=Rin \times \Big(1- \frac{Imax \times Cc}{Cc+IC_{50}}\Big) - kout \times E		\nonumber
 \end{align}
-which implementation shows the following snip set 
+its implementation shows the following snip set 
 \lstset{language=XML}
 \begin{lstlisting}
             <!-- EFFECT MODEL with TARGET 'Cc' -->
@@ -939,7 +979,7 @@ middle section for time points \emph{t2 ... t5}, is given in the following listi
         </Definition>
     </FunctionDefinition>
 \end{lstlisting}
-The following listing shows how the just defined interpolation function is then referenced in the model
+The next listing shows how the just defined interpolation function is then referenced in the model
 \lstset{language=XML}
 \begin{lstlisting}
         <StructuralModel blkId="sm1">
@@ -979,23 +1019,130 @@ The last part, the \xelem{LookupTable} definition and mapping, is identical to t
 
 \subsection{Interpolation support for covariates or model variables}
 
+A possibility of specifying one of five standard interpolation algorithms is provided, {constant, linear, spline, pchip, cubic}, as defined in MATLAB, http://www.mathworks.co.uk/help/matlab/ref/interp1.html
+
 \subsection{The notation of initial conditions for ODE's is extended}
+Last versions of PharmML assumed the initial time to be always equal $0$. This restriction is now relaxed and PharmML allows to store any initial time. The initial value and time get their proper tags, \xelem{InitialValue} and \xelem{InitialTime}, accordingly. In both cases, the user can define them as numerical values, symbols defined somewhere else in the model or arbitrary mathematical expressions.
+\lstset{language=XML}
+\begin{lstlisting}
+            <!-- dC/dt -->
+            <ct:DerivativeVariable symbolType="real" symbId="C">
+                <ct:Assign>
+                <!-- ODE definition omitted here --> 	
+                </ct:Assign>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="C0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                    <ct:InitialTime>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialTime>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+\end{lstlisting}
 
 \subsection{Add missing mathematical functions}
 
+Binary operators: 
+\begin{itemize}
+\item
+min, max
+\end{itemize}
+Unary operators: 
+\begin{itemize}
+\item
+$\ln$ -- natural logarithm
+\item
+$factln = \ln(n!)$
+\item
+$gammaln = \ln(\Gamma)$
+\item
+$normcdf$ -- cumulative distribution function of the normal distribution
+\item
+$sqrt$ -- square root
+\end{itemize}
+
 \subsection{Renamed attributes}
 
-a. \xatt{type} attribute values in the \xelem{VariabilityReference}
-- \xatt{model} $\longrightarrow$ \xatt{parameterVariability}
-- \xatt{error} $\longrightarrow$ \xatt{residualError}
+The values of the attribute \xatt{type} in the \xelem{VariabilityReference} have been renamed
+\begin{itemize}
+\item
+random effect related \xatt{model} in now called \xatt{parameterVariability} and 
+\item
+residual error related \xatt{error} in now called \xatt{residualError}.
+\end{itemize}
 
-b. \xatt{inputType} attribute in \xelem{DoseAmount}
-\xatt{inputType} $\longrightarrow$ \xatt{inputTarget}
-and its values
-- \xatt{target} $\longrightarrow$ \xatt{derivativeVariable}
-- \xatt{dose} $\longrightarrow$ \xatt{parameter}
-plus new type introduced (can also be used in the new \xelem{LookupTable}):
-- \xatt{variable}
+
+\subsection{Target for dosing and lookup table inputs}
+\label{subsec:inputTarget}
+So far, two options for dosing/input target were supported: 
+\begin{itemize}
+\item
+dose parameter in algebraic equations, here D, 
+\begin{align}
+& C(t) = \frac{D}{V} e^{-k(t-t_D)}	 \nonumber
+\end{align}
+In this case \xatt{inputType="dose"} was defined
+\lstset{language=XML}
+\begin{lstlisting}
+                <Bolus>
+                    <DoseAmount inputTarget="dose">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
+                    </DoseAmount>
+                    <!-- SKIP -->
+                </Bolus>
+\end{lstlisting}
+
+\item
+ODE's for state variable,  here Ad,
+\begin{align}
+& \frac{Ad(t)}{dt} = -k_a \; Ad; \quad \frac{Ac(t)}{dt} = k_a \; Ad - k \; Ac;	\nonumber  
+\end{align}
+In this case \xatt{inputType="target"} was defined
+\lstset{language=XML}
+\begin{lstlisting}
+                <Bolus>
+                    <DoseAmount inputTarget="target">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Ad"/>
+                    </DoseAmount>
+                    <!-- SKIP -->
+                </Bolus>
+\end{lstlisting}
+\end{itemize}
+During the recent PharmML workshop an extended input definition was requested which would allow to target an 
+\begin{itemize}
+\item
+arbitrary model variable, such an insulin infusion \emph{I(t)} in the following so called \emph{minimal model} (MM)
+\begin{align}
+\frac{dX(t)}{dt} = I(t) - I_b 	\nonumber
+\end{align}
+\end{itemize}
+This new input type has the attribute \xatt{variable}. It was requested to rename the \xatt{inputType} attribute and it's values -- the following table summarises the changes
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{lccc}
+  \hline
+  \hline
+		& old name 		& new name 			& example \\
+  \hline
+ attribute 	& \xatt{inputType} 	& \xatt{inputTarget} 		&	\\
+  \hline
+ values 	& \xatt{dose} 		& \xatt{parameter}		& \emph{D} \\
+  		& \xatt{target} 		& \xatt{derivativeVariable}& \emph{Ad}  \\
+  		&  				& \xatt{variable} 		& \emph{I(t)} \\
+  \hline
+\end{tabular}
+\caption{Old and new attribute and values names.}
+%\label{tab:lookupData}
+\end{center}
+\end{table}
+
+The new type \xatt{variable} can be used in the new \xelem{LookupTable} block, see also example in section \ref{subsec:caseC1}.
 
 
 \subsection{Multiple random errors allowed in the Gaussian model}
