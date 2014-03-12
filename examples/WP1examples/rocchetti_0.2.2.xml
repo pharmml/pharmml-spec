@@ -690,12 +690,10 @@
                     <ct:SymbRef symbIdRef="t"/>
                     <!-- tempo variabile globale non specifico il blocco di riferimento -->
                 </ColumnMapping>
-
                 <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="weight"/>
                     <ct:SymbRef symbIdRef="W" blkIdRef="sm1"/>
                 </ColumnMapping>
-
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
                         <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>

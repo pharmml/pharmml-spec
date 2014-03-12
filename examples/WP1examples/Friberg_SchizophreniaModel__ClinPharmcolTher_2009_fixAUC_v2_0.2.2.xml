@@ -608,32 +608,26 @@
             <ct:VariabilityReference>
                 <ct:SymbRef blkIdRef="model" symbIdRef="model"/>
             </ct:VariabilityReference>
-            
             <ColumnMapping>
                 <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="STUD"></ColumnRef>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="STUD"/>
             </ColumnMapping>
-            
             <ColumnMapping>
                 <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DDUR"></ColumnRef>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="DDUR"/>
             </ColumnMapping>
-            
             <ColumnMapping>
                 <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="US"></ColumnRef>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="US"/>
             </ColumnMapping>
-            
             <ColumnMapping>
                 <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="HOSP"></ColumnRef>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="HOSP"/>
             </ColumnMapping>
-            
             <ColumnMapping>
                 <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="AUC"></ColumnRef>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="AUC"/>
             </ColumnMapping>               
-            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
@@ -684,12 +678,10 @@
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
                     <ct:SymbRef symbIdRef="t"/>
                 </ColumnMapping>
-
                 <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
                     <ct:SymbRef blkIdRef="om1" symbIdRef="PANSS_total"/>
                 </ColumnMapping>
-                
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
                         <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>

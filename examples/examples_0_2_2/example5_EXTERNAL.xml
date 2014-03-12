@@ -530,12 +530,45 @@
             </DataSet>
         </NONMEMdataSet>-\->-->
         
+        <SimulationStep oid="simStep1">
+            <ct:VariableAssignment>
+                <ct:SymbRef symbIdRef="k1"/>
+                <ct:Assign>
+                    <ct:Real>1</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <Observations>
+                <Timepoints><ct:Vector><ct:Real>1</ct:Real><ct:Real>2</ct:Real></ct:Vector></Timepoints>
+                <Continuous>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="E"/>
+                </Continuous>
+            </Observations>
+        </SimulationStep>
+        
         <EstimationStep oid="estStep1">
             
             <TargetToolReference>
                 <ct:OidRef oidRef="TARGETTOOLoid"/>
             </TargetToolReference>            
             
+            <ObjectiveDataSet>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"></ColumnRef>
+                    <ct:SymbRef symbIdRef="ID"></ct:SymbRef>
+                </ColumnMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"></Column>
+                    </Definition>
+                    <ImportData oid="sds">
+                        <name>ds</name>
+                        <url>sd</url>
+                        <format>CSV</format>
+                        <delimiter>COMMA</delimiter>
+                    </ImportData>
+                </DataSet>
+            </ObjectiveDataSet>
+
             <ParametersToEstimate>
                 <ParameterEstimation>
                     <ct:SymbRef symbIdRef="V"/>

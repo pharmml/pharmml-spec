@@ -271,7 +271,7 @@
                 <ActivityRef oidRef="d1"/>
             </Segment>
             <Activity oid="d1">
-                                
+
                 <LookupTable>
                     <!-- MAPPING -->
                     <ColumnMapping>
@@ -332,23 +332,25 @@
     <!-- MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
-        <TargetTool oid="someOID">                  <!-- JUST TESTING -->
-            <TargetToolName>R</TargetToolName>
-            
-            <ds:TargetToolData>
-                <ds:ImportTargetData oid="itt">
-                    <ds:name>someName</ds:name>
-                    <ds:url>someURL</ds:url>
-                </ds:ImportTargetData>
-            </ds:TargetToolData>
-            
-        </TargetTool>
-        
+<!--        <NONMEMdataSet oid="NMoid">
+            <ds:DataSet>
+                <ds:Definition>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                </ds:Definition>
+                <ds:ImportData oid="dfd">
+                    <ds:name>ddss</ds:name>
+                    <ds:url>file://sadasd</ds:url>
+                    <ds:format>CSV</ds:format>
+                    <ds:delimiter>COMMA</ds:delimiter>
+                </ds:ImportData>
+            </ds:DataSet>
+        </NONMEMdataSet>-->
+                
         <SimulationStep oid="s1">
             
-            <TargetToolReference>
-                <ct:OidRef oidRef="someOID"/>
-            </TargetToolReference>
+<!--            <TargetToolReference>
+                <ct:OidRef oidRef="NMoid"/>
+            </TargetToolReference>-->
                         
             <ct:VariableAssignment>
                 <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Imax"/>

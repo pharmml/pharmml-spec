@@ -362,12 +362,11 @@
                 <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
                 <ct:SymbRef symbIdRef="t"/>
             </ColumnMapping>
-            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" columnType="dosingTime" valueType="real" columnNum="2"/>
-                    <Column columnId="AMT" columnType="doseAmount" valueType="real" columnNum="3" id="i12"/>
+                    <Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
+                    <Column columnId="AMT" columnType="dose" valueType="real" columnNum="3" id="i12"/>
                 </Definition>
                 <Table>
                     <!-- subject 1 -->
@@ -410,12 +409,10 @@
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
                     <ct:SymbRef symbIdRef="t"/>
                 </ColumnMapping>
-                
                 <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
                     <ct:SymbRef blkIdRef="om1" symbIdRef="A2_obs"/>
                 </ColumnMapping>
-                
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
                         <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
