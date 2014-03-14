@@ -553,7 +553,11 @@
                     <Column columnId="REP" columnType="replicate" valueType="int" columnNum="3"/> 
                 </Definition>
                 <Table>
-                    <Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Int>21</ct:Int></Row>
+                    <Row>
+                        <ct:Id>i</ct:Id>
+                        <ct:Id>arm1</ct:Id>
+                        <ct:Int>21</ct:Int>
+                    </Row>
                 </Table>
             </DataSet>
         </Population>
@@ -580,24 +584,6 @@
                     <format>CSV</format>
                     <delimiter>COMMA</delimiter>
                 </ImportData>
-                <!--    THE DATA SNIPSET FROM THE EXTERNAL FILE 'RIBBA2012_PCV_dosing' 
-                    ID	TIME	DOSE
-                    1	54.57	1
-                    1	59.77	1
-                    2	12	1
-                    2	14.09	1
-                    2	16.17	1
-                    2	18.26	1
-                    2	20.35	1
-                    2	22.43	1
-                    3	36.1	1
-                    3	38.05	1
-                    3	40.01	1
-                    3	41.96	1
-                    3	43.91	1
-                    3	45.87	1
-                    4	3.7	1
-                    4	5.51	1 -->
             </DataSet>
         </IndividualDosing>
     </TrialDesign>
@@ -631,28 +617,7 @@
                         <url>file:///examples/examples_0_2_2/</url>
                         <format>CSV</format>
                         <delimiter>COMMA</delimiter>
-                    </ImportData>
-                    <!--    THE DATA SNIPSET FROM THE EXTERNAL FILE 'RIBBA2012_PCV_observations' 
-                    ID	TIME	DV
-                    1	3.43	45.7
-                    1	5.3	48.03
-                    1	42.13	71.34
-                    1	52.63	79.3
-                    1	57.53	72.3
-                    1	63.3	72.07
-                    1	68.97	70.24
-                    1	76.53	66.81
-                    1	94.53	60.48
-                    1	106.1	62
-                    1	116.23	72.04
-                    1	121.87	90.16
-                    2	0	50.17
-                    2	11.07	61.68
-                    2	14.17	52.82
-                    2	16.6	53.36
-                    2	19.33	53.28
-                    2	25.13	48.3 -->
-                    
+                    </ImportData>                    
                 </DataSet>
             </ObjectiveDataSet>
             
