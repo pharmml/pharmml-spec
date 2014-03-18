@@ -168,38 +168,37 @@
             
             <Correlation>
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
+                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
                 
-<!--                <Pairwise>
-                    <RandomVariable1>
-                        <ct:SymbRef symbIdRef="eta_V"/>
-                    </RandomVariable1>
-                    <RandomVariable2>
-                        <ct:SymbRef symbIdRef="eta_CL"/>
-                    </RandomVariable2>
-                    <CorrelationCoefficient>
-                        <ct:SymbRef symbIdRef="omega_V_CL"/>
-                    </CorrelationCoefficient>                    
-                </Pairwise>-->
-                
-                <Matrix id="i4" matrixType="CovarianceMatrix">
-                    <ct:ColumnNames><ct:SymbRef symbIdRef="a1"/><ct:SymbRef symbIdRef="a2"/><ct:SymbRef symbIdRef="a3"/></ct:ColumnNames>
-<!--                    <RawNames><SymbRef>eta_V</SymbRef><SymbRef>eta_Cl</SymbRef><SymbRef>eta_ka</SymbRef></RawNames>-->
+                <Matrix matrixType="CovarianceMatrix">
+                    <ct:RowNames><ct:SymbRef symbIdRef="PPV_CL"/><ct:SymbRef symbIdRef="PPV_V"/><ct:SymbRef symbIdRef="PPV_EMAX"/><ct:SymbRef symbIdRef="PPV_C50"/></ct:RowNames>
                     <ct:MatrixRow>
-                        <ct:SymbRef symbIdRef="omega_V"/>
+                        <ct:Real>0.1</ct:Real>
                     </ct:MatrixRow>
                     <ct:MatrixRow>
-                        <ct:SymbRef symbIdRef="omega_V_CL"/>
-                        <ct:SymbRef symbIdRef="omega_CL"/>
+                        <ct:Real>0.01</ct:Real><ct:Real>0.1</ct:Real>
                     </ct:MatrixRow>
                     <ct:MatrixRow>
-                        <ct:SymbRef symbIdRef="omega_ka_V"/>
-                        <ct:SymbRef symbIdRef="omega_ka_CL"/>
-                        <ct:Real>1</ct:Real>
+                        <ct:Real>0</ct:Real><ct:Real>0.01</ct:Real><ct:Real>0.1</ct:Real>
+                    </ct:MatrixRow>
+                    <ct:MatrixRow>
+                        <ct:Real>0</ct:Real><ct:Real>0</ct:Real><ct:Real>0.01</ct:Real><ct:Real>0.01</ct:Real>
+                    </ct:MatrixRow>
+                </Matrix>            
+            </Correlation>
+            
+            <Correlation>
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <Matrix matrixType="CorrelationMatrix">
+                    <ct:RowNames><ct:SymbRef symbIdRef="ka"/><ct:SymbRef symbIdRef="V"/></ct:RowNames>
+                    <ct:ColumnNames><ct:SymbRef symbIdRef="ka"/><ct:SymbRef symbIdRef="V"/></ct:ColumnNames>
+                    <ct:MatrixRow>
+                        <ct:SymbRef symbIdRef="ds"/>
                     </ct:MatrixRow>
                 </Matrix>
-            
             </Correlation>
             
         </ParameterModel>
