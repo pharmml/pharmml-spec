@@ -65,6 +65,11 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:token">
+            <xs:enumeration value="identity">
+                <xs:annotation>
+                    <xs:documentation>Identity transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
             <xs:enumeration value="log">
                 <xs:annotation>
                     <xs:documentation>Natural log transformation.</xs:documentation>
