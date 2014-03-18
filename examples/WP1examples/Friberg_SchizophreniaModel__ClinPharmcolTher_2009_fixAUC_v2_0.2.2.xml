@@ -101,15 +101,6 @@
                     </Category>
                 </Categorical>
             </Covariate>           
-            <Covariate symbId="AUC">
-                <Continuous>
-                    <Transformation>
-                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-                            <ct:SymbRef symbIdRef="AUC"/>
-                        </Equation>
-                    </Transformation>
-                </Continuous>
-            </Covariate>    
         </CovariateModel>
         
         <!-- PARAMETER MODEL -->
@@ -276,6 +267,7 @@
             </RandomVariable>
             <IndividualParameter symbId="PMAX">
                 <GaussianModel>
+                    <Transformation>identity</Transformation>
                     <GeneralCovariate>
                         <ct:Assign>
                             <ct:SymbRef symbIdRef="pop_PMAX"/>                           
@@ -424,18 +416,18 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <RandomVariable1>
-                    <ct:SymbRef symbIdRef="eta_PAN0"/>
-                </RandomVariable1>
-                <RandomVariable2>
-                    <ct:SymbRef symbIdRef="eta_PMAX"/>
-                </RandomVariable2>
-                <CorrelationCoefficient>
-                    <ct:SymbRef symbIdRef="rho_PAN0_PMAX"/>
-                </CorrelationCoefficient>
+                <Pairwise>
+                    <RandomVariable1>
+                        <ct:SymbRef symbIdRef="eta_PAN0"/>
+                    </RandomVariable1>
+                    <RandomVariable2>
+                        <ct:SymbRef symbIdRef="eta_PMAX"/>
+                    </RandomVariable2>
+                    <CorrelationCoefficient>
+                        <ct:SymbRef symbIdRef="rho_PAN0_PMAX"/>
+                    </CorrelationCoefficient>
+                </Pairwise>
             </Correlation>
-
-            
 
         </ParameterModel>
 
@@ -444,7 +436,7 @@
               
         <!-- STRUCTURAL MODEL -->
         <StructuralModel blkId="sm1">
-           
+                       
            <!-- Placebo model -->
             <!-- exponential term -->
             <SimpleParameter symbId="expterm">
@@ -478,6 +470,9 @@
                 </ct:Assign>
             </ct:Variable>
             
+            <!-- target for lookup table -->
+            <ct:Variable symbolType="real" symbId="AUC"/>
+            
             <!-- Asenapine model -->
             <!-- FT: time course parameter for Asenapine model -->
             <ct:Variable symbolType="real" symbId="FT">
@@ -498,11 +493,11 @@
                             <Binop op="divide">
                                 <Binop op="times">
                                     <ct:SymbRef blkIdRef="pm1" symbIdRef="EMAX"/>
-                                    <ct:SymbRef blkIdRef="c1" symbIdRef="AUC"/>
+                                    <ct:SymbRef symbIdRef="AUC"/>
                                 </Binop>
                                 <Binop op="plus">
                                     <ct:SymbRef blkIdRef="pm1" symbIdRef="AUC50"/>
-                                    <ct:SymbRef blkIdRef="c1" symbIdRef="AUC"/>
+                                    <ct:SymbRef symbIdRef="AUC"/>
                                 </Binop>
                             </Binop>
                             <ct:SymbRef symbIdRef="FT"/>
@@ -599,7 +594,31 @@
                 <ActivityRef oidRef="dummy"/>
             </Segment>
             <Activity oid="dummy">
-                <Washout/>
+                <LookupTable>
+                    <ColumnMapping>
+                        <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
+                        <ct:SymbRef symbIdRef="t"/>
+                    </ColumnMapping>
+                    <Target inputTarget="variable">
+                        <ColumnMapping>
+                            <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="AUC"></ColumnRef>
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="AUC"/>
+                        </ColumnMapping>
+                    </Target>
+                    <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                        <Definition>
+                            <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                            <Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
+                            <Column columnId="AUC" columnType="dv" valueType="real" columnNum="3"/>
+                        </Definition>
+                        <ImportData oid="importData">
+                            <name>myData</name>
+                            <url>file:///sddss</url>
+                            <format>CSV</format>
+                            <delimiter>COMMA</delimiter>
+                        </ImportData>
+                    </DataSet>
+                </LookupTable>
             </Activity>
         </Structure> 
         
@@ -624,10 +643,6 @@
                 <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="HOSP"></ColumnRef>
                 <ct:SymbRef blkIdRef="c1" symbIdRef="HOSP"/>
             </ColumnMapping>
-            <ColumnMapping>
-                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="AUC"></ColumnRef>
-                <ct:SymbRef blkIdRef="c1" symbIdRef="AUC"/>
-            </ColumnMapping>               
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
                     <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
@@ -637,7 +652,6 @@
                     <Column columnId="US" columnType="covariate" valueType="int" columnNum="5"/>
                     <Column columnId="TIME" columnType="time" valueType="int" columnNum="6"/> 
                     <Column columnId="HOSP" columnType="covariate" valueType="int" columnNum="7"/>                           
-                    <Column columnId="AUC" columnType="covariate" valueType="int" columnNum="8"/>
                 </Definition>
                 <Table>
                     <!-- SUBJECT 1 -->
