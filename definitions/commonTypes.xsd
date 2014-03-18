@@ -659,15 +659,42 @@ the end value. In the second the step size is incremented r times, where r is th
                 The type specifies the content of a matrix.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
-                <xs:annotation>
-                    <xs:documentation>
-                        A row in the matrix.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="ColumnNames" type="ct:MatrixColumnRowNames">
+                        <xs:annotation>
+                            <xs:documentation>Names of the matrix columns.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="RowNames" type="ct:MatrixColumnRowNames">
+                        <xs:annotation>
+                            <xs:documentation>Names of the matrix rows.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A row in the matrix.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="matrixType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Matrix type.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="CovarianceMatrix"/>
+                            <xs:enumeration value="CorrelationMatrix"/>
+                            <xs:enumeration value="FisherInformationMatrix"/>
+                            <xs:enumeration value="StandardDeviationCorrelationMatrix"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     <!-- /new MatrixType based on DataSetTableType -->
     
@@ -679,20 +706,52 @@ the end value. In the second the step size is incremented r times, where r is th
                 a scalar value, null.
             </xs:documentation>
         </xs:annotation>
-        <xs:choice maxOccurs="unbounded">
-            <xs:element ref="ct:Real">
-                <xs:annotation>
-                    <xs:documentation>A real value.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>A variable reference.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:choice>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Real">
+                        <xs:annotation>
+                            <xs:documentation>A real value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A variable reference.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- NEW MatrixRowType based on DatasetRowType -->
     
+    <!-- NEW MatrixColumnRowNames -->
+    <xs:complexType name="MatrixColumnRowNames">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying names of the row and columns.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:String">
+                        <xs:annotation>
+                            <xs:documentation>A string.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A variable reference.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>            
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /NEW MatrixColumnNames -->
+
+
     <!--
         Attribute Groups
         -->
