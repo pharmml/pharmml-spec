@@ -1,0 +1,1197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.2.1">
+    
+    <ct:Name id="i1">Friberg-CPT-2009</ct:Name>
+    
+    <ct:Description id="i2">This model is based on the publication:An agonist-antagonist interaction model for prolactin release follwing risperidone and paliperidone treatment 
+        Friberg LE, Vermeulen AM, Petersson KJF, and Karlsson MO. CPT 2009; 85(4), 2009.</ct:Description>
+  
+    <!-- ***************************************************************** -->  
+    <!-- CNL: Still issues to be resolved -->
+    <!-- ***************************************************************** -->    
+    <!-- Introduction of covariate models -->  
+    <!-- IIV on PHS2 using an additive model -->
+    <!-- Correlation between PRL0 - KI -->
+    <!-- ***************************************************************** -->
+
+    <!-- independent variable -->
+    <IndependentVariable symbId="t"/>
+
+    <!-- SYMBOL DEFINITION - RESIDUAL ERROR MODEL Additive model in log-domain -->
+    <ct:FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
+        symbId="constantErrorModel" symbolType="real">
+        <ct:FunctionArgument symbId="a" symbolType="real"/>
+        <ct:Definition>
+            <ct:SymbRef symbIdRef="a"/>
+        </ct:Definition>
+    </ct:FunctionDefinition>    
+
+    <!-- ***************************************************************** -->
+    <!-- BLOCK I: MODEL DEFINITION -->
+    <!-- ***************************************************************** -->
+    <ModelDefinition  xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <!-- BLOCK I part A: VARIABILITY MODEL -->
+        <VariabilityModel blkId="model" type="model"> 
+            <Level symbId="indiv"/>
+            <Level symbId="iov1">
+                <ParentLevel>
+                    <ct:SymbRef symbIdRef="model"/>
+                </ParentLevel>
+            </Level>
+        </VariabilityModel>        
+        <VariabilityModel blkId="obsErr" type="error"> 
+            <Level symbId="residual"/>
+        </VariabilityModel>
+ 
+        <!-- ***************************************************************** -->
+        <!-- BLOCK I part B: COVARIATE MODEL -->
+        <!-- ***************************************************************** -->
+        
+        <!-- ***************************************************************** -->
+        <!-- CNL: covariate models to be implemented --> 
+        <!-- ***************************************************************** -->       
+        <!-- PRL0  = 7.67                          ; Base prolactin HV                        -->
+        <!-- IF(PAT.EQ.1)   PRL0 = 16.1            ; Base prolactin Male patients             -->
+        <!-- IF(SEX.EQ.1)   PRL0 = 35.2            ; Base prolactin Female patients           -->
+        <!-- IF(STU.EQ.101) PRL0 = 11.3            ; Base prolactin Male patients Study 101   -->
+        <!-- IF(STU.EQ.101.AND.SEX.EQ.1) PRL0=23.2 ; Base prolactin Female patients Study 101 -->
+        <!-- ***************************************************************** -->        
+        <!-- PHS1  = 20.1 -1.61*PATIENT            ; Phase Shift of first cosine function HV  -->       
+        <!-- PHS2  = 13.7 -1.61*PATIENT            ; Phase Shift of second cosine function HV -->          
+        <!-- ***************************************************************** -->
+        <!-- RSV  = 0.290 (-> variance=0.0841)     ; RSV expressed in CV% in Male HV          -->       
+        <!-- RSV  = 0.422 (-> variance=0.178)      ; RSV expressed in CV% in Male patients    --> 
+        <!-- RSV  = 0.571 (-> variance=0.326)      ; RSV expressed in CV% in Female patients  --> 
+        <!-- ***************************************************************** -->
+ 
+        <CovariateModel blkId="c1">
+            <!-- Pat -->
+            <Covariate symbId="Pat">
+                <Categorical>
+                    <Category catId="PAT">
+                        <ct:Name>PAT</ct:Name>
+                    </Category>
+                    <Category catId="HV">
+                        <ct:Name>HV</ct:Name>
+                    </Category>
+                </Categorical>
+            </Covariate>
+
+            <!-- Sex -->
+            <Covariate symbId="Sex">
+                <Categorical>
+                    <Category catId="F">
+                        <ct:Name>Female</ct:Name>
+                    </Category>
+                    <Category catId="M">
+                        <ct:Name>Male</ct:Name>
+                    </Category>
+                </Categorical>
+            </Covariate>
+
+            <!-- Study -->
+            <!-- ***************************************************************** -->
+            <!-- CNL: overall 9 studies                                            -->       
+            <!-- 3 studies without number, only 6 with number                      --> 
+            <!-- ***************************************************************** -->           
+            <Covariate symbId="Study">
+                <Categorical>
+                    <Category catId="STUD1">
+                        <ct:Name>STUD1</ct:Name>
+                    </Category>
+                    <Category catId="STUD28">
+                        <ct:Name>STUD28</ct:Name>
+                    </Category>
+                    <Category catId="STUD61">
+                        <ct:Name>STUD61</ct:Name>
+                    </Category>
+                    <Category catId="STUD101">
+                        <ct:Name>STUD101</ct:Name>
+                    </Category>
+                    <Category catId="STUD302">
+                        <ct:Name>STUD302</ct:Name>
+                    </Category>
+                    <Category catId="STUD9005">
+                        <ct:Name>STUD9005</ct:Name>
+                    </Category>
+                </Categorical>
+            </Covariate>
+            
+            <!-- Occasion -->
+            <Covariate symbId="Occasion">
+                <Categorical>
+                    <Category catId="occ1">
+                        <ct:Name>1</ct:Name>
+                    </Category>
+                    <Category catId="occ2">
+                        <ct:Name>2</ct:Name>
+                    </Category>
+                    <Category catId="occ3">
+                        <ct:Name>3</ct:Name>
+                    </Category>
+                    <Category catId="occ4">
+                        <ct:Name>4</ct:Name>
+                    </Category>
+                </Categorical>
+            </Covariate>
+        </CovariateModel>
+ 
+        <!-- ***************************************************************** -->
+        <!-- BLOCK I part C: PARAMETER MODEL -->
+        <!-- ***************************************************************** -->        
+        <ParameterModel blkId="pm1">
+            
+            <!-- ***************************************************************** -->
+            <!-- PARAMETERS: at initial conditions withh IIV: only PRL0            -->
+            <!-- ***************************************************************** -->
+            <!-- PRL0 -->
+            <SimpleParameter symbId="pop_PRL0"/>
+            <SimpleParameter symbId="omega_PRL0"/>
+            <RandomVariable symbId="eta_PRL0">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" 
+                    definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_PRL0"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="PRL0" id="i13">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_PRL0"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_PRL0"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <!-- ********************************************* -->
+            <!-- PARAMETERS: population values & omegas        -->
+            <!-- KOUT, PRL0, KDA, UPDA, AMP1, PHS1, AMP2, PHS2 -->
+            <!-- KI -->
+            <!-- ********************************************* -->
+            <!-- derived parameters:                           -->            
+            <!-- Diurnal variation for prolactine              -->
+            <!-- DIU1=AMP1*COS(2*PI*(T-PHS1)/24)               -->
+            <!-- DIU2=AMP2*COS(2*PI*(T-PHS2)/12)               -->
+            <!-- DIU=DIU1+DIU2                                 -->
+            <!-- KINB=KOUT*PRL0                                -->
+            <!-- KINM=KINB*(1+F5)                              -->          
+            
+            <!-- ********************************************* -->
+            <!-- Post-Hoc estimates for PK -->            
+            <!-- ********************************************* --> 
+
+            <SimpleParameter symbId="CLI"/>
+            <SimpleParameter symbId="VCI"/>
+            <SimpleParameter symbId="VPI"/>
+            <SimpleParameter symbId="QI"/>
+            <SimpleParameter symbId="KAI"/>
+            <SimpleParameter symbId="FI"/>
+            <SimpleParameter symbId="DURI"/>
+            <SimpleParameter symbId="LAGI"/>
+            <SimpleParameter symbId="D2">
+                <ct:Assign>
+                    <ct:Real>0.5</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>            
+            <SimpleParameter symbId="F2">
+                <ct:Assign>
+                    <ct:Real>1</ct:Real>
+                </ct:Assign>
+            </SimpleParameter> 
+            
+            <!-- ********************************************* -->
+            <!-- PD parameters without IIV -->            
+            <!-- ********************************************* --> 
+            
+            <SimpleParameter symbId="KDA"/>
+            <SimpleParameter symbId="UPDA"/>
+            <SimpleParameter symbId="PHS1"/>
+            <SimpleParameter symbId="AMP2"/>
+ 
+            <!-- ********************************************* -->
+            <!-- PD parameters with IIV -->            
+            <!-- ********************************************* --> 
+           
+            <!-- KOUT log-normal distributed -->
+            <SimpleParameter symbId="pop_KOUT"/>
+            <SimpleParameter symbId="omega_KOUT"/>
+            <RandomVariable symbId="eta_KOUT">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_KOUT"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="KOUT">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_KOUT"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_KOUT"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <!-- PRL0 log-normal distributed -->                      
+            <SimpleParameter symbId="pop_PRL0"/>
+            <SimpleParameter symbId="omega_PRL0"/>
+            <SimpleParameter symbId="gamma_PRL0"/>
+            
+            <!-- IIV on PRL0 -->            
+            <RandomVariable symbId="eta_PRL0">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_PRL0"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            
+            <!-- IOV on PRL0 -->           
+            <RandomVariable symbId="kappa_PRL0">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="iov1"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0"  definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="gamma_PRL0"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            
+            <IndividualParameter symbId="PRL0">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_PRL0"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_PRL0"/>
+                        <ct:SymbRef symbIdRef="kappa_PRL0"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+  
+            <!-- AMP1 log-normal distributed -->
+            <SimpleParameter symbId="pop_AMP1"/>
+            <SimpleParameter symbId="omega_AMP1"/>
+            <RandomVariable symbId="eta_AMP1">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_AMP1"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="AMP1">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_AMP1"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_AMP1"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+  
+            <!-- PHS2 additive distributed -->
+            <!-- ***************************************************************** -->           
+            <!-- CNL: check for additive model for omega -->            
+            <!-- ***************************************************************** -->            
+            <SimpleParameter symbId="pop_PHS2"/>
+            <SimpleParameter symbId="omega_PHS2"/>
+            <RandomVariable symbId="eta_PHS2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_PHS2"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="PHS2">
+                <GaussianModel>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_PHS2"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_PHS2"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+ 
+            <!-- KI log-normal distributed -->
+            <SimpleParameter symbId="pop_KI"/>
+            <SimpleParameter symbId="omega_KI"/>
+            <RandomVariable symbId="eta_KI">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_KI"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="KI">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_KI"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_KI"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter> 
+            
+        </ParameterModel>
+
+        <!-- ***************************************************************** -->
+        <!-- BLOCK I part D: STRUCTURAL MODEL -->
+        <!-- ***************************************************************** -->
+        
+        <StructuralModel blkId="sm1" id="i6">
+
+            <!-- ***************************************************************** -->
+            <!-- STRUCTURAL PK MODEL -->
+            <!-- ***************************************************************** -->
+            
+            <!-- dAd/dt Depot compartment -->
+            <ct:DerivativeVariable symbId="Ad" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Uniop op="minus">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="KAI"/>
+                            </Uniop>
+                            <ct:SymbRef symbIdRef="Ad"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+             
+            <!-- dAc/dt Central compartment -->
+            <ct:DerivativeVariable symbId="Ac" symbolType="real">
+                <ct:Assign> 
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Binop op="plus">
+                    <Binop op="minus">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="KAI"/>
+                            <ct:SymbRef symbIdRef="Ad"/>
+                        </Binop>
+                        <Binop op="times">
+                            <Binop op="plus">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="QI"/>
+                                    <ct:SymbRef symbIdRef="VCI"/>
+                                </Binop>
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="CLI"/>
+                                    <ct:SymbRef symbIdRef="VCI"/>
+                                </Binop>
+                            </Binop>
+                            <ct:SymbRef symbIdRef="Ac"/>
+                        </Binop>
+                    </Binop>
+                    <Binop op="times">
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="QI"/>
+                            <ct:SymbRef symbIdRef="VPI"/>
+                        </Binop>
+                        <ct:SymbRef symbIdRef="Ap"/>
+                    </Binop>
+                </Binop>
+            </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+  
+            <!-- dAp/dt Peripheral compartment-->
+            <ct:DerivativeVariable symbId="Ap" symbolType="real">
+                <ct:Assign> 
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <Binop op="divide">
+                                        <ct:SymbRef symbIdRef="QI"/>
+                                        <ct:SymbRef symbIdRef="VCI"/>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="Ac"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Binop op="divide">
+                                        <ct:SymbRef symbIdRef="QI"/>
+                                        <ct:SymbRef symbIdRef="VPI"/>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="Ap"/>
+                                </Binop>
+                            </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>0</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>  
+  
+            <!-- CP: Risperidone ou paliperidone concentration -->              
+            <!-- CP=1000*Ac/VCI -->   
+            
+            <ct:Variable symbolType="real" symbId="CP" id="i18">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="times">
+                                <ct:Real>1000</ct:Real>
+                                <ct:SymbRef symbIdRef="Ac"/>
+                            </Binop>
+                            <ct:SymbRef symbIdRef="VCI"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable> 
+   
+            <!-- ***************************************************************** -->
+            <!-- STRUCTURAL PD MODEL -->
+            <!-- ***************************************************************** -->
+            
+            <!-- Diurnal variation -->              
+            <!-- DIU=amp1*cos(2*3.14*(t-phs1)/24)+amp2*cos(2*3.14*(t-phs2)/12) -->           
+            
+            <ct:Variable symbolType="real" symbId="DIU" id="i18">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="amp1"/>
+                                <Uniop op="cos">
+                                    <Binop op="divide">
+                                        <Binop op="times">
+                                            <Binop op="times">
+                                                <ct:Real>2</ct:Real>
+                                                <ct:Real>3.14</ct:Real>
+                                            </Binop>
+                                            <Binop op="minus">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:SymbRef symbIdRef="phs1"/>
+                                            </Binop>
+                                        </Binop>
+                                        <ct:Real>24</ct:Real>
+                                    </Binop>
+                                </Uniop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="amp2"/>
+                                <Uniop op="cos">
+                                    <Binop op="divide">
+                                        <Binop op="times">
+                                            <Binop op="times">
+                                                <ct:Real>2</ct:Real>
+                                                <ct:Real>3.14</ct:Real>
+                                            </Binop>
+                                            <Binop op="minus">
+                                                <ct:SymbRef symbIdRef="t"/>
+                                                <ct:SymbRef symbIdRef="phs2"/>
+                                            </Binop>
+                                        </Binop>
+                                        <ct:Real>12</ct:Real>
+                                    </Binop>
+                                </Uniop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>            
+            
+            <!-- KINB -->              
+            <!-- KINB=KOUT*PRL0 -->   
+ 
+            <ct:Variable symbolType="real" symbId="KINB" id="i18">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="KOUT"/>
+                            <ct:SymbRef symbIdRef="PRL0"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable> 
+ 
+            <!-- KINM -->              
+            <!-- KINM=KINB*(1+F5) -->   
+            <!-- KINM=KINB*(1+10000) -->  
+            
+            <ct:Variable symbolType="real" symbId="KINM" id="i18">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="KINB"/>
+                            <Binop op="plus">
+                                <ct:Real>1</ct:Real>
+                                <ct:Real>10000</ct:Real>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable> 
+
+            <!-- AAI -->              
+            <!-- AAI=1 if Adp=0 -->   
+            <!-- AA1=Adp/(1+Adp+CP/(KI)) if Adp > 0 -->  
+            
+            <ct:Variable symbolType="real" symbId="AAI" id="i18">
+              <ct:Assign>
+                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                    <Piecewise>
+                        <Piece>
+                            <ct:Real>1</ct:Real>
+                            <Condition>
+                                <LogicBinop op="eq">
+                                    <ct:SymbRef symbIdRef="Adp"/>
+                                    <ct:Int>0</ct:Int>
+                                </LogicBinop>
+                            </Condition>
+                        </Piece>
+                        <Piece>
+                            <ct:SymbRef symbIdRef="AAI"/>
+                            <Condition>
+                                <LogicBinop op="gt">
+                                    <ct:SymbRef symbIdRef="Adp"/>
+                                    <ct:Real>0</ct:Real>
+                                </LogicBinop>
+                            </Condition>
+                        </Piece>
+                    </Piecewise>
+
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="Adp"/>
+                            <Binop op="plus">
+                                <Binop op="plus">
+                                    <ct:Real>1</ct:Real>
+                                    <ct:SymbRef symbIdRef="Adp"/>
+                                </Binop>
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="CP"/>
+                                    <ct:SymbRef symbIdRef="KI"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable> 
+           
+            <!-- FEED -->              
+            <!-- FEED=1 if Apr=0 -->   
+            <!-- FEED=(Apr/PRL0)^UPDA if Apr > 0 -->             
+
+            <ct:Variable symbolType="real" symbId="FEED" id="i18">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Piecewise>
+                            <Piece>
+                                <ct:Real>1</ct:Real>
+                                <Condition>
+                                    <LogicBinop op="eq">
+                                        <ct:SymbRef symbIdRef="Apr"/>
+                                        <ct:Int>0</ct:Int>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                            <Piece>
+                                <ct:SymbRef symbIdRef="FEED"/>
+                                <Condition>
+                                    <LogicBinop op="gt">
+                                        <ct:SymbRef symbIdRef="Apr"/>
+                                        <ct:Real>0</ct:Real>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                        </Piecewise>
+
+                        <Binop op="power">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="Apr"/>
+                                <ct:SymbRef symbIdRef="PRL0"/>
+                            </Binop>
+                            <ct:SymbRef symbIdRef="UPDA"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable> 
+            
+            <!-- dApr/dt Prolactine compartment -->
+            <ct:DerivativeVariable symbolType="real" symbId="Apr" id="i5">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="plus">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="KINM"/>
+                                    <Binop op="minus">
+                                        <ct:Real>1</ct:Real>
+                                        <ct:SymbRef symbIdRef="AAI"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="KINB"/>
+                                    <ct:SymbRef symbIdRef="DIU"/>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="KOUT"/>
+                                <ct:SymbRef symbIdRef="Apr"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+            </ct:DerivativeVariable>
+            
+            <!-- dAdp/dt Dopamime compartment -->
+            <ct:DerivativeVariable symbolType="real" symbId="Adp" id="i16">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="KDA"/>
+                                    <ct:Real>10000</ct:Real>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="FEED"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="KDA"/>
+                                <ct:SymbRef symbIdRef="Adp"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:Assign>
+                        <ct:Real>10000</ct:Real>
+                    </ct:Assign>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>                        
+        </StructuralModel>
+
+        <!-- ***************************************************************** -->
+        <!-- BLOCK I part E: OBSERVATION MODEL Apr -->
+        <!-- ***************************************************************** -->
+        
+        <!-- OBSERVATION MODEL for Apr_obs -->
+        <ObservationModel blkId="om1">
+            <SimpleParameter symbId="a"/>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>                    
+                    <stddev><prVal>1</prVal></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="Apr_obs" id="i9">
+                <Output>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="Apr"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <FunctionCall>
+                                <ct:SymbRef symbIdRef="constantErrorModel"/>
+                                <FunctionArgument symbId="a">
+                                    <ct:SymbRef symbIdRef="a"/>
+                                </FunctionArgument>
+                            </FunctionCall>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="eps"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+    </ModelDefinition>    
+            
+    <!-- ***************************************************************** -->
+    <!-- BLOCK II: TRIAL DEFINITION -->
+    <!-- ***************************************************************** -->
+    
+    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        
+        <!-- STRUCTURE -->
+        <Structure id="i7">
+            <Epoch oid="epoch1">
+                <Start>
+                    <ct:Real>0</ct:Real>
+                </Start>
+                <End>
+                    <ct:Real>1200</ct:Real>
+                </End>
+                <Order>1</Order>
+            </Epoch>
+            <Arm oid="arm1"/>
+            <Cell oid="cell1">
+                <EpochRef oidRef="epoch1"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="TA"/>
+            </Cell>
+            <Segment oid="TA">
+                <ActivityRef oidRef="Oral"/>
+            </Segment>
+            <Activity oid="Oral">
+                <Bolus>
+                    <DoseAmount inputType="target">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Ad"/>
+                    </DoseAmount>
+                </Bolus>
+            </Activity>
+        </Structure> 
+        
+        <!-- ***************************************************************** -->
+        <!-- POPULATION -->
+        <!-- ***************************************************************** -->
+        <!-- CNL: Meta-analysis  with several studies having their own design  -->
+        <!-- impossible to implement the design of each study....              -->
+        <!-- ***************************************************************** -->        
+        <Population> 
+            <IndividualTemplate> 
+                <IndividualMapping> 
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/> 
+                </IndividualMapping> 
+                <ArmMapping> 
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/> 
+                </ArmMapping> 
+                <ReplicateMapping> 
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="REP"/> 
+                </ReplicateMapping>
+            </IndividualTemplate>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" valueType="id" columnNum="1"/> 
+                    <Column columnId="ARM" valueType="id" columnNum="2"/> 
+                    <Column columnId="REP" valueType="int" columnNum="3"/> 
+                    <Column columnId="Pat" valueType="int" columnNum="4"/> 
+                    <Column columnId="Sex" valueType="int" columnNum="5"/> 
+                    <Column columnId="Study" valueType="int" columnNum="6"/> 
+                </Definition>
+                <Table>
+                    <Row>
+                        <ct:Id>i</ct:Id>
+                        <ct:Id>arm1</ct:Id>
+                        <ct:Int>21</ct:Int>
+                    </Row>
+                </Table>
+            </DataSet>
+        </Population>
+
+        <!-- ***************************************************************** -->
+        <!-- INDIVIDUAL DOSING -->
+        <!-- ***************************************************************** -->
+        <IndividualDosing>
+            <ActivityRef oidRef="Oral"/>
+            <IndividualRef columnIdRef="ID"/>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" valueType="id" columnNum="1"/>
+                    <Column columnId="TIME" valueType="real" columnNum="2"/>
+                    <Column columnId="AMT" valueType="real" columnNum="3" id="i12"/>
+                    <Column columnId="CMT" valueType="real" columnNum="3"/>
+                </Definition>
+                <Table>
+                    <!-- subject 1 -->
+                    <Row><ct:Id>i1</ct:Id><ct:Real>0</ct:Real><ct:Real>1</ct:Real><ct:Real>4</ct:Real></Row> 
+                    <Row><ct:Id>i1</ct:Id><ct:Real>0</ct:Real><ct:Real>1</ct:Real><ct:Real>5</ct:Real></Row> 
+                    <Row><ct:Id>i1</ct:Id><ct:Real>49.68</ct:Real><ct:Real>12</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i1</ct:Id><ct:Real>73.67</ct:Real><ct:Real>12</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i1</ct:Id><ct:Real>97.62</ct:Real><ct:Real>12</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i1</ct:Id><ct:Real>121.73</ct:Real><ct:Real>12</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i1</ct:Id><ct:Real>146.13</ct:Real><ct:Real>12</ct:Real><ct:Real>1</ct:Real></Row>             
+                    <!-- subject 2 -->
+                    <Row><ct:Id>i2</ct:Id><ct:Real>0</ct:Real><ct:Real>1</ct:Real><ct:Real>4</ct:Real></Row> 
+                    <Row><ct:Id>i2</ct:Id><ct:Real>0</ct:Real><ct:Real>1</ct:Real><ct:Real>5</ct:Real></Row> 
+                    <Row><ct:Id>i2</ct:Id><ct:Real>25.65</ct:Real><ct:Real>2</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i2</ct:Id><ct:Real>49.65</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i2</ct:Id><ct:Real>73.70</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i2</ct:Id><ct:Real>97.68</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i2</ct:Id><ct:Real>121.77</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i2</ct:Id><ct:Real>146.17</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row>           
+                    <!-- subject 3 -->
+                    <Row><ct:Id>i3</ct:Id><ct:Real>0</ct:Real><ct:Real>1</ct:Real><ct:Real>4</ct:Real></Row> 
+                    <Row><ct:Id>i3</ct:Id><ct:Real>0</ct:Real><ct:Real>1</ct:Real><ct:Real>5</ct:Real></Row> 
+                    <Row><ct:Id>i3</ct:Id><ct:Real>25.97</ct:Real><ct:Real>2</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i3</ct:Id><ct:Real>50.00</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i3</ct:Id><ct:Real>74.03</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i3</ct:Id><ct:Real>97.93</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i3</ct:Id><ct:Real>122.08</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row> 
+                    <Row><ct:Id>i3</ct:Id><ct:Real>146.47</ct:Real><ct:Real>4</ct:Real><ct:Real>1</ct:Real></Row>
+                    <!-- SNIP -->
+                    <!-- subject 1482 -->                  
+                </Table>
+            </DataSet>
+        </IndividualDosing>
+    </TrialDesign>
+    
+    <!-- ***************************************************************** -->
+    <!-- BLOCK III: MODELLING STEPS -->
+    <!-- ***************************************************************** -->
+    
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
+        <!-- ESTIMATION STEP -->
+        <EstimationStep oid="estTask1" id="i10">
+            <ObjectiveDataSet id="i8">
+                <IndividualMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
+                </IndividualMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
+                    <ct:SymbRef symbIdRef="t"/>
+                </VariableMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="Apr_obs"/>
+                </VariableMapping>
+                
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" valueType="real" columnNum="4" id="i11"/>
+                    </Definition>
+                    <Table>
+                        <!-- SUBJECT 1 -->
+                        <Row><ct:Id>i1</ct:Id><ct:Real>25.60</ct:Real><ct:Real>0.6232</ct:Real></Row> 
+                        <Row><ct:Id>i1</ct:Id><ct:Real>27.20</ct:Real><ct:Real>0.4798</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>28.20</ct:Real><ct:Real>1.4061</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>29.02</ct:Real><ct:Real>1.3738</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>30.02</ct:Real><ct:Real>1.4883</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>32.17</ct:Real><ct:Real>1.8566</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>34.02</ct:Real><ct:Real>1.5758</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>38.02</ct:Real><ct:Real>1.7494</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>44.02</ct:Real><ct:Real>2.0268</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>48.17</ct:Real><ct:Real>1.8385</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>49.68</ct:Real><ct:Real>1.3832</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>52.17</ct:Real><ct:Real>2.7549</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>72.17</ct:Real><ct:Real>3.8391</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>73.67</ct:Real><ct:Real>3.5207</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>76.18</ct:Real><ct:Real>3.3307</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>96.20</ct:Real><ct:Real>2.4681</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>97.62</ct:Real><ct:Real>3.0054</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>100.20</ct:Real><ct:Real>3.8830</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>120.22</ct:Real><ct:Real>4.6991</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>121.73</ct:Real><ct:Real>2.9404</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>124.20</ct:Real><ct:Real>3.2210</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>144.25</ct:Real><ct:Real>3.0205</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>146.13</ct:Real><ct:Real>3.6346</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>147.33</ct:Real><ct:Real>3.4685</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>148.48</ct:Real><ct:Real>3.3188</ct:Real></Row>                     
+                        <Row><ct:Id>i1</ct:Id><ct:Real>149.33</ct:Real><ct:Real>4.0546</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>150.33</ct:Real><ct:Real>3.5268</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>152.48</ct:Real><ct:Real>3.0318</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>154.33</ct:Real><ct:Real>3.3186</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>158.33</ct:Real><ct:Real>3.0557</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>164.33</ct:Real><ct:Real>3.3586</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>168.53</ct:Real><ct:Real>3.4400</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>170.33</ct:Real><ct:Real>3.6325</ct:Real></Row>
+                        <!-- SUBJECT 2 -->
+                        <Row><ct:Id>i2</ct:Id><ct:Real>25.65</ct:Real><ct:Real>1.3789</ct:Real></Row> 
+                        <Row><ct:Id>i2</ct:Id><ct:Real>27.07</ct:Real><ct:Real>1.2849</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>28.22</ct:Real><ct:Real>2.3092</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>29.07</ct:Real><ct:Real>3.4555</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>30.07</ct:Real><ct:Real>2.9930</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>32.22</ct:Real><ct:Real>2.8322</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>34.07</ct:Real><ct:Real>2.1063</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>38.07</ct:Real><ct:Real>2.2174</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>44.07</ct:Real><ct:Real>3.1325</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>48.20</ct:Real><ct:Real>2.3977</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>49.65</ct:Real><ct:Real>0.9959</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>52.20</ct:Real><ct:Real>3.5800</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>72.22</ct:Real><ct:Real>2.6670</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>73.70</ct:Real><ct:Real>1.5849</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>76.23</ct:Real><ct:Real>3.4719</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>96.23</ct:Real><ct:Real>2.5648</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>97.68</ct:Real><ct:Real>2.9726</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>100.23</ct:Real><ct:Real>3.5823</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>120.28</ct:Real><ct:Real>2.6492</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>121.77</ct:Real><ct:Real>2.8130</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>124.23</ct:Real><ct:Real>3.7757</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>144.32</ct:Real><ct:Real>2.4803</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>146.17</ct:Real><ct:Real>2.3684</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>147.37</ct:Real><ct:Real>2.9047</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>148.52</ct:Real><ct:Real>3.0418</ct:Real></Row>                     
+                        <Row><ct:Id>i2</ct:Id><ct:Real>149.37</ct:Real><ct:Real>3.2411</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>150.37</ct:Real><ct:Real>4.0465</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>152.53</ct:Real><ct:Real>3.2410</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>154.37</ct:Real><ct:Real>4.1040</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>158.37</ct:Real><ct:Real>3.0963</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>164.37</ct:Real><ct:Real>3.3334</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>168.57</ct:Real><ct:Real>2.7958</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>170.37</ct:Real><ct:Real>2.693</ct:Real></Row>
+                        <!-- SUBJECT 3 -->
+                        <Row><ct:Id>i3</ct:Id><ct:Real>25.97</ct:Real><ct:Real>2.7974</ct:Real></Row> 
+                        <Row><ct:Id>i3</ct:Id><ct:Real>27.38</ct:Real><ct:Real>3.2288</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>28.50</ct:Real><ct:Real>3.4644</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>29.38</ct:Real><ct:Real>3.6412</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>30.38</ct:Real><ct:Real>3.6741</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>32.47</ct:Real><ct:Real>3.2895</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>34.37</ct:Real><ct:Real>3.7705</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>38.37</ct:Real><ct:Real>3.5489</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>44.37</ct:Real><ct:Real>3.3608</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>48.48</ct:Real><ct:Real>2.7846</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>50.00</ct:Real><ct:Real>2.3477</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>52.50</ct:Real><ct:Real>3.7275</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>72.57</ct:Real><ct:Real>3.6137</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>74.03</ct:Real><ct:Real>3.1423</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>76.52</ct:Real><ct:Real>3.6697</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>96.63</ct:Real><ct:Real>2.3942</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>97.93</ct:Real><ct:Real>2.9140</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>100.53</ct:Real><ct:Real>3.9810</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>120.55</ct:Real><ct:Real>3.1656</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>122.08</ct:Real><ct:Real>3.4281</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>124.53</ct:Real><ct:Real>4.1692</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>144.50</ct:Real><ct:Real>3.5459</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>146.47</ct:Real><ct:Real>3.0208</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>147.58</ct:Real><ct:Real>3.6913</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>148.77</ct:Real><ct:Real>3.4866</ct:Real></Row>                     
+                        <Row><ct:Id>i3</ct:Id><ct:Real>149.58</ct:Real><ct:Real>3.8908</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>150.58</ct:Real><ct:Real>3.9960</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>152.82</ct:Real><ct:Real>3.6195</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>154.58</ct:Real><ct:Real>3.9871</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>158.58</ct:Real><ct:Real>3.1523</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>164.58</ct:Real><ct:Real>3.8180</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>168.83</ct:Real><ct:Real>3.2829</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>170.62</ct:Real><ct:Real>2.8059</ct:Real></Row>
+                        
+                        <!-- SNIP -->
+                        <!-- subject 1482 -->                        
+                        
+                    </Table>
+
+                </DataSet>
+            </ObjectiveDataSet>
+            <ParametersToEstimate>
+                
+                <!-- INITIAL CONDITIONS -->
+                
+                <!-- PRL0 -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_PRL0"/>
+                    <InitialEstimate>
+                        <ct:Real>7.67</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_PRL0"/>
+                    <InitialEstimate>
+                        <ct:Real>0.425</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma_PRL0"/>
+                    <InitialEstimate>
+                        <ct:Real>0.0657</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+
+                <!-- KOUT -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KOUT"/>
+                    <InitialEstimate>
+                        <ct:Real>0.664</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KOUT"/>
+                    <InitialEstimate>
+                        <ct:Real>0.589</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- AMP1 -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_AMP1"/>
+                    <InitialEstimate>
+                        <ct:Real>0.532</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_AMP1"/>
+                    <InitialEstimate>
+                        <ct:Real>0.0558</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- PHS1 -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_PHS1"/>
+                    <InitialEstimate>
+                        <ct:Real>20.1</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- AMP2 -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_AMP2"/>
+                    <InitialEstimate>
+                        <ct:Real>-0.314</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- PHS2 -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_PHS2"/>
+                    <InitialEstimate>
+                        <ct:Real>13.7</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_PHS2"/>
+                    <InitialEstimate>
+                        <ct:Real>1.80</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- KI -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KI"/>
+                    <InitialEstimate>
+                        <ct:Real>1.96</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KI"/>
+                    <InitialEstimate>
+                        <ct:Real>1.82</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- KDA -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KDA"/>
+                    <InitialEstimate>
+                        <ct:Real>-0.156</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- UPDA -->
+                <ParameterEstimation>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_UPDA"/>
+                    <InitialEstimate>
+                        <ct:Real>1.44</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>                
+
+                <!-- RESIDUAL ERROR PARAMETER -->
+                <!-- a -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="a"/>
+                    <InitialEstimate>
+                        <ct:Real>0.178</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+            </ParametersToEstimate>
+            <Operation order="1" opType="estPop"/>
+            <Operation order="2" opType="estIndiv"/>
+        </EstimationStep>
+
+        <!-- STEP DEPENDENCIES -->
+        <StepDependencies>
+            <Step>
+                <ct:OidRef oidRef="estTask1"/>
+            </Step>
+        </StepDependencies>
+    </ModellingSteps>
+</PharmML>
