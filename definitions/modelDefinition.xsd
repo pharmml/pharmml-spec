@@ -232,40 +232,45 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="ct:VariabilityReference"/>
                     <xs:choice>
-                        <xs:element name="Pairwise">
-                            
-                        </xs:element>
-                        <xs:element name="Matrix">
-                            
-                        </xs:element>
-                    </xs:choice>
-                    <xs:element name="RandomVariable1" type="mdef:CorrelatedRandomVarType">
-                        <xs:annotation>
-                            <xs:documentation>The first correlated parameter.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="RandomVariable2" type="mdef:CorrelatedRandomVarType">
-                        <xs:annotation>
-                            <xs:documentation>The second correlated parameter.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:choice>
-                        <xs:element name="CorrelationCoefficient" type="ct:ScalarRhs">
-                            <xs:annotation>
-                                <xs:documentation>The correlation co-efficient variable.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Covariance" type="ct:ScalarRhs">
-                            <xs:annotation>
-                                <xs:documentation>The covariance for both parameters.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                    
+                        <xs:element name="Pairwise" type="mdef:PairwiseType"/>
+                        <xs:element name="Matrix" type="ct:MatrixType"/>                            
+                    </xs:choice>                    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- NEW PairwiseType -->
+    <xs:complexType name="PairwiseType">
+        <xs:annotation>
+            <xs:documentation>Type defining pairwise correlations.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="RandomVariable1" type="mdef:CorrelatedRandomVarType">
+                <xs:annotation>
+                    <xs:documentation>The first correlated parameter.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RandomVariable2" type="mdef:CorrelatedRandomVarType">
+                <xs:annotation>
+                    <xs:documentation>The second correlated parameter.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:choice>
+                <xs:element name="CorrelationCoefficient" type="ct:ScalarRhs">
+                    <xs:annotation>
+                        <xs:documentation>The correlation co-efficient variable.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="Covariance" type="ct:ScalarRhs">
+                    <xs:annotation>
+                        <xs:documentation>The covariance for both parameters.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- /NEW PairwiseType -->
     
     <xs:complexType name="ObservationModelType">
         <xs:annotation>
