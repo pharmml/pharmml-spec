@@ -186,7 +186,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="CorrelationType">
+
+<!--  ORIGINAL
+        <xs:complexType name="CorrelationType">
         <xs:annotation>
             <xs:documentation>Type defining a correlation between random effects.</xs:documentation>
         </xs:annotation>
@@ -219,7 +221,52 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    
+    <xs:complexType name="CorrelationType">
+        <xs:annotation>
+            <xs:documentation>Type defining a correlation between random effects.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:VariabilityReference"/>
+                    <xs:choice>
+                        <xs:element name="Pairwise">
+                            
+                        </xs:element>
+                        <xs:element name="Matrix">
+                            
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element name="RandomVariable1" type="mdef:CorrelatedRandomVarType">
+                        <xs:annotation>
+                            <xs:documentation>The first correlated parameter.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="RandomVariable2" type="mdef:CorrelatedRandomVarType">
+                        <xs:annotation>
+                            <xs:documentation>The second correlated parameter.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="CorrelationCoefficient" type="ct:ScalarRhs">
+                            <xs:annotation>
+                                <xs:documentation>The correlation co-efficient variable.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Covariance" type="ct:ScalarRhs">
+                            <xs:annotation>
+                                <xs:documentation>The covariance for both parameters.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    
     <xs:complexType name="ObservationModelType">
         <xs:annotation>
             <xs:documentation>Type defining the observation model.</xs:documentation>
