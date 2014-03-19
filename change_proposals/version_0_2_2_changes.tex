@@ -44,7 +44,9 @@
   stringstyle=\color{stringColor},
   identifierstyle=\color{red},
   keywordstyle=\color{attributeColor},
-  morekeywords={oid,columnId,columnIdRef,symbId,symbolType,op,columnNum,columnType,valueType,inputTarget,blkId,blkIdRef,symbIdRef,xmlns,version,type,VariableMapping,IndividualMapping, NONMEMdataSet} % list your attributes here
+  morekeywords={oid,columnId,columnIdRef,symbId,symbolType,op,columnNum,columnType,valueType,inputTarget,
+  blkId,blkIdRef,symbIdRef,xmlns,version,type,VariableMapping,IndividualMapping, NONMEMdataSet,matrixType,opType,order,
+  name,definition} % list your attributes here
 }
 
 \lstdefinelanguage{NONMEMdataSet}
@@ -66,7 +68,7 @@
   morekeywords={kjkj} % list your attributes here
 }
 
-\author{MJS, SM, NIKR}
+\author{Maciek J Swat\\ Sarala Wimalaratne\\ Niels Rode Kristensen}
 \date{\today}
 \title{Changes in PharmML 0.3}
 %\title{NONMEM format dataset support for PharmML 0.2.2}
@@ -224,11 +226,79 @@ such as \xelem{CovariateModel  blkId="cm1"} or \xelem{ObservationModel blkId="om
                     <ds:ColumnRef columnIdRef="SEX"/>
                     <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
                 </ColumnMapping>
-                \end{lstlisting}
+\end{lstlisting}
 All other symbols/flags and variables, such as \xatt{DVID}, \xatt{MDV} etc. not used directly
 in the model definition will not be mapped. Instead, to assign meaning to these variables, the attribute 
 \xatt{columnType} is used in the column definition in the \xelem{DataSet}, similar to the attribute 
-\xatt{use} in MDL. See next section for more details.
+\xatt{use} in MDL. See following section.
+
+\subsubsection{New attribute \xatt{columnType} in the \xelem{DataSet} definition.}
+
+The following Table \ref{tab:MDLPharmML_columnTypes} collects all possible values for the 
+new \xatt{columnType} attribute. In contrast to MDL, which allows up to three values per category, 
+PharmML allows only one value for each type.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{lll}
+  \hline
+\xatt{use}/MDL & \xatt{columnType}/PharmML & Meaning \\  
+  \hline
+addl &  addl  & number of additional doses     \\
+adm &  adm  & type of administration     \\
+cens &  censoring  & left-censored data     \\
+covariate &  covariate  & covariates     \\
+dose &  dose  & dose      \\
+dv &  dv  & dependent variable     \\
+dvid, type, itype &  dvid  & mixed observations     \\
+evid &  evid  &  dose events     \\
+id & id   & subject identifiers      \\
+idv & idv   & independent variable     \\
+ii, tau & ii   & inter-dose interval     \\
+tinf & duration & infusion duration \\
+limit &  limit  & lower limit for interval-censored data     \\
+mdv &  mdv  & missing dependent variable     \\
+occasion & occasion   & occasions     \\
+rate & rate   & infusion rate     \\
+reg & reg   & regression variable     \\
+ss & ss   & steady state     \\
+time &  time  & time     \\
+   \hline
+\end{tabular}
+\caption{The table summarises allowed values for the attribute \xatt{use} in MDL and their counterpart \xatt{columnType} in PharmML.}
+\label{tab:MDLPharmML_columnTypes}
+\end{center}
+\end{table}
+
+Additionally there are few PharmML specific types the user can chose from to assign 
+to \xatt{columnType}, see Table \ref{tab:PharmML_columnTypes}. 
+They correspond to one of the symbols/elements in the \xelem{TrialDesign}, i.e. when the 
+study design is defined explicitly and not completely by the NONMEM dataset. Accordingly 
+these attribute values should be used in tables specified in blocks \xelem{Population}, 
+\xelem{ObjectiveDataSet} or \xelem{IndividualDosing}.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{lll}
+  \hline
+\xatt{columnType}/PharmML & Meaning \\  
+  \hline
+arm &     study arm \\
+demographic &     demographic type \\
+%doseAmount &     dose amount \\
+%dosingTime &     time of dosing \\
+epoch &     study epoch \\
+replicate &     in cases when subjects are assumed identical \\
+ssEndTime &     steady-state administration end time \\
+ssPeriod &     steady-state administration interval \\
+  \hline
+\end{tabular}
+\caption{The table lists additional values allowed for the attribute \xatt{columnType} in PharmML.}
+\label{tab:PharmML_columnTypes}
+\end{center}
+\end{table}
+
+Beside the values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes}, the \xatt{undefined} value can be used, this is most likely to be utilised when defining external tools datasets for which support is very limited and their needs underspecified.
 
 %\subsubsection{Reserved headers in Monolix}
 %The following list collects main headers identified by Monolix (User Guide, version 4.2.2) 
@@ -304,137 +374,22 @@ column number.
                         <ds:format>CSV</ds:format>
                         <ds:delimiter>COMMA</ds:delimiter>
                     </ds:ImportData>
-                </ds:DataSet>            
+                </ds:DataSet>
             </NONMEMdataSet>
 \end{lstlisting}
-
-The following Tabel \ref{tab:MDLPharmML_columnTypes} collects all possible values for the \xatt{columnType} attribute which is identical with one in MDL. 
-In contrast to MDL, PharmML allows only one value for each type.
-
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{lll}
-  \hline
-\xatt{use}/MDL & \xatt{columnType}/PharmML & Meaning \\  
-  \hline
-addl &  addl  & number of additional doses     \\
-adm &  adm  & type of administration     \\
-cens &  censoring  & left-censored data     \\
-covariate &  covariate  & covariates     \\
-dose &  dose  & dose      \\
-dv &  dv  & dependent variable     \\
-dvid, type, itype &  dvid  & mixed observations     \\
-evid &  evid  &  dose events     \\
-id & id   & subject identifiers      \\
-idv & idv   & independent variable     \\
-ii, tau & ii   & inter-dose interval     \\
-tinf & duration & infusion duration \\
-limit &  limit  & lower limit for interval-censored data     \\
-mdv &  mdv  & missing dependent variable     \\
-occasion & occasion   & occasions     \\
-rate & rate   & infusion rate     \\
-reg & reg   & regression variable     \\
-ss & ss   & steady state     \\
-time &  time  & time     \\
-   \hline
-\end{tabular}
-\caption{The table summarises allowed values for the attribute \xatt{use} in MDL and their counterpart \xatt{columnType} in PharmML.}
-\label{tab:MDLPharmML_columnTypes}
-\end{center}
-\end{table}
-
-Additionally there are few PharmML specific types the user can chose from to assign 
-to \xatt{columnType}, see Table \ref{tab:PharmML_columnTypes}. 
-They correspond to one of the symbols/elements in the \xelem{TrialDesign}, i.e. when the 
-study design is defined explicitly and not completely by the NONMEM dataset. Accordingly 
-these attribute values should be used in tables specified in blocks \xelem{Population}, 
-\xelem{ObjectiveDataSet} or \xelem{IndividualDosing}.
-
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{lll}
-  \hline
-\xatt{columnType}/PharmML & Meaning \\  
-  \hline
-arm &     study arm \\
-demographic &     demographic type \\
-%doseAmount &     dose amount \\
-%dosingTime &     time of dosing \\
-epoch &     study epoch \\
-replicate &     in cases when subjects are assumed identical \\
-ssEndTime &     steady-state administration end time \\
-ssPeriod &     steady-state administration interval \\
-  \hline
-\end{tabular}
-\caption{The table lists additional values allowed for the attribute \xatt{columnType} in PharmML.}
-\label{tab:PharmML_columnTypes}
-\end{center}
-\end{table}
-
-Additionally to values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes}, the \xatt{undefined} value can be used, this is most likely to be utilised when defining external tools datasets.
        
 \subsection{Part III -- NMTRAN code injection (Chan et al.)}
-To understand the purpose of this module, it is helpful to consider the following \cite{Chan:2005fk} example first.
-
-%"Exogenous oral levodopa was modeled by a steady state infusion with constant but unknown rate, which ended at the start of the first levodopa infusion of each trial. The rate of steady state infusion (R1) was calculated from: R1 = CL ¥ Css\_pre"
-%
-%This is encoded in the data file using flag '-1' (starting with month 6) in the RATE column, e.g.
-%
-%\lstset{language=NONMEMdataSet}
-%\begin{lstlisting}
-%\#ID	MONTH	TRIAL	OCC	WTKG	PREV	TIME	AMT	RATE	SS	II	CMT	DV	MDV
-%552	6	2	3	70	2	409	0	-1	1	0	1	.	1
-%\end{lstlisting}
-%
-%and the unknown rate, specified in the 'R1' in the NMTRAN code:
-%
-%\lstset{language=NONMEMdataSet}
-%\begin{lstlisting}
-%  IF (PREV.EQ.0) THEN
-%É
-%  ELSE
-%     R1=CL*CSS
-%  ENDIF
-%\end{lstlisting}
-%
-
 This section goes beyond the standard models, such as the previous one, and deals with cases 
-when the model and dataset are strongly interconnected. Not only does the dosing come from 
+when the model and dataset are strongly interconnected. In NONMEM not only does the dosing come from 
 the datafile but also certain model relevant information is stored in the data. 
 
-
-Place 
-
-to 
-
-describe
-
-the 
-
-model
-\\
-
-For example, additionally 
-to the usual MDL encoding, NMTRAN code needs to be passed 'as is' to the target tool via PharmML, 
-i.e. in this case the following code
-\lstset{language=NONMEMdataSet}
-\begin{lstlisting}
-      if (PREV==0) {
-         D1=TTK0
-      } else {
-         R1=CL*CSS
-      }
-\end{lstlisting}
-which contains links between certain \emph{flags}, e.g. $PREV=1$ or $RATE=-2$, encoded in the dataset and the 
-model definition and parameters.
-
-This NMTRAN code is right now part of MDL but we think that this needs to be marked as target 
-code and handled as such by MDL so that the translator knows which part is NONMEM-specific and 
-needs to be passed without any interpretation.
-
-The above example exemplifies so called \emph{events} which appear in the Chan/Holford model. 
-Below the first few rows of the according dataset are listed:
-
+To understand this it is helpful to consider the following \cite{Chan:2005fk} example first. 
+Two levodopa administrations were modelled, one of them as so called \emph{Exogenous oral levodopa administration}. 
+"Exogenous oral levodopa was modeled by a steady state infusion with constant but unknown rate, 
+which ended at the start of the first levodopa infusion of each trial. The rate of steady state infusion (R1) 
+was calculated from: R1 = CL ¥ Css\_pre". 
+This is encoded in the data file using flag '-2' (starting with month 6) 
+in the RATE column, e.g.
 \begin{table}[ht]
 \begin{center}
 \scriptsize
@@ -452,9 +407,38 @@ Below the first few rows of the according dataset are listed:
 \end{center}
 \end{table}
 
+and the unknown rate which specified as 'R1' in the NMTRAN code:
+\lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+  IF (PREV.EQ.0) THEN
+	É...
+  ELSE
+     R1=CL*CSS
+  ENDIF
+\end{lstlisting}
 
-The first two parts of the code, i.e. mapping of dataset columns and referencing of the NONMEM file, are analog to the previous example. Only symbols appearing in the \xelem{ModelDefinition} 
-will be mapped using the generic \xelem{ColumnMapping} element. All other symbols, appearing in the dataset but not in the model, have an appropriate attribute \xatt{columnType} which identifies their type.
+%For example, additionally 
+%to the usual MDL encoding, NMTRAN code needs to be passed 'as is' to the target tool via PharmML, 
+%i.e. in this case the following code
+%\lstset{language=NONMEMdataSet}
+%\begin{lstlisting}
+%      if (PREV==0) {
+%         D1=TTK0
+%      } else {
+%         R1=CL*CSS
+%      }
+%\end{lstlisting}
+%which contains links between certain \emph{flags}, e.g. $PREV=1$ or $RATE=-2$, encoded in the dataset and the 
+%model definition and parameters.
+
+This NMTRAN code is right now part of MDL but we think that this needs to be marked as target 
+code and handled as such by MDL so that the translator knows which part is NONMEM-specific and 
+needs to be passed without any interpretation.
+
+Mapping of dataset columns and referencing of the NONMEM file, are analog to the previous example. Only symbols 
+used in the \xelem{ModelDefinition} will be mapped using the generic \xelem{ColumnMapping} element. 
+All other symbols, appearing in the dataset but not in the model, have an appropriate attribute \xatt{columnType} 
+which identifies their type.
  
 \lstset{language=XML}
 \begin{lstlisting}
@@ -579,11 +563,11 @@ follows well defined rules and grammar.
 \section{External tools support}
 It has been requested that PharmML supports external data sets. This is now the case. 
 
-\subsection{Minimal form of external tools support}
+\subsection{Basic form of external tools support}
 Following items can be implemented to provide the minimum information needed for an external target tool support
 \begin{itemize}
 \item
-object identifier -- can used to reference the tool from a task in the \xelem{ModellingSteps}
+object identifier -- can be used to reference the tool from a task in the \xelem{ModellingSteps}
 \item
 target tool name
 \item
@@ -595,7 +579,6 @@ URL
 \begin{lstlisting}
         <TargetTool oid="target1">
             <TargetToolName>SIMCYP</TargetToolName>
-            
             <TargetToolData xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <ImportTargetData oid="importData">
                     <name>myFileName</name>
@@ -606,6 +589,19 @@ URL
 \end{lstlisting}
 
 \subsection{More complex scenario of external tools support}
+Additionally, following items can be implemented to provide 
+\begin{itemize}
+\item
+object identifier
+\item
+target tool name
+\item
+column definition with attribute \xatt{columnType} to assign the particular column to a specific category
+\item
+file URL \& format
+\item
+target tool code 
+\end{itemize}
 
 \lstset{language=XML}
 \begin{lstlisting}
@@ -1009,36 +1005,129 @@ The next listing shows how the just defined interpolation function is then refer
 The last part, the \xelem{LookupTable} definition and mapping, is identical to the previous example and will be skipped here.
 
 
+\section{New matrix structure}
+
+\lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+matrix(name="struc1",type="VAR") {
+PPV_CL=0.1,
+0.01, PPV_V=0.1,
+0, 0.01, PPV_EMAX=0.01,
+0, 0, 0.01, PPV_C50=0.01
+} # end matrix struc1
+\end{lstlisting}
+
+
+\lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+matrix(name="struc1",type="VAR") {
+PPV_CL=0.1,
+0.01, PPV_V=0.1,
+0, 0.01, PPV_EMAX=0.01,
+0, 0, 0.01, PPV_C50=0.01
+} # end matrix struc1
+\end{lstlisting}
+
+
+\begin{align}
+\begin{bmatrix} x & y & y \\ z & v & y \\ z & v & y \end{bmatrix} \nonumber
+\end{align}
+
+\lstset{language=XML}
+\begin{lstlisting}
+            <Correlation>
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+                </ct:VariabilityReference>                
+                <Matrix matrixType="CovarianceMatrix">
+                    <ct:RowNames>
+                        <ct:SymbRef symbIdRef="PPV_CL"/>
+                        <ct:SymbRef symbIdRef="PPV_V"/>
+                        <ct:SymbRef symbIdRef="PPV_EMAX"/>
+                        <ct:SymbRef symbIdRef="PPV_C50"/>
+                    </ct:RowNames>
+                    <ct:MatrixRow>
+                        <ct:Real>0.1</ct:Real>
+                    </ct:MatrixRow>
+                    <ct:MatrixRow>
+                        <ct:Real>0.01</ct:Real><ct:Real>0.1</ct:Real>
+                    </ct:MatrixRow>
+                    <ct:MatrixRow>
+                        <ct:Real>0</ct:Real><ct:Real>0.01</ct:Real><ct:Real>0.1</ct:Real>
+                    </ct:MatrixRow>
+                    <ct:MatrixRow>
+                        <ct:Real>0</ct:Real><ct:Real>0</ct:Real><ct:Real>0.01</ct:Real><ct:Real>0.01</ct:Real>
+                    </ct:MatrixRow>
+                </Matrix>            
+            </Correlation>
+\end{lstlisting}
+
+
 \section{Other changes}
 
 \subsection{Nested tables removed}
 
-\subsection{New attribute \xatt{columnType} in the \xelem{DataSet}/\xelem{Definition}}
-
 \subsection{Simplified/unified mapping in all dataset types}
+
+\subsection{New \emph{Identity} transformation for individual parameters}
+
+\lstset{language=XML}
+\begin{lstlisting}
+            <IndividualParameter symbId="p1">
+                <GaussianModel>
+                    <Transformation>identity</Transformation>
+                    <GeneralCovariate>
+                        <ct:Assign>
+                            <ct:SymbRef symbIdRef="pop_p1"/>                           
+                        </ct:Assign>
+                    </GeneralCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_p1"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+\end{lstlisting}
 
 \subsection{Interpolation support for covariates or model variables}
 
 A possibility of specifying one of five standard interpolation algorithms is provided, {constant, linear, spline, pchip, cubic}, as defined in MATLAB, http://www.mathworks.co.uk/help/matlab/ref/interp1.html
 
 \subsection{The notation of initial conditions for ODE's is extended}
-Last versions of PharmML assumed the initial time to be always equal $0$. This restriction is now relaxed and PharmML allows to store any initial time. The initial value and time get their proper tags, \xelem{InitialValue} and \xelem{InitialTime}, accordingly. In both cases, the user can define them as numerical values, symbols defined somewhere else in the model or arbitrary mathematical expressions.
+Last versions of PharmML assumed the initial time, $t_0$, to be always equal $0$. This restriction is now relaxed and PharmML allows to store any initial time. The initial value and time get their proper tags, \xelem{InitialValue} and \xelem{InitialTime}, accordingly. In both cases, the user can define them as numerical values, symbols defined somewhere else in the model or arbitrary mathematical expressions.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ccc}
+  \hline
+  \hline
+feature/ version	& PharmML 0.2.1 & PharmML 0.3 \\ [.5ex]
+  \hline
+ODE	& $\frac{dA}{dt} = -k_a Ad$ 	& $\frac{dA}{dt} = -k_a Ad$ \\ [1ex]
+IC 	&	$A_0$				&	$A(t_0=a) = A_0$ \\
+  \hline
+  \hline
+\end{tabular}
+\caption{Summary of \emph{initial conditions} in ODE support in PharmML. Version 0.2.1 supported the implementation of initial values only, version 0.3 supports additionally the storage of initial times $t_0$.}
+\end{center}
+\end{table}
+
+
 \lstset{language=XML}
 \begin{lstlisting}
             <!-- dC/dt -->
-            <ct:DerivativeVariable symbolType="real" symbId="C">
+            <ct:DerivativeVariable symbolType="real" symbId="Ad">
                 <ct:Assign>
                 <!-- ODE definition omitted here --> 	
                 </ct:Assign>
                 <ct:InitialCondition>
                     <ct:InitialValue>
                         <ct:Assign>
-                            <ct:SymbRef blkIdRef="pm1" symbIdRef="C0"/>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="A0"/>
                         </ct:Assign>
                     </ct:InitialValue>
                     <ct:InitialTime>
                         <ct:Assign>
-                            <ct:Real>0</ct:Real>
+                            <ct:SymbRef symbIdRef="a"/>
                         </ct:Assign>
                     </ct:InitialTime>
                 </ct:InitialCondition>
@@ -1121,7 +1210,8 @@ arbitrary model variable, such an insulin infusion \emph{I(t)} in the following 
 \frac{dX(t)}{dt} = I(t) - I_b 	\nonumber
 \end{align}
 \end{itemize}
-This new input type has the attribute \xatt{variable}. It was requested to rename the \xatt{inputType} attribute and it's values -- the following table summarises the changes
+This new input type has the attribute \xatt{variable}. It was requested to rename the \xatt{inputType} attribute 
+and it's values -- the following table summarises the changes
 
 \begin{table}[H]
 \begin{center}
@@ -1142,7 +1232,38 @@ This new input type has the attribute \xatt{variable}. It was requested to renam
 \end{center}
 \end{table}
 
-The new type \xatt{variable} can be used in the new \xelem{LookupTable} block, see also example in section \ref{subsec:caseC1}.
+The new type \xatt{variable} can be used in the new \xelem{LookupTable} block, see also example in 
+section \ref{subsec:caseC1}.
+
+\subsection{Updated \xelem{Operation} options}
+The \xelem{Operation} element allows to specify some detailed information about the estimation or simulation 
+tasks. In the following listing three subsequent operations are defined: estimation of population parameters,
+estimation of the Fisher Information Matrix and estimation of population parameters: 
+ \lstset{language=XML}
+\begin{lstlisting}
+           <Operation order="1" opType="estPop">
+                <ct:Description>Estimate the population parameters in the model.</ct:Description>
+                <Property name="software-tool-name">
+                    <ct:Assign>
+                        <ct:String>Monolix</ct:String>
+                    </ct:Assign>
+                </Property>
+                <Property name="software-tool-version">
+                    <ct:Assign>
+                        <ct:Real>4.3</ct:Real>
+                    </ct:Assign>
+                </Property>
+                <Algorithm definition="SAEM"/>
+            </Operation>
+            <Operation order="2" opType="estFIM"/>
+            <Operation order="3" opType="estIndiv"/>
+\end{lstlisting}
+For each set an arbitrary number of \xelem{Property} elements can be defined e.g. to store information
+about the tool or algorithm to be used. The three tasks as use above, \xatt{estPop}, \xatt{estFIM} and 
+\xatt{estIndiv} are so far the only choice the user has but it is feasible to provide more options upon feedback.
+
+Moreover, the previous version provided erroneously the same task choice for an estimation task as well.
+This has been now corrected. 
 
 
 \subsection{Multiple random errors allowed in the Gaussian model}
