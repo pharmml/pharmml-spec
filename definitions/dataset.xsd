@@ -466,21 +466,21 @@ permissions and limitations under the License.
     <xs:element name="ColumnRef" type="ds:ColumnRefType">
         <xs:annotation>
             <xs:documentation>
-                Element to a column in a dataset or nested table. 
+                Element to a column in a dataset. 
             </xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Table" type="ds:DataSetTableType">
         <xs:annotation>
             <xs:documentation>
-                Element specifies the content of the dataset or nested table.
+                Element specifies the content of the dataset.
             </xs:documentation>
         </xs:annotation>
     </xs:element>    
     <xs:element name="Definition" type="ColumnsDefinitionType">
         <xs:annotation>
             <xs:documentation>
-                Defines the columns and nested tables in a dataset or nested table.                
+                Defines the columns in a dataset.                
             </xs:documentation>
         </xs:annotation>
     </xs:element>
