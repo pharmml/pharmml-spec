@@ -227,15 +227,17 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <RandomVariable1>
-                    <ct:SymbRef symbIdRef="eta_CL"/>
-                </RandomVariable1>
-                <RandomVariable2>
-                    <ct:SymbRef symbIdRef="eta_V"/>
-                </RandomVariable2>
-                <Covariance>
-                    <ct:SymbRef symbIdRef="rho_CL_V"/>
-                </Covariance>
+                <Pairwise>
+                    <RandomVariable1>
+                        <ct:SymbRef symbIdRef="eta_CL"/>
+                    </RandomVariable1>
+                    <RandomVariable2>
+                        <ct:SymbRef symbIdRef="eta_V"/>
+                    </RandomVariable2>
+                    <Covariance>
+                        <ct:SymbRef symbIdRef="rho_CL_V"/>
+                    </Covariance>
+                </Pairwise>
             </Correlation>
         </ParameterModel>
         

@@ -221,15 +221,17 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
                 </ct:VariabilityReference>
-                <RandomVariable1>
-                    <ct:SymbRef symbIdRef="eta_CL"/>
-                </RandomVariable1>
-                <RandomVariable2>
-                    <ct:SymbRef symbIdRef="eta_V"/>
-                </RandomVariable2>
-                <Covariance>
-                    <ct:SymbRef symbIdRef="rho_CL_V"/>
-                </Covariance>
+                <Pairwise>
+                    <RandomVariable1>
+                        <ct:SymbRef symbIdRef="eta_CL"/>
+                    </RandomVariable1>
+                    <RandomVariable2>
+                        <ct:SymbRef symbIdRef="eta_V"/>
+                    </RandomVariable2>
+                    <Covariance>
+                        <ct:SymbRef symbIdRef="rho_CL_V"/>
+                    </Covariance>
+                </Pairwise>
             </Correlation>
         </ParameterModel>
         
@@ -524,12 +526,12 @@
                 <ct:Description>Estimate the population parameters in the model.</ct:Description>
                 <Property name="software-tool-name">
                     <ct:Assign>
-                        <ct:String>NONMEM</ct:String>
+                        <ct:String>Monolix</ct:String>
                     </ct:Assign>
                 </Property>
                 <Property name="software-tool-version">
                     <ct:Assign>
-                        <ct:Real>7.3</ct:Real>
+                        <ct:Real>4.3</ct:Real>
                     </ct:Assign>
                 </Property>
                 <Algorithm definition="FOCEI">
