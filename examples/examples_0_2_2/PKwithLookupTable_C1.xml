@@ -169,10 +169,14 @@
             <Correlation>
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
-                </ct:VariabilityReference>
-                
+                </ct:VariabilityReference>                
                 <Matrix matrixType="CovarianceMatrix">
-                    <ct:RowNames><ct:SymbRef symbIdRef="PPV_CL"/><ct:SymbRef symbIdRef="PPV_V"/><ct:SymbRef symbIdRef="PPV_EMAX"/><ct:SymbRef symbIdRef="PPV_C50"/></ct:RowNames>
+                    <ct:RowNames>
+                        <ct:SymbRef symbIdRef="PPV_CL"/>
+                        <ct:SymbRef symbIdRef="PPV_V"/>
+                        <ct:SymbRef symbIdRef="PPV_EMAX"/>
+                        <ct:SymbRef symbIdRef="PPV_C50"/>
+                    </ct:RowNames>
                     <ct:MatrixRow>
                         <ct:Real>0.1</ct:Real>
                     </ct:MatrixRow>

@@ -9,8 +9,10 @@
     writtenVersion="0.2.2" id="i1">
     
     <!-- MODEL NAME -->
-    <ct:Name>Example 4 - estimation with IOV1 and with covariates</ct:Name>
-
+    <ct:Name>Example 4 - Estimation with IOV</ct:Name>
+    
+    <ct:Description>Estimation example with IOV1 and with categorical covariates</ct:Description>
+    
     <!-- INDEPENDENT VARIABLE -->
     <IndependentVariable symbId="t"/>
 

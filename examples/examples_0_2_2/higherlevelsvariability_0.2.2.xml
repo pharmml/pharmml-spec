@@ -373,15 +373,17 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="model" symbIdRef="indiv"></ct:SymbRef>
                 </ct:VariabilityReference>
-                <RandomVariable1>
-                    <ct:SymbRef symbIdRef="eta_V"/>
-                </RandomVariable1>
-                <RandomVariable2>
-                    <ct:SymbRef symbIdRef="eta_Cl"></ct:SymbRef>
-                </RandomVariable2>
-                <CorrelationCoefficient>
-                    <ct:SymbRef symbIdRef="rho_V_Cl"/>
-                </CorrelationCoefficient>
+                <Pairwise>
+                    <RandomVariable1>
+                        <ct:SymbRef symbIdRef="eta_V"/>
+                    </RandomVariable1>
+                    <RandomVariable2>
+                        <ct:SymbRef symbIdRef="eta_Cl"></ct:SymbRef>
+                    </RandomVariable2>
+                    <CorrelationCoefficient>
+                        <ct:SymbRef symbIdRef="rho_V_Cl"/>
+                    </CorrelationCoefficient>
+                </Pairwise>
             </Correlation>
         </ParameterModel>
         
@@ -562,15 +564,17 @@
                 <ct:VariabilityReference>
                     <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
                 </ct:VariabilityReference>
-                <RandomVariable1>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="epsilon_C"/>
-                </RandomVariable1>
-                <RandomVariable2>
-                    <ct:SymbRef symbIdRef="epsilon_E"/>
-                </RandomVariable2>
-                <Covariance>
-                    <ct:SymbRef symbIdRef="g_C_E"/>
-                </Covariance>
+                <Pairwise>
+                    <RandomVariable1>
+                        <ct:SymbRef blkIdRef="om1" symbIdRef="epsilon_C"/>
+                    </RandomVariable1>
+                    <RandomVariable2>
+                        <ct:SymbRef symbIdRef="epsilon_E"/>
+                    </RandomVariable2>
+                    <Covariance>
+                        <ct:SymbRef symbIdRef="g_C_E"/>
+                    </Covariance>
+                </Pairwise>
             </Correlation>
             <General symbId="E_obs">
                 <ct:Assign>
