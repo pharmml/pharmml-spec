@@ -451,6 +451,41 @@
                     <ct:SymbRef blkIdRef="om1" symbIdRef="E_obs"/>
                 </Continuous>
             </Observations>
+
+            <Observations>
+                <Timepoints>
+                    <ct:Sequence>
+                        <ct:Begin><ct:Int>0</ct:Int></ct:Begin>
+                        <ct:StepSize><ct:Int>24</ct:Int></ct:StepSize>
+                        <ct:End><ct:Int>288</ct:Int></ct:End>
+                    </ct:Sequence>
+                </Timepoints>
+                <Continuous>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="C"/>
+                </Continuous>
+            </Observations>
+            
+            <Operation order="1" opType="simulatePK">
+                <Property name="toolName">
+                    <ct:Assign>
+                        <ct:String>MATLAB</ct:String>
+                    </ct:Assign>
+                </Property>
+                <Property name="versionNumber">
+                    <ct:Assign>
+                        <ct:String>R2013b</ct:String>
+                    </ct:Assign>
+                </Property>
+            </Operation>
+            
+            <Operation order="2" opType="simulatePD">
+                <Property name="toolName">
+                    <ct:Assign>
+                        <ct:String>R</ct:String>
+                    </ct:Assign>
+                </Property>
+            </Operation>
+            
         </SimulationStep>
         
         <!-- STEP DEPENDENCIES -->

@@ -534,8 +534,7 @@
                         <ct:Real>4.3</ct:Real>
                     </ct:Assign>
                 </Property>
-                <Algorithm definition="FOCEI">
-                </Algorithm>
+                <Algorithm definition="SAEM"/>
             </Operation>
             <Operation order="2" opType="estFIM"/>
             <Operation order="3" opType="estIndiv"/>
