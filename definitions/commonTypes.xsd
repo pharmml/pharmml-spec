@@ -662,7 +662,7 @@ the end value. In the second the step size is incremented r times, where r is th
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="RowNames" minOccurs="0" type="ct:MatrixColumnRowNames">
+                    <xs:element name="RowNames" type="ct:MatrixColumnRowNames">
                         <xs:annotation>
                             <xs:documentation>Names of the matrix rows.</xs:documentation>
                         </xs:annotation>
