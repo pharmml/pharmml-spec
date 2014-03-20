@@ -265,7 +265,8 @@ ss & ss   & steady state     \\
 time &  time  & time     \\
    \hline
 \end{tabular}
-\caption{The table summarises allowed values for the attribute \xatt{use} in MDL and their counterpart \xatt{columnType} in PharmML.}
+\caption{The table summarises allowed values for the attribute \xatt{use} in MDL and their 
+counterpart \xatt{columnType} in PharmML.}
 \label{tab:MDLPharmML_columnTypes}
 \end{center}
 \end{table}
@@ -298,7 +299,9 @@ ssPeriod &     steady-state administration interval \\
 \end{center}
 \end{table}
 
-Beside the values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes}, the \xatt{undefined} value can be used, this is most likely to be utilised when defining external tools datasets for which support is very limited and their needs underspecified.
+Beside the values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes}, 
+the \xatt{undefined} value can be used, this is most likely to be utilised when defining external tools 
+datasets for which support is very limited and their needs underspecified.
 
 %\subsubsection{Reserved headers in Monolix}
 %The following list collects main headers identified by Monolix (User Guide, version 4.2.2) 
@@ -351,9 +354,9 @@ Beside the values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML
 
 \subsection{Part II -- Referencing NONMEM dataset}
 \label{subsec:refNONMEM}
-This part is fairly straightforward. The structure is that of an externalised dataset discussed above. The columns 
-are defined by providing the attributes for the column identifier, column type, value type and 
-column number. 
+This part is fairly straightforward. The structure is that of an externalised dataset discussed 
+above. The columns are defined by providing the attributes for the column identifier, column 
+type, value type and column number. 
 
 \begin{lstlisting}
                 <ds:DataSet>
@@ -384,10 +387,10 @@ when the model and dataset are strongly interconnected. In NONMEM not only does 
 the datafile but also certain model relevant information is stored in the data. 
 
 To understand this it is helpful to consider the following \cite{Chan:2005fk} example first. 
-Two levodopa administrations were modelled, one of them as so called \emph{Exogenous oral levodopa administration}. 
-"Exogenous oral levodopa was modeled by a steady state infusion with constant but unknown rate, 
-which ended at the start of the first levodopa infusion of each trial. The rate of steady state infusion (R1) 
-was calculated from: R1 = CL ¥ Css\_pre". 
+Two levodopa administrations were modelled, one of them as so called \emph{Exogenous oral 
+levodopa administration}. "Exogenous oral levodopa was modeled by a steady state infusion 
+with constant but unknown rate, which ended at the start of the first levodopa infusion of each 
+trial. The rate of steady state infusion (R1) was calculated from: R1 = CL ¥ Css\_pre". 
 This is encoded in the data file using flag '-2' (starting with month 6) 
 in the RATE column, e.g.
 \begin{table}[ht]
@@ -560,11 +563,184 @@ follows well defined rules and grammar.
 \end{description}
 
 
+\section{New matrix structure}
+
+A typical parameter model for a log-normal distributed parameter with \emph{subject} 
+and \emph{occasion} levels of variability reads
+\begin{align*}
+& p_{ij} = p_{pop} \, e^{\eta_i^{(0)}} e^{\eta_{ij}^{(1)}} 
+\end{align*} 
+with
+\begin{align*}
+ & \eta_i^{(0)} \sim \mathcal{N}\big(0,\Omega^{(0)}\big), \quad \eta_{ij}^{(1)} \sim \mathcal{N}\big(0,\Omega^{(1)}\big)
+\end{align*}
+Each covariance matrix $\Omega^{(l)}$ contains the information about the variance/covariance 
+of the random effects. For example, a subject-level covariance matrix for four parameters \emph{CL}, 
+\emph{V1}, \emph{V2} and \emph{Q} could look like this 
+\begin{align}
+\Omega^{(0)} = 
+\begin{bmatrix} var(\eta_{V1}) &  &  &  \\
+ cov(\eta_{V1},\eta_{CL}) & var(\eta_{CL}) &  & \\
+ cov(\eta_{V1},\eta_{V2}) & cov(\eta_{CL},\eta_{V2}) & var(\eta_{V2}) & \\
+  cov(\eta_{V1},\eta_{Q}) & cov(\eta_{CL},\eta_{Q}) & cov(\eta_{V2},\eta_{Q}) & var(\eta_{Q}) \end{bmatrix} 
+  =
+  \begin{bmatrix} 0.015 &  &  &  \\
+ 0.00377 & 0.0158 &  & \\
+ 0.0156 & 0.0127 & 0.0218 & \\
+  0.0273 & 0.0282 & 0.0411 & 0.0804 \end{bmatrix} \nonumber
+\end{align}
+PharmML in versions 0.2.1 provided the possibility to define pair-wise the covariance or 
+correlation between corresponding random effects. The version 0.3 offers additionally a 
+\xelem{Matrix} structure which can be used to encode any matrix with
+\begin{itemize}
+\item
+Reference to the variability level \xelem{VariabilityReference}.
+\item
+Attribute \xatt{matrixType} with predefined values to choose from
+\begin{itemize}
+\item
+\xatt{CovMatrix} -- variance-covariance matrix.
+\item
+\xatt{CorrMatrix} -- correlation matrix.
+\item
+\xatt{StDevCorrMatrix} - NONMEM-like mixture matrix containing standard deviations 
+on the diagonal and correlation coefficients on the off diagonals. 
+\end{itemize}
+\item
+Mandatory raw names, \xelem{RawNames}, and optional column names, \xelem{ColumnNames}.
+\end{itemize}
+
+
+\subsection{Example 1 -- Inter-individual variability, IIV}
+In this case we encode the covariance matrix for the inter-individual variability level, with 
+following NMTRAN/MDL implementation
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+  NMTRAN & MDL \\
+  \hline
+ \lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+      ; Between Subject Variability
+	$OMEGA BLOCK (4)
+	0.015 
+	0.00377 0.0158 
+	0.0156 0.0127 0.0218 
+	0.0273 0.0282 0.0411 0.0804 
+\end{lstlisting} 
+ & 
+\lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+      #OMEGA
+      matrix(name="struc1",type="VAR") {
+         BSVV1=0.015,
+         0.00377, BSVCL=0.0158,
+         0.0156, 0.0127, BSVV2=0.0218, 
+         0.0273, 0.0282, 0.0411, BSVQ=0.0804
+      } # end matrix struc1
+\end{lstlisting}  
+\\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+The variability level in the PharmML version is called \emph{indiv} and the raw names refer to 
+the random effects defined in the parameter model \xatt{pm1}.
+ 
+\lstset{language=XML}
+\begin{lstlisting}
+    <Correlation>
+        <ct:VariabilityReference>
+            <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+        </ct:VariabilityReference>                
+        <Matrix matrixType="CovMatrix">
+            <ct:RowNames>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA0_V1"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA0_CL"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA0_V2"/>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA0_Q"/>
+            </ct:RowNames>
+            <ct:MatrixRow>
+                <ct:Real>0.015</ct:Real>
+            </ct:MatrixRow>
+            <ct:MatrixRow>
+                <ct:Real>0.00377</ct:Real><ct:Real>0.0158</ct:Real>
+            </ct:MatrixRow>
+            <ct:MatrixRow>
+                <ct:Real>0.0156</ct:Real><ct:Real>0.0127</ct:Real><ct:Real>0.0218</ct:Real>
+            </ct:MatrixRow>
+            <ct:MatrixRow>
+                <ct:Real>0.0273</ct:Real><ct:Real>0.0282</ct:Real><ct:Real>0.0411</ct:Real><ct:Real>0.0804</ct:Real>
+            </ct:MatrixRow>
+        </Matrix>            
+    </Correlation>
+\end{lstlisting}
+
+\subsection{Example 2 -- Inter-occassion variability, IOV}
+This example exemplifies the higher level of variability, encoded in NMTRAN/MDL as in the following table
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+  NMTRAN & MDL \\
+  \hline
+  \lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+	; Within Study Variability
+	$OMEGA BLOCK(4)
+	0.0254                      ; BOVV11 
+	0.0152 0.016                ; BOVCL1  
+	0.011  0.0102 0.00667       ; BOVV21 
+	0.0275 0.0137 0.0105 0.0313 ; BOVQ1 
+\end{lstlisting}
+&
+\lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+      #OMEGA
+      matrix(name="struc2",type="VAR") {
+         BOVV11=0.0254, 
+         0.0152, BOVCL1=0.016,
+         0.011, 0.0102, BOVV21=0.00667, 
+         0.0275, 0.0137, 0.0105, BOVQ1=0.0313 
+      } 
+\end{lstlisting}  
+\\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+The PharmML implementation is very similar to the previous example with the exception 
+that the \xelem{VariabilityReference} contains a reference to \xatt{iov1} and the \xelem{RowNames}
+are different.
+\lstset{language=XML}
+\begin{lstlisting}
+            <Correlation>
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="iov1"/>
+                </ct:VariabilityReference>                
+                <Matrix matrixType="CovMatrix">
+                    <ct:RowNames>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA1_CL"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA1_V"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA1_EMAX"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="ETA1_C50"/>
+                    </ct:RowNames>
+                    <ct:MatrixRow>
+                        <ct:Real>0.1</ct:Real>
+                        <!-- SKIP -->
+                </Matrix>            
+            </Correlation>
+\end{lstlisting}
+The rest is identical and therefore omitted.
+
 \section{External tools support}
 It has been requested that PharmML supports external data sets. This is now the case. 
 
 \subsection{Basic form of external tools support}
-Following items can be implemented to provide the minimum information needed for an external target tool support
+Following items can be implemented to provide the minimum information needed 
+for an external target tool support
 \begin{itemize}
 \item
 object identifier -- can be used to reference the tool from a task in the \xelem{ModellingSteps}
@@ -648,8 +824,8 @@ but not model has been estimated so the data has to be connected to a subsequent
 an interpolation method. In case \emph{C1} the user can chose from a list of known algorithms, e.g.
 \{nearest, linear, spline, chip, cubic \}\footnote{The choice is mainly based on the interpolation algorithms 
 provided by MATLAB, section \emph{interp1:1-D data interpolation (table lookup)}' 
-\url{http://www.mathworks.co.uk/help/matlab/ref/interp1.html}. Additionally the \emph{constant} algorithm type is supported.}. 
-In case \emph{C2} the interpolation 
+\url{http://www.mathworks.co.uk/help/matlab/ref/interp1.html}. Additionally the \emph{constant} 
+algorithm type is supported.}. In case \emph{C2} the interpolation 
 is an arbitrary user-defined piece-wise function. In case \emph{C3} not data is available but the 
 parameters of an user-defined function are estimated based on the model only.
 
@@ -682,7 +858,9 @@ C3	& Data unavailable 		& 						& -- Structural model  			& Estimation of \emph{
    \hline
 \end{tabular}
 \end{center}
-\caption{The table summarises possible configurations of what is given as input, column \emph{Setup/Input} and how it can be structured and implemented, columns \xelem{TrialDesign} and \emph{Target/ModelDefinition}.}
+\caption{The table summarises possible configurations of what is given as input, column 
+\emph{Setup/Input} and how it can be structured and implemented, columns \xelem{TrialDesign} 
+and \emph{Target/ModelDefinition}.}
 \label{tab:C1C2C2}
 \end{table}
 
@@ -755,7 +933,9 @@ which implementation shows the following snip set
                         ...
 \end{lstlisting}
 \end{itemize}
-In order to make the connection between the column names in the dataset and the according variables in the \xelem{TrialDesign} and \xelem{ModelDefinition}, following mappings are defined using again only one type of mapping:
+In order to make the connection between the column names in the dataset and the according 
+variables in the \xelem{TrialDesign} and \xelem{ModelDefinition}, following mappings are 
+defined using again only one type of mapping:
 
 \lstset{language=XML}
 \begin{lstlisting}
@@ -1002,65 +1182,8 @@ The next listing shows how the just defined interpolation function is then refer
             </ct:Variable>
 \end{lstlisting}
 
-The last part, the \xelem{LookupTable} definition and mapping, is identical to the previous example and will be skipped here.
-
-
-\section{New matrix structure}
-
-\lstset{language=NONMEMdataSet}
-\begin{lstlisting}
-matrix(name="struc1",type="VAR") {
-PPV_CL=0.1,
-0.01, PPV_V=0.1,
-0, 0.01, PPV_EMAX=0.01,
-0, 0, 0.01, PPV_C50=0.01
-} # end matrix struc1
-\end{lstlisting}
-
-
-\lstset{language=NONMEMdataSet}
-\begin{lstlisting}
-matrix(name="struc1",type="VAR") {
-PPV_CL=0.1,
-0.01, PPV_V=0.1,
-0, 0.01, PPV_EMAX=0.01,
-0, 0, 0.01, PPV_C50=0.01
-} # end matrix struc1
-\end{lstlisting}
-
-
-\begin{align}
-\begin{bmatrix} x & y & y \\ z & v & y \\ z & v & y \end{bmatrix} \nonumber
-\end{align}
-
-\lstset{language=XML}
-\begin{lstlisting}
-            <Correlation>
-                <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
-                </ct:VariabilityReference>                
-                <Matrix matrixType="CovarianceMatrix">
-                    <ct:RowNames>
-                        <ct:SymbRef symbIdRef="PPV_CL"/>
-                        <ct:SymbRef symbIdRef="PPV_V"/>
-                        <ct:SymbRef symbIdRef="PPV_EMAX"/>
-                        <ct:SymbRef symbIdRef="PPV_C50"/>
-                    </ct:RowNames>
-                    <ct:MatrixRow>
-                        <ct:Real>0.1</ct:Real>
-                    </ct:MatrixRow>
-                    <ct:MatrixRow>
-                        <ct:Real>0.01</ct:Real><ct:Real>0.1</ct:Real>
-                    </ct:MatrixRow>
-                    <ct:MatrixRow>
-                        <ct:Real>0</ct:Real><ct:Real>0.01</ct:Real><ct:Real>0.1</ct:Real>
-                    </ct:MatrixRow>
-                    <ct:MatrixRow>
-                        <ct:Real>0</ct:Real><ct:Real>0</ct:Real><ct:Real>0.01</ct:Real><ct:Real>0.01</ct:Real>
-                    </ct:MatrixRow>
-                </Matrix>            
-            </Correlation>
-\end{lstlisting}
+The last part, the \xelem{LookupTable} definition and mapping, is identical to the previous 
+example and will be skipped here.
 
 
 \section{Other changes}
@@ -1090,10 +1213,15 @@ PPV_CL=0.1,
 
 \subsection{Interpolation support for covariates or model variables}
 
-A possibility of specifying one of five standard interpolation algorithms is provided, {constant, linear, spline, pchip, cubic}, as defined in MATLAB, http://www.mathworks.co.uk/help/matlab/ref/interp1.html
+A possibility of specifying one of five standard interpolation algorithms is provided, {constant, 
+linear, spline, pchip, cubic}, as defined in MATLAB, http://www.mathworks.co.uk/help/matlab/ref/interp1.html
 
 \subsection{The notation of initial conditions for ODE's is extended}
-Last versions of PharmML assumed the initial time, $t_0$, to be always equal $0$. This restriction is now relaxed and PharmML allows to store any initial time. The initial value and time get their proper tags, \xelem{InitialValue} and \xelem{InitialTime}, accordingly. In both cases, the user can define them as numerical values, symbols defined somewhere else in the model or arbitrary mathematical expressions.
+Last versions of PharmML assumed the initial time, $t_0$, to be always equal $0$. This 
+restriction is now relaxed and PharmML allows to store any initial time. The initial value 
+and time get their proper tags, \xelem{InitialValue} and \xelem{InitialTime}, accordingly. 
+In both cases, the user can define them as numerical values, symbols defined somewhere 
+else in the model or arbitrary mathematical expressions.
 
 \begin{table}[ht]
 \begin{center}
@@ -1107,7 +1235,9 @@ IC 	&	$A_0$				&	$A(t_0=a) = A_0$ \\
   \hline
   \hline
 \end{tabular}
-\caption{Summary of \emph{initial conditions} in ODE support in PharmML. Version 0.2.1 supported the implementation of initial values only, version 0.3 supports additionally the storage of initial times $t_0$.}
+\caption{Summary of \emph{initial conditions} in ODE support in PharmML. Version 0.2.1 
+supported the implementation of initial values only, version 0.3 supports additionally the 
+storage of initial times $t_0$.}
 \end{center}
 \end{table}
 
