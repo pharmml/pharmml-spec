@@ -20,7 +20,7 @@
     <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="randomError" type="parameterVariability">
+        <VariabilityModel blkId="randomEffect" type="parameterVariability">
             <Level symbId="occasion">
                 <ParentLevel>
                     <ct:SymbRef symbIdRef="trial"/>
@@ -93,7 +93,7 @@
             <SimpleParameter symbId="pop_TTK0"/>
             <RandomVariable symbId="eta_TTK0">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -120,7 +120,7 @@
             <SimpleParameter symbId="pop_Rsyn"/>
             <RandomVariable symbId="eta_Rsyn">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -147,7 +147,7 @@
             <SimpleParameter symbId="pop_Css"/>
             <RandomVariable symbId="eta_Css">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -182,7 +182,7 @@
             <!-- eta_V1_indiv -->
             <RandomVariable symbId="eta_V1_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -202,7 +202,7 @@
             <!-- eta_V1_occasion -->
             <RandomVariable symbId="eta_V1_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -271,7 +271,7 @@
             <!-- eta_V2_indiv -->
             <RandomVariable symbId="eta_V2_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -281,7 +281,7 @@
             <!-- eta_V2_trial -->
             <RandomVariable symbId="eta_V2_trial">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="trial"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -291,7 +291,7 @@
             <!-- eta_V2_occasion -->
             <RandomVariable symbId="eta_V2_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -330,7 +330,7 @@
             <!-- eta_CL_indiv -->
             <RandomVariable symbId="eta_CL_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -340,7 +340,7 @@
             <!-- eta_CL_trial -->
             <RandomVariable symbId="eta_CL_trial">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="trial"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -350,7 +350,7 @@
             <!-- eta_CL_occasion -->
             <RandomVariable symbId="eta_CL_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -389,7 +389,7 @@
             <!-- eta_Q_indiv -->
             <RandomVariable symbId="eta_Q_indiv">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="subject"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="subject"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -399,7 +399,7 @@
             <!-- eta_Q_trial -->
             <RandomVariable symbId="eta_Q_trial">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="trial"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="trial"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -409,7 +409,7 @@
             <!-- eta_Q_occasion -->
             <RandomVariable symbId="eta_Q_occasion">
                 <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="randomError" symbIdRef="occasion"/>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="occasion"/>
                 </ct:VariabilityReference>
                 <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
                     <mean><rVal>0</rVal></mean>
@@ -439,6 +439,54 @@
                     </Equation>                   
                 </ct:Assign>
             </IndividualParameter>
+            
+            <SimpleParameter symbId="BSVV1">
+                <ct:Assign>
+                    <ct:Real>0.015</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="BSVCL">
+                <ct:Assign>
+                    <ct:Real>0.0158</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="BSVV2">
+                <ct:Assign>
+                    <ct:Real>0.0218</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="BSVQ">
+                <ct:Assign>
+                    <ct:Real>0.0804</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
+            
+            <Correlation>
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="randomEffect" symbIdRef="indiv"/>
+                </ct:VariabilityReference>                
+                <Matrix matrixType="StDevCorrMatrix">
+                    <ct:RowNames>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="eta_V1_indiv"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="eta_CL_indiv"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="eta_V2_indiv"/>
+                        <ct:SymbRef blkIdRef="pm1" symbIdRef="eta_Q_indiv"/>
+                    </ct:RowNames>
+                    <ct:MatrixRow>
+                        <ct:SymbRef symbIdRef="omega_V1"/>
+                    </ct:MatrixRow>
+                    <ct:MatrixRow>
+                        <ct:Real>0.00377</ct:Real><ct:SymbRef symbIdRef="omega_CL"/>
+                    </ct:MatrixRow>
+                    <ct:MatrixRow>
+                        <ct:Real>0.0156</ct:Real><ct:Real>0.0127</ct:Real><ct:SymbRef symbIdRef="omega_V2"/>
+                    </ct:MatrixRow>
+                    <ct:MatrixRow>
+                        <ct:Real>0.0273</ct:Real><ct:Real>0.0282</ct:Real><ct:Real>0.0411</ct:Real><ct:SymbRef symbIdRef="omega_Q"/>
+                    </ct:MatrixRow>
+                </Matrix>            
+            </Correlation>
+            
             
         </ParameterModel>
                 
@@ -797,7 +845,6 @@
             </CodeInjection>
         </NONMEMdataSet>
         
-        
         <EstimationStep oid="estStep">
             
             <TargetToolReference>
@@ -807,9 +854,39 @@
             <!-- PARAMETERS TO ESTIMATE -->
             <ParametersToEstimate>
                 <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="BSVV1"/>
+                    <InitialEstimate>
+                        <ct:Real>0.015</ct:Real>                        
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="BSVCL"/>
+                    <InitialEstimate>
+                        <ct:Real>0.0158</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="BSVV2"/>
+                    <InitialEstimate>
+                        <ct:Real>0.0218</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="BSVQ"/>
+                    <InitialEstimate>
+                        <ct:Real>0.0804</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_V"/>
                     <InitialEstimate>
                         <ct:Real>5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef symbIdRef="omega_Q"/>
+                    <InitialEstimate>
+                        <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
