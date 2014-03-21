@@ -235,41 +235,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-<!--    ORIGINAL code
-        <xs:complexType name="EstimationStepType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining the estimation step.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="msteps:CommonModellingStepType">
-                <xs:sequence>
-                    <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType"
-                        maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="1" minOccurs="1" name="ParametersToEstimate"
-                        type="msteps:ToEstimateType">
-                        <xs:annotation>
-                            <xs:documentation>Specified the parameters of the model to be estimated.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" ref="msteps:Operation">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The estimation operation. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
-    <!-- TEST -->
     <xs:complexType name="EstimationStepType">
         <xs:annotation>
             <xs:documentation>
@@ -301,7 +266,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="TargetToolReferenceType">
         <xs:annotation>
@@ -413,7 +377,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- based on EstimationOperationType -->
+
     <xs:complexType name="SimulationOperationType">
         <xs:annotation>
             <xs:documentation>
@@ -456,7 +420,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /NEW -->
+
     <xs:complexType name="ToEstimateType">
         <xs:annotation>
             <xs:documentation>
@@ -527,30 +491,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!--<!-\- NOT USED ANYMORE - TEST new type based on MappingType-\->
-    <xs:complexType abstract="true" name="NMMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Abstract type that defines a NONMEM datset mapping.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ds:ColumnRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The column reference to map to.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-\- /TEST -\->-->   
-
-    <!-- new DatasetMappingType based on design:LookupTableType !!! doseVarAttGroup REMOVED - not necesary here-->
     <xs:complexType name="DatasetMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -578,45 +518,8 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-    <!-- new NONMEMtype -->
+    </xs:complexType>    
     
-    
-<!--  Original - commented out for now
-        <xs:complexType name="DatasetMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining  a mapping of objective data to the model.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Initialises a variable.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" ref="msteps:Mapping">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines mapping to the dataset containing objective data. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ds:DataSet">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The dataset containing the objective data.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
     <xs:complexType name="TimepointsType">
         <xs:annotation>
             <xs:documentation>
@@ -693,9 +596,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- New: REFERENCE TO TOOL  -->
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
-                    <!-- /REFERENCE TO TOOL  -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -703,34 +604,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- original type "ModellingStepsType"
-        <xs:complexType name="ModellingStepsType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining the modelling steps section.                 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" ref="msteps:CommonModellingStep">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A modelling step.                
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="StepDependencies" type="msteps:StepDependencyType">
-                        <xs:annotation>
-                            <xs:documentation>Defines dependencies between steps.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-
-    <!-- TEST -->
     <xs:complexType name="ModellingStepsType">
         <xs:annotation>
             <xs:documentation>
@@ -766,10 +639,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
 
-    <!-- new NONMEMtype -->
     <xs:complexType name="NONMEMdataSetType">
         <xs:annotation>
             <xs:documentation>
@@ -807,9 +677,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- new NONMEMtype -->
-    
-    <!-- new TargetToolType - based on NONMEMtype: TargetToolData instead of DataSet -->
+
     <xs:complexType name="TargetToolType">
         <xs:annotation>
             <xs:documentation>
@@ -859,9 +727,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- new TargetToolType -->
-    
-    <!-- TEST - new type for SymbolMappingType based on 'MappingType' -->
+
     <xs:complexType name="SymbolMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -898,9 +764,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="CodeInjectionType">
         <xs:annotation>
             <xs:documentation>
@@ -920,9 +784,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>    
-    <!-- /TEST -->
-        
-    <!-- TEST -->
+
     <xs:complexType name="GenericCodeType">
         <xs:annotation>
             <xs:documentation>
@@ -932,7 +794,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- variable mapping type - using TargetToolSymbolType (instead of previously used NMTRANsymbolType) -->
                     <xs:element name="Symbol" minOccurs="0" maxOccurs="unbounded" type="msteps:TargetToolSymbolType"/>
                     <xs:element name="Code" type="xs:string">
                         <xs:annotation>
@@ -945,10 +806,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>    
-    <!-- /TEST -->
     
-    
-    <!-- TEST -->
     <xs:complexType name="TargetToolSymbolType">
         <xs:annotation>
             <xs:documentation>
@@ -961,7 +819,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     
     <!--
@@ -996,48 +853,12 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
-<!--    <!-\- TEST -\->
-    <xs:element name="NMCovariateMapping" substitutionGroup="msteps:NMMapping"
-        type="msteps:NMCovariateMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Specifies a mapping to a variable in the model.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <xs:element name="NMIndividualMapping" substitutionGroup="msteps:NMMapping"
-        type="msteps:NMIndividualMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Specifies the mapping to the individual.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <xs:element name="NMVariableMapping" substitutionGroup="msteps:NMMapping"
-        type="msteps:NMVariableMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                Specifies a mapping to a variable in the model.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>-->
-    
-    <!-- /TEST -->
-
     <xs:element name="Mapping" type="msteps:MappingType" abstract="true">
         <xs:annotation>
             <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    
-    <!--<!-\- TEST new Type for NONMEM dataset mapping -\->
-    <xs:element name="NMMapping" type="msteps:NMMappingType" abstract="true">
-        <xs:annotation>
-            <xs:documentation>Defines mappings between the dataset and the model.</xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <!-\- /TEST -\->-->
-        
+            
     <xs:element name="Timepoints" type="msteps:TimepointsType"/>
     <xs:element abstract="true" name="CommonModellingStep" type="msteps:CommonModellingStepType">
         <xs:annotation>
@@ -1046,18 +867,6 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-<!--    <xs:element name="EstimationOperation" type="msteps:EstimationOperationType">
-        <xs:annotation>
-            <xs:documentation>The estimation operation to be carried out.</xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <!-\- TEST -\->
-    <xs:element name="SimulationOperation" type="msteps:SimulationOperationType">
-        <xs:annotation>
-            <xs:documentation>The simulation operation to be carried out.</xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <!-\- /TEST -\->-->
     <xs:element name="EstimationStep" substitutionGroup="msteps:CommonModellingStep"
         type="msteps:EstimationStepType">
         <xs:annotation>
