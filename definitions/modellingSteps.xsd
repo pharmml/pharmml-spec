@@ -70,7 +70,7 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    <!-- NEW based on EstimationOpTypeType-->
+
     <xs:simpleType name="SimulationOpTypeType">
         <xs:annotation>
             <xs:documentation>
@@ -94,7 +94,7 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /NEW -->
+
     <xs:simpleType name="PropertyNameType">
         <xs:annotation>
             <xs:documentation>
