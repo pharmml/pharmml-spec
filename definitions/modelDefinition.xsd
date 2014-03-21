@@ -192,42 +192,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-<!--  ORIGINAL
-        <xs:complexType name="CorrelationType">
-        <xs:annotation>
-            <xs:documentation>Type defining a correlation between random effects.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:VariabilityReference"/>
-                    <xs:element name="RandomVariable1" type="mdef:CorrelatedRandomVarType">
-                        <xs:annotation>
-                            <xs:documentation>The first correlated parameter.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="RandomVariable2" type="mdef:CorrelatedRandomVarType">
-                        <xs:annotation>
-                            <xs:documentation>The second correlated parameter.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:choice>
-                        <xs:element name="CorrelationCoefficient" type="ct:ScalarRhs">
-                            <xs:annotation>
-                                <xs:documentation>The correlation co-efficient variable.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Covariance" type="ct:ScalarRhs">
-                            <xs:annotation>
-                                <xs:documentation>The covariance for both parameters.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
     <xs:complexType name="CorrelationType">
         <xs:annotation>
             <xs:documentation>Type defining a correlation between random effects.</xs:documentation>
@@ -245,7 +209,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- NEW PairwiseType -->
     <xs:complexType name="PairwiseType">
         <xs:annotation>
             <xs:documentation>Type defining pairwise correlations.</xs:documentation>
@@ -275,7 +238,6 @@ permissions and limitations under the License.
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
-    <!-- /NEW PairwiseType -->
     
     <xs:complexType name="ObservationModelType">
         <xs:annotation>
@@ -525,60 +487,7 @@ permissions and limitations under the License.
                                 A continuous univariate probability distribution, defined by UncertML, that describes this random variable. 
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
-                    <!-- TEST -->               
-                    <!-- OTHER DISTRIBUTIONS -->
-<!--                    <xs:element ref="distrib:AbstractContinuousMultivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A ...
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>                    
-                    <xs:element ref="distrib:AbstractDiscreteUnivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A ...
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="distrib:AbstractDiscreteMultivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A ...
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A ... 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="distrib:AbstractCategoricalMultivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A ... 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-\- STATISTICS -\->
-                    <xs:element ref="distrib:AbstractSummaryStatistic">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A ... 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="distrib:AbstractMetric">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A ... 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->                    
+                    </xs:element>    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -699,9 +608,7 @@ permissions and limitations under the License.
                     <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <!-- TEST extension: Interpolation goes here -->
             <xs:element ref="ct:Interpolation" minOccurs="0"/>
-            <!-- /TEST -->
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="CategorialCovariateType">
