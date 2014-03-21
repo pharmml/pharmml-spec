@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.2.2">
+    
+    <ct:Name>Example 6 - Chen, Holford model - model only</ct:Name>
+    
+    <IndependentVariable symbId="t"/>
+ 
+ 
+
+</PharmML>
+

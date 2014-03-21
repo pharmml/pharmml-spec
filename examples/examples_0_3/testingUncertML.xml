@@ -1,0 +1,1095 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
+    xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:un="http://www.uncertml.org/3.0"
+    writtenVersion="0.3" id="i1">
+    
+    <ct:Name>Testing PK with look-up table</ct:Name>
+    
+    <!-- INDEPENDENT VARIABLE -->
+    <IndependentVariable symbId="t"/>
+    
+    <!-- MODEL DEFINITION -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+
+        <!-- VARIABILITY MODEL -->
+        <VariabilityModel blkId="randEffect" type="parameterVariability">
+            <Level symbId="indiv">
+                <ct:Name>Individual Variability</ct:Name>
+            </Level>
+        </VariabilityModel>
+      
+        <!-- PARAMETER MODEL -->
+        <ParameterModel blkId="pm1">
+
+<!--            <RandomVariable symbId="eta_param1">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <un:NormalDistribution definition="">
+                    <un:mean>
+                        <un:var varId="mean_param1"/>
+                    </un:mean>
+                    <un:stddev>
+                        <un:var varId="stdev_param1"/>
+                    </un:stddev>
+                </un:NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="param1">
+                <GaussianModel>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_param1"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_param1"></ct:SymbRef>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>-->
+
+            <!-- kout -->
+            <SimpleParameter symbId="pop_kout"/>
+            <SimpleParameter symbId="omega_kout"/>
+            <RandomVariable symbId="eta_kout">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <!-- UNCERTML -->
+                <!--                <un:BetaDistribution definition="http://www.uncertml.org/...">
+                    <un:alpha>
+                        <un:prVal>1</un:prVal>
+                    </un:alpha>
+                    <un:beta>
+                        <un:prVal>2</un:prVal>
+                    </un:beta>
+                    <un:truncationLowerInclusiveBound>
+                        <un:pVal>.5</un:pVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:pVal>.4</un:pVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:BetaDistribution>-->
+<!--                <un:BetaDistribution definition="http://www.uncertml.org/...">
+                    <un:alpha>
+                        <un:var varId="ALPHA=1"/>
+                    </un:alpha>
+                    <un:beta>
+                        <un:var varId="BETA=2"/>
+                    </un:beta>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB=.5"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="uLIB=.4"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:BetaDistribution>-->
+                
+<!--                <un:CauchyDistribution definition="http://www.uncertml.org/...">
+                    <un:location>
+                        <un:rVal>1</un:rVal>
+                    </un:location>
+                    <un:scale>
+                        <un:prVal>2</un:prVal>
+                    </un:scale>
+                    <un:truncationLowerInclusiveBound>
+                        <un:rVal>.1</un:rVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:rVal>5</un:rVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:CauchyDistribution>-->
+<!--                <un:CauchyDistribution definition="http://www.uncertml.org/...">
+                    <un:location>
+                        <un:var varId="LOCATION=1"/>
+                    </un:location>
+                    <un:scale>
+                        <un:var varId="SCALE=2"/>
+                    </un:scale>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB=.1"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="tUIB=5"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:CauchyDistribution>-->
+                
+<!--                <un:ChiSquareDistribution definition="http://www.uncertml.org/...">
+                    <un:degreesOfFreedom>
+                        <un:pnVal>5</un:pnVal>
+                    </un:degreesOfFreedom>
+                    <un:truncationLowerInclusiveBoundIG>
+                        <un:prVal>.1</un:prVal>
+                    </un:truncationLowerInclusiveBoundIG>
+                    <un:truncationUpperInclusiveBoundIG>
+                        <un:prVal>2</un:prVal>
+                    </un:truncationUpperInclusiveBoundIG>
+                </un:ChiSquareDistribution>-->
+<!--                <un:ChiSquareDistribution definition="http://www.uncertml.org/...">
+                    <un:degreesOfFreedom>
+                        <un:pnVal>5</un:pnVal>
+                    </un:degreesOfFreedom>
+                    <un:truncationLowerInclusiveBoundIG>
+                        <un:var varId="tLIBIG=.1"/>
+                    </un:truncationLowerInclusiveBoundIG>
+                    <un:truncationUpperInclusiveBoundIG>
+                        <un:var varId="tUIBIG=2"/>
+                    </un:truncationUpperInclusiveBoundIG>
+                </un:ChiSquareDistribution>-->
+                
+<!--                <un:ContinuousUnivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".1">
+                        <un:NormalDistribution definition="http://www.uncertml.org/...">
+                            <un:mean>
+                                <un:rVal>1</un:rVal>
+                            </un:mean>
+                            <un:stddev>
+                                <un:prVal>.5</un:prVal>
+                            </un:stddev>
+                            <un:truncationLowerInclusiveBound>
+                                <un:rVal>.1</un:rVal>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:rVal>5</un:rVal>
+                            </un:truncationUpperInclusiveBound>
+                        </un:NormalDistribution>                        
+                    </un:component>
+                    <un:component weight=".9">
+                        <un:NormalDistribution definition="http://www.uncertml.org/...">
+                            <un:mean>
+                                <un:rVal>2</un:rVal>
+                            </un:mean>
+                            <un:stddev>
+                                <un:prVal>.75</un:prVal>
+                            </un:stddev>
+                            <un:truncationLowerInclusiveBound>
+                                <un:rVal>.2</un:rVal>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:rVal>10</un:rVal>
+                            </un:truncationUpperInclusiveBound>
+                        </un:NormalDistribution>                        
+                    </un:component>
+                </un:ContinuousUnivariateMixtureModel>-->
+<!--                <un:ContinuousUnivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".1">
+                        <un:NormalDistribution definition="http://www.uncertml.org/...">
+                            <un:mean>
+                                <un:var varId="MEAN=1"/>
+                            </un:mean>
+                            <un:stddev>
+                                <un:var varId="STDEV=.5"/>
+                            </un:stddev>
+                            <un:truncationLowerInclusiveBound>
+                                <un:var varId="tLIB=.1"/>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:var varId="tUIB=5"/>
+                            </un:truncationUpperInclusiveBound>
+                        </un:NormalDistribution>                        
+                    </un:component>
+                    <un:component weight=".9">
+                        <un:NormalDistribution definition="http://www.uncertml.org/...">
+                            <un:mean>
+                                <un:var varId="MEAN=2"/>
+                            </un:mean>
+                            <un:variance>
+                                <un:var varId="VARIANCE=2"/>
+                            </un:variance>
+                            <un:truncationLowerInclusiveBound>
+                                <un:var varId="tLIB=.2"/>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:var varId="tUIB=10"/>
+                            </un:truncationUpperInclusiveBound>
+                        </un:NormalDistribution>                        
+                    </un:component>
+                </un:ContinuousUnivariateMixtureModel>-->
+                
+<!--                <un:DiracDeltaDistribution definition="http://www.uncertml.org/...">
+                    <un:location>
+                        <un:rVal>1</un:rVal>
+                    </un:location>
+                </un:DiracDeltaDistribution>-->
+<!--                <un:DiracDeltaDistribution definition="http://www.uncertml.org/...">
+                    <un:location>
+                        <un:var varId="LOCATION=1"/>
+                    </un:location>
+                </un:DiracDeltaDistribution>-->
+                
+<!--                <un:ExponentialDistribution definition="http://www.uncertml.org/...">
+                    <un:rate>
+                        <un:prVal>.5</un:prVal>
+                    </un:rate>
+                    <un:truncationLowerInclusiveBound>
+                        <un:prVal>.1</un:prVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:prVal>5</un:prVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:ExponentialDistribution>-->
+                <un:ExponentialDistribution definition="http://www.uncertml.org/...">
+                    <un:rate>
+                        <un:var varId="RATE"/>
+                    </un:rate>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="tUIB"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:ExponentialDistribution>
+                
+<!--                <un:FDistribution definition="http://www.uncertml.org/...">
+                    <un:denominator>
+                        <un:nVal>3</un:nVal>
+                    </un:denominator>
+                    <un:numerator>
+                        <un:nVal>2</un:nVal>
+                    </un:numerator>
+                    <un:truncationLowerInclusiveBoundIG>
+                        <un:prVal>.1</un:prVal>
+                    </un:truncationLowerInclusiveBoundIG>
+                    <un:truncationUpperInclusiveBoundIG>
+                        <un:prVal>5</un:prVal>
+                    </un:truncationUpperInclusiveBoundIG>
+                </un:FDistribution>-->
+<!--                <un:GammaDistribution definition="http://www.uncertml.org/...">
+                    <un:shape>
+                        <un:prVal>.1</un:prVal>
+                    </un:shape>
+                    <un:scale>
+                        <un:prVal>3</un:prVal>
+                    </un:scale>
+                    <un:truncationLowerInclusiveBound>
+                        <un:prVal>.01</un:prVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:prVal>5</un:prVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:GammaDistribution>-->
+<!--                <un:InverseGammaDistribution definition="http://www.uncertml.org/...">
+                    <un:shape>
+                        <un:prVal>.7</un:prVal>
+                    </un:shape>
+                    <un:scale>
+                        <un:prVal>.5</un:prVal>
+                    </un:scale>
+                    <un:truncationLowerInclusiveBound>
+                        <un:prVal>.1</un:prVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:prVal>10</un:prVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:InverseGammaDistribution>-->
+<!--                <un:LaplaceDistribution definition="http://www.uncertml.org/...">
+                    <un:location>
+                        <un:rVal>1</un:rVal>
+                    </un:location>
+                    <un:scale>
+                        <un:prVal>3</un:prVal>
+                    </un:scale>
+                    <un:truncationLowerInclusiveBound>
+                        <un:rVal>.1</un:rVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:rVal>5</un:rVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:LaplaceDistribution>-->
+<!--                <un:LogNormalDistribution definition="http://www.uncertml.org/...">
+                    <un:logScale>
+                        <un:rVal>.9</un:rVal>
+                    </un:logScale>
+                    <un:shape>
+                        <un:prVal>2</un:prVal>
+                    </un:shape>
+                    <un:truncationLowerInclusiveBound>
+                        <un:prVal>.1</un:prVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:prVal>5</un:prVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:LogNormalDistribution>-->
+<!--                <un:LogisticDistribution definition="http://www.uncertml.org/...">
+                    <un:location>
+                        <un:rVal>2</un:rVal>
+                    </un:location>
+                    <un:scale>
+                        <un:prVal>3</un:prVal>
+                    </un:scale>
+                    <un:truncationLowerInclusiveBound>
+                        <un:rVal>.1</un:rVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:rVal>5</un:rVal>
+                    </un:truncationUpperInclusiveBound>                    
+                </un:LogisticDistribution>-->
+<!--                <un:NormalDistribution definition="http://www.uncertml.org/...">
+                    <un:mean>
+                        <un:rVal>1</un:rVal>
+                    </un:mean>
+                    <un:stddev>
+                        <un:prVal>.5</un:prVal>
+                    </un:stddev>
+                    <un:truncationLowerInclusiveBound>
+                        <un:rVal>.1</un:rVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:rVal>5</un:rVal>
+                    </un:truncationUpperInclusiveBound>                    
+                </un:NormalDistribution>-->
+<!--                <un:ParetoDistribution definition="http://www.uncertml.org/...">
+                    <un:scale>
+                        <un:prVal>1</un:prVal>
+                    </un:scale>
+                    <un:shape>
+                        <un:prVal>4</un:prVal>
+                    </un:shape>
+                    <un:truncationLowerInclusiveBound>
+                        <un:rVal>.1</un:rVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:rVal>5</un:rVal>
+                    </un:truncationUpperInclusiveBound>                    
+                </un:ParetoDistribution>-->
+<!--                <un:StudentTDistribution definition="http://www.uncertml.org/...">
+                    <un:location>
+                        <un:rVal>1</un:rVal>
+                    </un:location>
+                    <un:scale>
+                        <un:prVal>5</un:prVal>
+                    </un:scale>
+                    <un:degreesOfFreedom>
+                        <un:pnVal>2</un:pnVal>
+                    </un:degreesOfFreedom>
+                    <un:truncationLowerInclusiveBound>
+                        <un:rVal>.1</un:rVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:rVal>5</un:rVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:StudentTDistribution>-->
+<!--                <un:UniformDistribution definition="http://www.uncertml.org/...">
+                    <un:minimum>
+                        <un:rVal>0</un:rVal>
+                    </un:minimum>
+                    <un:maximum>
+                        <un:rVal>1</un:rVal>
+                    </un:maximum>
+                </un:UniformDistribution>-->
+<!--                <un:WeibullDistribution definition="http://www.uncertml.org/...">
+                    <un:scale>
+                        <un:prVal>1</un:prVal>
+                    </un:scale>
+                    <un:shape>
+                        <un:prVal>2</un:prVal>
+                    </un:shape>
+                    <un:truncationLowerInclusiveBound>
+                        <un:prVal>0.1</un:prVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:prVal>5</un:prVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:WeibullDistribution>-->
+                
+                <!-- MULTIVARIATE CONTINUES  -->
+
+                <!--                <un:NormalInverseGammaDistribution definition="http://www.uncertml.org/...">
+                    <un:mean>
+                        <un:rVal>1</un:rVal>
+                    </un:mean>
+                    <un:varianceScaling>
+                        <un:prVal>2</un:prVal>
+                    </un:varianceScaling>
+                    <un:truncationLowerInclusiveBoundN>
+                        <un:rVal>.1</un:rVal>
+                    </un:truncationLowerInclusiveBoundN>
+                    <un:truncationUpperInclusiveBoundN>
+                        <un:rVal>5</un:rVal>
+                    </un:truncationUpperInclusiveBoundN>
+                    <un:shape>
+                        <un:prVal>1</un:prVal>
+                    </un:shape>
+                    <un:scale>
+                        <un:prVal>2</un:prVal>
+                    </un:scale>
+                    <un:truncationLowerInclusiveBoundIG>
+                        <un:prVal>.1</un:prVal>
+                    </un:truncationLowerInclusiveBoundIG>
+                    <un:truncationUpperInclusiveBoundIG>
+                        <un:prVal>5</un:prVal>
+                    </un:truncationUpperInclusiveBoundIG>
+                </un:NormalInverseGammaDistribution>-->
+<!--                <un:MultivariateNormalDistribution definition="http://www.uncertml.org/...">
+                    <un:meanVector>
+                        <un:val><un:rVal>.5</un:rVal></un:val>
+                        <un:val><un:rVal>.7</un:rVal></un:val>
+                    </un:meanVector>
+                    <un:covarianceMatrix dimension="2" definition="http://www.uncertml.org/...">
+                        <un:value>
+                            <un:val><un:rVal>1</un:rVal></un:val>
+                            <un:val><un:rVal>2</un:rVal></un:val>
+                            <un:val><un:rVal>3</un:rVal></un:val>
+                            <un:val><un:rVal>4</un:rVal></un:val>
+                        </un:value>
+                    </un:covarianceMatrix>
+                </un:MultivariateNormalDistribution>-->
+<!--                <un:MultivariateNormalDistribution definition="http://www.uncertml.org/...">
+                    <un:meanVector>
+                        <un:arrayVar varId=""/>
+                    </un:meanVector>
+                    <un:covarianceMatrix dimension="2" definition="http://www.uncertml.org/...">
+                        <un:value>
+                            <un:arrayVar varId=""/>
+                        </un:value>
+                    </un:covarianceMatrix>
+                </un:MultivariateNormalDistribution>-->
+<!--                <un:ContinuousMultivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".3">
+                        <un:MultivariateNormalDistribution definition="http://www.uncertml.org/...">
+                            <un:meanVector>
+                                <un:val><un:rVal>.5</un:rVal></un:val>
+                                <un:val><un:rVal>.7</un:rVal></un:val>
+                            </un:meanVector>
+                            <un:covarianceMatrix dimension="2" definition="http://www.uncertml.org/...">
+                                <un:value>
+                                    <un:val><un:rVal>.1</un:rVal></un:val>
+                                    <un:val><un:rVal>.2</un:rVal></un:val>
+                                    <un:val><un:rVal>.3</un:rVal></un:val>
+                                    <un:val><un:rVal>.4</un:rVal></un:val>
+                                </un:value>
+                            </un:covarianceMatrix>
+                        </un:MultivariateNormalDistribution>
+                    </un:component>
+                    <un:component weight=".7">
+                        <un:MultivariateNormalDistribution definition="http://www.uncertml.org/...">
+                            <un:meanVector>
+                                <un:val><un:rVal>1.5</un:rVal></un:val>
+                                <un:val><un:rVal>1.7</un:rVal></un:val>
+                            </un:meanVector>
+                            <un:covarianceMatrix dimension="2" definition="http://www.uncertml.org/...">
+                                <un:value>
+                                    <un:val><un:rVal>.2</un:rVal></un:val>
+                                    <un:val><un:rVal>.3</un:rVal></un:val>
+                                    <un:val><un:rVal>.4</un:rVal></un:val>
+                                    <un:val><un:rVal>.5</un:rVal></un:val>
+                                </un:value>
+                            </un:covarianceMatrix>
+                        </un:MultivariateNormalDistribution>
+                    </un:component>
+                </un:ContinuousMultivariateMixtureModel>-->
+<!--                <un:DirichletDistribution definition="http://www.uncertml.org/...">
+                    <un:concentration><un:prVal>.5</un:prVal></un:concentration>
+                </un:DirichletDistribution>-->
+                
+                <!-- DISCRETE UNIVARIATE -->
+                
+<!--                <un:BinomialDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfTrials>
+                        <un:nVal>10</un:nVal>
+                    </un:numberOfTrials>
+                    <un:probabilityOfSuccess>
+                        <un:pVal>.25</un:pVal>
+                    </un:probabilityOfSuccess>
+                    <un:truncationLowerInclusiveBound>
+                        <un:nVal>1</un:nVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:nVal>15</un:nVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:BinomialDistribution>
+                
+                <un:BinomialDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfTrials>
+                        <un:var varId="NOT=10"/>
+                    </un:numberOfTrials>
+                    <un:probabilityOfSuccess>
+                        <un:var varId="POS=0.25"/>
+                    </un:probabilityOfSuccess>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB=1"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="tUIB=15"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:BinomialDistribution>-->
+                
+<!--                <un:DiscreteUnivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".1">
+                        <un:BinomialDistribution definition="http://www.uncertml.org/...">
+                            <un:numberOfTrials>
+                                <un:nVal>10</un:nVal>
+                            </un:numberOfTrials>
+                            <un:probabilityOfSuccess>
+                                <un:pVal>.25</un:pVal>
+                            </un:probabilityOfSuccess>
+                            <un:truncationLowerInclusiveBound>
+                                <un:nVal>1</un:nVal>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:nVal>15</un:nVal>
+                            </un:truncationUpperInclusiveBound>
+                        </un:BinomialDistribution>                    
+                    </un:component>
+                    <un:component weight=".9">
+                        <un:BinomialDistribution definition="http://www.uncertml.org/...">
+                            <un:numberOfTrials>
+                                <un:nVal>10</un:nVal>
+                            </un:numberOfTrials>
+                            <un:probabilityOfSuccess>
+                                <un:pVal>.45</un:pVal>
+                            </un:probabilityOfSuccess>
+                            <un:truncationLowerInclusiveBound>
+                                <un:nVal>1</un:nVal>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:nVal>15</un:nVal>
+                            </un:truncationUpperInclusiveBound>
+                        </un:BinomialDistribution>                    
+                    </un:component>
+                </un:DiscreteUnivariateMixtureModel>-->
+<!--                <un:DiscreteUnivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".1">
+                        <un:BinomialDistribution definition="http://www.uncertml.org/...">
+                            <un:numberOfTrials>
+                                <un:var varId="nOT"/>
+                            </un:numberOfTrials>
+                            <un:probabilityOfSuccess>
+                                <un:var varId="pOS"/>
+                            </un:probabilityOfSuccess>
+                            <un:truncationLowerInclusiveBound>
+                                <un:var varId="tLIB"/>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:var varId="tUIB"/>
+                            </un:truncationUpperInclusiveBound>
+                        </un:BinomialDistribution>                    
+                    </un:component>
+                    <un:component weight=".9">
+                        <un:BinomialDistribution definition="http://www.uncertml.org/...">
+                            <un:numberOfTrials>
+                                <un:var varId="nOT"/>
+                            </un:numberOfTrials>
+                            <un:probabilityOfSuccess>
+                                <un:var varId="pOS"/>
+                            </un:probabilityOfSuccess>
+                            <un:truncationLowerInclusiveBound>
+                                <un:var varId="tLIB"/>
+                            </un:truncationLowerInclusiveBound>
+                            <un:truncationUpperInclusiveBound>
+                                <un:var varId="tUIB"/>
+                            </un:truncationUpperInclusiveBound>
+                        </un:BinomialDistribution>                    
+                    </un:component>
+                </un:DiscreteUnivariateMixtureModel>-->
+                
+<!--                <un:GeometricDistribution definition="http://www.uncertml.org/...">
+                    <un:probability>
+                        <un:pVal>.3</un:pVal>
+                    </un:probability>
+                    <un:truncationLowerInclusiveBound>
+                        <un:nVal>1</un:nVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:nVal>15</un:nVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:GeometricDistribution>-->
+<!--                <un:GeometricDistribution definition="http://www.uncertml.org/...">
+                    <un:probability>
+                        <un:var varId="PROB=.3"/>
+                    </un:probability>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="tUIB"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:GeometricDistribution>-->
+                
+
+<!--                <un:HypergeometricDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfSuccesses>
+                        <un:nVal>2</un:nVal>
+                    </un:numberOfSuccesses>
+                    <un:numberOfTrials>
+                        <un:nVal>4</un:nVal>
+                    </un:numberOfTrials>
+                    <un:populationSize>
+                        <un:nVal>10</un:nVal>
+                    </un:populationSize>
+                    <un:truncationLowerInclusiveBound>
+                        <un:nVal>1</un:nVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:nVal>15</un:nVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:HypergeometricDistribution>-->
+<!--                <un:HypergeometricDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfSuccesses>
+                        <un:var varId="nOS=2"/>
+                    </un:numberOfSuccesses>
+                    <un:numberOfTrials>
+                        <un:var varId="nOT=4"/>
+                    </un:numberOfTrials>
+                    <un:populationSize>
+                        <un:var varId="pS=10"/>
+                    </un:populationSize>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="tUIB"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:HypergeometricDistribution>-->
+                
+<!--                <un:NegativeBinomialDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfFailures>
+                        <un:nVal>10</un:nVal>
+                    </un:numberOfFailures>
+                    <un:probability>
+                        <un:pVal>.1</un:pVal>
+                    </un:probability>
+                    <un:truncationLowerInclusiveBound>
+                        <un:nVal>1</un:nVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:nVal>15</un:nVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:NegativeBinomialDistribution>-->
+<!--                <un:NegativeBinomialDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfFailures>
+                        <un:var varId="nOF=10"/>
+                    </un:numberOfFailures>
+                    <un:probability>
+                        <un:var varId="PROB=.1"/>
+                    </un:probability>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="tUIB"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:NegativeBinomialDistribution>-->
+                
+<!--                <un:PoissonDistribution definition="http://www.uncertml.org/...">
+                    <un:rate>
+                        <un:prVal>.5</un:prVal>
+                    </un:rate>
+                    <un:truncationLowerInclusiveBound>
+                        <un:nVal>1</un:nVal>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:nVal>15</un:nVal>
+                    </un:truncationUpperInclusiveBound>
+                </un:PoissonDistribution>-->
+<!--                <un:PoissonDistribution definition="http://www.uncertml.org/...">
+                    <un:rate>
+                        <un:var varId="RATE"/>
+                    </un:rate>
+                    <un:truncationLowerInclusiveBound>
+                        <un:var varId="tLIB"/>
+                    </un:truncationLowerInclusiveBound>
+                    <un:truncationUpperInclusiveBound>
+                        <un:var varId="tUIB"/>
+                    </un:truncationUpperInclusiveBound>
+                </un:PoissonDistribution>-->
+                
+                <!--                <un:MultinomialDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfTrials>
+                        <un:nVal>2</un:nVal>
+                    </un:numberOfTrials>
+                    <un:probabilities>
+                        <un:pVal>.4</un:pVal>
+                    </un:probabilities>
+                </un:MultinomialDistribution>-->
+<!--                <un:MultinomialDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfTrials>
+                        <un:var varId="nOT=2"/>
+                    </un:numberOfTrials>
+                    <un:probabilities>
+                        <un:var varId="PROB=0.4"/>
+                    </un:probabilities>
+                </un:MultinomialDistribution>-->
+                
+<!--                <un:WishartDistribution definition="http://www.uncertml.org/...">
+                    <un:degreesOfFreedom>
+                        <un:prVal>.1</un:prVal>
+                    </un:degreesOfFreedom>
+                    <un:scaleMatrix dimension="2" definition="http://www.uncertml.org/...">
+                        <un:value>
+                            <un:val><un:rVal>1</un:rVal></un:val>
+                            <un:val><un:rVal>2</un:rVal></un:val>
+                            <un:val><un:rVal>3</un:rVal></un:val>
+                            <un:val><un:rVal>4</un:rVal></un:val>
+                        </un:value>
+                    </un:scaleMatrix>
+                </un:WishartDistribution>-->
+<!--                <un:WishartDistribution definition="http://www.uncertml.org/distributions/...">
+                    <un:degreesOfFreedom>
+                        <un:var varId="DOF"/>
+                    </un:degreesOfFreedom>
+                    <un:scaleMatrix dimension="2" definition="http://www.uncertml.org/distributions/...">
+                        <un:value>
+                            <un:arrayVar varId="valueArray"/>
+                        </un:value>
+                    </un:scaleMatrix>
+                </un:WishartDistribution>-->
+                
+<!--                <un:DiscreteMultivariateMixtureModel definition="http://www.uncertml.org/distributions/...">
+                    <un:component weight=".3">
+                        <un:WishartDistribution definition="http://www.uncertml.org/distributions/...">
+                            <un:degreesOfFreedom>
+                                <un:prVal>2</un:prVal>
+                            </un:degreesOfFreedom>
+                            <un:scaleMatrix dimension="2" definition="http://www.uncertml.org/distributions/...">
+                                <un:value>
+                                    <un:val><un:rVal>1</un:rVal></un:val>
+                                    <un:val><un:rVal>2</un:rVal></un:val>
+                                    <un:val><un:rVal>3</un:rVal></un:val>
+                                    <un:val><un:rVal>4</un:rVal></un:val>
+                                </un:value>
+                            </un:scaleMatrix>
+                        </un:WishartDistribution>
+                    </un:component>
+                    <un:component weight=".7">
+                        <un:WishartDistribution definition="http://www.uncertml.org/distributions/...">
+                            <un:degreesOfFreedom>
+                                <un:prVal>5</un:prVal>
+                            </un:degreesOfFreedom>
+                            <un:scaleMatrix dimension="2" definition="http://www.uncertml.org/distributions/...">
+                                <un:value>
+                                    <un:val><un:rVal>2</un:rVal></un:val>
+                                    <un:val><un:rVal>3</un:rVal></un:val>
+                                    <un:val><un:rVal>4</un:rVal></un:val>
+                                    <un:val><un:rVal>5</un:rVal></un:val>
+                                </un:value>
+                            </un:scaleMatrix>
+                        </un:WishartDistribution>
+                    </un:component>
+                </un:DiscreteMultivariateMixtureModel>-->
+                
+                <!--                <un:DiscreteMultivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".3">
+                        <un:WishartDistribution definition="http://www.uncertml.org/...">
+                            <un:degreesOfFreedom>
+                                <un:var varId="DOF"/>
+                            </un:degreesOfFreedom>
+                            <un:scaleMatrix dimension="2" definition="http://www.uncertml.org/...">
+                                <un:value>
+                                    <un:arrayVar varId="valueArray"/>
+                                </un:value>
+                            </un:scaleMatrix>
+                        </un:WishartDistribution>
+                    </un:component>
+                    <un:component weight=".7">
+                        <un:WishartDistribution definition="http://www.uncertml.org/...">
+                            <un:degreesOfFreedom><un:var varId="DOF"/></un:degreesOfFreedom>
+                            <un:scaleMatrix dimension="2" definition="http://www.uncertml.org/...">
+                                <un:value>
+                                    <un:arrayVar varId="valueArray"/>
+                                </un:value>
+                            </un:scaleMatrix>
+                        </un:WishartDistribution>
+                    </un:component>
+                </un:DiscreteMultivariateMixtureModel>-->
+<!--                <un:MultinomialDistribution definition="http://www.uncertml.org/...">
+                    <un:numberOfTrials><un:nVal>5</un:nVal></un:numberOfTrials>
+                    <un:probabilities><un:pVal>.1</un:pVal></un:probabilities>
+                </un:MultinomialDistribution>-->
+<!--                <un:BernoulliDistribution definition="http://www.uncertml.org/...">
+                    <un:categoryProb definition="C1">
+                        <un:name>P1</un:name>
+                        <un:probability>
+                            <un:pVal>.2</un:pVal>
+                        </un:probability>
+                    </un:categoryProb>
+                    <un:categoryProb definition="C2">
+                        <un:name>P2</un:name>
+                        <un:probability>
+                            <un:pVal>.3</un:pVal>
+                        </un:probability>
+                    </un:categoryProb>
+                </un:BernoulliDistribution>-->
+<!--                <un:CategoricalDistribution definition="http://www.uncertml.org/...">
+                    <un:categoryProb definition="C1">
+                        <un:name>P1</un:name>
+                        <un:probability>
+                            <un:pVal>.5</un:pVal>
+                        </un:probability>
+                    </un:categoryProb>
+                    <un:categoryProb definition="C2">
+                        <un:name>P2</un:name>
+                        <un:probability>
+                            <un:pVal>.75</un:pVal>
+                        </un:probability>
+                    </un:categoryProb>
+                </un:CategoricalDistribution>-->
+
+ <!--               <un:CategoricalUnivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".2">
+                        <un:BernoulliDistribution definition="http://www.uncertml.org/...">
+                            <un:categoryProb definition="http://www.uncertml.org/...">
+                                <un:name>P1</un:name>
+                                <un:probability>
+                                    <un:pVal>.1</un:pVal>
+                                </un:probability>
+                            </un:categoryProb>
+                        </un:BernoulliDistribution>
+                    </un:component>
+                    <un:component weight=".8">
+                        <un:BernoulliDistribution definition="http://www.uncertml.org/...">
+                            <un:categoryProb definition="http://www.uncertml.org/...">
+                                <un:name>P2</un:name>
+                                <un:probability>
+                                    <un:pVal>.2</un:pVal>
+                                </un:probability>
+                            </un:categoryProb>
+                        </un:BernoulliDistribution>
+                    </un:component>
+                </un:CategoricalUnivariateMixtureModel>
+                <un:CategoricalMultivariateMixtureModel definition="http://www.uncertml.org/...">
+                    <un:component weight=".1">
+                        <un:CategoricalDistribution definition="http://www.uncertml.org/...">
+                            <un:categoryProb definition="C11">
+                                <un:name>P1</un:name>
+                                <un:probability>
+                                    <un:pVal>.5</un:pVal>
+                                </un:probability>
+                            </un:categoryProb>
+                            <un:categoryProb definition="C12">
+                                <un:name>P2</un:name>
+                                <un:probability>
+                                    <un:pVal>.75</un:pVal>
+                                </un:probability>
+                            </un:categoryProb>
+                        </un:CategoricalDistribution>
+                    </un:component>
+                    <un:component weight=".9">
+                        <un:CategoricalDistribution definition="http://www.uncertml.org/...">
+                            <un:categoryProb definition="C21">
+                                <un:name>P1</un:name>
+                                <un:probability>
+                                    <un:pVal>.95</un:pVal>
+                                </un:probability>
+                            </un:categoryProb>
+                            <un:categoryProb definition="C22">
+                                <un:name>P2</un:name>
+                                <un:probability>
+                                    <un:pVal>.25</un:pVal>
+                                </un:probability>
+                            </un:categoryProb>
+                        </un:CategoricalDistribution>
+                    </un:component>
+                </un:CategoricalMultivariateMixtureModel>-->
+                
+                <!-- STATISTICS -->
+                
+<!--                <un:StandardDeviation definition="http://www.uncertml.org/3.0">
+                    <un:value>
+                        <un:rVal>.5</un:rVal>
+                    </un:value>
+                </un:StandardDeviation>-->
+<!--                <un:StandardDeviation definition="http://www.uncertml.org/3.0">
+                    <un:value>
+                        <un:var varId="varianceValue"/>
+                    </un:value>
+                </un:StandardDeviation>-->
+
+                <!--                <un:Variance definition="http://www.uncertml.org/3.0">
+                    <un:value>
+                        <un:prVal>5</un:prVal>
+                    </un:value>
+                </un:Variance>
+                <un:Variance definition="http://www.uncertml.org/3.0">
+                    <un:value>
+                        <un:var varId="VALUE"/>
+                    </un:value>
+                </un:Variance>-->
+                
+<!--                <un:ConfidenceInterval definition="http://www.uncertml.org/3.0">
+                    <un:lower level=".01" definition="http://www.uncertml.org/...">
+                        <un:value>
+                            <un:rVal>-3.14</un:rVal>
+                        </un:value>
+                    </un:lower>
+                    <un:upper level=".99" definition="http://www.uncertml.org/3.0">
+                        <un:value>
+                            <un:rVal>6.28</un:rVal>
+                        </un:value>
+                    </un:upper>
+                </un:ConfidenceInterval>
+                <un:ConfidenceInterval definition="http://www.uncertml.org/3.0">
+                    <un:lower level=".01" definition="http://www.uncertml.org/...">
+                        <un:value>
+                            <un:var varId="lowerValue"/>
+                        </un:value>
+                    </un:lower>
+                    <un:upper level=".99" definition="http://www.uncertml.org/3.0">
+                        <un:value>
+                            <un:var varId="upperValue"/>
+                        </un:value>
+                    </un:upper>
+                </un:ConfidenceInterval>-->
+                
+<!--                <un:CoefficientOfVariation definition="">
+                    <un:value>
+                        <un:rVal>3</un:rVal>
+                    </un:value>
+                </un:CoefficientOfVariation>
+                <un:CoefficientOfVariation definition="">
+                    <un:value>
+                        <un:var varId="VALUE"/>
+                    </un:value>
+                </un:CoefficientOfVariation>-->
+                
+                <!--                <un:Correlation definition="http://www.uncertml.org/...">
+                    <un:value>.3</un:value>
+                </un:Correlation>-->
+               
+<!--                <un:CovarianceMatrix dimension="2" definition="http://www.uncertml.org/...">
+                    <un:value>
+                        <un:val><un:rVal>.1</un:rVal></un:val>
+                        <un:val><un:rVal>.35</un:rVal></un:val>
+                        <un:val><un:rVal>.15</un:rVal></un:val>
+                        <un:val><un:rVal>.5</un:rVal></un:val>
+                    </un:value>
+                </un:CovarianceMatrix>-->
+<!--                <un:CovarianceMatrix dimension="2" definition="">
+                    <un:value>
+                        <un:val><un:var varId="variance1"/></un:val>
+                        <un:val><un:var varId="covariance12"/></un:val>
+                        <un:val><un:var varId="covariance21"/></un:val>
+                        <un:val><un:var varId="variance2"/></un:val>
+                    </un:value>
+                </un:CovarianceMatrix>-->
+                
+<!--                <un:ConfusionMatrix definition="http://www.uncertml.org/...">
+                    <un:sourceCategories>
+                        <un:sVal>Cat</un:sVal>
+                        <un:sVal>Dog</un:sVal>
+                        <un:sVal>Rabbit</un:sVal>
+                    </un:sourceCategories>
+                    <un:targetCategories>
+                        <un:sVal>Cat</un:sVal>
+                        <un:sVal>Dog</un:sVal>
+                        <un:sVal>Rabbit</un:sVal>
+                    </un:targetCategories>
+                    <un:counts>
+                        <un:nVal>5</un:nVal><un:nVal>3</un:nVal><un:nVal>0</un:nVal>
+                        <un:nVal>2</un:nVal><un:nVal>3</un:nVal><un:nVal>1</un:nVal>
+                        <un:nVal>0</un:nVal><un:nVal>2</un:nVal><un:nVal>11</un:nVal>
+                    </un:counts>
+                </un:ConfusionMatrix>
+                <un:ConfusionMatrix definition="http://www.uncertml.org/...">
+                    <un:sourceCategories>
+                        <un:arrayVar varId="CatDogRabbit"/>
+                    </un:sourceCategories>
+                    <un:targetCategories>
+                        <un:arrayVar varId="CatDogRabbit"/>
+                    </un:targetCategories>
+                    <un:counts>
+                        <un:arrayVar varId="CatDogRabbit_Matrix"/>
+                    </un:counts>
+                </un:ConfusionMatrix>-->
+<!--                <un:ConfusionMatrix definition="http://www.uncertml.org/...">
+                    <un:sourceCategories>
+                        <un:var varId="Cat"/>
+                        <un:var varId="Dog"/>
+                        <un:var varId="Rabbit"/>
+                    </un:sourceCategories>
+                    <un:targetCategories>
+                        <un:var varId="Cat"/>
+                        <un:var varId="Dog"/>
+                        <un:var varId="Rabbit"/>
+                    </un:targetCategories>
+                    <un:counts>
+                        <un:var varId="CC"/><un:var varId="CD"/><un:var varId="CR"/>
+                        <un:var varId="DC"/><un:var varId="DD"/><un:var varId="DR"/>
+                        <un:var varId="RC"/><un:var varId="RD"/><un:var varId="RR"/>
+                    </un:counts>
+                </un:ConfusionMatrix>-->
+                
+
+
+            </RandomVariable>
+            <IndividualParameter symbId="kout">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <GeneralCovariate>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="plus">
+                                    <Uniop op="log">
+                                        <ct:SymbRef symbIdRef="pop_kout"/>
+                                    </Uniop>
+                                    <ct:SymbRef symbIdRef="eta_kout"/>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </GeneralCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_kout"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+
+        </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
+        <StructuralModel blkId="sm1">
+            
+            <!-- TARGET FOR LOOKUP DATA REFERENCE -->
+            <ct:Variable symbolType="real" symbId="Cc">
+                <ct:Assign>
+                    <ct:Interpolation>
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="t"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
+                </ct:Assign>
+            </ct:Variable>
+
+            <ct:DerivativeVariable symbId="E" symbolType="real">
+                <ct:Description>Effect</ct:Description>
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="Rin"/>
+                                <Binop op="minus">
+                                    <ct:Real>1</ct:Real>
+                                    <Binop op="divide">
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Imax"/>
+                                            <ct:SymbRef symbIdRef="Cc"/>
+                                        </Binop>
+                                        <Binop op="plus">
+                                            <ct:SymbRef symbIdRef="Cc"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="IC50"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="kout"/>
+                                <ct:SymbRef symbIdRef="E"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:DerivativeVariable>
+        </StructuralModel>
+
+    </ModelDefinition>
+
+</PharmML>

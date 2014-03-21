@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
+    xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
+    writtenVersion="0.3" id="i1">
+    
+    <ct:Name>Testing PK with user-defined interpolation fct - C2</ct:Name>
+    
+    <!-- INDEPENDENT VARIABLE -->
+    <IndependentVariable symbId="t"/>
+    
+    <!-- FUNCTION DEFINITION -->
+    <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
+        symbId="MyInterpolationFunction" symbolType="real">
+        <FunctionArgument symbId="time" symbolType="real"/>
+        <FunctionArgument symbId="k0" symbolType="real"/>
+        <FunctionArgument symbId="k1" symbolType="real"/>
+        <FunctionArgument symbId="k2" symbolType="real"/>
+        <FunctionArgument symbId="k3" symbolType="real"/>
+        <FunctionArgument symbId="k4" symbolType="real"/>
+        <FunctionArgument symbId="k5" symbolType="real"/>
+        <FunctionArgument symbId="k6" symbolType="real"/>
+        <FunctionArgument symbId="k7" symbolType="real"/>
+        <FunctionArgument symbId="t0" symbolType="real"/>
+        <FunctionArgument symbId="t1" symbolType="real"/>
+        <FunctionArgument symbId="t2" symbolType="real"/>
+        <FunctionArgument symbId="t3" symbolType="real"/>
+        <FunctionArgument symbId="t4" symbolType="real"/>
+        <FunctionArgument symbId="t5" symbolType="real"/>
+        <FunctionArgument symbId="t6" symbolType="real"/>
+        <FunctionArgument symbId="t7" symbolType="real"/>
+        <Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Piecewise>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k0"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k1"/>
+                                        <ct:SymbRef symbIdRef="k0"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t1"/>
+                                        <ct:SymbRef symbIdRef="t0"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t0"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t0"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t1"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k1"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k2"/>
+                                        <ct:SymbRef symbIdRef="k1"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t2"/>
+                                        <ct:SymbRef symbIdRef="t1"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t1"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t1"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t2"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k2"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k3"/>
+                                        <ct:SymbRef symbIdRef="k2"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t3"/>
+                                        <ct:SymbRef symbIdRef="t2"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t2"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t2"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t3"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k3"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k4"/>
+                                        <ct:SymbRef symbIdRef="k3"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t4"/>
+                                        <ct:SymbRef symbIdRef="t3"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t3"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t3"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t4"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k4"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k5"/>
+                                        <ct:SymbRef symbIdRef="k4"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t5"/>
+                                        <ct:SymbRef symbIdRef="t4"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t4"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t4"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t5"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k5"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k6"/>
+                                        <ct:SymbRef symbIdRef="k5"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t6"/>
+                                        <ct:SymbRef symbIdRef="t5"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t5"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t5"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t6"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="k6"/>
+                            <Binop op="times">
+                                <Binop op="divide">
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="k7"/>
+                                        <ct:SymbRef symbIdRef="k6"/>
+                                    </Binop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="t7"/>
+                                        <ct:SymbRef symbIdRef="t6"/>
+                                    </Binop>
+                                </Binop>
+                                <Binop op="minus">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t6"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                        <Condition>
+                            <LogicBinop op="and">
+                                <LogicBinop op="geq">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t6"/>
+                                </LogicBinop>
+                                <LogicBinop op="lt">
+                                    <ct:SymbRef symbIdRef="time"/>
+                                    <ct:SymbRef symbIdRef="t7"/>
+                                </LogicBinop>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>                
+                </Piecewise>
+            </Equation>
+        </Definition>
+    </FunctionDefinition>
+
+    <!-- MODEL DEFINITION -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+
+        <!-- VARIABILITY MODEL -->
+        <VariabilityModel blkId="randEffect" type="parameterVariability">
+            <Level symbId="indiv">
+                <ct:Name>Individual Variability</ct:Name>
+            </Level>
+        </VariabilityModel>
+
+        <VariabilityModel blkId="obsErr" type="residualError">
+            <Level symbId="residual">
+                <ct:Name>Residual Error</ct:Name>
+            </Level>
+        </VariabilityModel>
+
+        <!-- COVARIATE MODEL -->
+        <CovariateModel blkId="cm1">
+            <SimpleParameter symbId="pop_W"/>
+            <SimpleParameter symbId="omega_W"/>
+            <Covariate symbId="W">
+                <Continuous>
+                    <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                        <mean>
+                            <var varId="pop_W"/>
+                        </mean>
+                        <variance>
+                            <var varId="omega_W"/>
+                        </variance>
+                    </NormalDistribution>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Uniop op="log">
+                                <Binop op="divide">
+                                    <ct:SymbRef symbIdRef="W"/>
+                                    <ct:Real>70.0</ct:Real>
+                                </Binop>
+                            </Uniop>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        
+        <CovariateModel blkId="cm2">
+            <Covariate symbId="Sex">
+                <Categorical>
+                    <Category catId="M">
+                        <Probability>
+                            <ct:Real>0.5</ct:Real>
+                        </Probability>
+                    </Category>
+                </Categorical>
+            </Covariate>
+        </CovariateModel>
+        
+        <!-- PARAMETER MODEL -->
+        <ParameterModel blkId="pm1">
+            <!-- Interpolatin parameters -->
+            <SimpleParameter symbId="k0"/>
+            <SimpleParameter symbId="k1"/>
+            <SimpleParameter symbId="k2"/>
+            <SimpleParameter symbId="k3"/>
+            <SimpleParameter symbId="k4"/>
+            <SimpleParameter symbId="k5"/>
+            <SimpleParameter symbId="k6"/>
+            <SimpleParameter symbId="k7"/>
+            <SimpleParameter symbId="t0"/>
+            <SimpleParameter symbId="t1"/>
+            <SimpleParameter symbId="t2"/>
+            <SimpleParameter symbId="t3"/>
+            <SimpleParameter symbId="t4"/>
+            <SimpleParameter symbId="t5"/>
+            <SimpleParameter symbId="t6"/>
+            <SimpleParameter symbId="t7"/>
+            
+            <!-- Rin -->
+            <SimpleParameter symbId="pop_Rin"/>
+            <SimpleParameter symbId="omega_Rin"/>
+            <RandomVariable symbId="eta_Rin">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0"
+                    definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_Rin"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="Rin">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="pop_R_in"/>
+                            <Uniop op="exp">
+                                <ct:SymbRef symbIdRef="eta_R_in"/>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </IndividualParameter>
+            <!-- kout -->
+            <SimpleParameter symbId="pop_kout"/>
+            <SimpleParameter symbId="omega_kout"/>
+            <RandomVariable symbId="eta_kout">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_kout"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="kout">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <GeneralCovariate>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="plus">
+                                    <Uniop op="log">
+                                        <ct:SymbRef symbIdRef="pop_kout"/>
+                                    </Uniop>
+                                    <ct:SymbRef symbIdRef="eta_kout"/>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </GeneralCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_kout"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- IC50 -->
+            <SimpleParameter symbId="pop_IC50"/>
+            <SimpleParameter symbId="omega_IC50"/>
+            <RandomVariable symbId="eta_IC50">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0"
+                    definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="omega_IC50"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="IC50">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_IC50"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_IC50"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+        </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
+        <StructuralModel blkId="sm1">
+
+            <!-- TARGET FOR LOOKUP DATA REFERENCE -->
+            <ct:Variable symbolType="real" symbId="Cc">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:FunctionCall>
+                            <ct:SymbRef symbIdRef="MyInterpolationFunction"/>
+                            <math:FunctionArgument symbId="time">
+                                <ct:SymbRef symbIdRef="t"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k0">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k0"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k1">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k1"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k2">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k2"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k3">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k3"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k4">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k4"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k5">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k5"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k6">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k6"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="k7">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="k7"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t0">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t0"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t1">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t1"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t2">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t2"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t3">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t3"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t4">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t4"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t5">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t5"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t6">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t6"/>
+                            </math:FunctionArgument>
+                            <math:FunctionArgument symbId="t7">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="t7"/>
+                            </math:FunctionArgument>
+                        </math:FunctionCall>
+                    </math:Equation>
+                </ct:Assign>
+            </ct:Variable>
+
+            <ct:DerivativeVariable symbId="E" symbolType="real">
+                <ct:Description>Effect</ct:Description>
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="Rin"/>
+                                <Binop op="minus">
+                                    <ct:Real>1</ct:Real>
+                                    <Binop op="divide">
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Imax"/>
+                                            <ct:SymbRef symbIdRef="Cc"/>
+                                        </Binop>
+                                        <Binop op="plus">
+                                            <ct:SymbRef symbIdRef="Cc"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="IC50"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="kout"/>
+                                <ct:SymbRef symbIdRef="E"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:DerivativeVariable>
+        </StructuralModel>
+
+        <!-- OBSERVATION MODEL -->
+        <ObservationModel blkId="om1">
+            <SimpleParameter symbId="a"/>
+            <RandomVariable symbId="epsilon_E">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0"
+                    definition="http://www.uncertml.org/distributions/normal">
+                    <mean><rVal>0</rVal></mean>
+                    <stddev><var varId="sigma_E"/></stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="E_obs">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:Binop op="plus">
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="E"/>
+                            <math:Binop op="times">
+                                <math:FunctionCall>
+                                    <ct:SymbRef symbIdRef="constantErrorModel"/>
+                                    <math:FunctionArgument symbId="a">
+                                        <ct:SymbRef symbIdRef="a"/>
+                                    </math:FunctionArgument>
+                                </math:FunctionCall>
+                                <ct:SymbRef symbIdRef="epsilon_E"/>
+                            </math:Binop>
+                        </math:Binop>
+                    </math:Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+    </ModelDefinition>
+    
+    <!-- TRIAL DESIGN -->
+    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        
+        <!-- STRUCTURE -->
+        <Structure>
+            <Epoch oid="e1">
+                <Start>
+                    <ct:Real>0</ct:Real>
+                </Start>
+                <End>
+                    <ct:Real>300</ct:Real>
+                </End>
+                <Order>1</Order>
+            </Epoch>
+            <Arm oid="a1"/>
+            <Cell oid="c1">
+                <EpochRef oidRef="e1" />
+                <ArmRef oidRef="a1"/>
+                <SegmentRef oidRef="ta"/>
+            </Cell>
+            <Segment oid="ta">
+                <ActivityRef oidRef="d1"/>
+            </Segment>
+            <Activity oid="d1">
+
+                <LookupTable>
+                    
+                    <!-- MAPPING -->
+                    <ColumnMapping> 
+                        <ds:ColumnRef columnIdRef="TIME"/>
+                        <ct:SymbRef symbIdRef="t"/>
+                    </ColumnMapping>
+                    
+                    <Target inputTarget="variable">
+                        <ColumnMapping>
+                            <ds:ColumnRef columnIdRef="Cc"/>
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                        </ColumnMapping>
+                    </Target>
+                    
+                    <!-- DATASET -->
+                    <ds:DataSet>
+                        <ds:Definition>
+                            <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                            <ds:Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                            <ds:Column columnId="EPOCH" columnType="epoch" valueType="real" columnNum="3"/>
+                            <ds:Column columnId="ARM" columnType="arm" valueType="real" columnNum="4"/>
+                            <ds:Column columnId="Cc" columnType="dv" valueType="real" columnNum="5"/>
+                        </ds:Definition>
+                        <ds:ImportData oid="importData">
+                            <ds:name>Cc_lookupTable</ds:name>
+                            <ds:url>file:///../../datasets/</ds:url>
+                            <ds:format>CSV</ds:format>
+                            <ds:delimiter>COMMA</ds:delimiter>
+                        </ds:ImportData>
+                    </ds:DataSet>
+                </LookupTable>
+            </Activity>
+        </Structure>
+        
+
+        <!-- POPULATION -->
+        <Population>
+            <ct:VariabilityReference>
+                <ct:SymbRef blkIdRef="randEffect" symbIdRef="indiv"/>
+            </ct:VariabilityReference>
+            
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="WEIGHT"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+            </ColumnMapping>
+
+            <ds:DataSet>
+                <ds:Definition>
+                    <ds:Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <ds:Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                    <ds:Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
+                    <ds:Column columnId="SEX" columnType="covariate" valueType="real" columnNum="4"/>
+                </ds:Definition>
+                <ds:Table>
+                    <ds:Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Real>20</ct:Real></ds:Row>
+                </ds:Table>
+            </ds:DataSet>
+        </Population>
+    </TrialDesign>
+    
+    <!-- MODELLING STEPS -->
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
+        
+        <SimulationStep oid="simStep1">
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Imax"/>
+                <ct:Assign>
+                    <ct:Real>0.9</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Imax"/>
+                <ct:Assign>
+                    <ct:Real>2</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_IC50"/>
+                <ct:Assign>
+                    <ct:Real>0.4</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_IC50"/>
+                <ct:Assign>
+                    <ct:Real>0.4</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_kout"/>
+                <ct:Assign>
+                    <ct:Real>0.05</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_kout"/>
+                <ct:Assign>
+                    <ct:Real>0.05</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Rin"/>
+                <ct:Assign>
+                    <ct:Real>5</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+            <ct:VariableAssignment>
+                <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Rin"/>
+                <ct:Assign>
+                    <ct:Real>0.05</ct:Real>
+                </ct:Assign>
+            </ct:VariableAssignment>
+
+            <Observations>
+                <Timepoints>
+                    <ct:Sequence>
+                        <ct:Begin><ct:Int>0</ct:Int></ct:Begin>
+                        <ct:StepSize><ct:Int>24</ct:Int></ct:StepSize>
+                        <ct:End><ct:Int>288</ct:Int></ct:End>
+                    </ct:Sequence>
+                </Timepoints>
+                <Continuous>
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="E_obs"/>
+                </Continuous>
+            </Observations>
+        </SimulationStep>
+        
+        <!-- STEP DEPENDENCIES -->
+        <StepDependencies>
+<!--            <Step>
+                <ct:OidRef oidRef="estimStep1"/>
+            </Step>-->
+            <Step>
+                <ct:OidRef oidRef="simStep1"/>
+            </Step>
+        </StepDependencies>
+    </ModellingSteps>
+</PharmML>

@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.3" id="i1">
+    
+    <ct:Name>Residual error models - multiple types</ct:Name>
+    
+    <ct:Description>based on document on 'Residual error models and Keizer/Karlsson list'</ct:Description>
+
+    <!-- intependent variable -->
+    <IndependentVariable symbId="time"/>
+
+    <!-- FUNCTION FACT for 3.5.1. case 2 -->
+    <ct:FunctionDefinition symbId="FACT" symbolType="real">
+        <ct:FunctionArgument symbId="firstValue" symbolType="real"/>
+        <ct:FunctionArgument symbId="secondValue" symbolType="real"/>
+        <ct:FunctionArgument symbId="firstCond" symbolType="real"/>
+        <ct:FunctionArgument symbId="IDV" symbolType="real"/>
+        <ct:Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Piecewise>
+                    <Piece>
+                        <ct:Real>1</ct:Real>
+                        <Condition>
+                            <LogicBinop op="gt">
+                                <ct:SymbRef symbIdRef="IDV"/>
+                                <ct:SymbRef symbIdRef="firstCond"/>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <ct:SymbRef symbIdRef="secondValue"/>
+                        <Condition>
+                            <Otherwise/>
+                        </Condition>
+                    </Piece>
+                </Piecewise>
+            </Equation>
+        </ct:Definition>
+    </ct:FunctionDefinition>
+
+    <!-- FUNCTION FOR 'TYPICAL' W = sqrt(a^2 + b^2 f^2) -->
+    <ct:FunctionDefinition symbId="typicalW" symbolType="real">
+        <ct:FunctionArgument symbId="a" symbolType="real"/>
+        <ct:FunctionArgument symbId="b" symbolType="real"/>
+        <ct:FunctionArgument symbId="f" symbolType="real"/>
+        <ct:Definition> 
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Binop op="root">
+                    <Binop op="plus">
+                        <Binop op="power">
+                            <ct:SymbRef symbIdRef="a"/>
+                            <ct:Int>2</ct:Int>
+                        </Binop>
+                        <Binop op="times">
+                            <Binop op="power">
+                                <ct:SymbRef symbIdRef="b"/>
+                                <ct:Int>2</ct:Int>
+                            </Binop>
+                            <Binop op="power">
+                                <ct:SymbRef symbIdRef="f"/>
+                                <ct:Int>2</ct:Int>
+                            </Binop>
+                        </Binop>
+                    </Binop>
+                    <ct:Real>2</ct:Real>
+                </Binop>
+            </Equation>
+        </ct:Definition>
+    </ct:FunctionDefinition>
+    
+    <!-- MODEL DEFINITION -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <!-- VARIABILITY MODEL -->
+        <VariabilityModel blkId="model" type="parameterVariability">
+            <Level symbId="indiv"/>
+            <Level symbId="occasion">
+                <ParentLevel>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ParentLevel>
+            </Level>
+        </VariabilityModel>
+
+        <VariabilityModel blkId="obsErr" type="residualError">
+            <Level symbId="residual"/>
+        </VariabilityModel>
+        
+        <!-- COVARIATE MODEL -->
+        <CovariateModel blkId="cm1">
+            <Covariate symbId="W">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="W"/>
+                                <ct:Real>70</ct:Real>
+                            </Binop>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        
+        <!-- PARAMETER MODEL -->
+        <ParameterModel blkId="pm1">
+            <!-- V -->
+            <SimpleParameter symbId="omega_V"/>
+            <SimpleParameter symbId="pop_V"/>
+            <SimpleParameter symbId="beta_V"/>
+            <RandomVariable symbId="eta_V">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_V"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="V">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_V"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                        <Covariate>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                            <FixedEffect>
+                                <ct:SymbRef symbIdRef="beta_V"/>
+                            </FixedEffect>
+                        </Covariate>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_V"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- V2 -->
+            <SimpleParameter symbId="omega_V2"/>
+            <SimpleParameter symbId="pop_V2"/>
+            <SimpleParameter symbId="beta_V2"/>
+            <RandomVariable symbId="eta_V2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_V2"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="V2">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_V2"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                        <Covariate>
+                            <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+                            <FixedEffect>
+                                <ct:SymbRef symbIdRef="beta_V2"/>
+                            </FixedEffect>
+                        </Covariate>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_V2"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- k -->
+            <SimpleParameter symbId="omega_k"/>
+            <SimpleParameter symbId="pop_k"/>
+            <RandomVariable symbId="eta_k">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_k"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="k">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_k"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_k"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- k2 -->
+            <SimpleParameter symbId="omega_k2"/>
+            <SimpleParameter symbId="pop_k2"/>
+            <RandomVariable symbId="eta_k2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_k2"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="k2">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_k2"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_k2"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+        </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
+        <StructuralModel blkId="sm1">
+            <ct:Variable symbolType="real" symbId="tD"/>
+            <ct:Variable symbolType="real" symbId="tD2"/>
+            <ct:Variable symbolType="real" symbId="D"/>
+            <!-- C1model variable -->
+            <ct:Variable symbolType="real" symbId="C1model">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="D"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V"/>
+                            </Binop>
+                            <Uniop op="exp">
+                                <Binop op="times">
+                                    <Uniop op="minus">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="k"/>
+                                    </Uniop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="time"/>
+                                        <ct:SymbRef symbIdRef="tD"/>
+                                    </Binop>
+                                </Binop>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+            <!-- C2model variable -->
+            <ct:Variable symbolType="real" symbId="C2model">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="D"/>
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="V2"/>
+                            </Binop>
+                            <Uniop op="exp">
+                                <Binop op="times">
+                                    <Uniop op="minus">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="k2"/>
+                                    </Uniop>
+                                    <Binop op="minus">
+                                        <ct:SymbRef symbIdRef="time"/>
+                                        <ct:SymbRef symbIdRef="tD2"/>
+                                    </Binop>
+                                </Binop>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+        </StructuralModel>
+        
+        <!-- OBSERVATION MODEL -->
+            
+        <!-- 3.1.1  case 1: IIV of the residual error magnitude -->
+        <ObservationModel blkId="om1.1">
+            <SimpleParameter symbId="theta1"/>
+            <SimpleParameter symbId="theta2"/>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eta">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                            <Binop op="times">
+                                <Binop op="times">
+                                    <FunctionCall>
+                                        <ct:SymbRef symbIdRef="typicalW"/>
+                                        <FunctionArgument symbId="a">
+                                            <ct:SymbRef symbIdRef="theta1"/>
+                                        </FunctionArgument>
+                                        <FunctionArgument symbId="b">
+                                            <ct:SymbRef symbIdRef="theta2"/>
+                                        </FunctionArgument>
+                                        <FunctionArgument symbId="f">
+                                            <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                                        </FunctionArgument>
+                                    </FunctionCall>
+                                    <Uniop op="exp">
+                                        <ct:SymbRef symbIdRef="eta"/>
+                                    </Uniop>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="eps"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+            
+        <!-- 3.1.2  case 2: IOV of the residual error magnitude -->
+        <ObservationModel blkId="om1.2">
+            <SimpleParameter symbId="omega"/>
+            <SimpleParameter symbId="FLAG"/>
+            <SimpleParameter symbId="theta1"/>
+            <SimpleParameter symbId="theta2"/>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eta1">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="occasion"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega"/> 
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eta2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="occasion"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Piecewise>
+                            <Piece>                                <!-- FLAG = 1 -->
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                                    <Binop op="times">
+                                        <Binop op="times">
+                                            <FunctionCall>
+                                                <ct:SymbRef symbIdRef="typicalW"/>
+                                                <FunctionArgument symbId="a">
+                                                    <ct:SymbRef symbIdRef="theta1"/>
+                                                </FunctionArgument>
+                                                <FunctionArgument symbId="b">
+                                                    <ct:SymbRef symbIdRef="theta2"/>
+                                                </FunctionArgument>
+                                                <FunctionArgument symbId="f">
+                                                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                                                </FunctionArgument>
+                                            </FunctionCall>
+                                            <Uniop op="exp">
+                                                <ct:SymbRef symbIdRef="eta1"/>
+                                            </Uniop>
+                                        </Binop>
+                                        <ct:SymbRef symbIdRef="eps"/>
+                                    </Binop>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="eq">
+                                        <ct:SymbRef symbIdRef="FLAG"/>
+                                        <ct:Int>1</ct:Int>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>                                <!-- FLAG = 0 -->
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                                    <Binop op="times">
+                                        <Binop op="times">
+                                            <FunctionCall>
+                                                <ct:SymbRef symbIdRef="typicalW"/>
+                                                <FunctionArgument symbId="a">
+                                                    <ct:SymbRef symbIdRef="theta1"/>
+                                                </FunctionArgument>
+                                                <FunctionArgument symbId="b">
+                                                    <ct:SymbRef symbIdRef="theta2"/>
+                                                </FunctionArgument>
+                                                <FunctionArgument symbId="f">
+                                                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                                                </FunctionArgument>
+                                            </FunctionCall>
+                                            <Uniop op="exp">
+                                                <ct:SymbRef symbIdRef="eta2"/>
+                                            </Uniop>
+                                        </Binop>
+                                        <ct:SymbRef symbIdRef="eps"/>
+                                    </Binop>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="eq">
+                                        <ct:SymbRef symbIdRef="FLAG"/>
+                                        <ct:Int>0</ct:Int>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                        </Piecewise>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+            
+        <!-- 3.1.3	Alternative representation (not on the K/K list) -->
+        <ObservationModel blkId="om1.3">
+            <!-- a - error parameter with IIV -->
+            <SimpleParameter symbId="omega_a"/>
+            <SimpleParameter symbId="pop_a"/>
+            <RandomVariable symbId="eta_a">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_a"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="a">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                    <ct:SymbRef symbIdRef="pop_a"/>
+                                </Equation>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_a"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <!-- b - error parameter with IIV -->
+            <SimpleParameter symbId="omega_b"/>
+            <SimpleParameter symbId="pop_b"/>
+            <RandomVariable symbId="eta_b">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_b"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="b">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                    <ct:SymbRef symbIdRef="pop_b"/>
+                                </Equation>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_b"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal> 
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal> 
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="C">
+                <Output>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <FunctionCall>
+                                <ct:SymbRef symbIdRef="typicalW"/>
+                                <FunctionArgument symbId="a">
+                                    <ct:SymbRef symbIdRef="a"/>
+                                </FunctionArgument>
+                                <FunctionArgument symbId="b">
+                                    <ct:SymbRef symbIdRef="b"/>
+                                </FunctionArgument>
+                                <FunctionArgument symbId="f">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                </FunctionArgument>
+                            </FunctionCall>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="eps"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+            
+        <!-- 3.2.1	case 1: Joint parent/metabolite measurements -->
+        <ObservationModel blkId="om1.4">
+            <SimpleParameter symbId="TYPE"/>
+            <SimpleParameter symbId="sigma1"/>
+            <SimpleParameter symbId="sigma2"/>
+            <SimpleParameter symbId="rho_eps1_eps2"/>
+            <RandomVariable symbId="eps1">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="sigma1"/> 
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eps2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="sigma2"/> 
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <!-- CORRELATION OF EPSILONS -->
+            <Correlation>
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <Pairwise>
+                    <RandomVariable1>
+                        <ct:SymbRef symbIdRef="eps1"/>
+                    </RandomVariable1>
+                    <RandomVariable2>
+                        <ct:SymbRef symbIdRef="eps2"/>
+                    </RandomVariable2>
+                    <CorrelationCoefficient>
+                        <ct:SymbRef symbIdRef="rho_eps1_eps2"/>
+                    </CorrelationCoefficient>
+                </Pairwise>
+            </Correlation>
+            <General symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Piecewise>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                                    <ct:SymbRef symbIdRef="eps1"/>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="eq">
+                                        <ct:SymbRef symbIdRef="TYPE"/>
+                                        <ct:Int>1</ct:Int>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C2model"/>
+                                    <ct:SymbRef symbIdRef="eps2"/>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="eq">
+                                        <ct:SymbRef symbIdRef="TYPE"/>
+                                        <ct:Int>0</ct:Int>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                        </Piecewise>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+            
+            <!-- 3.2.2	case 2: Replicate observations -->
+        <ObservationModel blkId="om1.5">
+            <SimpleParameter symbId="TYPE"/>
+            <SimpleParameter symbId="sigma1"/>
+            <SimpleParameter symbId="sigma2"/>
+            <SimpleParameter symbId="sigma3"/>
+            <RandomVariable symbId="eps1">
+                    <ct:VariabilityReference>
+                        <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                    </ct:VariabilityReference>
+                    <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                        <mean>
+                            <rVal>0</rVal>
+                        </mean>
+                        <stddev>
+                            <var varId="sigma1"/> 
+                        </stddev>
+                    </NormalDistribution>
+                </RandomVariable>
+            <RandomVariable symbId="eps2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="sigma2"/> 
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eps3">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="sigma3"/> 
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Piecewise>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                    <Binop op="plus">
+                                        <ct:SymbRef symbIdRef="eps1"/>
+                                        <ct:SymbRef symbIdRef="eps2"/>
+                                    </Binop>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="eq">
+                                        <ct:SymbRef symbIdRef="TYPE"/>
+                                        <ct:Int>2</ct:Int>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                    <Binop op="plus">
+                                        <ct:SymbRef symbIdRef="eps1"/>
+                                        <ct:SymbRef symbIdRef="eps3"/>
+                                    </Binop>
+                                </Binop>
+                                <Condition>
+                                    <Otherwise/>
+                                </Condition>
+                            </Piece>
+                        </Piecewise>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+            
+        <!-- 3.5 Residual error magnitude varying with covariates and time - 3.5.1	case 1 -->
+        <!-- VERSION 1 -->
+        <ObservationModel blkId="om1.6">
+            <!-- theta1,2,3,4 -->
+            <SimpleParameter symbId="theta1"/>
+            <SimpleParameter symbId="theta2"/>
+            <SimpleParameter symbId="theta3"/>
+            <SimpleParameter symbId="theta4"/>
+            <!-- KA -->
+            <SimpleParameter symbId="KA">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <ct:SymbRef symbIdRef="theta4"/>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <!-- MAT -->
+            <SimpleParameter symbId="MAT">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:Real>1</ct:Real>
+                            <ct:SymbRef symbIdRef="KA"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Piecewise>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                    <Binop op="times">
+                                        <FunctionCall>                                  <!-- typicalW function call -->
+                                            <ct:SymbRef symbIdRef="typicalW"/>
+                                            <FunctionArgument symbId="a">
+                                                <ct:SymbRef symbIdRef="theta1"/>
+                                            </FunctionArgument>
+                                            <FunctionArgument symbId="b">
+                                                <ct:SymbRef symbIdRef="theta2"/>
+                                            </FunctionArgument>
+                                            <FunctionArgument symbId="f">
+                                                <ct:SymbRef symbIdRef="C1model"/>
+                                            </FunctionArgument>
+                                        </FunctionCall>
+                                        <ct:SymbRef symbIdRef="eps"/>
+                                    </Binop>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="gt">
+                                        <ct:SymbRef symbIdRef="time"/>
+                                        <ct:SymbRef symbIdRef="MAT"/> 
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                    <Binop op="times">
+                                        <Binop op="times">
+                                            <FunctionCall>                                  <!-- typicalW function call -->
+                                                <ct:SymbRef symbIdRef="typicalW"/>
+                                                <FunctionArgument symbId="a">
+                                                    <ct:SymbRef symbIdRef="theta1"/>
+                                                </FunctionArgument>
+                                                <FunctionArgument symbId="b">
+                                                    <ct:SymbRef symbIdRef="theta2"/>
+                                                </FunctionArgument>
+                                                <FunctionArgument symbId="f">
+                                                    <ct:SymbRef symbIdRef="C1model"/>
+                                                </FunctionArgument>
+                                            </FunctionCall>
+                                            <ct:SymbRef symbIdRef="theta3"/>
+                                        </Binop>                                            
+                                        <ct:SymbRef symbIdRef="eps"/>
+                                    </Binop>
+                                </Binop>
+                                <Condition>
+                                    <Otherwise/>
+                                </Condition>
+                            </Piece>
+                        </Piecewise>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+        <!-- VERSION 2 -->
+        <ObservationModel blkId="om1.7">
+            <!-- theta1,2,3,4 -->
+            <SimpleParameter symbId="theta1"/>
+            <SimpleParameter symbId="theta2"/>
+            <SimpleParameter symbId="theta3"/>
+            <SimpleParameter symbId="theta4"/>
+            <!-- KA -->
+            <SimpleParameter symbId="KA">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <ct:SymbRef symbIdRef="theta4"/>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <!-- MAT -->
+            <SimpleParameter symbId="MAT">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:Real>1</ct:Real>
+                            <ct:SymbRef symbIdRef="KA"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="C">
+                <Output>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="C1model"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="times">
+                                <FunctionCall>                                  <!-- typicalW function call -->
+                                    <ct:SymbRef symbIdRef="typicalW"/>
+                                    <FunctionArgument symbId="a">
+                                        <ct:SymbRef symbIdRef="theta1"/>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="b">
+                                        <ct:SymbRef symbIdRef="theta2"/>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="f">
+                                        <ct:SymbRef symbIdRef="C1model"/>
+                                    </FunctionArgument>
+                                </FunctionCall>
+                                <FunctionCall>                                  <!-- FACT function call -->
+                                    <ct:SymbRef symbIdRef="FACT"/>
+                                    <FunctionArgument symbId="firstValue">
+                                        <ct:Real>1</ct:Real>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="secondValue">
+                                        <ct:SymbRef symbIdRef="theta3"/>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="firstCond">
+                                        <ct:SymbRef symbIdRef="MAT"/>
+                                    </FunctionArgument>
+                                </FunctionCall>
+                            </Binop>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="eps"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+
+        <!-- 3.5 Residual error magnitude varying with covariates and time - 3.5.1	case 2 -->
+        <ObservationModel blkId="om1.8">
+            <!-- theta1,2,3 & 5 -->
+            <SimpleParameter symbId="theta1"/>
+            <SimpleParameter symbId="theta2"/>
+            <SimpleParameter symbId="theta3"/>
+            <SimpleParameter symbId="theta5"/>
+            <!-- TT -->
+            <SimpleParameter symbId="TT">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <ct:SymbRef symbIdRef="theta5"/>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <RandomVariable symbId="eps">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <prVal>1</prVal>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="C">
+                <Output>
+                    <ct:SymbRef symbIdRef="C1model"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Binop op="times">
+                                <FunctionCall>
+                                    <ct:SymbRef symbIdRef="typicalW"/>
+                                    <FunctionArgument symbId="a">
+                                        <ct:SymbRef symbIdRef="theta1"/>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="b">
+                                        <ct:SymbRef symbIdRef="theta2"/>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="f">
+                                        <ct:SymbRef symbIdRef="C1model"/>
+                                    </FunctionArgument>
+                                </FunctionCall>
+                                <FunctionCall>
+                                    <ct:SymbRef symbIdRef="FACT"/>
+                                    <FunctionArgument symbId="firstValue">
+                                        <ct:Real>1</ct:Real>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="secondValue">
+                                        <ct:SymbRef symbIdRef="theta3"/>
+                                    </FunctionArgument>
+                                    <FunctionArgument symbId="firstCond">
+                                        <ct:SymbRef symbIdRef="TT"/>
+                                    </FunctionArgument>
+                                </FunctionCall>
+                            </Binop>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="dsds"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+        
+        
+        <!-- 3.5 Residual error magnitude varying with covariates and time - 3.5.1	case 3  (not in the K/K list) -->
+        <ObservationModel blkId="om1.9">
+            <SimpleParameter symbId="TIME"/>
+            <SimpleParameter symbId="ID"/>
+            <SimpleParameter symbId="sigma1"/>
+            <SimpleParameter symbId="sigma2"/>
+            <RandomVariable symbId="eps1">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="sigma1"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <RandomVariable symbId="eps2">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="sigma2"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <General symbId="C">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Piecewise>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                    <ct:SymbRef symbIdRef="eps1"/>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="and">
+                                        <LogicBinop op="leq">
+                                            <ct:SymbRef symbIdRef="TIME"/>
+                                            <ct:Real>10</ct:Real>
+                                        </LogicBinop>
+                                        <LogicBinop op="eq">
+                                            <ct:SymbRef symbIdRef="ID"/>
+                                            <ct:Real>1</ct:Real>
+                                        </LogicBinop>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                            <Piece>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="C1model"/>
+                                    <ct:SymbRef symbIdRef="eps2"/>
+                                </Binop>
+                                <Condition>
+                                    <LogicBinop op="and">
+                                        <LogicBinop op="gt">
+                                            <ct:SymbRef symbIdRef="TIME"/>
+                                            <ct:Real>10</ct:Real>
+                                        </LogicBinop>
+                                        <LogicBinop op="eq">
+                                            <ct:SymbRef symbIdRef="ID"/>
+                                            <ct:Real>1</ct:Real>
+                                        </LogicBinop>
+                                    </LogicBinop>
+                                </Condition>
+                            </Piece>
+                        </Piecewise>
+                    </Equation>
+                </ct:Assign>
+            </General>
+        </ObservationModel>
+        
+    </ModelDefinition>
+    
+</PharmML>
