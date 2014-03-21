@@ -25,11 +25,11 @@
     <ModelDefinition id="i3"  xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
         
         <!-- VARIABILITY MODEL -->
-        <VariabilityModel id="i4" blkId="model" type="model"> 
+        <VariabilityModel id="i4" blkId="model" type="parameterVariability"> 
             <Level symbId="indiv"/>
         </VariabilityModel>
         
-        <VariabilityModel id="i5" blkId="obsErr" type="error"> 
+        <VariabilityModel id="i5" blkId="obsErr" type="residualError"> 
             <Level symbId="residual"/>
         </VariabilityModel>
         
@@ -569,7 +569,7 @@
             </Segment>
             <Activity oid="bolusIV"> 
                 <Bolus> 
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="variable">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
                     </DoseAmount>
                     <DosingTimes>
@@ -628,26 +628,15 @@
         
         <!-- POPULATION -->
         <Population> 
-            <IndividualTemplate> 
-                <IndividualMapping> 
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/> 
-                </IndividualMapping> 
-                <ArmMapping> 
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/> 
-                </ArmMapping> 
-                <CovariateMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="W"/>
-                    <ct:SymbRef symbIdRef="WEIGHT"/>
-                    <Interpolation xmlns="http://www.pharmml.org/2013/08/Dataset">
-                        <InterpolationAlgorithm>spline</InterpolationAlgorithm>
-                    </Interpolation>
-                </CovariateMapping>
-            </IndividualTemplate>
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="W"/>
+                <ct:SymbRef symbIdRef="WEIGHT"/>
+            </ColumnMapping>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/> 
-                    <Column columnId="ARM" valueType="id" columnNum="2"/> 
-                    <Column columnId="WEIGHT" valueType="real" columnNum="3"/>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
+                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/> 
+                    <Column columnId="WEIGHT" columnType="covariate" valueType="real" columnNum="3"/>
                 </Definition>
                 <ImportData oid="covariatesTable">
                     <name>RIBBA2012_PCV_covariates</name>
@@ -669,12 +658,15 @@
         <!-- INDIVUIDUAL DOSING -->
         <IndividualDosing>
             <ActivityRef oidRef="bolusIV"/>
-            <IndividualRef columnIdRef="ID"/>
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
+                <ct:SymbRef symbIdRef="time"/>
+            </ColumnMapping>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" valueType="real" columnNum="2"/>
-                    <Column columnId="DOSE" valueType="real" columnNum="5"/>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
+                    <Column columnId="DOSE" columnType="dose" valueType="real" columnNum="5"/>
                 </Definition>
                 <ImportData oid="PCV_dosingData">
                     <name>RIBBA2012_PCV_dosing</name>
@@ -710,23 +702,20 @@
         <!-- ESTIMATION STEP -->
         <EstimationStep oid="estTask1">
             <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
-                </IndividualMapping>
-                <VariableMapping>
+                <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
                     <ct:SymbRef symbIdRef="time"/>
-                </VariableMapping>
-                <VariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
                     <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR"/>
-                </VariableMapping>
+                </ColumnMapping>
                 
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <Column columnId="DV" valueType="real" columnNum="3"/>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
                     </Definition>
                     <ImportData oid="PCV_observationData">
                         <name>RIBBA2012_PCV_observations</name>
