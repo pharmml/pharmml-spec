@@ -8,7 +8,7 @@
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
     xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
-    writtenVersion="0.2.2" id="i1">
+    writtenVersion="0.3" id="i1">
     
     <!-- MODEL NAME -->
     <ct:Name>Chan, Holford model with NONMEM dataset.</ct:Name>
