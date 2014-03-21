@@ -740,22 +740,16 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:sequence>
-                        <!-- moved from line 258-270; sequence changed -->
-                        <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType" minOccurs="0" maxOccurs="1">
-                            <xs:annotation>
-                                <xs:documentation>Defines the NONMEM format datset and its mapping with optional code injection.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>                                            
-                        <!-- /moved from line 258-270 -->
-                        <!-- new TargetToolType -->
-                        <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>                        
-                        <!-- /new TargetToolType -->
-                    </xs:sequence>
+                    <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Defines the NONMEM format datset and its mapping with optional code injection.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                                            
+                    <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                        
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:CommonModellingStep">
                         <xs:annotation>
                             <xs:documentation>
@@ -963,11 +957,7 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="symbId" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The variable symbol to map target tool variables.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
+                <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>                
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
