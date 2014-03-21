@@ -223,9 +223,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Vector"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Interpolation"/> 
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -346,25 +344,6 @@ the end value. In the second the step size is incremented r times, where r is th
         </xs:sequence>
     </xs:complexType>
         
-    <!--  original "InitialConditionType"  
-        <xs:complexType name="InitialConditionType">
-        <xs:annotation>
-            <xs:documentation>The initial condition of the derivative variable.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>The initial value assigned to the derivative.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
-    <!-- TEST -->
     <xs:complexType name="InitialValueType">
         <xs:annotation>
             <xs:documentation>The initial value of the derivative variable.</xs:documentation>
@@ -381,9 +360,7 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:complexType name="InitialTimeType">
         <xs:annotation>
             <xs:documentation>The value of the initial condition time.</xs:documentation>
@@ -400,9 +377,7 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->        
     
-    <!-- TEST -->
     <xs:complexType name="InitialConditionType">
         <xs:annotation>
             <xs:documentation>The initial condition of the derivative variable.</xs:documentation>
@@ -416,7 +391,6 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="DerivativeVariableType">
         <xs:annotation>
@@ -562,8 +536,6 @@ the end value. In the second the step size is incremented r times, where r is th
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- moved from trialDesign -->
-    <!-- TEST for Interpolation Independent Variable type -->
     <xs:complexType name="InterpolationIVType">
         <xs:annotation>
             <xs:documentation>
@@ -584,9 +556,7 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST moved from dataset -->
     <xs:element name="Interpolation" type="ct:InterpolationType">
         <xs:annotation>
             <xs:documentation>
@@ -594,9 +564,7 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     
-    <!-- new type for interpolation; also moved from dataset-->
     <xs:complexType name="InterpolationType">
         <xs:annotation>
             <xs:documentation>This is an interpolation algorithm definition element.</xs:documentation>
@@ -642,17 +610,13 @@ the end value. In the second the step size is incremented r times, where r is th
                                 </xs:enumeration>
                             </xs:restriction>
                         </xs:simpleType>
-                    </xs:element>                    
-                    <!-- TEST newest eddition-->
+                    </xs:element> 
                     <xs:element name="InterpIndepVar" type="ct:InterpolationIVType"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /moved from trialDesign -->
     
-    <!-- new MatrixType based on DataSetTableType -->
     <xs:complexType name="MatrixType">
         <xs:annotation>
             <xs:documentation>
@@ -696,9 +660,7 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /new MatrixType based on DataSetTableType -->
     
-    <!-- NEW MatrixRowType based on DatasetRowType -->
     <xs:complexType name="MatrixRowType">
         <xs:annotation>
             <xs:documentation>
@@ -723,9 +685,7 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- NEW MatrixRowType based on DatasetRowType -->
     
-    <!-- NEW MatrixColumnRowNames -->
     <xs:complexType name="MatrixColumnRowNames">
         <xs:annotation>
             <xs:documentation>
@@ -749,8 +709,6 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /NEW MatrixColumnNames -->
-
 
     <!--
         Attribute Groups
@@ -858,10 +816,6 @@ the end value. In the second the step size is incremented r times, where r is th
                 This abstract element defines an Booelan value.
             </xs:documentation>
         </xs:annotation>
-        <!--xs:complexType>
-            <xs:group ref="ct:RootElementGroup"/>
-            <xs:attributeGroup ref="ct:RootAttributesGroup"/>
-        </xs:complexType-->
     </xs:element>
     <xs:element name="True" type="ct:TrueBooleanType" substitutionGroup="ct:Boolean">
         <xs:annotation>
