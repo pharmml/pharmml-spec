@@ -66,8 +66,8 @@ permissions and limitations under the License.
                     <xs:enumeration value="power"/>
                     <xs:enumeration value="logx"/>
                     <xs:enumeration value="root"/>
-                    <xs:enumeration value="min"/>                       <!-- new MIN(a,b) function -->
-                    <xs:enumeration value="max"/>                       <!-- new MAX(a,b) function -->
+                    <xs:enumeration value="min"/>
+                    <xs:enumeration value="max"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -94,16 +94,16 @@ permissions and limitations under the License.
                             <xs:enumeration value="abs"/>
                             <xs:enumeration value="exp"/>
                             <xs:enumeration value="factorial"/>
-                            <xs:enumeration value="factln"/>            <!-- new FACTLN = ln(factorial(n)) = ln(n!) -->
-                            <xs:enumeration value="gammaln"/>           <!-- new GAMMALN = ln(Gamma function) -->
-                            <xs:enumeration value="ln"/>                <!-- new LN - natural logarithm -->
+                            <xs:enumeration value="factln"/>
+                            <xs:enumeration value="gammaln"/>
+                            <xs:enumeration value="ln"/>
                             <xs:enumeration value="log"/>
                             <xs:enumeration value="logistic"/>
                             <xs:enumeration value="logit"/>
-                            <xs:enumeration value="normcdf"/>           <!-- new NORMCDF - cumulative distribution function of the normal distribution -->
+                            <xs:enumeration value="normcdf"/>
                             <xs:enumeration value="probit"/>
                             <xs:enumeration value="minus"/>
-                            <xs:enumeration value="sqrt"/>              <!-- new SQRT - square root -->
+                            <xs:enumeration value="sqrt"/>
                             <xs:enumeration value="sin"/>
                             <xs:enumeration value="cos"/>
                             <xs:enumeration value="tan"/>
@@ -291,7 +291,7 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Complex Type that defines a mathematical equation.</xs:documentation>
         </xs:annotation>
-        <xs:choice>                                                               <!-- changed from unbounded to 1 -->
+        <xs:choice>
             <xs:element ref="ct:Scalar"/>
             <xs:element maxOccurs="1" minOccurs="1" ref="ct:SymbRef"/>
             <xs:element ref="math:Binop"/>
