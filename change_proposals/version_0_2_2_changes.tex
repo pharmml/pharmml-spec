@@ -44,9 +44,10 @@
   stringstyle=\color{stringColor},
   identifierstyle=\color{red},
   keywordstyle=\color{attributeColor},
-  morekeywords={oid,columnId,columnIdRef,symbId,symbolType,op,columnNum,columnType,valueType,inputTarget,
-  blkId,blkIdRef,symbIdRef,xmlns,version,type,VariableMapping,IndividualMapping, NONMEMdataSet,matrixType,opType,order,
-  name,definition} % list your attributes here
+  morekeywords={oid,columnId,columnIdRef,symbId,symbolType,op,columnNum,columnType,
+  valueType,inputTarget,blkId,blkIdRef,symbIdRef,xmlns,version,type,VariableMapping,
+  IndividualMapping,schemaLocation,xs,xsi,NONMEMdataSet,matrixType,opType,order,
+  math,ct,ds,mdef,mstep,mml,un,name,definition,writtenVersion,id} % list your attributes here
 }
 
 \lstdefinelanguage{NONMEMdataSet}
@@ -90,6 +91,7 @@
 \tableofcontents
 
 \section{Externalisation of data files}
+\label{sec:externalFiles}
 So far, only inline storage of data was supported, for example covariates were stored in the following 
 table in the \xelem{Population} block:
 
@@ -303,54 +305,6 @@ Beside the values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML
 the \xatt{undefined} value can be used, this is most likely to be utilised when defining external tools 
 datasets for which support is very limited and their needs underspecified.
 
-%\subsubsection{Reserved headers in Monolix}
-%The following list collects main headers identified by Monolix (User Guide, version 4.2.2) 
-%%but as discussed below in the Chan/Holford model there can be many other column names:
-%\begin{itemize}
-%\item
-%ID (or \#ID, I) -- subject identifiers
-%\item
-%TIME (or T) -- time
-%\item
-%AMT (or DOSE, D) -- dose
-%\item
-%X (or REG, XX) -- any regression variable
-%\item
-%Y (or DV, CONC) -- observations
-%\item
-%YTYPE (or ITYPE, TYPE, DVID) -- for the type of observations when there are several types of observations (1 for the first type, 2 for the second type, ...). YTYPE is not necessary in the case of a single output.
-%\item
-%COV -- continuos covariates 
-%\item
-%CAT -- categorical covariates
-%\item
-%OCCASION (or OCC) -- occasions
-%\item
-%ADM -- type of administration
-%\item
-%CENS -- left-censored data. Can be -1 to represent right-censored data.
-%\item
-%LIMIT for interval-censored data. It gives the lower limit while Y gives the upper limit.
-%\item
-%RATE (or R) -- infusion rate
-%\item
-%TINF -- infusion duration
-%\item
-%SS -- steady-state (requires column II)
-%\item
-%ADDL -- number of additional doses  (requires column II)
-%\item
-%II (or TAU) -- inter-dose interval
-%\item
-%MDV (Missing Dependent Variable). MDV= 0 if the row contains an observation and MDV=1 otherwise. MDV is not necessary if a dot is used to say when a row does not contain any measurement (Y=дсе). You can use MDV=2 to include times for regression variables updates and for prediction evaluation
-%\item
-%EVID -- Dose events. EVID is not necessary if DOSE=дсе is used when a row does not contain any dose information. EVID=4 resets the system to the initial state.
-%\end{itemize}
-%
-%\begin{description}
-%\item[Question 1] NONMEM allows any string to be used in the header, correct? 
-%This has consequences for the translation from MDL/NMTRAN to PharmML because, if the answer is \emph{yes}, the translation tool will not know what arbitrary names stand for.
-%\end{description}
 
 \subsection{Part II -- Referencing NONMEM dataset}
 \label{subsec:refNONMEM}
@@ -590,7 +544,7 @@ of the random effects. For example, a subject-level covariance matrix for four p
   0.0273 & 0.0282 & 0.0411 & 0.0804 \end{bmatrix} \nonumber
 \end{align}
 PharmML in versions 0.2.1 provided the possibility to define pair-wise the covariance or 
-correlation between corresponding random effects. The version 0.3 offers additionally a 
+correlation between corresponding random effects. Version 0.3 offers additionally a 
 \xelem{Matrix} structure which can be used to encode any matrix with
 \begin{itemize}
 \item
@@ -609,6 +563,7 @@ on the diagonal and correlation coefficients on the off diagonals.
 \item
 Mandatory raw names, \xelem{RawNames}, and optional column names, \xelem{ColumnNames}.
 \end{itemize}
+Please, not that the sequence of rows and columns matter. 
 
 
 \subsection{Example 1 -- Inter-individual variability, IIV}
@@ -648,7 +603,7 @@ following NMTRAN/MDL implementation
 
 The variability level in the PharmML version is called \emph{indiv} and the raw names refer to 
 the random effects defined in the parameter model \xatt{pm1}.
- 
+   
 \lstset{language=XML}
 \begin{lstlisting}
     <Correlation>
@@ -1189,6 +1144,9 @@ example and will be skipped here.
 \section{Other changes}
 
 \subsection{Nested tables removed}
+The extension to support external data files as discussed in section \ref{sec:externalFiles} 
+means 
+
 
 \subsection{Simplified/unified mapping in all dataset types}
 
@@ -1213,8 +1171,28 @@ example and will be skipped here.
 
 \subsection{Interpolation support for covariates or model variables}
 
-A possibility of specifying one of five standard interpolation algorithms is provided, {constant, 
-linear, spline, pchip, cubic}, as defined in MATLAB, http://www.mathworks.co.uk/help/matlab/ref/interp1.html
+The possibility of specifying one of the standard interpolation algorithms is provided, {constant, nearest,
+linear, spline, pchip, cubic}, as defined in MATLAB, has been touched upon in section \ref{subsec:caseC1} 
+when we showed how a variable from a lookup table can be interpolated.
+The same hold for a continues covariate as the following listing visualises
+\lstset{language=XML}
+\begin{lstlisting}
+        <CovariateModel blkId="cm1">
+            <Covariate symbId="W">
+                <Continuous>
+                    <ct:Interpolation>
+                        <ct:Algorithm>linear</ct:Algorithm>
+                        <ct:InterpIndepVar>
+                            <ct:SymbRef symbIdRef="Age"/>
+                        </ct:InterpIndepVar>
+                    </ct:Interpolation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+\end{lstlisting}
+The independent interpolation variable doesn't have to be the \xelem{IndependentVariable} but can as here
+any other variable, for example for body weight, \emph{W}, e.g. \emph{Age} is a possible option.
+
 
 \subsection{The notation of initial conditions for ODE's is extended}
 Last versions of PharmML assumed the initial time, $t_0$, to be always equal $0$. This 
@@ -1369,7 +1347,7 @@ section \ref{subsec:caseC1}.
 The \xelem{Operation} element allows to specify some detailed information about the estimation or simulation 
 tasks. In the following listing three subsequent operations are defined: estimation of population parameters,
 estimation of the Fisher Information Matrix and estimation of population parameters: 
- \lstset{language=XML}
+\lstset{language=XML}
 \begin{lstlisting}
            <Operation order="1" opType="estPop">
                 <ct:Description>Estimate the population parameters in the model.</ct:Description>
@@ -1396,10 +1374,22 @@ Moreover, the previous version provided erroneously the same task choice for an 
 This has been now corrected. 
 
 
-\subsection{Multiple random errors allowed in the Gaussian model}
+\subsection{Random errors in the Gaussian model}
+
 
 \subsection{Missing metadata 'is' added}
+The metadata identifier \xatt{id} has been missing on multiple elements, such as the root \xelem{PharmML} or 
+number of elements in the \xelem{TrialDesign}. 
 
+\lstset{language=XML}
+\begin{lstlisting}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    	    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+	    <!-- SKIP -->
+    	    writtenVersion="0.3" id="i1">
+\end{lstlisting}
 
 \bibliographystyle{plain}
 \bibliography{pharmml-specification}
