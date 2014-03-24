@@ -186,6 +186,7 @@ Part III -- Code injection (with symbol mapping)
 \end{itemize}
 
 \subsection{Part I -- Mapping of the columns in dataset}
+\label{subset:partI}
 A mapping type proposed in the form 
  \lstset{language=XML}
 \begin{lstlisting}
@@ -529,7 +530,7 @@ with
  & \eta_i^{(0)} \sim \mathcal{N}\big(0,\Omega^{(0)}\big), \quad \eta_{ij}^{(1)} \sim \mathcal{N}\big(0,\Omega^{(1)}\big)
 \end{align*}
 Each covariance matrix $\Omega^{(l)}$ contains the information about the variance/covariance 
-of the random effects. For example, a subject-level covariance matrix for four parameters \emph{CL}, 
+of the random effects at level \emph{l}. For example, a subject-level covariance matrix for four parameters \emph{CL}, 
 \emph{V1}, \emph{V2} and \emph{Q} could look like this 
 \begin{align}
 \Omega^{(0)} = 
@@ -543,7 +544,7 @@ of the random effects. For example, a subject-level covariance matrix for four p
  0.0156 & 0.0127 & 0.0218 & \\
   0.0273 & 0.0282 & 0.0411 & 0.0804 \end{bmatrix} \nonumber
 \end{align}
-PharmML in versions 0.2.1 provided the possibility to define pair-wise the covariance or 
+PharmML in versions 0.2.1 provided the possibility to define pair-wise covariance or 
 correlation between corresponding random effects. Version 0.3 offers additionally a 
 \xelem{Matrix} structure which can be used to encode any matrix with
 \begin{itemize}
@@ -559,11 +560,13 @@ Attribute \xatt{matrixType} with predefined values to choose from
 \item
 \xatt{StDevCorrMatrix} - NONMEM-like mixture matrix containing standard deviations 
 on the diagonal and correlation coefficients on the off diagonals. 
+\item
+\xatt{Cholesky} -- the Cholesky form, introduced in NONMEM 7.2.
 \end{itemize}
 \item
 Mandatory raw names, \xelem{RawNames}, and optional column names, \xelem{ColumnNames}.
 \end{itemize}
-Please, not that the sequence of rows and columns matter. 
+Please, not that in this case the sequence of rows and columns matters.
 
 
 \subsection{Example 1 -- Inter-individual variability, IIV}
@@ -819,7 +822,7 @@ and \emph{Target/ModelDefinition}.}
 \label{tab:C1C2C2}
 \end{table}
 
-\subsection{Case C1}
+\paragraph{Case C1}
 \label{subsec:caseC1}
 The main ingredients in this case are 
 \begin{itemize}
@@ -930,7 +933,7 @@ target variable, \emph{Cc}, is a general input target, see also discussion in se
 The last part of the above listing, \xelem{DataSet}, follows the same rules as described 
 in the section about the externalised datasets.
 
-\subsection{Case C2}
+\paragraph{Case C2}
 In this case the model is defined by specifying
 
 \begin{itemize}
@@ -1140,34 +1143,115 @@ The next listing shows how the just defined interpolation function is then refer
 The last part, the \xelem{LookupTable} definition and mapping, is identical to the previous 
 example and will be skipped here.
 
+\paragraph{Case C3}
+This case is straightforward and doesn't contain any new aspects needed to be described.
+
 
 \section{Other changes}
 
 \subsection{Nested tables removed}
-The extension to support external data files as discussed in section \ref{sec:externalFiles} 
-means 
+Nested tables have been used to store time-varying \emph{covariates} data in \xelem{Population}
+block.
 
+As described in section \ref{sec:externalFiles} external data files, in CSV format with three 
+different delimiters, are from now on supported in PharmML.
+This also means that a nested table would have to be stored in an additional file along with
+the other covariates. This in turn means that we would have to provide different data structure
+depending whether the covariates are being stored inline or external.
+Moreover, a nested data table proofed to be difficult to understand, use and parse.
+
+It was therefore decided to provide one unified format to store both time-dependent and independent data
+internally or externally -- in one data table/file. 
 
 \subsection{Simplified/unified mapping in all dataset types}
+The section goes into more details of what has been described in the section \ref{subset:partI} on mapping
+of dataset columns to model relevant symbols. The changes can be summarised in the following list:
+\begin{itemize}
+\item
+There is only one mapping type -- \xelem{ColumnMapping}
+\item
+Only columns are mapped for which target symbols in either \xelem{ModelDefinition} and \xelem{TrialDesign} exist. 
+Accordingly, the \xatt{ID} is not mapped as the subject identifier is not used in the model.
+\item
+The meaning of all other columns is stored in the new attribute \xatt{columnType} of the following \xelem{DataSet}.
+See Tables \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes} for allowed values of this
+attribute.
+\end{itemize}
 
-\subsection{New \emph{Identity} transformation for individual parameters}
-
+The following listing stems from the 0.2.1 version of a model where different types of mappings were used.
 \lstset{language=XML}
 \begin{lstlisting}
-            <IndividualParameter symbId="p1">
+            <ObjectiveDataSet>
+                <IndividualMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
+                </IndividualMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
+                    <ct:SymbRef symbIdRef="time"/>
+                </VariableMapping>
+                <VariableMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR_obs"/>
+                </VariableMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" valueType="real" columnNum="3"/>
+                    </Definition>
+                    <!-- SKIP -->
+\end{lstlisting}                    
+This listing shows the 0.3 versions of the mapping with the newly introduced element \xelem{ColumnMapping}
+and attribute \xatt{columnType}
+\lstset{language=XML}
+\begin{lstlisting}
+            <ObjectiveDataSet>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
+                    <ct:SymbRef symbIdRef="time"/>
+                </ColumnMapping>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
+                    <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR_obs"/>
+                </ColumnMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
+                    </Definition>
+                    <!-- SKIP -->
+\end{lstlisting}       
+
+\subsection{New \emph{Identity} transformation for individual parameters}
+The Gaussian parameter without covariates reads
+\begin{align}
+h(V_i) = h(V_{pop}) + \eta_V \nonumber
+\end{align}
+Previously only three types of transformation \emph{h} were allowed: \emph{log, logic and probit}. 
+For example a log-normal distributed parameter would be encoded as
+\lstset{language=XML}
+\begin{lstlisting}
+            <IndividualParameter symbId="V">
                 <GaussianModel>
-                    <Transformation>identity</Transformation>
-                    <GeneralCovariate>
-                        <ct:Assign>
-                            <ct:SymbRef symbIdRef="pop_p1"/>                           
-                        </ct:Assign>
-                    </GeneralCovariate>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="V_pop"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
                     <RandomEffects>
-                        <ct:SymbRef symbIdRef="eta_p1"/>
+                        <ct:SymbRef symbIdRef="eta_V"/>
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
-\end{lstlisting}
+\end{lstlisting}       
+The assumption was that to encode normal distributed parameters the \xelem{Transformation} tag
+would be omitted. This however lead to misunderstandings which can be avoided with the 
+additional \xatt{identity} transformation. The \xelem{Transformation} element is now mandatory which reminds
+the user to define it accordingly. 
 
 \subsection{Interpolation support for covariates or model variables}
 
@@ -1375,15 +1459,36 @@ This has been now corrected.
 
 
 \subsection{Random errors in the Gaussian model}
+Version 0.2.1 allowed to defined multiple random effects for one parameter in that one could encode both 
+random effects in one \xelem{RandomEffects} element
+\lstset{language=XML}
+\begin{lstlisting}
+          <RandomEffects>
+              <ct:SymbRef symbIdRef="eta0_kout"/>
+              <ct:SymbRef symbIdRef="eta1_kout"/>
+          </RandomEffects>
+\end{lstlisting}
+In the 0.3 version one can assign only one element per \xelem{RandomEffects} which means that the code above 
+would be now written as 
+
+\lstset{language=XML}
+\begin{lstlisting}
+          <RandomEffects>
+              <ct:SymbRef symbIdRef="eta0_kout"/>
+          </RandomEffects>
+          <RandomEffects>
+              <ct:SymbRef symbIdRef="eta1_kout"/>
+          </RandomEffects>
+\end{lstlisting}
 
 
 \subsection{Missing metadata 'is' added}
 The metadata identifier \xatt{id} has been missing on multiple elements, such as the root \xelem{PharmML} or 
-number of elements in the \xelem{TrialDesign}. 
+number of elements in the \xelem{TrialDesign}. For example the user can annotate the model by applying 
+according annotation to the root element, here using the identifier \xatt{id="i1"}.
 
 \lstset{language=XML}
 \begin{lstlisting}
-	<?xml version="1.0" encoding="UTF-8"?>
 	<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	    xmlns="http://www.pharmml.org/2013/03/PharmML"
     	    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
