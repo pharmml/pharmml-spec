@@ -1223,12 +1223,12 @@ and attribute \xatt{columnType}
                     <!-- SKIP -->
 \end{lstlisting}       
 
-\subsection{New \emph{Identity} transformation for individual parameters}
+\subsection{New \xatt{identity} transformation for individual parameters}
 The Gaussian parameter without covariates reads
 \begin{align}
 h(V_i) = h(V_{pop}) + \eta_V \nonumber
 \end{align}
-Previously only three types of transformation \emph{h} were allowed: \emph{log, logic and probit}. 
+Previously only three types of transformation \emph{h} were allowed: \xatt{log, logic and probit}. 
 For example a log-normal distributed parameter would be encoded as
 \lstset{language=XML}
 \begin{lstlisting}
@@ -1459,8 +1459,8 @@ This has been now corrected.
 
 
 \subsection{Random errors in the Gaussian model}
-Version 0.2.1 allowed to defined multiple random effects for one parameter in that one could encode both 
-random effects in one \xelem{RandomEffects} element
+Version 0.2.1 allowed to defined multiple random effects for one parameter in that one could encode 
+any number of random effects in one \xelem{RandomEffects} element
 \lstset{language=XML}
 \begin{lstlisting}
           <RandomEffects>
@@ -1468,9 +1468,9 @@ random effects in one \xelem{RandomEffects} element
               <ct:SymbRef symbIdRef="eta1_kout"/>
           </RandomEffects>
 \end{lstlisting}
-In the 0.3 version one can assign only one element per \xelem{RandomEffects} which means that the code above 
-would be now written as 
-
+In the 0.3 version one can assign only one element per \xelem{RandomEffects} which means that 
+to encode multiple random effects one has to use an according number of \xelem{RandomEffects} such as
+in the following snip set
 \lstset{language=XML}
 \begin{lstlisting}
           <RandomEffects>
