@@ -742,13 +742,13 @@
                 
                 <!-- KPQ -->
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KQP"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KPQ"/>
                     <InitialEstimate>
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KQP"/>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KPQ"/>
                     <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
