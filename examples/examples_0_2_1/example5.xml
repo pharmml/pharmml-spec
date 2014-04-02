@@ -96,26 +96,15 @@
                 </GaussianModel>
             </IndividualParameter>            
             <!-- QP0 -->
-            <SimpleParameter symbId="QP0">
-                <ct:Assign>
-                    <ct:Real>0</ct:Real>
-                </ct:Assign>
-            </SimpleParameter>
+            <SimpleParameter symbId="QP0"/>
+            
             
             <!-- **************************************** -->
             <!-- PARAMETERS: population values & omegas   -->
             <!-- **************************************** -->
-            <SimpleParameter symbId="K">
-                <ct:Assign>
-                    <ct:Real>100</ct:Real>
-                </ct:Assign>
-            </SimpleParameter>
+            <SimpleParameter symbId="K"/>
             <SimpleParameter symbId="pop_KDE"/>
-            <SimpleParameter symbId="omega_KDE">
-                <ct:Assign>
-                    <ct:Real>0.5</ct:Real>
-                </ct:Assign>
-            </SimpleParameter>
+            <SimpleParameter symbId="omega_KDE"/>
             <SimpleParameter symbId="pop_LAMBDAP"/>
             <SimpleParameter symbId="omega_LAMBDAP"/>
             <SimpleParameter symbId="pop_KQPP"/>
@@ -126,6 +115,36 @@
             <SimpleParameter symbId="omega_GAMA"/>
             <SimpleParameter symbId="pop_DELTAQP"/>
             <SimpleParameter symbId="omega_DELTAQP"/>
+            
+            <!-- KDE  log-normal distributed -->
+            <RandomVariable symbId="eta_KDE">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <stddev>
+                        <var varId="omega_KDE"/>
+                    </stddev>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="KDE">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_KDE"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_KDE"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
             
             <!-- LAMBDAP log-normal distributed -->
             <RandomVariable symbId="eta_LAMBDAP">
@@ -362,7 +381,10 @@
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="minus">
-                            <ct:SymbRef blkIdRef="pm1" symbIdRef="KPQ"/>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="KPQ"/>
+                                <ct:SymbRef symbIdRef="PT"/>
+                            </Binop>
                             <Binop op="times">
                                 <ct:SymbRef  blkIdRef="pm1" symbIdRef="GAMMA"/>
                                 <Binop op="times">
@@ -654,27 +676,34 @@
                 <!-- P0 -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_P0"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_P0"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>0.5</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <!-- Q0 -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Q0"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Q0"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>0.5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <!-- QP0 -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="QP0"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>0</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 
@@ -702,12 +731,26 @@
                     </InitialEstimate>
                 </ParameterEstimation>
                 
+                <!-- K -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>100</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
                 <!-- KDE -->
-                <!-- omega_KDE is fixed, see pm1 -->
+                <!-- omega_KDE is fixed to 0.5 -->
                 <!-- only pop_KDE to be estimated -->
                 <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KDE"/>
+                    <InitialEstimate fixed="true">
+                        <ct:Real>0.5</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KDE"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -715,13 +758,13 @@
                 <!-- KQPP -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KQPP"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KQPP"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -729,13 +772,13 @@
                 <!-- LAMBDAP -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_LAMBDAP"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_LAMBDAP"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -743,13 +786,13 @@
                 <!-- KPQ -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KPQ"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KPQ"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -757,13 +800,13 @@
                 <!-- GAMMA -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_GAMMA"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_GAMMA"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -771,13 +814,13 @@
                 <!-- DELTAQP -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_DELTAQP"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_DELTAQP"/>
-                    <InitialEstimate>
+                    <InitialEstimate fixed="false">
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
