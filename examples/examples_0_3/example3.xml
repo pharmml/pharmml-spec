@@ -47,7 +47,6 @@
             <Level symbId="residual"/>
         </VariabilityModel>
         
-        
         <!-- COVARIATE MODEL -->
         <CovariateModel blkId="cm1">
             <Covariate symbId="W">
@@ -65,7 +64,6 @@
                 </Continuous>
             </Covariate>
         </CovariateModel>
-        
         
         <!-- PARAMETER MODEL -->
         <ParameterModel blkId="pm1">

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PharmML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
+    xmlns:mstep="http://www.pharmml.org/2013/03/ModellingSteps"
+    xmlns:mml="http://www.pharmml.org/2013/03/PharmML"
+    writtenVersion="0.2.1">
+    
+    <!-- MODEL NAME -->
+    <ct:Name>Example 3 - basic Warfarin PK estimation with covariate W</ct:Name>
+    
+    <!-- INDEPENDENT VARIABLE -->
+    <IndependentVariable symbId="t"/>
+    
+    <!-- FUNCTION DEFINITION -->
+    <ct:FunctionDefinition  xmlns="http://www.pharmml.org/2013/03/CommonTypes" 
+        symbId="combinedErrorModel" symbolType="real">
+        <FunctionArgument symbolType="real" symbId="a"/>
+        <FunctionArgument symbolType="real" symbId="b"/>
+        <FunctionArgument symbolType="real" symbId="f"/>
+        <Definition>
+            <math:Equation>
+                <math:Binop op="plus">
+                    <ct:SymbRef symbIdRef="a"/>
+                    <math:Binop op="times">
+                        <ct:SymbRef symbIdRef="b"/>
+                        <ct:SymbRef symbIdRef="f"/>
+                    </math:Binop>
+                </math:Binop>
+            </math:Equation>
+        </Definition>
+    </ct:FunctionDefinition>
+
+    <!-- MODEL DEFINITION -->
+
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <!-- PARAMETER MODEL -->
+        <ParameterModel blkId="pm1">
+            
+            <SimpleParameter symbId="p">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:Uniop op="exp">
+                            <math:Uniop op="log">
+                                <ct:SymbRef symbIdRef="x"/>                                
+                            </math:Uniop>
+                        </math:Uniop>
+                    </math:Equation>
+                </ct:Assign>
+            </SimpleParameter>
+
+            <IndividualParameter symbId="b">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="b_pop"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta"></ct:SymbRef>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <IndividualParameter symbId="b2">
+                <GaussianModel>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="b_pop"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta"></ct:SymbRef>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            
+        </ParameterModel>
+        
+        <!-- STRUCTURAL MODEL -->
+        <StructuralModel blkId="sm1">
+            <SimpleParameter symbId="D"/>
+            <SimpleParameter symbId="tD"/>
+            <!-- k -->
+            <SimpleParameter symbId="k">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:Binop op="divide">
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V"/>
+                        </math:Binop>
+                    </math:Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <!-- C - algebraic formula -->
+            <ct:Variable symbolType="real" symbId="C">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:Piecewise>
+                            <math:Piece>
+                                <ct:Real>0</ct:Real>
+                                <math:Condition>
+                                    <math:LogicBinop op="lt">
+                                        <math:Binop op="minus">
+                                            <ct:SymbRef symbIdRef="t"/>
+                                            <ct:SymbRef symbIdRef="tD"/>
+                                        </math:Binop>
+                                        <ct:SymbRef symbIdRef="Tlag"></ct:SymbRef>
+                                    </math:LogicBinop>
+                                </math:Condition>
+                            </math:Piece>
+                            <math:Piece>
+                                <math:Binop op="times">
+                                    <math:Binop op="divide">
+                                        <math:Binop op="times">
+                                            <ct:SymbRef symbIdRef="D"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"></ct:SymbRef>
+                                        </math:Binop>
+                                        <math:Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="V"/>
+                                            <math:Binop op="minus">
+                                                <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"/>
+                                                <ct:SymbRef symbIdRef="k"/>
+                                            </math:Binop>
+                                        </math:Binop>
+                                    </math:Binop>
+                                    <math:Binop op="minus">
+                                        <math:Uniop op="exp">
+                                            <math:Binop op="times">
+                                                <math:Uniop op="minus">
+                                                    <ct:SymbRef symbIdRef="k"/>
+                                                </math:Uniop>
+                                                <math:Binop op="minus">
+                                                    <math:Binop op="minus">
+                                                        <ct:SymbRef symbIdRef="t"/>
+                                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="tD"/>
+                                                    </math:Binop>
+                                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Tlag"/>
+                                                </math:Binop>
+                                            </math:Binop>
+                                        </math:Uniop>
+                                        <math:Uniop op="exp">
+                                            <math:Binop op="times">
+                                                <math:Uniop op="minus">
+                                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="ka"/>
+                                                </math:Uniop>
+                                                <math:Binop op="minus">
+                                                    <math:Binop op="minus">
+                                                        <ct:SymbRef symbIdRef="t"/>
+                                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="tD"/>
+                                                    </math:Binop>
+                                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="Tlag"/>
+                                                </math:Binop>
+                                            </math:Binop>
+                                        </math:Uniop>                                        
+                                    </math:Binop>
+                                </math:Binop>
+                                <math:Condition>
+                                    <math:Otherwise/>
+                                </math:Condition>
+                            </math:Piece>
+                        </math:Piecewise>
+                    </math:Equation>
+                </ct:Assign>
+            </ct:Variable>
+        </StructuralModel>
+
+    </ModelDefinition>
+    
+</PharmML>

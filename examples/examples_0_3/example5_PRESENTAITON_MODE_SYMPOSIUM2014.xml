@@ -3,38 +3,22 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.2.1">
+    writtenVersion="0.3" id="i1">
     
-    <!-- MODEL NAME -->
-    <ct:Name>Example 5 - estimation for growth tumor model (Ribba et al. 2012)</ct:Name>
+    <ct:Name>Example 5 - estimation for growth tumor model</ct:Name>    
     
-    <ct:Description>based on A Tumor Growth Inhibition Model for Low-Grade Glioma Treated with Chemotherapy or Radiotherapy
-        Benjamin Ribba, Gentian Kaloshi, Mathieu Peyre, et al. Clin Cancer Res Published OnlineFirst July 3, 2012.</ct:Description>
-    
-    <!-- INDEPENDENT VARIABLE -->
-    <IndependentVariable symbId="time"/>
+    <IndependentVariable symbId="t"/>
 
-    <!-- SYMBOL DEFINITION - RESUIDUAL ERROR MODEL -->
-    <ct:FunctionDefinition symbId="constantErrorModel" symbolType="real">
-        <ct:FunctionArgument symbId="a" symbolType="real"/>
-        <ct:Definition>
-            <ct:SymbRef symbIdRef="a"/>
-        </ct:Definition>
-    </ct:FunctionDefinition>
-
-    <!-- BLOCK I: MODEL DEFINITION -->
-    <ModelDefinition  xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
-        
-        <!-- VARIABILITY MODEL -->
-        <VariabilityModel blkId="modelVar" type="model"> 
+    <ModelDefinition  xmlns="http://www.pharmml.org/2013/03/ModelDefinition">   
+      
+        <VariabilityModel blkId="modelVar" type="parameterVariability"> 
             <Level symbId="indiv"/>
-        </VariabilityModel>
-        
-        <VariabilityModel blkId="obsErr" type="error"> 
+        </VariabilityModel>    
+    
+        <VariabilityModel blkId="obsErr" type="residualError"> 
             <Level symbId="residual"/>
-        </VariabilityModel>
-        
-        <!-- PARAMETER MODEL -->
+        </VariabilityModel>   
+    
         <ParameterModel blkId="pm1">
             <!-- **************************************** -->
             <!-- PARAMETERS: initial conditions           -->
@@ -96,15 +80,26 @@
                 </GaussianModel>
             </IndividualParameter>            
             <!-- QP0 -->
-            <SimpleParameter symbId="QP0"/>
-            
+            <SimpleParameter symbId="QP0">
+                <ct:Assign>
+                    <ct:Real>0</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
             
             <!-- **************************************** -->
             <!-- PARAMETERS: population values & omegas   -->
             <!-- **************************************** -->
-            <SimpleParameter symbId="K"/>
+            <SimpleParameter symbId="K">
+                <ct:Assign>
+                    <ct:Real>100</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
             <SimpleParameter symbId="pop_KDE"/>
-            <SimpleParameter symbId="omega_KDE"/>
+            <SimpleParameter symbId="omega_KDE">
+                <ct:Assign>
+                    <ct:Real>0.5</ct:Real>
+                </ct:Assign>
+            </SimpleParameter>
             <SimpleParameter symbId="pop_LAMBDAP"/>
             <SimpleParameter symbId="omega_LAMBDAP"/>
             <SimpleParameter symbId="pop_KQPP"/>
@@ -115,36 +110,6 @@
             <SimpleParameter symbId="omega_GAMA"/>
             <SimpleParameter symbId="pop_DELTAQP"/>
             <SimpleParameter symbId="omega_DELTAQP"/>
-            
-            <!-- KDE  log-normal distributed -->
-            <RandomVariable symbId="eta_KDE">
-                <ct:VariabilityReference>
-                    <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
-                </ct:VariabilityReference>
-                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
-                    <mean>
-                        <rVal>0</rVal>
-                    </mean>
-                    <stddev>
-                        <var varId="omega_KDE"/>
-                    </stddev>
-                </NormalDistribution>
-            </RandomVariable>
-            <IndividualParameter symbId="KDE">
-                <GaussianModel>
-                    <Transformation>log</Transformation>
-                    <LinearCovariate>
-                        <PopulationParameter>
-                            <ct:Assign>
-                                <ct:SymbRef symbIdRef="pop_KDE"/>
-                            </ct:Assign>
-                        </PopulationParameter>
-                    </LinearCovariate>
-                    <RandomEffects>
-                        <ct:SymbRef symbIdRef="eta_KDE"/>
-                    </RandomEffects>
-                </GaussianModel>
-            </IndividualParameter>
             
             <!-- LAMBDAP log-normal distributed -->
             <RandomVariable symbId="eta_LAMBDAP">
@@ -171,7 +136,7 @@
                         </PopulationParameter>
                     </LinearCovariate>
                     <RandomEffects>
-                        <ct:SymbRef symbIdRef="eta_LAMBDAP"/>
+                        <ct:SymbRef symbIdRef="eta_LAMBDA"/>
                     </RandomEffects>
                 </GaussianModel>
             </IndividualParameter>
@@ -296,16 +261,19 @@
                 </GaussianModel>
             </IndividualParameter>
             
-        </ParameterModel>
-
-        <!-- STRUCTURAL MODEL - ODEs -->
-        <StructuralModel blkId="sm1">
+            <Correlation>
+                <ct:VariabilityReference>
+                    <ct:SymbRef symbIdRef=""></ct:SymbRef>
+                </ct:VariabilityReference>
+                <Matrix matrixType="CorrMatrix">
+                    <ct:RowNames></ct:RowNames>
+                    <ct:MatrixRow></ct:MatrixRow>
+                </Matrix>
+            </Correlation>
             
-            <ct:Variable symbolType="real" symbId="Q0">
-                <ct:Assign>                         
-                    <ct:Real>40</ct:Real>
-                </ct:Assign>
-            </ct:Variable>
+        </ParameterModel>
+        
+        <StructuralModel blkId="sm1">
             
             <!-- dC/dt -->
             <ct:DerivativeVariable symbolType="real" symbId="C">
@@ -323,9 +291,16 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="C0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="C0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                    <ct:InitialTime>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialTime>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -376,9 +351,16 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="P0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="P0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                    <ct:InitialTime>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialTime>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -387,10 +369,7 @@
                 <ct:Assign>
                     <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
                         <Binop op="minus">
-                            <Binop op="times">
-                                <ct:SymbRef blkIdRef="pm1" symbIdRef="KPQ"/>
-                                <ct:SymbRef symbIdRef="PT"/>
-                            </Binop>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="KPQ"/>
                             <Binop op="times">
                                 <ct:SymbRef  blkIdRef="pm1" symbIdRef="GAMMA"/>
                                 <Binop op="times">
@@ -408,9 +387,16 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="Q0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="Q0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                    <ct:InitialTime>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialTime>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -446,9 +432,16 @@
                     <ct:SymbRef symbIdRef="time"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:SymbRef blkIdRef="pm1" symbIdRef="QP0"/>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="QP0"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                    <ct:InitialTime>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialTime>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
 
@@ -467,8 +460,7 @@
                 </ct:Assign>
             </ct:Variable>
         </StructuralModel>
-
-        <!-- OBSERVATION MODEL - PSTAR -->
+    
         <ObservationModel blkId="om1">
             <SimpleParameter symbId="a"/>
             <RandomVariable symbId="eps">
@@ -505,13 +497,11 @@
                 </ResidualError>
             </Standard>
         </ObservationModel>
-
+    
     </ModelDefinition>
     
-    <!-- BLOCK II: TRIAL DEFINITION -->
-    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
-        
-        <!-- STRUCTURE -->
+    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">     
+   
         <Structure>
             <Epoch oid="epoch1">
                 <Start>
@@ -533,31 +523,23 @@
             </Segment>
             <Activity oid="bolusIV">
                 <Bolus>
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="derivativeVariable">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="C"/>
                     </DoseAmount>
                 </Bolus>
             </Activity>
         </Structure> 
-        
-        <!-- POPULATION -->
+   
         <Population> 
-            <IndividualTemplate> 
-                <IndividualMapping> 
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/> 
-                </IndividualMapping> 
-                <ArmMapping> 
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/> 
-                </ArmMapping> 
-                <ReplicateMapping> 
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="REP"/> 
-                </ReplicateMapping>
-            </IndividualTemplate>
+            <ct:VariabilityReference>
+                <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
+            </ct:VariabilityReference>
+            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/> 
-                    <Column columnId="ARM" valueType="id" columnNum="2"/> 
-                    <Column columnId="REP" valueType="int" columnNum="3"/> 
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
+                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/> 
+                    <Column columnId="REP" columnType="replicate" valueType="int" columnNum="3"/> 
                 </Definition>
                 <Table>
                     <Row>
@@ -569,147 +551,87 @@
             </DataSet>
         </Population>
 
-        <!-- INDIVUIDUAL DOSING -->
         <IndividualDosing>
+            
             <ActivityRef oidRef="bolusIV"/>
-            <IndividualRef columnIdRef="ID"/>
-            <DoseAmount columnIdRef="DOSE"/>
-            <DosingTime columnIdRef="TIME"/>
+            
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/>
+                <ct:SymbRef symbIdRef="time"/>
+            </ColumnMapping>
+            
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/>
-                    <Column columnId="TIME" valueType="real" columnNum="2"/>
-                    <Column columnId="DOSE" valueType="real" columnNum="5"/>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="TIME" columnType="time" valueType="real" columnNum="2"/>
+                    <Column columnId="DOSE" columnType="dose" valueType="real" columnNum="3"/>
                 </Definition>
-                <Table>
-                    <!-- subject 1 -->
-                    <Row><ct:Id>i1</ct:Id><ct:Real>54.57</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i1</ct:Id><ct:Real>59.77</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <!-- subject 2 -->
-                    <Row><ct:Id>i2</ct:Id><ct:Real>12</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i2</ct:Id><ct:Real>14.09</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i2</ct:Id><ct:Real>16.17</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i2</ct:Id><ct:Real>18.26</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i2</ct:Id><ct:Real>20.35</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i2</ct:Id><ct:Real>22.43</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <!-- SNIP -->
-                    <!-- subject 21 -->
-                    <Row><ct:Id>i21</ct:Id><ct:Real>1.5</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i21</ct:Id><ct:Real>3.17</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i21</ct:Id><ct:Real>4.85</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i21</ct:Id><ct:Real>6.52</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i21</ct:Id><ct:Real>8.19</ct:Real><ct:Real>1</ct:Real></Row> 
-                    <Row><ct:Id>i21</ct:Id><ct:Real>9.87</ct:Real><ct:Real>1</ct:Real></Row> 
-                </Table>
+                <ImportData oid="PCV_dosingData">
+                    <name>RIBBA2012_PCV_dosing</name>
+                    <url>file:///examples/examples_0_2_2/</url>
+                    <format>CSV</format>
+                    <delimiter>COMMA</delimiter>
+                </ImportData>
             </DataSet>
         </IndividualDosing>
     </TrialDesign>
     
-    <!-- BLOCK III: MODELLING STEPS -->
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
-        
-        <!-- ESTIMATION STEP -->
         <EstimationStep oid="estTask1">
+
             <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
-                </IndividualMapping>
-                <VariableMapping>
+                
+                <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TIME"/> 
                     <ct:SymbRef symbIdRef="time"/>
-                </VariableMapping>
-                <VariableMapping>
+                </ColumnMapping>
+                
+                <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="DV"/> 
                     <ct:SymbRef blkIdRef="om1" symbIdRef="PSTAR_obs"/>
-                </VariableMapping>
+                </ColumnMapping>
                 
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"/>
-                        <Column columnId="TIME" valueType="real" columnNum="2"/>
-                        <Column columnId="DV" valueType="real" columnNum="3"/>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
+                        <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
                     </Definition>
-                    <Table>
-                        <!-- SUBJECT 1 -->
-                        <Row><ct:Id>i1</ct:Id><ct:Real>3.43</ct:Real><ct:Real>45.7</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>5.3</ct:Real><ct:Real>48.03</ct:Real></Row> 
-                        <Row><ct:Id>i1</ct:Id><ct:Real>42.13</ct:Real><ct:Real>71.34</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>52.63</ct:Real><ct:Real>79.3</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>57.53</ct:Real><ct:Real>72.3</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>63.3</ct:Real><ct:Real>72.07</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>68.97</ct:Real><ct:Real>70.24</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>76.53</ct:Real><ct:Real>66.81</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>94.53</ct:Real><ct:Real>60.48</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>106.1</ct:Real><ct:Real>62</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>116.23</ct:Real><ct:Real>72.04</ct:Real></Row>
-                        <Row><ct:Id>i1</ct:Id><ct:Real>121.87</ct:Real><ct:Real>90.16</ct:Real></Row>
-                        <!-- SUBJECT 2 -->
-                        <Row><ct:Id>i2</ct:Id><ct:Real>0</ct:Real><ct:Real>50.17</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>11.07</ct:Real><ct:Real>61.68</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>14.17</ct:Real><ct:Real>52.82</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>16.6</ct:Real><ct:Real>53.36</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>19.33</ct:Real><ct:Real>53.28</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>25.13</ct:Real><ct:Real>48.3</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>29.27</ct:Real><ct:Real>40.66</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>33.4</ct:Real><ct:Real>42.4</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>37.43</ct:Real><ct:Real>38.2</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>42.67</ct:Real><ct:Real>42.99</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>48.83</ct:Real><ct:Real>42.76</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>56.4</ct:Real><ct:Real>48.6</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>62.23</ct:Real><ct:Real>55.85</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>65.9</ct:Real><ct:Real>54.71</ct:Real></Row>
-                        <Row><ct:Id>i2</ct:Id><ct:Real>71.37</ct:Real><ct:Real>60.77</ct:Real></Row>
-                        <!-- SUBJECT 3 -->
-                        <!-- SUBJECT 4 -->
-                        <!-- SUBJECT 5 -->
-                        <!-- SUBJECT 6 -->
-                        <!-- SUBJECT 7 -->
-                        <!-- SUBJECT 8 -->
-                        <!-- SUBJECT 9 -->
-                        <!-- SUBJECT 10 -->
-                        <!-- SNIP -->
-                        <!-- SUBJECT 21 -->
-                        <Row><ct:Id>i21</ct:Id><ct:Real>9.77</ct:Real><ct:Real>72.35</ct:Real></Row>
-                        <Row><ct:Id>i21</ct:Id><ct:Real>14.23</ct:Real><ct:Real>66.96</ct:Real></Row>
-                        <Row><ct:Id>i21</ct:Id><ct:Real>18.13</ct:Real><ct:Real>56.79</ct:Real></Row>
-                        <Row><ct:Id>i21</ct:Id><ct:Real>23.9</ct:Real><ct:Real>60.06</ct:Real></Row>
-                    </Table>
-
+                    <ImportData oid="PCV_observationData">
+                        <name>RIBBA2012_PCV_observations</name>
+                        <url>file:///examples/examples_0_2_2/</url>
+                        <format>CSV</format>
+                        <delimiter>COMMA</delimiter>
+                    </ImportData>                    
                 </DataSet>
             </ObjectiveDataSet>
+            
             <ParametersToEstimate>
                 <!-- INITIAL CONDITIONS -->
                 <!-- P0 -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_P0"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_P0"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>0.5</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <!-- Q0 -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_Q0"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_Q0"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>0.5</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <!-- QP0 -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="QP0"/>
-                    <InitialEstimate fixed="true">
-                        <ct:Real>0</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 
@@ -737,26 +659,12 @@
                     </InitialEstimate>
                 </ParameterEstimation>
                 
-                <!-- K -->
-                <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K"/>
-                    <InitialEstimate fixed="true">
-                        <ct:Real>100</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                
                 <!-- KDE -->
-                <!-- omega_KDE is fixed to 0.5 -->
+                <!-- omega_KDE is fixed, see pm1 -->
                 <!-- only pop_KDE to be estimated -->
                 <ParameterEstimation>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KDE"/>
-                    <InitialEstimate fixed="true">
-                        <ct:Real>0.5</ct:Real>
-                    </InitialEstimate>
-                </ParameterEstimation>
-                <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KDE"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -764,13 +672,13 @@
                 <!-- KQPP -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KQPP"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KQPP"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -778,13 +686,13 @@
                 <!-- LAMBDAP -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_LAMBDAP"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_LAMBDAP"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -792,13 +700,13 @@
                 <!-- KPQ -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_KPQ"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_KPQ"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -806,13 +714,13 @@
                 <!-- GAMMA -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_GAMMA"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_GAMMA"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
@@ -820,23 +728,22 @@
                 <!-- DELTAQP -->
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_DELTAQP"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>10</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 <ParameterEstimation>
                     <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_DELTAQP"/>
-                    <InitialEstimate fixed="false">
+                    <InitialEstimate>
                         <ct:Real>1</ct:Real>
                     </InitialEstimate>
                 </ParameterEstimation>
                 
             </ParametersToEstimate>
+            
             <Operation order="1" opType="estPop"/>
             <Operation order="2" opType="estIndiv"/>
         </EstimationStep>
-
-        <!-- STEP DEPENDENCIES -->
         <StepDependencies>
             <Step>
                 <ct:OidRef oidRef="estTask1"/>
@@ -844,3 +751,4 @@
         </StepDependencies>
     </ModellingSteps>
 </PharmML>
+

@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"  
     
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    writtenVersion="0.2.2" id="i1">
+    writtenVersion="0.3" id="i1">
     
     <Name id="id1" xmlns="http://www.pharmml.org/2013/03/CommonTypes">Friberg_PANSS_2009</Name>
     
