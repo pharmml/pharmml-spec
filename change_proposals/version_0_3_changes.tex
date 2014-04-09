@@ -533,7 +533,6 @@ ignored by the language parser and passed 'as is'.
 follows well defined rules and grammar.
 \end{description}
 
-
 \section{Changes in structure of \xelem{ModellingSteps}}
 \label{sec:modellingSteps}
 You might have noticed that the \xelem{NONMEMdataSet} in sections \ref{subset:partI} and 
@@ -576,7 +575,7 @@ The following code visualises the implementation.
             </TargetToolReference>
             
             <ParametersToEstimate>
-                <!-- ommited details on parameter estimations -->
+                <!-- omitted details on parameter estimations -->
             </ParametersToEstimate>
             <Operation order="1" opType="estPop"/>
         </EstimationStep>
@@ -586,18 +585,81 @@ The following code visualises the implementation.
                 <ct:OidRef oidRef="TToid"/>
             </TargetToolReference>
             <Observations>
-                <!-- ommited details on simulation -->
+                <!-- omitted details on simulation -->
             </Observations>
         </SimulationStep>
         
         <!-- omitted <StepDependencies> -->
     </ModellingSteps>
 \end{lstlisting}
-    
+
+\subsection{Suggested improvements}
+There was a discussion on how to improve this part of PharmML at the last consortium 
+meeting in Hoofddrop, 25-28 March 2014. Unfortunately, due to time constraints the changes have 
+not been implemented. The improvements suggestions are described here.
+
+Additionally to elements, such as \xelem{NONMEMdataSet} and \xelem{TargetTool}, new ones would 
+be very helpful to enable the exchange of data/information between steps of an workflow, such as
+\xelem{InputData} and \xelem{OutputData}. The following example of PSN driven estimation
+explains the use of the new elements. 
+
+\lstset{language=XML}
+\begin{lstlisting}
+    <!-- MODELLING STEPS -->
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
+        <NONMEMdataSet oid="NMoid">
+            <!-- omitted details on dataset declaration -->
+        </NONMEMdataSet>
+        
+        <InputData oid="PSNinput">
+            <TargetToolName>PSN</TargetToolName>
+            <ds:TargetToolData>
+                <ds:ImportTarget oid="PSN1">
+                    <ds:name>myInputFile.psn</ds:name>
+                    <ds:url>c://projectXYZ/combineArchive/inputFolder/...</ds:url>
+                </ds:ImportTarget>
+            </ds:TargetToolData>
+        </InputData>
+        
+        <OutputData oid="PSNoutput">
+            <TargetToolName>PSN</TargetToolName>
+            <ds:TargetToolData>
+                <ds:OutputTarget oid="PSN2">
+                    <ds:name>myOutputFile.psn</ds:name>
+                    <ds:url>c://projectXYZ/combineArchive/outputFolder/...</ds:url>
+                </ds:OutputTarget>
+            </ds:TargetToolData>
+        </OutputData>
+        
+        <!-- ESTIMATION -->
+        <EstimationStep oid="estimStep1">
+            
+            <InputReference>
+                <ct:OidRef oidRef="PSNinput"/>
+            </InputReference>
+            
+            <OutputReference>
+                <ct:OidRef oidRef="PSNoutput"/>
+            </OutputReference>
+            
+            <!-- PARAMETERS TO ESTIMATE -->
+            <ParametersToEstimate>
+                <!-- ommited details on parameter estimations -->
+            </ParametersToEstimate>
+            <Operation order="1" opType="estPop"/>
+        </EstimationStep>
+\end{lstlisting}
+First the input and output data is defined, here \emph{./inputFolder/myInputFile.psn} 
+and \emph{./outputFolder/myOutputFile.psn}, 
+using \xelem{InputData} and \xelem{OutputData} elements with object identifiers, \xatt{PSNinput} 
+and \xatt{PSNoutput}, respectively. They can be then referenced in \xelem{InputReference} or 
+\xelem{OutputReference} elements within for example \xelem{EstimationStep}.
+In this way, one can chain virtually arbitrary number of tasks assuring that the information is passed
+from step to step by data files located in the according Combine archive.
+
 \begin{description}
-\item[Note] There was a discussion on how to improve this section during of the PharmML sessions 
-at the last consortium meeting, 25-28 March 2014. Unfortunately, due to time constraints the changes
-have not been implemented. 
+\item[AP1] Any comments are welcome on the suggested structure. 
 \end{description}
 
 
