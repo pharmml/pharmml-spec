@@ -98,7 +98,7 @@
 This document describes changes and extensions to the 0.2.1 version of PharmML \cite{Pharmml_021}. 
 It is based on the feedback we have received during the DDMoRe-internal PharmML workshop in 
 Pavia (November 2013), the MDL-PharmML task-force group discussions, the exchange with the 
-PharmML-NMTRAN translation team and many other communications.
+PharmML-NMTRAN translation team and via other communication channels.
 
 The new version, 0.3, is intended to be released to the consortium members only. Next public release 
 is due in M42 (August 31, 2014) and should cover number of additional language elements, such as
@@ -665,11 +665,16 @@ from step to step by data files located in the according Combine archive.
 
 \section{New matrix structure}
 
-A typical parameter model for a log-normal distributed parameter with \emph{subject} 
+A typical parameter model for a log-normally distributed parameter with \emph{subject} 
 and \emph{occasion} levels of variability, see Figure \ref{figTable:IIVIOVexample}, reads
+for subject $i$ and occasion $k$
 \begin{align*}
-& p_{ij} = p_{pop} \, e^{\eta_i^{(0)}} e^{\eta_{ij}^{(1)}} 
+& p_{ik} = p_{pop} \, e^{\eta_i^{(0)}} e^{\eta_{ik}^{(1)}} \quad or \quad \log(p_{ik}) = \log(p_{pop}) \, + \eta_i^{(0)} + \eta_{ik}^{(1)} 
 \end{align*} 
+with
+\begin{align*}
+ & \eta_i^{(0)} \sim \mathcal{N}\big(0,\Omega^{(0)}\big), \quad \eta_{ik}^{(1)} \sim \mathcal{N}\big(0,\Omega^{(1)}\big).
+\end{align*}
 
 \begin{figure}[ht!]
 \centering
@@ -677,11 +682,6 @@ and \emph{occasion} levels of variability, see Figure \ref{figTable:IIVIOVexampl
 \caption{Two levels of variability, IIV with covariance matrix $\Omega^{(0)}$ and IOV with covariance matrix $\Omega^{(1)}$.}
 \label{figTable:IIVIOVexample}
 \end{figure}
-
-with
-\begin{align*}
- & \eta_i^{(0)} \sim \mathcal{N}\big(0,\Omega^{(0)}\big), \quad \eta_{ij}^{(1)} \sim \mathcal{N}\big(0,\Omega^{(1)}\big)
-\end{align*}
 Each covariance matrix $\Omega^{(l)}$ contains the information about the variance/covariance 
 of the random effects at level \emph{l}. For example, a subject-level covariance matrix for four parameters \emph{CL}, 
 \emph{V1}, \emph{V2} and \emph{Q} could look like this 
@@ -1475,7 +1475,7 @@ storage of initial times $t_0$.}
             </ct:DerivativeVariable>
 \end{lstlisting}
 
-\subsection{Add missing mathematical functions}
+\subsection{Added missing functions}
 
 Binary operators: 
 \begin{itemize}
@@ -1485,15 +1485,15 @@ min, max
 Unary operators: 
 \begin{itemize}
 \item
-$\ln$ -- natural logarithm
+ln -- natural logarithm
 \item
-$factln = \ln(n!)$
+factln = $\ln(n!)$
 \item
-$gammaln = \ln(\Gamma)$
+gammaln = $\ln(\Gamma)$
 \item
-$normcdf$ -- cumulative distribution function of the normal distribution
+normcdf -- cumulative distribution function of the normal distribution
 \item
-$sqrt$ -- square root
+sqrt -- square root
 \end{itemize}
 
 \subsection{Renamed attributes}
