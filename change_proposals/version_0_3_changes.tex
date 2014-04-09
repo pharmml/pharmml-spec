@@ -123,7 +123,7 @@ table in the \xelem{Population} block:
             <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id></ds:Row>
             <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep1</ct:Id></ds:Row>
             <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Id>M</ct:Id><ct:Id>ep3</ct:Id></ds:Row>
-            <!-- SKIP -->
+            <!-- omitted remaining subjects -->
         </ds:Table>
     </ds:DataSet>
     \end{lstlisting}
@@ -694,7 +694,7 @@ NMTRAN/MDL as in the following table. The PharmML implementation is very similar
                     </ct:RowNames>
                     <ct:MatrixRow>
                         <ct:Real>0.1</ct:Real>
-                        <!-- SKIP REMAINING ROWS-->
+                        <!-- omitted remaining rows -->
                 </Matrix>            
             </Correlation>
 \end{lstlisting}
@@ -963,7 +963,7 @@ function, here \emph{MyInterpolationFunction(...)}
                     <math:Equation>
                         <math:FunctionCall>
                             <ct:SymbRef symbIdRef="MyInterpolationFunction"/>
-                            <!-- SKIP -->
+                            <!-- omitted function call details -->
                         </math:FunctionCall>
                     </math:Equation>
                 </ct:Assign>
@@ -1011,7 +1011,7 @@ is defined in the \xelem{StructuralModel}, e.g.
     <!-- FUNCTION DEFINITION -->
     <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
         symbId="MyInterpolationFunction" symbolType="real">
-        <!-- SKIP -->
+        <!-- omitted function definition details -->
     </FunctionDefinition>
 \end{lstlisting}
 
@@ -1032,11 +1032,11 @@ middle section for time points \emph{t2 ... t5}, is given in the following listi
         <FunctionArgument symbId="time" symbolType="real"/>
         <FunctionArgument symbId="k0" symbolType="real"/>
         <FunctionArgument symbId="k1" symbolType="real"/>
-        <!-- SKIP -->    
+        <!-- omitted paramater k2...k6 declaration --> 
         <FunctionArgument symbId="k7" symbolType="real"/>
         <FunctionArgument symbId="t0" symbolType="real"/>
         <FunctionArgument symbId="t1" symbolType="real"/>
-        <!-- SKIP -->    
+        <!-- omitted time points t2...t6 declaration --> 
         <FunctionArgument symbId="t7" symbolType="real"/>
 
         <Definition>
@@ -1075,7 +1075,7 @@ middle section for time points \emph{t2 ... t5}, is given in the following listi
                             </LogicBinop>
                         </Condition>
                     </Piece>
-                    <!-- SKIP -->                    
+                    <!-- omitted definition of piece-wise functions between t1 and t6 -->                    
                     <Piece>
                         <Binop op="plus">
                             <ct:SymbRef symbIdRef="k6"/>
@@ -1131,7 +1131,7 @@ The next listing shows how the just defined interpolation function is then refer
                             <math:FunctionArgument symbId="k0">
                                 <ct:SymbRef blkIdRef="pm1" symbIdRef="k0"/>
                             </math:FunctionArgument>
-                            <!-- SKIP -->     
+                            <!-- omitted function arguments k1...k7 & t0...t6 -->     
                             <math:FunctionArgument symbId="t7">
                                 <ct:SymbRef blkIdRef="pm1" symbIdRef="t7"/>
                             </math:FunctionArgument>
@@ -1201,9 +1201,9 @@ The following listing stems from the 0.2.1 version of a model where different ty
                         <Column columnId="TIME" valueType="real" columnNum="2"/>
                         <Column columnId="DV" valueType="real" columnNum="3"/>
                     </Definition>
-                    <!-- SKIP -->
+                    <!-- omitted data table -->
 \end{lstlisting}                    
-This listing shows the 0.3 versions of the mapping with the newly introduced element \xelem{ColumnMapping}
+The listing below shows the 0.3 versions of the mapping with the newly introduced element \xelem{ColumnMapping}
 and attribute \xatt{columnType}
 \lstset{language=XML}
 \begin{lstlisting}
@@ -1222,8 +1222,9 @@ and attribute \xatt{columnType}
                         <Column columnId="TIME" columnType="idv" valueType="real" columnNum="2"/>
                         <Column columnId="DV" columnType="dv" valueType="real" columnNum="3"/>
                     </Definition>
-                    <!-- SKIP -->
+                    <!-- omitted external file reference (or inline data table) -->
 \end{lstlisting}       
+In both case above the reference to an inline data table or to an external datafile (new in 0.3) has been omitted.
 
 \subsection{New \xatt{identity} transformation for individual parameters}
 The Gaussian parameter without covariates reads
@@ -1377,7 +1378,7 @@ In this case \xatt{inputType="dose"} was defined
                     <DoseAmount inputType="dose">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="D"/>
                     </DoseAmount>
-                    <!-- SKIP -->
+                    <!-- omitted details related to dosing times -->
                 </Bolus>
 \end{lstlisting}
 
@@ -1393,7 +1394,7 @@ In this case \xatt{inputType="target"} was defined
                     <DoseAmount inputType="target">
                         <ct:SymbRef blkIdRef="sm1" symbIdRef="Ad"/>
                     </DoseAmount>
-                    <!-- SKIP -->
+                    <!-- omitted details related to dosing times -->
                 </Bolus>
 \end{lstlisting}
 \end{itemize}
