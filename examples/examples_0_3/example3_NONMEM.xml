@@ -372,37 +372,6 @@
                     <ds:delimiter>COMMA</ds:delimiter>
                 </ds:ImportData>
             </ds:DataSet>
-            <CodeInjection>
-                <SymbolMapping>
-                    <ct:SymbRef symbIdRef="CSS"/>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CSS"/>
-                </SymbolMapping>
-                <SymbolMapping>
-                    <ct:SymbRef symbIdRef="CL"/>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="CL"/>
-                </SymbolMapping>
-                <SymbolMapping>
-                    <ct:SymbRef symbIdRef="TTK0"/>
-                    <ct:SymbRef blkIdRef="pm1" symbIdRef="TTK0"/>
-                </SymbolMapping>
-                <TargetCode>
-                    <Symbol symbId="PREV"/>
-                    <Symbol symbId="D1"/>
-                    <Symbol symbId="R1"/>
-                    <Symbol symbId="CL"/>
-                    <Symbol symbId="CSS"/>
-                    <Symbol symbId="TTK0"/>
-                    <Code>
-                        <![CDATA[
-                                  if (PREV==0) {
-                                     D1=TTK0
-                                  } else {
-                                     R1=CL*CSS
-                                  }
-                            ]]>
-                    </Code>
-                </TargetCode>
-            </CodeInjection>
         </NONMEMdataSet>
         
         

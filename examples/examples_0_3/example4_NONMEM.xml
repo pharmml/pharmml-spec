@@ -390,14 +390,6 @@
                     <ds:delimiter>COMMA</ds:delimiter>
                 </ds:ImportData>
             </ds:DataSet>
-            <CodeInjection>
-                <TargetCode>
-                    <Code>
-                        <![CDATA[
-                            dsfsdfdf]]>
-                    </Code>
-                </TargetCode>
-            </CodeInjection>
         </NONMEMdataSet>
         
         
