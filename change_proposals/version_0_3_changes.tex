@@ -49,7 +49,7 @@
   morekeywords={oid,columnId,columnIdRef,symbId,symbolType,op,columnNum,columnType,
   valueType,inputTarget,blkId,blkIdRef,symbIdRef,xmlns,version,type,VariableMapping,
   IndividualMapping,schemaLocation,xs,xsi,NONMEMdataSet,matrixType,opType,order,
-  math,ct,ds,mdef,mstep,mml,un,name,definition,writtenVersion,id,inputType} % list your attributes here
+  math,ct,ds,mdef,mstep,mml,un,name,definition,writtenVersion,id,inputType,oidRef} % list your attributes here
 }
 
 \lstdefinelanguage{NONMEMdataSet}
@@ -88,7 +88,7 @@
 
 \begin{document}
 
-%\input{title.tex} 
+\input{title.tex} 
 
 %\maketitle
 
@@ -225,38 +225,38 @@ A mapping type is proposed in the form
 \end{lstlisting}
 The following code (PharmML file: warfarin\_PK\_PRED.xml) illustrates the mapping of dataset columns 
 to the variables or covariates as used in one of the elements of \xelem{ModelDefinition}, 
-such as covariate model, \xatt{cm1}, or observation model, \xatt{om1}.
+such as covariate model, \xatt{cm1}, or observation model, \xatt{om1}. Note the object identifier 
+\xatt{ oid="NMoid"} assigned to the \xelem{NONMEMdataSe} element, it's use will be explained in the section 
+\ref{sec:modellingSteps}.
 \lstset{language=XML}
 \begin{lstlisting}
-<!-- MODELLING STEPS -->
-<ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
-    
-    <!-- ESTIMATION -->
-    <EstimationStep oid="estimStep1">
+    <!-- MODELLING STEPS -->
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
         
-            <NONMEMdataSet>
+        <!-- NONMEM FORMAT DATAFILE -->
+        <NONMEMdataSet oid="NMoid">
             
-                <!-- Mapping -->
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="TIME"/>
-                    <ct:SymbRef symbIdRef="t"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="DV"/>
-                    <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="WT"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="AGE"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="AGE"/>
-                </ColumnMapping>
-                <ColumnMapping>
-                    <ds:ColumnRef columnIdRef="SEX"/>
-                    <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
-                </ColumnMapping>
+            <!-- Mapping -->
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="TIME"/>
+                <ct:SymbRef symbIdRef="t"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="DV"/>
+                <ct:SymbRef blkIdRef="om1" symbIdRef="C_obs"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="WT"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="W"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="AGE"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="AGE"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ds:ColumnRef columnIdRef="SEX"/>
+                <ct:SymbRef blkIdRef="cm1" symbIdRef="SEX"/>
+            </ColumnMapping>
 \end{lstlisting}
 The symbols/flags and variables, such as \xatt{DVID}, \xatt{MDV} etc. not used directly
 in the model definition will not be mapped. Instead, to assign meaning to these variables, the attribute 
@@ -364,6 +364,7 @@ and column number.
 \end{lstlisting}
        
 \subsection{Part III -- NMTRAN code injection (Chan et al.)}
+\label{subset:partIII}
 This section goes beyond the standard models, such as the previous one, and deals with cases 
 when the model and dataset are strongly interconnected. In NONMEM not only does the dosing come from 
 the datafile but also certain model relevant information is stored in the data. 
@@ -372,7 +373,7 @@ To understand this it is helpful to consider the following \cite{Chan:2005fk} ex
 Two levodopa administrations were modelled, one of them as so called \emph{Exogenous oral 
 levodopa administration}. "Exogenous oral levodopa was modeled by a steady state infusion 
 with constant but unknown rate, which ended at the start of the first levodopa infusion of each 
-trial. The rate of steady state infusion (R1) was calculated from: R1 = CL $\times$ Css\_pre". 
+trial. The rate of steady state infusion (R1) was calculated from: R1=CL*CSS. 
 This is encoded in the data file using flag '-2' 
 in the RATE column, e.g.
 \begin{table}[ht]
@@ -418,7 +419,7 @@ which identifies their type.
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
 
            <!-- NONMEM OBJECTIVE DATA -->
-            <NONMEMdataSet>
+            <NONMEMdataSet oid="NMoid">
                 
                 <!-- NM dataset mapping -->
                 <ColumnMapping>
@@ -530,6 +531,73 @@ ignored by the language parser and passed 'as is'.
 \item[Answer] The easiest solution, for now, would be to extract all symbols out of the target code. 
 \item[Alternatively] MDL should deal with it by making sure that the target code passed to PharmML 
 follows well defined rules and grammar.
+\end{description}
+
+
+\section{Changes in structure of \xelem{ModellingSteps}}
+\label{sec:modellingSteps}
+You might have noticed that the \xelem{NONMEMdataSet} in sections \ref{subset:partI} and 
+\ref{subset:partIII} is placed directly under the \xelem{ModellingSteps}. The reorganisation 
+of the code is suppose to provide more flexibility to the encode tasks and workflows, in that
+first multiple data sources and tools can be defined which are referred to later in the estimation 
+or simulations steps, \xelem{EstimationStep} and \xelem{SimulationStep}, respectively. 
+This section illustrates how this can work. 
+
+Let's consider that one would like to encode a simple workflow consisting of estimation and simulation 
+tasks. The first based on the NONMEM format dataset, the second using user defined R-script. 
+The following code visualises the implementation.
+
+\lstset{language=XML}
+\begin{lstlisting}
+    <!-- MODELLING STEPS -->
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
+        <!-- 1. DEFINING DATASETS AND TARGET TOOLS -->
+        <NONMEMdataSet oid="NMoid">
+            <ColumnMapping>
+                <!-- ommited mapping the data set declaration -->
+        </NONMEMdataSet>
+        
+        <TargetTool oid="TToid">
+            <TargetToolName>R</TargetToolName>
+            <ds:TargetToolData>
+                <ds:ImportTargetData oid="Roid">
+                    <ds:name>myRscript.R</ds:name>
+                    <ds:url>file:///projectXYZ/</ds:url>
+                </ds:ImportTargetData>
+            </ds:TargetToolData>
+        </TargetTool>
+
+        
+        <!-- 2. DEFINING TASKS -->
+        <EstimationStep oid="estStep">
+            <TargetToolReference>
+                <ct:OidRef oidRef="NMoid"/>
+            </TargetToolReference>
+            
+            <ParametersToEstimate>
+                <!-- ommited details on parameter estimations -->
+            </ParametersToEstimate>
+            <Operation order="1" opType="estPop"/>
+        </EstimationStep>
+        
+        <SimulationStep oid="simStep">
+            <TargetToolReference>
+                <ct:OidRef oidRef="TToid"/>
+            </TargetToolReference>
+            <Observations>
+                <!-- ommited details on simulation -->
+            </Observations>
+        </SimulationStep>
+        
+        <!-- omitted <StepDependencies> -->
+    </ModellingSteps>
+\end{lstlisting}
+    
+\begin{description}
+\item[Note] There was a discussion on how to improve this section during of the PharmML sessions 
+at the last consortium meeting, 25-28 March 2014. Unfortunately, due to time constraints the changes
+have not been implemented. 
 \end{description}
 
 
@@ -1510,6 +1578,15 @@ The metadata identifier \xatt{id} has been missing on multiple elements, such as
 the root \xelem{PharmML} or number of elements in the \xelem{TrialDesign}. 
 For example the user can annotate the model by applying according annotation to the 
 root element, here using the identifier \xatt{id="i1"}.
+
+\begin{description}
+\item[Note] 
+Not all elements are annotable right now, which might be a limitation in some cases.
+For example, \xelem{NONMEMdataSet} described in section \ref{subset:partI} is annotable down to 
+the \xelem{ImportData} but the elements below, \xelem{name}, \xelem{url}, \xelem{format}, \xelem{delimiter}
+are not. 
+\item[Suggestion] This will be corrected in the next version and every element of PharmML will made annotable.
+\end{description}
 
 
 %
