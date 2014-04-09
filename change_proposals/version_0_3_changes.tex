@@ -28,6 +28,8 @@
 %  stepnumber=5
 }
 
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
 \lstdefinelanguage{XML}
 {
   basicstyle=\ttfamily\footnotesize,
@@ -86,12 +88,18 @@
 
 \begin{document}
 
-\maketitle
+\input{title.tex} 
+
+%\maketitle
 
 \tableofcontents
 
 \section{Introduction}
-This document describes changes and extension to the 0.2.1 version of PharmML \cite{Pharmml_021}.
+This document describes changes and extensions to the 0.2.1 version of PharmML \cite{Pharmml_021}. 
+It is based on the feedback we have received during the DDMoRe-internal PharmML workshop in 
+Pavia (November 2013), the MDL-PharmML task-force group discussions, the exchange with the 
+PharmML-NMTRAN translation team and many other communications.
+
 The new version, 0.3, is intended to be released to the consortium members only. Next public release 
 is due in M42 (August 31, 2014) and should cover number of additional language elements, such as
 \begin{itemize}
@@ -217,7 +225,7 @@ A mapping type is proposed in the form
 \end{lstlisting}
 The following code (PharmML file: warfarin\_PK\_PRED.xml) illustrates the mapping of dataset columns 
 to the variables or covariates as used in one of the elements of \xelem{ModelDefinition}, 
-such as \xelem{CovariateModel} or \xelem{ObservationModel}
+such as covariate model, \xatt{cm1}, or observation model, \xatt{om1}.
 \lstset{language=XML}
 \begin{lstlisting}
 <!-- MODELLING STEPS -->
@@ -321,9 +329,9 @@ ssPeriod &     steady-state administration interval \\
 \end{center}
 \end{table}
 
-Beside the values in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes}, 
+Beside the values listed in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:PharmML_columnTypes}, 
 the \xatt{undefined} value can be used, which is most likely to be utilised when defining 
-external tool datasets for which support is very limited and their needs underspecified.
+external tool datasets for which the support is very limited and their needs underspecified.
 
 
 \subsection{Part II -- Referencing the NONMEM-format dataset}
@@ -364,7 +372,7 @@ To understand this it is helpful to consider the following \cite{Chan:2005fk} ex
 Two levodopa administrations were modelled, one of them as so called \emph{Exogenous oral 
 levodopa administration}. "Exogenous oral levodopa was modeled by a steady state infusion 
 with constant but unknown rate, which ended at the start of the first levodopa infusion of each 
-trial. The rate of steady state infusion (R1) was calculated from: R1 = CL ¥ Css\_pre". 
+trial. The rate of steady state infusion (R1) was calculated from: R1 = CL $\times$ Css\_pre". 
 This is encoded in the data file using flag '-2' 
 in the RATE column, e.g.
 \begin{table}[ht]
@@ -408,8 +416,7 @@ which identifies their type.
 \lstset{language=XML}
 \begin{lstlisting}
     <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
-        <EstimationStep oid="estStep">
-           
+
            <!-- NONMEM OBJECTIVE DATA -->
             <NONMEMdataSet>
                 
@@ -529,10 +536,18 @@ follows well defined rules and grammar.
 \section{New matrix structure}
 
 A typical parameter model for a log-normal distributed parameter with \emph{subject} 
-and \emph{occasion} levels of variability reads
+and \emph{occasion} levels of variability, see Figure \ref{figTable:IIVIOVexample}, reads
 \begin{align*}
 & p_{ij} = p_{pop} \, e^{\eta_i^{(0)}} e^{\eta_{ij}^{(1)}} 
 \end{align*} 
+
+\begin{figure}[ht!]
+\centering
+ \includegraphics[width=120mm]{pics/IOV_2levels_treeOnly}
+\caption{Two levels of variability, IIV with covariance matrix $\Omega^{(0)}$ and IOV with covariance matrix $\Omega^{(1)}$.}
+\label{figTable:IIVIOVexample}
+\end{figure}
+
 with
 \begin{align*}
  & \eta_i^{(0)} \sim \mathcal{N}\big(0,\Omega^{(0)}\big), \quad \eta_{ij}^{(1)} \sim \mathcal{N}\big(0,\Omega^{(1)}\big)
