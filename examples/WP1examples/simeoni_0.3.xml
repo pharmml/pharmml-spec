@@ -267,7 +267,9 @@
                     <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign><ct:Real>0</ct:Real></ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign><ct:Real>0</ct:Real></ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -290,9 +292,11 @@
                     <ct:SymbRef symbIdRef="t"/>
                 </ct:IndependentVariable>
                 <ct:InitialCondition>
-                    <ct:Assign>
-                        <ct:Real>0</ct:Real>
-                    </ct:Assign>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialValue>
                 </ct:InitialCondition>
             </ct:DerivativeVariable>
             
@@ -393,7 +397,7 @@
             </Activity>
             <Activity oid="act_drug">
                 <Bolus>
-                    <DoseAmount inputType="target">
+                    <DoseAmount inputTarget="derivativeVariable">
                         <ct:SymbRef symbIdRef="Q1" blkIdRef="sm1"/>
                         <ct:Assign>
                             <ct:Real>30</ct:Real> <!-- mg/kg -->
@@ -413,18 +417,10 @@
         </Structure>
         
         <Population>
-            <IndividualTemplate>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
-                </IndividualMapping>
-                <ArmMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ARM"/>
-                </ArmMapping>
-            </IndividualTemplate>
             <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                 <Definition>
-                    <Column columnId="ID" valueType="id" columnNum="1"/>
-                    <Column columnId="ARM" valueType="id" columnNum="2"/>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
                 </Definition>
                 <Table>
                     <Row>
@@ -503,23 +499,20 @@
         <EstimationStep oid="est1">
             <!-- Data Set per la stima -->
             <ObjectiveDataSet>
-                <IndividualMapping>
-                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="ID"/>
-                </IndividualMapping>
-                <VariableMapping>
+                <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="time"/>
                     <ct:SymbRef symbIdRef="t"/>
                     <!-- tempo variabile globale non specifico il blocco di riferimento -->
-                </VariableMapping>
-                <VariableMapping>
+                </ColumnMapping>
+                <ColumnMapping>
                     <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="weight"/>
                     <ct:SymbRef symbIdRef="y" blkIdRef="om1"/>
-                </VariableMapping>
+                </ColumnMapping>
                 <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
                     <Definition>
-                        <Column columnId="ID" valueType="id" columnNum="1"/>
-                        <Column columnId="time" valueType="real" columnNum="2"/>
-                        <Column columnId="weight" valueType="real" columnNum="3"/>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="time" columnType="idv" valueType="real" columnNum="2"/>
+                        <Column columnId="weight" columnType="dv" valueType="real" columnNum="3"/>
                     </Definition>
                     <Table>
                         <Row><ct:Id>i1</ct:Id><ct:Real>8</ct:Real><ct:Real>0.083</ct:Real></Row>
