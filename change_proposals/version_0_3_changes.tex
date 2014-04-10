@@ -94,6 +94,7 @@
 
 \tableofcontents
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 This document describes changes and extensions to the 0.2.1 version of PharmML \cite{Pharmml_021}. 
 It is based on the feedback we have received during the DDMoRe-internal PharmML workshop in 
@@ -112,6 +113,7 @@ Optimal Experimental Design (OED) support etc.
 \end{itemize}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Externalisation of data files}
 \label{sec:externalFiles}
 So far, only inline storage of data was supported, for example covariates were stored in the following 
@@ -172,7 +174,9 @@ For example:
 Note, that an additional attribute \xatt{columnType} is used to annotate the column, see section \ref{subsec:refNONMEM} 
 for a detailed description.
                     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{NONMEM-format dataset support}
+\label{sec:NONMEMsupport}
 %The reference and mapping to the external NONMEM-format dataset is discussed in connection with an estimation task i.e. one located in the \xelem{EstimationStep}, within \xelem{ModellingSteps}, but it can be defined in \xelem{SimulationStep} as well if necessary. 
 \subsection{Introduction}
 In version 0.2.1 the only option to use experimental data was to encode them 
@@ -206,14 +210,14 @@ The support for NONMEM datasets is an extension of the \xelem{EstimationStep} el
 is located in the \xelem{NONMEMdataSet} element. It consists of three parts:
 \begin{itemize}
 \item
-Part I -- Mapping of the columns defined in a dataset
+Mapping of the columns defined in a dataset
 \item
-Part II -- Referencing the NONMEM-format dataset (as an external file or inline data)
+Referencing the NONMEM-format dataset (as an external file or inline data)
 \item
-Part III -- Code injection (with symbol mapping)
+Code injection (with symbol mapping)
 \end{itemize}
 
-\subsection{Part I -- Mapping of the columns in a dataset}
+\subsection{Mapping of the columns in a dataset}
 \label{subset:partI}
 A mapping type is proposed in the form 
  \lstset{language=XML}
@@ -226,8 +230,8 @@ A mapping type is proposed in the form
 The following code (PharmML file: warfarin\_PK\_PRED.xml) illustrates the mapping of dataset columns 
 to the variables or covariates as used in one of the elements of \xelem{ModelDefinition}, 
 such as covariate model, \xatt{cm1}, or observation model, \xatt{om1}. Note the object identifier 
-\xatt{ oid="NMoid"} assigned to the \xelem{NONMEMdataSe} element, it's use will be explained in the section 
-\ref{sec:modellingSteps}.
+\xatt{ oid="NMoid"} assigned to the \xelem{NONMEMdataSe} element, the use of this attribute will be 
+explained in the section \ref{sec:modellingSteps}.
 \lstset{language=XML}
 \begin{lstlisting}
     <!-- MODELLING STEPS -->
@@ -304,10 +308,29 @@ counterpart \xatt{columnType} in PharmML.}
 Additionally there are few PharmML specific types the user can choose from to assign 
 to \xatt{columnType}, see Table \ref{tab:PharmML_columnTypes}. 
 They correspond to symbols/elements in the \xelem{TrialDesign}, i.e. when the 
-study design is defined explicitly and not completely by the NONMEM dataset. Accordingly 
+study design is defined explicitly in PharmML without using the NONMEM dataset. Accordingly 
 these attribute values should be used in tables specified in blocks \xelem{Population}, 
-\xelem{ObjectiveDataSet} or \xelem{IndividualDosing}.
-
+\xelem{ObjectiveDataSet} or \xelem{IndividualDosing}. The following listing shows an example
+for the use of attributes values \xatt{arm} and \xatt{replicate}
+\begin{lstlisting}
+        <Population> 
+            <ct:VariabilityReference>
+                <ct:SymbRef blkIdRef="modelVar" symbIdRef="indiv"/>
+            </ct:VariabilityReference>
+            
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
+                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/> 
+                    <Column columnId="REP" columnType="replicate" valueType="int" columnNum="3"/> 
+                </Definition>
+                <Table>
+                    <Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Int>21</ct:Int></Row>
+                </Table>
+            </DataSet>
+        </Population>
+\end{lstlisting}
+        
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{lll}
@@ -333,8 +356,7 @@ Beside the values listed in Table \ref{tab:MDLPharmML_columnTypes} and \ref{tab:
 the \xatt{undefined} value can be used, which is most likely to be utilised when defining 
 external tool datasets for which the support is very limited and their needs underspecified.
 
-
-\subsection{Part II -- Referencing the NONMEM-format dataset}
+\subsection{Referencing the NONMEM-format dataset}
 \label{subsec:refNONMEM}
 The structure is that of an externalised dataset discussed above. The columns are 
 defined by providing the attributes for the column identifier, column type, value type 
@@ -363,7 +385,7 @@ and column number.
             </NONMEMdataSet>
 \end{lstlisting}
        
-\subsection{Part III -- NMTRAN code injection (Chan et al.)}
+\subsection{NMTRAN code injection (Chan et al.)}
 \label{subset:partIII}
 This section goes beyond the standard models, such as the previous one, and deals with cases 
 when the model and dataset are strongly interconnected. In NONMEM not only does the dosing come from 
@@ -462,7 +484,7 @@ which identifies their type.
                 </ds:DataSet>
 \end{lstlisting}
 
-The following is new and specific to Part III. The first section of the next listing shows 
+The following is new and specific to the last part. The first section of the next listing shows 
 again a mapping, this time it is about the variables/parameters used in the NMTRAN 
 injected code. Some of them are model related, others are just indicators for NONMEM 
 to perform a particular operation. (For now, the general rule is that we don't distinguish 
@@ -533,136 +555,77 @@ ignored by the language parser and passed 'as is'.
 follows well defined rules and grammar.
 \end{description}
 
-\section{Changes in structure of \xelem{ModellingSteps}}
-\label{sec:modellingSteps}
-You might have noticed that the \xelem{NONMEMdataSet} in sections \ref{subset:partI} and 
-\ref{subset:partIII} is placed directly under the \xelem{ModellingSteps}. The reorganisation 
-of the code is suppose to provide more flexibility to the encode tasks and workflows, in that
-first multiple data sources and tools can be defined which are referred to later in the estimation 
-or simulations steps, \xelem{EstimationStep} and \xelem{SimulationStep}, respectively. 
-This section illustrates how this can work. 
-
-Let's consider that one would like to encode a simple workflow consisting of estimation and simulation 
-tasks. The first based on the NONMEM format dataset, the second using user defined R-script. 
-The following code visualises the implementation.
-
-\lstset{language=XML}
-\begin{lstlisting}
-    <!-- MODELLING STEPS -->
-    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
-        
-        <!-- 1. DEFINING DATASETS AND TARGET TOOLS -->
-        <NONMEMdataSet oid="NMoid">
-            <ColumnMapping>
-                <!-- ommited mapping the data set declaration -->
-        </NONMEMdataSet>
-        
-        <TargetTool oid="TToid">
-            <TargetToolName>R</TargetToolName>
-            <ds:TargetToolData>
-                <ds:ImportTargetData oid="Roid">
-                    <ds:name>myRscript.R</ds:name>
-                    <ds:url>file:///projectXYZ/</ds:url>
-                </ds:ImportTargetData>
-            </ds:TargetToolData>
-        </TargetTool>
-
-        
-        <!-- 2. DEFINING TASKS -->
-        <EstimationStep oid="estStep">
-            <TargetToolReference>
-                <ct:OidRef oidRef="NMoid"/>
-            </TargetToolReference>
-            
-            <ParametersToEstimate>
-                <!-- omitted details on parameter estimations -->
-            </ParametersToEstimate>
-            <Operation order="1" opType="estPop"/>
-        </EstimationStep>
-        
-        <SimulationStep oid="simStep">
-            <TargetToolReference>
-                <ct:OidRef oidRef="TToid"/>
-            </TargetToolReference>
-            <Observations>
-                <!-- omitted details on simulation -->
-            </Observations>
-        </SimulationStep>
-        
-        <!-- omitted <StepDependencies> -->
-    </ModellingSteps>
-\end{lstlisting}
-
-\subsection{Suggested improvements}
-There was a discussion on how to improve this part of PharmML at the last consortium 
-meeting in Hoofddrop, 25-28 March 2014. Unfortunately, due to time constraints the changes have 
-not been implemented. The improvements suggestions are described here.
-
-Additionally to elements, such as \xelem{NONMEMdataSet} and \xelem{TargetTool}, new ones would 
-be very helpful to enable the exchange of data/information between steps of an workflow, such as
-\xelem{InputData} and \xelem{OutputData}. The following example of PSN driven estimation
-explains the use of the new elements. 
-
-\lstset{language=XML}
-\begin{lstlisting}
-    <!-- MODELLING STEPS -->
-    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
-        
-        <NONMEMdataSet oid="NMoid">
-            <!-- omitted details on dataset declaration -->
-        </NONMEMdataSet>
-        
-        <InputData oid="PSNinput">
-            <TargetToolName>PSN</TargetToolName>
-            <ds:TargetToolData>
-                <ds:ImportTarget oid="PSN1">
-                    <ds:name>myInputFile.psn</ds:name>
-                    <ds:url>c://projectXYZ/combineArchive/inputFolder/...</ds:url>
-                </ds:ImportTarget>
-            </ds:TargetToolData>
-        </InputData>
-        
-        <OutputData oid="PSNoutput">
-            <TargetToolName>PSN</TargetToolName>
-            <ds:TargetToolData>
-                <ds:OutputTarget oid="PSN2">
-                    <ds:name>myOutputFile.psn</ds:name>
-                    <ds:url>c://projectXYZ/combineArchive/outputFolder/...</ds:url>
-                </ds:OutputTarget>
-            </ds:TargetToolData>
-        </OutputData>
-        
-        <!-- ESTIMATION -->
-        <EstimationStep oid="estimStep1">
-            
-            <InputReference>
-                <ct:OidRef oidRef="PSNinput"/>
-            </InputReference>
-            
-            <OutputReference>
-                <ct:OidRef oidRef="PSNoutput"/>
-            </OutputReference>
-            
-            <!-- PARAMETERS TO ESTIMATE -->
-            <ParametersToEstimate>
-                <!-- ommited details on parameter estimations -->
-            </ParametersToEstimate>
-            <Operation order="1" opType="estPop"/>
-        </EstimationStep>
-\end{lstlisting}
-First the input and output data is defined, here \emph{./inputFolder/myInputFile.psn} 
-and \emph{./outputFolder/myOutputFile.psn}, 
-using \xelem{InputData} and \xelem{OutputData} elements with object identifiers, \xatt{PSNinput} 
-and \xatt{PSNoutput}, respectively. They can be then referenced in \xelem{InputReference} or 
-\xelem{OutputReference} elements within for example \xelem{EstimationStep}.
-In this way, one can chain virtually arbitrary number of tasks assuring that the information is passed
-from step to step by data files located in the according Combine archive.
-
-\begin{description}
-\item[AP1] Any comments are welcome on the suggested structure. 
-\end{description}
+%\subsection{Suggested improvements}
+%There was a discussion on how to improve this part of PharmML at the last consortium 
+%meeting in Hoofddrop, 25-28 March 2014. Unfortunately, due to time constraints the changes have 
+%not been implemented. The improvements suggestions are described here.
+%
+%Additionally to elements, such as \xelem{NONMEMdataSet} and \xelem{TargetTool}, new ones would 
+%be very helpful to enable the exchange of data/information between steps of an workflow, such as
+%\xelem{InputData} and \xelem{OutputData}. The following example of PSN driven estimation
+%explains the use of the new elements. 
+%
+%\lstset{language=XML}
+%\begin{lstlisting}
+%    <!-- MODELLING STEPS -->
+%    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+%        
+%        <NONMEMdataSet oid="NMoid">
+%            <!-- omitted details on dataset declaration -->
+%        </NONMEMdataSet>
+%        
+%        <InputData oid="PSNinput">
+%            <TargetToolName>PSN</TargetToolName>
+%            <ds:TargetToolData>
+%                <ds:ImportTarget oid="PSN1">
+%                    <ds:name>myInputFile.psn</ds:name>
+%                    <ds:url>c://projectXYZ/combineArchive/inputFolder/...</ds:url>
+%                </ds:ImportTarget>
+%            </ds:TargetToolData>
+%        </InputData>
+%        
+%        <OutputData oid="PSNoutput">
+%            <TargetToolName>PSN</TargetToolName>
+%            <ds:TargetToolData>
+%                <ds:OutputTarget oid="PSN2">
+%                    <ds:name>myOutputFile.psn</ds:name>
+%                    <ds:url>c://projectXYZ/combineArchive/outputFolder/...</ds:url>
+%                </ds:OutputTarget>
+%            </ds:TargetToolData>
+%        </OutputData>
+%        
+%        <!-- ESTIMATION -->
+%        <EstimationStep oid="estimStep1">
+%            
+%            <InputReference>
+%                <ct:OidRef oidRef="PSNinput"/>
+%            </InputReference>
+%            
+%            <OutputReference>
+%                <ct:OidRef oidRef="PSNoutput"/>
+%            </OutputReference>
+%            
+%            <!-- PARAMETERS TO ESTIMATE -->
+%            <ParametersToEstimate>
+%                <!-- omitted details on parameter estimations -->
+%            </ParametersToEstimate>
+%            <Operation order="1" opType="estPop"/>
+%        </EstimationStep>
+%\end{lstlisting}
+%First the input and output data is defined, here \emph{./inputFolder/myInputFile.psn} 
+%and \emph{./outputFolder/myOutputFile.psn}, 
+%using \xelem{InputData} and \xelem{OutputData} elements with object identifiers, \xatt{PSNinput} 
+%and \xatt{PSNoutput}, respectively. They can be then referenced in \xelem{InputReference} or 
+%\xelem{OutputReference} elements within for example \xelem{EstimationStep}.
+%In this way, one can chain virtually arbitrary number of tasks assuring that the information is passed
+%from step to step by data files located in the according Combine archive.
+%
+%\begin{description}
+%\item[AP1] Any comments are welcome on the suggested structure. 
+%\end{description}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{New matrix structure}
 
 A typical parameter model for a log-normally distributed parameter with \emph{subject} 
@@ -845,7 +808,9 @@ NMTRAN/MDL as in the following table. The PharmML implementation is very similar
 \end{lstlisting}
 The rest is identical and therefore omitted.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{General target tool support}
+\label{sec:targetToolSupport}
 It has been requested that PharmML supports data sets or scripts coming from other sources 
 then NONMEM-format files, such as SIMCYP project files or R scripts. This is now the case. 
 
@@ -921,6 +886,71 @@ target tool code
         \end{lstlisting}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Extension of the \xelem{ModellingSteps} structure}
+\label{sec:modellingSteps}
+Note that the new \xelem{NONMEMdataSet} element introduced in sections \ref{sec:NONMEMsupport}
+is placed directly under the \xelem{ModellingSteps}. Similarly \xelem{TargetTool} element, 
+described in section \ref{sec:targetToolSupport}, can be use here. The extension of this structure is suppose 
+to provide more flexibility to the encode tasks and workflows, in that first multiple data sources and 
+tools can be defined which are referred to later in the estimation or simulations steps, 
+\xelem{EstimationStep} and \xelem{SimulationStep}, respectively. 
+
+This section illustrates how can be applied. Let's consider that one would like to encode a simple workflow 
+consisting of estimation and simulation tasks. The first based on the NONMEM format dataset, 
+the second using user defined R-script. The following code visualises the implementation.
+
+\lstset{language=XML}
+\begin{lstlisting}
+    <!-- MODELLING STEPS -->
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        
+        <!-- 1. DEFINING DATASETS AND TARGET TOOLS -->
+        <NONMEMdataSet oid="NMoid">
+            <ColumnMapping>
+                <!-- omitted mapping the data set declaration -->
+        </NONMEMdataSet>
+        
+        <TargetTool oid="TToid">
+            <TargetToolName>R</TargetToolName>
+            <ds:TargetToolData>
+                <ds:ImportTargetData oid="Roid">
+                    <ds:name>myRscript.R</ds:name>
+                    <ds:url>file:///projectXYZ/</ds:url>
+                </ds:ImportTargetData>
+            </ds:TargetToolData>
+        </TargetTool>
+
+        
+        <!-- 2. DEFINING TASKS -->
+        <EstimationStep oid="estStep">
+            <TargetToolReference>
+                <!-- reference to NONMEM dataset defined above -->
+                <ct:OidRef oidRef="NMoid"/>
+            </TargetToolReference>
+            
+            <ParametersToEstimate>
+                <!-- omitted details on parameter estimations -->
+            </ParametersToEstimate>
+            <Operation order="1" opType="estPop"/>
+        </EstimationStep>
+        
+        <SimulationStep oid="simStep">
+            <TargetToolReference>
+                <!-- reference to R script defined above -->
+                <ct:OidRef oidRef="TToid"/>	
+            </TargetToolReference>
+            <Observations>
+                <!-- omitted details on simulation -->
+            </Observations>
+        </SimulationStep>
+        
+        <!-- omitted <StepDependencies> -->
+    </ModellingSteps>
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lookup table as new input type}
 
 \subsection{Introduction}
@@ -1293,7 +1323,8 @@ example and will be skipped here.
 This case is straightforward and doesn't contain any new aspects needed to be described.
 
 
-\section{Other changes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Other changes/extensions}
 
 \subsection{Nested tables removed}
 Nested tables have been used to store time-varying \emph{covariates} data in the 
@@ -1644,7 +1675,7 @@ root element, here using the identifier \xatt{id="i1"}.
 \begin{description}
 \item[Note] 
 Not all elements are annotable right now, which might be a limitation in some cases.
-For example, \xelem{NONMEMdataSet} described in section \ref{subset:partI} is annotable down to 
+For example, \xelem{NONMEMdataSet} described in section \ref{subsec:refNONMEM} is annotable down to 
 the \xelem{ImportData} but the elements below, \xelem{name}, \xelem{url}, \xelem{format}, \xelem{delimiter}
 are not. 
 \item[Suggestion] This will be corrected in the next version and every element of PharmML will made annotable.
