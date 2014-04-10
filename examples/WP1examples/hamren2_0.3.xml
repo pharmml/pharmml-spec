@@ -1,0 +1,2505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PharmML xmlns="http://www.pharmml.org/2013/03/PharmML"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pharmml.org/2013/03/PharmML http://www.pharmml.org/2013/03/PharmML"
+    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    writtenVersion="0.3" id="i1">
+    
+    <ct:Name>Hamren2008</ct:Name>
+    
+    <ct:Description>FPG-HbA1c-Hb</ct:Description>
+    
+    <!-- intependent variable -->
+    <IndependentVariable symbId="t"/>
+    
+    <!-- SYMBOL DEFINITION - RESUIDUAL ERROR MODEL -->
+    <ct:FunctionDefinition symbolType="real" symbId="constantErrorModel">
+        <ct:FunctionArgument symbolType="real" symbId="a"/>
+        <ct:Definition>
+            <ct:SymbRef symbIdRef="a"/>
+        </ct:Definition>
+    </ct:FunctionDefinition>
+
+    <ct:FunctionDefinition symbolType="real" symbId="evaluate_sex">
+        <ct:FunctionArgument symbolType="id" symbId="my_sex"/>
+        <ct:Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Piecewise>
+                    <Piece>
+                        <ct:Real>0</ct:Real>
+                        <Condition>
+                            <LogicBinop op="eq">
+                                <ct:SymbRef symbIdRef="my_sex"/>
+                                <ct:Id>F</ct:Id>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <ct:Real>1</ct:Real>
+                        <Condition>
+                            <LogicBinop op="eq">
+                                <ct:SymbRef symbIdRef="my_sex"/>
+                                <ct:Id>M</ct:Id>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                </Piecewise>
+            </Equation>
+        </ct:Definition>
+    </ct:FunctionDefinition>
+    
+    <ct:FunctionDefinition symbolType="real" symbId="evaluate_treat">
+        <ct:FunctionArgument symbolType="id" symbId="my_treat"/>
+        <ct:Definition>
+            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                <Piecewise>
+                    <Piece>
+                        <ct:Real>0</ct:Real>
+                        <Condition>
+                            <LogicBinop op="eq">
+                                <ct:SymbRef symbIdRef="my_treat"/>
+                                <ct:Id>N</ct:Id>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                    <Piece>
+                        <ct:Real>1</ct:Real>
+                        <Condition>
+                            <LogicBinop op="eq">
+                                <ct:SymbRef symbIdRef="my_treat"/>
+                                <ct:Id>Y</ct:Id>
+                            </LogicBinop>
+                        </Condition>
+                    </Piece>
+                </Piecewise>
+            </Equation>
+        </ct:Definition>
+    </ct:FunctionDefinition>
+    
+
+    <!-- BLOCK I: MODEL DEFINITION -->
+    <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
+        
+        <VariabilityModel blkId="model" type="parameterVariability"> 
+            <Level symbId="indiv"/>
+        </VariabilityModel>
+        
+        <VariabilityModel blkId="obsErr" type="residualError"> 
+            <Level symbId="residual"/>
+        </VariabilityModel>
+        
+        <CovariateModel blkId="cov">
+            <Covariate symbId="sex">
+                <Categorical>
+                    <Category catId="M"/>
+                    <Category catId="F"/>
+                </Categorical>
+            </Covariate>
+            <Covariate symbId="treat">
+                <Categorical>
+                    <Category catId="Y"/>
+                    <Category catId="N"/>
+                </Categorical>
+            </Covariate>
+            <Covariate symbId="CL">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <ct:SymbRef symbIdRef="CL"/>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+            <Covariate symbId="V">
+                <Continuous>
+                    <Transformation>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <ct:SymbRef symbIdRef="V"/>
+                        </Equation>
+                    </Transformation>
+                </Continuous>
+            </Covariate>
+        </CovariateModel>
+        
+        <ParameterModel blkId="pm1">
+            
+            <SimpleParameter symbId="pop_FPG_baseline"/>
+            <SimpleParameter symbId="pop_FPG_washout">
+                <ct:Assign>
+                    <ct:Int>0</ct:Int>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="K_out_FPG"/>
+            <SimpleParameter symbId="E_max_FPG"/>
+            <SimpleParameter symbId="pop_EC_50_FPG"/>
+            <SimpleParameter symbId="pop_K_in_RBC"/>
+            <SimpleParameter symbId="RBC_lifespan"/>
+            <SimpleParameter symbId="K_glucose"/>
+            <SimpleParameter symbId="pop_gamma"/>
+            <SimpleParameter symbId="K_out_dilution"/>
+            <SimpleParameter symbId="E_max_dilution"/>
+            <SimpleParameter symbId="pop_EC_50_dilution"/>
+            <SimpleParameter symbId="omega_FPG_baseline"/>
+            <SimpleParameter symbId="omega_FPG_washout"/>
+            <SimpleParameter symbId="omega_EC_50_FPG"/>
+            <SimpleParameter symbId="omega_K_in_RBC"/>
+            <SimpleParameter symbId="omega_gamma"/>
+            <SimpleParameter symbId="omega_EC_50_dilution"/>
+            
+            <!-- covariate values -->
+            <SimpleParameter symbId="beta_FPG_baseline"/>
+            <SimpleParameter symbId="beta_FPG_washout"/>
+            <SimpleParameter symbId="beta_EC_50_FPG"/>
+            <SimpleParameter symbId="beta_K_in_RBC"/>
+
+            <!-- Derived parameters -->
+            <SimpleParameter symbId="K_in_FPG">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef symbIdRef="K_out_FPG"/>
+                            <ct:SymbRef symbIdRef="FPG_baseline"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            <SimpleParameter symbId="K_tr">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:Int>4</ct:Int>
+                            <ct:SymbRef symbIdRef="RBC_lifespan"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            
+            <!-- Subject-dependent parameters for PK -->
+            <SimpleParameter symbId="kout">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:SymbRef blkIdRef="cov" symbIdRef="CL"/>
+                            <ct:SymbRef blkIdRef="cov" symbIdRef="V"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            
+            <!-- Initial conditions, not FPG and VHb because they are simply FPG_baseline and 1 -->
+            <!-- not PK -->
+            <SimpleParameter symbId="nonRBC10">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="K_in_RBC"/>
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="K_tr"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_glucose"/>
+                                    <Binop op="power">
+                                       <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                       <ct:SymbRef symbIdRef="gamma"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            
+            <SimpleParameter symbId="nonRBC20">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="nonRBC10"/>
+                            </Binop>
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="K_tr"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_glucose"/>
+                                    <Binop op="power">
+                                        <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                        <ct:SymbRef symbIdRef="gamma"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            
+            <SimpleParameter symbId="nonRBC30">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="nonRBC20"/>
+                            </Binop>
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="K_tr"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_glucose"/>
+                                    <Binop op="power">
+                                        <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                        <ct:SymbRef symbIdRef="gamma"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+
+            <SimpleParameter symbId="nonRBC40">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="times">
+                                <ct:SymbRef symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="nonRBC30"/>
+                            </Binop>
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="K_tr"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_glucose"/>
+                                    <Binop op="power">
+                                        <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                        <ct:SymbRef symbIdRef="gamma"/>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            
+            <SimpleParameter symbId="RBC10">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="times">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_glucose"/>
+                                    <Binop op="power">
+                                        <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                        <ct:SymbRef symbIdRef="gamma"/>
+                                    </Binop>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="nonRBC10"></ct:SymbRef>
+                            </Binop>
+                            <ct:SymbRef symbIdRef="K_tr"></ct:SymbRef>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+
+            <SimpleParameter symbId="RBC20">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="plus">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_tr"/>
+                                    <ct:SymbRef symbIdRef="RBC10"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Binop op="times">
+                                        <ct:SymbRef symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                            <ct:SymbRef symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="nonRBC20"/>
+                                </Binop> <!-- fine moltipl di 3 -->
+                            </Binop>
+                            <ct:SymbRef symbIdRef="K_tr"/>
+                        </Binop> <!-- del divide -->
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+
+            <SimpleParameter symbId="RBC30">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="plus">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_tr"/>
+                                    <ct:SymbRef symbIdRef="RBC20"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Binop op="times">
+                                        <ct:SymbRef symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                            <ct:SymbRef symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="nonRBC30"/>
+                                </Binop> <!-- fine moltipl di 3 -->
+                            </Binop>
+                            <ct:SymbRef symbIdRef="K_tr"/>
+                        </Binop> <!-- del divide -->
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+
+            <SimpleParameter symbId="RBC40">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <Binop op="plus">
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="K_tr"/>
+                                    <ct:SymbRef symbIdRef="RBC30"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <Binop op="times">
+                                        <ct:SymbRef symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG_baseline"/>
+                                            <ct:SymbRef symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="nonRBC40"/>
+                                </Binop> <!-- fine moltipl di 3 -->
+                            </Binop>
+                            <ct:SymbRef symbIdRef="K_tr"/>
+                        </Binop> <!-- del divide -->
+                    </Equation>
+                </ct:Assign>
+            </SimpleParameter>
+
+
+            <!-- ETA -->
+
+            <RandomVariable symbId="eta_FPG_baseline">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_FPG_baseline"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="FPG_baseline">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="pop_FPG_baseline"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="beta_FPG_baseline"/>
+                                    <FunctionCall>
+                                        <ct:SymbRef symbIdRef="evaluate_treat"/>
+                                        <FunctionArgument symbId="my_treat">
+                                            <ct:SymbRef blkIdRef="cov" symbIdRef="treat"/>
+                                        </FunctionArgument>
+                                    </FunctionCall>
+                                </Binop>
+                            </Binop>
+                            <Uniop op="exp">
+                                <ct:SymbRef symbIdRef="eta_FPG_baseline"/>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="eta_FPG_washout">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_FPG_washout"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="FPG_washout">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="pop_FPG_washout"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="beta_FPG_washout"/>
+                                    <FunctionCall>
+                                        <ct:SymbRef symbIdRef="evaluate_treat"/>
+                                        <FunctionArgument symbId="my_treat">
+                                            <ct:SymbRef blkIdRef="cov" symbIdRef="treat"/>
+                                        </FunctionArgument>
+                                    </FunctionCall>
+                                </Binop>
+                            </Binop>
+                            <Uniop op="exp">
+                                <ct:SymbRef symbIdRef="eta_FPG_washout"/>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="eta_EC_50_FPG">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_EC_50_FPG"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="EC_50_FPG">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="pop_EC_50_FPG"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="beta_EC_50_FPG"/>
+                                    <FunctionCall>
+                                        <ct:SymbRef symbIdRef="evaluate_sex"/>
+                                        <FunctionArgument symbId="my_sex">
+                                            <ct:SymbRef blkIdRef="cov" symbIdRef="sex"/>
+                                        </FunctionArgument>
+                                    </FunctionCall>
+                                </Binop>
+                            </Binop>
+                            <Uniop op="exp">
+                                <ct:SymbRef symbIdRef="eta_EC_50_FPG"/>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="eta_K_in_RBC">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_K_in_RBC"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="K_in_RBC">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="pop_K_in_RBC"/>
+                                <Binop op="times">
+                                    <ct:SymbRef symbIdRef="beta_K_in_RBC"/>
+                                    <FunctionCall>
+                                        <ct:SymbRef symbIdRef="evaluate_sex"/>
+                                        <FunctionArgument symbId="my_sex">
+                                            <ct:SymbRef blkIdRef="cov" symbIdRef="sex"/>
+                                        </FunctionArgument>
+                                    </FunctionCall>
+                                </Binop>
+                            </Binop>
+                            <Uniop op="exp">
+                                <ct:SymbRef symbIdRef="eta_K_in_RBC"/>
+                            </Uniop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="eta_gamma">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_gamma"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="gamma">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_gamma"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_gamma"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="eta_EC_50_dilution">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_EC_50_dilution"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="EC_50_dilution">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_EC_50_dilution"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_EC_50_dilution"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>            
+
+        </ParameterModel>
+
+
+        <!-- STRUCTURAL MODEL - ODEs -->
+        <StructuralModel blkId="sm1">
+            
+            <ct:DerivativeVariable symbId="QP" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Uniop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="kout"/>
+                                <ct:SymbRef symbIdRef="QP"/>
+                            </Binop>
+                        </Uniop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real> <!-- initial condition of PK set to zero -->
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:Variable symbolType="real" symbId="CP">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="QP"/>
+                            <ct:SymbRef blkIdRef="cov" symbIdRef="V"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+
+            <ct:DerivativeVariable symbId="FPG" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_in_FPG"/>
+                                <Binop op="plus">
+                                    <ct:Int>1</ct:Int>
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="FPG_washout"/>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_out_FPG"/>
+                                <Binop op="times">
+                                    <Binop op="plus">
+                                        <ct:Int>1</ct:Int>
+                                        <Binop op="divide">
+                                            <Binop op="times">
+                                                <ct:SymbRef blkIdRef="pm1" symbIdRef="E_max_FPG"/>
+                                                <ct:SymbRef symbIdRef="CP"/>
+                                            </Binop>
+                                            <Binop op="plus">
+                                                <ct:SymbRef blkIdRef="pm1" symbIdRef="EC_50_FPG"/>
+                                                <ct:SymbRef symbIdRef="CP"/>
+                                            </Binop>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="FPG"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="FPG_baseline"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="nonRBC1" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="K_in_RBC"/>
+                            <Binop op="times">
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="nonRBC1"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="nonRBC10"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:DerivativeVariable symbId="nonRBC2" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="nonRBC1"/>
+                            </Binop>
+                            <Binop op="times">
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="nonRBC2"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="nonRBC20"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="nonRBC3" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="nonRBC2"/>
+                            </Binop>
+                            <Binop op="times">
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="nonRBC3"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="nonRBC30"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:DerivativeVariable symbId="nonRBC4" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="nonRBC3"/>
+                            </Binop>
+                            <Binop op="times">
+                                <Binop op="plus">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="nonRBC4"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="nonRBC40"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:DerivativeVariable symbId="RBC1" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="minus">
+                            <Binop op="times">
+                                <Binop op="times">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                    <Binop op="power">
+                                        <ct:SymbRef symbIdRef="FPG"/>
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                    </Binop>
+                                </Binop>
+                                <ct:SymbRef symbIdRef="nonRBC1"/>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="RBC1"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="RBC10"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:DerivativeVariable symbId="RBC2" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="nonRBC2"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                    <ct:SymbRef symbIdRef="RBC2"/>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="RBC1"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="RBC20"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:DerivativeVariable symbId="RBC3" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="nonRBC3"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                    <ct:SymbRef symbIdRef="RBC3"/>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="RBC2"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="RBC30"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:DerivativeVariable symbId="RBC4" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <Binop op="minus">
+                                <Binop op="times">
+                                    <Binop op="times">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                                        <Binop op="power">
+                                            <ct:SymbRef symbIdRef="FPG"/>
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="gamma"/>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="nonRBC4"/>
+                                </Binop>
+                                <Binop op="times">
+                                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                    <ct:SymbRef symbIdRef="RBC4"/>
+                                </Binop>
+                            </Binop>
+                            <Binop op="times">
+                                <ct:SymbRef blkIdRef="pm1" symbIdRef="K_tr"/>
+                                <ct:SymbRef symbIdRef="RBC3"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="RBC40"/>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+            
+            <ct:DerivativeVariable symbId="VHb" symbolType="real">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="K_out_dilution"/>
+                            <Binop op="plus">
+                                <ct:Int>1</ct:Int>
+                                <Binop op="minus">
+                                    <Binop op="divide">
+                                        <Binop op="times">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="E_max_dilution"/>
+                                            <ct:SymbRef symbIdRef="CP"/>
+                                        </Binop>
+                                        <Binop op="plus">
+                                            <ct:SymbRef blkIdRef="pm1" symbIdRef="EC_50_dilution"/>
+                                            <ct:SymbRef symbIdRef="CP"/>
+                                        </Binop>
+                                    </Binop>
+                                    <ct:SymbRef symbIdRef="VHb"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+                <ct:IndependentVariable>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ct:IndependentVariable>
+                <ct:InitialCondition>
+                    <ct:InitialValue>
+                        <ct:Assign>
+                            <ct:Real>1</ct:Real>
+                        </ct:Assign>
+                    </ct:InitialValue>
+                </ct:InitialCondition>
+            </ct:DerivativeVariable>
+
+            <ct:Variable symbolType="real" symbId="TotRBC">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="nonRBC1"/>
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="nonRBC2"/>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="nonRBC3"/>
+                                    <Binop op="plus">
+                                        <ct:SymbRef symbIdRef="nonRBC4"/>
+                                        <Binop op="plus">
+                                            <ct:SymbRef symbIdRef="RBC1"/>
+                                            <Binop op="plus">
+                                                <ct:SymbRef symbIdRef="RBC2"/>
+                                                <Binop op="plus">
+                                                    <ct:SymbRef symbIdRef="RBC3"/>
+                                                    <ct:SymbRef symbIdRef="RBC4"/>
+                                                </Binop>
+                                            </Binop>
+                                        </Binop>
+                                    </Binop>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+
+            <ct:Variable symbolType="real" symbId="glyRBC">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="plus">
+                            <ct:SymbRef symbIdRef="RBC1"/>
+                            <Binop op="plus">
+                                <ct:SymbRef symbIdRef="RBC2"/>
+                                <Binop op="plus">
+                                    <ct:SymbRef symbIdRef="RBC3"/>
+                                    <ct:SymbRef symbIdRef="RBC4"/>
+                                </Binop>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+
+            <ct:Variable symbolType="real" symbId="glyPerc">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="times">
+                            <ct:Int>100</ct:Int>
+                            <Binop op="divide">
+                                <ct:SymbRef symbIdRef="glyRBC"/>
+                                <ct:SymbRef symbIdRef="totRBC"/>
+                            </Binop>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+
+            <ct:Variable symbolType="real" symbId="concRBC">
+                <ct:Assign>
+                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                        <Binop op="divide">
+                            <ct:SymbRef symbIdRef="totRBC"/>
+                            <ct:SymbRef symbIdRef="VHb"/>
+                        </Binop>
+                    </Equation>
+                </ct:Assign>
+            </ct:Variable>
+
+        </StructuralModel>
+        
+        
+        <!-- OBSERVATION MODEL: -->
+        <ObservationModel blkId="obsFPG">
+            <SimpleParameter symbId="pop_resFPG"/>
+            <SimpleParameter symbId="omega_resFPG"/>
+            
+            <RandomVariable symbId="eta_resFPG">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_resFPG"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="resFPG">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_resFPG"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_resFPG"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="epsFPG">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <prVal>1</prVal>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="FPGobs">
+                <Transformation>log</Transformation>
+                <Output>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="FPG"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <FunctionCall>
+                                <ct:SymbRef symbIdRef="constantErrorModel"/>
+                                <FunctionArgument symbId="a">
+                                    <ct:SymbRef symbIdRef="resFPG"/>
+                                </FunctionArgument>
+                            </FunctionCall>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="epsFPG"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+
+        <ObservationModel blkId="obsPerc">
+            <SimpleParameter symbId="pop_resPerc"/>
+            <SimpleParameter symbId="omega_resPerc"/>
+            
+            <RandomVariable symbId="eta_resPerc">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_resPerc"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="resPerc">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_resPerc"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_resPerc"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="epsPerc">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <prVal>1</prVal>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="PercObs">
+                <Transformation>log</Transformation>
+                <Output>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="glyPerc"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <FunctionCall>
+                                <ct:SymbRef symbIdRef="constantErrorModel"/>
+                                <FunctionArgument symbId="a">
+                                    <ct:SymbRef symbIdRef="resPerc"/>
+                                </FunctionArgument>
+                            </FunctionCall>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="epsPerc"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+        
+        <ObservationModel blkId="obsConc">
+            <SimpleParameter symbId="pop_resConc"/>
+            <SimpleParameter symbId="omega_resConc"/>
+            
+            <RandomVariable symbId="eta_resConc">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="http://www.uncertml.org/distributions/normal">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <var varId="omega_resConc"/>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <IndividualParameter symbId="resConc">
+                <GaussianModel>
+                    <Transformation>log</Transformation>
+                    <LinearCovariate>
+                        <PopulationParameter>
+                            <ct:Assign>
+                                <ct:SymbRef symbIdRef="pop_resConc"/>
+                            </ct:Assign>
+                        </PopulationParameter>
+                    </LinearCovariate>
+                    <RandomEffects>
+                        <ct:SymbRef symbIdRef="eta_resConc"/>
+                    </RandomEffects>
+                </GaussianModel>
+            </IndividualParameter>
+            
+            <RandomVariable symbId="epsConc">
+                <ct:VariabilityReference>
+                    <ct:SymbRef blkIdRef="obsErr" symbIdRef="residual"/>
+                </ct:VariabilityReference>
+                <NormalDistribution xmlns="http://www.uncertml.org/3.0" definition="">
+                    <mean>
+                        <rVal>0</rVal>
+                    </mean>
+                    <variance>
+                        <prVal>1</prVal>
+                    </variance>
+                </NormalDistribution>
+            </RandomVariable>
+            <Standard symbId="concObs">
+                <Transformation>log</Transformation>
+                <Output>
+                    <ct:SymbRef blkIdRef="sm1" symbIdRef="concRBC"/>
+                </Output>
+                <ErrorModel>
+                    <ct:Assign>
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <FunctionCall>
+                                <ct:SymbRef symbIdRef="constantErrorModel"/>
+                                <FunctionArgument symbId="a">
+                                    <ct:SymbRef symbIdRef="resConc"/>
+                                </FunctionArgument>
+                            </FunctionCall>
+                        </Equation>
+                    </ct:Assign>
+                </ErrorModel>
+                <ResidualError>
+                    <ct:SymbRef symbIdRef="epsConc"/>
+                </ResidualError>
+            </Standard>
+        </ObservationModel>
+    </ModelDefinition>
+
+    <TrialDesign xmlns="http://www.pharmml.org/2013/03/TrialDesign">
+        <Structure>
+            <Epoch oid="ep1">
+                <Start>
+                    <ct:Real>0</ct:Real>
+                </Start>
+                <End>
+                    <ct:Real>6</ct:Real>
+                </End>
+                <Order>1</Order>
+            </Epoch>
+            <Epoch oid="ep2">
+                <Start>
+                    <ct:Real>0</ct:Real>
+                </Start>
+                <End>
+                    <ct:Real>12</ct:Real>
+                </End>
+                <Order>2</Order>
+            </Epoch>
+            <Epoch oid="ep3">
+                <Start>
+                    <ct:Real>0</ct:Real>
+                </Start>
+                <End>
+                    <ct:Real>3</ct:Real>
+                </End>
+                <Order>3</Order>
+            </Epoch>
+            <Arm oid="placebo"/>
+            <Arm oid="arm1"/>
+            <Arm oid="arm2"/>
+            <Arm oid="arm3"/>
+            <Arm oid="arm4"/>
+            <Arm oid="arm5"/>
+            <Cell oid="cell1">
+                <EpochRef oidRef="ep1"/>
+                <ArmRef oidRef="placebo"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell2">
+                <EpochRef oidRef="ep2"/>
+                <ArmRef oidRef="placebo"/>
+                <SegmentRef oidRef="tr0"/>
+            </Cell>
+            <Cell oid="cell3">
+                <EpochRef oidRef="ep3"/>
+                <ArmRef oidRef="placebo"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell4">
+                <EpochRef oidRef="ep1"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell5">
+                <EpochRef oidRef="ep2"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="tr01"/>
+            </Cell>
+            <Cell oid="cell6">
+                <EpochRef oidRef="ep3"/>
+                <ArmRef oidRef="arm1"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell7">
+                <EpochRef oidRef="ep1"/>
+                <ArmRef oidRef="arm2"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell8">
+                <EpochRef oidRef="ep2"/>
+                <ArmRef oidRef="arm2"/>
+                <SegmentRef oidRef="tr05"/>
+            </Cell>
+            <Cell oid="cell9">
+                <EpochRef oidRef="ep3"/>
+                <ArmRef oidRef="arm2"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell10">
+                <EpochRef oidRef="ep1"/>
+                <ArmRef oidRef="arm3"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell11">
+                <EpochRef oidRef="ep2"/>
+                <ArmRef oidRef="arm3"/>
+                <SegmentRef oidRef="tr1"/>
+            </Cell>
+            <Cell oid="cell12">
+                <EpochRef oidRef="ep3"/>
+                <ArmRef oidRef="arm3"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell13">
+                <EpochRef oidRef="ep1"/>
+                <ArmRef oidRef="arm4"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell14">
+                <EpochRef oidRef="ep2"/>
+                <ArmRef oidRef="arm4"/>
+                <SegmentRef oidRef="tr2"/>
+            </Cell>
+            <Cell oid="cell15">
+                <EpochRef oidRef="ep3"/>
+                <ArmRef oidRef="arm4"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell16">
+                <EpochRef oidRef="ep1"/>
+                <ArmRef oidRef="arm5"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Cell oid="cell17">
+                <EpochRef oidRef="ep2"/>
+                <ArmRef oidRef="arm5"/>
+                <SegmentRef oidRef="tr3"/>
+            </Cell>
+            <Cell oid="cell18">
+                <EpochRef oidRef="ep3"/>
+                <ArmRef oidRef="arm5"/>
+                <SegmentRef oidRef="wash"/>
+            </Cell>
+            <Segment oid="wash">
+                <ActivityRef oidRef="act_wash"/>
+            </Segment>
+            <Segment oid="tr0">
+                <ActivityRef oidRef="act_tr0"/>
+            </Segment>
+            <Segment oid="tr01">
+                <ActivityRef oidRef="act_tr01"/>
+            </Segment>
+            <Segment oid="tr05">
+                <ActivityRef oidRef="act_tr05"/>
+            </Segment>
+            <Segment oid="tr1">
+                <ActivityRef oidRef="act_tr1"/>
+            </Segment>
+            <Segment oid="tr2">
+                <ActivityRef oidRef="act_tr2"/>
+            </Segment>
+            <Segment oid="tr3">
+                <ActivityRef oidRef="act_tr3"/>
+            </Segment>
+            <Activity oid="act_wash">
+                <Washout/>
+            </Activity>
+            <Activity oid="act_tr0">
+                <Infusion>
+                    <DoseAmount inputTarget="derivativeVariable">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="QP"/>
+                        <ct:Assign>
+                            <ct:Real>0</ct:Real>
+                        </ct:Assign>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Int>0</ct:Int>
+                        </ct:Assign>
+                    </DosingTimes>
+                    <Duration>
+                        <ct:Assign>
+                            <ct:Int>12</ct:Int>
+                        </ct:Assign>
+                    </Duration>
+                </Infusion>
+            </Activity>
+            <Activity oid="act_tr01">
+                <Infusion>
+                    <DoseAmount inputTarget="derivativeVariable">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="QP"/>
+                        <ct:Assign>
+                            <ct:Real>0.1</ct:Real>                      
+                        </ct:Assign>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Sequence>
+                                <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
+                                <ct:StepSize>
+                                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                        <Binop op="divide">
+                                            <ct:Real>1</ct:Real>
+                                            <ct:Real>7</ct:Real>
+                                        </Binop>
+                                    </Equation>
+                                </ct:StepSize>
+                                <ct:End><ct:Real>12</ct:Real></ct:End>
+                            </ct:Sequence>
+                        </ct:Assign>
+                    </DosingTimes>
+                    <Duration>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:Real>1</ct:Real>
+                                    <ct:Real>7</ct:Real>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </Duration>
+                </Infusion>
+            </Activity>
+            <Activity oid="act_tr05">
+                <Infusion>
+                    <DoseAmount inputTarget="derivativeVariable">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="QP"/>
+                        <ct:Assign>
+                            <ct:Real>0.5</ct:Real>                      
+                        </ct:Assign>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Sequence>
+                                <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
+                                <ct:StepSize>
+                                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                        <Binop op="divide">
+                                            <ct:Real>1</ct:Real>
+                                            <ct:Real>7</ct:Real>
+                                        </Binop>
+                                    </Equation>
+                                </ct:StepSize>
+                                <ct:End><ct:Real>12</ct:Real></ct:End>
+                            </ct:Sequence>
+                        </ct:Assign>
+                    </DosingTimes>
+                    <Duration>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:Real>1</ct:Real>
+                                    <ct:Real>7</ct:Real>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </Duration>
+                </Infusion>
+            </Activity>
+            <Activity oid="act_tr1">
+                <Infusion>
+                    <DoseAmount inputTarget="derivativeVariable">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="QP"/>
+                        <ct:Assign>
+                            <ct:Real>1</ct:Real>                      
+                        </ct:Assign>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Sequence>
+                                <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
+                                <ct:StepSize>
+                                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                        <Binop op="divide">
+                                            <ct:Real>1</ct:Real>
+                                            <ct:Real>7</ct:Real>
+                                        </Binop>
+                                    </Equation>
+                                </ct:StepSize>
+                                <ct:End><ct:Real>12</ct:Real></ct:End>
+                            </ct:Sequence>
+                        </ct:Assign>
+                    </DosingTimes>
+                    <Duration>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:Real>1</ct:Real>
+                                    <ct:Real>7</ct:Real>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </Duration>
+                </Infusion>
+            </Activity>
+            <Activity oid="act_tr2">
+                <Infusion>
+                    <DoseAmount inputTarget="derivativeVariable">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="QP"/>
+                        <ct:Assign>
+                            <ct:Real>2</ct:Real>                      
+                        </ct:Assign>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Sequence>
+                                <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
+                                <ct:StepSize>
+                                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                        <Binop op="divide">
+                                            <ct:Real>1</ct:Real>
+                                            <ct:Real>7</ct:Real>
+                                        </Binop>
+                                    </Equation>
+                                </ct:StepSize>
+                                <ct:End><ct:Real>12</ct:Real></ct:End>
+                            </ct:Sequence>
+                        </ct:Assign>
+                    </DosingTimes>
+                    <Duration>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:Real>1</ct:Real>
+                                    <ct:Real>7</ct:Real>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </Duration>
+                </Infusion>
+            </Activity>
+            <Activity oid="act_tr3">
+                <Infusion>
+                    <DoseAmount inputTarget="derivativeVariable">
+                        <ct:SymbRef blkIdRef="sm1" symbIdRef="QP"/>
+                        <ct:Assign>
+                            <ct:Real>3</ct:Real>                      
+                        </ct:Assign>
+                    </DoseAmount>
+                    <DosingTimes>
+                        <ct:Assign>
+                            <ct:Sequence>
+                                <ct:Begin><ct:Real>0</ct:Real></ct:Begin>
+                                <ct:StepSize>
+                                    <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                        <Binop op="divide">
+                                            <ct:Real>1</ct:Real>
+                                            <ct:Real>7</ct:Real>
+                                        </Binop>
+                                    </Equation>
+                                </ct:StepSize>
+                                <ct:End><ct:Real>12</ct:Real></ct:End>
+                            </ct:Sequence>
+                        </ct:Assign>
+                    </DosingTimes>
+                    <Duration>
+                        <ct:Assign>
+                            <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                                <Binop op="divide">
+                                    <ct:Real>1</ct:Real>
+                                    <ct:Real>7</ct:Real>
+                                </Binop>
+                            </Equation>
+                        </ct:Assign>
+                    </Duration>
+                </Infusion>
+            </Activity>
+        </Structure>
+        <Population>
+            <ct:VariabilityReference>
+                <ct:SymbRef blkIdRef="model" symbIdRef="indiv"/>
+            </ct:VariabilityReference>
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="SEX"/>
+                <ct:SymbRef blkIdRef="cov" symbIdRef="sex"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="TREAT"/>
+                <ct:SymbRef blkIdRef="cov" symbIdRef="treat"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="CLEAR"/>
+                <ct:SymbRef blkIdRef="cov" symbIdRef="CL"/>
+            </ColumnMapping>
+            <ColumnMapping>
+                <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="VOL"/>
+                <ct:SymbRef blkIdRef="cov" symbIdRef="V"/>
+            </ColumnMapping>
+            <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                <Definition>
+                    <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                    <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/>
+                    <Column columnId="SEX" columnType="covariate" valueType="id" columnNum="3"/>
+                    <Column columnId="TREAT" columnType="covariate" valueType="id" columnNum="4"/>
+                    <Column columnId="CLEAR" columnType="covariate" valueType="real" columnNum="5"/>
+                    <Column columnId="VOL" columnType="covariate" valueType="real" columnNum="6"/>
+                </Definition>
+                <!-- Using a dummy dataset of 18 subjects, 3 per arm -->
+                <!-- Clearance is expressed as L/week -->
+                <Table>
+                    <Row>
+                        <ct:Id>s1</ct:Id>
+                        <ct:Id>placebo</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s2</ct:Id>
+                        <ct:Id>placebo</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s3</ct:Id>
+                        <ct:Id>placebo</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s4</ct:Id>
+                        <ct:Id>arm1</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s5</ct:Id>
+                        <ct:Id>arm1</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s6</ct:Id>
+                        <ct:Id>arm1</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s7</ct:Id>
+                        <ct:Id>arm2</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s8</ct:Id>
+                        <ct:Id>arm2</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s9</ct:Id>
+                        <ct:Id>arm2</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s10</ct:Id>
+                        <ct:Id>arm3</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s11</ct:Id>
+                        <ct:Id>arm3</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s12</ct:Id>
+                        <ct:Id>arm3</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s13</ct:Id>
+                        <ct:Id>arm4</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s14</ct:Id>
+                        <ct:Id>arm4</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s15</ct:Id>
+                        <ct:Id>arm4</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s16</ct:Id>
+                        <ct:Id>arm5</ct:Id>
+                        <ct:Id>M</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s17</ct:Id>
+                        <ct:Id>arm5</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>Y</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                    <Row>
+                        <ct:Id>s18</ct:Id>
+                        <ct:Id>arm5</ct:Id>
+                        <ct:Id>F</ct:Id>
+                        <ct:Id>N</ct:Id>
+                        <ct:Real>24.1</ct:Real>
+                        <ct:Real>10.7</ct:Real>
+                    </Row>
+                </Table>
+            </DataSet>
+        </Population>
+    </TrialDesign>
+    
+    <ModellingSteps xmlns="http://www.pharmml.org/2013/03/ModellingSteps">
+        <EstimationStep oid="est1">
+            
+            <ObjectiveDataSet>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ColumnMapping>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="fpg"/>
+                    <ct:SymbRef blkIdRef="obsFPG" symbIdRef="FPGobs"/>
+                </ColumnMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="time" columnType="idv" valueType="real" columnNum="2"/>
+                        <Column columnId="fpg" columnType="dv" valueType="real" columnNum="3"/>
+                    </Definition>
+                    <Table>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>2</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>6</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>8</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>12</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>14</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>16</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>18</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>21</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>0</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>5</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>8</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>14</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>18</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>21</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>0</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>5</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>8</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>10</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>12</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>14</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>16</ct:Real><ct:Real>12</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>18</ct:Real><ct:Real>12</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>21</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>2</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>6</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>8</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>12</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>14</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>16</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>18</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>21</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>0</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>5</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>8</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>14</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>18</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>21</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>8</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>10</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>12</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>14</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>16</ct:Real><ct:Real>12</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>18</ct:Real><ct:Real>12</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>21</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>2</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>6</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>8</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>14</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>21</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>0</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>5</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>8</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>21</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>6</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>8</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>10</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>12</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>16</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>21</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>2</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>6</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>8</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>14</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>21</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>0</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>5</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>8</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>10</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>21</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>6</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>8</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>10</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>12</ct:Real><ct:Real>11</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>16</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>21</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>2</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>6</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>8</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>10</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>14</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>18</ct:Real><ct:Real>4</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>21</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>0</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>5</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>8</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>10</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>21</ct:Real><ct:Real>2</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>6</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>8</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>10</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>12</ct:Real><ct:Real>4</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>16</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>21</ct:Real><ct:Real>2</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>2</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>6</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>8</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>10</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>14</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>18</ct:Real><ct:Real>1</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>21</ct:Real><ct:Real>2</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>0</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>5</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>8</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>10</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>16</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>18</ct:Real><ct:Real>1</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>21</ct:Real><ct:Real>2</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>2</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>5</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>6</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>8</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>10</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>12</ct:Real><ct:Real>4</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>14</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>16</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>18</ct:Real><ct:Real>1</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>21</ct:Real><ct:Real>2</ct:Real></Row>
+                    </Table>
+                </DataSet>
+            </ObjectiveDataSet>
+            
+            <ObjectiveDataSet>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ColumnMapping>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="hba1c"/>
+                    <ct:SymbRef blkIdRef="obsPerc" symbIdRef="PercObs"/>
+                </ColumnMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="time" columnType="idv" valueType="real" columnNum="2"/>
+                        <Column columnId="hba1c" columnType="dv" valueType="real" columnNum="3"/>
+                    </Definition>
+                    <Table>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>0</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>12</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>0</ct:Real><ct:Real>7.5</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>12</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>18</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>12</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>18</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>12</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>18</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>12</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>18</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>12</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>18</ct:Real><ct:Real>10</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>12</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>18</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>12</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>18</ct:Real><ct:Real>2</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>0</ct:Real><ct:Real>8</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>6</ct:Real><ct:Real>7</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>12</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>18</ct:Real><ct:Real>2</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>0</ct:Real><ct:Real>6</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>6</ct:Real><ct:Real>9</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>12</ct:Real><ct:Real>5</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>18</ct:Real><ct:Real>2</ct:Real></Row>
+                    </Table>
+                </DataSet>
+            </ObjectiveDataSet>
+            
+            <ObjectiveDataSet>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="time"/>
+                    <ct:SymbRef symbIdRef="t"/>
+                </ColumnMapping>
+                <ColumnMapping>
+                    <ColumnRef xmlns="http://www.pharmml.org/2013/08/Dataset" columnIdRef="hb"/>
+                    <ct:SymbRef blkIdRef="obsConc" symbIdRef="concObs"/>
+                </ColumnMapping>
+                <DataSet xmlns="http://www.pharmml.org/2013/08/Dataset">
+                    <Definition>
+                        <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/>
+                        <Column columnId="time" columnType="idv" valueType="real" columnNum="2"/>
+                        <Column columnId="hb" columnType="dv" valueType="real" columnNum="3"/>
+                    </Definition>
+                    <Table>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i1</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>0</ct:Real><ct:Real>0.12</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>8</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>14</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i2</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i3</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i4</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>0</ct:Real><ct:Real>0.12</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>8</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>14</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i5</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i6</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i7</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>0</ct:Real><ct:Real>0.12</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>8</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>14</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i8</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i9</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i10</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>0</ct:Real><ct:Real>0.12</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>8</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>14</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>16</ct:Real><ct:Real>0.2</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i11</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i12</ct:Id><ct:Real>21</ct:Real><ct:Real>0.2</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i13</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>0</ct:Real><ct:Real>0.12</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>8</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>14</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>16</ct:Real><ct:Real>0.2</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i14</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i15</ct:Id><ct:Real>21</ct:Real><ct:Real>0.2</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i16</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>0</ct:Real><ct:Real>0.12</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>8</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>14</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>16</ct:Real><ct:Real>0.2</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i17</ct:Id><ct:Real>21</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>0</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>6</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>8</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>10</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>12</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>14</ct:Real><ct:Real>0.13</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>16</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>18</ct:Real><ct:Real>0.14</ct:Real></Row>
+                        <Row><ct:Id>i18</ct:Id><ct:Real>21</ct:Real><ct:Real>0.2</ct:Real></Row>
+                    </Table>
+                </DataSet>
+            </ObjectiveDataSet>
+
+            <ParametersToEstimate>
+                <!-- 12 parameters, 4 beta of covariates, 6 omegas, 3 omegas res -->
+                <!-- the PK parameters are assumed to be given -->
+                <!-- one of the parameters (FPG_washout) is set to zero, but it has a beta -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_FPG_baseline"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>8.72</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_FPG_baseline"/>
+                    <InitialEstimate fixed="false">
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Uniop op="minus">
+                                <ct:Real>0.52</ct:Real>
+                            </Uniop>
+                        </Equation>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_FPG_washout"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.164</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_out_FPG"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.0367</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="E_max_FPG"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.698</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_EC_50_FPG"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>1.48</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_EC_50_FPG"/>
+                    <InitialEstimate fixed="false">
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Uniop op="minus">
+                                <ct:Real>0.6</ct:Real>
+                            </Uniop>
+                        </Equation>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_K_in_RBC"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>1.11</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="beta_K_in_RBC"/>
+                    <InitialEstimate fixed="false">
+                        <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+                            <Uniop op="minus">
+                                <ct:Real>0.09</ct:Real>
+                            </Uniop>
+                        </Equation>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="RBC_lifespan"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>135</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_glucose"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.000181</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_gamma"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.743</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="K_out_dilution"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.0305</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="E_max_dilution"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.682</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="pop_EC_50_dilution"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>8.25</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_FPG_baseline"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.0196</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_FPG_washout"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.64</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_EC_50_FPG"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>1.21</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_K_in_RBC"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.005</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_gamma"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.0035</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="pm1" symbIdRef="omega_EC_50_dilution"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.31</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <!-- Residual errors: -->
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="obsFPG" symbIdRef="pop_resFPG"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.0964</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="obsPerc" symbIdRef="pop_resPerc"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.0298</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="obsConc" symbIdRef="pop_resConc"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.0495</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="obsFPG" symbIdRef="omega_resFPG"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.13</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="obsPerc" symbIdRef="omega_resPerc"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.029</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                <ParameterEstimation>
+                    <ct:SymbRef blkIdRef="obsConc" symbIdRef="omega_resConc"/>
+                    <InitialEstimate fixed="false">
+                        <ct:Real>0.068</ct:Real>
+                    </InitialEstimate>
+                </ParameterEstimation>
+                
+            </ParametersToEstimate>
+
+            <Operation order="1" opType="estPop"/>
+            <Operation order="2" opType="estIndiv"/>
+            <Operation order="3" opType="estFIM"/>
+
+        </EstimationStep>
+        <StepDependencies>
+            <Step>
+                <ct:OidRef oidRef="est1"/>
+            </Step>
+        </StepDependencies>
+    </ModellingSteps>
+    
+</PharmML>
