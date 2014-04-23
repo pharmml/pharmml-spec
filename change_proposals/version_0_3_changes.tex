@@ -18,6 +18,12 @@
 \definecolor{attributeColor}{rgb}{0.96,0.517,0.29}
 \definecolor{darkgreen}{rgb}{0,.392,0}
 \definecolor{stringColor}{rgb}{0.6,0.2,0}
+\usepackage{array,multirow}
+\usepackage{longtable}
+\usepackage{cleveref}
+\crefname{section}{¤}{¤¤}
+\Crefname{section}{¤}{¤¤}
+\usepackage[utf8]{inputenc}
 
 \lstset{
   basicstyle=\ttfamily,
@@ -71,9 +77,9 @@
   morekeywords={kjkj} % list your attributes here
 }
 
-\author{Maciek J Swat\\ Sarala Wimalaratne\\ Niels Rode Kristensen}
-\date{\today}
-\title{Changes in PharmML 0.3}
+%\author{Maciek J Swat\\ Sarala Wimalaratne\\ Niels Rode Kristensen}
+%\date{\today}
+%\title{Changes in PharmML 0.3}
 %\title{NONMEM format dataset support for PharmML 0.2.2}
 
 
@@ -113,6 +119,129 @@ Optimal Experimental Design (OED) support etc.
 \end{itemize}
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overview of changes}
+
+\begin{center}
+\begin{longtable}{lll}
+  \hline
+  \hline
+PharmML element 	&  version 0.2.1 			& version 0.3 \\
+or modelling aspect 	&						& \\
+  \hline
+Experimental data 	& Inline data support only 		& Following options are available \\
+				& with up to 3 tables for			& 1. Inline data support \\ [-.25ex]
+				& -- Observations				& (see left column for details) \\ [-.25ex]
+				& -- Dosing 					& \\ [-.25ex]
+				& -- Covariates					& \\ [-.25ex]
+(see \textsection\ref{sec:externalFiles})	&			& 2. External data files support \\ [-.25ex]
+				&							& {\color{red} \scshape{new}} \\ 
+				&							&  \\ 
+(see \textsection\ref{sec:NONMEMsupport} \& \textsection\ref{sec:modellingSteps})	&	& 3. NONMEM-format dataset  \\ [-.25ex]
+				&							& support with \xelem{NONMEMdataSet} \\ [-.25ex]
+				&							& {\color{red} \scshape{new}} \\ 
+				&							& \\
+(see \textsection\ref{sec:lookupTabel})	&			& 4. Lookup tables {\color{red} \scshape{new}} \\ [1ex]
+\hline
+Column Mapping	& \multicolumn{2}{c}{\xelem{Population} table} \\  [.5ex]
+%\hline
+(see \textsection\ref{subsubsec:columnType})			& Multiple mapping elements:		& Only one type is available: \\ [-.25ex]
+				& -- \xelem{Demographic}		& -- \xelem{ColumnMapping} \\ [-.25ex]
+				& -- \xelem{IndividualTemplate}	& everything else defined using\\ [-.25ex]
+				& --- \xelem{IndividualMapping}	& \xatt{columnType} {\color{red} \scshape{new}} \\ [-.25ex]
+				& --- \xelem{ArmMapping}		& \\ [-.25ex]
+				& --- \xelem{CovariateMapping}	& \\ [-.25ex]
+				& --- \xelem{DemographicMapping}	& \\ [-.25ex]
+				& --- \xelem{ReplicateMapping}	& \\ [-.25ex]
+				& --- \xelem{IVDependentMapping} with & \\ [-.25ex]
+				& \xelem{IndependentVariableMapping}, & \\ [-.25ex]
+				& \xelem{EpochMapping} and		& \\ [-.25ex]
+				& \xelem{CovariateMapping}		& \\  [1ex]
+%\hline 
+				& \multicolumn{2}{c}{\xelem{IndividualDosing} table}  \\  [.5ex]
+%\hline
+				& Multiple mapping elements:		& Activity reference is required  \\  [-.25ex]
+				& -- \xelem{ActivityRef}			& \xelem{ActivityRef} \\ 
+				& -- \xelem{IndividualRef}			& and \xelem{ColumnMapping}  \\ 
+				& ...							& \\  [1ex]
+%\hline
+				& \multicolumn{2}{c}{\xelem{ObjectiveDataSet} table}  \\ [.5ex]
+%\hline
+				& -- \xelem{IndividualMapping}		& \xelem{ColumnMapping}  \\ 
+				& -- \xelem{VariableMapping}		& \\  [1ex]
+\hline
+ODE's 			& \xelem{InitialCondition}	with no	& \xelem{InitialCondition} \\ [-.25ex]
+				& child elements				& with two new elements:  \\
+				&							& \xelem{InitialTime} \& \\
+				&							& \xelem{InitialValue} {\color{red} \scshape{new}} \\ [1ex]
+\hline
+Matrix 			& \emph{not supported}			& \xelem{Matrix} element {\color{red} \scshape{new}} \\ [-.25ex]
+(see \textsection\ref{sec:matrixStructure})	&		& with attributes: \\
+				&							& -- \xatt{VariabilityReference}  \\
+				&							& -- \xatt{matrixType} with values \\
+				&							& \xatt{CovMatrix}, \xatt{CorrMatrix}, \\
+				&							& \xatt{StDevCorrMatrix}, \xatt{Cholesky}	\\
+				&							& -- \xatt{RowNames} \\
+				&							& -- \xatt{ColumnNames} (optional) \\ [1ex]
+\hline
+External tools 		& \emph{not supported}			& \xelem{TargetTool} tag {\color{red} \scshape{new}} \\ [-.25ex]
+				&							& with \emph{mandatory} element \\
+				& 							& \xelem{TargetToolName} and \\
+				&							& \emph{optional} \xelem{CodeInjection} \\ [1ex]
+\hline
+Trial Design 		& Explicitly coded in 				& Following options are available \\
+				& \xelem{TrialDesign}			& 1. Explicitly coded in \\
+				& 							& \xelem{TrialDesign} \\
+				&							& \\
+(see \textsection\ref{sec:NONMEMsupport})	&		& 2. Design \& data from \\
+				&							& NONMEM-format dataset {\color{red} \scshape{new}} \\ [1ex]
+\hline
+Interpolation 		& \emph{not supported}			& \xelem{Interpolation} element {\color{red} \scshape{new}} \\
+(see \textsection\ref{subsec:interpolation})	&		& with \\
+				&							& -- \xelem{Algorithm} taking a value \\
+				&							& from list: \xatt{constant}, \xatt{nearest}, \\
+				&							& \xatt{linear}, \dots, \xatt{cubic} or \\
+				&							& -- user-defined in element \\
+				&							& \xelem{FunctionDefinition} \\ [1ex]
+\hline
+Changes in attribute  	& \multicolumn{2}{c}{in \xelem{DoseAmount} and \xelem{LookupTable}/\xelem{Target} elements} \\ [.25ex]
+names			& \xatt{inputType} 				& \xatt{inputTarget} \\
+(see \textsection\ref{subsec:inputTarget})& with values	& with values \\
+				& -- \xatt{dose}					& -- \xatt{parameter} \\
+				& -- \xatt{target}				& -- \xatt{derivativeVariable} \\
+				& 							& -- \xatt{variable} {\color{red} \scshape{new}} \\ [1ex]
+(see \textsection\ref{subsec:renamedAttrib})			& \multicolumn{2}{c}{in \xelem{VariabilityReference} element} \\ [-.25ex]
+				& \multicolumn{2}{c}{values of the \xatt{type} attribute} \\				
+				& \xatt{model}					& \xatt{parameterVariability} \\
+				& \xatt{error}					& \xatt{residualError} \\ [1ex]
+  \hline
+ Nested tables 		& supported in all datasets		& \emph{not supported} \\				
+(see \textsection\ref{subsec:nestedTable}) &			& \\ [1ex]
+  \hline
+Gaussian parameter & 							& \xatt{identity} transformation {\color{red} \scshape{new}} \\
+model 			&							& in \xelem{Transformation} \\ [1ex]
+  \hline
+Missing mathematical  & 							& \xatt{BinOp} with \\ 
+functions (see \textsection\ref{subsec:newMaths}) & 	& \xatt{min}, \xatt{max} {\color{red} \scshape{new}} \\
+				&							& \xatt{UniOp} with\\
+				&							& \xatt{ln}, \xatt{factln}, \xatt{gammaln}, \\
+				&							& \xatt{normcdf}, \xatt{sqrt} {\color{red} \scshape{new}} \\ [1ex]
+  \hline
+  Missing metadata 	&							& added in \xelem{PharmML} \\
+  attribute			&							& and child elements of \\
+  				&							& \xelem{TrialDesign} \\ [1ex]
+  \hline
+  Random errors	& multiple \xelem{SymbRef} allowed	& only one \xelem {SymbRef} allowed \\
+  				& in \xelem{RandomEffects}		& per \xelem{RandomEffects} \\ [1ex]
+  \hline
+\caption{Overview of major differences between versions 0.2.1 and 0.3}
+\label{figTable:overviewTable}
+\end{longtable}
+\end{center}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Externalisation of data files}
 \label{sec:externalFiles}
@@ -140,10 +269,10 @@ table in the \xelem{Population} block:
                     
 This has a number of disadvantages. Therefore externalisation of datasets is supported in the 
 upcoming release. As shown in the following listing, the external data set can be specified 
-alternatively in the new \xelem{ImportData} element, instead of \xelem{Table}, by providing the file name, URL, file format 
-and delimiter. Only one file format is allowed so far, the \emph{character-separated value}, 
-\emph{CSV}, with three delimiters: \xatt{COMMA}, \xatt{SPACE} and \xatt{TAB}.
-The template for this reads:
+alternatively in the new \xelem{ImportData} element, instead of \xelem{Table}, by providing 
+the file name, URL, file format and delimiter. Only one file format is allowed so far, the 
+\emph{character-separated value}, \emph{CSV}, with three delimiters: \xatt{COMMA}, 
+\xatt{SPACE} and \xatt{TAB}. The template for this reads:
 \lstset{language=XML}
 \begin{lstlisting}
     <ds:ImportData oid="id1">
@@ -267,6 +396,7 @@ in the model definition will not be mapped. Instead, to assign meaning to these 
 \xatt{columnType} is used in the column definition in the \xelem{DataSet}, similar to the \xatt{use} attribute in MDL. 
 
 \subsubsection{New attribute \xatt{columnType} in the \xelem{DataSet} definition.}
+\label{subsubsec:columnType}
 
 Table \ref{tab:MDLPharmML_columnTypes} collects all possible values for the 
 new \xatt{columnType} attribute. In contrast to MDL, which allows up to three values per category, 
@@ -419,7 +549,7 @@ and the unknown rate 'R1' is specified in the NMTRAN code:
 \lstset{language=NONMEMdataSet}
 \begin{lstlisting}
   IF (PREV.EQ.0) THEN
-	É...
+	. . .
   ELSE
      R1=CL*CSS
   ENDIF
@@ -627,6 +757,7 @@ follows well defined rules and grammar.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{New matrix structure}
+\label{sec:matrixStructure}
 
 A typical parameter model for a log-normally distributed parameter with \emph{subject} 
 and \emph{occasion} levels of variability, see Figure \ref{figTable:IIVIOVexample}, reads
@@ -641,7 +772,7 @@ with
 
 \begin{figure}[ht!]
 \centering
- \includegraphics[width=120mm]{pics/IOV_2levels_treeOnly}
+ \includegraphics[width=120mm]{pics/IOV_2levels_treeOnly.jpg}
 \caption{Two levels of variability, IIV with covariance matrix $\Omega^{(0)}$ and IOV with covariance matrix $\Omega^{(1)}$.}
 \label{figTable:IIVIOVexample}
 \end{figure}
@@ -952,6 +1083,7 @@ the second using user defined R-script. The following code visualises the implem
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lookup table as new input type}
+\label{sec:lookupTabel}
 
 \subsection{Introduction}
 PharmML covers with \xelem{TrialDesign} a wide range of dosing scenarios which can be 
@@ -1327,6 +1459,7 @@ This case is straightforward and doesn't contain any new aspects needed to be de
 \section{Other changes/extensions}
 
 \subsection{Nested tables removed}
+\label{subsec:nestedTable}
 Nested tables have been used to store time-varying \emph{covariates} data in the 
 \xelem{Population} element.
 
@@ -1433,6 +1566,7 @@ additional \xatt{identity} transformation. The \xelem{Transformation} element is
 the user to define it accordingly. 
 
 \subsection{Interpolation support for covariates or model variables}
+\label{subsec:interpolation}
 
 The possibility of specifying one of the standard interpolation algorithms (constant, nearest,
 linear, spline, pchip, cubic, as defined in MATLAB) has been touched upon in section 
@@ -1507,6 +1641,7 @@ storage of initial times $t_0$.}
 \end{lstlisting}
 
 \subsection{Added missing functions}
+\label{subsec:newMaths}
 
 Binary operators: 
 \begin{itemize}
@@ -1528,8 +1663,9 @@ sqrt -- square root
 \end{itemize}
 
 \subsection{Renamed attributes}
+\label{subsec:renamedAttrib}
 
-The values of the attribute \xatt{type} in the \xelem{VariabilityReference} have been renamed
+The values of the attribute \xatt{type} in the \xelem{VariabilityModel} have been renamed
 \begin{itemize}
 \item
 random effect related \xatt{model} is now called \xatt{parameterVariability} and 
@@ -1641,6 +1777,10 @@ choices the user has but it is feasible to provide more options upon feedback.
 Moreover, the previous version provided erroneously the same task choice for an 
 simulation task as well. This has been now corrected. 
 
+
+ADD Simulation options: simPK \& simPD
+ADD Simulation options: simPK \& simPD
+ADD Simulation options: simPK \& simPD
 
 \subsection{Random errors in the Gaussian model}
 Version 0.2.1 allowed to define multiple random effects for one parameter in that 
