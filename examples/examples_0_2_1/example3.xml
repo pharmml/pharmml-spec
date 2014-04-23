@@ -398,13 +398,13 @@
                     <ds:Column columnId="WEIGHT" valueType="real" columnNum="3"/>
                 </ds:Definition>
                 <ds:Table>
-                    <ds:Row><ct:Id>i1</ct:Id><ct:Id>a1</ct:Id><ct:Real>70.1</ct:Real></ds:Row>
-                    <ds:Row><ct:Id>i2</ct:Id><ct:Id>a1</ct:Id><ct:Real>60.0</ct:Real></ds:Row>
-                    <ds:Row><ct:Id>i3</ct:Id><ct:Id>a1</ct:Id><ct:Real>93.2</ct:Real></ds:Row>
-                    <ds:Row><ct:Id>i4</ct:Id><ct:Id>a1</ct:Id><ct:Real>85.7</ct:Real></ds:Row>
-                    <ds:Row><ct:Id>i5</ct:Id><ct:Id>a1</ct:Id><ct:Real>78.3</ct:Real></ds:Row>
+                    <ds:Row><ct:Id>i1</ct:Id><ct:Id>arm1</ct:Id><ct:Real>70.1</ct:Real></ds:Row>
+                    <ds:Row><ct:Id>i2</ct:Id><ct:Id>arm1</ct:Id><ct:Real>60.0</ct:Real></ds:Row>
+                    <ds:Row><ct:Id>i3</ct:Id><ct:Id>arm1</ct:Id><ct:Real>93.2</ct:Real></ds:Row>
+                    <ds:Row><ct:Id>i4</ct:Id><ct:Id>arm1</ct:Id><ct:Real>85.7</ct:Real></ds:Row>
+                    <ds:Row><ct:Id>i5</ct:Id><ct:Id>arm1</ct:Id><ct:Real>78.3</ct:Real></ds:Row>
                     <!-- SNIP -->
-                    <ds:Row><ct:Id>i33</ct:Id><ct:Id>a1</ct:Id><ct:Real>94.1</ct:Real></ds:Row>
+                    <ds:Row><ct:Id>i33</ct:Id><ct:Id>arm1</ct:Id><ct:Real>94.1</ct:Real></ds:Row>
                 </ds:Table>
             </ds:DataSet>
         </Population>
