@@ -550,11 +550,13 @@
                 <Definition>
                     <Column columnId="ID" columnType="id" valueType="id" columnNum="1"/> 
                     <Column columnId="ARM" columnType="arm" valueType="id" columnNum="2"/> 
-                    <Column columnId="REP" columnType="replicate" valueType="int" columnNum="3"/> 
                 </Definition>
-                <Table>
-                    <Row><ct:Id>i</ct:Id><ct:Id>arm1</ct:Id><ct:Int>21</ct:Int></Row>
-                </Table>
+                <ImportData oid="PCV_covariateData">
+                    <name>RIBBA2012_PCV_covariates</name>
+                    <url>./combineArchive_XYZ/examples_0_3/</url>
+                    <format>CSV</format>
+                    <delimiter>COMMA</delimiter>
+                </ImportData>
             </DataSet>
         </Population>
 
@@ -576,7 +578,7 @@
                 </Definition>
                 <ImportData oid="PCV_dosingData">
                     <name>RIBBA2012_PCV_dosing</name>
-                    <url>file:///examples/examples_0_2_2/</url>
+                    <url>./combineArchive_XYZ/examples_0_3/</url>
                     <format>CSV</format>
                     <delimiter>COMMA</delimiter>
                 </ImportData>
@@ -610,7 +612,7 @@
                     </Definition>
                     <ImportData oid="PCV_observationData">
                         <name>RIBBA2012_PCV_observations</name>
-                        <url>file:///examples/examples_0_2_2/</url>
+                        <url>./combineArchive_XYZ/examples_0_3/</url>
                         <format>CSV</format>
                         <delimiter>COMMA</delimiter>
                     </ImportData>                    
