@@ -535,7 +535,7 @@
                 </Definition>
                 <ImportData oid="importNONMEM">
                     <name>RIBBA2012_PCV</name>
-                    <url>file:///</url>
+                    <url>./combineArchive_XYZ/examples_0_3/</url>
                     <format>CSV</format>
                     <delimiter>COMMA</delimiter>
                 </ImportData>
