@@ -346,7 +346,7 @@
                                     <ct:SymbRef blkIdRef="pm1" symbIdRef="KQPP"/>
                                     <ct:SymbRef symbIdRef="QP"/>
                                 </Binop>
-                                <Binop op="minus">
+                                <Binop op="plus">
                                     <Binop op="times">
                                         <ct:SymbRef blkIdRef="pm1" symbIdRef="KPQ"/>
                                         <ct:SymbRef symbIdRef="PT"/>
