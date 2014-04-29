@@ -314,10 +314,71 @@ observations, covariates or dosing records. This proved difficult to use especia
 for large data sets. Version 0.3 offers the possibility to use standard NONMEM 
 format datasets whereas the inline option still exists.
 
+Using NONMEM datasets has consequences on the content of the PharmML document in that
+the \xelem{TrialDesign} part is in such case redundant which simplifies the encoding of such model.
+Table \ref{tab:withAndWithoutNM} below summarises the differences.
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+ Using \xelem{TrialDesign} & Using NONMEM format dataset \\
+  \hline
+  \lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+<ModelDefinition>
+...
+</ModelDefinition>
+<TrialDesing>
+	<Structure>
+	...
+	</Structure>
+	<Population>
+	...
+	</Population>
+</TrialDesing>
+<ModellingsSteps>
+        <EstimationStep oid="est1">
+	        <ObjectiveDataSet>
+	        ...
+	        </ObjectiveDataSet>                
+	    ...
+        </EstimationStep>
+...
+</ModellingsSteps>
+\end{lstlisting}
+&
+\lstset{language=NONMEMdataSet}
+\begin{lstlisting}
+<ModelDefinition>
+...
+</ModelDefinition>
+<ModellingsSteps>
+	<NONMEMdataSet oid="NMoid">
+	...
+	<NONMEMdataSet>
+	
+        <EstimationStep oid="est1">
+            <TargetToolReference>
+                <ct:OidRef oidRef="NMoid"/>
+            </TargetToolReference>
+	    ...
+        </EstimationStep>
+...
+</ModellingsSteps>
+\end{lstlisting}  
+\\
+    \hline
+\end{tabular}
+\caption{Comparison of model structures encoded using \xelem{TrialDesign} (left) versus using NONMEM format dataset (right).}
+\label{tab:withAndWithoutNM}
+\end{center}
+\end{table}
+
+
 At first the mapping of the columns of the NONMEM data file to the according elements in the 
 \xelem{ModelDefinition} will be described, then the dataset reference will be discussed 
 and at the end how to handle NMTRAN code injection. The warfarin dataset is used 
-for the first two sections, \emph{warfarin\_conc\_pca.csv}:
+for the first two sections, \emph{warfarin\_conc\_pca.csv}, see Table \ref{tab:warfarinData}.
 
 \begin{table}[ht]
 \begin{center}
@@ -330,6 +391,8 @@ for the first two sections, \emph{warfarin\_conc\_pca.csv}:
 ...\\
   \hline
 \end{tabular}
+\caption{Snippet from the warfarin data set.}
+\label{tab:warfarinData}
 \end{center}
 \end{table}
 The Chan et al. dataset will be used in the last section to explain the code injection.
