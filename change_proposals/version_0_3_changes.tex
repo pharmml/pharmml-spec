@@ -95,7 +95,7 @@
 \begin{document}
 
 \input{title.tex} 
-
+	
 %\maketitle
 
 \tableofcontents
@@ -313,11 +313,11 @@ in three dedicated datasets section within PharmML, more specifically as
 observations, covariates or dosing records. This proved difficult to use especially 
 for large data sets. Version 0.3 offers the possibility to use standard NONMEM 
 format datasets whereas the inline option still exists.
-
 Using NONMEM datasets has consequences on the content of the PharmML document in that
-the \xelem{TrialDesign} part is in such case redundant which simplifies the encoding of such model.
-Table \ref{tab:withAndWithoutNM} below summarises the differences.
+the \xelem{TrialDesign} part is in such case redundant. Table \ref{tab:withAndWithoutNM} below 
+summarises the differences.
 \begin{table}[ht!]
+\setlength{\tabcolsep}{25pt}
 \begin{center}
 \begin{tabular}{ll}
   \hline
@@ -369,7 +369,7 @@ Table \ref{tab:withAndWithoutNM} below summarises the differences.
 \\
     \hline
 \end{tabular}
-\caption{Comparison of model structures encoded using \xelem{TrialDesign} (left) versus using NONMEM format dataset (right).}
+\caption{Comparison of model structures encoded using \xelem{TrialDesign} (left) versus models using NONMEM format dataset (right).}
 \label{tab:withAndWithoutNM}
 \end{center}
 \end{table}
@@ -380,7 +380,7 @@ At first the mapping of the columns of the NONMEM data file to the according ele
 and at the end how to handle NMTRAN code injection. The warfarin dataset is used 
 for the first two sections, \emph{warfarin\_conc\_pca.csv}, see Table \ref{tab:warfarinData}.
 
-\begin{table}[ht]
+\begin{table}[ht!]
 \begin{center}
 \begin{tabular}{lllllllll}
   \hline
@@ -388,14 +388,15 @@ for the first two sections, \emph{warfarin\_conc\_pca.csv}, see Table \ref{tab:w
 1	& 0	& 66.7	& 50	& 1	& 100	& 0	& .	& 1 \\
 1	& 0	& 66.7	& 50	& 1	& .	& 2	& .	& 1 \\
 1	& 0.5	& 66.7	& 50	& 1	& .	& 1	& 0	& 0 \\
-...\\
+1	& 1	& 	66.7		& 50	& 	1	& 	.	& 	1	& 	1.9	& 	0 \\1	& 2	& 	66.7	& 	50	& 	1	& 	.	& 	1	& 	3.3	& 	0 \\1	& 3	& 	66.7	& 	50	& 	1	& 	.	& 	1	& 	6.6	& 	0 \\...\\
+2	&	0	& 66.7	& 	50	& 	1	& 	100	& 	0	& 	.	& 	1 \\2	&	0	& 66.7	& 	50	& 	1	& 	.	& 	2	& 	100	& 	0 \\2	&	24	& 66.7	& 	50	& 	1	& 	.	& 	1	& 	9.2	& 	0 \\2	&	24	& 66.7	& 	50	& 	1	& 	.	& 	2	& 	49	& 	0 \\2	&	36	& 66.7	& 	50	& 	1	& 	.	& 	1	& 	8.5	& 	0 \\...\\
   \hline
 \end{tabular}
 \caption{Snippet from the warfarin data set.}
 \label{tab:warfarinData}
 \end{center}
 \end{table}
-The Chan et al. dataset will be used in the last section to explain the code injection.
+The Chan et al. dataset will be used in the last section to explain the code injection (Sec. \ref{subset:partIII}).
 
 \subsection{Structure in a nutshell}
 The support for NONMEM datasets is an extension of the \xelem{EstimationStep} element and 
@@ -406,7 +407,7 @@ Mapping of the columns defined in a dataset
 \item
 Referencing the NONMEM-format dataset (as an external file or inline data)
 \item
-Code injection (with symbol mapping)
+Support for NMTRAN code injection (with symbol mapping)
 \end{itemize}
 
 \subsection{Mapping of the columns in a dataset}
@@ -423,7 +424,7 @@ The following code (PharmML file: warfarin\_PK\_PRED.xml) illustrates the mappin
 to the variables or covariates as used in one of the elements of \xelem{ModelDefinition}, 
 such as covariate model, \xatt{cm1}, or observation model, \xatt{om1}. Note the object identifier 
 \xatt{ oid="NMoid"} assigned to the \xelem{NONMEMdataSe} element, the use of this attribute will be 
-explained in the section \ref{sec:modellingSteps}.
+explained in the Sec. \ref{sec:modellingSteps}.
 \lstset{language=XML}
 \begin{lstlisting}
     <!-- MODELLING STEPS -->
