@@ -407,6 +407,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="adm"/>
                     <xs:enumeration value="arm"/>
                     <xs:enumeration value="censoring"/>
+                    <xs:enumeration value="cmt"/>
                     <xs:enumeration value="covariate"/>
                     <xs:enumeration value="demographic"/>
                     <xs:enumeration value="dose"/>
