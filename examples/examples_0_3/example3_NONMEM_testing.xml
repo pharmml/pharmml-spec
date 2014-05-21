@@ -291,6 +291,28 @@
         
         <!-- OBSERVATION MODEL -->
         <ObservationModel blkId="om1">
+            
+            <SimpleParameter symbId="LAMB">
+                <ct:Assign>
+                    <math:Equation>
+                        <math:Binop op="times">
+                            <ct:SymbRef blkIdRef="pm1" symbIdRef="LAMBDA0"/>
+                            <math:Binop op="minus">
+                                <ct:Real>1</ct:Real>
+                                <math:Binop op="divide">
+                                    <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                                    <math:Binop op="plus">
+                                        <ct:SymbRef blkIdRef="pm1" symbIdRef="IC50"/>
+                                        <ct:SymbRef blkIdRef="sm1" symbIdRef="Cc"/>
+                                    </math:Binop>
+                                </math:Binop>
+                            </math:Binop>
+                        </math:Binop>
+                    </math:Equation>
+                </ct:Assign>
+            </SimpleParameter>
+            
+            
             <SimpleParameter symbId="a"/>
             <SimpleParameter symbId="b"/>
             <RandomVariable symbId="epsilon_C">
