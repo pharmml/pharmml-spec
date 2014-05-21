@@ -326,7 +326,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:sequence>
-                        <xs:element name="ColumnMapping" minOccurs="1" maxOccurs="2" type="ds:ColumnMappingType">
+                        <xs:element name="ColumnMapping" minOccurs="1" maxOccurs="unbounded" type="ds:ColumnMappingType">
                             <xs:annotation>
                                 <xs:documentation>
                                     Defines mapping to the dataset containing objective data. 
