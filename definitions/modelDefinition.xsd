@@ -568,9 +568,9 @@ permissions and limitations under the License.
                                 <xs:documentation>Specifies a continuous covariate.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element name="Categorical" type="mdef:CategorialCovariateType">
+                        <xs:element name="Categorical" type="mdef:CategoricalCovariateType">
                             <xs:annotation>
-                                <xs:documentation>Specifies a categprical covariate.</xs:documentation>
+                                <xs:documentation>Specifies a categorical covariate.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
@@ -611,7 +611,7 @@ permissions and limitations under the License.
             <xs:element ref="ct:Interpolation" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="CategorialCovariateType">
+    <xs:complexType name="CategoricalCovariateType">
         <xs:annotation>
             <xs:documentation>
                 Type defines a categorical covariate.
