@@ -547,7 +547,7 @@ permissions and limitations under the License.
             <xs:documentation>Type defining a Random effect using a reference to a Random variable.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="ct:SymbRef">
+            <xs:element maxOccurs="1" ref="ct:SymbRef">
                 <xs:annotation>
                     <xs:documentation>The reference to the Random Variable.</xs:documentation>
                 </xs:annotation>
