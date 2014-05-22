@@ -88,8 +88,8 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="url" type="xs:string">
+                <xs:sequence>                                       <!-- name removed -->
+                    <xs:element name="path" type="xs:string">       <!-- changed from url -->
                         <xs:annotation>
                             <xs:documentation>
                                 The URL of the import data file.
@@ -126,7 +126,7 @@ permissions and limitations under the License.
                                         <xs:documentation>Comma ',' as delimiter</xs:documentation>
                                     </xs:annotation>
                                 </xs:enumeration>
-                                <xs:enumeration value="SEMICOLON">
+                                <xs:enumeration value="SEMICOLON">                  <!-- NEW value -->
                                     <xs:annotation>
                                         <xs:documentation>Semicolon ';' as delimiter</xs:documentation>
                                     </xs:annotation>
@@ -154,20 +154,8 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="name">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The name of the import data file.
-                            </xs:documentation>
-                        </xs:annotation>                        
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_.]*"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="url" type="xs:string">
+                <xs:sequence>                                               <!-- name removed -->
+                    <xs:element name="path" type="xs:string">               <!-- renamed from url -->
                         <xs:annotation>
                             <xs:documentation>
                                 The URL of the import data file.
@@ -207,6 +195,11 @@ permissions and limitations under the License.
                                 <xs:enumeration value="COMMA">
                                     <xs:annotation>
                                         <xs:documentation>Comma ',' as delimiter</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
+                                <xs:enumeration value="SEMICOLON">                  <!-- NEW value -->
+                                    <xs:annotation>
+                                        <xs:documentation>Semicolon ';' as delimiter</xs:documentation>
                                     </xs:annotation>
                                 </xs:enumeration>
                             </xs:restriction>
