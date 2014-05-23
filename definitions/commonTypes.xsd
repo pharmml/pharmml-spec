@@ -46,6 +46,18 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
+
+    <!-- TEST -->
+    <xs:simpleType name="CatIdType">
+        <xs:annotation>
+            <xs:documentation>Type for symbols identifiers.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
+
     <!-- TEST -->
     <xs:simpleType name="CompartmentNoType">
         <xs:annotation>
