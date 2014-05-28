@@ -406,7 +406,6 @@ permissions and limitations under the License.
                     <xs:enumeration value="dose"/>
                     <xs:enumeration value="duration"/>
                     <xs:enumeration value="dv"/>
-                    <xs:enumeration value="ebe"/>
                     <xs:enumeration value="dvid"/>
                     <xs:enumeration value="epoch"/>
                     <xs:enumeration value="evid"/>
