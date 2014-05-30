@@ -533,7 +533,7 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type specifying a relationship to a specific category value in a categorical covariate.</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="catId" type="ct:CatIdType" use="required">              <!-- TEST changed from SymbolIdType /TEST -->
+        <xs:attribute name="catId" type="ct:CatIdType" use="required">
             <xs:annotation>
                 <xs:documentation>
                     Specifies the category value of the covariate to which this relationship applies.
@@ -547,7 +547,7 @@ permissions and limitations under the License.
             <xs:documentation>Type defining a Random effect using a reference to a Random variable.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element maxOccurs="1" ref="ct:SymbRef">                             <!-- TEST changed to 1 from unbounded /TEST -->
+            <xs:element maxOccurs="1" ref="ct:SymbRef">
                 <xs:annotation>
                     <xs:documentation>The reference to the Random Variable.</xs:documentation>
                 </xs:annotation>
@@ -638,7 +638,7 @@ permissions and limitations under the License.
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
-        <xs:attribute name="catId" type="ct:CatIdType" use="required">              <!-- TEST changed from SymbolIdType /TEST -->
+        <xs:attribute name="catId" type="ct:CatIdType" use="required">
             <xs:annotation>
                 <xs:documentation>The identifier of the category.</xs:documentation>
             </xs:annotation>
