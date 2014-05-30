@@ -47,7 +47,6 @@ permissions and limitations under the License.
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
 
-    <!-- TEST -->
     <xs:simpleType name="CatIdType">
         <xs:annotation>
             <xs:documentation>Type for symbols identifiers.</xs:documentation>
@@ -56,16 +55,13 @@ permissions and limitations under the License.
             <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:simpleType name="CompartmentNoType">
         <xs:annotation>
             <xs:documentation>Type for compartment number.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:integer"/>
     </xs:simpleType>
-    <!-- /TEST -->
     <xs:simpleType name="BlockIdType">
         <xs:annotation>
             <xs:documentation>Type for block identifiers.</xs:documentation>
@@ -436,13 +432,11 @@ the end value. In the second the step size is incremented r times, where r is th
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="compartmentNo" type="ct:CompartmentNoType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Integer used to identify the comparment nmber when mapping to NONMEM dataset.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->                
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required" fixed="real">
                     <xs:annotation>
                         <xs:documentation>The symbol type of a derivative variable is always set to be a real.</xs:documentation>
