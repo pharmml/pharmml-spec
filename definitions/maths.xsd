@@ -25,10 +25,8 @@ permissions and limitations under the License.
     <xs:import namespace="http://www.pharmml.org/2013/03/CommonTypes"
         schemaLocation="http://www.pharmml.org/2013/03/CommonTypes"/>
     
-    <!-- TEST -->
     <xs:import namespace="http://www.pharmml.org/2013/08/Dataset"
         schemaLocation="http://www.pharmml.org/2013/08/Dataset"/>
-    <!-- /TEST -->
     
     <xs:complexType name="BinopType">
         <xs:annotation>
@@ -225,7 +223,7 @@ permissions and limitations under the License.
                 <xs:element ref="ct:Scalar"/>
                 <xs:element ref="math:Constant"/>
                 <xs:element ref="ct:SymbRef"/>
-                <xs:element ref="ds:ColumnRef"/>                    <!-- NEW columnRef for Piecewise in MultipleDVMapping -->
+                <xs:element ref="ds:ColumnRef"/>
                 <xs:element ref="math:Binop"/>
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
