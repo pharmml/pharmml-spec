@@ -282,7 +282,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- new NONMEMdataSetReferenceType based on 'TargetToolReferenceType'-->
     <xs:complexType name="NONMEMdataSetReferenceType">
         <xs:annotation>
             <xs:documentation>
@@ -613,7 +612,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
-                    <xs:element name="NONMEMdataSetReference" minOccurs="0" type="msteps:NONMEMdataSetReferenceType"/>        <!-- NEW NONMEMdataSetReference -->
+                    <xs:element name="NONMEMdataSetReference" minOccurs="0" type="msteps:NONMEMdataSetReferenceType"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
