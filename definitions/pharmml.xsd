@@ -95,6 +95,13 @@ permissions and limitations under the License.
                     <xs:documentation>The version of PharmML that this document was compliant with when this document was written.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
+            <!-- TEST -->
+            <xs:attribute name="implementedBy" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation>The author of this PharmML implementation.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <!-- /TEST -->
             <xs:attributeGroup ref="ct:RootAttributesGroup"/> 
         </xs:complexType>
         <!-- KEYS -->
