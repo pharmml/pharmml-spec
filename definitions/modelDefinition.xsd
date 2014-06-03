@@ -465,7 +465,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="ParameterRandomVariableType">
+    <!-- org -->
+<!--    <xs:complexType name="ParameterRandomVariableType">
         <xs:annotation>
             <xs:documentation>
                 Type specifies a random variable definition.
@@ -487,7 +488,46 @@ permissions and limitations under the License.
                                 A continuous univariate probability distribution, defined by UncertML, that describes this random variable. 
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>    
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>-->
+    <!-- /org -->
+    <xs:complexType name="ParameterRandomVariableType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifies a random variable definition.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:CommonParameterType">
+                <xs:sequence>
+                    <xs:element ref="ct:VariabilityReference">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The level of random variability that describes this random variable.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element> 
+                    <!-- TEST -->
+                    <xs:choice>
+                        <xs:element ref="distrib:AbstractContinuousUnivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A continuous univariate probability distribution, defined by UncertML, that describes this random variable. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A continuous univariate probability distribution, defined by UncertML, that describes this random variable. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -714,17 +754,21 @@ permissions and limitations under the License.
                             <xs:documentation>A covariate model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="ParameterModel"
+                    <!-- TEST minOccurs="0" changed from '1' -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ParameterModel"
                         type="mdef:ParameterModelType">
                         <xs:annotation>
                             <xs:documentation>A parameter model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" ref="mdef:StructuralModel">
+                    <!-- /TEST -->
+                    <!-- TEST minOccurs="0" added -->
+                    <xs:element maxOccurs="unbounded"  minOccurs="0" ref="mdef:StructuralModel">
                         <xs:annotation>
                             <xs:documentation>A structural model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="ObservationModel" maxOccurs="unbounded"
                         type="mdef:ObservationModelType">
                         <xs:annotation>
