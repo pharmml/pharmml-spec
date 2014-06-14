@@ -247,7 +247,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:MixedVector"/>      <!-- previously just called 'Vector', might need to add a real vector as well -->
-                    <xs:element ref="ct:Vector"/> 
+                    <xs:element ref="ct:Vector"/>           <!-- NEW member of Rhs -->
                     <xs:element ref="ct:Interpolation"/> 
                 </xs:choice>
             </xs:extension>
@@ -928,7 +928,7 @@ the end value. In the second the step size is incremented r times, where r is th
     <!-- TEST new element -->
     <xs:element name="Vector" type="ct:VectorType">
         <xs:annotation>
-            <xs:documentation></xs:documentation>
+            <xs:documentation>Element defines a vector type, with real values only and indexes</xs:documentation>
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
