@@ -80,7 +80,15 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-    
+    <!-- TEST -->
+    <xs:simpleType name="VectorIndexType">
+        <xs:annotation>
+            <xs:documentation>Type of the vector index.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+    <!-- /TEST -->
+        
     <!-- 
         Complex Types
      -->
@@ -238,7 +246,8 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
-                    <xs:element ref="ct:Vector"/>
+                    <xs:element ref="ct:MixedVector"/>      <!-- previously just called 'Vector', might need to add a real vector as well -->
+                    <xs:element ref="ct:Vector"/> 
                     <xs:element ref="ct:Interpolation"/> 
                 </xs:choice>
             </xs:extension>
@@ -280,12 +289,13 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="VectorType">
+    <!-- TEST renamed from VectorType -->
+    <xs:complexType name="MixedVectorType">
         <xs:annotation>
             <xs:documentation>The definition of a non-uniform sequence of numbers. The vector is an ordered list of
-            values. The values of the sequence element are inserted into the vector at the point of definition.
-            For example, take the vector (the [] brackets denote a sequence): 0, 4, [0:1:3], 33. Inserting the 
-            sequence gives us the vector of values: 0, 4, 0, 1, 2, 3, 33. 
+                values. The values of the sequence element are inserted into the vector at the point of definition.
+                For example, take the vector (the [] brackets denote a sequence): 0, 4, [0:1:3], 33. Inserting the 
+                sequence gives us the vector of values: 0, 4, 0, 1, 2, 3, 33. 
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -305,6 +315,32 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST based on MixedVectorType -->
+    <xs:complexType name="VectorType">
+        <xs:annotation>
+            <xs:documentation>
+                Traditional vector, with numerical values only and facultative index.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence maxOccurs="unbounded">
+                    <xs:element name="VectorIndex" type="ct:VectorIndexType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>An index of the numerical element of the vector</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Real">
+                        <xs:annotation>
+                            <xs:documentation>A real value to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="CommonVariableDefinitionType" abstract="true">
         <xs:annotation>
             <xs:documentation>
@@ -882,11 +918,20 @@ the end value. In the second the step size is incremented r times, where r is th
             <xs:documentation>Element defines a uniform sequence of values.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="Vector" type="ct:VectorType" substitutionGroup="ct:Arrays">
+    <!-- TEST renamed from VectorType -->
+    <xs:element name="MixedVector" type="ct:MixedVectorType" substitutionGroup="ct:Arrays">
         <xs:annotation>
-            <xs:documentation>Element deines a vector of values.</xs:documentation>
+            <xs:documentation>Element defines a mixed type vector, can contain scalars and sequences.</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- /TEST -->
+    <!-- TEST new element -->
+    <xs:element name="Vector" type="ct:VectorType">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element abstract="true" name="CommonVariable" type="ct:CommonVariableDefinitionType">
         <xs:annotation>
             <xs:documentation>An abstract element that defines a variety of variable declarations. The possible variable declarations are
