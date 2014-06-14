@@ -73,6 +73,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="root"/>
                     <xs:enumeration value="min"/>
                     <xs:enumeration value="max"/>
+                    <xs:enumeration value="rem"/>               <!-- NEW -->
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -100,6 +101,12 @@ permissions and limitations under the License.
                             <xs:enumeration value="exp"/>
                             <xs:enumeration value="factorial"/>
                             <xs:enumeration value="factln"/>
+                            <xs:enumeration value="ceil"/>              <!-- NEW -->
+                            <xs:enumeration value="floor"/>             <!-- NEW -->
+                            <xs:enumeration value="atan2"/>             <!-- NEW -->
+                            <xs:enumeration value="acos"/>              <!-- NEW -->
+                            <xs:enumeration value="asin"/>              <!-- NEW -->
+                            <xs:enumeration value="atan"/>              <!-- NEW -->
                             <xs:enumeration value="gammaln"/>
                             <xs:enumeration value="ln"/>
                             <xs:enumeration value="log"/>
@@ -298,6 +305,8 @@ permissions and limitations under the License.
             <xs:documentation>Complex Type that defines a mathematical equation.</xs:documentation>
         </xs:annotation>
         <xs:choice>
+            <!-- TEST to avoid redundant asssignments-->
+            <!-- REMOVED FOR NOW - need to consider more cases -->
             <xs:element ref="ct:Scalar"/>
             <xs:element maxOccurs="1" minOccurs="1" ref="ct:SymbRef"/>
             <xs:element ref="math:Binop"/>
