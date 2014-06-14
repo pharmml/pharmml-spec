@@ -326,7 +326,7 @@ the end value. In the second the step size is incremented r times, where r is th
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="VectorIndex" type="ct:VectorIndexType" minOccurs="0">
+                    <xs:element name="Index" type="ct:VectorIndexType" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>An index of the numerical element of the vector</xs:documentation>
                         </xs:annotation>
