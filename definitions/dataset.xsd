@@ -384,10 +384,61 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST new CategoryMapping -->
+                    <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping for categorical covariates and data. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST new based on ColumnMappingType -->
+    <xs:complexType name="CategoryMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that defines category mapping - for categorical covariates and categorical data.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Map" type="ds:MapType" minOccurs="1" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The maping between data and model symbols.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST new Map type -->
+    <xs:complexType name="MapType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="dataSymbol" type="ct:CatIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Symbol in </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="modelSymbol" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Symbol.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- TEST -->
 
     <xs:simpleType name="ColumnTypeType">
         <xs:annotation>
