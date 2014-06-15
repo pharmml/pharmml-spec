@@ -282,7 +282,7 @@ permissions and limitations under the License.
     <xs:complexType name="LookupTableType">
         <xs:annotation>
             <xs:documentation>
-                A type defining the NONMEM type data and task settings.                
+                A type defining the lookup table type data.                
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
