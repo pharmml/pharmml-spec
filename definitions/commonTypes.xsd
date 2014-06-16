@@ -464,26 +464,43 @@ the end value. In the second the step size is incremented r times, where r is th
     </xs:complexType>
     <!-- /TEST -->
     
+   
     <!-- TEST -->
-    <!--  Delay element: delay(symbIdRef, delayVariable)-->
+    <!--  Delay type for delay element: delay(symbIdRef, delayVariable)-->
     <xs:complexType name="DelayType">
         <xs:annotation>
             <xs:documentation>
-                <xs:sequence>
-                    <xs:element minOccurs="1" maxOccurs="1" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the variable for which a delay is defined.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="1" maxOccurs="1" ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the delay value or symbol.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>                    
-                </xs:sequence>
+                The delay type for delay elements.
             </xs:documentation>
         </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="ct:SymbRef">
+                <xs:annotation>
+                    <xs:documentation>Reference to the variable for which a delay is defined.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:choice>
+                <xs:element ref="ct:Scalar">
+                    <xs:annotation>
+                        <xs:documentation>Reference to the delay value.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>                    
+                <xs:element ref="ct:SymbRef">
+                    <xs:annotation>
+                        <xs:documentation>Reference to the variable for a delay variable.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+            </xs:sequence>
     </xs:complexType>
+    
+    <xs:element name="Delay" type="ct:DelayType">
+        <xs:annotation>
+            <xs:documentation>
+                Delay element for DDEs.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <!-- /TEST -->
 
 
@@ -497,11 +514,6 @@ the end value. In the second the step size is incremented r times, where r is th
                     <xs:element minOccurs="0" ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>The symbol id used to define the variable.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="0" name="Delay" type="ct:DelayType">
-                        <xs:annotation>
-                            <xs:documentation>The definition of a delay term, delay(Y1,tau1).</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element minOccurs="0" name="IndependentVariable"
