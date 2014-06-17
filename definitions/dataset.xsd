@@ -427,12 +427,12 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:attribute name="dataSymbol" type="ct:CatIdType" use="required">
                     <xs:annotation>
-                        <xs:documentation>Symbol in </xs:documentation>
+                        <xs:documentation>Symbol in the data set.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
                 <xs:attribute name="modelSymbol" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
-                        <xs:documentation>ID referencing a Symbol.</xs:documentation>
+                        <xs:documentation>ID referencing a Symbol in the model.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
