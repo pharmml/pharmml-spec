@@ -18,7 +18,8 @@ permissions and limitations under the License.
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    xmlns:math="http://www.pharmml.org/2013/03/Maths" xmlns:distrib="http://www.uncertml.org/3.0"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths" 
+    xmlns:distrib="http://www.uncertml.org/3.0"
     targetNamespace="http://www.pharmml.org/2013/03/ModelDefinition" version="0.1"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
@@ -202,7 +203,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VariabilityReference"/>
                     <xs:choice>
                         <xs:element name="Pairwise" type="mdef:PairwiseType"/>
-                        <xs:element name="Matrix" type="ct:MatrixType"/>                            
+                        <!-- TEST need to add here correlation matrix type: covariance, correlation, stdevCorr, Cholesky etc.-->
+                        <xs:element name="Matrix" type="ct:MatrixType"/>
+                        <!-- /TEST -->
                     </xs:choice>                    
                 </xs:sequence>
             </xs:extension>
