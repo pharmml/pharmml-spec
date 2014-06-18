@@ -45,7 +45,6 @@ permissions and limitations under the License.
                 <xs:element ref="math:Binop"/>
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
-                <xs:element ref="ct:Delay"/>
             </xs:choice>
             <xs:choice>
                 <xs:annotation>
@@ -57,7 +56,6 @@ permissions and limitations under the License.
                 <xs:element ref="math:Binop"/>
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
-                <xs:element ref="ct:Delay"/>
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="op" use="required">
@@ -103,12 +101,6 @@ permissions and limitations under the License.
                             <xs:enumeration value="exp"/>
                             <xs:enumeration value="factorial"/>
                             <xs:enumeration value="factln"/>
-                            <xs:enumeration value="ceil"/>              <!-- NEW -->
-                            <xs:enumeration value="floor"/>             <!-- NEW -->
-                            <xs:enumeration value="atan2"/>             <!-- NEW -->
-                            <xs:enumeration value="acos"/>              <!-- NEW -->
-                            <xs:enumeration value="asin"/>              <!-- NEW -->
-                            <xs:enumeration value="atan"/>              <!-- NEW -->
                             <xs:enumeration value="gammaln"/>
                             <xs:enumeration value="ln"/>
                             <xs:enumeration value="log"/>
@@ -121,9 +113,13 @@ permissions and limitations under the License.
                             <xs:enumeration value="sin"/>
                             <xs:enumeration value="cos"/>
                             <xs:enumeration value="tan"/>
+                            <xs:enumeration value="cot"/>
+                            <xs:enumeration value="asin"/>              <!-- NEW -->
+                            <xs:enumeration value="acos"/>              <!-- NEW -->
+                            <xs:enumeration value="atan"/>              <!-- NEW -->
+                            <xs:enumeration value="atan2"/>             <!-- NEW -->
                             <xs:enumeration value="sec"/>
                             <xs:enumeration value="csc"/>
-                            <xs:enumeration value="cot"/>
                             <xs:enumeration value="sinh"/>
                             <xs:enumeration value="cosh"/>
                             <xs:enumeration value="tanh"/>
