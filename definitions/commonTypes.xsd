@@ -18,7 +18,8 @@ permissions and limitations under the License.
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     targetNamespace="http://www.pharmml.org/2013/03/CommonTypes"
-    xmlns:distrib="http://www.uncertml.org/3.0" xmlns:maths="http://www.pharmml.org/2013/03/Maths"
+    xmlns:distrib="http://www.uncertml.org/3.0" 
+    xmlns:maths="http://www.pharmml.org/2013/03/Maths"
     version="0.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <xs:import namespace="http://www.pharmml.org/2013/03/Maths"
@@ -248,7 +249,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:MixedVector"/>      <!-- previously just called 'Vector', might need to add a real vector as well -->
                     <xs:element ref="ct:Vector"/>           <!-- NEW member of Rhs -->
-                    <xs:element ref="ct:Interpolation"/> 
+                    <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -651,14 +652,15 @@ the end value. In the second the step size is incremented r times, where r is th
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="AssignType">
+    <!-- TEST - not used anywhere????? -->
+<!--    <xs:complexType name="AssignType">
         <xs:annotation>
             <xs:documentation>The type specifies an assignment of a value(s) or equation to another element in the PharmML document.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:Rhs"/>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     <xs:complexType name="InterpolationIVType">
         <xs:annotation>
@@ -770,7 +772,7 @@ the end value. In the second the step size is incremented r times, where r is th
                 </xs:sequence>
                 <xs:attribute name="matrixType" use="required">
                     <xs:annotation>
-                        <xs:documentation>Matrix type.</xs:documentation>
+                        <xs:documentation>Mathematical type of the matrix.</xs:documentation>
                     </xs:annotation>
                     <xs:simpleType>
                         <!-- TEST -->
