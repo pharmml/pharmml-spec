@@ -48,6 +48,9 @@ permissions and limitations under the License.
                 <!-- TEST -->
                 <xs:element ref="ct:Delay"/>
                 <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="ct:VectorSelector"/>
+                <!-- /TEST -->
             </xs:choice>
             <xs:choice>
                 <xs:annotation>
@@ -61,6 +64,9 @@ permissions and limitations under the License.
                 <xs:element ref="math:FunctionCall"/>
                 <!-- TEST -->
                 <xs:element ref="ct:Delay"/>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="ct:VectorSelector"/>
                 <!-- /TEST -->
             </xs:choice>
         </xs:sequence>
