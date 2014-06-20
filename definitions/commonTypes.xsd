@@ -239,6 +239,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
+                    <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Vector"/>           <!-- updated definition -->
                     <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
@@ -247,9 +248,9 @@ permissions and limitations under the License.
     </xs:complexType>
     <xs:complexType name="SequenceType">
         <xs:annotation>
-            <xs:documentation>The definition of a uniform sequence of numbers. Conceptually is has two forms. The first form takes an initial number, a step size and the last number. The sequence starts at the first
-number and a new value, incremented by the step size, is added to the sequence until this value exceeds
-the end value. In the second the step size is incremented r times, where r is the number of repetitions.                   
+            <xs:documentation>The definition of a uniform sequence of numbers. It has two forms
+                1. Begin:StepSize:End or
+                2. Begin:StepSize:Repetitions
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -758,6 +759,26 @@ the end value. In the second the step size is incremented r times, where r is th
                     </xs:choice>
                     <!-- /TEST -->
                 </xs:sequence>
+                <xs:attribute name="diagDefault" type="xs:double" default="0">
+                    <xs:annotation>
+                        <xs:documentation>The default diagonal value.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="offDiagDefault" type="xs:double" default="0">
+                    <xs:annotation>
+                        <xs:documentation>The default off-diagonal value.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="numbCols" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The number of columns.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="numbRows" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The number of rows.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
                 <xs:attribute name="matrixType" use="required">
                     <xs:annotation>
                         <xs:documentation>Mathematical type of the matrix.</xs:documentation>
@@ -765,12 +786,11 @@ the end value. In the second the step size is incremented r times, where r is th
                     <xs:simpleType>
                         <!-- TEST -->
                         <xs:restriction base="xs:Name">
-                            <xs:enumeration value="Full"/>
+                            <xs:enumeration value="Any"/>
                             <xs:enumeration value="Diagonal"/>
                             <xs:enumeration value="LowerTriangular"/>
                             <xs:enumeration value="UpperTriangular"/>
                             <xs:enumeration value="Symmetric"/>
-                            <xs:enumeration value="Identity"/>
                         </xs:restriction>
                         <!-- /TEST -->
 <!--                        <xs:restriction base="xs:Name">
@@ -838,7 +858,7 @@ the end value. In the second the step size is incremented r times, where r is th
     </xs:complexType>
 
 
-    <!-- TEST, based on MatrixRowType -->
+    <!-- TEST -->
     <xs:complexType name="VectorElementType">
         <xs:annotation>
             <xs:documentation>
@@ -865,7 +885,7 @@ the end value. In the second the step size is incremented r times, where r is th
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST, based on MatrixRowType -->
+    <!-- TEST -->
     <xs:complexType name="VectorCellType">
         <xs:annotation>
             <xs:documentation>
@@ -926,7 +946,7 @@ the end value. In the second the step size is incremented r times, where r is th
     </xs:element>
     <!-- /TEST -->
     
-    <!-- TEST, based on VectorRowType -->
+    <!-- TEST, based on VectorCellType -->
     <xs:complexType name="MatrixCellType">
         <xs:annotation>
             <xs:documentation>
@@ -1118,6 +1138,11 @@ the end value. In the second the step size is incremented r times, where r is th
     <xs:element name="Vector" type="ct:VectorType" substitutionGroup="ct:Arrays">
         <xs:annotation>
             <xs:documentation>Element defines a vector type, scalars and sequences</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Matrix" type="ct:MatrixType">
+        <xs:annotation>
+            <xs:documentation>Element defines a matrix</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element abstract="true" name="CommonVariable" type="ct:CommonVariableDefinitionType">
