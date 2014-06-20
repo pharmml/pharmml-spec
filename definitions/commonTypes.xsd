@@ -741,13 +741,22 @@ the end value. In the second the step size is incremented r times, where r is th
                             <xs:documentation>Names of the matrix columns.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A row in the matrix.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <!-- TEST -->
+                    <xs:choice>
+                        <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A row in the matrix.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="MatrixCell" type="ct:MatrixCellType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Single matrix element with indexes.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                        
+                    </xs:choice>
+                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attribute name="matrixType" use="required">
                     <xs:annotation>
@@ -888,9 +897,71 @@ the end value. In the second the step size is incremented r times, where r is th
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST - VectorSelector -->
-    
+    <!-- TEST - VectorSelectorType -->
+    <xs:complexType name="VectorSelectorType">
+        <xs:annotation>
+            <xs:documentation>
+                Type for vector selector.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef"/>
+                    <xs:element name="VectorIndex" type="xs:integer"/>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <!-- TEST -->
+    
+    
+    <!-- TEST - VectorSelector -->
+    <xs:element name="VectorSelector" type="ct:VectorSelectorType">
+        <xs:annotation>
+            <xs:documentation>
+                Allows to select a choosen vector element.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    
+    <!-- TEST, based on VectorRowType -->
+    <xs:complexType name="MatrixCellType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a matrix cell - with indexes.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Sequence">
+                        <xs:annotation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the matrix at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value to be inserted into the matrix row at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef"/>
+                </xs:choice>
+                <xs:attribute name="row" type="xs:integer" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Row index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="column" type="xs:integer" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Column index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     
     <!--
