@@ -732,7 +732,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="RowNames" type="ct:MatrixColumnRowNames">
+                    <xs:element name="RowNames" minOccurs="0" type="ct:MatrixColumnRowNames">
                         <xs:annotation>
                             <xs:documentation>Names of the matrix rows.</xs:documentation>
                         </xs:annotation>
