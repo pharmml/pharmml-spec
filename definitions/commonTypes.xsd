@@ -81,14 +81,15 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-    <!-- TEST -->
+    <!-- DELETE after Vector implementation completed -->
+    <!--<!-\- TEST -\->
     <xs:simpleType name="VectorIndexType">
         <xs:annotation>
             <xs:documentation>Type of the vector index.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:integer"/>
     </xs:simpleType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
         
     <!-- 
         Complex Types
@@ -247,7 +248,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
-                    <xs:element ref="ct:MixedVector"/>      <!-- previously just called 'Vector', might need to add a real vector as well -->
+<!--                    <xs:element ref="ct:MixedVector"/>      <!-\- previously just called 'Vector', might need to add a real vector as well -\->-->
                     <xs:element ref="ct:Vector"/>           <!-- NEW member of Rhs -->
                     <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
@@ -291,7 +292,8 @@ the end value. In the second the step size is incremented r times, where r is th
         </xs:complexContent>
     </xs:complexType>
     <!-- TEST renamed from VectorType -->
-    <xs:complexType name="MixedVectorType">
+    <!-- candidate to remove after redefining Vector -->
+<!--    <xs:complexType name="MixedVectorType">
         <xs:annotation>
             <xs:documentation>The definition of a non-uniform sequence of numbers. The vector is an ordered list of
                 values. The values of the sequence element are inserted into the vector at the point of definition.
@@ -315,7 +317,7 @@ the end value. In the second the step size is incremented r times, where r is th
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <!-- /TEST -->
     <!-- TEST based on MixedVectorType -->
     <xs:complexType name="VectorType">
@@ -326,18 +328,28 @@ the end value. In the second the step size is incremented r times, where r is th
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="Index" type="ct:VectorIndexType" minOccurs="0">
+                <xs:choice>
+                    <xs:element name="VectorElement" type="ct:VectorElementType">
                         <xs:annotation>
-                            <xs:documentation>An index of the numerical element of the vector</xs:documentation>
+                            <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ct:Real">
+                    <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
                         <xs:annotation>
-                            <xs:documentation>A real value to be inserted into the vector at this point.</xs:documentation>
+                            <xs:documentation>Single vector element with index.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                </xs:sequence>
+                </xs:choice>
+                <xs:attribute name="length" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The length of the vector - optional.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="default" type="xs:double" default="0">
+                    <xs:annotation>
+                        <xs:documentation>Default value of vector - set to 0.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -448,19 +460,15 @@ the end value. In the second the step size is incremented r times, where r is th
     </xs:complexType>
     
     <!-- TEST -->
-    <xs:complexType name="DDEHistoryType">
+    <xs:complexType name="HistoryType">
         <xs:annotation>
             <xs:documentation>The history for DDEs.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="HistoryTimeValue" type="ct:InitialValueType"/>  <!-- CHECK THIS one!!!!!!!!!! -->
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>The symbol id used to define the variable.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:element minOccurs="0" name="HistoryValue" type="ct:InitialValueType"/>  <!-- CHECK THIS one!!!!!!!!!! -->
+                    <xs:element minOccurs="0" name="HistoryTime" type="ct:InitialTimeType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -531,7 +539,7 @@ the end value. In the second the step size is incremented r times, where r is th
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element minOccurs="0" name="History" type="ct:DDEHistoryType">
+                    <xs:element minOccurs="0" name="History" type="ct:HistoryType">
                         <xs:annotation>
                             <xs:documentation>The definition of the history for delay differential equations.</xs:documentation>
                         </xs:annotation>
@@ -805,6 +813,7 @@ the end value. In the second the step size is incremented r times, where r is th
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST - extended  -->
     <xs:complexType name="MatrixRowType">
         <xs:annotation>
             <xs:documentation>
@@ -815,20 +824,22 @@ the end value. In the second the step size is incremented r times, where r is th
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Real">
+                    <xs:element ref="ct:Scalar">
                         <xs:annotation>
-                            <xs:documentation>A real value.</xs:documentation>
+                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ct:SymbRef">
+                    <xs:element ref="ct:Sequence">
                         <xs:annotation>
-                            <xs:documentation>A variable reference.</xs:documentation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element ref="ct:SymbRef"/>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     
     <xs:complexType name="MatrixColumnRowNames">
         <xs:annotation>
@@ -854,6 +865,71 @@ the end value. In the second the step size is incremented r times, where r is th
         </xs:complexContent>
     </xs:complexType>
 
+
+    <!-- TEST, based on MatrixRowType -->
+    <xs:complexType name="VectorElementType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a vector element - without indexes.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Sequence">
+                        <xs:annotation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST, based on MatrixRowType -->
+    <xs:complexType name="VectorCellType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a vector cell - with index.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Sequence">
+                        <xs:annotation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef"/>
+                </xs:choice>
+                <xs:attribute name="vectorIndex" type="xs:integer" use="required">
+                    <xs:annotation>
+                        <xs:documentation>A vector index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST - VectorSelector -->
+    
+    <!-- TEST -->
+    
+    
     <!--
         Attribute Groups
         -->
@@ -1006,11 +1082,12 @@ the end value. In the second the step size is incremented r times, where r is th
         </xs:annotation>
     </xs:element>
     <!-- TEST renamed from VectorType -->
-    <xs:element name="MixedVector" type="ct:MixedVectorType" substitutionGroup="ct:Arrays">
+    <!-- candidate to remove after redefining Vector -->
+<!--    <xs:element name="MixedVector" type="ct:MixedVectorType" substitutionGroup="ct:Arrays">
         <xs:annotation>
             <xs:documentation>Element defines a mixed type vector, can contain scalars and sequences.</xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
     <!-- /TEST -->
     <!-- TEST new element -->
     <xs:element name="Vector" type="ct:VectorType">
