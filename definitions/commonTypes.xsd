@@ -239,7 +239,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
-                    <xs:element ref="ct:Matrix"/>
+                    <xs:element ref="ct:Matrix"/>           <!-- updated definition -->
                     <xs:element ref="ct:Vector"/>           <!-- updated definition -->
                     <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
@@ -718,7 +718,12 @@ permissions and limitations under the License.
                             <xs:annotation>
                                 <xs:documentation>Single matrix element with indexes.</xs:documentation>
                             </xs:annotation>
-                        </xs:element>                        
+                        </xs:element>
+                        <xs:element name="MatrixBlock" type="ct:MatrixBlockType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Matrix block (submatrix) with indexes.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
                     </xs:choice>
                     <!-- /TEST -->
                 </xs:sequence>
