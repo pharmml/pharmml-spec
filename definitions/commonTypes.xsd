@@ -928,13 +928,35 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element ref="ct:SymbRef"/>
-                    <xs:element name="VectorIndex" type="xs:integer"/>                    
+                    <xs:choice>
+                        <xs:element name="Index" maxOccurs="unbounded" type="xs:integer"/>
+                        <xs:element name="Head" type="xs:integer"/>
+                        <xs:element name="Tail" type="xs:integer"/>
+                        <xs:element name="Segment" maxOccurs="unbounded" type="ct:VectorSegmentType"/>
+                    </xs:choice>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <!-- TEST -->
     
+    <!-- TEST -->
+    <xs:complexType name="VectorSegmentType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a vector segment.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence maxOccurs="unbounded">
+                    <xs:element name="StartIndex" type="xs:integer"/>
+                    <xs:element name="EndIndex" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <!-- TEST - VectorSelector -->
     <xs:element name="VectorSelector" type="ct:VectorSelectorType">
