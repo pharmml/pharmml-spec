@@ -709,9 +709,7 @@ permissions and limitations under the License.
                     <xs:choice>
                         <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
                             <xs:annotation>
-                                <xs:documentation>
-                                    A row in the matrix.
-                                </xs:documentation>
+                                <xs:documentation>A row in the matrix.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
                         <xs:element name="MatrixCell" type="ct:MatrixCellType" maxOccurs="unbounded">
@@ -773,34 +771,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST - extended  -->
-    <xs:complexType name="MatrixRowType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a row of values in a matrix. The row contains a cell which is
-                a scalar value, null.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Sequence">
-                        <xs:annotation>
-                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
-    
     <xs:complexType name="MatrixColumnRowNames">
         <xs:annotation>
             <xs:documentation>
@@ -824,6 +794,31 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST - extended  -->
+    <xs:complexType name="MatrixRowType">
+        <xs:annotation>
+            <xs:documentation>This type specifies a row of values in a matrix. The row contains a cell which is a scalar value, null.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Sequence">
+                        <xs:annotation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <!-- TEST -->
     <xs:complexType name="MatrixCellType">
