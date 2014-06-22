@@ -897,6 +897,11 @@ permissions and limitations under the License.
                             <xs:documentation>Single vector element with index.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="VectorSegment" type="ct:VectorSegmentType" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Consecutive vector elements with start index and segment length.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                 </xs:choice>
                 <xs:attribute name="length" type="xs:integer">
                     <xs:annotation>
@@ -973,6 +978,24 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="VectorSegmentType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a vector segment.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence maxOccurs="unbounded">
+                    <xs:element name="StartIndex" type="xs:integer"/>
+                    <xs:element name="EndIndex" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="VectorSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -997,23 +1020,6 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- TEST -->
     
-    <!-- TEST -->
-    <xs:complexType name="VectorSegmentType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a vector segment.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="StartIndex" type="xs:integer"/>
-                    <xs:element name="EndIndex" type="xs:integer"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
     
     <!-- TEST - VectorSelector -->
     <xs:element name="VectorSelector" type="ct:VectorSelectorType">
