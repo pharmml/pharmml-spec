@@ -283,41 +283,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- TEST - updated definition -->
-    <xs:complexType name="VectorType">
-        <xs:annotation>
-            <xs:documentation>
-                Traditional vector, with numerical values only and facultative index.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element name="VectorElements" type="ct:VectorElementType">
-                        <xs:annotation>
-                            <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>Single vector element with index.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:choice>
-                <xs:attribute name="length" type="xs:integer">
-                    <xs:annotation>
-                        <xs:documentation>The length of the vector - optional.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="default" type="xs:double" default="0">
-                    <xs:annotation>
-                        <xs:documentation>Default value of vector - set to 0.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
     <xs:complexType name="CommonVariableDefinitionType" abstract="true">
         <xs:annotation>
             <xs:documentation>
@@ -439,7 +404,6 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-   
     <!-- TEST -->
     <!--  Delay type for delay element: delay(symbIdRef, delayVariable)-->
     <xs:complexType name="DelayType">
@@ -477,7 +441,6 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
-
 
     <xs:complexType name="DerivativeVariableType">
         <xs:annotation>
@@ -909,6 +872,42 @@ permissions and limitations under the License.
                     <xs:element name="StartRowIndex" type="xs:integer"/>
                     <xs:element name="RowsNumber" type="xs:integer"/>
                 </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST - updated definition -->
+    <xs:complexType name="VectorType">
+        <xs:annotation>
+            <xs:documentation>
+                Traditional vector, with numerical values only and facultative index.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element name="VectorElements" type="ct:VectorElementType">
+                        <xs:annotation>
+                            <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Single vector element with index.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+                <xs:attribute name="length" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The length of the vector - optional.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="default" type="xs:double" default="0">
+                    <xs:annotation>
+                        <xs:documentation>Default value of vector - set to 0.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
