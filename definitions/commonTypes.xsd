@@ -855,11 +855,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Sequence">
-                        <xs:annotation>
-                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the matrix at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                     <xs:element ref="ct:Scalar">
                         <xs:annotation>
                             <xs:documentation>A scalar value to be inserted into the matrix row at this point.</xs:documentation>
@@ -882,8 +877,56 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
 
-    <!-- TEST -->
+    <!--MatrixBlockType as subset of MatrixType-->
     <xs:complexType name="MatrixBlockType">
+        <xs:annotation>
+            <xs:documentation>
+                The type specifies the content of a block/submatrix of a matrix.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>A row in the matrix.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="MatrixCell" type="ct:MatrixCellType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Single matrix element with indexes.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:attribute name="diagDefault" type="xs:double" default="0">
+                    <xs:annotation>
+                        <xs:documentation>The default diagonal value.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="offDiagDefault" type="xs:double" default="0">
+                    <xs:annotation>
+                        <xs:documentation>The default off-diagonal value.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="numbCols" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The number of columns.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="numbRows" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The number of rows.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+
+    <!-- TEST -->
+    <xs:complexType name="MatrixBlockSelectorType">
         <xs:annotation>
             <xs:documentation>
                 This type specifies a submatrix/block of matrix.
@@ -915,7 +958,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:SymbRef"/>
                     <xs:choice>
                         <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="xs:integer"/>
-                        <xs:element name="Block" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSegmentType"/>                            
+                        <xs:element name="Block" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixBlockSelectorType"/>                            
                         <xs:element name="Row" type="xs:integer"/>
                         <xs:element name="Column" type="xs:integer"/>
                     </xs:choice>
@@ -957,11 +1000,11 @@ permissions and limitations under the License.
                             <xs:documentation>Single vector element with index.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="VectorSegment" type="ct:VectorSegmentType" maxOccurs="unbounded">
+<!--                    <xs:element name="VectorSegment" type="ct:VectorSegmentType" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>Consecutive vector elements with start index and segment length.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                 </xs:choice>
                 <xs:attribute name="length" type="xs:integer">
                     <xs:annotation>
@@ -1038,7 +1081,7 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="VectorSegmentType">
+    <xs:complexType name="VectorSelectorSegmentType">
         <xs:annotation>
             <xs:documentation>
                 This type specifies a vector segment.
@@ -1070,7 +1113,7 @@ permissions and limitations under the License.
                         <xs:element name="Head" minOccurs="0" type="xs:integer"/>
                         <xs:choice maxOccurs="unbounded">
                             <xs:element name="Index" minOccurs="0" maxOccurs="unbounded" type="xs:integer"/>
-                            <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSegmentType"/>                            
+                            <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSelectorSegmentType"/>                            
                         </xs:choice>
                         <xs:element name="Tail" minOccurs="0" type="xs:integer"/>
                     </xs:sequence>
