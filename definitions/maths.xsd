@@ -213,6 +213,9 @@ permissions and limitations under the License.
             <xs:element ref="math:Binop"/>
             <xs:element ref="math:Uniop"/>
             <xs:element ref="math:FunctionCall"/>
+            <!-- TEST -->
+            <xs:element ref="ct:VectorSelector"/>
+            <!-- /TEST -->
         </xs:choice>
     </xs:complexType>
     <xs:complexType name="LogicConditionType">
@@ -244,6 +247,9 @@ permissions and limitations under the License.
                 <xs:element ref="math:Binop"/>
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
+                <!-- TEST -->
+                <xs:element ref="ct:VectorSelector"/>
+                <!-- /TEST -->
             </xs:choice>
             <xs:choice>
                 <xs:annotation>
@@ -257,6 +263,9 @@ permissions and limitations under the License.
                 <xs:element ref="math:Binop"/>
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
+                <!-- TEST -->
+                <xs:element ref="ct:VectorSelector"/>
+                <!-- /TEST -->
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="op" use="required">
@@ -291,6 +300,9 @@ permissions and limitations under the License.
             <xs:element ref="math:Binop"/>
             <xs:element ref="math:Uniop"/>
             <xs:element ref="math:FunctionCall"/>
+            <!-- TEST -->
+            <xs:element ref="ct:VectorSelector"/>
+            <!-- /TEST -->
         </xs:choice>
     </xs:complexType>
     <xs:complexType name="LogicUniOpType">
@@ -315,8 +327,6 @@ permissions and limitations under the License.
             <xs:documentation>Complex Type that defines a mathematical equation.</xs:documentation>
         </xs:annotation>
         <xs:choice>
-            <!-- TEST to avoid redundant asssignments-->
-            <!-- REMOVED FOR NOW - need to consider more cases -->
             <xs:element ref="ct:Scalar"/>
             <xs:element maxOccurs="1" minOccurs="1" ref="ct:SymbRef"/>
             <xs:element ref="math:Binop"/>
@@ -362,6 +372,9 @@ permissions and limitations under the License.
                 <xs:element ref="ct:Scalar"/>
                 <xs:element ref="math:Constant"/>
                 <xs:element ref="ct:SymbRef"/>
+                <!-- TEST -->
+                <xs:element ref="ct:VectorSelector"/>
+                <!-- /TEST -->
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
