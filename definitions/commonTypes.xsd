@@ -862,12 +862,12 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:SymbRef"/>
                 </xs:choice>
-                <xs:attribute name="row" type="xs:integer" use="required">
+                <xs:attribute name="cellRow" type="xs:integer" use="required">
                     <xs:annotation>
                         <xs:documentation>Row index.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="column" type="xs:integer" use="required">
+                <xs:attribute name="cellColumn" type="xs:integer" use="required">
                     <xs:annotation>
                         <xs:documentation>Column index.</xs:documentation>
                     </xs:annotation>
@@ -910,6 +910,16 @@ permissions and limitations under the License.
                         <xs:documentation>The default off-diagonal value.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <xs:attribute name="blockColumn" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The number of columns.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="blockRow" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The number of rows.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
                 <xs:attribute name="numbCols" type="xs:integer">
                     <xs:annotation>
                         <xs:documentation>The number of columns.</xs:documentation>
@@ -946,6 +956,24 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="MatrixCellSelectorType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a submatrix/block of matrix.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence maxOccurs="unbounded">
+                    <xs:element name="ColumnIndex" type="xs:integer"/>
+                    <xs:element name="RowIndex" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+
+    <!-- TEST -->
     <xs:complexType name="MatrixSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -957,7 +985,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="ct:SymbRef"/>
                     <xs:choice>
-                        <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="xs:integer"/>
+                        <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixCellSelectorType"/>
                         <xs:element name="Block" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixBlockSelectorType"/>                            
                         <xs:element name="Row" type="xs:integer"/>
                         <xs:element name="Column" type="xs:integer"/>
@@ -968,8 +996,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- TEST -->
     
-    
-    <!--<!-\- TEST -\->
+    <!-- TEST -->
     <xs:element name="MatrixSelector" type="ct:MatrixSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -977,7 +1004,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-\- /TEST -\->-->    
+    <!-- /TEST -->    
     
     
     <!-- TEST - updated definition -->
