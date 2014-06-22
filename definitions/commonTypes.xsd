@@ -820,6 +820,31 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    <!-- TEST - extended  -->
+    <xs:complexType name="MatrixColumnType">
+        <xs:annotation>
+            <xs:documentation>This type specifies a column of values in a matrix. The column contains a cell which is a scalar value, null.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Sequence">
+                        <xs:annotation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <!-- TEST -->
     <xs:complexType name="MatrixCellType">
         <xs:annotation>
@@ -876,6 +901,41 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="MatrixSelectorType">
+        <xs:annotation>
+            <xs:documentation>
+                Type for matrix selector.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef"/>
+                    <xs:choice>
+                        <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="xs:integer"/>
+                        <xs:element name="Block" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSegmentType"/>                            
+                        <xs:element name="Row" type="xs:integer"/>
+                        <xs:element name="Column" type="xs:integer"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- TEST -->
+    
+    
+    <!--<!-\- TEST -\->
+    <xs:element name="MatrixSelector" type="ct:MatrixSelectorType">
+        <xs:annotation>
+            <xs:documentation>
+                Allows to select a choosen matrix element/row/column/block.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-\- /TEST -\->-->    
+    
     
     <!-- TEST - updated definition -->
     <xs:complexType name="VectorType">
