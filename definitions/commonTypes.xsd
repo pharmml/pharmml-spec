@@ -856,6 +856,43 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="MatrixCellType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a matrix cell - with indexes.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="ct:Sequence">
+                        <xs:annotation>
+                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the matrix at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A scalar value to be inserted into the matrix row at this point.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef"/>
+                </xs:choice>
+                <xs:attribute name="row" type="xs:integer" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Row index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="column" type="xs:integer" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Column index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
 
     <!-- TEST -->
     <xs:complexType name="SubmatrixType">
@@ -987,45 +1024,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
-    
-    <!-- TEST, based on VectorCellType -->
-    <xs:complexType name="MatrixCellType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a matrix cell - with indexes.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Sequence">
-                        <xs:annotation>
-                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the matrix at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value to be inserted into the matrix row at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef"/>
-                </xs:choice>
-                <xs:attribute name="row" type="xs:integer" use="required">
-                    <xs:annotation>
-                        <xs:documentation>Row index.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="column" type="xs:integer" use="required">
-                    <xs:annotation>
-                        <xs:documentation>Column index.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
-    
+    <!-- /TEST -->    
     
     <!--
         Attribute Groups
