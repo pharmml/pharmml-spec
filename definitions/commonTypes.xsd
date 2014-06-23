@@ -1118,7 +1118,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
                     <xs:element name="StartIndex" type="xs:integer"/>
-                    <xs:element name="EndIndex" type="xs:integer"/>
+                    <xs:element name="SegmentLength" type="xs:integer"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
