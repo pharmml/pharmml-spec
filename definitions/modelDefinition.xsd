@@ -242,7 +242,8 @@ permissions and limitations under the License.
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="ObservationModelType">
+<!--   ORIGINAL
+        <xs:complexType name="ObservationModelType">
         <xs:annotation>
             <xs:documentation>Type defining the observation model.</xs:documentation>
         </xs:annotation>
@@ -253,7 +254,54 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    <!-- TEST -->
+    <xs:complexType name="ObservationModelType">
+        <xs:annotation>
+            <xs:documentation>Type defining the observation model.</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="Continuous" type="mdef:ContinuousType">
+                <xs:annotation>
+                    <xs:documentation>The continuous data models.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Discrete" type="mdef:DiscreteType">
+                <xs:annotation>
+                    <xs:documentation>The discrete data models.</xs:documentation>
+                </xs:annotation>
+            </xs:element>            
+        </xs:choice>
     </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="ContinuousType">
+        <xs:annotation>
+            <xs:documentation>Type defining the observation model for continuous data.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:CommonParameterModelType">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="1" ref="mdef:ObservationError"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="DiscreteType">
+        <xs:annotation>
+            <xs:documentation>Type defining the observation model for continuous data.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:CommonParameterModelType">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="1" ref="mdef:ObservationError"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="ObservationErrorType" abstract="true">
         <xs:annotation>
             <xs:documentation>Base observation error type. This defines the name of the variable
