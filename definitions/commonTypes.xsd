@@ -795,6 +795,32 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
+    <xs:complexType name="MatrixCellType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a matrix cell - with indexes.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="cellRow" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="cellColumn" type="ct:MatrixVectorIndexType"/>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element ref="ct:Scalar">
+                            <xs:annotation>
+                                <xs:documentation>A scalar value to be inserted into the matrix cell.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ct:SymbRef"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <!-- TEST - extended  -->
     <xs:complexType name="MatrixRowType">
         <xs:annotation>
@@ -844,32 +870,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-    
-    <!-- TEST -->
-    <xs:complexType name="MatrixCellType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a matrix cell - with indexes.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="cellRow" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="cellColumn" type="ct:MatrixVectorIndexType"/>
-                    <xs:choice maxOccurs="unbounded">
-                        <xs:element ref="ct:Scalar">
-                            <xs:annotation>
-                                <xs:documentation>A scalar value to be inserted into the matrix cell.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element ref="ct:SymbRef"/>
-                    </xs:choice>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
 
     <!--MatrixBlockType as subset of MatrixType-->
     <xs:complexType name="MatrixBlockType">
@@ -899,7 +899,7 @@ permissions and limitations under the License.
                         </xs:element>
                         <xs:element name="MatrixCell" type="ct:MatrixCellType" maxOccurs="unbounded">
                             <xs:annotation>
-                                <xs:documentation>Single matrix element with indexes.</xs:documentation>
+                                <xs:documentation>Single matrix element with indexes relative to the block start coordinates.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
@@ -1135,7 +1135,7 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="VectorSelectorSegmentType">
+    <xs:complexType name="VectorSegmentSelectorType">
         <xs:annotation>
             <xs:documentation>
                 This type specifies a vector segment.
@@ -1167,7 +1167,7 @@ permissions and limitations under the License.
                         <xs:element name="Head" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                         <xs:choice maxOccurs="unbounded">
                             <xs:element name="Index" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixVectorIndexType"/>
-                            <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSelectorSegmentType"/>                            
+                            <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSegmentSelectorType"/>                            
                         </xs:choice>
                         <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                     </xs:sequence>
