@@ -735,12 +735,12 @@ permissions and limitations under the License.
                         <xs:documentation>The default off-diagonal value.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="numbCols" type="xs:integer">
+                <xs:attribute name="numbCols" type="xs:integer">                                                <!-- CORRECT THAT -->
                     <xs:annotation>
                         <xs:documentation>The number of columns.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="numbRows" type="xs:integer">
+                <xs:attribute name="numbRows" type="xs:integer">                                                <!-- CORRECT THAT -->
                     <xs:annotation>
                         <xs:documentation>The number of rows.</xs:documentation>
                     </xs:annotation>
@@ -854,24 +854,18 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value to be inserted into the matrix row at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef"/>
-                </xs:choice>
-                <xs:attribute name="cellRow" type="xs:integer" use="required">
-                    <xs:annotation>
-                        <xs:documentation>Row index.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="cellColumn" type="xs:integer" use="required">
-                    <xs:annotation>
-                        <xs:documentation>Column index.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
+                <xs:sequence>
+                    <xs:element name="cellRow" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="cellColumn" type="ct:MatrixVectorIndexType"/>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element ref="ct:Scalar">
+                            <xs:annotation>
+                                <xs:documentation>A scalar value to be inserted into the matrix cell.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ct:SymbRef"/>
+                    </xs:choice>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -886,20 +880,18 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:choice>
-                        <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>A row in the matrix.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="MatrixCell" type="ct:MatrixCellType" maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>Single matrix element with indexes.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                </xs:sequence>
+                <xs:choice>
+                    <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>A row in the matrix.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="MatrixCell" type="ct:MatrixCellType" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Single matrix element with indexes.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
                 <xs:attribute name="diagDefault" type="xs:double" default="0">
                     <xs:annotation>
                         <xs:documentation>The default diagonal value.</xs:documentation>
@@ -910,22 +902,22 @@ permissions and limitations under the License.
                         <xs:documentation>The default off-diagonal value.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="blockColumn" type="xs:integer">
+                <xs:attribute name="blockColumn" type="xs:integer">                                     <!-- CORRECT THAT -->
+                    <xs:annotation>
+                        <xs:documentation>The column index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="blockRow" type="xs:integer">                                        <!-- CORRECT THAT -->
+                    <xs:annotation>
+                        <xs:documentation>The row index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="numbCols" type="xs:integer">                                        <!-- CORRECT THAT -->
                     <xs:annotation>
                         <xs:documentation>The number of columns.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="blockRow" type="xs:integer">
-                    <xs:annotation>
-                        <xs:documentation>The number of rows.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="numbCols" type="xs:integer">
-                    <xs:annotation>
-                        <xs:documentation>The number of columns.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="numbRows" type="xs:integer">
+                <xs:attribute name="numbRows" type="xs:integer">                                        <!-- CORRECT THAT -->
                     <xs:annotation>
                         <xs:documentation>The number of rows.</xs:documentation>
                     </xs:annotation>
@@ -945,10 +937,10 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="StartColumnIndex" type="xs:integer"/>
-                    <xs:element name="ColumnsNumber" type="xs:integer"/>
-                    <xs:element name="StartRowIndex" type="xs:integer"/>
-                    <xs:element name="RowsNumber" type="xs:integer"/>
+                    <xs:element name="StartColumnIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="ColumnsNumber" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="StartRowIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="RowsNumber" type="ct:MatrixVectorIndexType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -965,8 +957,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="ColumnIndex" type="xs:integer"/>
-                    <xs:element name="RowIndex" type="xs:integer"/>
+                    <xs:element name="ColumnIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="RowIndex" type="ct:MatrixVectorIndexType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -987,8 +979,8 @@ permissions and limitations under the License.
                     <xs:choice>
                         <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixCellSelectorType"/>
                         <xs:element name="Block" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixBlockSelectorType"/>                            
-                        <xs:element name="Row" type="xs:integer"/>
-                        <xs:element name="Column" type="xs:integer"/>
+                        <xs:element name="Row" type="ct:MatrixVectorIndexType"/>
+                        <xs:element name="Column" type="ct:MatrixVectorIndexType"/>
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -1097,7 +1089,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:SymbRef"/>
                 </xs:choice>
-                <xs:attribute name="vectorIndex" type="xs:integer" use="required">
+                <xs:attribute name="vectorIndex" type="xs:integer" use="required">                              <!-- CORRECT THAT -->
                     <xs:annotation>
                         <xs:documentation>A vector index.</xs:documentation>
                     </xs:annotation>
@@ -1117,8 +1109,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="StartIndex" type="xs:integer"/>
-                    <xs:element name="SegmentLength" type="xs:integer"/>
+                    <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1137,12 +1129,12 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="ct:SymbRef"/>
                     <xs:sequence>
-                        <xs:element name="Head" minOccurs="0" type="xs:integer"/>
+                        <xs:element name="Head" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                         <xs:choice maxOccurs="unbounded">
-                            <xs:element name="Index" minOccurs="0" maxOccurs="unbounded" type="xs:integer"/>
+                            <xs:element name="Index" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixVectorIndexType"/>
                             <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSelectorSegmentType"/>                            
                         </xs:choice>
-                        <xs:element name="Tail" minOccurs="0" type="xs:integer"/>
+                        <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                     </xs:sequence>
                 </xs:sequence>
             </xs:extension>
@@ -1160,6 +1152,26 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->    
+    
+    <!-- TEST -->
+    <xs:complexType name="MatrixVectorIndexType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Int">
+                        <xs:annotation>
+                            <xs:documentation>An integer value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A variable reference.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     <!--
         Attribute Groups
