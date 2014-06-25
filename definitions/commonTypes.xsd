@@ -706,7 +706,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:choice>
+                    <xs:choice maxOccurs="unbounded">
                         <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>A row in the matrix.</xs:documentation>
@@ -918,23 +918,23 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="blockColumn" type="ct:MatrixVectorIndexType">
-                        <xs:annotation>
-                            <xs:documentation>The column index.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                     <xs:element name="blockRow" type="ct:MatrixVectorIndexType">
                         <xs:annotation>
                             <xs:documentation>The row index.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="blockColumn" type="ct:MatrixVectorIndexType">
+                        <xs:annotation>
+                            <xs:documentation>The column index.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:choice>
-                        <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
+                        <xs:element name="BlockRow" type="ct:MatrixRowType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>A row in the matrix.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element name="MatrixCell" type="ct:MatrixCellType" maxOccurs="unbounded">
+                        <xs:element name="BlockCell" type="ct:MatrixCellType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>Single matrix element with indexes relative to the block start coordinates.</xs:documentation>
                             </xs:annotation>
