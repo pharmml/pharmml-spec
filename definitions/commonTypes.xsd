@@ -821,26 +821,63 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST - extended  -->
-    <xs:complexType name="MatrixRowType">
+    <!-- TEST -->
+    <xs:complexType name="MatrixRowCellType">
         <xs:annotation>
-            <xs:documentation>This type specifies a row of values in a matrix. The row contains a cell which is a scalar value, null.</xs:documentation>
+            <xs:documentation>
+                This type specifies a matrix cell defined relative to a matrix row.
+            </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Sequence">
-                        <xs:annotation>
-                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef"/>
-                </xs:choice>
+                <xs:sequence>
+                    <xs:element name="ColumnIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element ref="ct:Scalar">
+                            <xs:annotation>
+                                <xs:documentation>A scalar value to be inserted into the matrix row cell.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ct:SymbRef"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST - extended  -->
+    <xs:complexType name="MatrixRowType">
+        <xs:annotation>
+            <xs:documentation>This type specifies a row of values in a matrix. The row can contain indexed cells or 
+                scalars/symbols filling the whole row. Row is indexed - if using cell inside rows, the cell will be
+                indexed relative to the row.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="RowIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:choice>
+                        <xs:element name="MatrixRowCell" type="ct:MatrixRowCellType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Single matrix element with indexes.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:choice maxOccurs="unbounded">
+                            <xs:element ref="ct:Scalar">
+                                <xs:annotation>
+                                    <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element ref="ct:Sequence">
+                                <xs:annotation>
+                                    <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element ref="ct:SymbRef"/>
+                        </xs:choice>
+                    </xs:choice>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
