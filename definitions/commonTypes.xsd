@@ -1117,9 +1117,14 @@ permissions and limitations under the License.
                         </xs:element>
                     </xs:choice>
                 </xs:sequence>
+                <xs:attribute name="length" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The length of the sector.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
                 <xs:attribute name="default" type="xs:double" default="0">
                     <xs:annotation>
-                        <xs:documentation>Default value of vector - set to 0.</xs:documentation>
+                        <xs:documentation>Default value of vector set to 0.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
