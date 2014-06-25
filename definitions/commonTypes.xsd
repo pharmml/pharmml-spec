@@ -1009,7 +1009,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element name="VectorElements" type="ct:VectorElementType">
+                    <xs:element name="VectorElements" type="ct:VectorElementsType">
                         <xs:annotation>
                             <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
                         </xs:annotation>
@@ -1041,7 +1041,7 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="VectorElementType">
+    <xs:complexType name="VectorElementsType">
         <xs:annotation>
             <xs:documentation>
                 This type specifies a vector element - without indexes.
@@ -1092,6 +1092,47 @@ permissions and limitations under the License.
                 <xs:attribute name="vectorIndex" type="xs:integer" use="required">                              <!-- CORRECT THAT -->
                     <xs:annotation>
                         <xs:documentation>A vector index.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="VectorSegmentType">
+        <xs:annotation>
+            <xs:documentation>
+                Traditional vector, with numerical values only and facultative index.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element name="VectorElements" type="ct:VectorElementsType">
+                        <xs:annotation>
+                            <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Single vector element with index.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!--                    <xs:element name="VectorSegment" type="ct:VectorSegmentType" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Consecutive vector elements with start index and segment length.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>-->
+                </xs:choice>
+                <xs:attribute name="length" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>The length of the vector - optional.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="default" type="xs:double" default="0">
+                    <xs:annotation>
+                        <xs:documentation>Default value of vector - set to 0.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
