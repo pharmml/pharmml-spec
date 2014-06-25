@@ -846,7 +846,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST - extended  -->
+<!--    <!-\- TEST - extended  -\->
     <xs:complexType name="MatrixColumnType">
         <xs:annotation>
             <xs:documentation>This type specifies a column of values in a matrix. The column contains a cell which is a scalar value, null.</xs:documentation>
@@ -869,7 +869,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\-> -->
 
     <!--MatrixBlockType as subset of MatrixType-->
     <xs:complexType name="MatrixBlockType">
