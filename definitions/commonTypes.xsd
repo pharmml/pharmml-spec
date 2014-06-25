@@ -1077,11 +1077,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Sequence">
-                        <xs:annotation>
-                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                     <xs:element ref="ct:Scalar">
                         <xs:annotation>
                             <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
