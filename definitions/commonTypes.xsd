@@ -1058,16 +1058,18 @@ permissions and limitations under the License.
                             <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>Single vector element with index.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="VectorSegment" type="ct:VectorSegmentType" maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>Consecutive vector elements with start index and segment length.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Single vector element with index.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="VectorSegment" type="ct:VectorSegmentType" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Consecutive vector elements with start index and segment length.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
                 </xs:choice>
                 <xs:attribute name="length" type="xs:integer">
                     <xs:annotation>
@@ -1148,24 +1150,17 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
                     <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>                    
-                    <xs:choice>
-                        <xs:element name="VectorElements" type="ct:VectorElementsType">
-                            <xs:annotation>
-                                <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
+                    <xs:element name="VectorElements" type="ct:VectorElementsType">
+                        <xs:annotation>
+                            <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!--<xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>Single vector element with index.</xs:documentation>
                             </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
+                        </xs:element>-->
                 </xs:sequence>
-                <xs:attribute name="length" type="xs:integer">
-                    <xs:annotation>
-                        <xs:documentation>The length of the sector.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
                 <xs:attribute name="default" type="xs:double" default="0">
                     <xs:annotation>
                         <xs:documentation>Default value of vector set to 0.</xs:documentation>
