@@ -805,8 +805,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="cellRow" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="cellColumn" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="CellRow" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="CellColumn" type="ct:MatrixVectorIndexType"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
@@ -923,12 +923,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="blockRow" type="ct:MatrixVectorIndexType">
+                    <xs:element name="BlockStartRow" type="ct:MatrixVectorIndexType">
                         <xs:annotation>
                             <xs:documentation>The row index.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="blockColumn" type="ct:MatrixVectorIndexType">
+                    <xs:element name="BlockStartColumn" type="ct:MatrixVectorIndexType">
                         <xs:annotation>
                             <xs:documentation>The column index.</xs:documentation>
                         </xs:annotation>
@@ -981,10 +981,10 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="StartColumnIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="ColumnsNumber" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="StartRowIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="BlockStartRow" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="BlockStartColumn" type="ct:MatrixVectorIndexType"/>
                     <xs:element name="RowsNumber" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="ColumnsNumber" type="ct:MatrixVectorIndexType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1021,8 +1021,8 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="ct:SymbRef"/>
                     <xs:choice>
-                        <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixCellSelectorType"/>
-                        <xs:element name="Block" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixBlockSelectorType"/>                            
+                        <xs:element name="Cell" type="ct:MatrixCellSelectorType"/>
+                        <xs:element name="Block" type="ct:MatrixBlockSelectorType"/>                            
                         <xs:element name="Row" type="ct:MatrixVectorIndexType"/>
                         <xs:element name="Column" type="ct:MatrixVectorIndexType"/>
                     </xs:choice>
@@ -1121,7 +1121,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="vectorIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="VectorIndex" type="ct:MatrixVectorIndexType"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
