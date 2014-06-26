@@ -886,30 +886,6 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-<!--    <!-\- TEST - extended  -\->
-    <xs:complexType name="MatrixColumnType">
-        <xs:annotation>
-            <xs:documentation>This type specifies a column of values in a matrix. The column contains a cell which is a scalar value, null.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Sequence">
-                        <xs:annotation>
-                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-\- /TEST -\-> -->
 
     <!--MatrixBlockType as subset of MatrixType-->
     <xs:complexType name="MatrixBlockType">
