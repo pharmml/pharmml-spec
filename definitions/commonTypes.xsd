@@ -857,25 +857,23 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="RowIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:choice>
-                        <xs:element name="MatrixRowCell" type="ct:MatrixRowCellType" maxOccurs="unbounded">
+                    <!--<xs:element name="MatrixRowCell" type="ct:MatrixRowCellType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>Single matrix element with indexes.</xs:documentation>
                             </xs:annotation>
+                        </xs:element>-->
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
+                        <xs:element ref="ct:Scalar">
+                            <xs:annotation>
+                                <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
+                            </xs:annotation>
                         </xs:element>
-                        <xs:choice minOccurs="0" maxOccurs="unbounded">
-                            <xs:element ref="ct:Scalar">
-                                <xs:annotation>
-                                    <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element ref="ct:Sequence">
-                                <xs:annotation>
-                                    <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element ref="ct:SymbRef"/>
-                        </xs:choice>
+                        <xs:element ref="ct:Sequence">
+                            <xs:annotation>
+                                <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ct:SymbRef"/>
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="default" type="xs:double" default="0">
