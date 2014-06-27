@@ -805,8 +805,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="CellRow" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="CellColumn" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="CellRowIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="CellColumnIndex" type="ct:MatrixVectorIndexType"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
@@ -821,7 +821,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="MatrixRowCellType">
         <xs:annotation>
             <xs:documentation>
@@ -844,7 +844,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <!-- TEST - extended  -->
     <xs:complexType name="MatrixRowType">
@@ -1124,7 +1124,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
                     <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>                    
-                    <xs:element name="VectorElements" type="ct:VectorElementsType">
+                    <xs:element name="VectorElements" minOccurs="0" type="ct:VectorElementsType">
                         <xs:annotation>
                             <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
                         </xs:annotation>
