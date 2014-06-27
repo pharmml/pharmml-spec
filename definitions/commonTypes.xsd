@@ -975,8 +975,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="ColumnIndex" type="ct:MatrixVectorIndexType"/>
                     <xs:element name="RowIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="ColumnIndex" type="ct:MatrixVectorIndexType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
