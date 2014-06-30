@@ -832,11 +832,6 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="RowIndex" type="ct:MatrixVectorIndexType"/>
-                    <!--<xs:element name="MatrixRowCell" type="ct:MatrixRowCellType" maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>Single matrix element with indexes.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>-->
                     <xs:choice minOccurs="0" maxOccurs="unbounded">
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
