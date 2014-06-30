@@ -1142,7 +1142,7 @@ permissions and limitations under the License.
                     <xs:sequence>
                         <xs:element name="Head" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                         <xs:choice maxOccurs="unbounded">
-                            <xs:element name="Index" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixVectorIndexType"/>
+                            <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixVectorIndexType"/>
                             <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSegmentSelectorType"/>                            
                         </xs:choice>
                         <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
