@@ -821,31 +821,6 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <!--<!-\- TEST -\->
-    <xs:complexType name="MatrixRowCellType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a matrix cell defined relative to a matrix row.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="ColumnIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:choice maxOccurs="unbounded">
-                        <xs:element ref="ct:Scalar">
-                            <xs:annotation>
-                                <xs:documentation>A scalar value to be inserted into the matrix row cell.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element ref="ct:SymbRef"/>
-                    </xs:choice>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-\- /TEST -\->-->
-    
     <!-- TEST - extended  -->
     <xs:complexType name="MatrixRowType">
         <xs:annotation>
