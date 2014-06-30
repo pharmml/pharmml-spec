@@ -805,8 +805,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="CellRowIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="CellColumnIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="CellRow" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="CellColumn" type="ct:MatrixVectorIndexType"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
