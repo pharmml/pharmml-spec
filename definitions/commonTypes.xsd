@@ -318,11 +318,11 @@ permissions and limitations under the License.
                     </xs:element>
                 </xs:sequence>
                 <!-- TEST -->
-<!--                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The type of the variable.</xs:documentation>
                     </xs:annotation>
-                </xs:attribute>-->
+                </xs:attribute>
                 <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
@@ -479,11 +479,11 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:attribute>
                 <!-- TEST -->
-<!--                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required" fixed="real">
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required" fixed="real">
                     <xs:annotation>
                         <xs:documentation>The symbol type of a derivative variable is always set to be a real.</xs:documentation>
                     </xs:annotation>
-                </xs:attribute>-->
+                </xs:attribute>
                 <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
@@ -510,13 +510,13 @@ permissions and limitations under the License.
                     </xs:element>
                 </xs:sequence>
                 <!-- TEST -->
-<!--                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
                             The type of the function definition.
                         </xs:documentation>
                     </xs:annotation>
-                </xs:attribute>-->
+                </xs:attribute>
                 <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
@@ -528,13 +528,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:CommonVariableDefinitionType">
                 <!-- TEST -->
-<!--                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
                             The type of the function definition.
                         </xs:documentation>
                     </xs:annotation>
-                </xs:attribute>-->
+                </xs:attribute>
                 <!-- TEST -->
             </xs:extension>
         </xs:complexContent>
