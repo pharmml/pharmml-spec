@@ -42,6 +42,17 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>    
     <!-- TEST -->
+    <xs:simpleType name="DependanceAttributeType">
+        <xs:annotation>
+            <xs:documentation>Defines the dependency attrbute type.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="discreteMarkov"/>
+            <xs:enumeration value="continuousMarkov"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- TEST -->
+    <!-- TEST -->
     <xs:simpleType name="OrderedDataType">
         <xs:annotation>
             <xs:documentation>Defines the type for ordered attrbute for categorical data.</xs:documentation>
@@ -49,6 +60,19 @@ permissions and limitations under the License.
         <xs:restriction base="xs:token">
             <xs:enumeration value="yes"/>
             <xs:enumeration value="no"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:simpleType name="LinkFunctionType">
+        <xs:annotation>
+            <xs:documentation>Defines the type of link function for discrete data models.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="identity"/>
+            <xs:enumeration value="log"/>
+            <xs:enumeration value="logit"/>
+            <xs:enumeration value="probit"/>
         </xs:restriction>
     </xs:simpleType>
     <!-- /TEST -->
