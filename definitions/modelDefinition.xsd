@@ -450,10 +450,10 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="PMFType">
+    <xs:complexType name="CategoricalPMFType">
         <xs:annotation>
             <xs:documentation>
-                Type specifies a PMF for discrete data models.
+                Type specifies a PMF for categorical data models.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -501,6 +501,35 @@ permissions and limitations under the License.
     <!-- /TEST -->
 
     <!-- TEST -->
+    <xs:complexType name="CountPMFType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifies a PMF for count data models.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A discrete univariate probability distribution as defined by UncertML. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign"/>
+                </xs:choice>
+                <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Type of the link function applied to the PMF.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="CategoricalDataType">
         <xs:annotation>
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
@@ -538,7 +567,7 @@ permissions and limitations under the License.
                             <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:PMFType">
+                    <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:CategoricalPMFType">
                         <xs:annotation>
                             <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
                             or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
@@ -573,7 +602,7 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the count variable - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:PMFType">
+                    <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:CountPMFType">
                         <xs:annotation>
                             <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
                                 or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
