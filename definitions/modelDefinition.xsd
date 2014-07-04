@@ -301,9 +301,29 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="mdef:CommonObservationModelType">
-<!--                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="1" ref="mdef:ObservationError"/>
-                </xs:sequence>-->
+                <xs:sequence>
+                    <xs:element  name="CategoricalData" type="mdef:CategoricalDataType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="CommonCategoryVariableType">
+        <xs:annotation>
+            <xs:documentation>Type defining the common category variables in discrete data models.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Symbol"/>
+                </xs:sequence>
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id for this parameter.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -315,6 +335,28 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+<!--                    <xs:element name="ListOfCategories" type="ListOfCategoriesType">
+                        <xs:annotation>
+                            <xs:documentation>List of categories in the data set.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>-->
+                    <xs:element name="CategoryVariable" type="mdef:CommonCategoryVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the category variable - usually 'y' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="InitialStateVariable" type="mdef:CommonCategoryVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the initial state - usually 'y_1' or 'yinit' in MLXTRAN.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PreviousStateVariable" type="mdef:CommonCategoryVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the previous state - usually 'yp' in MLXTRAN.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
                 <xs:attribute name="ordered" type="ct:OrderedDataType" use="required">
                     <xs:annotation>
                         <xs:documentation>Specifies whether the following model is for nominal or ordered data.</xs:documentation>
