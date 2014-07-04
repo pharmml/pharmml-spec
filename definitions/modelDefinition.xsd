@@ -432,6 +432,57 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="PMFType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifies a PMF for discrete data models.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A categorical univariate probability distribution as defined by UncertML. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="distrib:AbstractCategoricalMultivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A categorical multivariate probability distribution as defined by UncertML. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="distrib:AbstractDiscreteUnivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A discrete univariate probability distribution as defined by UncertML. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="distrib:AbstractDiscreteMultivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A discrete multivariate probability distribution as defined by UncertML. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Type of the link function applied to the PMF.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+
+    <!-- TEST -->
     <xs:complexType name="CategoricalDataType">
         <xs:annotation>
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
@@ -467,6 +518,12 @@ permissions and limitations under the License.
                     <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
                         <xs:annotation>
                             <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:PMFType">
+                        <xs:annotation>
+                            <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
+                            or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="TransitionRate" minOccurs="0" maxOccurs="unbounded" type="mdef:TransitionRateType">
@@ -787,14 +844,21 @@ permissions and limitations under the License.
                         <xs:element ref="distrib:AbstractContinuousUnivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
-                                    A continuous univariate probability distribution, defined by UncertML, that describes this random variable. 
+                                    A continuous univariate probability distribution, defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
-                                    A continuous univariate probability distribution, defined by UncertML, that describes this random variable. 
+                                    A continuous univariate probability distribution, defined by UncertML. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="distrib:AbstractCategoricalMultivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A continuous multivariate probability distribution, defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
