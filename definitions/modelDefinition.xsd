@@ -369,21 +369,21 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:choice>
+                    <xs:choice minOccurs="0">
                         <xs:element ref="math:LogicBinop"/>
                         <xs:element ref="math:LogicUniop"/>
                     </xs:choice>
-                    <xs:element name="CurrentState" type="mdef:CommonDiscreteStateType">
+                    <xs:element name="CurrentState" minOccurs="0" type="mdef:CommonDiscreteStateType">
                         <xs:annotation>
                             <xs:documentation>Definition of the current state.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PreviousState" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
+                    <xs:element name="PreviousState" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
                         <xs:annotation>
                             <xs:documentation>Definition of the previous state.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Condition" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
+                    <xs:element name="Condition" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
                         <xs:annotation>
                             <xs:documentation>Definition of a general condition.</xs:documentation>
                         </xs:annotation>
