@@ -442,28 +442,28 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
+                        <xs:element minOccurs="0" ref="distrib:AbstractCategoricalUnivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
                                     A categorical univariate probability distribution as defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element ref="distrib:AbstractCategoricalMultivariateDistribution">
+                        <xs:element minOccurs="0" ref="distrib:AbstractCategoricalMultivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
                                     A categorical multivariate probability distribution as defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element ref="distrib:AbstractDiscreteUnivariateDistribution">
+                        <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
                                     A discrete univariate probability distribution as defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element ref="distrib:AbstractDiscreteMultivariateDistribution">
+                        <xs:element minOccurs="0" ref="distrib:AbstractDiscreteMultivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
                                     A discrete multivariate probability distribution as defined by UncertML. 
