@@ -313,6 +313,15 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
         </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="ordered" type="ct:OrderedDataType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Specifies whether the following model is for nominal or ordered data.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <!-- TEST -->
