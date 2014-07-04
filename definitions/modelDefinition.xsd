@@ -358,7 +358,7 @@ permissions and limitations under the License.
             <xs:element ref="math:LogicBinop"/>
             <xs:element ref="math:LogicUniop"/>            
         </xs:choice>
-        <xs:attribute name="order" type="ct:MarkovOrderType"/>
+        <xs:attribute name="MarkovOrder" type="ct:MarkovOrderType"/>
     </xs:complexType>
     <!-- /TEST -->
     
@@ -402,6 +402,36 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="TransitionRateType">
+        <xs:annotation>
+            <xs:documentation>Type defining the transition rate for continuous Markov models.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="CurrentState" minOccurs="0" type="mdef:CommonDiscreteStateType">
+                        <xs:annotation>
+                            <xs:documentation>Definition of the current state.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PreviousState" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
+                        <xs:annotation>
+                            <xs:documentation>Definition of the previous state.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Condition" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
+                        <xs:annotation>
+                            <xs:documentation>Definition of a general condition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="CategoricalDataType">
         <xs:annotation>
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
@@ -437,6 +467,11 @@ permissions and limitations under the License.
                     <xs:element name="Probability" maxOccurs="unbounded" type="mdef:ProbabilityType">
                         <xs:annotation>
                             <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="TransitionRate" maxOccurs="unbounded" type="mdef:TransitionRateType">
+                        <xs:annotation>
+                            <xs:documentation>Transition rate definition for continuous markov models.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
