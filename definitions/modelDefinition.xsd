@@ -602,15 +602,15 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the count variable - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:CountPMFType">
-                        <xs:annotation>
-                            <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
-                                or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                     <xs:element name="IntensityParameter" type="mdef:IntensityParameterType">
                         <xs:annotation>
                             <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
+                        <xs:annotation>
+                            <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
+                                or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
