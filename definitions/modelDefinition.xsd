@@ -330,6 +330,53 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="DependanceType">
+        <xs:annotation>
+            <xs:documentation>Type defining the discrete/continuous Markov dependency.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Symbol"/>
+                </xs:sequence>
+                <xs:attribute name="type" type="ct:DependanceAttributeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Dependancy attribute type.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="ProbabilityType">
+        <xs:annotation>
+            <xs:documentation>Type defining the probability definition.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="math:LogicBinop"/>
+                    <xs:element ref="math:LogicUniop"/>
+                    <xs:element ref="ct:Assign"/>
+                    <xs:element name="ListOfCategories" type="mdef:ListOfCategoriesType">
+                        <xs:annotation>
+                            <xs:documentation>List of categories in the data set.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Type of the link function applied to a probability.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="CategoricalDataType">
         <xs:annotation>
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
@@ -357,10 +404,20 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the previous state - usually 'yp' in MLXTRAN.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="Dependance" minOccurs="0" type="mdef:DependanceType">
+                        <xs:annotation>
+                            <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Probability" maxOccurs="unbounded" type="mdef:ProbabilityType">
+                        <xs:annotation>
+                            <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                 </xs:sequence>
                 <xs:attribute name="ordered" type="ct:OrderedDataType" use="required">
                     <xs:annotation>
-                        <xs:documentation>Specifies whether the following model is for nominal or ordered data.</xs:documentation>
+                        <xs:documentation>Specifies whether the following model deals with nominal or ordered data.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
