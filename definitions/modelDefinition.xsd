@@ -330,6 +330,26 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="CountVariableType">
+        <xs:annotation>
+            <xs:documentation>Type defining the count variable in discrete data models.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Symbol"/>
+                </xs:sequence>
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id for this parameter.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="DependanceType">
         <xs:annotation>
             <xs:documentation>Type defining the discrete/continuous Markov dependency.</xs:documentation>
@@ -537,6 +557,36 @@ permissions and limitations under the License.
                         <xs:documentation>Specifies whether the following model deals with nominal or ordered data.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="CountDataType">
+        <xs:annotation>
+            <xs:documentation>Type defining count data models.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="CountVariable" type="mdef:CountVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the count variable - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:PMFType">
+                        <xs:annotation>
+                            <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
+                                or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="IntensityParameter" type="mdef:IntensityParameterType">
+                        <xs:annotation>
+                            <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
