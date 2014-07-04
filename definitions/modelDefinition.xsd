@@ -309,6 +309,12 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    <xs:complexType name="CategoricalDataType">
+        <xs:annotation>
+            <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
+        </xs:annotation>
+    </xs:complexType>
+    
     <!-- TEST -->
     <xs:complexType name="ObservationModelType">
         <xs:annotation>
