@@ -76,6 +76,14 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>
     <!-- /TEST -->
+    <!-- TEST -->
+    <xs:simpleType name="MarkovOrderType">
+        <xs:annotation>
+            <xs:documentation>Defines the Markov order attribute type.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer"/>        
+    </xs:simpleType>
+    <!-- /TEST -->
     <xs:simpleType name="SymbolIdType">
         <xs:annotation>
             <xs:documentation>Type for symbols identifiers.</xs:documentation>

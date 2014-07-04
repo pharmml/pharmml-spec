@@ -358,6 +358,7 @@ permissions and limitations under the License.
             <xs:element ref="math:LogicBinop"/>
             <xs:element ref="math:LogicUniop"/>            
         </xs:choice>
+        <xs:attribute name="order" type="ct:MarkovOrderType"/>
     </xs:complexType>
     <!-- /TEST -->
     
