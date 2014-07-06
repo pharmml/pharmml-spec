@@ -509,16 +509,22 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A discrete univariate probability distribution as defined by UncertML. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Assign"/>
-                </xs:choice>
+                <xs:sequence>
+                    <xs:choice minOccurs="0">
+                        <xs:element ref="math:LogicBinop"/>
+                        <xs:element ref="math:LogicUniop"/>
+                    </xs:choice>
+                    <xs:choice>
+                        <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A discrete univariate probability distribution as defined by UncertML. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="ct:Assign"/>
+                    </xs:choice>
+                </xs:sequence>
                 <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
                     <xs:annotation>
                         <xs:documentation>Type of the link function applied to the PMF.</xs:documentation>
