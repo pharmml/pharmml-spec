@@ -602,6 +602,16 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the count variable - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="PreviousCountVariable" minOccurs="0" type="mdef:CountVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Dependance" minOccurs="0" type="mdef:DependanceType">
+                        <xs:annotation>
+                            <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="IntensityParameter" type="mdef:IntensityParameterType">
                         <xs:annotation>
                             <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter.</xs:documentation>
