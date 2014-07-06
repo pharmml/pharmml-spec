@@ -487,10 +487,25 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:choice minOccurs="0">
-                        <xs:element ref="math:LogicBinop"/>
-                        <xs:element ref="math:LogicUniop"/>
-                    </xs:choice>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" ref="math:LogicBinop"/>
+                        <xs:element minOccurs="0" ref="math:LogicUniop"/>
+                        <xs:element name="CurrentState" minOccurs="0" type="mdef:CommonDiscreteStateType">
+                            <xs:annotation>
+                                <xs:documentation>Definition of the current state.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="PreviousState" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
+                            <xs:annotation>
+                                <xs:documentation>Definition of the previous state.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Condition" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteStateType">
+                            <xs:annotation>
+                                <xs:documentation>Definition of a general condition.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
                     <xs:choice>
                         <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
                             <xs:annotation>
