@@ -610,9 +610,10 @@ permissions and limitations under the License.
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="IntensityParameter" type="mdef:IntensityParameterType">
+                    <xs:element name="IntensityParameter" maxOccurs="unbounded" type="mdef:IntensityParameterType">
                         <xs:annotation>
-                            <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter.</xs:documentation>
+                            <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter
+                                - can be defined more then once, for Markov dependency.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
