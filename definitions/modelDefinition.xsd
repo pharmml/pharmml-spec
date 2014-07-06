@@ -610,7 +610,13 @@ permissions and limitations under the License.
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="IntensityParameter" maxOccurs="unbounded" type="mdef:IntensityParameterType">
+                    <xs:element name="IntensityParameter" maxOccurs="unbounded" type="mdef:DiscreteDataParameterType">
+                        <xs:annotation>
+                            <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter
+                                - can be defined more then once, for Markov dependency.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DispersionParameter" maxOccurs="unbounded" type="mdef:DiscreteDataParameterType">
                         <xs:annotation>
                             <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter
                                 - can be defined more then once, for Markov dependency.</xs:documentation>
@@ -629,9 +635,9 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="IntensityParameterType">
+    <xs:complexType name="DiscreteDataParameterType">
         <xs:annotation>
-            <xs:documentation>Type defining the intensity parameter in count data models.</xs:documentation>
+            <xs:documentation>Type defining the parameters in count data models.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
