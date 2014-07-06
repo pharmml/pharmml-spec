@@ -616,10 +616,9 @@ permissions and limitations under the License.
                                 - can be defined more then once, for Markov dependency.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="DispersionParameter" maxOccurs="unbounded" type="mdef:DiscreteDataParameterType">
+                    <xs:element name="DispersionParameter" type="mdef:DiscreteDataParameterType">
                         <xs:annotation>
-                            <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter
-                                - can be defined more then once, for Markov dependency.</xs:documentation>
+                            <xs:documentation>Definition of dispersion parameter, usualy 'tau', for NB models.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
