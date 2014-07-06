@@ -334,9 +334,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Symbol"/>
-                </xs:sequence>
                 <xs:attribute name="type" type="ct:DependanceAttributeType" use="required">
                     <xs:annotation>
                         <xs:documentation>Dependancy attribute type.</xs:documentation>
