@@ -311,32 +311,12 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
-    <xs:complexType name="CommonCategoryVariableType">
+    <xs:complexType name="CommonDiscreteVariableType">
         <xs:annotation>
-            <xs:documentation>Type defining the common category variables in discrete data models.</xs:documentation>
+            <xs:documentation>Type defining the common state/category variables in discrete data models.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The symbol id for this parameter.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
-    <xs:complexType name="CountVariableType">
-        <xs:annotation>
-            <xs:documentation>Type defining the count variable in discrete data models.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Symbol"/>
-                </xs:sequence>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
                         <xs:documentation>The symbol id for this parameter.</xs:documentation>
@@ -548,17 +528,17 @@ permissions and limitations under the License.
                             <xs:documentation>List of categories in the data set.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="CategoryVariable" type="mdef:CommonCategoryVariableType">
+                    <xs:element name="CategoryVariable" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the category variable - usually 'y' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="InitialStateVariable" minOccurs="0" type="mdef:CommonCategoryVariableType">
+                    <xs:element name="InitialStateVariable" minOccurs="0" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the initial state - usually 'y_1' or 'yinit' in MLXTRAN.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PreviousStateVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonCategoryVariableType">
+                    <xs:element name="PreviousStateVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the previous state - usually 'yp' in MLXTRAN.</xs:documentation>
                         </xs:annotation>
@@ -603,12 +583,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="CountVariable" type="mdef:CountVariableType">
+                    <xs:element name="CountVariable" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the count variable - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PreviousCountVariable" minOccurs="0" type="mdef:CountVariableType">
+                    <xs:element name="PreviousCountVariable" minOccurs="0" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
                         </xs:annotation>
@@ -663,7 +643,7 @@ permissions and limitations under the License.
                 This keeps categories definition uncoupled from the data</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="Category" maxOccurs="unbounded" type="mdef:CommonCategoryVariableType"/>            
+            <xs:element name="Category" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType"/>            
         </xs:sequence>
     </xs:complexType>
     <!-- /TEST -->
