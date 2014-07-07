@@ -600,7 +600,7 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the count variable - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PreviousCountVariable" minOccurs="0" type="mdef:CommonDiscreteVariableType">
+                    <xs:element name="PreviousCountVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
                         </xs:annotation>
@@ -610,15 +610,17 @@ permissions and limitations under the License.
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="IntensityParameter" maxOccurs="unbounded" type="mdef:DiscreteDataParameterType">
+                    <xs:element name="IntensityParameter" minOccurs="0" maxOccurs="unbounded" type="mdef:DiscreteDataParameterType">
                         <xs:annotation>
-                            <xs:documentation>Definition of 'Lambda' the Poisson intensity parameter
-                                - can be defined more then once, for Markov dependency.</xs:documentation>
+                            <xs:documentation>(Optional) Definition of 'Lambda' the Poisson intensity parameter
+                                - can be defined more then once, for Markov dependency. Lambda can be defined
+                                in the parameter model or as standard parameter in the observation model as well.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="DispersionParameter" minOccurs="0" type="mdef:DiscreteDataParameterType">
                         <xs:annotation>
-                            <xs:documentation>Definition of dispersion parameter, usualy 'tau', for NB models.</xs:documentation>
+                            <xs:documentation>(Optional) Definition of dispersion parameter, usualy 'tau', for NB models.
+                                can be defined in the parameter model or as standard parameter in the observation model as well.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
