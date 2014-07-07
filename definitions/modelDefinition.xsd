@@ -623,6 +623,12 @@ permissions and limitations under the License.
                                 can be defined in the parameter model or as standard parameter in the observation model as well.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="OverDispersionParameter" minOccurs="0" type="mdef:DiscreteDataParameterType">
+                        <xs:annotation>
+                            <xs:documentation>(Optional) Definition of over-dispersion parameter, usualy 'delta', for GP models.
+                                can be defined in the parameter model or as standard parameter in the observation model as well.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="ZeroProbabilityParameter" minOccurs="0" type="mdef:DiscreteDataParameterType">
                         <xs:annotation>
                             <xs:documentation>(Optional) Definition of zero probability parameter, usualy 'p0', for ZIP models.
