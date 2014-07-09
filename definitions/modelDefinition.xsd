@@ -210,7 +210,7 @@ permissions and limitations under the License.
                     <xs:element maxOccurs="unbounded" minOccurs="0"
                         ref="mdef:CommonParameterElement"/>
                     <!-- add VARIABLE here -->
-                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="ct:Variable">
+                    <xs:element  minOccurs="0" maxOccurs="unbounded" ref="ct:Variable">
                         <xs:annotation>
                             <xs:documentation>A variable definition.</xs:documentation>
                         </xs:annotation>
