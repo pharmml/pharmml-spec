@@ -868,13 +868,13 @@ permissions and limitations under the License.
     <xs:complexType name="MatrixRowType">
         <xs:annotation>
             <xs:documentation>This type specifies a row of values in a matrix. The row can contain indexed cells or 
-                scalars/symbols filling the whole row. Row is indexed - if using cell inside rows, the cell will be
-                indexed relative to the row.</xs:documentation>
+                scalars/symbols filling the whole row. Index of the matrix row is optoinal. If cells are defined inside rows, 
+                the cells will be indexed relative to the row.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="RowIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="RowIndex" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                     <xs:choice minOccurs="0" maxOccurs="unbounded">
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
