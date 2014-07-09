@@ -802,12 +802,6 @@ permissions and limitations under the License.
                             <xs:enumeration value="Symmetric"/>
                         </xs:restriction>
                         <!-- /TEST -->
-<!--                        <xs:restriction base="xs:Name">
-                            <xs:enumeration value="CovMatrix"/>
-                            <xs:enumeration value="CorrMatrix"/>
-                            <xs:enumeration value="StDevCorrMatrix"/>
-                            <xs:enumeration value="Cholesky"/>
-                        </xs:restriction>-->
                     </xs:simpleType>
                 </xs:attribute>
             </xs:extension>
