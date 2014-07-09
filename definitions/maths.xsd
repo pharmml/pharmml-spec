@@ -46,6 +46,12 @@ permissions and limitations under the License.
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
                 <!-- TEST -->
+                <xs:element ref="ct:Sum"/>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="ct:Product"/>
+                <!-- /TEST -->
+                <!-- TEST -->
                 <xs:element ref="ct:Delay"/>
                 <!-- /TEST -->
                 <!-- TEST -->
@@ -65,6 +71,12 @@ permissions and limitations under the License.
                 <xs:element ref="math:Binop"/>
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
+                <!-- TEST -->
+                <xs:element ref="ct:Sum"/>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="ct:Product"/>
+                <!-- /TEST -->
                 <!-- TEST -->
                 <xs:element ref="ct:Delay"/>
                 <!-- /TEST -->
@@ -220,6 +232,12 @@ permissions and limitations under the License.
             <xs:element ref="math:Uniop"/>
             <xs:element ref="math:FunctionCall"/>
             <!-- TEST -->
+            <xs:element ref="ct:Sum"/>
+            <!-- /TEST -->
+            <!-- TEST -->
+            <xs:element ref="ct:Product"/>
+            <!-- /TEST -->
+            <!-- TEST -->
             <xs:element ref="ct:VectorSelector"/>
             <!-- /TEST -->
             <!-- TEST -->
@@ -257,6 +275,12 @@ permissions and limitations under the License.
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
                 <!-- TEST -->
+                <xs:element ref="ct:Sum"/>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="ct:Product"/>
+                <!-- /TEST -->
+                <!-- TEST -->
                 <xs:element ref="ct:VectorSelector"/>
                 <!-- /TEST -->
                 <!-- TEST -->
@@ -275,6 +299,12 @@ permissions and limitations under the License.
                 <xs:element ref="math:Binop"/>
                 <xs:element ref="math:Uniop"/>
                 <xs:element ref="math:FunctionCall"/>
+                <!-- TEST -->
+                <xs:element ref="ct:Sum"/>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="ct:Product"/>
+                <!-- /TEST -->
                 <!-- TEST -->
                 <xs:element ref="ct:VectorSelector"/>
                 <!-- /TEST -->
@@ -316,6 +346,12 @@ permissions and limitations under the License.
             <xs:element ref="math:Uniop"/>
             <xs:element ref="math:FunctionCall"/>
             <!-- TEST -->
+            <xs:element ref="ct:Sum"/>
+            <!-- /TEST -->
+            <!-- TEST -->
+            <xs:element ref="ct:Product"/>
+            <!-- /TEST -->
+            <!-- TEST -->
             <xs:element ref="ct:VectorSelector"/>
             <!-- /TEST -->
             <!-- TEST -->
@@ -355,6 +391,12 @@ permissions and limitations under the License.
                 </xs:annotation>
             </xs:element>
             <xs:element ref="math:FunctionCall"/>
+            <!-- TEST -->
+            <xs:element ref="ct:Sum"/>
+            <!-- /TEST -->
+            <!-- TEST -->
+            <xs:element ref="ct:Product"/>
+            <!-- /TEST -->
             <!-- TEST -->
             <xs:element ref="ct:Delay"/>
             <!-- /TEST -->
@@ -396,6 +438,12 @@ permissions and limitations under the License.
                 <xs:element ref="ct:Scalar"/>
                 <xs:element ref="math:Constant"/>
                 <xs:element ref="ct:SymbRef"/>
+                <!-- TEST -->
+                <xs:element ref="ct:Sum"/>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="ct:Product"/>
+                <!-- /TEST -->
                 <!-- TEST -->
                 <xs:element ref="ct:VectorSelector"/>
                 <!-- /TEST -->
