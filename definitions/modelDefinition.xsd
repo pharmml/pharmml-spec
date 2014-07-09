@@ -757,7 +757,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <xs:complexType name="GaussianObsError">
         <xs:annotation>
-            <xs:documentation>Gaussian residual error definition. Definition is of the form: y = f + g * eps</xs:documentation>
+            <xs:documentation>Gaussian residual error definition. Definition is of the form: u(y) = u(f) + g * eps</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="mdef:ObservationErrorType">
@@ -765,7 +765,7 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" name="Transformation"
                         type="mdef:LRhsTransformationType">
                         <xs:annotation>
-                            <xs:documentation>Defines the transformation (u) applied to both sides of equation.</xs:documentation>
+                            <xs:documentation>Defines the transformation (u) applied to both sides, i.e. to y and f, of equation.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="Output">
