@@ -749,7 +749,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:choice maxOccurs="unbounded">
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
                         <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>A row in the matrix.</xs:documentation>
