@@ -209,6 +209,13 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0"
                         ref="mdef:CommonParameterElement"/>
+                    <!-- add VARIABLE here -->
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="ct:Variable">
+                        <xs:annotation>
+                            <xs:documentation>A variable definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /add VARIABLE here -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
                         type="mdef:CorrelationType">
                         <xs:annotation>
