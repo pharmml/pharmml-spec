@@ -88,7 +88,37 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-
+    <!-- TEST -->
+    <xs:simpleType name="LRhsTransformationType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining possible transformation functions that may be applied.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="identity">
+                <xs:annotation>
+                    <xs:documentation>Identity transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="log">
+                <xs:annotation>
+                    <xs:documentation>Natural log transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="logit">
+                <xs:annotation>
+                    <xs:documentation>Logit transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="probit">
+                <xs:annotation>
+                    <xs:documentation>Probit transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
 
     <!--
         Complex Types
@@ -733,7 +763,7 @@ permissions and limitations under the License.
             <xs:extension base="mdef:ObservationErrorType">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="Transformation"
-                        type="mdef:LhsTransformationType">
+                        type="mdef:LRhsTransformationType">
                         <xs:annotation>
                             <xs:documentation>Defines the transformation (u) applied to both sides of equation.</xs:documentation>
                         </xs:annotation>
@@ -835,7 +865,7 @@ permissions and limitations under the License.
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element minOccurs="0" name="Transformation"
-                                        type="mdef:LhsTransformationType">
+                                        type="mdef:LRhsTransformationType">
                                         <xs:annotation>
                                             <xs:documentation>The transformation (h) applied to both sides of the equation.</xs:documentation>
                                         </xs:annotation>
