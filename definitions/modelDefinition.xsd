@@ -268,6 +268,19 @@ permissions and limitations under the License.
                         <!-- /TEST -->
                     </xs:choice>                    
                 </xs:sequence>
+                <xs:attribute name="deviationMatrixType">
+                    <xs:annotation>
+                        <xs:documentation>Optional attribute if correlation/covariance is defined using a matrix</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="CovMatrix"/>
+                            <xs:enumeration value="CorrMatrix"/>
+                            <xs:enumeration value="StDevCorrMatrix"/>
+                            <xs:enumeration value="Cholesky"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
