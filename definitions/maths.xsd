@@ -356,6 +356,9 @@ permissions and limitations under the License.
             </xs:element>
             <xs:element ref="math:FunctionCall"/>
             <!-- TEST -->
+            <xs:element ref="ct:Delay"/>
+            <!-- /TEST -->
+            <!-- TEST -->
             <xs:element ref="ct:VectorSelector"/>
             <!-- /TEST -->
             <!-- TEST -->
