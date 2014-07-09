@@ -460,18 +460,11 @@ permissions and limitations under the License.
                     <xs:documentation>Reference to the variable for which a delay is defined.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:choice>
-                <xs:element ref="ct:Scalar">
-                    <xs:annotation>
-                        <xs:documentation>Reference to the delay value.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>                    
-                <xs:element ref="ct:SymbRef">
-                    <xs:annotation>
-                        <xs:documentation>Reference to the variable for a delay variable.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
-            </xs:choice>
+            <xs:element name="DelayVariable" type="ct:DelayVariableType">
+                <xs:annotation>
+                    <xs:documentation>Delay variable, usually 'tau'.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
             </xs:sequence>
     </xs:complexType>
     
@@ -483,6 +476,28 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
+
+
+    <!-- TEST -->
+    <xs:complexType name="DelayVariableType">
+        <xs:annotation>
+            <xs:documentation>
+                The type for delay variable.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element ref="ct:Scalar">
+                <xs:annotation>
+                    <xs:documentation>Reference to the delay value.</xs:documentation>
+                </xs:annotation>
+            </xs:element>                    
+            <xs:element ref="ct:SymbRef">
+                <xs:annotation>
+                    <xs:documentation>Reference to the variable for a delay variable.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
 
     <xs:complexType name="DerivativeVariableType">
         <xs:annotation>
