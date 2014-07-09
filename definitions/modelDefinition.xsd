@@ -263,14 +263,13 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VariabilityReference"/>
                     <xs:choice>
                         <xs:element name="Pairwise" type="mdef:PairwiseType"/>
-                        <!-- TEST need to add here correlation matrix type: covariance, correlation, stdevCorr, Cholesky etc.-->
                         <xs:element name="Matrix" type="ct:MatrixType"/>
-                        <!-- /TEST -->
                     </xs:choice>                    
                 </xs:sequence>
-                <xs:attribute name="deviationMatrixType">
+                <!-- TEST - added attribute -->
+                <xs:attribute name="deviationMatrixType" use="optional">
                     <xs:annotation>
-                        <xs:documentation>Optional attribute if correlation/covariance is defined using a matrix</xs:documentation>
+                        <xs:documentation>Optional attribute if correlation/covariance is defined using a matrix.</xs:documentation>
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
@@ -281,6 +280,7 @@ permissions and limitations under the License.
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
