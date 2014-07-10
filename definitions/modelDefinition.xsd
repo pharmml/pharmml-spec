@@ -596,6 +596,62 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="CensoringFeatureType">
+        <xs:annotation>
+            <xs:documentation>
+                Type for censoring features for TTE data models.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Assign"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="CensoringType">
+        <xs:annotation>
+            <xs:documentation>
+                Type for censoring for TTE data models.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="IntervalLength" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
+                        <xs:annotation>
+                            <xs:documentation>Censoring interval definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="LeftCensoringTime" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
+                        <xs:annotation>
+                            <xs:documentation>Left censoring time definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="RightCensoringTime" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
+                        <xs:annotation>
+                            <xs:documentation>Left censoring time definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="censoringType" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="intervalCensored"/>
+                            <xs:enumeration value="rightCensored"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+        
+    <!-- TEST -->
     <xs:complexType name="CategoricalDataType">
         <xs:annotation>
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
@@ -744,17 +800,16 @@ permissions and limitations under the License.
                             <xs:documentation>Survival function definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="IntervalLength" minOccurs="0" maxOccurs="unbounded" type="mdef:TTEFunctionType">
+                    <xs:element name="Censoring" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringType">
                         <xs:annotation>
-                            <xs:documentation>Survival function definition.</xs:documentation>
+                            <xs:documentation>Censoring definition.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>-->
-<!--                    <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
+                    </xs:element>
+                    <xs:element name="MaximumNumberEvents" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
                         <xs:annotation>
-                            <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
-                                or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
+                            <xs:documentation>Maximum number of events definition.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>-->
+                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
