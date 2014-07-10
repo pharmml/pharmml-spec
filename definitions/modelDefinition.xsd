@@ -323,6 +323,7 @@ permissions and limitations under the License.
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
+            <!-- TEST missing id-->
         </xs:complexContent>
     </xs:complexType>
     
@@ -410,11 +411,17 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defining a discrete state: current, previous and a general condition.</xs:documentation>
         </xs:annotation>
-        <xs:choice>
-            <xs:element ref="math:LogicBinop"/>
-            <xs:element ref="math:LogicUniop"/>            
-        </xs:choice>
-        <xs:attribute name="MarkovOrder" type="ct:MarkovOrderType"/>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="math:LogicBinop"/>
+                    <xs:element ref="math:LogicUniop"/>            
+                </xs:choice>
+                <xs:attribute name="MarkovOrder" type="ct:MarkovOrderType"/>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <!-- /TEST -->
     
@@ -854,9 +861,15 @@ permissions and limitations under the License.
                 The mapping between their names and symbols used in a dataset happens in the ModellingSteps/DataSet. 
                 This keeps categories definition uncoupled from the data</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="Category" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType"/>            
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Category" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType"/>            
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <!-- /TEST -->
     
@@ -1187,38 +1200,50 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defining the relationship between the covariate and a fixed effect parameter. Typically this defines a linear relationships.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>The covariate to be related.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="FixedEffect" type="mdef:FixedEffectRelationType">
-                <xs:annotation>
-                    <xs:documentation>The fixed effect relating the parameter and covariate.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>The covariate to be related.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="FixedEffect" type="mdef:FixedEffectRelationType">
+                        <xs:annotation>
+                            <xs:documentation>The fixed effect relating the parameter and covariate.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="FixedEffectRelationType">
         <xs:annotation>
             <xs:documentation>Defines a fixed effect.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>A reference to the variable defining the fixed effect value.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element minOccurs="0" name="Category" type="mdef:CategoricalRelationType">
-                <xs:annotation>
-                    <xs:documentation>
-                        Specifies the category value of the covariate that must apply when this fixed effect is to be used in the parameter equation. 
-                        This is equivalent to specifying the following: 1_cov=cat . beta. 
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A reference to the variable defining the fixed effect value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Category" type="mdef:CategoricalRelationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Specifies the category value of the covariate that must apply when this fixed effect is to be used in the parameter equation. 
+                                This is equivalent to specifying the following: 1_cov=cat . beta. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="CategoricalRelationType">
         <xs:annotation>
@@ -1237,13 +1262,19 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defining a Random effect using a reference to a Random variable.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element maxOccurs="1" ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>The reference to the Random Variable.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>The reference to the Random Variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+            <!-- TEST missing id-->
+        </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="CovariateDefinitionType">
         <xs:annotation>
@@ -1274,33 +1305,45 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defines how the covariate is transformed when used.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element ref="math:Equation">
-                <xs:annotation>
-                    <xs:documentation>
-                        The transformation is defined as an equation that must include a reference to the covariate variable, defined by the parent of this element.  
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="math:Equation">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The transformation is defined as an equation that must include a reference to the covariate variable, defined by the parent of this element.  
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="ContinuousCovariateType">
         <xs:annotation>
             <xs:documentation>Type defines a continuous covariate.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element minOccurs="0" ref="distrib:AbstractContinuousUnivariateDistribution">
-                <xs:annotation>
-                    <xs:documentation>The distribution that the continuous covariate follows.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0">
-                <xs:annotation>
-                    <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element ref="ct:Interpolation" minOccurs="0"/>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="distrib:AbstractContinuousUnivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>The distribution that the continuous covariate follows.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Interpolation" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="CategoricalCovariateType">
         <xs:annotation>
