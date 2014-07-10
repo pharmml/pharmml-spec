@@ -373,13 +373,19 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>References the independent variable.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>References the independent variable symbol.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>References the independent variable symbol.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
         
     <xs:complexType name="InitialValueType">
@@ -454,18 +460,24 @@ permissions and limitations under the License.
                 The delay type for delay elements.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>Reference to the variable for which a delay is defined.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="DelayVariable" type="ct:DelayVariableType">
-                <xs:annotation>
-                    <xs:documentation>Delay variable, usually 'tau'.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable for which a delay is defined.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DelayVariable" type="ct:DelayVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Delay variable, usually 'tau'.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     
     <xs:element name="Delay" type="ct:DelayType">
@@ -485,18 +497,24 @@ permissions and limitations under the License.
                 The type for delay variable.
             </xs:documentation>
         </xs:annotation>
-        <xs:choice>
-            <xs:element ref="ct:Scalar">
-                <xs:annotation>
-                    <xs:documentation>Reference to the delay value.</xs:documentation>
-                </xs:annotation>
-            </xs:element>                    
-            <xs:element ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>Reference to the variable for a delay variable.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:choice>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the delay value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable for a delay variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
 
     <xs:complexType name="DerivativeVariableType">
