@@ -589,6 +589,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="ct:Assign"/>
                 </xs:sequence>
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -743,12 +744,17 @@ permissions and limitations under the License.
                             <xs:documentation>Survival function definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
+<!--                    <xs:element name="IntervalLength" minOccurs="0" maxOccurs="unbounded" type="mdef:TTEFunctionType">
+                        <xs:annotation>
+                            <xs:documentation>Survival function definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>-->
+<!--                    <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
                         <xs:annotation>
                             <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
                                 or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
