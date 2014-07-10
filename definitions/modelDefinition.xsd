@@ -344,7 +344,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="DiscreteObservationModelType">
         <xs:annotation>
             <xs:documentation>Type defining the observation model.</xs:documentation>
@@ -358,7 +358,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <!-- TEST -->
     <xs:complexType name="CommonDiscreteVariableType">
@@ -583,7 +583,7 @@ permissions and limitations under the License.
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
+            <xs:extension base="mdef:CommonObservationModelType">
                 <xs:sequence>
                     <xs:element name="ListOfCategories" type="mdef:ListOfCategoriesType">
                         <xs:annotation>
@@ -643,7 +643,7 @@ permissions and limitations under the License.
             <xs:documentation>Type defining count data models.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
+            <xs:extension base="mdef:CommonObservationModelType">
                 <xs:sequence>
                     <xs:element name="CountVariable" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
@@ -749,17 +749,27 @@ permissions and limitations under the License.
                             <xs:documentation>The continuous data models.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Discrete" type="mdef:DiscreteObservationModelType">
+                    <xs:element  name="CategoricalData" type="mdef:CategoricalDataType">
+                        <xs:annotation>
+                            <xs:documentation>The nominal/ordered categorical data models.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element  name="CountData" type="mdef:CountDataType">
+                        <xs:annotation>
+                            <xs:documentation>The nominal/ordered categorical data models.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+<!--                    <xs:element name="Discrete" type="mdef:DiscreteObservationModelType">
                         <xs:annotation>
                             <xs:documentation>The discrete data models.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                 </xs:choice>
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/> 
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-- /TEST -->    
     
     <xs:complexType name="ObservationErrorType" abstract="true">
         <xs:annotation>
