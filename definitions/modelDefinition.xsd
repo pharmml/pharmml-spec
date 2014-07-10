@@ -627,7 +627,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="ordered" type="ct:OrderedDataType" use="required">
+                <xs:attribute name="ordered" type="ct:OrderedAttributeType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Specifies whether the following model deals with nominal or ordered data.</xs:documentation>
                     </xs:annotation>
@@ -704,6 +704,36 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="TimeToEventDataType">
+        <xs:annotation>
+            <xs:documentation>Type defining TTE data models.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:CommonObservationModelType">
+                <xs:sequence>
+                    <xs:element name="EventVariable" type="mdef:CommonDiscreteVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the event variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PreviousCountVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
+                        <xs:annotation>
+                            <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
+                                or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="DiscreteDataParameterType">
         <xs:annotation>
             <xs:documentation>Type defining the parameters in count data models.</xs:documentation>
@@ -744,7 +774,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element name="Continuous" type="mdef:ContinuousObservationModelType">
+                    <xs:element name="ContinuousData" type="mdef:ContinuousObservationModelType">
                         <xs:annotation>
                             <xs:documentation>The continuous data models.</xs:documentation>
                         </xs:annotation>
@@ -756,14 +786,14 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element  name="CountData" type="mdef:CountDataType">
                         <xs:annotation>
-                            <xs:documentation>The nominal/ordered categorical data models.</xs:documentation>
+                            <xs:documentation>The count data models.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="Discrete" type="mdef:DiscreteObservationModelType">
+                    <xs:element  name="TimeToEventData" type="mdef:TimeToEventDataType">
                         <xs:annotation>
-                            <xs:documentation>The discrete data models.</xs:documentation>
+                            <xs:documentation>The time-to-event data models.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>-->
+                    </xs:element>
                 </xs:choice>
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/> 
             </xs:extension>

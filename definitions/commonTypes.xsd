@@ -53,7 +53,7 @@ permissions and limitations under the License.
     </xs:simpleType>
     <!-- TEST -->
     <!-- TEST -->
-    <xs:simpleType name="OrderedDataType">
+    <xs:simpleType name="OrderedAttributeType">
         <xs:annotation>
             <xs:documentation>Defines the type for ordered attrbute for categorical data.</xs:documentation>
         </xs:annotation>
