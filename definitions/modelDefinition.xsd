@@ -145,13 +145,19 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Parent level type.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>References the parent level.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>References the parent level.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="VariabilityDefnBlock">
         <xs:annotation>
@@ -289,30 +295,35 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defining pairwise correlations.</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="RandomVariable1" type="mdef:CorrelatedRandomVarType">
-                <xs:annotation>
-                    <xs:documentation>The first correlated parameter.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="RandomVariable2" type="mdef:CorrelatedRandomVarType">
-                <xs:annotation>
-                    <xs:documentation>The second correlated parameter.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:choice>
-                <xs:element name="CorrelationCoefficient" type="ct:ScalarRhs">
-                    <xs:annotation>
-                        <xs:documentation>The correlation co-efficient variable.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
-                <xs:element name="Covariance" type="ct:ScalarRhs">
-                    <xs:annotation>
-                        <xs:documentation>The covariance for both parameters.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
-            </xs:choice>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="RandomVariable1" type="mdef:CorrelatedRandomVarType">
+                        <xs:annotation>
+                            <xs:documentation>The first correlated parameter.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="RandomVariable2" type="mdef:CorrelatedRandomVarType">
+                        <xs:annotation>
+                            <xs:documentation>The second correlated parameter.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="CorrelationCoefficient" type="ct:ScalarRhs">
+                            <xs:annotation>
+                                <xs:documentation>The correlation co-efficient variable.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Covariance" type="ct:ScalarRhs">
+                            <xs:annotation>
+                                <xs:documentation>The covariance for both parameters.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
 <!--   ORIGINAL-->
