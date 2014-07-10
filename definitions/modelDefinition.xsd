@@ -1273,14 +1273,20 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type specifying a relationship to a specific category value in a categorical covariate.</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="catId" type="ct:CatIdType" use="required">
-            <xs:annotation>
-                <xs:documentation>
-                    Specifies the category value of the covariate to which this relationship applies.
-                    For example if a covariate is sex then the Female category may be specified as catId="F". 
-                </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="catId" type="ct:CatIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Specifies the category value of the covariate to which this relationship applies.
+                            For example if a covariate is sex then the Female category may be specified as catId="F". 
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="ParameterRandomEffectType">
         <xs:annotation>
@@ -1375,13 +1381,19 @@ permissions and limitations under the License.
                 Type defines a categorical covariate.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="1" name="Category" type="mdef:CategoryType">
-                <xs:annotation>
-                    <xs:documentation>A category of the categorical covariate.</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST missing id-->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Category" type="mdef:CategoryType">
+                        <xs:annotation>
+                            <xs:documentation>A category of the categorical covariate.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="CategoryType">
         <xs:annotation>
