@@ -133,6 +133,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="factln"/>
                             <xs:enumeration value="gammaln"/>
                             <xs:enumeration value="log"/>
+                            <xs:enumeration value="log2"/>             <!-- NEW -->
                             <xs:enumeration value="log10"/>             <!-- NEW -->
                             <xs:enumeration value="logistic"/>
                             <xs:enumeration value="logit"/>
