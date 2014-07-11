@@ -73,7 +73,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:element name="ImportData" type="ImportDataType">
         <xs:annotation>
             <xs:documentation>
@@ -81,7 +81,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    
+
     <xs:complexType name="ImportDataType">
         <xs:annotation>
             <xs:documentation>This is a data type for external data files.</xs:documentation>
@@ -509,7 +509,7 @@ permissions and limitations under the License.
     <xs:element name="Definition" type="ColumnsDefinitionType">
         <xs:annotation>
             <xs:documentation>
-                Defines the columns in a dataset.                
+                Defines the columns in a dataset.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
