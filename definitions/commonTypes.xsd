@@ -1252,6 +1252,21 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
+    <xs:complexType name="SumProductIndexType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A variable reference.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- TEST -->
     <xs:complexType name="SumType">
         <xs:annotation>
             <xs:documentation>Type defining summation.</xs:documentation>
@@ -1265,6 +1280,7 @@ permissions and limitations under the License.
                             <xs:documentation>A variable reference.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
                     <xs:element name="LowLimit" type="ct:LowUpLimitType">
                         <xs:annotation>
                             <xs:documentation>Defining first index in the sum.</xs:documentation>
@@ -1296,6 +1312,7 @@ permissions and limitations under the License.
                             <xs:documentation>A variable reference.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="ProductIndex" type="ct:SumProductIndexType"/>
                     <xs:element name="LowLimit" type="ct:LowUpLimitType">
                         <xs:annotation>
                             <xs:documentation>Defining first index in the sum.</xs:documentation>
