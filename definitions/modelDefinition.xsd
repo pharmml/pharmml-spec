@@ -478,6 +478,21 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="ProbabilityAssignmentType">
+        <xs:annotation>
+            <xs:documentation>Type defining probability assignment element.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ></xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="TransitionRateType">
         <xs:annotation>
             <xs:documentation>Type defining the transition rate for continuous Markov models.</xs:documentation>
