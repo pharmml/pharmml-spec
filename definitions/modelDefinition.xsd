@@ -59,7 +59,7 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="LhsTransformationType">
+    <xs:simpleType name="LHSTransformationType">
         <xs:annotation>
             <xs:documentation>
                 A type defining possible transformation functions that may be applied.
@@ -89,7 +89,7 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>
     <!-- TEST -->
-    <xs:simpleType name="LRhsTransformationType">
+    <xs:simpleType name="LRHSTransformationType">
         <xs:annotation>
             <xs:documentation>
                 A type defining possible transformation functions that may be applied.
@@ -930,7 +930,7 @@ permissions and limitations under the License.
             <xs:extension base="mdef:ObservationErrorType">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="Transformation"
-                        type="mdef:LRhsTransformationType">
+                        type="mdef:LRHSTransformationType">
                         <xs:annotation>
                             <xs:documentation>Defines the transformation (u) applied to both sides, i.e. to y and f, of equation.</xs:documentation>
                         </xs:annotation>
@@ -977,7 +977,7 @@ permissions and limitations under the License.
             <xs:extension base="mdef:ObservationErrorType">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="Transformation"
-                        type="mdef:LhsTransformationType">
+                        type="mdef:LHSTransformationType">
                         <xs:annotation>
                             <xs:documentation>Defines a transformation applied to the left-hand-side of the residual error equation.</xs:documentation>
                         </xs:annotation>
@@ -1035,7 +1035,7 @@ permissions and limitations under the License.
                                     <xs:extension base="ct:PharmMLRootType">
                                         <xs:sequence>
                                             <xs:element minOccurs="0" name="Transformation"
-                                                type="mdef:LRhsTransformationType">
+                                                type="mdef:LRHSTransformationType">
                                                 <xs:annotation>
                                                     <xs:documentation>The transformation (h) applied to both sides of the equation.</xs:documentation>
                                                 </xs:annotation>
