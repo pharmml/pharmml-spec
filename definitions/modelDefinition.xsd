@@ -738,9 +738,10 @@ permissions and limitations under the License.
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
+                    <xs:element name="ProbabilityAssignment" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityAssignmentType">
                         <xs:annotation>
-                            <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
+                            <xs:documentation>Probability assignment element - provides space for basic probability definitions
+                            and more complex probability expressions, such as logit, reference category models etc.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="PMF" minOccurs="0" maxOccurs="unbounded" type="mdef:CategoricalPMFType">
