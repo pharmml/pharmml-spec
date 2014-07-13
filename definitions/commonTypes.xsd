@@ -1299,6 +1299,7 @@ permissions and limitations under the License.
                             <xs:documentation>A variable reference.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element ref=""></xs:element>
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
                     <xs:choice>
                         <xs:sequence>
