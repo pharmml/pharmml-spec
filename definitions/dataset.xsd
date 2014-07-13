@@ -217,7 +217,6 @@ permissions and limitations under the License.
                 The type specifies the content of a dataset.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -231,7 +230,6 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     
     <xs:complexType name="DataSetType">
@@ -359,7 +357,6 @@ permissions and limitations under the License.
                 a scalar value, null.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="unbounded">
@@ -371,7 +368,6 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     
 
@@ -396,7 +392,6 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST new CategoryMapping -->
                     <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
                         <xs:annotation>
                             <xs:documentation>
@@ -404,13 +399,11 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST new based on ColumnMappingType -->
     <xs:complexType name="CategoryMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -431,9 +424,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST new Map type -->
     <xs:complexType name="MapType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -450,7 +441,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
 
     <xs:simpleType name="ColumnTypeType">
         <xs:annotation>
