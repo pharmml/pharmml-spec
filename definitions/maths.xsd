@@ -38,7 +38,6 @@ permissions and limitations under the License.
                 A binary operator describing a numerical operation. Takes two operands (as you would expect).
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -52,24 +51,12 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Sum"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:Product"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:Delay"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:VectorSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="mdef:Probability"/>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -81,24 +68,12 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Sum"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:Product"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:Delay"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:VectorSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="mdef:Probability"/>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -116,13 +91,12 @@ permissions and limitations under the License.
                             <xs:enumeration value="root"/>
                             <xs:enumeration value="min"/>
                             <xs:enumeration value="max"/>
-                            <xs:enumeration value="rem"/>               <!-- NEW -->
+                            <xs:enumeration value="rem"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="UniopType">
         <xs:annotation>
@@ -149,8 +123,8 @@ permissions and limitations under the License.
                             <xs:enumeration value="factln"/>
                             <xs:enumeration value="gammaln"/>
                             <xs:enumeration value="log"/>
-                            <xs:enumeration value="log2"/>             <!-- NEW -->
-                            <xs:enumeration value="log10"/>             <!-- NEW -->
+                            <xs:enumeration value="log2"/>
+                            <xs:enumeration value="log10"/>
                             <xs:enumeration value="logistic"/>
                             <xs:enumeration value="logit"/>
                             <xs:enumeration value="normcdf"/>
@@ -161,10 +135,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="cos"/>
                             <xs:enumeration value="tan"/>
                             <xs:enumeration value="cot"/>
-                            <xs:enumeration value="asin"/>              <!-- NEW -->
-                            <xs:enumeration value="acos"/>              <!-- NEW -->
-                            <xs:enumeration value="atan"/>              <!-- NEW -->
-                            <xs:enumeration value="atan2"/>             <!-- NEW -->
+                            <xs:enumeration value="atan2"/>
                             <xs:enumeration value="sec"/>
                             <xs:enumeration value="csc"/>
                             <xs:enumeration value="sinh"/>
