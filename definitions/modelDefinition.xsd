@@ -484,14 +484,21 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element ref="math:LogicBinop"/>
                     <xs:sequence>
                         <!-- TEST -->
-                        <xs:element name="Probability" type="mdef:ProbabilityType" maxOccurs="unbounded"  minOccurs="0">
-                            <xs:annotation>
-                                <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
+                        <xs:choice>
+                            <xs:element ref="math:LogicBinop"/>
+                            <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
+                                <xs:annotation>
+                                    <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="TransitionRate" minOccurs="0" maxOccurs="unbounded" type="mdef:TransitionRateType">
+                                <xs:annotation>
+                                    <xs:documentation>Transition rate definition for continuous markov models.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:choice>
                         <xs:element minOccurs="0" ref="ct:Assign"/>
                     </xs:sequence>
                 </xs:choice>
@@ -523,7 +530,6 @@ permissions and limitations under the License.
                             <xs:documentation>Definition of a general condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ct:Assign"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -750,11 +756,11 @@ permissions and limitations under the License.
                             or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="TransitionRate" minOccurs="0" maxOccurs="unbounded" type="mdef:TransitionRateType">
+<!--                    <xs:element name="TransitionRate" minOccurs="0" maxOccurs="unbounded" type="mdef:TransitionRateType">
                         <xs:annotation>
                             <xs:documentation>Transition rate definition for continuous markov models.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                 </xs:sequence>
                 <xs:attribute name="ordered" type="ct:OrderedAttributeType" use="optional">
                     <xs:annotation>
