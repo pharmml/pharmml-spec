@@ -67,6 +67,9 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
                         <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element ref="mdef:Probability"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -92,6 +95,9 @@ permissions and limitations under the License.
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element ref="mdef:Probability"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -257,6 +263,9 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element ref="ct:MatrixSelector"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="mdef:Probability"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -395,6 +404,9 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element ref="ct:MatrixSelector"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="mdef:Probability"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -450,6 +462,9 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element ref="ct:MatrixSelector"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="mdef:Probability"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -502,6 +517,9 @@ permissions and limitations under the License.
                 <!-- /TEST -->
                 <!-- TEST -->
                 <xs:element ref="ct:MatrixSelector"/>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:element ref="mdef:Probability"/>
                 <!-- /TEST -->
             </xs:choice>
         </xs:sequence>
