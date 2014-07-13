@@ -19,8 +19,12 @@ permissions and limitations under the License.
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     targetNamespace="http://www.pharmml.org/2013/03/CommonTypes"
     xmlns:distrib="http://www.uncertml.org/3.0" 
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:math="http://www.pharmml.org/2013/03/Maths"
     version="0.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    
+    <xs:import namespace="http://www.pharmml.org/2013/03/ModelDefinition"
+        schemaLocation="http://www.pharmml.org/2013/03/ModelDefinition"/>
 
     <xs:import namespace="http://www.pharmml.org/2013/03/Maths"
         schemaLocation="http://www.pharmml.org/2013/03/Maths"/>
@@ -1299,7 +1303,9 @@ permissions and limitations under the License.
                             <xs:documentation>A variable reference.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref=""></xs:element>
+                    <!-- TEST -->
+                    <xs:element ref="mdef:Probability"/>
+                    <!-- /TEST -->
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
                     <xs:choice>
                         <xs:sequence>
