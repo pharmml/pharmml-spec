@@ -477,7 +477,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="ProbabilityAssignmentType">
         <xs:annotation>
             <xs:documentation>Type defining probability assignment element.</xs:documentation>
@@ -490,7 +490,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <!-- TEST -->
     <xs:complexType name="TransitionRateType">
