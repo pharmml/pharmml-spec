@@ -466,7 +466,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
+                <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Type of the link function applied to a probability.</xs:documentation>
                     </xs:annotation>
