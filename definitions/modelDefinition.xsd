@@ -88,7 +88,6 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    <!-- TEST -->
     <xs:simpleType name="LRHSTransformationType">
         <xs:annotation>
             <xs:documentation>
@@ -118,7 +117,6 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
 
     <!--
         Complex Types
@@ -145,7 +143,6 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Parent level type.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -157,7 +154,6 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="VariabilityDefnBlock">
         <xs:annotation>
@@ -204,7 +200,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     <xs:complexType name="CommonObservationModelType" abstract="true">
         <xs:annotation>
             <xs:documentation>Abstract type defining common observation model.</xs:documentation>
@@ -215,13 +210,11 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0"
                         ref="mdef:CommonParameterElement"/>
-                    <!-- add VARIABLE here -->
                     <xs:element  minOccurs="0" maxOccurs="unbounded" ref="ct:Variable">
                         <xs:annotation>
                             <xs:documentation>A variable definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /add VARIABLE here -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
                         type="mdef:CorrelationType">
                         <xs:annotation>
@@ -229,11 +222,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-<!--                <xs:attributeGroup ref="ct:BlockDefnGroup"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     <xs:complexType name="ParameterModelType">
         <xs:annotation>
             <xs:documentation>The type defining a parameter model.</xs:documentation>
@@ -272,7 +263,6 @@ permissions and limitations under the License.
                         <xs:element name="Matrix" type="ct:MatrixType"/>
                     </xs:choice>                    
                 </xs:sequence>
-                <!-- TEST - added attribute -->
                 <xs:attribute name="deviationMatrixType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Optional attribute if correlation/covariance is defined using a matrix.</xs:documentation>
@@ -286,7 +276,6 @@ permissions and limitations under the License.
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -295,7 +284,6 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defining pairwise correlations.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -323,25 +311,9 @@ permissions and limitations under the License.
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
-            <!-- TEST missing id-->
         </xs:complexContent>
     </xs:complexType>
     
-<!--   ORIGINAL-->
-<!--        <xs:complexType name="ObservationModelType">
-        <xs:annotation>
-            <xs:documentation>Type defining the observation model.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="mdef:CommonParameterModelType">
-                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="1" ref="mdef:ObservationError"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
-    <!-- TEST -->
     <xs:complexType name="ContinuousObservationModelType">
         <xs:annotation>
             <xs:documentation>Type defining the observation model.</xs:documentation>
@@ -354,9 +326,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="DiscreteType">
         <xs:annotation>
             <xs:documentation>Type defining the observation model.</xs:documentation>
