@@ -1298,14 +1298,16 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>A variable reference.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-- TEST -->
-                    <xs:element ref="mdef:Probability"/>
-                    <!-- /TEST -->
+                    <xs:choice>
+                        <xs:element ref="ct:SymbRef">
+                            <xs:annotation>
+                                <xs:documentation>A variable reference.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- TEST -->
+                        <xs:element ref="mdef:Probability"/>
+                        <!-- /TEST -->
+                    </xs:choice>
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
                     <xs:choice>
                         <xs:sequence>
