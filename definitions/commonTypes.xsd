@@ -45,7 +45,6 @@ permissions and limitations under the License.
             <xs:enumeration value="id"/>
         </xs:restriction>
     </xs:simpleType>    
-    <!-- TEST -->
     <xs:simpleType name="DependanceAttributeType">
         <xs:annotation>
             <xs:documentation>Defines the dependency attrbute type.</xs:documentation>
@@ -55,8 +54,6 @@ permissions and limitations under the License.
             <xs:enumeration value="continuousMarkov"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- TEST -->
-    <!-- TEST -->
     <xs:simpleType name="OrderedAttributeType">
         <xs:annotation>
             <xs:documentation>Defines the type for ordered attrbute for categorical data.</xs:documentation>
@@ -66,8 +63,6 @@ permissions and limitations under the License.
             <xs:enumeration value="no"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
-    <!-- TEST -->
     <xs:simpleType name="LinkFunctionType">
         <xs:annotation>
             <xs:documentation>Defines the type of link function for discrete data models.</xs:documentation>
@@ -79,15 +74,12 @@ permissions and limitations under the License.
             <xs:enumeration value="probit"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
-    <!-- TEST -->
     <xs:simpleType name="MarkovOrderType">
         <xs:annotation>
             <xs:documentation>Defines the Markov order attribute type.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:integer"/>        
     </xs:simpleType>
-    <!-- /TEST -->
     <xs:simpleType name="SymbolIdType">
         <xs:annotation>
             <xs:documentation>Type for symbols identifiers.</xs:documentation>
@@ -286,7 +278,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
-                    <xs:element ref="ct:Vector"/>           <!-- updated definition -->
+                    <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
             </xs:extension>
@@ -363,13 +355,11 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The type of the variable.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -377,7 +367,6 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>References the independent variable.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -389,7 +378,6 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
         
     <xs:complexType name="InitialValueType">
@@ -440,7 +428,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="HistoryType">
         <xs:annotation>
             <xs:documentation>The history for DDEs.</xs:documentation>
@@ -454,17 +441,13 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
-    <!--  Delay type for delay element: delay(symbIdRef, delayVariable)-->
     <xs:complexType name="DelayType">
         <xs:annotation>
             <xs:documentation>
                 The delay type for delay elements.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -481,7 +464,6 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     
     <xs:element name="Delay" type="ct:DelayType">
@@ -491,17 +473,13 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
 
-
-    <!-- TEST -->
     <xs:complexType name="DelayVariableType">
         <xs:annotation>
             <xs:documentation>
                 The type for delay variable.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
@@ -518,7 +496,6 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
 
     <xs:complexType name="DerivativeVariableType">
@@ -544,26 +521,22 @@ permissions and limitations under the License.
                             <xs:documentation>The definition of the initial condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element minOccurs="0" name="History" type="ct:HistoryType">
                         <xs:annotation>
                             <xs:documentation>The definition of the history for delay differential equations.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attribute name="compartmentNo" type="ct:CompartmentNoType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Integer used to identify the comparment nmber when mapping to NONMEM dataset.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required" fixed="real">
                     <xs:annotation>
                         <xs:documentation>The symbol type of a derivative variable is always set to be a real.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -588,7 +561,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -596,7 +568,6 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -606,7 +577,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:CommonVariableDefinitionType">
-                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -614,7 +584,6 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -674,15 +643,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST - not used anywhere????? -->
-<!--    <xs:complexType name="AssignType">
-        <xs:annotation>
-            <xs:documentation>The type specifies an assignment of a value(s) or equation to another element in the PharmML document.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:Rhs"/>
-        </xs:complexContent>
-    </xs:complexType>-->
     
     <xs:complexType name="InterpolationIVType">
         <xs:annotation>
@@ -784,7 +744,6 @@ permissions and limitations under the License.
                             <xs:documentation>Names of the matrix columns.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:choice minOccurs="0" maxOccurs="unbounded">
                         <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
                             <xs:annotation>
@@ -802,7 +761,6 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
-                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attribute name="diagDefault" type="xs:double" default="0">
                     <xs:annotation>
@@ -829,7 +787,6 @@ permissions and limitations under the License.
                         <xs:documentation>Mathematical type of the matrix.</xs:documentation>
                     </xs:annotation>
                     <xs:simpleType>
-                        <!-- TEST -->
                         <xs:restriction base="xs:Name">
                             <xs:enumeration value="Any"/>
                             <xs:enumeration value="Diagonal"/>
@@ -837,7 +794,6 @@ permissions and limitations under the License.
                             <xs:enumeration value="UpperTriangular"/>
                             <xs:enumeration value="Symmetric"/>
                         </xs:restriction>
-                        <!-- /TEST -->
                     </xs:simpleType>
                 </xs:attribute>
             </xs:extension>
@@ -868,7 +824,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="MatrixCellType">
         <xs:annotation>
             <xs:documentation>
@@ -892,9 +847,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST - extended  -->
     <xs:complexType name="MatrixRowType">
         <xs:annotation>
             <xs:documentation>This type specifies a row of values in a matrix. The row can contain indexed cells or 
@@ -927,10 +880,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-
-    <!--MatrixBlockType as subset of MatrixType-->
     <xs:complexType name="MatrixBlockType">
         <xs:annotation>
             <xs:documentation>
@@ -986,9 +936,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:complexType name="MatrixBlockSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1006,9 +954,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="MatrixCellSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1024,9 +970,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:complexType name="MatrixSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1047,9 +991,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     
-    <!-- TEST -->
     <xs:element name="MatrixSelector" type="ct:MatrixSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1057,10 +999,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->    
     
-    
-    <!-- TEST - updated definition -->
     <xs:complexType name="VectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1101,9 +1040,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="VectorElementsType">
         <xs:annotation>
             <xs:documentation>
@@ -1128,9 +1065,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="VectorCellType">
         <xs:annotation>
             <xs:documentation>
@@ -1153,9 +1088,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="VectorSegmentType">
         <xs:annotation>
             <xs:documentation>
@@ -1181,9 +1114,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="VectorSegmentSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1199,9 +1130,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="VectorSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1222,10 +1151,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     
-    
-    <!-- TEST - VectorSelector -->
     <xs:element name="VectorSelector" type="ct:VectorSelectorType">
         <xs:annotation>
             <xs:documentation>
@@ -1233,9 +1159,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->    
     
-    <!-- TEST -->
     <xs:complexType name="MatrixVectorIndexType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1255,7 +1179,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="SumProductIndexType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1270,7 +1193,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="SumIndexSetType">
         <xs:annotation>
             <xs:documentation>Type for sum index set.</xs:documentation>
@@ -1287,14 +1209,11 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="SumType">
         <xs:annotation>
             <xs:documentation>Type defining summation.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1332,16 +1251,12 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="ProductType">
         <xs:annotation>
             <xs:documentation>Type defining product.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1365,9 +1280,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="LowUpLimitType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1444,20 +1357,16 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-    <!-- TEST -->
     <xs:element name="Sum" type="ct:SumType">
         <xs:annotation>
             <xs:documentation>Sigma sum element.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
-    <!-- TEST -->
     <xs:element name="Product" type="ct:ProductType">
         <xs:annotation>
             <xs:documentation>Product element.</xs:documentation>
         </xs:annotation>
     </xs:element>    
-    <!-- /TEST -->
     <xs:element name="OidRef" type="ct:OidRefType">
         <xs:annotation>
             <xs:documentation>
