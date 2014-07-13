@@ -212,7 +212,6 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>The schema type defining a mathematical expression.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="1" minOccurs="1">
@@ -222,31 +221,19 @@ permissions and limitations under the License.
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Sum"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:Product"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:VectorSelector"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:MatrixSelector"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="mdef:Probability"/>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="LogicConditionType">
         <xs:annotation>
             <xs:documentation>The schema type defining logical condition.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="1">
@@ -257,13 +244,11 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="LogicBinOpType">
         <xs:annotation>
             <xs:documentation>The schema type defining a binary logical operator.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -280,21 +265,11 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Sum"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:Product"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:VectorSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="mdef:Probability"/>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -308,21 +283,11 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Sum"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:Product"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:VectorSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element ref="mdef:Probability"/>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -345,13 +310,11 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="LogicExprType">
         <xs:annotation>
             <xs:documentation>A logical expression.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="1">
@@ -363,25 +326,14 @@ permissions and limitations under the License.
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Sum"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:Product"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:VectorSelector"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:MatrixSelector"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="mdef:Probability"/>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="LogicUniOpType">
         <xs:complexContent>
@@ -404,7 +356,6 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Complex Type that defines a mathematical equation.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
@@ -418,34 +369,20 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="math:FunctionCall"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Sum"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:Product"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:Delay"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:VectorSelector"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:MatrixSelector"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="mdef:Probability"/>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="FunctionCallType">
         <xs:annotation>
             <xs:documentation>A type defining a function call.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -463,7 +400,6 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="FunctionArgumentType">
         <xs:annotation>
@@ -477,21 +413,11 @@ permissions and limitations under the License.
                 <xs:element ref="ct:Scalar"/>
                 <xs:element ref="math:Constant"/>
                 <xs:element ref="ct:SymbRef"/>
-                <!-- TEST -->
                 <xs:element ref="ct:Sum"/>
-                <!-- /TEST -->
-                <!-- TEST -->
                 <xs:element ref="ct:Product"/>
-                <!-- /TEST -->
-                <!-- TEST -->
                 <xs:element ref="ct:VectorSelector"/>
-                <!-- /TEST -->
-                <!-- TEST -->
                 <xs:element ref="ct:MatrixSelector"/>
-                <!-- /TEST -->
-                <!-- TEST -->
                 <xs:element ref="mdef:Probability"/>
-                <!-- /TEST -->
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
