@@ -483,23 +483,18 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:choice>
-                        <xs:element ref="math:LogicBinop"/>
+                <xs:choice>
+                    <xs:element ref="math:LogicBinop"/>
+                    <xs:sequence>
                         <!-- TEST -->
                         <xs:element name="Probability" type="mdef:ProbabilityType" maxOccurs="unbounded"  minOccurs="0">
                             <xs:annotation>
                                 <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-<!--                        <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
-                            <xs:annotation>
-                                <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>-->
-                    </xs:choice>
-                    <xs:element minOccurs="0" ref="ct:Assign"/>
-                </xs:sequence>
+                        <xs:element minOccurs="0" ref="ct:Assign"/>
+                    </xs:sequence>
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
