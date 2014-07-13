@@ -353,9 +353,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CommonDiscreteVariableType">
         <xs:annotation>
             <xs:documentation>Type defining the common state/category variables in discrete data models.</xs:documentation>
@@ -370,9 +368,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="DependanceType">
         <xs:annotation>
             <xs:documentation>Type defining the discrete/continuous Markov dependency.</xs:documentation>
@@ -387,14 +383,11 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CommonDiscreteStateType">
         <xs:annotation>
             <xs:documentation>Type defining a discrete state: current, previous and a general condition.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
@@ -404,11 +397,8 @@ permissions and limitations under the License.
                 <xs:attribute name="MarkovOrder" type="ct:MarkovOrderType"/>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="ProbabilityType">
         <xs:annotation>
             <xs:documentation>Type defining the probability definition.</xs:documentation>
@@ -444,9 +434,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="ProbabilityAssignmentType">
         <xs:annotation>
             <xs:documentation>Type defining probability assignment element.</xs:documentation>
@@ -454,7 +442,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:choice>
                         <xs:element ref="math:LogicBinop"/>
                         <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
@@ -473,9 +460,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="TransitionRateType">
         <xs:annotation>
             <xs:documentation>Type defining the transition rate for continuous Markov models.</xs:documentation>
@@ -502,9 +487,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CategoricalPMFType">
         <xs:annotation>
             <xs:documentation>
@@ -553,9 +536,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:complexType name="CountPMFType">
         <xs:annotation>
             <xs:documentation>
@@ -603,9 +584,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="TTEFunctionType">
         <xs:annotation>
             <xs:documentation>
@@ -621,9 +600,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CensoringFeatureType">
         <xs:annotation>
             <xs:documentation>
@@ -638,9 +615,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CensoringType">
         <xs:annotation>
             <xs:documentation>
@@ -677,9 +652,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
         
-    <!-- TEST -->
     <xs:complexType name="CategoricalDataType">
         <xs:annotation>
             <xs:documentation>Type defining nominal and ordered categorical data models.</xs:documentation>
@@ -724,11 +697,6 @@ permissions and limitations under the License.
                             or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="TransitionRate" minOccurs="0" maxOccurs="unbounded" type="mdef:TransitionRateType">
-                        <xs:annotation>
-                            <xs:documentation>Transition rate definition for continuous markov models.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
                 </xs:sequence>
                 <xs:attribute name="ordered" type="ct:OrderedAttributeType" use="optional">
                     <xs:annotation>
@@ -738,9 +706,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CountDataType">
         <xs:annotation>
             <xs:documentation>Type defining count data models.</xs:documentation>
@@ -804,9 +770,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="TimeToEventDataType">
         <xs:annotation>
             <xs:documentation>Type defining TTE data models.</xs:documentation>
@@ -843,9 +807,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="DiscreteDataParameterType">
         <xs:annotation>
             <xs:documentation>Type defining the parameters in count data models.</xs:documentation>
@@ -863,16 +825,13 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="ListOfCategoriesType">
         <xs:annotation>
             <xs:documentation>Type definig the list of categories. Categories can be assinged automatically by a tool.
                 The mapping between their names and symbols used in a dataset happens in the ModellingSteps/DataSet. 
                 This keeps categories definition uncoupled from the data</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -880,11 +839,8 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="ObservationModelType">
         <xs:annotation>
             <xs:documentation>Type defining the observation model.</xs:documentation>
@@ -902,22 +858,11 @@ permissions and limitations under the License.
                             <xs:documentation>The discrete data models.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element  name="CountData" type="mdef:CountDataType">
-                        <xs:annotation>
-                            <xs:documentation>The count data models.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element  name="TimeToEventData" type="mdef:TimeToEventDataType">
-                        <xs:annotation>
-                            <xs:documentation>The time-to-event data models.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
                 </xs:choice>
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/> 
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->    
     
     <xs:complexType name="ObservationErrorType" abstract="true">
         <xs:annotation>
@@ -1041,7 +986,6 @@ permissions and limitations under the License.
                                 <xs:documentation>Defines a Gaussian model, with either linear or non-linear covariates.</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
-                                <!-- TEST missing id-->
                                 <xs:complexContent>
                                     <xs:extension base="ct:PharmMLRootType">
                                         <xs:sequence>
@@ -1057,7 +1001,6 @@ permissions and limitations under the License.
                                                         <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
                                                     </xs:annotation>
                                                     <xs:complexType>
-                                                        <!-- TEST missing id-->
                                                         <xs:complexContent>
                                                             <xs:extension base="ct:PharmMLRootType">
                                                                 <xs:sequence>
@@ -1066,7 +1009,6 @@ permissions and limitations under the License.
                                                                             <xs:documentation>The population parameter: psi_pop.</xs:documentation>
                                                                         </xs:annotation>
                                                                         <xs:complexType>
-                                                                            <!-- TEST missing id-->
                                                                             <xs:complexContent>
                                                                                 <xs:extension base="ct:PharmMLRootType">
                                                                                     <xs:sequence>
@@ -1074,7 +1016,6 @@ permissions and limitations under the License.
                                                                                     </xs:sequence>
                                                                                 </xs:extension>
                                                                             </xs:complexContent>
-                                                                            <!-- TEST missing id-->
                                                                         </xs:complexType>
                                                                     </xs:element>
                                                                     <xs:element name="Covariate" maxOccurs="unbounded"
@@ -1086,7 +1027,6 @@ permissions and limitations under the License.
                                                                 </xs:sequence>
                                                             </xs:extension>
                                                         </xs:complexContent>
-                                                        <!-- TEST missing id-->
                                                     </xs:complexType>
                                                 </xs:element>
                                                 <xs:element name="GeneralCovariate">
@@ -1096,7 +1036,6 @@ permissions and limitations under the License.
                                                         </xs:documentation>
                                                     </xs:annotation>
                                                     <xs:complexType>
-                                                        <!-- TEST missing id-->
                                                         <xs:complexContent>
                                                             <xs:extension base="ct:PharmMLRootType">
                                                                 <xs:sequence>
@@ -1110,7 +1049,6 @@ permissions and limitations under the License.
                                                                 </xs:sequence>
                                                             </xs:extension>
                                                         </xs:complexContent>
-                                                        <!-- TEST missing id-->
                                                     </xs:complexType>
                                                 </xs:element>
                                             </xs:choice>
@@ -1123,7 +1061,6 @@ permissions and limitations under the License.
                                         </xs:sequence>
                                     </xs:extension>
                                 </xs:complexContent>
-                                <!-- TEST missing id-->
                             </xs:complexType>
                         </xs:element>
                         <xs:element minOccurs="1" ref="ct:Assign">
@@ -1157,35 +1094,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- org -->
-<!--    <xs:complexType name="ParameterRandomVariableType">
-        <xs:annotation>
-            <xs:documentation>
-                Type specifies a random variable definition.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="mdef:CommonParameterType">
-                <xs:sequence>
-                    <xs:element ref="ct:VariabilityReference">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The level of random variability that describes this random variable.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element> 
-                    <xs:element ref="distrib:AbstractContinuousUnivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A continuous univariate probability distribution, defined by UncertML, that describes this random variable. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /org -->
     <xs:complexType name="ParameterRandomVariableType">
         <xs:annotation>
             <xs:documentation>
@@ -1235,7 +1143,6 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defining the relationship between the covariate and a fixed effect parameter. Typically this defines a linear relationships.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1252,13 +1159,11 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="FixedEffectRelationType">
         <xs:annotation>
             <xs:documentation>Defines a fixed effect.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1278,13 +1183,11 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="CategoricalRelationType">
         <xs:annotation>
             <xs:documentation>Type specifying a relationship to a specific category value in a categorical covariate.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:attribute name="catId" type="ct:CatIdType" use="required">
@@ -1297,13 +1200,11 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="ParameterRandomEffectType">
         <xs:annotation>
             <xs:documentation>Type defining a Random effect using a reference to a Random variable.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1314,7 +1215,6 @@ permissions and limitations under the License.
                     </xs:element>
                 </xs:sequence>
             </xs:extension>
-            <!-- TEST missing id-->
         </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="CovariateDefinitionType">
@@ -1346,7 +1246,6 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type defines how the covariate is transformed when used.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1360,13 +1259,11 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="ContinuousCovariateType">
         <xs:annotation>
             <xs:documentation>Type defines a continuous covariate.</xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1384,7 +1281,6 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="CategoricalCovariateType">
         <xs:annotation>
@@ -1392,7 +1288,6 @@ permissions and limitations under the License.
                 Type defines a categorical covariate.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST missing id-->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -1404,7 +1299,6 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- TEST missing id-->
     </xs:complexType>
     <xs:complexType name="CategoryType">
         <xs:annotation>
@@ -1495,21 +1389,17 @@ permissions and limitations under the License.
                             <xs:documentation>A covariate model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST minOccurs="0" changed from '1' -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="ParameterModel"
                         type="mdef:ParameterModelType">
                         <xs:annotation>
                             <xs:documentation>A parameter model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- TEST minOccurs="0" added -->
                     <xs:element maxOccurs="unbounded"  minOccurs="0" ref="mdef:StructuralModel">
                         <xs:annotation>
                             <xs:documentation>A structural model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="ObservationModel" maxOccurs="unbounded"
                         type="mdef:ObservationModelType">
                         <xs:annotation>
