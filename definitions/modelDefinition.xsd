@@ -477,20 +477,28 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <!--<!-\- TEST -\->
+    <!-- TEST -->
     <xs:complexType name="ProbabilityAssignmentType">
         <xs:annotation>
             <xs:documentation>Type defining probability assignment element.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element ></xs:element>
-                </xs:choice>
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element ref="math:LogicBinop"/>
+                        <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
+                            <xs:annotation>
+                                <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element ref="ct:Assign"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-\- /TEST -\->-->
+    <!-- /TEST -->
     
     <!-- TEST -->
     <xs:complexType name="TransitionRateType">
