@@ -498,7 +498,7 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>-->
                     </xs:choice>
-                    <xs:element ref="ct:Assign"/>
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
