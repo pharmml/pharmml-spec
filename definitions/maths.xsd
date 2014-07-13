@@ -20,7 +20,11 @@ permissions and limitations under the License.
     xmlns:math="http://www.pharmml.org/2013/03/Maths" elementFormDefault="qualified"
     attributeFormDefault="unqualified" 
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    xmlns:ds="http://www.pharmml.org/2013/08/Dataset">
+    xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition">
+    
+    <xs:import namespace="http://www.pharmml.org/2013/03/ModelDefinition" 
+        schemaLocation="http://www.pharmml.org/2013/03/ModelDefinition"/>
 
     <xs:import namespace="http://www.pharmml.org/2013/03/CommonTypes"
         schemaLocation="http://www.pharmml.org/2013/03/CommonTypes"/>
@@ -308,6 +312,9 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
                         <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element ref="mdef:Probability"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -332,6 +339,9 @@ permissions and limitations under the License.
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="ct:MatrixSelector"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element ref="mdef:Probability"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
