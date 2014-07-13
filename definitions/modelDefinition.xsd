@@ -465,7 +465,6 @@ permissions and limitations under the License.
                             <xs:documentation>Definition of a general condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ct:Assign"/>
                 </xs:sequence>
                 <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
                     <xs:annotation>
@@ -487,11 +486,17 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:choice>
                         <xs:element ref="math:LogicBinop"/>
-                        <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
+                        <!-- TEST -->
+                        <xs:element name="Probability" type="mdef:ProbabilityType" maxOccurs="unbounded"  minOccurs="0">
                             <xs:annotation>
                                 <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
+<!--                        <xs:element name="Probability" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityType">
+                            <xs:annotation>
+                                <xs:documentation>Probability definition for categories/conditions etc.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>-->
                     </xs:choice>
                     <xs:element ref="ct:Assign"/>
                 </xs:sequence>
@@ -1551,6 +1556,11 @@ permissions and limitations under the License.
     <!--
         Elements 
         -->
+    <xs:element name="Probability" type="mdef:ProbabilityType">
+        <xs:annotation>
+            <xs:documentation>Defines a probability statement.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <xs:element name="ObservationError" type="mdef:ObservationErrorType" abstract="true">
         <xs:annotation>
             <xs:documentation>Abstract element defining an observation error.</xs:documentation>
