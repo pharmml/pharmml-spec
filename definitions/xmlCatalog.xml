@@ -22,30 +22,15 @@
         systemId="http://www.pharmml.org/2013/03/TrialDesign" 
         uri="trialDesign.xsd"/>
 
-    <!--uri 
-        name="http://www.pharmml.org/2013/03/TrialDesign" 
-        uri="trialDesign.xsd"/-->
-    
     <system
         systemId="http://www.pharmml.org/2013/03/CommonTypes" 
         uri="commonTypes.xsd"/>
-    
-    <!--uri 
-        name="http://www.pharmml.org/2013/03/CommonTypes" 
-        uri="commonTypes.xsd"/-->
     
     <system
         systemId="http://www.pharmml.org/2013/03/ModellingSteps"
         uri="modellingSteps.xsd"/>
     
-    <!--uri
-        name="http://www.pharmml.org/2013/03/ModellingSteps"
-        uri="modellingSteps.xsd"/-->
-    
     <system systemId="http://www.pharmml.org/2013/03/ModelDefinition"
         uri="modelDefinition.xsd"/>
-    
-    <!--uri name="http://www.pharmml.org/2013/03/ModelDefinition"
-        uri="modelDefinition.xsd"/-->
     
 </catalog>

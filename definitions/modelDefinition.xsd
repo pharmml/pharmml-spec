@@ -19,8 +19,8 @@ permissions and limitations under the License.
     xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     xmlns:math="http://www.pharmml.org/2013/03/Maths" xmlns:distrib="http://www.uncertml.org/3.0"
-    targetNamespace="http://www.pharmml.org/2013/03/ModelDefinition" version="0.1"
-    elementFormDefault="qualified" attributeFormDefault="unqualified">
+    targetNamespace="http://www.pharmml.org/2013/03/ModelDefinition" 
+    version="0.3.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!--
         Imports
