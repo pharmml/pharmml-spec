@@ -1119,17 +1119,24 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <xs:element ref="distrib:AbstractContinuousMultivariateDistribution">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    A continuous multivariate probability distribution, defined by UncertML. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
                         <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
-                                    A continuous univariate probability distribution, defined by UncertML. 
+                                    A categorical univariate probability distribution, defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="distrib:AbstractCategoricalMultivariateDistribution">
                             <xs:annotation>
                                 <xs:documentation>
-                                    A continuous multivariate probability distribution, defined by UncertML. 
+                                    A categorical multivariate probability distribution, defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
