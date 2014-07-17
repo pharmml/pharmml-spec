@@ -278,7 +278,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
-                    <xs:element ref="ct:Vector"/>
+                    <xs:element ref="math:Vector"/>
                     <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
             </xs:extension>
@@ -1001,165 +1001,6 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
-    <xs:complexType name="VectorType">
-        <xs:annotation>
-            <xs:documentation>
-                Traditional vector, with numerical values only and facultative index.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element name="VectorElements" type="ct:VectorElementsType">
-                        <xs:annotation>
-                            <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:choice maxOccurs="unbounded">
-                        <xs:element name="VectorCell" type="ct:VectorCellType" maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>Single vector element with index.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="VectorSegment" type="ct:VectorSegmentType" maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>Consecutive vector elements with start index and segment length.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                </xs:choice>
-                <xs:attribute name="length" type="xs:integer">
-                    <xs:annotation>
-                        <xs:documentation>The length of the vector - optional.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="default" type="xs:double" default="0">
-                    <xs:annotation>
-                        <xs:documentation>Default value of vector - set to 0.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="VectorElementsType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a vector element - without indexes.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice maxOccurs="unbounded">
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Sequence">
-                        <xs:annotation>
-                            <xs:documentation>A sequence (or uniform series) of numbers to be inserted into the vector at this point.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="VectorCellType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a vector cell - with index.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="VectorIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:choice maxOccurs="unbounded">
-                        <xs:element ref="ct:Scalar">
-                            <xs:annotation>
-                                <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element ref="ct:SymbRef"/>
-                    </xs:choice>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="VectorSegmentType">
-        <xs:annotation>
-            <xs:documentation>
-                A segment of a vector with numerical values or variables and facultative index.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>                    
-                    <xs:element name="VectorElements" minOccurs="0" type="ct:VectorElementsType">
-                        <xs:annotation>
-                            <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-                <xs:attribute name="default" type="xs:double" default="0">
-                    <xs:annotation>
-                        <xs:documentation>Default value of vector set to 0.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="VectorSegmentSelectorType">
-        <xs:annotation>
-            <xs:documentation>
-                This type specifies a vector segment.
-            </xs:documentation>            
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence maxOccurs="unbounded">
-                    <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="VectorSelectorType">
-        <xs:annotation>
-            <xs:documentation>
-                Type for vector selector.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:SymbRef"/>
-                    <xs:element name="Head" minOccurs="0" type="ct:MatrixVectorIndexType"/>
-                    <xs:choice maxOccurs="unbounded">
-                        <xs:element name="Cell" minOccurs="0" maxOccurs="unbounded" type="ct:MatrixVectorIndexType"/>
-                        <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSegmentSelectorType"/>                            
-                    </xs:choice>
-                    <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:element name="VectorSelector" type="ct:VectorSelectorType">
-        <xs:annotation>
-            <xs:documentation>
-                Allows to select a choosen vector element.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
     
     <xs:complexType name="MatrixVectorIndexType">
         <xs:complexContent>
@@ -1201,7 +1042,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="ct:Vector">
+                    <xs:element ref="math:Vector">
                         <xs:annotation>
                             <xs:documentation>Sum index is defined by a vector</xs:documentation>
                         </xs:annotation>
@@ -1460,11 +1301,6 @@ permissions and limitations under the License.
     <xs:element name="Sequence" type="ct:SequenceType" substitutionGroup="ct:Arrays">
         <xs:annotation>
             <xs:documentation>Element defines a uniform sequence of values.</xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <xs:element name="Vector" type="ct:VectorType" substitutionGroup="ct:Arrays">
-        <xs:annotation>
-            <xs:documentation>Element defines a vector type, scalars and sequences</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Matrix" type="ct:MatrixType">
