@@ -426,6 +426,8 @@ permissions and limitations under the License.
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
+    
+    <!-- elements -->
     <xs:element name="Otherwise">
         <xs:annotation>
             <xs:documentation>The otherwise case in a piecewise function.</xs:documentation>
