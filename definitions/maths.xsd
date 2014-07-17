@@ -51,8 +51,8 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <xs:element ref="ct:Sum"/>
-                        <xs:element ref="ct:Product"/>
+                        <xs:element ref="math:Sum"/>
+                        <xs:element ref="math:Product"/>
                         <xs:element ref="ct:Delay"/>
                         <xs:element ref="math:VectorSelector"/>
                         <xs:element ref="math:MatrixSelector"/>
@@ -68,8 +68,8 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <xs:element ref="ct:Sum"/>
-                        <xs:element ref="ct:Product"/>
+                        <xs:element ref="math:Sum"/>
+                        <xs:element ref="math:Product"/>
                         <xs:element ref="ct:Delay"/>
                         <xs:element ref="math:VectorSelector"/>
                         <xs:element ref="math:MatrixSelector"/>
@@ -221,8 +221,8 @@ permissions and limitations under the License.
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
-                    <xs:element ref="ct:Sum"/>
-                    <xs:element ref="ct:Product"/>
+                    <xs:element ref="math:Sum"/>
+                    <xs:element ref="math:Product"/>
                     <xs:element ref="math:VectorSelector"/>
                     <xs:element ref="math:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
@@ -265,8 +265,8 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <xs:element ref="ct:Sum"/>
-                        <xs:element ref="ct:Product"/>
+                        <xs:element ref="math:Sum"/>
+                        <xs:element ref="math:Product"/>
                         <xs:element ref="math:VectorSelector"/>
                         <xs:element ref="math:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
@@ -283,8 +283,8 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
-                        <xs:element ref="ct:Sum"/>
-                        <xs:element ref="ct:Product"/>
+                        <xs:element ref="math:Sum"/>
+                        <xs:element ref="math:Product"/>
                         <xs:element ref="math:VectorSelector"/>
                         <xs:element ref="math:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
@@ -326,8 +326,8 @@ permissions and limitations under the License.
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
-                    <xs:element ref="ct:Sum"/>
-                    <xs:element ref="ct:Product"/>
+                    <xs:element ref="math:Sum"/>
+                    <xs:element ref="math:Product"/>
                     <xs:element ref="math:VectorSelector"/>
                     <xs:element ref="math:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
@@ -369,8 +369,8 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="math:FunctionCall"/>
-                    <xs:element ref="ct:Sum"/>
-                    <xs:element ref="ct:Product"/>
+                    <xs:element ref="math:Sum"/>
+                    <xs:element ref="math:Product"/>
                     <xs:element ref="ct:Delay"/>
                     <xs:element ref="math:VectorSelector"/>
                     <xs:element ref="math:MatrixSelector"/>
@@ -413,8 +413,8 @@ permissions and limitations under the License.
                 <xs:element ref="ct:Scalar"/>
                 <xs:element ref="math:Constant"/>
                 <xs:element ref="ct:SymbRef"/>
-                <xs:element ref="ct:Sum"/>
-                <xs:element ref="ct:Product"/>
+                <xs:element ref="math:Sum"/>
+                <xs:element ref="math:Product"/>
                 <xs:element ref="math:VectorSelector"/>
                 <xs:element ref="math:MatrixSelector"/>
                 <xs:element ref="mdef:Probability"/>
@@ -1007,6 +1007,16 @@ permissions and limitations under the License.
     </xs:element>
     
     <!-- elements -->
+    <xs:element name="Sum" type="math:SumType">
+        <xs:annotation>
+            <xs:documentation>Sigma sum element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Product" type="math:ProductType">
+        <xs:annotation>
+            <xs:documentation>Product element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>    
     <xs:element name="Matrix" type="math:MatrixType">
         <xs:annotation>
             <xs:documentation>Element defines a matrix</xs:documentation>
