@@ -260,7 +260,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VariabilityReference"/>
                     <xs:choice>
                         <xs:element name="Pairwise" type="mdef:PairwiseType"/>
-                        <xs:element name="Matrix" type="ct:MatrixType"/>
+                        <xs:element name="Matrix" type="math:MatrixType"/>
                     </xs:choice>                    
                 </xs:sequence>
                 <xs:attribute name="deviationMatrixType" use="optional">
