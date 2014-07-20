@@ -826,6 +826,51 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
+    <xs:complexType name="IntegralType">
+        <xs:annotation>
+            <xs:documentation>Type defining an integral.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <!-- START IntegrationDomain -->
+                    <xs:choice>
+                        <xs:element ref="ct:SymbRef">
+                            <xs:annotation>
+                                <xs:documentation>A variable reference.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element name="IntegrationVariableIndex" type="math:SumProductIndexType"/>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element name="LowLimit" type="math:LowUpLimitType">
+                                <xs:annotation>
+                                    <xs:documentation>Defining first index in the sum.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="UpLimit" type="math:LowUpLimitType">
+                                <xs:annotation>
+                                    <xs:documentation>Defining last index in the sum.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:element name="SumIndexSet" type="math:SumIndexSetType">
+                            <xs:annotation>
+                                <xs:documentation>Definig a set of indexes for summation, i.e. if non-consequtive
+                                    element are to be considered.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+                <!-- END IntegrationDomain -->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- /TEST -->
+    
     <xs:complexType name="LowUpLimitType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
