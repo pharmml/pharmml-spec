@@ -967,7 +967,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="VectorIndex" type="math:MatrixVectorIndexType"/>
-                    <xs:choice maxOccurs="unbounded">
+                    <xs:choice>
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
                                 <xs:documentation>A scalar value to be inserted into the vector at this point.</xs:documentation>
