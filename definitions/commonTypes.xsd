@@ -68,6 +68,8 @@ permissions and limitations under the License.
             <xs:enumeration value="log"/>
             <xs:enumeration value="logit"/>
             <xs:enumeration value="probit"/>
+            <xs:enumeration value="loglog"/>
+            <xs:enumeration value="comploglog"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="MarkovOrderType">
