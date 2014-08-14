@@ -635,14 +635,14 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="Structure" type="design:TrialStructureType"> 
+                    <xs:element name="Structure" minOccurs="0" type="design:TrialStructureType"> 
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the structure of the study.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Population" type="design:PopulationType">
+                    <xs:element name="Population" minOccurs="0" type="design:PopulationType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the population of the study.
