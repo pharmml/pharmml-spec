@@ -1071,8 +1071,12 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable reference.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
-                        <xs:element ref="mdef:Probability"/>
+                        <!-- TEST need more then Probability -->
+                        <xs:element ref="math:Equation">
+                            <xs:annotation>
+                                <xs:documentation>A mathematical expression.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
