@@ -1160,7 +1160,7 @@ permissions and limitations under the License.
                             <xs:documentation>The covariate to be related.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="FixedEffect" type="mdef:FixedEffectRelationType">
+                    <xs:element name="FixedEffect" minOccurs="0" type="mdef:FixedEffectRelationType">
                         <xs:annotation>
                             <xs:documentation>The fixed effect relating the parameter and covariate.</xs:documentation>
                         </xs:annotation>
