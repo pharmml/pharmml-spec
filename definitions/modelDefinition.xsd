@@ -1465,7 +1465,7 @@ permissions and limitations under the License.
                             <xs:documentation>An transfer macro definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Elmination" minOccurs="0" maxOccurs="unbounded" type="mdef:EliminationMacroType">
+                    <xs:element name="Elimination" minOccurs="0" maxOccurs="unbounded" type="mdef:EliminationMacroType">
                         <xs:annotation>
                             <xs:documentation>An elimination macro definition.</xs:documentation>
                         </xs:annotation>
@@ -1737,9 +1737,12 @@ permissions and limitations under the License.
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
-                            <xs:enumeration value="from"/>
-                            <xs:enumeration value="to"/>
-                            <xs:enumeration value="kt"/>
+                            <xs:enumeration value="cmt"/>
+                            <xs:enumeration value="V"/>
+                            <xs:enumeration value="k"/>
+                            <xs:enumeration value="CL"/>
+                            <xs:enumeration value="Vm"/>
+                            <xs:enumeration value="Km"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
