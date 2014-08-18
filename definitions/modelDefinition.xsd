@@ -1419,11 +1419,72 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="CompartmentMacroType">
+        <xs:annotation>
+            <xs:documentation>Type defines a compartment macro.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Value" type="mdef:CompartmentMacroValueType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="CompartmentMacroValueType">
+        <xs:annotation>
+            <xs:documentation>Type defines a compartment macro.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialise the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>The value of the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                </xs:sequence>
+                <xs:attribute name="argument" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Name of the argument belonging to the macro.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="cmt"/>
+                            <xs:enumeration value="amount"/>
+                            <xs:enumeration value="volume"/>
+                            <xs:enumeration value="cocentration"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-
+    <!-- /TEST -->
+    
+    
     <!--
         Elements 
         -->
+    <xs:element name="CompartmentMacro" type="mdef:CompartmentMacroType">
+        <xs:annotation>
+            <xs:documentation>Defines a compartment macro.</xs:documentation>
+        </xs:annotation>
+    </xs:element>    
     <xs:element name="Probability" type="mdef:ProbabilityType">
         <xs:annotation>
             <xs:documentation>Defines a probability statement.</xs:documentation>
