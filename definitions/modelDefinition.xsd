@@ -1440,6 +1440,11 @@ permissions and limitations under the License.
                             <xs:documentation>A compartment macro definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="Peripheral" minOccurs="0" maxOccurs="unbounded" type="mdef:PeripheralMacroType">
+                        <xs:annotation>
+                            <xs:documentation>A peripheral macro definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="Absorption" minOccurs="0" maxOccurs="unbounded" type="mdef:OralMacroType">
                         <xs:annotation>
                             <xs:documentation>An absorption macro definition.</xs:documentation>
@@ -1448,6 +1453,21 @@ permissions and limitations under the License.
                     <xs:element name="Oral" minOccurs="0" maxOccurs="unbounded" type="mdef:OralMacroType">
                         <xs:annotation>
                             <xs:documentation>An oral macro definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="IV" minOccurs="0" maxOccurs="unbounded" type="mdef:IVMacroType">
+                        <xs:annotation>
+                            <xs:documentation>An iv macro definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Transfer" minOccurs="0" maxOccurs="unbounded" type="mdef:TransferMacroType">
+                        <xs:annotation>
+                            <xs:documentation>An transfer macro definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Elmination" minOccurs="0" maxOccurs="unbounded" type="mdef:EliminationMacroType">
+                        <xs:annotation>
+                            <xs:documentation>An elimination macro definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:choice>
