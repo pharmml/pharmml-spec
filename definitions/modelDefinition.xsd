@@ -1573,13 +1573,22 @@ permissions and limitations under the License.
                         <xs:documentation>Name of the argument belonging to the macro.</xs:documentation>
                     </xs:annotation>
                     <xs:simpleType>
-                        <xs:restriction base="xs:Name">
-                            <xs:enumeration value="kij"/>
-                            <xs:enumeration value="kji"/>
-                            <xs:enumeration value="amount"/>
-                            <xs:enumeration value="volume"/>
-                            <xs:enumeration value="concentration"/>
-                        </xs:restriction>
+                        <xs:union>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:Name">
+                                    <xs:enumeration value="kij"/>
+                                    <xs:enumeration value="kji"/>
+                                    <xs:enumeration value="amount"/>
+                                    <xs:enumeration value="volume"/>
+                                    <xs:enumeration value="concentration"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="k[0-9][0-9]"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:union>
                     </xs:simpleType>
                 </xs:attribute>
             </xs:extension>
