@@ -1473,7 +1473,7 @@ permissions and limitations under the License.
     
     <xs:complexType name="CompartmentMacroValueType">
         <xs:annotation>
-            <xs:documentation>Type defines a compartment macro.</xs:documentation>
+            <xs:documentation>Type defines a compartment macro value.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1527,7 +1527,7 @@ permissions and limitations under the License.
     
     <xs:complexType name="PeripheralMacroValueType">
         <xs:annotation>
-            <xs:documentation>Type defines a peripheral macro.</xs:documentation>
+            <xs:documentation>Type defines a peripheral macro value.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1582,7 +1582,7 @@ permissions and limitations under the License.
     
     <xs:complexType name="IVMacroValueType">
         <xs:annotation>
-            <xs:documentation>Type defines a iv macro.</xs:documentation>
+            <xs:documentation>Type defines a iv macro value.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1624,7 +1624,7 @@ permissions and limitations under the License.
     <!-- Transfer -->
     <xs:complexType name="TransferMacroType">
         <xs:annotation>
-            <xs:documentation>Type defines a Transfer macro.</xs:documentation>
+            <xs:documentation>Type defines a transfer macro.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1637,7 +1637,7 @@ permissions and limitations under the License.
     
     <xs:complexType name="TransferMacroValueType">
         <xs:annotation>
-            <xs:documentation>Type defines a Transfer macro.</xs:documentation>
+            <xs:documentation>Type defines a transfer macro value.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1664,11 +1664,62 @@ permissions and limitations under the License.
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
-                            <xs:enumeration value="cmt"/>
-                            <xs:enumeration value="type"/>
-                            <xs:enumeration value="adm"/>
-                            <xs:enumeration value="Tlag"/>
-                            <xs:enumeration value="p"/>
+                            <xs:enumeration value="from"/>
+                            <xs:enumeration value="to"/>
+                            <xs:enumeration value="kt"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <!-- Elimination -->
+    <xs:complexType name="EliminationMacroType">
+        <xs:annotation>
+            <xs:documentation>Type defines an elimination macro.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Value" type="mdef:EliminationMacroValueType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="EliminationMacroValueType">
+        <xs:annotation>
+            <xs:documentation>Type defines an elimination macro value.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialise the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>The value of the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                </xs:choice>
+                <xs:attribute name="argument" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Name of the argument belonging to the macro.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="from"/>
+                            <xs:enumeration value="to"/>
+                            <xs:enumeration value="kt"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
