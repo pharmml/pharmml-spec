@@ -1349,7 +1349,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="PKMacros" minOccurs="0" type="mdef:PKMacroType">
+                    <xs:element name="PKmacros" minOccurs="0" type="mdef:PKmacroType">
                         <xs:annotation>
                             <xs:documentation>A macro definition.</xs:documentation>
                         </xs:annotation>
@@ -1428,7 +1428,7 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
-    <xs:complexType name="PKMacroType">
+    <xs:complexType name="PKmacroType">
         <xs:annotation>
             <xs:documentation>Type defines a PK macro.</xs:documentation>
         </xs:annotation>
@@ -1586,6 +1586,7 @@ permissions and limitations under the License.
                             <xs:simpleType>
                                 <xs:restriction base="xs:string">
                                     <xs:pattern value="k[0-9][0-9]"/>
+<!--                                    <xs:pattern value="[k\\_0-9\\_0-9]"/>-->
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:union>
@@ -1869,16 +1870,7 @@ permissions and limitations under the License.
     <!--
         Elements 
         -->
-    <xs:element name="PKMacro" type="mdef:PKMacroType">
-        <xs:annotation>
-            <xs:documentation>Defines a PK macro.</xs:documentation>
-        </xs:annotation>
-    </xs:element>    
-    <xs:element name="CompartmentMacro" type="mdef:CompartmentMacroType">
-        <xs:annotation>
-            <xs:documentation>Defines a compartment macro.</xs:documentation>
-        </xs:annotation>
-    </xs:element>    
+
     <xs:element name="Probability" type="mdef:ProbabilityType">
         <xs:annotation>
             <xs:documentation>Defines a probability statement.</xs:documentation>
