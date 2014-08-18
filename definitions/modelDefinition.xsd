@@ -1349,7 +1349,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="PKMacro" minOccurs="0" type="mdef:PKMacroType">
+                    <xs:element name="PKMacros" minOccurs="0" type="mdef:PKMacroType">
                         <xs:annotation>
                             <xs:documentation>A macro definition.</xs:documentation>
                         </xs:annotation>
@@ -1457,6 +1457,7 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <!-- Compartment -->
     <xs:complexType name="CompartmentMacroType">
         <xs:annotation>
             <xs:documentation>Type defines a compartment macro.</xs:documentation>
@@ -1509,6 +1510,62 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- Peripheral -->
+    <xs:complexType name="PeripheralMacroType">
+        <xs:annotation>
+            <xs:documentation>Type defines a peripheral macro.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Value" type="mdef:PeripheralMacroValueType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="PeripheralMacroValueType">
+        <xs:annotation>
+            <xs:documentation>Type defines a peripheral macro.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialise the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>The value of the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                </xs:choice>
+                <xs:attribute name="argument" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Name of the argument belonging to the macro.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="kij"/>
+                            <xs:enumeration value="kji"/>
+                            <xs:enumeration value="amount"/>
+                            <xs:enumeration value="volume"/>
+                            <xs:enumeration value="concentration"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
 
     <!-- ABSORPTION or ORAL -->
     <xs:complexType name="OralMacroType">
