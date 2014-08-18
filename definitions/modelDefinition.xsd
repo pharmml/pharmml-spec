@@ -1348,6 +1348,18 @@ permissions and limitations under the License.
                             <xs:documentation>A variable definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="Compartment" minOccurs="0" maxOccurs="unbounded" type="mdef:CompartmentMacroType">
+                        <xs:annotation>
+                            <xs:documentation>A compartment macro definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Oral" minOccurs="0" maxOccurs="unbounded" type="mdef:OralMacroType">
+                        <xs:annotation>
+                            <xs:documentation>An oral macro definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/>
             </xs:extension>
@@ -1428,7 +1440,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="Value" type="mdef:CompartmentMacroValueType"/>
+                    <xs:element maxOccurs="unbounded" name="Value" type="mdef:CompartmentMacroValueType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1440,8 +1452,8 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Assign">
+                <xs:choice>
+                    <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>Initialise the name attribute.</xs:documentation>
                         </xs:annotation>
@@ -1456,8 +1468,8 @@ permissions and limitations under the License.
                             <xs:documentation>The value of the name attribute.</xs:documentation>
                         </xs:annotation>
                     </xs:element>                    
-                </xs:sequence>
-                <xs:attribute name="argument" use="required">
+                </xs:choice>
+                <xs:attribute name="argument" use="optional">
                     <xs:annotation>
                         <xs:documentation>Name of the argument belonging to the macro.</xs:documentation>
                     </xs:annotation>
@@ -1466,7 +1478,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="cmt"/>
                             <xs:enumeration value="amount"/>
                             <xs:enumeration value="volume"/>
-                            <xs:enumeration value="cocentration"/>
+                            <xs:enumeration value="concentration"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
@@ -1474,6 +1486,64 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
+    <!-- ABSORPTION or ORAL -->
+    <xs:complexType name="OralMacroType">
+        <xs:annotation>
+            <xs:documentation>Type defines a oral macro.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Value" type="mdef:OralMacroValueType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="OralMacroValueType">
+        <xs:annotation>
+            <xs:documentation>Type defines a oral macro.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialise the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>The value of the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                </xs:choice>
+                <xs:attribute name="argument" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Name of the argument belonging to the macro.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="cmt"/>
+                            <xs:enumeration value="type"/>
+                            <xs:enumeration value="adm"/>
+                            <xs:enumeration value="Tlag"/>
+                            <xs:enumeration value="p"/>
+                            <xs:enumeration value="Tk0"/>
+                            <xs:enumeration value="ka"/>
+                            <xs:enumeration value="Ktr"/>
+                            <xs:enumeration value="Mtt"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <!-- /TEST -->
     
     
