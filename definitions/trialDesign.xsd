@@ -105,7 +105,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
-                    <xs:element ref="ct:SymbRef">
+                    <xs:element minOccurs="0" ref="ct:SymbRef">
                         <xs:annotation>
                             <xs:documentation>
                                 The name of the variable that is the dose administered to.
