@@ -97,7 +97,13 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    
+                    <xs:element minOccurs="0" maxOccurs="1" name="Compartment" type="design:CompartmentNoType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The numner of the compartment that the dose is administred to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <!-- /TEST -->
                     <xs:element ref="ct:SymbRef">
                         <xs:annotation>
@@ -117,6 +123,22 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
+    <xs:complexType name="CompartmentNoType">
+        <xs:annotation>
+            <xs:documentation>
+                Defines type for the compartment number for administration. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- TEST -->
     
     <xs:complexType name="DosingRegimenType" abstract="true">
         <xs:annotation>
