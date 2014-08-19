@@ -71,6 +71,13 @@ permissions and limitations under the License.
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+            <xs:enumeration value="compartmentNo">
+                <xs:annotation>
+                    <xs:documentation>
+                        Dose is an input to a system via a compartment.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
@@ -89,6 +96,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    
+                    <!-- /TEST -->
                     <xs:element ref="ct:SymbRef">
                         <xs:annotation>
                             <xs:documentation>
