@@ -97,21 +97,25 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element minOccurs="0" maxOccurs="1" name="Compartment" type="design:CompartmentNoType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The numner of the compartment that the dose is administred to.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-- /TEST -->
-                    <xs:element minOccurs="0" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The name of the variable that is the dose administered to.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:choice>
+                        <!-- TEST -->
+                        <xs:element minOccurs="0" maxOccurs="1" name="Compartment" type="design:CompartmentNoType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The numner of the compartment that the dose is administred to.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- /TEST -->
+                        <xs:element minOccurs="0" ref="ct:SymbRef">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The name of the variable that is the dose administered to.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <!-- TEST -->
                     <xs:element minOccurs="0" ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>The amount of dose to be applied at dosing time.</xs:documentation>
@@ -135,6 +139,11 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="ct:Int"/>
                 </xs:sequence>
+                <xs:attribute name="blkIdRef" type="ct:BlockIdType">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Block.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
