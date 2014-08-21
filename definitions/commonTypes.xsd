@@ -1287,7 +1287,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="VectorIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="CellIndex" type="ct:MatrixVectorIndexType"/>
                     <xs:choice>
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
@@ -1310,7 +1310,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
+                    <xs:element name="SegmemntStartIndex" type="ct:MatrixVectorIndexType"/>
                     <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>                    
                     <xs:element name="VectorElements" minOccurs="0" type="ct:VectorElementsType">
                         <xs:annotation>
