@@ -149,24 +149,22 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:choice>
-                        <xs:element name="Continuous" type="msteps:ContinuousObservationType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Defines the continuous variable output.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <!-- TEST -->
-                        <xs:element name="Discrete" type="msteps:DiscreteObservationType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Defines the discrete variable output.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <!-- TEST -->
-                    </xs:choice>
+                    <xs:element name="Continuous" type="msteps:ContinuousObservationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines the continuous variable output.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="Discrete" type="msteps:DiscreteObservationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines the discrete variable output.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
