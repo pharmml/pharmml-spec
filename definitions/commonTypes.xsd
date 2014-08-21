@@ -1310,8 +1310,20 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="SegmemntStartIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>                    
+                    <xs:element name="SegmentStartIndex" type="ct:MatrixVectorIndexType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Index indicating the segment's first element.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Segment length.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="VectorElements" minOccurs="0" type="ct:VectorElementsType">
                         <xs:annotation>
                             <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
