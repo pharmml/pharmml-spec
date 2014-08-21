@@ -1313,7 +1313,7 @@ permissions and limitations under the License.
                     <xs:element name="SegmentStartIndex" type="ct:MatrixVectorIndexType">
                         <xs:annotation>
                             <xs:documentation>
-                                Index indicating the segment's first element.
+                                Index indicating the segment's first element position in the vector.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
