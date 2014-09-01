@@ -529,11 +529,13 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="compartmentNo" type="ct:CompartmentNoType" use="optional">
+                <!-- TEST -->
+<!--                <xs:attribute name="compartmentNo" type="ct:CompartmentNoType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Integer used to identify the comparment nmber when mapping to NONMEM dataset.</xs:documentation>
                     </xs:annotation>
-                </xs:attribute>
+                </xs:attribute>-->
+                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required" fixed="real">
                     <xs:annotation>
                         <xs:documentation>The symbol type of a derivative variable is always set to be a real.</xs:documentation>
