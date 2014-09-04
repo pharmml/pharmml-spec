@@ -373,7 +373,8 @@ permissions and limitations under the License.
     </xs:complexType>
     
 
-    <xs:complexType name="ColumnMappingType">
+<!-- ORIGINAL
+        <xs:complexType name="ColumnMappingType">
         <xs:annotation>
             <xs:documentation>
                 The type that defines column mapping.
@@ -404,7 +405,53 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    
+    <!-- TEST -->
+    <xs:complexType name="ColumnMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that defines column mapping.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The column reference to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element ref="ct:SymbRef">
+                                <xs:annotation>
+                                    <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Defines mapping for categorical covariates and data. 
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:element name="TargetMapping" maxOccurs="unbounded" type="ds:CategoryMappingType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Defines mapping for categorical covariates and data. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     
     <xs:complexType name="CategoryMappingType">
         <xs:annotation>
@@ -426,6 +473,31 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="TargetMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that defines mapping targets in the structural model and in the data.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Map" type="ds:MapType" minOccurs="1" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The maping between data and model symbols.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <!-- /TEST -->
     
     <xs:complexType name="MapType">
         <xs:complexContent>
