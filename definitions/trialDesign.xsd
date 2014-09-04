@@ -337,7 +337,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>                        
-                    <xs:element name="Target" maxOccurs="unbounded" type="design:TargetMappingType">
+                    <xs:element name="Target" maxOccurs="unbounded" type="design:TargetType">
                         <xs:annotation>
                             <xs:documentation>
                                 Definition of mapping between lookup table variable and target in the model.
@@ -357,7 +357,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="TargetMappingType">
+    <xs:complexType name="TargetType">
         <xs:annotation>
             <xs:documentation>
                 Mapping of the lookup table target variables type.
