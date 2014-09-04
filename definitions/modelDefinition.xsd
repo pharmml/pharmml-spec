@@ -1826,7 +1826,6 @@ permissions and limitations under the License.
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
                             <xs:enumeration value="cmt"/>
-                            <xs:enumeration value="fromCmt"/>
                             <xs:enumeration value="type"/>
                             <xs:enumeration value="adm"/>
                             <xs:enumeration value="Tlag"/>
