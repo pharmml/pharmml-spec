@@ -71,10 +71,10 @@ permissions and limitations under the License.
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="compartmentNo">
+            <xs:enumeration value="adminType">
                 <xs:annotation>
                     <xs:documentation>
-                        Dose is an input to a system via a compartment.
+                        Dose is an input to a system via a admin type defined in a macro.
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
