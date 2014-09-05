@@ -99,10 +99,10 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:choice>
                         <!-- TEST -->
-                        <xs:element minOccurs="0" maxOccurs="1" name="Compartment" type="design:CompartmentNoType">
+                        <xs:element minOccurs="0" maxOccurs="1" name="TargetMapping" type="ds:TargetMappingType">
                             <xs:annotation>
                                 <xs:documentation>
-                                    The numner of the compartment that the dose is administred to.
+                                    Defined the mapping between targets in the structural model and the TrialDesign.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
@@ -127,7 +127,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
+   <!-- <!-\- TEST -\->
     <xs:complexType name="CompartmentNoType">
         <xs:annotation>
             <xs:documentation>
@@ -147,8 +147,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
-    
+    <!-\- TEST -\->
+   --> 
     <xs:complexType name="DosingRegimenType" abstract="true">
         <xs:annotation>
             <xs:documentation>
