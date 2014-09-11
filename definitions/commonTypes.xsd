@@ -851,6 +851,13 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Equation">
+                            <xs:annotation>
+                                <xs:documentation>A mathematical expression.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -879,6 +886,13 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Equation">
+                            <xs:annotation>
+                                <xs:documentation>A mathematical expression.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="default" type="xs:double" default="0">
