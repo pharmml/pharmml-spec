@@ -281,6 +281,9 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Vector"/>
+                    <!-- TEST -->
+                    <xs:element ref="ct:Matrix"/>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
             </xs:extension>
