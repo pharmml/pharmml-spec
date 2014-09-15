@@ -47,6 +47,7 @@ permissions and limitations under the License.
                         </xs:annotation> 
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="ct:SymbRef"/>
+                        <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
@@ -64,6 +65,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="ct:SymbRef"/>
+                        <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
@@ -280,6 +282,7 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="math:Constant"/>
                         <xs:element ref="ct:SymbRef"/>
+                        <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
