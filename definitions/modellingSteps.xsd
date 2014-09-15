@@ -46,29 +46,38 @@ permissions and limitations under the License.
                 Type specifying the types of estimation operation. 
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="ct:SymbolIdType">
-            <xs:enumeration value="estPop">
-                <xs:annotation>
-                    <xs:documentation>
-                        Estimate the population paramaters.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="estIndiv">
-                <xs:annotation>
-                    <xs:documentation>
-                        Estimate the individual parameters.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="estFIM">
-                <xs:annotation>
-                    <xs:documentation>
-                        Calculate the Fisher Information Matrix. 
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>
+        <!-- TEST -->
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="ct:SymbolIdType">
+                    <xs:enumeration value="estPop">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Estimate the population paramaters.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="estIndiv">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Estimate the individual parameters.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="estFIM">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Calculate the Fisher Information Matrix. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+        </xs:union>
+        <!-- /TEST -->
     </xs:simpleType>
 
     <xs:simpleType name="SimulationOpTypeType">
@@ -77,22 +86,31 @@ permissions and limitations under the License.
                 Type specifying the types of estimation operation. 
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="ct:SymbolIdType">
-            <xs:enumeration value="simulatePK">
-                <xs:annotation>
-                    <xs:documentation>
-                        Simulate PK profile(s).
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="simulatePD">
-                <xs:annotation>
-                    <xs:documentation>
-                        Simulate PD profile(s).
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>
+        <!-- TEST -->
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="ct:SymbolIdType">
+                    <xs:enumeration value="simulatePK">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Simulate PK profile(s).
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="simulatePD">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Simulate PD profile(s).
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+        </xs:union>
+        <!-- /TEST -->
     </xs:simpleType>
 
     <xs:simpleType name="PropertyNameType">
