@@ -195,15 +195,21 @@ permissions and limitations under the License.
                 Type defining the type of a continuous observation variable to be simulated.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>
-                        Refers to the variable to be observed. 
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST added extension -->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to the variable to be observed. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- /TEST -->
     </xs:complexType>
     
     <!-- TEST -->
@@ -213,15 +219,21 @@ permissions and limitations under the License.
                 Type defining the type of a discrete observation variable to be simulated.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="ct:SymbRef">
-                <xs:annotation>
-                    <xs:documentation>
-                        Refers to the variable to be observed. 
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-        </xs:sequence>
+        <!-- TEST added extension -->
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to the variable to be observed. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+        <!-- /TEST -->
     </xs:complexType>
     <!-- /TEST -->
     
