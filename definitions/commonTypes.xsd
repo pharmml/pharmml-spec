@@ -1402,9 +1402,71 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    
-    
     <!-- /relocated types Vector, Matrix, Sum, Product -->
+    
+    
+    <!-- TEST -->
+    <xs:complexType name="LoopIndexType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="math:Equation">
+                        <xs:annotation>
+                            <xs:documentation>A mathematical expression.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Int">
+                        <xs:annotation>
+                            <xs:documentation>An integer value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>A variable reference.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <!-- TEST based on SumType -->
+    <xs:complexType name="forLoopType">
+        <xs:annotation>
+            <xs:documentation>Type defining for-loop.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="ProbabilityAssignment" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityAssignmentType">
+                            <xs:annotation>
+                                <xs:documentation>Probability assignment element - provides space for basic probability definitions
+                                    and more complex probability expressions, such as logit, reference category models etc.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element name="LoopIndex" type="ct:SumProductIndexType"/>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element name="StartIndex" type="ct:LoopIndexType">
+                                <xs:annotation>
+                                    <xs:documentation>Defining first index in the loop.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="EndIndex" type="ct:LoopIndexType">
+                                <xs:annotation>
+                                    <xs:documentation>Defining last index in the loop.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
 
     <!--
