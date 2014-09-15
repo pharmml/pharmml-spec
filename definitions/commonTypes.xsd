@@ -1432,7 +1432,7 @@ permissions and limitations under the License.
     
     
     <!-- TEST based on SumType -->
-    <xs:complexType name="forLoopType">
+    <xs:complexType name="ForLoopType">
         <xs:annotation>
             <xs:documentation>Type defining for-loop.</xs:documentation>
         </xs:annotation>
@@ -1440,7 +1440,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element name="ProbabilityAssignment" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityAssignmentType">
+                        <xs:element name="ProbabilityAssignment" type="mdef:ProbabilityAssignmentType">
                             <xs:annotation>
                                 <xs:documentation>Probability assignment element - provides space for basic probability definitions
                                     and more complex probability expressions, such as logit, reference category models etc.</xs:documentation>
