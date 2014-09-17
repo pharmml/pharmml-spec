@@ -1440,7 +1440,7 @@ permissions and limitations under the License.
     </xs:complexType>
     
     
-    <!-- TEST based on SumType -->
+<!--
     <xs:complexType name="ForLoopType">
         <xs:annotation>
             <xs:documentation>Type defining for-loop.</xs:documentation>
@@ -1474,8 +1474,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
+    </xs:complexType>-->
     
 
     <!--
