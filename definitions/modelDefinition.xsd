@@ -687,11 +687,6 @@ permissions and limitations under the License.
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="ForLoop" minOccurs="0" maxOccurs="unbounded" type="ct:ForLoopType">
-                        <xs:annotation>
-                            <xs:documentation>For loop - takes one ProbabilityAssignment.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
                     <xs:element name="ProbabilityAssignment" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityAssignmentType">
                         <xs:annotation>
                             <xs:documentation>Probability assignment element - provides space for basic probability definitions
