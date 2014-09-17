@@ -127,28 +127,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-   <!-- <!-\- TEST -\->
-    <xs:complexType name="CompartmentNoType">
-        <xs:annotation>
-            <xs:documentation>
-                Defines type for the compartment number for administration. 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:Int"/>
-                </xs:sequence>
-                <xs:attribute name="blkIdRef" type="ct:BlockIdType">
-                    <xs:annotation>
-                        <xs:documentation>ID referencing a Block.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-\- TEST -\->
-   --> 
     <xs:complexType name="DosingRegimenType" abstract="true">
         <xs:annotation>
             <xs:documentation>

@@ -98,12 +98,6 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="CompartmentNoType">
-        <xs:annotation>
-            <xs:documentation>Type for compartment number.</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:integer"/>
-    </xs:simpleType>
     <xs:simpleType name="BlockIdType">
         <xs:annotation>
             <xs:documentation>Type for block identifiers.</xs:documentation>
@@ -532,13 +526,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
-<!--                <xs:attribute name="compartmentNo" type="ct:CompartmentNoType" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>Integer used to identify the comparment nmber when mapping to NONMEM dataset.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>-->
-                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required" fixed="real">
                     <xs:annotation>
                         <xs:documentation>The symbol type of a derivative variable is always set to be a real.</xs:documentation>
