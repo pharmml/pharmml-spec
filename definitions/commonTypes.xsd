@@ -1437,7 +1437,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>
-                                The transformation is defined as an equation that must include a reference to the covariate variable, defined by the parent of this element.  
+                                The transformation is defined as an equation that must include a reference to the column, defined by the parent of this element.  
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>

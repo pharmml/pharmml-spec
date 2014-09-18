@@ -329,9 +329,18 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
     <xs:complexType name="ColumnDefnType">
         <xs:complexContent>
             <xs:extension base="CommonColumnDefnType">
+                <xs:sequence>
+                    <xs:element name="Transformation" type="ct:ColumnTransformationType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                
                 <xs:attribute name="columnId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
                         <xs:documentation>The name to give the column.</xs:documentation>
