@@ -1281,9 +1281,16 @@ permissions and limitations under the License.
                             <xs:documentation>The distribution that the continuous covariate follows.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="TransformedCovariate" type="mdef:TransformedCovariateType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the transformed covariate.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0">
                         <xs:annotation>
-                            <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
+                            <xs:documentation>The transformation to be applied when the covariate is used.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Interpolation" minOccurs="0"/>
@@ -1328,6 +1335,24 @@ permissions and limitations under the License.
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="TransformedCovariateType">
+        <xs:annotation>
+            <xs:documentation>Type defining a transformed covariate symbol.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id for this parameter.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="StructuralModelType">
         <xs:annotation>
             <xs:documentation>
