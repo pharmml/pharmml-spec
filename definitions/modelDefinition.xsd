@@ -1176,11 +1176,20 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>A reference to the variable defining the fixed effect value.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:choice>
+                        <xs:element ref="ct:SymbRef">
+                            <xs:annotation>
+                                <xs:documentation>A reference to the variable defining the fixed effect value.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- TEST -->
+                        <xs:element ref="ct:Scalar">
+                            <xs:annotation>
+                                <xs:documentation>A scalar value.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- /TEST -->
+                    </xs:choice>
                     <xs:element minOccurs="0" name="Category" type="mdef:CategoricalRelationType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1258,6 +1267,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="TransformedCovariate" type="mdef:TransformedCovariateType">
+                        <xs:annotation>
+                            <xs:documentation>Name of the transformed covariate.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>
@@ -1281,14 +1297,7 @@ permissions and limitations under the License.
                             <xs:documentation>The distribution that the continuous covariate follows.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-                    <xs:element name="TransformedCovariate" type="mdef:TransformedCovariateType">
-                        <xs:annotation>
-                            <xs:documentation>Name of the transformed covariate.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-- /TEST -->
-                    <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0">
+                    <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>The transformation to be applied when the covariate is used.</xs:documentation>
                         </xs:annotation>
