@@ -20,7 +20,7 @@ permissions and limitations under the License.
     xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     targetNamespace="http://www.pharmml.org/2013/08/Dataset" 
-    version="0.4.1" elementFormDefault="qualified">
+    version="0.4.3" elementFormDefault="qualified">
     
     <xs:import namespace="http://www.pharmml.org/2013/03/CommonTypes"
         schemaLocation="http://www.pharmml.org/2013/03/CommonTypes"/>
