@@ -96,9 +96,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:choice>
-                        <!-- TEST -->
                         <xs:element minOccurs="0" maxOccurs="1" name="TargetMapping" type="ds:TargetMappingType">
                             <xs:annotation>
                                 <xs:documentation>
@@ -106,7 +104,6 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                         <xs:element minOccurs="0" ref="ct:SymbRef">
                             <xs:annotation>
                                 <xs:documentation>
@@ -115,7 +112,6 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
-                    <!-- TEST -->
                     <xs:element minOccurs="0" ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>The amount of dose to be applied at dosing time.</xs:documentation>

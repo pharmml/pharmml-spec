@@ -334,13 +334,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="CommonColumnDefnType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="Transformation" type="ct:ColumnTransformationType" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:sequence>
                 
                 <xs:attribute name="columnId" type="ct:SymbolIdType" use="required">
@@ -382,44 +380,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-
-<!-- ORIGINAL
-        <xs:complexType name="ColumnMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                The type that defines column mapping.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ds:ColumnRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The column reference to map to.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="1" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines mapping for categorical covariates and data. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
         
     
-    <!-- TEST -->
     <xs:complexType name="ColumnMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -429,7 +391,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:choice>
                         <xs:element ref="ct:Assign">
                             <xs:annotation>
@@ -444,7 +405,6 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
-                    <!-- /TEST -->
                     <xs:choice>
                         <xs:sequence>
                             <xs:element ref="ct:SymbRef">
@@ -472,7 +432,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="CategoryMappingType">
         <xs:annotation>
@@ -495,7 +454,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="TargetMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -522,9 +480,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    
-    <!-- /TEST -->
-    
     <xs:complexType name="MapType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -538,13 +493,11 @@ permissions and limitations under the License.
                         <xs:documentation>ID referencing a Symbol in the model.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
                 <xs:attribute name="admNumber" type="xs:integer" use="optional">
                     <xs:annotation>
                         <xs:documentation>Number referencing adm/type macro attribute.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

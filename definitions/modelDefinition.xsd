@@ -1182,13 +1182,11 @@ permissions and limitations under the License.
                                 <xs:documentation>A reference to the variable defining the fixed effect value.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                         <xs:element ref="ct:Scalar">
                             <xs:annotation>
                                 <xs:documentation>A scalar value.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:element minOccurs="0" name="Category" type="mdef:CategoricalRelationType">
                         <xs:annotation>
@@ -1267,13 +1265,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="TransformedCovariate" type="mdef:TransformedCovariateType">
                         <xs:annotation>
                             <xs:documentation>Name of the transformed covariate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>
@@ -1345,7 +1341,6 @@ permissions and limitations under the License.
         </xs:attribute>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="TransformedCovariateType">
         <xs:annotation>
             <xs:documentation>Type defining a transformed covariate symbol.</xs:documentation>
@@ -1360,7 +1355,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="StructuralModelType">
         <xs:annotation>

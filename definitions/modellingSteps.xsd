@@ -46,7 +46,6 @@ permissions and limitations under the License.
                 Type specifying the types of estimation operation. 
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST -->
         <xs:union>
             <xs:simpleType>
                 <xs:restriction base="ct:SymbolIdType">
@@ -77,7 +76,6 @@ permissions and limitations under the License.
                 <xs:restriction base="xs:string"/>
             </xs:simpleType>
         </xs:union>
-        <!-- /TEST -->
     </xs:simpleType>
 
     <xs:simpleType name="SimulationOpTypeType">
@@ -86,7 +84,6 @@ permissions and limitations under the License.
                 Type specifying the types of estimation operation. 
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST -->
         <xs:union>
             <xs:simpleType>
                 <xs:restriction base="ct:SymbolIdType">
@@ -110,7 +107,6 @@ permissions and limitations under the License.
                 <xs:restriction base="xs:string"/>
             </xs:simpleType>
         </xs:union>
-        <!-- /TEST -->
     </xs:simpleType>
 
     <xs:simpleType name="PropertyNameType">
@@ -175,7 +171,6 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                         <xs:element name="Discrete" type="msteps:DiscreteObservationType">
                             <xs:annotation>
                                 <xs:documentation>
@@ -183,7 +178,6 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -195,7 +189,6 @@ permissions and limitations under the License.
                 Type defining the type of a continuous observation variable to be simulated.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST added extension -->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -209,17 +202,14 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- /TEST -->
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="DiscreteObservationType">
         <xs:annotation>
             <xs:documentation>
                 Type defining the type of a discrete observation variable to be simulated.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST added extension -->
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
@@ -233,9 +223,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-        <!-- /TEST -->
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="DependentsType">
         <xs:annotation>
@@ -358,7 +346,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="MONOLIXdataSetReferenceType">
         <xs:annotation>
             <xs:documentation>
@@ -373,7 +360,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="OperationPropertyType">
         <xs:annotation>
@@ -785,7 +771,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="MONOLIXdataSetType">
         <xs:annotation>
             <xs:documentation>
@@ -830,7 +815,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     
     <xs:complexType name="MultipleDVMappingType">
         <xs:annotation>

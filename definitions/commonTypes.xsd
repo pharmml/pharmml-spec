@@ -275,9 +275,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Vector"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Matrix"/>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Interpolation"/>
                 </xs:choice>
             </xs:extension>
@@ -841,13 +839,11 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <!-- TEST -->
                         <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -876,13 +872,11 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <!-- TEST -->
                         <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="default" type="xs:double" default="0">
@@ -1018,13 +1012,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <!-- TEST needs sometimes to calculate the index -->
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>
                             <xs:documentation>An integer value.</xs:documentation>
@@ -1084,13 +1076,11 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable reference.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST need more then Probability -->
                         <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
                     <xs:choice>
@@ -1131,13 +1121,11 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable reference.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                         <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:element name="ProductIndex" type="ct:SumProductIndexType"/>
                     <xs:element name="LowLimit" type="ct:LowUpLimitType">
@@ -1155,62 +1143,16 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
-    <xs:complexType name="IntegralType">
-        <xs:annotation>
-            <xs:documentation>Type defining an integral.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <!-- START IntegrationDomain -->
-                    <xs:choice>
-                        <xs:element ref="ct:SymbRef">
-                            <xs:annotation>
-                                <xs:documentation>A variable reference.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                    <xs:element name="IntegrationVariableIndex" type="ct:SumProductIndexType"/>
-                    <xs:choice>
-                        <xs:sequence>
-                            <xs:element name="LowLimit" type="ct:LowUpLimitType">
-                                <xs:annotation>
-                                    <xs:documentation>Defining first index in the sum.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element name="UpLimit" type="ct:LowUpLimitType">
-                                <xs:annotation>
-                                    <xs:documentation>Defining last index in the sum.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                        </xs:sequence>
-                        <xs:element name="SumIndexSet" type="ct:SumIndexSetType">
-                            <xs:annotation>
-                                <xs:documentation>Definig a set of indexes for summation, i.e. if non-consequtive
-                                    element are to be considered.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                </xs:sequence>
-                <!-- END IntegrationDomain -->
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <!-- /TEST -->
     
     <xs:complexType name="LowUpLimitType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <!-- TEST need more then Int and SymbRef -->
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>
                             <xs:documentation>An integer value.</xs:documentation>
@@ -1398,35 +1340,8 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /relocated types Vector, Matrix, Sum, Product -->
     
     
-<!--    <!-\- TEST -\->
-    <xs:complexType name="LoopIndexType">
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element ref="math:Equation">
-                        <xs:annotation>
-                            <xs:documentation>A mathematical expression.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Int">
-                        <xs:annotation>
-                            <xs:documentation>An integer value.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>A variable reference.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
-    <!-- TEST -->
     <xs:complexType name="ColumnTransformationType">
         <xs:annotation>
             <xs:documentation>Type defines how the column is transformed when used.</xs:documentation>
@@ -1445,7 +1360,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
 
     <!--
