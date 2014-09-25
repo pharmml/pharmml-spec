@@ -742,7 +742,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnTransformationType">
                         <xs:annotation>
                             <xs:documentation>
@@ -750,7 +749,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="MultipleDVMapping" minOccurs="0" maxOccurs="unbounded" type="msteps:MultipleDVMappingType">
                         <xs:annotation>
                             <xs:documentation>
@@ -796,7 +794,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnTransformationType">
                         <xs:annotation>
                             <xs:documentation>
@@ -804,7 +801,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="MultipleDVMapping" minOccurs="0" maxOccurs="unbounded" type="msteps:MultipleDVMappingType">
                         <xs:annotation>
                             <xs:documentation>
