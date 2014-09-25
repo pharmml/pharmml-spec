@@ -1343,7 +1343,7 @@ permissions and limitations under the License.
     
     
     <!-- TEST 1 -->
-    <xs:complexType name="ColumnTransformationType">
+<!--    <xs:complexType name="ColumnTransformationType">
         <xs:annotation>
             <xs:documentation>Type defines how the column is transformed when used.</xs:documentation>
         </xs:annotation>
@@ -1370,9 +1370,9 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
 
-    <xs:complexType name="TransformedColumnType">
+<!--    <xs:complexType name="TransformedColumnType">
         <xs:annotation>
             <xs:documentation>Type defining a transformed covariate symbol.</xs:documentation>
         </xs:annotation>
@@ -1385,7 +1385,7 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <!-- /TEST 1 -->
     
 

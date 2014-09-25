@@ -72,6 +72,13 @@ permissions and limitations under the License.
                         <xs:documentation>Refers to a column in a dataset.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- TEST -->
+                <xs:attribute name="transformIdRef" type="ct:SymbolIdType" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Refers to a column of a transformed column associated with the current one and the same administration process.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -333,13 +340,13 @@ permissions and limitations under the License.
     <xs:complexType name="ColumnDefnType">
         <xs:complexContent>
             <xs:extension base="CommonColumnDefnType">
-                <xs:sequence>
+<!--                <xs:sequence>
                     <xs:element name="Transformation" type="ct:ColumnTransformationType" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                </xs:sequence>
+                </xs:sequence>-->
                 
                 <xs:attribute name="columnId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>

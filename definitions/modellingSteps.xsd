@@ -750,7 +750,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="msteps:ColumnTransformationType2">
+                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="msteps:ColumnTransformationType">
                         <xs:annotation>
                             <xs:documentation>
                                 Allows to encode any transformation of the columns.
@@ -804,7 +804,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="msteps:ColumnTransformationType2">
+                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="msteps:ColumnTransformationType">
                         <xs:annotation>
                             <xs:documentation>
                                 Allows to encode any transformation of the columns.
@@ -835,7 +835,7 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST 2 -->
-    <xs:complexType name="ColumnTransformationType2">
+    <xs:complexType name="ColumnTransformationType">
         <xs:annotation>
             <xs:documentation>Type defines how the column is transformed when used.</xs:documentation>
         </xs:annotation>
