@@ -750,7 +750,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="msteps:ColumnTransformationType">
+                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnTransformationType">
                         <xs:annotation>
                             <xs:documentation>
                                 Allows to encode any transformation of the columns.
@@ -804,7 +804,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="msteps:ColumnTransformationType">
+                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnTransformationType">
                         <xs:annotation>
                             <xs:documentation>
                                 Allows to encode any transformation of the columns.
@@ -834,38 +834,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST 2 -->
-    <xs:complexType name="ColumnTransformationType">
-        <xs:annotation>
-            <xs:documentation>Type defines how the column is transformed when used.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ds:ColumnRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to a column in a table. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="math:Equation">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The transformation is defined as an equation that must include a reference to the column, defined by the parent of this element.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-                <xs:attribute name="transformId" type="ct:SymbolIdType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The name to give the transformation.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST 2 -->
     
     <xs:complexType name="MultipleDVMappingType">
         <xs:annotation>

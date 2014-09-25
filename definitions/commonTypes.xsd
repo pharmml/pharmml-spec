@@ -1341,53 +1341,6 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
-    
-    <!-- TEST 1 -->
-<!--    <xs:complexType name="ColumnTransformationType">
-        <xs:annotation>
-            <xs:documentation>Type defines how the column is transformed when used.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="TransformedColumn" type="ct:TransformedColumnType">
-                        <xs:annotation>
-                            <xs:documentation>Name of the transformed covariate.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="math:Equation">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The transformation is defined as an equation that must include a reference to the column, defined by the parent of this element.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-                <xs:attribute name="transformId" type="ct:SymbolIdType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The name to give the transformation.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-
-<!--    <xs:complexType name="TransformedColumnType">
-        <xs:annotation>
-            <xs:documentation>Type defining a transformed covariate symbol.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="columnId" type="ct:SymbolIdType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The name to give the column.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /TEST 1 -->
-    
 
     <!--
         Attribute Groups

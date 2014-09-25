@@ -19,9 +19,13 @@ permissions and limitations under the License.
     xmlns="http://www.pharmml.org/2013/08/Dataset"
     xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
+    xmlns:math="http://www.pharmml.org/2013/03/Maths"
     targetNamespace="http://www.pharmml.org/2013/08/Dataset" 
     version="0.4.1" elementFormDefault="qualified">
     
+    <xs:import namespace="http://www.pharmml.org/2013/03/Maths"
+        schemaLocation="http://www.pharmml.org/2013/03/Maths"/>
+
     <xs:import namespace="http://www.pharmml.org/2013/03/CommonTypes"
         schemaLocation="http://www.pharmml.org/2013/03/CommonTypes"/>
     <xs:annotation>
@@ -340,13 +344,6 @@ permissions and limitations under the License.
     <xs:complexType name="ColumnDefnType">
         <xs:complexContent>
             <xs:extension base="CommonColumnDefnType">
-<!--                <xs:sequence>
-                    <xs:element name="Transformation" type="ct:ColumnTransformationType" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>The transformation to be applied when the covariate is ued.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>-->
                 
                 <xs:attribute name="columnId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
@@ -545,6 +542,39 @@ permissions and limitations under the License.
                     <xs:enumeration value="undefined"/>
                 </xs:restriction>
     </xs:simpleType>
+    
+    <!-- TEST 2 -->
+    <xs:complexType name="ColumnTransformationType">
+        <xs:annotation>
+            <xs:documentation>Type defines how the column is transformed when used.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to a column in a table. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="math:Equation">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The transformation is defined as an equation that must include a reference to the column, defined by the parent of this element.  
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="transformId" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The name to give the transformation.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST 2 -->
     
     <!--
         Elements
