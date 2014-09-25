@@ -551,13 +551,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" ref="ds:ColumnRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to a column in a table. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>
