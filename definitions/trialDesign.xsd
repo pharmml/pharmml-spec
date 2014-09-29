@@ -318,6 +318,15 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnTransformationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Allows to encode any transformation of the columns.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element ref="ds:DataSet">
                         <xs:annotation>
                             <xs:documentation>
