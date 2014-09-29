@@ -99,8 +99,8 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="path" type="xs:string">
+                <xs:sequence>                                  
+                    <xs:element name="path" type="xs:string">   
                         <xs:annotation>
                             <xs:documentation>
                                 The URL of the import data file.
