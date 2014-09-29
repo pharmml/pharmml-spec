@@ -101,6 +101,11 @@ permissions and limitations under the License.
                     <xs:documentation>The author of this PharmML implementation.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
+            <xs:attribute name="metadataFile" type="xs:string" use="optional">
+                <xs:annotation>
+                    <xs:documentation>The RDF file wth annotations for this model.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
             <xs:attributeGroup ref="ct:RootAttributesGroup"/> 
         </xs:complexType>
         <!-- KEYS -->
