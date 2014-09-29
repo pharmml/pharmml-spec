@@ -420,11 +420,18 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:choice>
                         <xs:sequence>
-                            <xs:element ref="ct:SymbRef">
+                            <xs:element minOccurs="0" ref="ct:SymbRef">
                                 <xs:annotation>
                                     <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <!-- TEST -->
+                            <xs:element minOccurs="0" ref="ct:Assign">
+                                <xs:annotation>
+                                    <xs:documentation>Define the scaling for the column.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <!-- /TEST -->
                             <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
                                 <xs:annotation>
                                     <xs:documentation>
