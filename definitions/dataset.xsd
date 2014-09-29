@@ -76,6 +76,13 @@ permissions and limitations under the License.
                         <xs:documentation>Refers to a column in a dataset.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- TEST -->
+                <xs:attribute name="transformIdRef" type="ct:SymbolIdType" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Refers to a column of a transformed column associated with the current one and the same administration process.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
