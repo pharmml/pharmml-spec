@@ -415,11 +415,11 @@ permissions and limitations under the License.
                                 </xs:annotation>
                             </xs:element>
                             <!-- TEST -->
-                            <xs:element minOccurs="0" ref="ct:Assign">
+                            <xs:element name="Piecewise" type="math:PiecewiseType">
                                 <xs:annotation>
-                                    <xs:documentation>Define the scaling for the column.</xs:documentation>
+                                    <xs:documentation>Defines a piecewise expression - for conditional mapping.</xs:documentation>
                                 </xs:annotation>
-                            </xs:element>
+                            </xs:element>                    
                             <!-- /TEST -->
                             <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
                                 <xs:annotation>
