@@ -415,7 +415,7 @@ permissions and limitations under the License.
                                 </xs:annotation>
                             </xs:element>
                             <!-- TEST -->
-                            <xs:element name="Piecewise" type="math:PiecewiseType">
+                            <xs:element name="Piecewise" minOccurs="0" type="math:PiecewiseType">
                                 <xs:annotation>
                                     <xs:documentation>Defines a piecewise expression - for conditional mapping.</xs:documentation>
                                 </xs:annotation>
