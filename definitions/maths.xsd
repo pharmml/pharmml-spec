@@ -94,6 +94,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="min"/>
                             <xs:enumeration value="max"/>
                             <xs:enumeration value="rem"/>
+                            <xs:enumeration value="atan2"/>     <!-- moved from UniopType -->
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
@@ -136,8 +137,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="sin"/>
                             <xs:enumeration value="cos"/>
                             <xs:enumeration value="tan"/>
-                            <xs:enumeration value="cot"/>
-                            <xs:enumeration value="atan2"/>
+                            <xs:enumeration value="cot"/>   <!--atan2 moved to BinopType -->
                             <xs:enumeration value="sec"/>
                             <xs:enumeration value="csc"/>
                             <xs:enumeration value="sinh"/>
