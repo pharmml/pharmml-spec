@@ -966,7 +966,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="IndividualParameterType">
+ <!--   <xs:complexType name="IndividualParameterType">
         <xs:annotation>
             <xs:documentation>Describes an individual parameter. Three encodings of a parameter model are available:
                 Type 1. explicit equation type of parameter model
@@ -998,7 +998,7 @@ permissions and limitations under the License.
                                                 </xs:annotation>
                                             </xs:element>
                                             <xs:choice>
-                                                <xs:element maxOccurs="unbounded" name="LinearCovariate">
+                                                <xs:element name="LinearCovariate">
                                                     <xs:annotation>
                                                         <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
                                                     </xs:annotation>
@@ -1076,7 +1076,122 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    <!-- TEST -->
+    <xs:complexType name="IndividualParameterType">
+        <xs:annotation>
+            <xs:documentation>Describes an individual parameter. Three encodings of a parameter model are available:
+                Type 1. explicit equation type of parameter model
+                psi_i = H(beta, c_i, eta_i)
+                
+                Type 2. Gaussian model with general covariate model
+                h(psi_i) = H(beta, c_i) + eta_i
+                
+                Type 3. Gaussian model with linear covariate model
+                h(psi_i) = h(psi_pop) + beta c_i + eta_i
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:CommonParameterType">
+                <xs:sequence minOccurs="1">
+                    <xs:choice>
+                        <xs:element name="GaussianModel">
+                            <xs:annotation>
+                                <xs:documentation>Defines a Gaussian model, with either linear or non-linear covariates.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="ct:PharmMLRootType">
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="Transformation"
+                                                type="mdef:LRHSTransformationType">
+                                                <xs:annotation>
+                                                    <xs:documentation>The transformation (h) applied to both sides of the equation.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:choice>
+                                                <xs:sequence>
+                                                    <xs:element name="PopulationParameter">
+                                                        <xs:annotation>
+                                                            <xs:documentation>The population parameter: psi_pop.</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:complexContent>
+                                                                <xs:extension base="ct:PharmMLRootType">
+                                                                    <xs:sequence>
+                                                                        <xs:element ref="ct:Assign"/>
+                                                                    </xs:sequence>
+                                                                </xs:extension>
+                                                            </xs:complexContent>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element maxOccurs="unbounded" name="LinearCovariate">
+                                                        <xs:annotation>
+                                                            <xs:documentation>Defines the linear covariate model: beta c_i</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:complexContent>
+                                                                <xs:extension base="ct:PharmMLRootType">
+                                                                    <xs:sequence>
+                                                                        <xs:element name="Covariate" maxOccurs="unbounded"
+                                                                            minOccurs="0" type="mdef:CovariateRelationType">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>Defines the linear covariate model: beta * c_i</xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                    </xs:sequence>
+                                                                </xs:extension>
+                                                            </xs:complexContent>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:element name="GeneralCovariate">
+                                                    <xs:annotation>
+                                                        <xs:documentation>A general covariate model definition. This can be used to define a non-linear covariate model.
+                                                            This equates to H in the above definitions.
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:complexContent>
+                                                            <xs:extension base="ct:PharmMLRootType">
+                                                                <xs:sequence>
+                                                                    <xs:element ref="ct:Assign">
+                                                                        <xs:annotation>
+                                                                            <xs:documentation>
+                                                                                The general covariate definition. Note that this should NOT contain references to a random variable. You should use an explicit (type 3) parameter definition to do that.
+                                                                            </xs:documentation>
+                                                                        </xs:annotation>
+                                                                    </xs:element>
+                                                                </xs:sequence>
+                                                            </xs:extension>
+                                                        </xs:complexContent>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:choice>
+                                            <xs:element name="RandomEffects" minOccurs="1" maxOccurs="unbounded"
+                                                type="mdef:ParameterRandomEffectType">
+                                                <xs:annotation>
+                                                    <xs:documentation>The random effects (eta) used in the gaussian parameter model.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="1" ref="ct:Assign">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The explicit, type 1, definition of an individual parameter. This defines H and can contain references to one or more random variables.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="SimpleParameterType">
         <xs:annotation>
             <xs:documentation>
