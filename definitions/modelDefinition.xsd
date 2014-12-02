@@ -1000,7 +1000,7 @@ permissions and limitations under the License.
                                             <xs:choice>
                                                 <xs:element name="LinearCovariate">
                                                     <xs:annotation>
-                                                        <xs:documentation>Defines the linear covariate model: beta c_i</xs:documentation>
+                                                        <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
                                                     </xs:annotation>
                                                     <xs:complexType>
                                                         <xs:complexContent>
