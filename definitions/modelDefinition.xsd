@@ -998,7 +998,7 @@ permissions and limitations under the License.
                                                 </xs:annotation>
                                             </xs:element>
                                             <xs:choice>
-                                                <xs:element name="LinearCovariate">
+                                                <xs:element maxOccurs="unbounded" name="LinearCovariate">
                                                     <xs:annotation>
                                                         <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
                                                     </xs:annotation>
