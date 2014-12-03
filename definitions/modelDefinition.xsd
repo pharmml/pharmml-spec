@@ -1020,9 +1020,9 @@ permissions and limitations under the License.
                                                                             </xs:complexContent>
                                                                         </xs:complexType>
                                                                     </xs:element>
-                                                                    <xs:element name="Covariate" minOccurs="0" type="mdef:CovariateRelationType">
+                                                                    <xs:element name="Covariate" maxOccurs="unbounded" minOccurs="0" type="mdef:CovariateRelationType">
                                                                         <xs:annotation>
-                                                                            <xs:documentation>Defines the linear covariate model: beta * c_i</xs:documentation>
+                                                                            <xs:documentation>Defines the covariate terms: beta * c_i</xs:documentation>
                                                                         </xs:annotation>
                                                                     </xs:element>
                                                                 </xs:sequence>
