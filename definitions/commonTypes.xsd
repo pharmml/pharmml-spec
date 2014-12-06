@@ -792,7 +792,9 @@ permissions and limitations under the License.
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional"/>
+<!-- TEST
+                    <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional"/>
+/TEST-->  
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
