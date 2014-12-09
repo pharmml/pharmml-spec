@@ -107,14 +107,14 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>                        
                     </xs:element>
-                    <xs:element name="format" type="xs:string" fixed="CSV">
+                    <xs:element name="format" minOccurs="0" type="xs:string" fixed="CSV">
                         <xs:annotation>
                             <xs:documentation>
                                 Only CSV format is allowed with Tab, Comma or Space as delimiters.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="delimiter">
+                    <xs:element name="delimiter" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>
                                 Only Tab, Comma or Space as delimiters are allowed.
@@ -137,7 +137,7 @@ permissions and limitations under the License.
                                         <xs:documentation>Comma ',' as delimiter</xs:documentation>
                                     </xs:annotation>
                                 </xs:enumeration>
-                                <xs:enumeration value="SEMICOLON">                  <!-- NEW value -->
+                                <xs:enumeration value="SEMICOLON">
                                     <xs:annotation>
                                         <xs:documentation>Semicolon ';' as delimiter</xs:documentation>
                                     </xs:annotation>
