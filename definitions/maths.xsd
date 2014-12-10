@@ -134,7 +134,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="probit"/>
                             <xs:enumeration value="minus"/>
                             <xs:enumeration value="sqrt"/>
-                            <xs:enumeration value="heavyside"/>     <!-- NEW -->
+                            <xs:enumeration value="heaviside"/>     <!-- NEW -->
                             <xs:enumeration value="sign"/>          <!-- NEW -->
                             <xs:enumeration value="sin"/>
                             <xs:enumeration value="cos"/>
