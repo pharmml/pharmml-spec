@@ -38,6 +38,16 @@ permissions and limitations under the License.
     <!--
         Simple Types
         -->
+    <!-- TEST -->
+    <xs:simpleType name="ReferenceLevelType">
+        <xs:annotation>
+            <xs:documentation>
+                The type defining the reference level in the variability model.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <!-- /TEST -->
     <xs:simpleType name="VariabilityType">
         <xs:annotation>
             <xs:documentation>
@@ -137,6 +147,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
+                <!-- TEST -->
+                <xs:attribute name="referenceLevel" type="mdef:ReferenceLevelType"/>
+                <!-- /TEST -->
                 <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>
             </xs:extension>
         </xs:complexContent>
