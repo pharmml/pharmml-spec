@@ -792,7 +792,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="IndependentVariableMappingType">
+<!--  TEST - unused type
+        <xs:complexType name="IndependentVariableMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the independent variable mapping.
@@ -802,6 +803,7 @@ permissions and limitations under the License.
             <xs:extension base="design:PopulationMappingType"/>
         </xs:complexContent>
     </xs:complexType>
+    /TEST -->
     
     <xs:complexType name="IndividualDosingType">
         <xs:complexContent>

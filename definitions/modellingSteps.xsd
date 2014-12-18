@@ -519,7 +519,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="IndividualMappingType">
+    <!-- TEST - unused type
+        <xs:complexType name="IndividualMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type defining the mapping of a dataset to the individual.
@@ -528,8 +529,10 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:MappingType"/>
         </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="VariableMappingType">
+    </xs:complexType>-->
+    
+<!-- TEST - unused type
+        <xs:complexType name="VariableMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type defining a maping to a variable in the model. 
@@ -546,7 +549,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     
     <xs:complexType abstract="true" name="MappingType">
@@ -1021,22 +1024,25 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="IndividualMapping" substitutionGroup="msteps:Mapping"
+    <!--  TEST - unused type
+        <xs:element name="IndividualMapping" substitutionGroup="msteps:Mapping"
         type="msteps:IndividualMappingType">
         <xs:annotation>
             <xs:documentation>
                 Specifies the mapping to the individual.
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
-    <xs:element name="VariableMapping" substitutionGroup="msteps:Mapping"
+    </xs:element>-->
+    
+<!--  TEST - unused type
+        <xs:element name="VariableMapping" substitutionGroup="msteps:Mapping"
         type="msteps:VariableMappingType">
         <xs:annotation>
             <xs:documentation>
                 Specifies a mapping to a variable in the model.
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
     
     <xs:element name="Mapping" type="msteps:MappingType" abstract="true">
         <xs:annotation>
