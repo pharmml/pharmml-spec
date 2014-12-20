@@ -393,14 +393,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:choice> 
-                        <!-- TEST -->
-<!--                        <xs:element ref="ct:Assign">
-                            <xs:annotation>
-                                <xs:documentation>Define the scaling for the column.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>-->
-                        <!-- /TEST -->
+                    <xs:choice>
                         <xs:element ref="ds:ColumnRef">
                             <xs:annotation>
                                 <xs:documentation>
@@ -416,13 +409,11 @@ permissions and limitations under the License.
                                     <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- TEST -->
                             <xs:element name="Piecewise" minOccurs="0" type="math:PiecewiseType">
                                 <xs:annotation>
                                     <xs:documentation>Defines a piecewise expression - for conditional mapping.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>                    
-                            <!-- /TEST -->
                             <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
                                 <xs:annotation>
                                     <xs:documentation>
