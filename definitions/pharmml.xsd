@@ -22,7 +22,7 @@ permissions and limitations under the License.
     xmlns:design="http://www.pharmml.org/2013/03/TrialDesign"
     xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
     xmlns:msteps="http://www.pharmml.org/2013/03/ModellingSteps"
-    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition" version="0.5.1"
+    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition" version="0.5.2"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <xs:import namespace="http://www.pharmml.org/2013/03/Maths"
