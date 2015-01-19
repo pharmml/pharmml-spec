@@ -331,7 +331,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="NONMEMdataSetReferenceType">
+<!--    <xs:complexType name="NONMEMdataSetReferenceType">
         <xs:annotation>
             <xs:documentation>
                 Type defining reference to NONMEM dataset.
@@ -344,12 +344,13 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
-    <xs:complexType name="MONOLIXdataSetReferenceType">
+    <!-- TEST -->
+    <xs:complexType name="ExternalDataSetReferenceType">
         <xs:annotation>
             <xs:documentation>
-                Type defining reference to MONOLIX dataset.
+                Type defining reference to an external dataset.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -360,6 +361,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
     
     <xs:complexType name="OperationPropertyType">
         <xs:annotation>
@@ -648,8 +650,10 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
-                    <xs:element name="MONOLIXdataSetReference" minOccurs="0" type="msteps:MONOLIXdataSetReferenceType"/>
-                    <xs:element name="NONMEMdataSetReference" minOccurs="0" type="msteps:NONMEMdataSetReferenceType"/>
+                    <!-- TEST -->
+                    <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
+<!--                    <xs:element name="NONMEMdataSetReference" minOccurs="0" type="msteps:NONMEMdataSetReferenceType"/>-->
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -666,16 +670,18 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="MONOLIXdataSet" type="msteps:MONOLIXdataSetType" minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="ExternalDataSet" type="msteps:ExternalDataSetType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
-                            <xs:documentation>Defines the MONOLIX format datset.</xs:documentation>
+                            <xs:documentation>Defines the external format datset.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>                                            
-                    <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType" minOccurs="0" maxOccurs="unbounded">
+                    </xs:element>
+                    <!-- TEST -->
+<!--                    <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>Defines the NONMEM format datset and its mapping with optional code injection.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>                                            
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
@@ -698,7 +704,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="NONMEMdataSetType">
+<!-- TEST -->
+<!--    <xs:complexType name="NONMEMdataSetType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the NONMEM type data and task settings.                
@@ -750,12 +757,13 @@ permissions and limitations under the License.
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
+    <!-- /TEST -->
     
-    <xs:complexType name="MONOLIXdataSetType">
+    <xs:complexType name="ExternalDataSetType">
         <xs:annotation>
             <xs:documentation>
-                A type defining the MONOLIX type data and task settings.                
+                A type defining the external type data and task settings.                
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
