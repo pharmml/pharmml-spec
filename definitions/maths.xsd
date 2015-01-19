@@ -16,21 +16,21 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->    
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.pharmml.org/2013/03/Maths"
-    xmlns:math="http://www.pharmml.org/2013/03/Maths" elementFormDefault="qualified"
-    attributeFormDefault="unqualified" version="0.5.2"
-    xmlns:ct="http://www.pharmml.org/2013/03/CommonTypes"
-    xmlns:ds="http://www.pharmml.org/2013/08/Dataset"
-    xmlns:mdef="http://www.pharmml.org/2013/03/ModelDefinition">
+    targetNamespace="http://www.pharmml.org/0.6/Maths"
+    xmlns:math="http://www.pharmml.org/0.6/Maths" elementFormDefault="qualified"
+    attributeFormDefault="unqualified" version="0.6"
+    xmlns:ct="http://www.pharmml.org/0.6/CommonTypes"
+    xmlns:ds="http://www.pharmml.org/0.6/Dataset"
+    xmlns:mdef="http://www.pharmml.org/0.6/ModelDefinition">
     
-    <xs:import namespace="http://www.pharmml.org/2013/03/ModelDefinition" 
-        schemaLocation="http://www.pharmml.org/2013/03/ModelDefinition"/>
+    <xs:import namespace="http://www.pharmml.org/0.6/ModelDefinition" 
+        schemaLocation="http://www.pharmml.org/0.6/ModelDefinition"/>
 
-    <xs:import namespace="http://www.pharmml.org/2013/03/CommonTypes"
-        schemaLocation="http://www.pharmml.org/2013/03/CommonTypes"/>
+    <xs:import namespace="http://www.pharmml.org/0.6/CommonTypes"
+        schemaLocation="http://www.pharmml.org/0.6/CommonTypes"/>
     
-    <xs:import namespace="http://www.pharmml.org/2013/08/Dataset"
-        schemaLocation="http://www.pharmml.org/2013/08/Dataset"/>
+    <xs:import namespace="http://www.pharmml.org/0.6/Dataset"
+        schemaLocation="http://www.pharmml.org/0.6/Dataset"/>
     
     <xs:complexType name="BinopType">
         <xs:annotation>
