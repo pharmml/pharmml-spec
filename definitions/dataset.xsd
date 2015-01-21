@@ -85,7 +85,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="ImportData" type="ImportDataType">
+    <xs:element name="ExternalFile" type="ExternalFileType">
         <xs:annotation>
             <xs:documentation>
                 Element specifies the details for the import data file.
@@ -93,7 +93,7 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
 
-    <xs:complexType name="ImportDataType">
+    <xs:complexType name="ExternalFileType">
         <xs:annotation>
             <xs:documentation>This is a data type for external data files.</xs:documentation>
         </xs:annotation>
@@ -114,13 +114,13 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="delimiter" minOccurs="0">
+                    <xs:element name="delimiter" type="DelimiterType" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>
-                                Only Tab, Comma or Space as delimiters are allowed.
+                                Tab, Comma, Space, Semicolon as delimiters are predefined plus other strings allowed.
                             </xs:documentation>
                         </xs:annotation>
-                        <xs:simpleType>
+<!--                        <xs:simpleType>
                             <xs:restriction base="xs:token">
                                 <xs:enumeration value="TAB">
                                     <xs:annotation>
@@ -142,14 +142,52 @@ permissions and limitations under the License.
                                         <xs:documentation>Semicolon ';' as delimiter</xs:documentation>
                                     </xs:annotation>
                                 </xs:enumeration>
+                                <xs:pattern value="[a-zA-Z]*"/>
                             </xs:restriction>
-                        </xs:simpleType>
+                        </xs:simpleType>-->
                     </xs:element>
                 </xs:sequence>         
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <xs:simpleType name="DelimiterType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying the types of delimiters, a predifined set plus any string. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="ct:SymbolIdType">
+                    <xs:enumeration value="TAB">
+                        <xs:annotation>
+                            <xs:documentation>Tab '\t' as delimiter</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="SPACE">
+                        <xs:annotation>
+                            <xs:documentation>Space ' ' as delimiter</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="COMMA">
+                        <xs:annotation>
+                            <xs:documentation>Comma ',' as delimiter</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="SEMICOLON">
+                        <xs:annotation>
+                            <xs:documentation>Semicolon ';' as delimiter</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
     
     <xs:element name="ImportTargetData" type="ImportTargetDataType">
         <xs:annotation>
@@ -254,7 +292,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="Definition"/>
                     <xs:choice>
-                        <xs:element ref="ds:ImportData" maxOccurs="1">
+                        <xs:element ref="ds:ExternalFile" maxOccurs="1">
                             <xs:annotation>
                                 <xs:documentation>
                                     Import datafile
@@ -596,7 +634,8 @@ permissions and limitations under the License.
                 data associate with it.
             </xs:documentation>
         </xs:annotation>
-    </xs:element>    <xs:element name="TargetToolData" type="ds:TargetToolDataSetType">
+    </xs:element>    
+    <xs:element name="TargetToolData" type="ds:TargetToolDataSetType">
         <xs:annotation>
             <xs:documentation>
                 This element specifies a target tool dataset in PharmML. Its children define its structure and the
