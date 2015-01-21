@@ -33,6 +33,19 @@ permissions and limitations under the License.
     <!--
         Simple Types
       -->
+    <!-- TEST -->
+    <xs:simpleType name="ToolNameType">
+        <xs:annotation>
+            <xs:documentation>Defines the tool names attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="BUGS"/>
+            <xs:enumeration value="Monolix"/>
+            <xs:enumeration value="NONMEM"/>
+            <xs:enumeration value="Simcyp"/>
+        </xs:restriction>
+    </xs:simpleType>    
+    <!-- /TEST -->
     <xs:simpleType name="SymbolTypeType">
         <xs:annotation>
             <xs:documentation>Defines the symbol types. Restricted to the available types.</xs:documentation>
