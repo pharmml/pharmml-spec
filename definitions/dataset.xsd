@@ -184,7 +184,9 @@ permissions and limitations under the License.
                 </xs:restriction>
             </xs:simpleType>
             <xs:simpleType>
-                <xs:restriction base="xs:string"/>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[^\s]+"/>
+                </xs:restriction>
             </xs:simpleType>
         </xs:union>
     </xs:simpleType>
