@@ -42,7 +42,6 @@ permissions and limitations under the License.
             <xs:enumeration value="BUGS"/>
             <xs:enumeration value="Monolix"/>
             <xs:enumeration value="NONMEM"/>
-            <xs:enumeration value="Simcyp"/>
         </xs:restriction>
     </xs:simpleType>    
     <!-- /TEST -->
