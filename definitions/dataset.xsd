@@ -382,7 +382,7 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>
                 This type specifies a row of values in the dataset. The row contains a cell which is
-                a scalar value, null.
+                a scalar value.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
