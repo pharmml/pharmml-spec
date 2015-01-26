@@ -438,6 +438,13 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
+                <!-- TEST -->
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id for the probability.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!--  -->
                 <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Type of the link function applied to a probability.</xs:documentation>

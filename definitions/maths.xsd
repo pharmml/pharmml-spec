@@ -200,6 +200,8 @@ permissions and limitations under the License.
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+    
+    <!-- TEST -->
     <xs:complexType name="PieceType">
         <xs:annotation>
             <xs:documentation>The schema type defining a `piece' in a piecewise function.</xs:documentation>
@@ -207,11 +209,14 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="math:ExprType">
                 <xs:sequence>
+                    <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType"/>
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+
     <xs:complexType name="ExprType">
         <xs:annotation>
             <xs:documentation>The schema type defining a mathematical expression.</xs:documentation>
