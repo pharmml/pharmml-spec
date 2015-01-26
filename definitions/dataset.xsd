@@ -440,7 +440,8 @@ permissions and limitations under the License.
                         <xs:element name="TargetMapping" maxOccurs="unbounded" type="ds:TargetMappingType">
                             <xs:annotation>
                                 <xs:documentation>
-                                    Defines mapping for categorical covariates and data. 
+                                    Defines mapping for dosing targets defined e.g. by PK macros 
+                                    (see 'Datasets mapping' in PK macros chapter or 'Mapping Rules' report). 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>

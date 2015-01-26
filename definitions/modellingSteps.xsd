@@ -809,7 +809,7 @@ permissions and limitations under the License.
                         </xs:element>
                     </xs:sequence>
                 </xs:sequence>
-                <xs:attribute name="toolName" use="optional" type="ct:ToolNameType">
+                <xs:attribute name="toolName" use="required" type="ct:ToolNameType">
                     <xs:annotation>
                         <xs:documentation>The tool name with which the dataset is compatible.</xs:documentation>
                     </xs:annotation>
