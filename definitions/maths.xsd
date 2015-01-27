@@ -209,7 +209,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="math:ExprType">
                 <xs:sequence>
-                    <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType"/>
+                    <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
             </xs:extension>
