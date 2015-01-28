@@ -33,7 +33,6 @@ permissions and limitations under the License.
     <!--
         Simple Types
       -->
-    <!-- TEST -->
     <xs:simpleType name="ToolNameType">
         <xs:annotation>
             <xs:documentation>Defines the tool names attribute.</xs:documentation>
@@ -42,9 +41,9 @@ permissions and limitations under the License.
             <xs:enumeration value="BUGS"/>
             <xs:enumeration value="Monolix"/>
             <xs:enumeration value="NONMEM"/>
+            <!-- extandable with other tool names -->
         </xs:restriction>
     </xs:simpleType>    
-    <!-- /TEST -->
     <xs:simpleType name="SymbolTypeType">
         <xs:annotation>
             <xs:documentation>Defines the symbol types. Restricted to the available types.</xs:documentation>
@@ -444,7 +443,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="HistoryValue" type="ct:InitialValueType"/>  <!-- CHECK THIS one!!!!!!!!!! -->
+                    <xs:element minOccurs="0" name="HistoryValue" type="ct:InitialValueType"/>
                     <xs:element minOccurs="0" name="HistoryTime" type="ct:InitialTimeType"/>
                 </xs:sequence>
             </xs:extension>
@@ -730,10 +729,7 @@ permissions and limitations under the License.
     </xs:complexType>
 
 
-
-    <!-- relocated types Vector, Matrix, Sum, Product -->
-
-       <xs:complexType name="MatrixType">
+    <xs:complexType name="MatrixType">
         <xs:annotation>
             <xs:documentation>
                 The type specifies the content of a matrix.

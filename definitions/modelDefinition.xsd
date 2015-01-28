@@ -438,13 +438,11 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
                     <xs:annotation>
                         <xs:documentation>The symbol id for the probability.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!--  -->
                 <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Type of the link function applied to a probability.</xs:documentation>
@@ -1128,7 +1126,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element> 
-                    <!-- TEST -->
                     <xs:choice>
                         <xs:element ref="distrib:AbstractContinuousUnivariateDistribution">
                             <xs:annotation>
@@ -1159,7 +1156,6 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1526,7 +1522,6 @@ permissions and limitations under the License.
        </xs:complexContent>
     </xs:complexType>
     
-    <!-- Compartment -->
     <xs:complexType name="CompartmentMacroType">
         <xs:annotation>
             <xs:documentation>Type defines a compartment macro.</xs:documentation>
@@ -1580,7 +1575,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- Peripheral -->
     <xs:complexType name="PeripheralMacroType">
         <xs:annotation>
             <xs:documentation>Type defines a peripheral macro.</xs:documentation>
@@ -1657,7 +1651,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- IV -->
     <xs:complexType name="IVMacroType">
         <xs:annotation>
             <xs:documentation>Type defines a iv macro.</xs:documentation>
@@ -1712,7 +1705,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- Transfer -->
     <xs:complexType name="TransferMacroType">
         <xs:annotation>
             <xs:documentation>Type defines a transfer macro.</xs:documentation>
@@ -1765,7 +1757,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- Elimination -->
     <xs:complexType name="EliminationMacroType">
         <xs:annotation>
             <xs:documentation>Type defines an elimination macro.</xs:documentation>
@@ -1821,7 +1812,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- ABSORPTION or ORAL -->
     <xs:complexType name="AbsorptionOralMacroType">
         <xs:annotation>
             <xs:documentation>Type defines an absorption/oral macro.</xs:documentation>
@@ -1880,7 +1870,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- Effect -->
     <xs:complexType name="EffectMacroType">
         <xs:annotation>
             <xs:documentation>Type defines an effect macro.</xs:documentation>
@@ -1933,7 +1922,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- Depot -->
     <xs:complexType name="DepotMacroType">
         <xs:annotation>
             <xs:documentation>Type defines an depot macro.</xs:documentation>

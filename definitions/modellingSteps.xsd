@@ -331,22 +331,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-<!--    <xs:complexType name="NONMEMdataSetReferenceType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining reference to NONMEM dataset.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:OidRef"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
-    <!-- TEST -->
     <xs:complexType name="ExternalDataSetReferenceType">
         <xs:annotation>
             <xs:documentation>
@@ -361,7 +345,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     
     <xs:complexType name="OperationPropertyType">
         <xs:annotation>
@@ -650,10 +633,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
-                    <!-- TEST -->
                     <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
-<!--                    <xs:element name="NONMEMdataSetReference" minOccurs="0" type="msteps:NONMEMdataSetReferenceType"/>-->
-                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -675,13 +655,6 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the external format datset.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-<!--                    <xs:element name="NONMEMdataSet" type="msteps:NONMEMdataSetType" minOccurs="0" maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>Defines the NONMEM format datset and its mapping with optional code injection.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
                     <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
@@ -703,62 +676,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-<!-- TEST -->
-<!--    <xs:complexType name="NONMEMdataSetType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining the NONMEM type data and task settings.                
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:choice maxOccurs="unbounded">
-                        <xs:element name="ColumnMapping" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnMappingType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Defines mapping to the dataset containing objective data. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnTransformationType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Allows to encode any transformation of the columns.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="MultipleDVMapping" minOccurs="0" maxOccurs="unbounded" type="msteps:MultipleDVMappingType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Defines mapping to the dataset containing objective data. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                    <xs:sequence>
-                        <xs:element ref="ds:DataSet">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Data for each subject within the study.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="CodeInjection" minOccurs="0" type="msteps:CodeInjectionType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Placegholder for target tool code.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /TEST -->
     
     <xs:complexType name="ExternalDataSetType">
         <xs:annotation>

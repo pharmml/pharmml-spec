@@ -180,8 +180,8 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>                                               <!-- name removed -->
-                    <xs:element name="path" type="xs:string">               <!-- renamed from url -->
+                <xs:sequence>
+                    <xs:element name="path" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>
                                 The URL of the import data file.
@@ -223,7 +223,7 @@ permissions and limitations under the License.
                                         <xs:documentation>Comma ',' as delimiter</xs:documentation>
                                     </xs:annotation>
                                 </xs:enumeration>
-                                <xs:enumeration value="SEMICOLON">                  <!-- NEW value -->
+                                <xs:enumeration value="SEMICOLON">
                                     <xs:annotation>
                                         <xs:documentation>Semicolon ';' as delimiter</xs:documentation>
                                     </xs:annotation>

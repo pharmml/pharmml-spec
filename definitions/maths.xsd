@@ -94,7 +94,7 @@ permissions and limitations under the License.
                             <xs:enumeration value="min"/>
                             <xs:enumeration value="max"/>
                             <xs:enumeration value="rem"/>
-                            <xs:enumeration value="atan2"/>     <!-- moved from UniopType -->
+                            <xs:enumeration value="atan2"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
@@ -134,12 +134,12 @@ permissions and limitations under the License.
                             <xs:enumeration value="probit"/>
                             <xs:enumeration value="minus"/>
                             <xs:enumeration value="sqrt"/>
-                            <xs:enumeration value="heaviside"/>     <!-- NEW -->
-                            <xs:enumeration value="sign"/>          <!-- NEW -->
+                            <xs:enumeration value="heaviside"/>
+                            <xs:enumeration value="sign"/>
                             <xs:enumeration value="sin"/>
                             <xs:enumeration value="cos"/>
                             <xs:enumeration value="tan"/>
-                            <xs:enumeration value="cot"/>   <!--atan2 moved to BinopType -->
+                            <xs:enumeration value="cot"/>
                             <xs:enumeration value="sec"/>
                             <xs:enumeration value="csc"/>
                             <xs:enumeration value="sinh"/>
@@ -201,7 +201,6 @@ permissions and limitations under the License.
         </xs:sequence>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="PieceType">
         <xs:annotation>
             <xs:documentation>The schema type defining a `piece' in a piecewise function.</xs:documentation>
@@ -215,7 +214,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
     <xs:complexType name="ExprType">
         <xs:annotation>
