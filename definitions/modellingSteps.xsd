@@ -353,6 +353,21 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <xs:complexType name="ObservationsReferenceType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining reference to an external dataset.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="ct:OidRef"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="OperationPropertyType">
         <xs:annotation>
             <xs:documentation>
@@ -643,6 +658,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
+                    <xs:element name="ObservationsReference" minOccurs="0" type="msteps:ObservationsReferenceType"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
