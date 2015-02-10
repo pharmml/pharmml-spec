@@ -37,7 +37,9 @@ permissions and limitations under the License.
 
     <xs:import namespace="http://www.pharmml.org/pharmml/0.6/Dataset"
         schemaLocation="http://www.pharmml.org/pharmml/0.6/Dataset"/>
-
+    
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.6/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/0.6/Maths"/>
 
     <!--
         Simple Types
@@ -657,28 +659,46 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="Structure" minOccurs="0" type="design:TrialStructureType"> 
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines the structure of the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="Population" minOccurs="0" type="design:PopulationType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines the population of the study.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
-                        type="design:IndividualDosingType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Provides time dependent dosing information for each individual in the study.    
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:choice>
+                        <!-- moved from msteps -->
+                        <xs:element name="ExternalDataSet" type="design:ExternalDataSetType" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Defines the external format datset.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- /moved from msteps -->
+                        <xs:sequence>
+                            <xs:element name="Structure" minOccurs="0" type="design:TrialStructureType"> 
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Defines the structure of the study.   
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Population" minOccurs="0" type="design:PopulationType">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Defines the population of the study.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <!-- moved from msteps -->
+                            <xs:element name="ObjectiveDataSet" type="design:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <!-- /moved from msteps -->
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
+                                type="design:IndividualDosingType">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Provides time dependent dosing information for each individual in the study.    
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:choice>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -730,6 +750,215 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- moved from msteps -->
+    <xs:complexType name="DatasetMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining type data and task settings.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines mapping to the dataset containing objective data. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ds:DataSet">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Instantiates the individual template defined above with data for each subject within
+                                the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ExternalDataSetType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the external type data and task settings.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="ColumnMapping" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnMappingType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Defines mapping to the dataset. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ColumnTransformation" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnTransformationType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Allows to encode any transformation of the columns.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="MultipleDVMapping" minOccurs="0" maxOccurs="unbounded" type="design:MultipleDVMappingType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Defines mapping to the dataset containing objective data. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:sequence>
+                        <xs:element ref="ds:DataSet">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Data for each subject within the study.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="CodeInjection" minOccurs="0" type="design:CodeInjectionType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Placegholder for target tool code.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:sequence>
+                <xs:attribute name="toolName" use="required" type="ct:ToolNameType">
+                    <xs:annotation>
+                        <xs:documentation>The tool name with which the dataset is compatible.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MultipleDVMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that defines column mapping.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ds:ColumnRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The column reference to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Piecewise" type="maths:PiecewiseType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a piecewise expression.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="CodeInjectionType">
+        <xs:annotation>
+            <xs:documentation>
+                Type that defines the target tool code injection.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="SymbolMapping" type="design:SymbolMappingType">
+                        <xs:annotation>
+                            <xs:documentation>Defines parameter mapping between injected code and model.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="TargetCode" type="design:GenericCodeType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="GenericCodeType">
+        <xs:annotation>
+            <xs:documentation>
+                Defines the target tool CDATA code injection containing element.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Symbol" minOccurs="0" maxOccurs="unbounded" type="design:TargetToolSymbolType"/>
+                    <xs:element name="Code" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Original target tool code.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    
+    <xs:complexType name="TargetToolSymbolType">
+        <xs:annotation>
+            <xs:documentation>
+                Target tool variable type.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SymbolMappingType">
+        <xs:annotation>
+            <xs:documentation>
+                Type that defines variable/parameter, used in the injected code, to be mapped to the model or dataset.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The parameter reference in injected code to map to.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:element minOccurs="1" ref="ct:SymbRef">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The model parameter reference to map to.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element minOccurs="1" ref="ds:ColumnRef">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The column reference to map to.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                        
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /moved from msteps -->
+
     <xs:complexType name="DemographicType">
         <xs:annotation>
             <xs:documentation>

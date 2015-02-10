@@ -20,6 +20,7 @@ permissions and limitations under the License.
     xmlns:math="http://www.pharmml.org/pharmml/0.6/Maths"
     xmlns:ct="http://www.pharmml.org/pharmml/0.6/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.6/Dataset"
+    xmlns:design="http://www.pharmml.org/pharmml/0.6/TrialDesign"
     targetNamespace="http://www.pharmml.org/pharmml/0.6/ModellingSteps" version="0.6"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
@@ -36,6 +37,8 @@ permissions and limitations under the License.
     <xs:import namespace="http://www.pharmml.org/pharmml/0.6/Dataset"
         schemaLocation="http://www.pharmml.org/pharmml/0.6/Dataset"/>
 
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.6/TrialDesign"
+        schemaLocation="http://www.pharmml.org/pharmml/0.6/TrialDesign"/>
 
     <!--
         Simple types
@@ -293,11 +296,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="msteps:CommonModellingStepType">
                 <xs:sequence>
-                    <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
-                            <xs:annotation>
-                                <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
+                    <!-- TEST -->
+<!--                    <xs:element name="ObjectiveDataSet" type="msteps:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>Defines the objective data to use in the estimation.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <xs:element maxOccurs="1" minOccurs="1" name="ParametersToEstimate"
                         type="msteps:ToEstimateType">
                         <xs:annotation>
@@ -527,7 +532,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="DatasetMappingType">
+<!--  MOVED TO TRIAL DESIGN
+        <xs:complexType name="DatasetMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining type data and task settings.                
@@ -554,7 +560,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
+    </xs:complexType>    -->
     
     <xs:complexType name="TimepointsType">
         <xs:annotation>
@@ -650,11 +656,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="ExternalDataSet" type="msteps:ExternalDataSetType" minOccurs="0" maxOccurs="unbounded">
+                    <!-- moved to trial design -->
+<!--                    <xs:element name="ExternalDataSet" type="msteps:ExternalDataSetType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>Defines the external format datset.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /moved to trial design -->
                     <xs:element name="TargetTool" type="msteps:TargetToolType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
@@ -677,7 +685,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="ExternalDataSetType">
+<!--  moved to trial design
+        <xs:complexType name="ExternalDataSetType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the external type data and task settings.                
@@ -690,7 +699,7 @@ permissions and limitations under the License.
                         <xs:element name="ColumnMapping" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnMappingType">
                             <xs:annotation>
                                 <xs:documentation>
-                                    Defines mapping to the dataset containing objective data. 
+                                    Defines mapping to the dataset. 
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
@@ -734,10 +743,11 @@ permissions and limitations under the License.
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     
-    <xs:complexType name="MultipleDVMappingType">
+<!-- moved to trail design
+        <xs:complexType name="MultipleDVMappingType">
         <xs:annotation>
             <xs:documentation>
                 The type that defines column mapping.
@@ -761,7 +771,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     <xs:complexType name="TargetToolType">
         <xs:annotation>
@@ -799,7 +809,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="CodeInjection" minOccurs="0" type="msteps:CodeInjectionType">
+                    <xs:element name="CodeInjection" minOccurs="0" type="design:CodeInjectionType">
                         <xs:annotation>
                             <xs:documentation>
                                 Instantiates the individual template defined above with data for each subject within
@@ -813,7 +823,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="SymbolMappingType">
+<!--  moved to trial design
+        <xs:complexType name="SymbolMappingType">
         <xs:annotation>
             <xs:documentation>
                 Type that defines variable/parameter, used in the injected code, to be mapped to the model or dataset.
@@ -848,9 +859,10 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
 
-    <xs:complexType name="CodeInjectionType">
+<!--  moved to trial design
+        <xs:complexType name="CodeInjectionType">
         <xs:annotation>
             <xs:documentation>
                 Type that defines the target tool code injection.
@@ -868,9 +880,10 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
+    </xs:complexType>    -->
 
-    <xs:complexType name="GenericCodeType">
+    <!-- moved to trial design
+        <xs:complexType name="GenericCodeType">
         <xs:annotation>
             <xs:documentation>
                 Defines the target tool CDATA code injection containing element.
@@ -890,9 +903,10 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
+    </xs:complexType>    -->
     
-    <xs:complexType name="TargetToolSymbolType">
+<!--  moved to trial design
+        <xs:complexType name="TargetToolSymbolType">
         <xs:annotation>
             <xs:documentation>
                 Target tool variable type.
@@ -903,7 +917,7 @@ permissions and limitations under the License.
                 <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>                
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     
     <!--

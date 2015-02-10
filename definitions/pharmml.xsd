@@ -18,7 +18,8 @@ permissions and limitations under the License.
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://www.pharmml.org/pharmml/0.6/PharmML"
     xmlns:mml="http://www.pharmml.org/pharmml/0.6/PharmML"
-    xmlns:math="http://www.pharmml.org/pharmml/0.6/Maths" xmlns:distrib="http://www.uncertml.org/3.0"
+    xmlns:math="http://www.pharmml.org/pharmml/0.6/Maths" 
+    xmlns:distrib="http://www.uncertml.org/3.0"
     xmlns:design="http://www.pharmml.org/pharmml/0.6/TrialDesign"
     xmlns:ct="http://www.pharmml.org/pharmml/0.6/CommonTypes"
     xmlns:msteps="http://www.pharmml.org/pharmml/0.6/ModellingSteps"
@@ -134,7 +135,7 @@ permissions and limitations under the License.
                 <xs:documentation>Defines the OID key.</xs:documentation>
             </xs:annotation>
             <xs:selector    
-                xpath=".//design:Epoch|.//design:Arm|.//design:Cell|.//design:Activity|.//design:Segment|.//design:Individual|.//design:Demographic|.//msteps:SimulationStep|.//msteps:EstimationStep|.//design:ObservationsEvent|.//msteps:ExternalDataSet|.//msteps:TargetTool"/>
+                xpath=".//design:Epoch|.//design:Arm|.//design:Cell|.//design:Activity|.//design:Segment|.//design:Individual|.//design:Demographic|.//msteps:SimulationStep|.//msteps:EstimationStep|.//design:ObservationsEvent|.//design:ExternalDataSet|.//msteps:TargetTool"/>
             <xs:field xpath="@oid"/>
         </xs:key>
         <xs:keyref refer="mml:oidKey" name="oidRef">
