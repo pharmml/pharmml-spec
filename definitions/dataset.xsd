@@ -564,6 +564,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TODO -->
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>
@@ -571,6 +572,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TODO -->
                 </xs:sequence>
                 <xs:attribute name="transformId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
