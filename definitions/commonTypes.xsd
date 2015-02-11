@@ -868,11 +868,16 @@ permissions and limitations under the License.
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
                         <!-- TODO -->
-                        <xs:element ref="math:Equation">
+                        <xs:element ref="ct:Assign">
+                            <xs:annotation>
+                                <xs:documentation>Any expression or scalar to be inserted into the matrix cell.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+<!--                        <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
-                        </xs:element>
+                        </xs:element>-->
                         <!-- /TODO -->
                     </xs:choice>
                 </xs:sequence>
@@ -883,7 +888,7 @@ permissions and limitations under the License.
     <xs:complexType name="MatrixRowType">
         <xs:annotation>
             <xs:documentation>This type specifies a row of values in a matrix. The row can contain indexed cells or 
-                scalars/symbols filling the whole row. Index of the matrix row is optoinal. If cells are defined inside rows, 
+                scalars/symbols filling the whole row. Index of the matrix row is optional. If cells are defined inside rows, 
                 the cells will be indexed relative to the row.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -903,11 +908,16 @@ permissions and limitations under the License.
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
                         <!-- TODO -->
-                        <xs:element ref="math:Equation">
+                        <xs:element ref="ct:Assign">
+                            <xs:annotation>
+                                <xs:documentation>Any expression or scalar to be inserted into the matrix row.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+<!--                        <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
-                        </xs:element>
+                        </xs:element>-->
                         <!-- /TODO -->
                     </xs:choice>
                 </xs:sequence>
@@ -1045,11 +1055,16 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
                     <!-- TODO -->
-                    <xs:element ref="math:Equation">
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Any expression or scalar to be inserted into the matrix/vector index.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+<!--                    <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     <!-- /TODO -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>
@@ -1111,11 +1126,16 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <!-- TODO -->
-                        <xs:element ref="math:Equation">
+                        <xs:element ref="ct:Assign">
+                            <xs:annotation>
+                                <xs:documentation>Any expression or scalar to be assigned to the sum.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+<!--                        <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
-                        </xs:element>
+                        </xs:element>-->
                         <!-- /TODO -->
                     </xs:choice>
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
@@ -1158,11 +1178,16 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <!-- TODO -->
-                        <xs:element ref="math:Equation">
+                        <xs:element ref="ct:Assign">
+                            <xs:annotation>
+                                <xs:documentation>Any expression or scalar to be assigned to the product.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+<!--                        <xs:element ref="math:Equation">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
-                        </xs:element>
+                        </xs:element>-->
                         <!-- /TODO -->
                     </xs:choice>
                     <xs:element name="ProductIndex" type="ct:SumProductIndexType"/>
@@ -1187,11 +1212,16 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
                     <!-- TODO -->
-                    <xs:element ref="math:Equation">
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Any expression or scalar to be assigned to the sum.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+<!--                    <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     <!-- /TODO -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>

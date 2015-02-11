@@ -1284,7 +1284,7 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the transformed covariate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TODO -->
+                    <!-- TEST -->
                     <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>
@@ -1292,7 +1292,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TODO -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

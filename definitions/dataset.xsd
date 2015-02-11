@@ -565,13 +565,18 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TODO -->
-                    <xs:element ref="math:Equation">
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Any expression or scalar to be inserted into the matrix row.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+<!--                    <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>
                                 The transformation is defined as an equation that must include a reference to the column, defined by the parent of this element.  
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     <!-- /TODO -->
                 </xs:sequence>
                 <xs:attribute name="transformId" type="ct:SymbolIdType" use="required">
