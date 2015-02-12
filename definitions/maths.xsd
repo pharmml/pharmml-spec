@@ -489,7 +489,7 @@ permissions and limitations under the License.
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
-    <xs:element name="Equation">
+<!--    <xs:element name="Equation">
         <xs:annotation>
             <xs:documentation>A mathematical expression that is evaluated to a scalar type.</xs:documentation>
         </xs:annotation>
@@ -498,5 +498,5 @@ permissions and limitations under the License.
                 <xs:extension base="math:EquationType"> </xs:extension>
             </xs:complexContent>
         </xs:complexType>
-    </xs:element>
+    </xs:element>-->
 </xs:schema>
