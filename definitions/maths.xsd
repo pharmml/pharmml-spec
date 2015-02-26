@@ -417,14 +417,7 @@ permissions and limitations under the License.
             <xs:element minOccurs="0" ref="ct:Symbol"/>
             <xs:element minOccurs="0" ref="ct:Description"/>
             <xs:choice>
-                <!-- TODO -->
-                <xs:element ref="ct:Assign">
-                    <xs:annotation>
-                        <xs:documentation>Any expression or scalar to be assigned to the function argument.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
-<!--                <xs:element maxOccurs="1" ref="math:Equation"/>-->
-                <!-- /TODO -->
+                <xs:element maxOccurs="1" ref="math:Equation"/>
                 <xs:element ref="ct:Scalar"/>
                 <xs:element ref="math:Constant"/>
                 <xs:element ref="ct:SymbRef"/>
@@ -489,7 +482,7 @@ permissions and limitations under the License.
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
-<!--    <xs:element name="Equation">
+    <xs:element name="Equation">
         <xs:annotation>
             <xs:documentation>A mathematical expression that is evaluated to a scalar type.</xs:documentation>
         </xs:annotation>
@@ -498,5 +491,5 @@ permissions and limitations under the License.
                 <xs:extension base="math:EquationType"> </xs:extension>
             </xs:complexContent>
         </xs:complexType>
-    </xs:element>-->
+    </xs:element>
 </xs:schema>

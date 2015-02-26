@@ -601,15 +601,13 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <!-- TEST ScalarRhs -> Rhs -->
-            <xs:extension base="ct:Rhs">
+            <xs:extension base="ct:ScalarRhs">
                 <xs:attribute name="fixed" type="xs:boolean">
                     <xs:annotation>
                         <xs:documentation>Specifies whether the initial estimate is fixed. If it is then this means that this parameter is not estimated, but assigned. If fixed is true then the upper and lower bounds are ignored.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
-            <!-- /TEST -->
         </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="ParameterEstimateType">
@@ -634,18 +632,16 @@ permissions and limitations under the License.
                             <xs:documentation>The initial estimate to use.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST ScalarRhs -> Rhs -->
-                    <xs:element minOccurs="0" name="LowerBound" type="ct:Rhs">
+                    <xs:element minOccurs="0" name="LowerBound" type="ct:ScalarRhs">
                         <xs:annotation>
                             <xs:documentation>The lower bounds of the estimate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="UpperBound" type="ct:Rhs">
+                    <xs:element minOccurs="0" name="UpperBound" type="ct:ScalarRhs">
                         <xs:annotation>
                             <xs:documentation>The upper bounds of the estimate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
