@@ -538,7 +538,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="CellDefnType">
+    <!-- TEST -->
+<!--   not required
+        <xs:complexType name="CellDefnType">
         <xs:annotation>
             <xs:documentation>
                 Type defining a Cell in the study.  
@@ -573,7 +575,8 @@ permissions and limitations under the License.
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
+    <!-- /TEST -->
     <xs:complexType name="SegmentDefnType">
         <xs:complexContent>
             <xs:annotation>
@@ -618,13 +621,15 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" name="Cell" type="design:CellDefnType">
+                    <!-- TEST -->
+<!--                    <xs:element maxOccurs="unbounded" name="Cell" type="design:CellDefnType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a cell in the study.   
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <xs:element name="Segment" maxOccurs="unbounded" type="design:SegmentDefnType">
                         <xs:annotation>
                             <xs:documentation>

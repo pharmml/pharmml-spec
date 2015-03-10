@@ -135,7 +135,7 @@ permissions and limitations under the License.
                 <xs:documentation>Defines the OID key.</xs:documentation>
             </xs:annotation>
             <xs:selector    
-                xpath=".//design:Epoch|.//design:Arm|.//design:Cell|.//design:Activity|.//design:Segment|.//design:Individual|.//msteps:SimulationStep|.//msteps:EstimationStep|.//design:ObservationsEvent|.//design:ExternalDataSet|.//msteps:TargetTool|.//design:Observations"/>
+                xpath=".//design:Epoch|.//design:Arm|.//design:Activity|.//design:Segment|.//design:Individual|.//msteps:SimulationStep|.//msteps:EstimationStep|.//design:ObservationsEvent|.//design:ExternalDataSet|.//msteps:TargetTool|.//design:Observations"/>
             <xs:field xpath="@oid"/>
         </xs:key>
         <xs:keyref refer="mml:oidKey" name="oidRef">
