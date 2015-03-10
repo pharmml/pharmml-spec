@@ -607,17 +607,17 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="design:Activity">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an activity in the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element maxOccurs="unbounded" name="Epoch" type="design:EpochDefnType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines an epoch in the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines an arm of the study.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
@@ -637,17 +637,17 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" ref="design:Activity">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines an activity in the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                     <xs:element maxOccurs="unbounded" ref="design:StudyEvent" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a study event. Typically an Observation Event.  
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an arm of the study.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
