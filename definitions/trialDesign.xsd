@@ -445,13 +445,15 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Name">
+                    <!-- TEST - removed -->
+<!--                    <xs:element minOccurs="0" ref="ct:Name">
                         <xs:annotation>
                             <xs:documentation>
                                 A descriptive name for this set of observations.
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>In effect defines the population of subjects that this event happens to.</xs:documentation>
