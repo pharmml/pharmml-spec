@@ -1068,7 +1068,8 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /moved from msteps -->
 
-    <xs:complexType name="DemographicType">
+    <!-- TEST redundant type -->
+<!--    <xs:complexType name="DemographicType">
         <xs:annotation>
             <xs:documentation>
                 The type defining a demographic attribute of the subject.
@@ -1107,7 +1108,8 @@ permissions and limitations under the License.
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
+    <!-- /TEST -->
     <xs:complexType abstract="true" name="PopulationMappingType">
         <xs:annotation>
             <xs:documentation>
