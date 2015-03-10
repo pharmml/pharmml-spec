@@ -749,7 +749,9 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" name="Demographic"
+                    <!-- TEST -->
+<!--                Redundant with columnType=covariate
+                        <xs:element minOccurs="0" maxOccurs="unbounded" name="Demographic"
                         type="design:DemographicType">
                         <xs:annotation>
                             <xs:documentation>
@@ -757,8 +759,8 @@ permissions and limitations under the License.
                                 important in the design of the study.    
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
-                    
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <xs:element name="ColumnMapping" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
