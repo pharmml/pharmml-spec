@@ -383,7 +383,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType abstract="true" name="StudyEventType">
+    <!-- TEST -->
+<!--    <xs:complexType abstract="true" name="StudyEventType">
         <xs:annotation>
             <xs:documentation>
                 A type defining a study event (a CDISC term). In our case such events are observations take during the study.  
@@ -401,8 +402,10 @@ permissions and limitations under the License.
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="ObservationsType">
+    </xs:complexType>-->
+    <!-- TEST -->
+<!--  OROIIGINAL  
+        <xs:complexType name="ObservationsType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the set of observations taken from a set of subjects.
@@ -430,9 +433,46 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>--> 
+    <!-- TEST - teh oroginal needs modification - moving 'ArmRef' from redundant StudyEvent
+    and changing extension type -->
+    <xs:complexType name="ObservationsType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the set of observations taken from a set of subjects.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Name">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A descriptive name for this set of observations.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>In effect defines the population of subjects that this event happens to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" ref="ct:VariabilityReference">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to the variability level that describes the random variability associated with
+                                these observations. Typically this is used to describe Random Inter-Occasion Variability. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="ObservationGroup" type="design:ObservationsGroupType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
     
-        <xs:complexType name="StudyTimePointType">
+    <xs:complexType name="StudyTimePointType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the timepoint in a study.
@@ -623,6 +663,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /moved from msteps -->
+                    <!-- TEST - used to be by ref=StudyEvent -->
+                    <xs:element name="Occasions" maxOccurs="unbounded" type="design:ObservationsType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a study event. Typically an Observation Event.  
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" name="Epoch" type="design:EpochDefnType">
                         <xs:annotation>
                             <xs:documentation>
@@ -643,13 +692,6 @@ permissions and limitations under the License.
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a segment of the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" ref="design:StudyEvent" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines a study event. Typically an Observation Event.  
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
@@ -1269,14 +1311,25 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="ObservationsEvent" substitutionGroup="design:StudyEvent"
+    <!-- TEST not required -> Occasions -->
+<!--    <xs:element name="ObservationsEvent" type="design:ObservationsType">
+        <xs:annotation>
+            <xs:documentation>
+                Defines an observations event in the study,  
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>-->
+    <!-- /TEST -->
+    <!-- TEST -->
+<!-- ORG   <xs:element name="ObservationsEvent" substitutionGroup="design:StudyEvent"
         type="design:ObservationsType">
         <xs:annotation>
             <xs:documentation>
                 Defines an observations event in the study,  
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
+    <!-- /TEST -->
     
     <xs:element name="TrialDesign" type="design:TrialDesignType">
         <xs:annotation>
@@ -1285,14 +1338,16 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element abstract="true" name="StudyEvent" type="design:StudyEventType">
+    <!-- TEST -->
+<!--    <xs:element abstract="true" name="StudyEvent" type="design:StudyEventType">
         <xs:annotation>
             <xs:documentation>
                 An abstract element for all study events. There is only one element inheriting from this so this
                 be superfluous in the future.                        
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
+    <!-- /TEST -->
     
     <xs:element name="Timepoints" type="design:TimepointsType"/>
     
