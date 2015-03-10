@@ -533,7 +533,9 @@ permissions and limitations under the License.
                     <xs:enumeration value="censoring"/>
                     <xs:enumeration value="cmt"/>
                     <xs:enumeration value="covariate"/>
-                    <xs:enumeration value="demographic"/>
+                    <!-- TEST -->
+<!--                    <xs:enumeration value="demographic"/>-->
+                    <!-- /TEST -->
                     <xs:enumeration value="dose"/>
                     <xs:enumeration value="duration"/>
                     <xs:enumeration value="dv"/>
