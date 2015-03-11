@@ -454,11 +454,13 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>-->
                     <!-- /TEST -->
-                    <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
+                    <!-- TEST -->
+<!--                    <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>In effect defines the population of subjects that this event happens to.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>
@@ -530,13 +532,15 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:choice>
-                        <xs:element minOccurs="1" name="EpochRef" type="ct:OidRefType">
+                        <!-- TEST to be removed -->
+<!--                        <xs:element minOccurs="1" name="EpochRef" type="ct:OidRefType">
                             <xs:annotation>
                                 <xs:documentation>
                                     Refers to the epoch during which this group of observations occurred.  
                                 </xs:documentation>
                             </xs:annotation>
-                        </xs:element>
+                        </xs:element>-->
+                        <!-- /TEST to be removed -->
                         <xs:element name="Period" type="design:StudyPeriodType">
                             <xs:annotation>
                                 <xs:documentation>
@@ -777,6 +781,10 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
+                    <!-- TEST ??? -->
+                    <xs:element ref="design:LookupTable"/>
+                    <!-- TEST -->
+                    
                     <xs:element name="ObservationsDataset" type="design:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>Defines the observation in a dataset to use in the tasks.</xs:documentation>
