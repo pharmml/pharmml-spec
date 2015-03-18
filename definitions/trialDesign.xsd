@@ -586,10 +586,18 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="Segment" maxOccurs="unbounded" type="design:SegmentDefnType">
+                    <xs:element name="armSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                    <xs:element name="TreatmentSegment" minOccurs="0" maxOccurs="unbounded" type="design:TreatmentSegmentType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines a segment of the study.   
+                                Defines a treatment segment of the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="ObservationSegment" minOccurs="0" maxOccurs="unbounded" type="design:ObservationSegmentType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a observation segment of the study.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
@@ -600,6 +608,18 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
+<!--    <xs:complexType name="ArmSizeType">
+        <xs:annotation>
+            <xs:documentation>Type for defining the arm size</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element></xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>-->
     <!-- TEST -->
 <!--   not required
         <xs:complexType name="CellDefnType">
@@ -639,27 +659,56 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>-->
     <!-- /TEST -->
-    <xs:complexType name="SegmentDefnType">
+    <!-- TEST changed from SegmentDefnType -->
+    <xs:complexType name="TreatmentSegmentType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
-                    Type defining a segment of the study.  
+                    Type defining a treatment segment of the study.  
                 </xs:documentation>
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="ActivityRef" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to an activity carried out in the segment of the study.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST changed from SegmentDefnType -->
+    <xs:complexType name="TreatmentListType">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>
+                    Type defining a treatment list of the study.  
+                </xs:documentation>
+            </xs:annotation>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="ObservationSegmentType">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>
+                    Type defining a observation segment of the study.  
+                </xs:documentation>
+            </xs:annotation>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="TrialStructureType">
         <xs:annotation>
             <xs:documentation>
@@ -685,7 +734,16 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /moved from msteps -->
-                    <!-- TEST - used to be by ref=StudyEvent -->
+                    <!-- moved from below -->
+                    <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an arm of the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /moved from below -->
+                    <!--<!-\- TEST - used to be by ref=StudyEvent -\->
                     <xs:element name="Occasions" maxOccurs="unbounded" type="design:OccasionsType" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>
@@ -693,7 +751,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
+                    <!-\- /TEST -\->
                     <xs:element maxOccurs="unbounded" name="Epoch" type="design:EpochDefnType">
                         <xs:annotation>
                             <xs:documentation>
@@ -701,7 +759,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
+                    <!-\- TEST -\->-->
 <!--                    <xs:element maxOccurs="unbounded" name="Cell" type="design:CellDefnType">
                         <xs:annotation>
                             <xs:documentation>
@@ -719,13 +777,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>-->
                     <!-- /TEST -->
-                    <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines an arm of the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
