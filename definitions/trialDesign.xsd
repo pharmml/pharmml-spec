@@ -576,6 +576,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
     <xs:complexType name="ArmDefnType">
         <xs:annotation>
             <xs:documentation>
@@ -584,10 +585,21 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Segment" maxOccurs="unbounded" type="design:SegmentDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a segment of the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    
+                </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     <!-- TEST -->
 <!--   not required
         <xs:complexType name="CellDefnType">
@@ -698,13 +710,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>-->
                     <!-- /TEST -->
-                    <xs:element name="Segment" maxOccurs="unbounded" type="design:SegmentDefnType">
+                    <!-- TEST -->
+<!--                    <xs:element name="Segment" maxOccurs="unbounded" type="design:SegmentDefnType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a segment of the study.   
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
                         <xs:annotation>
                             <xs:documentation>
