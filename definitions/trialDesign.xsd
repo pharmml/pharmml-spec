@@ -669,13 +669,15 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    
+                    <xs:element name="TreatmentList" type="design:TreatmentListType"/>
+                    <xs:element name="Start" type="design:TimepointsType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST changed from SegmentDefnType -->
+    <!-- TEST -->
     <xs:complexType name="TreatmentListType">
         <xs:complexContent>
             <xs:annotation>
@@ -687,7 +689,6 @@ permissions and limitations under the License.
                 <xs:sequence>
                     
                 </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -702,13 +703,31 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-
+                    <xs:element name="ObservationList" type="design:ObservationListType"/>
+                    <xs:element name="Start" type="design:TimepointsType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="ObservationListType">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>
+                    Type defining a observation list of the study.  
+                </xs:documentation>
+            </xs:annotation>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="TrialStructureType">
         <xs:annotation>
             <xs:documentation>
@@ -1315,9 +1334,14 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
+                <!-- TEST -->
+                <xs:choice>
                     <xs:element ref="ct:Arrays"/>
-                </xs:sequence>
+                    <!-- TEST -->
+                    <xs:element ref="ct:Scalar"/>
+                    <!-- /TEST -->
+                </xs:choice>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
