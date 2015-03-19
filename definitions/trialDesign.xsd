@@ -316,9 +316,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="ct:SymbRef"/>
-                    <xs:element name="ResetValue" type="ct:RealValueType"/>
-                    <xs:element name="ResetTime" type="ct:RealValueType"/>
+                    <xs:choice>
+                        <xs:element ref="ct:SymbRef"/>
+                        <xs:element name="FullReset"/>
+                    </xs:choice>
+                    <xs:element name="ResetValue" minOccurs="0" type="ct:RealValueType"/>
+                    <xs:element name="ResetTime" minOccurs="0" type="ct:RealValueType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -808,7 +811,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <!-- /TEST -->
                     <!-- TEST -->
-                    <xs:element name="Action" maxOccurs="unbounded" type="design:ActionType">
+                    <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="design:ActionType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines an action in the study - reset or wahsout.   
