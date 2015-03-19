@@ -765,6 +765,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /moved from msteps -->
+                    <!-- moved here -->
+                    <xs:element name="Occasions" maxOccurs="unbounded" type="design:OccasionsType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an occasion.  
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /moved here -->
                     <!-- moved from below -->
                     <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
                         <xs:annotation>
