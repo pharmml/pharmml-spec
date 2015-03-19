@@ -285,6 +285,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
+    <!-- TEST -->
     <xs:complexType name="WashoutType">
         <xs:annotation>
             <xs:documentation>
@@ -292,9 +293,37 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType"/>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element name="VariableToReset" type="design:VariableToResetType"/>
+                    <xs:sequence>
+                        <xs:element name="Start" type="design:TimepointsType"/>
+                        <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>
+                    </xs:sequence>
+                </xs:choice>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="VariableToResetType">
+        <xs:annotation>
+            <xs:documentation>
+                Varible to be reset with options specification.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef"/>
+                    <xs:element name="ResetValue" type="ct:RealValueType"/>
+                    <xs:element name="ResetTime" type="ct:RealValueType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <xs:complexType name="LookupTableType">
         <xs:annotation>
@@ -750,10 +779,10 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element maxOccurs="unbounded" ref="design:Activity">
+                    <xs:element name="Activity" maxOccurs="unbounded" type="design:ActivityType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines an activity in the study.   
+                                Defines an activity in the study - treatment or wahsout.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
@@ -1414,13 +1443,15 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element abstract="false" name="Activity" type="design:ActivityType">
+    <!-- TEST -->
+<!--    <xs:element abstract="false" name="Activity" type="design:ActivityType">
         <xs:annotation>
             <xs:documentation>
                 Specifies an activity in the trial structure.  
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
+    <!-- /TEST -->
     <xs:element name="Washout" type="design:WashoutType">
         <xs:annotation>
             <xs:documentation>
