@@ -295,7 +295,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element name="VariableToReset" type="design:VariableToResetType"/>
+                    <xs:element name="VariableToReset" maxOccurs="unbounded" type="design:VariableToResetType"/>
                     <xs:sequence>
                         <xs:element name="Start" type="design:TimepointsType"/>
                         <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>
@@ -393,7 +393,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="ActivityType" abstract="false">
+    <xs:complexType name="AdministrationType">
         <xs:annotation>
             <xs:documentation>
                 An activity that occurs during dosing. 
@@ -405,6 +405,25 @@ permissions and limitations under the License.
                     <xs:choice>
                         <xs:element ref="design:LookupTable"/>
                         <xs:element ref="design:DosingRegimen"/>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="ActionType">
+        <xs:annotation>
+            <xs:documentation>
+                An action that occurs during . 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:choice>
                         <xs:element ref="design:Washout"/>
                     </xs:choice>
                 </xs:sequence>
@@ -413,6 +432,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- TEST -->
+    
 <!--    <xs:complexType abstract="true" name="StudyEventType">
         <xs:annotation>
             <xs:documentation>
@@ -779,10 +799,19 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element name="Activity" maxOccurs="unbounded" type="design:ActivityType">
+                    <xs:element name="Administration" maxOccurs="unbounded" type="design:AdministrationType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines an activity in the study - treatment or wahsout.   
+                                Defines a treatment in the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element name="Action" maxOccurs="unbounded" type="design:ActionType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an action in the study - reset or wahsout.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
