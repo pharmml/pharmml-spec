@@ -1032,6 +1032,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <xs:element name="NumberTimes" minOccurs="0" type="xs:int"/>
                     <xs:element ref="design:Timepoints">
                         <xs:annotation>
                             <xs:documentation>
