@@ -721,20 +721,34 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:sequence maxOccurs="unbounded">
-                        <xs:element name="ObservationRef" maxOccurs="unbounded" type="ct:OidRefType">
-                            <xs:annotation>
-                                <xs:documentation>Reference to an observation.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="ObservationStart" minOccurs="0" type="design:TimepointsType"/>
-                    </xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Observation" type="design:SingleObservationType"/>
                     <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="SingleObservationType">
+        <xs:annotation>
+            <xs:documentation>Signle observation type as element of ObservationsCombination.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="ObservationRef" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to an observation.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <!-- TEST -->
     <xs:simpleType name="RelativeType">
         <xs:annotation>
