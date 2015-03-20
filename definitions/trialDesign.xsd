@@ -842,20 +842,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element name="Administration" maxOccurs="unbounded" type="design:AdministrationType">
+                    <xs:element name="Interventions" type="design:InterventionsType">
                         <xs:annotation>
-                            <xs:documentation>
-                                Defines a treatment in the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-- /TEST -->
-                    <!-- TEST -->
-                    <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="design:ActionType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines an action in the study - reset or wahsout.   
-                            </xs:documentation>
+                            <xs:documentation>Defines the administrations and actions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
@@ -876,11 +865,9 @@ permissions and limitations under the License.
                     </xs:element>
                     <!-- /moved here -->
                     <!-- moved from below -->
-                    <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
+                    <xs:element name="Arms" type="design:ArmsType">
                         <xs:annotation>
-                            <xs:documentation>
-                                Defines an arm of the study.   
-                            </xs:documentation>
+                            <xs:documentation>Desines the arms in the study and properties applicable to all arms.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /moved from below -->
@@ -1068,6 +1055,57 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="ArmsType">
+        <xs:annotation>
+            <xs:documentation>Type for the definition of arms and their properties.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="armSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                    <xs:element name="totalNumberSamples" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an arm of the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="InterventionsType">
+        <xs:annotation>
+            <xs:documentation>Type defining the interventions: administrations and acgtions.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Administration" maxOccurs="unbounded" type="design:AdministrationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a treatment in the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="design:ActionType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an action in the study - reset or wahsout.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <!-- moved from msteps -->
     <xs:complexType name="ObservationsExplicitType">
