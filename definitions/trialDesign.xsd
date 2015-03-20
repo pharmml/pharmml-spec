@@ -639,7 +639,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="armSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
-                    <xs:element name="TreatmentSegment" minOccurs="0" maxOccurs="unbounded" type="design:TreatmentSegmentType">
+                    <xs:element name="InterventionSegment" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSegmentType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a treatment segment of the study.   
@@ -752,7 +752,7 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST changed from SegmentDefnType -->
-    <xs:complexType name="TreatmentSegmentType">
+    <xs:complexType name="InterventionSegmentType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
@@ -761,7 +761,7 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="TreatmentList" type="design:TreatmentListType"/>
+                    <xs:element name="InterventionList" type="design:InterventionListType"/>
                     <xs:element name="Start" type="design:TimepointsType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -770,7 +770,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST changed from SegmentDefnType -->
     <!-- TEST -->
-    <xs:complexType name="TreatmentListType">
+    <xs:complexType name="InterventionListType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
