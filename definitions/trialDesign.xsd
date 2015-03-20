@@ -816,7 +816,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="ObservationList" type="design:ObservationListType"/>
-                    <xs:element name="Start" type="design:TimepointsType"/>
+                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
