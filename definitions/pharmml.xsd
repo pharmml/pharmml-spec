@@ -143,7 +143,7 @@ permissions and limitations under the License.
                 <xs:documentation>Ensures all treatment Id refs point to valid treatment id. Prevents dangling references.</xs:documentation>
             </xs:annotation>
             <xs:selector
-                xpath=".//design:ActivityRef|.//design:SegmentRef|.//design:ArmRef|.//design:EpochRef|.//design:CellRef|.//ct:OidRef"/>
+                xpath=".//design:ObservationRef|.//design:InterventionRef|.//design:ArmRef|.//design:EpochRef|.//design:CellRef|.//ct:OidRef"/>
             <xs:field xpath="@oidRef"/>
         </xs:keyref>
     </xs:element>
