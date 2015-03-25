@@ -653,7 +653,13 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    
+                    <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a occasion segment of the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -818,7 +824,7 @@ permissions and limitations under the License.
                     <xs:element name="ObservationList" type="design:ObservationListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
-<!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
+                <!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -837,6 +843,46 @@ permissions and limitations under the License.
                         <xs:annotation>
                             <xs:documentation>
                                 Refers to the observation being instantiated here. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="OccasionSegmentType">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>
+                    Type defining an occasion segment of the study.  
+                </xs:documentation>
+            </xs:annotation>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="OccasionList" type="design:OccasionListType"/>
+                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
+                </xs:sequence>
+                <!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="OccasionListType">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>
+                    Type defining an occasion list of the study.  
+                </xs:documentation>
+            </xs:annotation>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="OccasionRef" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to the occasion being instantiated here. 
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
