@@ -778,7 +778,7 @@ permissions and limitations under the License.
                     <xs:element name="InterventionList" type="design:InterventionListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+<!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -818,7 +818,7 @@ permissions and limitations under the License.
                     <xs:element name="ObservationList" type="design:ObservationListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+<!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
