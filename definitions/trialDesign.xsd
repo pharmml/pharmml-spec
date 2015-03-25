@@ -639,6 +639,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="armSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                    <xs:element name="numberTimes" minOccurs="0" type="xs:int"/>
+                    <xs:element name="numberArms" minOccurs="0" type="xs:int"/>
+                    <xs:element name="totalNumberSamples" minOccurs="0" type="xs:int"/>
                     <xs:element name="InterventionSegment" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSegmentType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1125,10 +1128,6 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="totalSize" minOccurs="0" type="xs:int"/>
-                    <xs:element name="numberTimes" minOccurs="0" type="xs:int"/>
-                    <xs:element name="numberArms" minOccurs="0" type="xs:int"/>
-                    <xs:element name="armSize" minOccurs="0" type="xs:int"/>
-                    <xs:element name="totalNumberSamples" minOccurs="0" type="xs:int"/>
                     <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
                         <xs:annotation>
                             <xs:documentation>
