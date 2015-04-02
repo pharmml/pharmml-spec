@@ -32,9 +32,12 @@ permissions and limitations under the License.
     <!--
         Imports
         -->
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.6/ModelDefinition"
+        schemaLocation="http://www.pharmml.org/pharmml/0.6/ModelDefinition"/>
+    
     <xs:import namespace="http://www.pharmml.org/pharmml/0.6/CommonTypes"
         schemaLocation="http://www.pharmml.org/pharmml/0.6/CommonTypes"/>
-
+    
     <xs:import namespace="http://www.pharmml.org/pharmml/0.6/Dataset"
         schemaLocation="http://www.pharmml.org/pharmml/0.6/Dataset"/>
     
@@ -639,8 +642,13 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="armSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                    <xs:element name="numberArms" minOccurs="0" type="xs:int"/>
+                    <xs:element name="numberSamples" minOccurs="0" type="xs:int"/>
                     <xs:element name="numberTimes" minOccurs="0" type="xs:int"/>
-                    <xs:element name="totalNumberSamples" minOccurs="0" type="xs:int"/>
+                    <xs:element name="sameTimes" minOccurs="0" maxOccurs="1" type="xs:int"/>
+                    <xs:element name="totalCost" minOccurs="0" type="xs:int"/>
+                    <xs:element name="totalSize" minOccurs="0" type="xs:int"/>
+
                     <xs:element name="InterventionSegment" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSegmentType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1129,11 +1137,18 @@ permissions and limitations under the License.
                     <xs:element name="armSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
                     <xs:element name="minSamples" minOccurs="0" maxOccurs="1" type="xs:int"/>
                     <xs:element name="maxSamples" minOccurs="0" maxOccurs="1" type="xs:int"/>
-                    <xs:element name="numberArms" minOccurs="0" type="xs:int"/>
                     <xs:element name="numberTimes" minOccurs="0" type="xs:int"/>
                     <xs:element name="totalCost" minOccurs="0" type="xs:int"/>
                     <xs:element name="totalNumberSamples" minOccurs="0" type="xs:int"/>
                     <xs:element name="totalSize" minOccurs="0" type="xs:int"/>
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
+                        type="mdef:CovariateModelType">
+                        <xs:annotation>
+                            <xs:documentation>A covariate model.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
                         <xs:annotation>
                             <xs:documentation>
