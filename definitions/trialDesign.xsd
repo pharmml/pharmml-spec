@@ -1201,7 +1201,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="NumberTimes" minOccurs="0" type="xs:int"/>
-                    <xs:element ref="design:Timepoints">
+                    <xs:element name="SampleTime" type="design:TimepointsType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the time-points of the observations.  
@@ -1705,6 +1705,6 @@ permissions and limitations under the License.
     </xs:element>-->
     <!-- /TEST -->
     
-    <xs:element name="Timepoints" type="design:TimepointsType"/>
+<!--    <xs:element name="SampleTime" type="design:TimepointsType"/>-->
     
 </xs:schema>
