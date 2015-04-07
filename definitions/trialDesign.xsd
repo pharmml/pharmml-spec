@@ -641,6 +641,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="ArmRef" minOccurs="0" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to an amr on which the current arm is based.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="NumberSamples" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
