@@ -127,6 +127,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+   
     
     <xs:complexType name="DosingRegimenType" abstract="true">
         <xs:annotation>
@@ -1128,15 +1129,57 @@ permissions and limitations under the License.
                                 <xs:documentation>Reference to an observation already defined.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        
                     </xs:choice>
+                    <xs:element name="DoseAmount" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>Dosing information.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="NumberTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>Sampling information.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="SampleTime" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>Sampling information.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    
+    <!-- /TEST -->
+
+    <!-- TEST -->
+    <xs:complexType name="AttributesDesignSpaceType">
+        <xs:annotation>
+            <xs:documentation>
+                The type that specifies short format for dosing variable used in design spaces.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialise the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>The value of the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                </xs:choice>            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <!-- /TEST -->
     
     <xs:complexType name="PopulationType">
