@@ -285,6 +285,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
+                    <!-- TEST -->
+                    <xs:element ref="ct:Range"/>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
@@ -329,6 +332,57 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
+    <!-- TEST -->
+    <xs:complexType name="RangeType">
+        <xs:annotation>
+            <xs:documentation>The definition of a range of numbers.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="LeftEndpoint" type="ct:EndpointType">
+                        <xs:annotation>
+                            <xs:documentation>The left endpoint of the range.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="RightEndpoint" type="ct:EndpointType">
+                        <xs:annotation>
+                            <xs:documentation>The right endpoint of the range.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="EndpointType">
+        <xs:annotation>
+            <xs:documentation>The definition of a range of numbers.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>Value of the endpoint.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="inclusive">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="yes"/>
+                            <xs:enumeration value="no"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="CommonVariableDefinitionType" abstract="true">
         <xs:annotation>
             <xs:documentation>
@@ -1425,6 +1479,13 @@ permissions and limitations under the License.
             <xs:documentation>Element defines a vector type, scalars and sequences</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="Range" type="ct:RangeType">
+        <xs:annotation>
+            <xs:documentation>Element defines a range</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="OidRef" type="ct:OidRefType">
         <xs:annotation>
             <xs:documentation>
