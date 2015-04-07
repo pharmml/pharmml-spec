@@ -1044,6 +1044,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="SimpleParameter" type="mdef:SimpleParameterType"/>
+                    <!-- /TEST -->
                     <xs:choice>
                         <!-- TEST ??? -->
                         <xs:element ref="design:LookupTable"/>
