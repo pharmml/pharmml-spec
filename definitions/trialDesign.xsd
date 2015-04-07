@@ -1115,18 +1115,21 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="InterventionRef" maxOccurs="unbounded" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the intervention describing the dosing regimen being target of this design space. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="ObservationRef" minOccurs="0" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>Reference to an observation already defined.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="InterventionRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Refers to the intervention describing the dosing regimen being target of this design space. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ObservationRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
+                            <xs:annotation>
+                                <xs:documentation>Reference to an observation already defined.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        
+                    </xs:choice>
                     
                 </xs:sequence>
             </xs:extension>
