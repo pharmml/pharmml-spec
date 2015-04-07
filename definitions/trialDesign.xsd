@@ -939,7 +939,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <!-- /moved here -->
                     <!-- TEST -->
-                    <xs:element name="DesignSpaces" minOccurs="0" maxOccurs="unbounded" type="design:DesignSpacesType">
+                    <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
                         <xs:annotation>
                             <xs:documentation>Defines the design spaces for optimization.</xs:documentation>
                         </xs:annotation>
@@ -1100,7 +1100,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="DesignSpace" type="design:SingleDesignSpaceType"/>
+                    <xs:element name="DesignSpace" maxOccurs="unbounded" type="design:SingleDesignSpaceType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1124,7 +1124,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element name="ObservationRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
-                            <xs:documentation>Optional reference to an observation already defined.</xs:documentation>
+                            <xs:documentation>Reference to an observation already defined.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     
