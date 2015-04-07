@@ -1090,6 +1090,52 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    <!-- TEST -->
+    <xs:complexType name="DesignSpacesType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining the design spaces for optimization.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="DesignSpace" type="design:SingleDesignSpaceType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SingleDesignSpaceType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining a single design space for optimization.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="InterventionRef" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to the intervention describing the dosing regimen being target of this design space. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="ObservationRef" minOccurs="0" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Optional reference to an observation already defined.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <!-- /TEST -->
+    
     <xs:complexType name="PopulationType">
         <xs:annotation>
             <xs:documentation>
