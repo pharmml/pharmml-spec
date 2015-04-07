@@ -1129,7 +1129,19 @@ permissions and limitations under the License.
                                 <xs:documentation>Reference to an observation already defined.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <xs:element maxOccurs="unbounded" ref="ct:SymbRef">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Refers to the variable to be optimized. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>                
                     </xs:choice>
+                    <xs:element name="ArmSize" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>Arm size to be optimized.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="DoseAmount" minOccurs="0" type="design:AttributesDesignSpaceType">
                         <xs:annotation>
                             <xs:documentation>Dosing amount to be optimized.</xs:documentation>
@@ -1138,6 +1150,21 @@ permissions and limitations under the License.
                     <xs:element name="DosingTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
                         <xs:annotation>
                             <xs:documentation>Dosing time to be optimized.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Duration" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>infusion duration to be optimized.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="NumberArms" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>Number of arms to be optimized.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="NumberSamples" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>Number of samples to be optimized.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="NumberTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
@@ -1150,7 +1177,6 @@ permissions and limitations under the License.
                             <xs:documentation>Sampling time to be optimized.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1182,7 +1208,8 @@ permissions and limitations under the License.
                             <xs:documentation>The value of the name attribute.</xs:documentation>
                         </xs:annotation>
                     </xs:element>                    
-                </xs:choice>            </xs:extension>
+                </xs:choice>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
