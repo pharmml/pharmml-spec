@@ -1132,17 +1132,22 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:element name="DoseAmount" minOccurs="0" type="design:AttributesDesignSpaceType">
                         <xs:annotation>
-                            <xs:documentation>Dosing information.</xs:documentation>
+                            <xs:documentation>Dosing amount to be optimized.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DosingTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
+                        <xs:annotation>
+                            <xs:documentation>Dosing time to be optimized.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="NumberTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
                         <xs:annotation>
-                            <xs:documentation>Sampling information.</xs:documentation>
+                            <xs:documentation>Number of sampling times to be optimized.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="SampleTime" minOccurs="0" type="design:AttributesDesignSpaceType">
                         <xs:annotation>
-                            <xs:documentation>Sampling information.</xs:documentation>
+                            <xs:documentation>Sampling time to be optimized.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     
