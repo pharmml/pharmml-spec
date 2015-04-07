@@ -641,13 +641,10 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="ArmSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
-                    <xs:element name="NumberArms" minOccurs="0" type="xs:int"/>
-                    <xs:element name="NumberSamples" minOccurs="0" type="xs:int"/>
-                    <xs:element name="NumberTimes" minOccurs="0" type="xs:int"/>
-                    <xs:element name="SameTimes" minOccurs="0" maxOccurs="1" type="xs:int"/>
-                    <xs:element name="TotalCost" minOccurs="0" type="xs:int"/>
-                    <xs:element name="TotalSize" minOccurs="0" type="xs:int"/>
+                    <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="NumberSamples" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="SameTimes" minOccurs="0" type="design:ArmAttributeType"/>
 
                     <xs:element name="InterventionSegment" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSegmentType">
                         <xs:annotation>
@@ -1137,13 +1134,14 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="ArmSize" minOccurs="0" maxOccurs="1" type="xs:int"/>
-                    <xs:element name="MinSamples" minOccurs="0" maxOccurs="1" type="xs:int"/>
-                    <xs:element name="MaxSamples" minOccurs="0" maxOccurs="1" type="xs:int"/>
-                    <xs:element name="NumberTimes" minOccurs="0" type="xs:int"/>
-                    <xs:element name="TotalCost" minOccurs="0" type="xs:int"/>
-                    <xs:element name="TotalNumberSamples" minOccurs="0" type="xs:int"/>
-                    <xs:element name="TotalSize" minOccurs="0" type="xs:int"/>
+                    <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="CostFunction" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="NumberArms" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="NumberSamples" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="SameTimes" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="TotalCost" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="TotalSize" minOccurs="0" type="design:ArmAttributeType"/>
                     <!-- TEST -->
                     <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
                         type="mdef:CovariateModelType">
@@ -1203,7 +1201,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="NumberTimes" minOccurs="0" type="xs:int"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="SampleTime" type="design:TimepointsType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1599,6 +1597,37 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="ArmAttributeType">
+        <xs:annotation>
+            <xs:documentation>
+                Arm attribute defining type.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialise the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>The value of the name attribute.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- TEST -->
     
     <!--
         Attribute Groups
