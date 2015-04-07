@@ -1042,7 +1042,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element name="SimpleParameter" type="mdef:SimpleParameterType"/>
+                    <xs:element name="SimpleParameter" minOccurs="0" maxOccurs="unbounded" type="mdef:SimpleParameterType"/>
                     <!-- /TEST -->
                     <xs:choice>
                         <!-- TEST ??? -->
@@ -1134,6 +1134,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="SimpleParameter" minOccurs="0" maxOccurs="unbounded" type="mdef:SimpleParameterType"/>
+                    <!-- /TEST -->
                     <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="CostFunction" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="NumberArms" minOccurs="0" type="design:ArmAttributeType"/>
