@@ -1181,7 +1181,7 @@ permissions and limitations under the License.
                                     <xs:documentation>Number of sampling times to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="SampleTime" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="SampleTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
                                 <xs:annotation>
                                     <xs:documentation>Sampling time to be optimized.</xs:documentation>
                                 </xs:annotation>
@@ -1223,7 +1223,7 @@ permissions and limitations under the License.
                         <xs:annotation>
                             <xs:documentation>The value of the name attribute.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>                    
+                    </xs:element>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -1750,6 +1750,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <!-- TEST -->
                 <xs:choice>
+                    <!-- TEST -->
+                    <xs:element ref="ct:Assign"/>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Arrays"/>
                     <!-- TEST -->
                     <xs:element ref="ct:Scalar"/>
