@@ -410,6 +410,15 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:choice>
+                        <!-- TEST -->
+                        <xs:element name="InterventionRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Refers to the intervention defined already. 
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- /TEST -->
                         <xs:element ref="design:LookupTable"/>
                         <xs:element ref="design:DosingRegimen"/>
                     </xs:choice>
