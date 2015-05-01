@@ -419,7 +419,7 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <!-- /TEST -->
-                        <xs:element ref="design:LookupTable"/>
+<!--                        <xs:element ref="design:LookupTable"/>-->
                         <xs:element ref="design:DosingRegimen"/>
                     </xs:choice>
                 </xs:sequence>
