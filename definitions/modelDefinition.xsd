@@ -201,6 +201,10 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0"
                         ref="mdef:CommonParameterElement"/>
+                    <!-- TEST -->
+<!--                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:Vector"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:Matrix"/>-->
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
                         type="mdef:CorrelationType">
                         <xs:annotation>
@@ -333,7 +337,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="mdef:CommonObservationModelType">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="1" ref="mdef:ObservationError"/>
+                    <!-- TEST - optional since it can be defined with RandomVariable instead -->            <!-- CORRECT!!!! CORRECT!!!! CORRECT!!!! CORRECT!!!! -->
+                    <xs:element maxOccurs="1" minOccurs="0" ref="mdef:ObservationError"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -895,9 +901,10 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="GaussianObsError">
+    <xs:complexType name="StructuredObsError">
         <xs:annotation>
-            <xs:documentation>Gaussian residual error definition. Definition is of the form: u(y) = u(f) + g * eps</xs:documentation>
+            <xs:documentation>Structured (e.g. Gaussian) residual error definition. Definition is of the form: u(y) = u(f) + g * eps.
+            The type dependen on the distribution of 'eps' - can be Normal or Student-T distribtion.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="mdef:ObservationErrorType">
@@ -942,7 +949,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="GeneralObsError">
+    
+    <!-- TEST -->
+<!--  ORG  <xs:complexType name="GeneralObsError">
         <xs:annotation>
             <xs:documentation>A general form of the residual error, where the error is unstructured and explicit.</xs:documentation>
         </xs:annotation>
@@ -963,7 +972,53 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    <xs:complexType name="GeneralObsError">
+        <xs:annotation>
+            <xs:documentation>The general and distribution tyeps of observation errors.
+                Type 2. General model                                   - no VariabilityReference required, LHS optional
+                h(y) = H(f, xi, eps)               
+                
+                Type 3. Distribution type model (eps-free notation)     - VariabilityReference required, LHS optional
+                u(y) ~ distribution(parameter1, parameter2, ...) e.g. log(y) ~ N(log(f), sigma)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:ObservationErrorType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
+                        <xs:annotation>
+                            <xs:documentation>The level of random variability and its connection
+                                to variance/stdev as defined when using the distribution.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element> 
+                    <xs:choice>
+                        <xs:element ref="ct:Assign">
+                            <xs:annotation>
+                                <xs:documentation>This assignment defines the RHS of the residual error.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
+                                <xs:annotation>
+                                    <xs:documentation>Defines a left-hand-side transformation.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Distribution" type="mdef:DistributionType">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Definition using a distribution.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType abstract="true" name="CommonParameterType">
         <xs:annotation>
             <xs:documentation>Abstract type defining the common properties of a parameter definition.</xs:documentation>
@@ -981,97 +1036,111 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST extended for Type 4-->
     <xs:complexType name="IndividualParameterType">
         <xs:annotation>
             <xs:documentation>Describes an individual parameter. Three encodings of a parameter model are available:
                 Type 1. explicit equation type of parameter model
                 psi_i = H(beta, c_i, eta_i)
                 
-                Type 2. Gaussian model with general covariate model
-                h(psi_i) = H(beta, c_i) + eta_i
+                Type 2. Structured (e.g. Gaussian) model with general covariate model
+                h(psi_i) = H(beta, c_i) + eta_i [if eta_i ~ N()]
                 
-                Type 3. Gaussian model with linear covariate model
-                h(psi_i) = h(psi_pop) + beta c_i + eta_i
+                Type 3. Structured (e.g. Gaussian) model with linear covariate model
+                h(psi_i) = h(psi_pop) + beta c_i + eta_i [if eta_i ~ N()]
+                
+                Type 4. Generic parameter model using distribution, i.e. so called eta-free notation 
+                h(psi_i) ~ distribution(parameter1, parameter2, ...) e.g. log(psi_i) ~ N(log(psi_pop) + beta c_i, omega_psi)
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="mdef:CommonParameterType">
-                <xs:sequence minOccurs="1">
-                    <xs:choice>
-                        <xs:element name="GaussianModel">
+                    <xs:choice minOccurs="0">
+                        <!-- types 2 & 3 -->
+                        <xs:element name="StructuredModel" type="mdef:StructuredModelType">
                             <xs:annotation>
-                                <xs:documentation>Defines a Gaussian model, with either linear or non-linear covariates.</xs:documentation>
+                                <xs:documentation>Defines a structured model with arbitrary distribution of random 
+                                    effects and with either linear or non-linear covariates. For eta_i ~ N() it is 
+                                    then a Gaussian one.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- types 1 & 4 -->
+                        <xs:choice>
+                            <xs:element minOccurs="1" ref="ct:Assign">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        The explicit, type 1, definition of an individual parameter. This defines H and can 
+                                        contain references to one or more random variables.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:sequence>
+                                <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
+                                    <xs:annotation>
+                                        <xs:documentation>Defines a transformation applied to the left-hand-side.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
+                                    <xs:annotation>
+                                        <xs:documentation>The level of random variability and its connection
+                                            to variance/stdev as defined when using the distribution.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element> 
+                                <xs:element name="Distribution" type="mdef:DistributionType">
+                                    <xs:annotation>
+                                        <xs:documentation>
+                                            Distribution definition using either UncertML or ProbOnto.
+                                        </xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:choice>
+                    </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+   <!-- TEST -->
+    <xs:complexType name="StructuredModelType">
+        <xs:annotation>
+            <xs:documentation>Defines the general structure model type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Transformation"
+                        type="mdef:LRHSTransformationType">
+                        <xs:annotation>
+                            <xs:documentation>The transformation (h) applied to both sides of the equation.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="LinearCovariate">
+                            <xs:annotation>
+                                <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                                 <xs:complexContent>
                                     <xs:extension base="ct:PharmMLRootType">
                                         <xs:sequence>
-                                            <xs:element minOccurs="0" name="Transformation"
-                                                type="mdef:LRHSTransformationType">
+                                            <xs:element name="PopulationParameter">
                                                 <xs:annotation>
-                                                    <xs:documentation>The transformation (h) applied to both sides of the equation.</xs:documentation>
+                                                    <xs:documentation>The population parameter: psi_pop.</xs:documentation>
                                                 </xs:annotation>
+                                                <xs:complexType>
+                                                    <xs:complexContent>
+                                                        <xs:extension base="ct:PharmMLRootType">
+                                                            <xs:sequence>
+                                                                <xs:element ref="ct:Assign"/>
+                                                            </xs:sequence>
+                                                        </xs:extension>
+                                                    </xs:complexContent>
+                                                </xs:complexType>
                                             </xs:element>
-                                            <xs:choice>
-                                                <xs:element name="LinearCovariate">
-                                                    <xs:annotation>
-                                                        <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
-                                                    </xs:annotation>
-                                                    <xs:complexType>
-                                                        <xs:complexContent>
-                                                            <xs:extension base="ct:PharmMLRootType">
-                                                                <xs:sequence>
-                                                                    <xs:element name="PopulationParameter">
-                                                                        <xs:annotation>
-                                                                            <xs:documentation>The population parameter: psi_pop.</xs:documentation>
-                                                                        </xs:annotation>
-                                                                        <xs:complexType>
-                                                                            <xs:complexContent>
-                                                                                <xs:extension base="ct:PharmMLRootType">
-                                                                                    <xs:sequence>
-                                                                                        <xs:element ref="ct:Assign"/>
-                                                                                    </xs:sequence>
-                                                                                </xs:extension>
-                                                                            </xs:complexContent>
-                                                                        </xs:complexType>
-                                                                    </xs:element>
-                                                                    <xs:element name="Covariate" maxOccurs="unbounded" minOccurs="0" type="mdef:CovariateRelationType">
-                                                                        <xs:annotation>
-                                                                            <xs:documentation>Defines the covariate terms: beta * c_i</xs:documentation>
-                                                                        </xs:annotation>
-                                                                    </xs:element>
-                                                                </xs:sequence>
-                                                            </xs:extension>
-                                                        </xs:complexContent>
-                                                    </xs:complexType>
-                                                </xs:element>
-                                                <xs:element name="GeneralCovariate">
-                                                    <xs:annotation>
-                                                        <xs:documentation>A general covariate model definition. This can be used to define a non-linear covariate model.
-                                                            This equates to H in the above definitions.
-                                                        </xs:documentation>
-                                                    </xs:annotation>
-                                                    <xs:complexType>
-                                                        <xs:complexContent>
-                                                            <xs:extension base="ct:PharmMLRootType">
-                                                                <xs:sequence>
-                                                                    <xs:element ref="ct:Assign">
-                                                                        <xs:annotation>
-                                                                            <xs:documentation>
-                                                                                The general covariate definition. Note that this should NOT contain references to a random variable. You should use an explicit (type 3) parameter definition to do that.
-                                                                            </xs:documentation>
-                                                                        </xs:annotation>
-                                                                    </xs:element>
-                                                                </xs:sequence>
-                                                            </xs:extension>
-                                                        </xs:complexContent>
-                                                    </xs:complexType>
-                                                </xs:element>
-                                            </xs:choice>
-                                            <xs:element name="RandomEffects" minOccurs="1" maxOccurs="unbounded"
-                                                type="mdef:ParameterRandomEffectType">
+                                            <xs:element name="Covariate" maxOccurs="unbounded" minOccurs="0" type="mdef:CovariateRelationType">
                                                 <xs:annotation>
-                                                    <xs:documentation>The random effects (eta) used in the gaussian parameter model.</xs:documentation>
+                                                    <xs:documentation>Defines the covariate terms: beta * c_i</xs:documentation>
                                                 </xs:annotation>
                                             </xs:element>
                                         </xs:sequence>
@@ -1079,18 +1148,85 @@ permissions and limitations under the License.
                                 </xs:complexContent>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element minOccurs="1" ref="ct:Assign">
+                        <xs:element name="GeneralCovariate">
+                            <xs:annotation>
+                                <xs:documentation>A general covariate model definition. This can be used to define a non-linear covariate model.
+                                    This equates to H in the above definitions.
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="ct:PharmMLRootType">
+                                        <xs:sequence>
+                                            <xs:element ref="ct:Assign">
+                                                <xs:annotation>
+                                                    <xs:documentation>
+                                                        The general covariate definition. Note that this should NOT contain references to a random variable. You should use an explicit (type 3) parameter definition to do that.
+                                                    </xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:element name="RandomEffects" minOccurs="1" maxOccurs="unbounded"
+                        type="mdef:ParameterRandomEffectType">
+                        <xs:annotation>
+                            <xs:documentation>The random effects (eta) used in the gaussian parameter model.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+
+    <!-- TEST -->
+    <xs:complexType name="PopulationParameterType">
+        <xs:annotation>
+            <xs:documentation>Describes an population parameter.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:CommonParameterType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a transformation applied to the left-hand-side.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice minOccurs="0">
+                        <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>
-                                    The explicit, type 1, definition of an individual parameter. This defines H and can contain references to one or more random variables.
+                                    The explicit definition of an population parameter.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
+                                <xs:annotation>
+                                    <xs:documentation>The level of random variability and its connection
+                                        to variance/stdev as defined when using the Distribution.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element> 
+                            <xs:element name="Distribution" type="mdef:DistributionType">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Definition using a distribution.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="SimpleParameterType">
         <xs:annotation>
             <xs:documentation>
@@ -1110,7 +1246,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="ParameterRandomVariableType">
+    
+    
+<!--    <xs:complexType name="ParameterRandomVariableType">
         <xs:annotation>
             <xs:documentation>
                 Type specifies a random variable definition.
@@ -1159,7 +1297,147 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>-->
+    <!-- TEST -->
+    <xs:complexType name="ParameterRandomVariableType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifies a random variable definition.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="mdef:CommonParameterType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="ct:VariabilityReference">
+                        <xs:annotation>
+                            <xs:documentation>The level of random variability that describes this random variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element> 
+                    <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a transformation applied to the left-hand-side.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="Distribution" type="mdef:DistributionType"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="DistributionType">
+        <xs:annotation>
+            <xs:documentation>Type defining a distribution.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element name="UncertML" type="mdef:UncertMLType"/>
+                    <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
+                    <!-- TEST as Parent for possible UncertML or ProbOnto -->
+                    <xs:element name="Piecewise" type="math:PiecewiseType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a piecewise expression.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <!-- <xs:complexType name="CDFType">
+        <xs:annotation>
+            <xs:documentation>Type defining CDF.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+-->    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="UncertMLType">
+        <xs:annotation>
+            <xs:documentation>Type for UncertML distributions.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="distrib:AbstractContinuousUnivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A continuous univariate probability distribution, defined by UncertML. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="distrib:AbstractContinuousMultivariateDistribution">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A continuous multivariate probability distribution, defined by UncertML. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- ADD ALL OTHERS??? ADD ALL OTHERS??? ADD ALL OTHERS??? -->
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="ProbOntoType">
+        <xs:annotation>
+            <xs:documentation>Type for ProbOnto distributions.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="DistributionName" type="ct:StringValueType"/>
+                    <xs:element name="Parameter1" type="mdef:ParameterXType"/>
+                    <xs:element name="Parameter2" minOccurs="0" type="mdef:ParameterXType"/>
+                    <xs:element name="Parameter3" minOccurs="0" type="mdef:ParameterXType"/>
+                    <xs:element name="Parameter4" minOccurs="0" type="mdef:ParameterXType"/>
+                    <xs:element name="Parameter5" minOccurs="0" type="mdef:ParameterXType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="ParameterXType">
+        <xs:annotation>
+            <xs:documentation>Type for specifying parameters of distributions.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign">
+                        <xs:annotation>
+                            <xs:documentation>Initialises the parameter.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id for this parameter.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="CovariateRelationType">
         <xs:annotation>
             <xs:documentation>Type defining the relationship between the covariate and a fixed effect parameter. Typically this defines a linear relationships.</xs:documentation>
@@ -1300,11 +1578,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" ref="distrib:AbstractContinuousUnivariateDistribution">
-                        <xs:annotation>
-                            <xs:documentation>The distribution that the continuous covariate follows.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
+                    <!-- /TEST -->
                     <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>The transformation to be applied when the covariate is used.</xs:documentation>
@@ -1996,7 +2272,7 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <xs:element name="Standard" substitutionGroup="mdef:ObservationError"
-        type="mdef:GaussianObsError">
+        type="mdef:StructuredObsError">
         <xs:annotation>
             <xs:documentation>Defines standard error model.</xs:documentation>
         </xs:annotation>
@@ -2019,6 +2295,14 @@ permissions and limitations under the License.
             <xs:documentation>Defines an individual parameter.</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="PopulationParameter" substitutionGroup="mdef:CommonParameterElement"
+        type="mdef:PopulationParameterType">
+        <xs:annotation>
+            <xs:documentation>Defines an population parameter.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="RandomVariable" type="mdef:ParameterRandomVariableType"
         substitutionGroup="mdef:CommonParameterElement">
         <xs:annotation>
