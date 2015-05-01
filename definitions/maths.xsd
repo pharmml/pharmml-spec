@@ -35,7 +35,7 @@ permissions and limitations under the License.
     <xs:complexType name="BinopType">
         <xs:annotation>
             <xs:documentation>
-                A binary operator describing a numerical operation. Takes two operands (as you would expect).
+                A binary operator describing a numerical operation. Takes two operands.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -104,7 +104,7 @@ permissions and limitations under the License.
     <xs:complexType name="UniopType">
         <xs:annotation>
             <xs:documentation>
-                The unary operator type. Takes one operator.
+                The unary operator type. Takes one operand.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -162,12 +162,45 @@ permissions and limitations under the License.
                             <xs:enumeration value="arccoth"/>
                             <xs:enumeration value="floor"/>
                             <xs:enumeration value="ceiling"/>
+<!--                            <xs:enumeration value="inverseMatrix"/>-->     <!-- here? -->
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="MatrixUniOpType">
+        <xs:annotation>
+            <xs:documentation>
+                An operator describing a matrix and vector operation.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="math:ExprType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Extends the expression which is in effect the operand.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:attribute name="op" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The matrix operator. More detail in the specification.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="inverse"/>
+                            <xs:enumeration value="trace"/>
+                            <xs:enumeration value="transpose"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+                        
     <xs:complexType name="ConstantType">
         <xs:annotation>
             <xs:documentation>
@@ -208,6 +241,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="math:ExprType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:choice minOccurs="0">
+                        <xs:element name="UncertML" type="mdef:UncertMLType"/>
+                        <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
+                    </xs:choice>
+                    <!-- /TEST -->
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
@@ -223,7 +262,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="1" minOccurs="1">
                     <xs:element ref="ct:Scalar"/>
-                    <xs:element maxOccurs="1" minOccurs="1" ref="ct:SymbRef"/>
+                    <xs:element minOccurs="0" ref="ct:SymbRef"/>
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
@@ -382,6 +421,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Delay"/>
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:MatrixUniop"/>
+                    <!-- /TEST -->
                     <xs:element ref="mdef:Probability"/>
                 </xs:choice>
             </xs:extension>
@@ -462,6 +504,13 @@ permissions and limitations under the License.
             <xs:documentation>A unary operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="MatrixUniop" type="math:MatrixUniOpType">
+        <xs:annotation>
+            <xs:documentation>A unary matrix operator.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="LogicBinop" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>A logical binary operator used in logical expressions.</xs:documentation>
