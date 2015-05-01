@@ -1357,7 +1357,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="SampleTime" minOccurs="0" type="design:TimepointsType">
+                    <xs:element name="SampleTimes" minOccurs="0" type="design:TimepointsType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the time-points of the observations.  
