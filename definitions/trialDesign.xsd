@@ -1077,7 +1077,6 @@ permissions and limitations under the License.
                         <!-- TEST ??? -->
                         <xs:element ref="design:LookupTable"/>
                         <!-- TEST -->
-                        
                         <xs:element name="ObservationsDataset" type="design:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>Defines the observation in a dataset to use in the tasks.</xs:documentation>
@@ -1158,6 +1157,13 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>                
                     </xs:choice>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
+                        <xs:annotation>
+                            <xs:documentation>A parameter definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:choice>
                         <xs:choice>
                             <xs:element name="ArmSize" minOccurs="0" type="design:AttributesDesignSpaceType">
