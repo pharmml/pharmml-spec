@@ -1688,7 +1688,7 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element name="CovariateModelRef" minOccurs="0" type="ct:CovariateModelRefType">
                         <xs:annotation>
-                            <xs:documentation>Reference to another covariate model from which the current model
+                            <xs:documentation>Reference to a covariate model from which the current model
                                 inherits its features.</xs:documentation>
                         </xs:annotation>
                     </xs:element>

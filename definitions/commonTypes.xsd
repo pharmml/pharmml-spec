@@ -425,11 +425,11 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:StandardTripletType">
-                <xs:attribute name="inclusive">
+                <xs:attribute name="type" default="closed">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
-                            <xs:enumeration value="yes"/>
-                            <xs:enumeration value="no"/>
+                            <xs:enumeration value="closed"/>
+                            <xs:enumeration value="open"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
