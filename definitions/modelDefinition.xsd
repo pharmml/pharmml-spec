@@ -1683,6 +1683,14 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="CovariateModelRef" minOccurs="0" type="ct:CovariateModelRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to another covariate model from which the current model
+                                inherits its features.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
                         <xs:annotation>
