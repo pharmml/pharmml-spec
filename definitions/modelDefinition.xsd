@@ -1227,7 +1227,8 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-    <xs:complexType name="SimpleParameterType">
+    <!-- TEST -->
+<!--    <xs:complexType name="SimpleParameterType">
         <xs:annotation>
             <xs:documentation>
                 This defines a parameter that does not contain any random effects. Once initialised its value will not change
@@ -1245,7 +1246,8 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
+    <!-- /TEST -->
     
     
 <!--    <xs:complexType name="ParameterRandomVariableType">
@@ -1654,7 +1656,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Name"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
@@ -1692,7 +1694,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <!-- /TEST -->
                     <xs:element minOccurs="0" ref="ct:Name"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
                         <xs:annotation>
                             <xs:documentation>The definition of parameters in the covariate block. Typically these will define parameters used by the covariate definitions.</xs:documentation>
                         </xs:annotation>
@@ -2290,13 +2292,14 @@ permissions and limitations under the License.
             <xs:documentation>Defines general error model.</xs:documentation>
         </xs:annotation>
     </xs:element>
-
-    <xs:element name="SimpleParameter" substitutionGroup="mdef:CommonParameterElement"
+    <!-- TEST -->
+<!--    <xs:element name="SimpleParameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:SimpleParameterType">
         <xs:annotation>
             <xs:documentation>Defines a simple parameter.</xs:documentation>
         </xs:annotation>
-    </xs:element>
+    </xs:element>-->
+    <!-- /TEST -->
     <xs:element name="IndividualParameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:IndividualParameterType">
         <xs:annotation>
