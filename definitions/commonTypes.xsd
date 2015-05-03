@@ -363,6 +363,28 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <xs:complexType name="StandardTripletType">
+        <xs:annotation>
+            <xs:documentation>Tyype defining two common assignment options: SymbRef and Assign.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the delay value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>                    
+                    <xs:element minOccurs="0" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to a variable/parameter symbol.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <!-- /TEST -->
     
     <!-- TEST -->
