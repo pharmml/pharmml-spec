@@ -376,13 +376,23 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
+                <!-- TEST -->
+                <xs:choice>
                     <xs:element ref="ct:Scalar">
                         <xs:annotation>
                             <xs:documentation>Value of the endpoint.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                </xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Reference to a dteady state dosing time variable. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign"/>
+                </xs:choice>
+                <!-- /TEST -->
                 <xs:attribute name="inclusive">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
