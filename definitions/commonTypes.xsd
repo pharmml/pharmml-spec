@@ -299,7 +299,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
                     <!-- TEST -->
-                    <xs:element ref="ct:Range"/>
+                    <xs:element ref="ct:Interval"/>
                     <!-- /TEST -->
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
@@ -344,27 +344,54 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+    
     <!-- TEST -->
-    <xs:complexType name="RangeType">
+    <xs:complexType name="StandardDupletType">
+        <xs:annotation>
+            <xs:documentation>Tyype defining two common assignment options: SymbRef and Assign.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element minOccurs="0" ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to a variable/parameter symbol.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="ct:Assign"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="IntervalType">
         <xs:annotation>
             <xs:documentation>The definition of a range of numbers.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="LeftEndpoint" type="ct:EndpointType">
+                <xs:choice>
+                    <xs:element name="IntervalLength" type="ct:StandardDupletType">
                         <xs:annotation>
-                            <xs:documentation>The left endpoint of the range.</xs:documentation>
+                            <xs:documentation>The dosing period.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="RightEndpoint" type="ct:EndpointType">
-                        <xs:annotation>
-                            <xs:documentation>The right endpoint of the range.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
+                    <xs:sequence>
+                        <xs:element name="LeftEndpoint" type="ct:EndpointType">
+                            <xs:annotation>
+                                <xs:documentation>The left endpoint of the range.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="RightEndpoint" type="ct:EndpointType">
+                            <xs:annotation>
+                                <xs:documentation>The right endpoint of the range.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -378,16 +405,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <!-- TEST -->
                 <xs:choice>
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>Value of the endpoint.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
                     <xs:element minOccurs="0" ref="ct:SymbRef">
                         <xs:annotation>
-                            <xs:documentation>
-                                Reference to a dteady state dosing time variable. 
-                            </xs:documentation>
+                            <xs:documentation>Reference to a variable/parameter symbol.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Assign"/>
@@ -1604,9 +1624,9 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
-    <xs:element name="Range" type="ct:RangeType">
+    <xs:element name="Interval" type="ct:IntervalType">
         <xs:annotation>
-            <xs:documentation>Element defines a range</xs:documentation>
+            <xs:documentation>Element defines an interval with length or endpoints definiton.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
