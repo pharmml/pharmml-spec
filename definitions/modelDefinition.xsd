@@ -1632,7 +1632,23 @@ permissions and limitations under the License.
                 </xs:annotation>
             </xs:element>
             <!-- TEST -->
-            
+            <xs:choice>
+                <xs:element name="InterventionRef" minOccurs="0" maxOccurs="1" type="ct:OidRefType">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Refers to one(!) intervention which will be treated as covariate. 
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="InterventionSequence" minOccurs="0" type="mdef:InterventionSequenceType"/>
+                <xs:element name="OccasionRef" minOccurs="0" type="ct:OidRefType">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Refers to the occasion which will be treated as covariate.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
             <!-- /TEST -->
         </xs:sequence>
         <xs:attribute name="catId" type="ct:CatIdType" use="required">
@@ -1642,6 +1658,25 @@ permissions and limitations under the License.
         </xs:attribute>
     </xs:complexType>
     
+    <!-- TEST -->
+    <xs:complexType name="InterventionSequenceType">
+        <xs:annotation>
+            <xs:documentation>Type defining a intervention sequence to be treated as covariate.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="InterventionRef" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Refers to as least two interventions which sequence will be treated as a covariate.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+
     <xs:complexType name="TransformedCovariateType">
         <xs:annotation>
             <xs:documentation>Type defining a transformed covariate symbol.</xs:documentation>
