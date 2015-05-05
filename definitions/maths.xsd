@@ -307,6 +307,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="math:Constant"/>
                         <xs:element ref="ct:SymbRef"/>
+                        <!-- TEST -->
+                        <xs:element ref="ct:CatRef"/>
+                        <!-- /TEST -->
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
@@ -326,6 +329,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="math:Constant"/>
                         <xs:element ref="ct:SymbRef"/>
+                        <!-- TEST -->
+                        <xs:element ref="ct:CatRef"/>
+                        <!-- /TEST -->
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>

@@ -99,7 +99,14 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-
+    <!-- TEST -->
+    <xs:simpleType name="CategoryIdType">
+        <xs:annotation>
+            <xs:documentation>Type for category identifiers.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
+    <!-- /TEST -->
     <xs:simpleType name="CatIdType">
         <xs:annotation>
             <xs:documentation>Type for symbols identifiers.</xs:documentation>
@@ -248,6 +255,24 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
+    <xs:complexType name="CategoryRefType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="blkIdRef" type="ct:BlockIdType">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Block.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="catIdRef" type="ct:CategoryIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Category.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="ScalarRhs">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1716,6 +1741,13 @@ permissions and limitations under the License.
             <xs:documentation>Element references a symbol defined elsewhere in the document.</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="CatRef" type="ct:CategoryRefType">
+        <xs:annotation>
+            <xs:documentation>Element references a symbol defined elsewhere in the document.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="Description" type="ct:AnnotationType">
         <xs:annotation>
             <xs:documentation>Element provides additional documentation about its parent element.</xs:documentation>
