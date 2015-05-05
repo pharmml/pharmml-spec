@@ -501,7 +501,8 @@ permissions and limitations under the License.
     </xs:complexType>--> 
     <!-- TEST - teh oroginal needs modification - moving 'ArmRef' from redundant StudyEvent
     and changing extension type to PharmMLRootType PLUS and renaming from ObservationsType to OccasionsType -->
-    <xs:complexType name="OccasionsType">
+<!--  not reqiured anymore
+        <xs:complexType name="OccasionsType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the set of identifiable occasions during the study.
@@ -510,22 +511,22 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST - removed -->
-<!--                    <xs:element minOccurs="0" ref="ct:Name">
+                    <!-\- TEST - removed -\->
+<!-\-                    <xs:element minOccurs="0" ref="ct:Name">
                         <xs:annotation>
                             <xs:documentation>
                                 A descriptive name for this set of observations.
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
-                    <!-- TEST -->
-<!--                    <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
+                    </xs:element>-\->
+                    <!-\- /TEST -\->
+                    <!-\- TEST -\->
+<!-\-                    <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>In effect defines the population of subjects that this event happens to.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
+                    </xs:element>-\->
+                    <!-\- /TEST -\->
                     <xs:element minOccurs="0" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>
@@ -534,13 +535,13 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST renaming to Occasion and ObservationsGroupType to SingleOccasionType-->
+                    <!-\- TEST renaming to Occasion and ObservationsGroupType to SingleOccasionType-\->
                     <xs:element maxOccurs="unbounded" name="Occasion" type="design:SingleOccasionType"/>
-                    <!-- /TEST -->
+                    <!-\- /TEST -\->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <!-- TEST -->
     
     <xs:complexType name="StudyTimePointType">
@@ -587,7 +588,8 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST renamed from ObservationsGroupType -->
-    <xs:complexType name="SingleOccasionType">
+<!--  redundant
+        <xs:complexType name="SingleOccasionType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the timepoint in a study.
@@ -596,30 +598,15 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:choice>
-                        <!-- TEST to be removed -->
-<!--                        <xs:element minOccurs="1" name="EpochRef" type="ct:OidRefType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Refers to the epoch during which this group of observations occurred.  
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>-->
-                        <!-- /TEST to be removed -->
-                        <xs:element name="Period" type="design:StudyPeriodType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Defines the time period within the study during which this group of observations occurred.  
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
+                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
+                    <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>  
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <!-- /TEST -->
+    
     <xs:complexType name="EpochDefnType">
         <xs:annotation>
             <xs:documentation>
@@ -677,13 +664,16 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST back to the origin-->
                     <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines a occasion segment of the study.   
+                                Defines a occasion segment for the particular arm of the study - alternative 
+                                to definition holing for all arms.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -885,6 +875,7 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:VariabilityReference"/>
                     <xs:element name="OccasionList" type="design:OccasionListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
@@ -903,7 +894,7 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="OccasionRef" maxOccurs="unbounded" type="ct:OidRefType">
+                    <xs:element name="Occasion" maxOccurs="unbounded" type="design:OccasionType">
                         <xs:annotation>
                             <xs:documentation>
                                 Refers to the occasion being instantiated here. 
@@ -911,6 +902,25 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="OccasionType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining the set of identifiable occasions during the study.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
+                    <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>  
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -940,13 +950,14 @@ permissions and limitations under the License.
                     </xs:element>
                     <!-- /moved from msteps -->
                     <!-- moved here -->
-                    <xs:element name="Occasions" maxOccurs="unbounded" type="design:OccasionsType" minOccurs="0">
+<!--                 NOT REQUIERED
+                        <xs:element name="Occasions" maxOccurs="unbounded" type="design:OccasionsType" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines an occasion.  
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     <!-- /moved here -->
                     <!-- TEST -->
                     <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
@@ -1338,6 +1349,16 @@ permissions and limitations under the License.
                     <xs:element name="SameTimes" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="TotalCost" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="TotalSize" minOccurs="0" type="design:ArmAttributeType"/>
+                    <!-- TEST -->
+                    <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an occasion segment of the study for all arms, alternative such can be
+                                defined in single arms.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <!-- TEST -->
                     <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
                         type="mdef:CovariateModelType">
