@@ -1622,6 +1622,16 @@ permissions and limitations under the License.
             </xs:annotation>
         </xs:attribute>
     </xs:attributeGroup>    
+    <!-- TEST -->
+    <xs:attributeGroup name="CovariateAttributeGroup">
+        <xs:attribute name="symbIdRef" type="ct:SymbolIdType" use="required">
+            <xs:annotation>
+                <xs:documentation>ID referencing a Symbol.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <!-- /TEST -->
+    
     
     <!--
         Element Groups

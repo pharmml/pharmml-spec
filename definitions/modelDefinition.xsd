@@ -1552,6 +1552,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- /TEST -->
     <xs:complexType name="CovariateTransformationType">
         <xs:annotation>
             <xs:documentation>Type defines how the covariate is transformed when used.</xs:documentation>
@@ -1660,6 +1662,79 @@ permissions and limitations under the License.
         </xs:attribute>
     </xs:complexType>
     
+    <!-- TEST Covariate Def type for Design spaces -->
+    <xs:complexType name="DSCovariateDefinitionType">
+        <xs:annotation>
+            <xs:documentation>Type that specifies a covariate definition.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Symbol"/>
+                    <xs:choice>
+                        <xs:element name="Continuous" type="mdef:ContinuousCovariateType">
+                            <xs:annotation>
+                                <xs:documentation>Specifies a continuous covariate.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Categorical" type="mdef:DSCategoricalCovariateType">
+                            <xs:annotation>
+                                <xs:documentation>Specifies a categorical covariate.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:CovariateAttributeGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST Categorical covariate type for design spaces -->    
+    <xs:complexType name="DSCategoricalCovariateType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defines a categorical covariate for desing space.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Category" type="mdef:DSCategoryType">
+                        <xs:annotation>
+                            <xs:documentation>A category of the categorical covariate in design space.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST Category type for design spaces -->
+    <xs:complexType name="DSCategoryType">
+        <xs:annotation>
+            <xs:documentation>Type for design space definition for probabilities of 
+                categories of categorical covariate.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Probability" type="ct:Rhs">             <!-- CHECK IF Interval/sequence/Vector AVAILABLE -->
+                        <xs:annotation>
+                            <xs:documentation>The definition of the probability space associated with 
+                                this category.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="catId" type="ct:CatIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The identifier of the category.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST  -->
+
     <!-- TEST -->
     <xs:complexType name="InterventionSequenceType">
         <xs:annotation>

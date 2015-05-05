@@ -1164,11 +1164,18 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <!-- TEST -->
-                        <xs:element name="CovariateModelRef" minOccurs="0" type="ct:CovariateModelRefType">
-                            <xs:annotation>
-                                <xs:documentation>Reference to a covariate model which elements are to be optimised.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
+                        <xs:sequence minOccurs="0">
+                            <xs:element name="CovariateModelRef" type="ct:CovariateModelRefType">
+                                <xs:annotation>
+                                    <xs:documentation>Reference to a covariate model which elements are to be optimised.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="CovariateRef" type="mdef:DSCovariateDefinitionType">
+                                <xs:annotation>
+                                    <xs:documentation>Defines a design space for a covariate.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
