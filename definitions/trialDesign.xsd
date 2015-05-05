@@ -411,7 +411,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:choice>
                         <!-- TEST -->
-                        <xs:element name="InterventionRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:element name="InterventionRef" minOccurs="0" type="ct:OidRefType">
                             <xs:annotation>
                                 <xs:documentation>
                                     Refers to the intervention defined already. 
