@@ -373,7 +373,7 @@ permissions and limitations under the License.
     <!-- TEST -->
     <xs:complexType name="StandardDupletType">
         <xs:annotation>
-            <xs:documentation>Tyype defining two common assignment options: SymbRef and Assign.</xs:documentation>
+            <xs:documentation>Type defining two common assignment options: SymbRef and Assign.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -390,7 +390,7 @@ permissions and limitations under the License.
     </xs:complexType>
     <xs:complexType name="StandardTripletType">
         <xs:annotation>
-            <xs:documentation>Tyype defining two common assignment options: SymbRef and Assign.</xs:documentation>
+            <xs:documentation>Type defining three common assignment options: Scalar, SymbRef and Assign.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">

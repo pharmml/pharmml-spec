@@ -289,7 +289,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- TEST -->
     <xs:complexType name="WashoutType">
         <xs:annotation>
             <xs:documentation>
@@ -308,9 +307,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="VariableToResetType">
         <xs:annotation>
             <xs:documentation>
@@ -330,7 +327,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="LookupTableType">
         <xs:annotation>
@@ -410,7 +406,6 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:choice>
-                        <!-- TEST -->
                         <xs:element name="InterventionRef" minOccurs="0" type="ct:OidRefType">
                             <xs:annotation>
                                 <xs:documentation>
@@ -418,8 +413,6 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
-<!--                        <xs:element ref="design:LookupTable"/>-->
                         <xs:element ref="design:DosingRegimen"/>
                     </xs:choice>
                 </xs:sequence>
@@ -427,9 +420,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="ActionType">
         <xs:annotation>
             <xs:documentation>
@@ -447,102 +438,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
-    
-<!--    <xs:complexType abstract="true" name="StudyEventType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining a study event (a CDISC term). In our case such events are observations take during the study.  
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>In effect defines the population of subjects that this event happens to.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- TEST -->
-<!--  OROIIGINAL  
-        <xs:complexType name="ObservationsType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining the set of observations taken from a set of subjects.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="design:StudyEventType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Name">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A descriptive name for this set of observations.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element minOccurs="0" ref="ct:VariabilityReference">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the variability level that describes the random variability associated with
-                                these observations. Typically this is used to describe Random Inter-Occasion Variability. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" name="ObservationGroup" type="design:ObservationsGroupType"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>--> 
-    <!-- TEST - teh oroginal needs modification - moving 'ArmRef' from redundant StudyEvent
-    and changing extension type to PharmMLRootType PLUS and renaming from ObservationsType to OccasionsType -->
-<!--  not reqiured anymore
-        <xs:complexType name="OccasionsType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining the set of identifiable occasions during the study.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <!-\- TEST - removed -\->
-<!-\-                    <xs:element minOccurs="0" ref="ct:Name">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A descriptive name for this set of observations.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-\->
-                    <!-\- /TEST -\->
-                    <!-\- TEST -\->
-<!-\-                    <xs:element maxOccurs="unbounded" name="ArmRef" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>In effect defines the population of subjects that this event happens to.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-\->
-                    <!-\- /TEST -\->
-                    <xs:element minOccurs="0" ref="ct:VariabilityReference">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the variability level that describes the random variability associated with
-                                these observations. Typically this is used to describe Random Inter-Occasion Variability. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-\- TEST renaming to Occasion and ObservationsGroupType to SingleOccasionType-\->
-                    <xs:element maxOccurs="unbounded" name="Occasion" type="design:SingleOccasionType"/>
-                    <!-\- /TEST -\->
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- TEST -->
     
     <xs:complexType name="StudyTimePointType">
         <xs:annotation>
@@ -587,26 +482,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST renamed from ObservationsGroupType -->
-<!--  redundant
-        <xs:complexType name="SingleOccasionType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining the timepoint in a study.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
-                    <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>  
-                </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /TEST -->
-    
     <xs:complexType name="EpochDefnType">
         <xs:annotation>
             <xs:documentation>
@@ -628,7 +503,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     <xs:complexType name="ArmDefnType">
         <xs:annotation>
             <xs:documentation>
@@ -638,13 +512,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="ArmRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to an amr on which the current arm is based.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="NumberSamples" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
@@ -664,7 +536,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST back to the origin-->
                     <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
                         <xs:annotation>
                             <xs:documentation>
@@ -673,64 +544,11 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-<!--    <xs:complexType name="ArmSizeType">
-        <xs:annotation>
-            <xs:documentation>Type for defining the arm size</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element></xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- TEST -->
-<!--   not required
-        <xs:complexType name="CellDefnType">
-        <xs:annotation>
-            <xs:documentation>
-                Type defining a Cell in the study.  
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="EpochRef" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the epoch in which this cell occurrs.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="ArmRef" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the arm in which this cell occurs.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element> 
-                    <xs:element maxOccurs="unbounded" name="SegmentRef" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to a Segment which is used in this Cell (segments can be referred to 
-                                by more than one cell.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /TEST -->
     
     <xs:complexType name="ObservationsCombinationType">
         <xs:complexContent>
@@ -749,7 +567,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="SingleObservationType">
         <xs:annotation>
             <xs:documentation>Signle observation type as element of ObservationsCombination.</xs:documentation>
@@ -767,9 +584,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:simpleType name="RelativeType">
         <xs:annotation>
             <xs:documentation>Type defining relativity of observations.</xs:documentation>
@@ -783,9 +598,7 @@ permissions and limitations under the License.
             </xs:simpleType>
         </xs:union>
     </xs:simpleType>
-    <!-- /TEST -->
-    
-    <!-- TEST changed from SegmentDefnType -->
+
     <xs:complexType name="InterventionSegmentType">
         <xs:complexContent>
             <xs:annotation>
@@ -798,12 +611,10 @@ permissions and limitations under the License.
                     <xs:element name="InterventionList" type="design:InterventionListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
-<!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST changed from SegmentDefnType -->
-    <!-- TEST -->
+
     <xs:complexType name="InterventionListType">
         <xs:complexContent>
             <xs:annotation>
@@ -824,8 +635,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    <!-- TEST -->
+
     <xs:complexType name="ObservationSegmentType">
         <xs:complexContent>
             <xs:annotation>
@@ -838,12 +648,10 @@ permissions and limitations under the License.
                     <xs:element name="ObservationList" type="design:ObservationListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
-                <!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    <!-- TEST -->
+
     <xs:complexType name="ObservationListType">
         <xs:complexContent>
             <xs:annotation>
@@ -864,8 +672,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    <!-- TEST -->
+
     <xs:complexType name="OccasionSegmentType">
         <xs:complexContent>
             <xs:annotation>
@@ -879,12 +686,10 @@ permissions and limitations under the License.
                     <xs:element name="OccasionList" type="design:OccasionListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
-                <!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    <!-- TEST -->
+
     <xs:complexType name="OccasionListType">
         <xs:complexContent>
             <xs:annotation>
@@ -905,9 +710,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="OccasionType">
         <xs:annotation>
             <xs:documentation>
@@ -924,7 +727,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="TrialStructureType">
         <xs:annotation>
@@ -935,78 +737,26 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="Interventions" type="design:InterventionsType">
                         <xs:annotation>
                             <xs:documentation>Defines the administrations and actions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- moved from msteps and modified -->
                     <xs:element name="Observations" minOccurs="0" maxOccurs="unbounded" type="design:ObservationDataType">
                         <xs:annotation>
                             <xs:documentation>Defines the observation data to use in the tasks.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /moved from msteps -->
-                    <!-- moved here -->
-<!--                 NOT REQUIERED
-                        <xs:element name="Occasions" maxOccurs="unbounded" type="design:OccasionsType" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines an occasion.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /moved here -->
-                    <!-- TEST -->
                     <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
                         <xs:annotation>
                             <xs:documentation>Defines the design spaces for optimization.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- moved from below -->
                     <xs:element name="Arms" type="design:ArmsType">
                         <xs:annotation>
                             <xs:documentation>Desines the arms in the study and properties applicable to all arms.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /moved from below -->
-                    <!--<!-\- TEST - used to be by ref=StudyEvent -\->
-                    <xs:element name="Occasions" maxOccurs="unbounded" type="design:OccasionsType" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines a study event. Typically an Observation Event.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-\- /TEST -\->
-                    <xs:element maxOccurs="unbounded" name="Epoch" type="design:EpochDefnType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines an epoch in the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-\- TEST -\->-->
-<!--                    <xs:element maxOccurs="unbounded" name="Cell" type="design:CellDefnType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines a cell in the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
-                    <!-- TEST -->
-<!--                    <xs:element name="Segment" maxOccurs="unbounded" type="design:SegmentDefnType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines a segment of the study.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1022,13 +772,11 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:choice>
                         <xs:sequence>
-                            <!-- moved from msteps -->
                             <xs:element name="ExternalDataSet" minOccurs="0" maxOccurs="unbounded" type="design:ExternalDataSetType">
                                 <xs:annotation>
                                     <xs:documentation>Defines the external format datset.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- /moved from msteps -->
                         </xs:sequence>
                         <xs:sequence>
                             <xs:element name="Structure" minOccurs="0" type="design:TrialStructureType"> 
@@ -1055,20 +803,11 @@ permissions and limitations under the License.
                             </xs:element>
                         </xs:sequence>
                     </xs:choice>
-                    <!-- TEST to be moved again after Activities-->
-                    <!--<!-\- moved from msteps and modified -\->
-                    <xs:element name="Observations" minOccurs="0" maxOccurs="unbounded" type="design:ObservationDataType">
-                        <xs:annotation>
-                            <xs:documentation>Defines the observation data to use in the tasks.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-\- /moved from msteps -\->-->
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
+
     <xs:complexType name="ObservationDataType">
         <xs:annotation>
             <xs:documentation>Type combining the dataset and explicit observations.</xs:documentation>
@@ -1076,18 +815,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
-<!--                    <xs:element name="SimpleParameter" minOccurs="0" maxOccurs="unbounded" type="mdef:SimpleParameterType"/>-->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:choice>
-                        <!-- TEST ??? -->
                         <xs:element ref="design:LookupTable"/>
-                        <!-- TEST -->
                         <xs:element name="ObservationsDataset" type="design:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>Defines the observation in a dataset to use in the tasks.</xs:documentation>
@@ -1106,16 +840,11 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
-<!--                <xs:attributeGroup ref="ct:OidDefnGroup"/>-->
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
         
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="DesignSpacesType">
         <xs:annotation>
             <xs:documentation>
@@ -1125,13 +854,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="DesignSpace" maxOccurs="unbounded" type="design:SingleDesignSpaceType"/>
                 </xs:sequence>
             </xs:extension>
@@ -1160,13 +887,11 @@ permissions and limitations under the License.
                                 <xs:documentation>Reference to an observation.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                         <xs:element name="ArmRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                             <xs:annotation>
                                 <xs:documentation>Reference to an arm.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                         <xs:element maxOccurs="unbounded" ref="ct:SymbRef">
                             <xs:annotation>
                                 <xs:documentation>
@@ -1174,7 +899,6 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                         <xs:sequence minOccurs="0">
                             <xs:element name="CovariateModelRef" type="ct:CovariateModelRefType">
                                 <xs:annotation>
@@ -1187,7 +911,6 @@ permissions and limitations under the License.
                                 </xs:annotation>
                             </xs:element>
                         </xs:sequence>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:choice>
@@ -1242,9 +965,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:complexType name="AttributesDesignSpaceType">
         <xs:annotation>
             <xs:documentation>
@@ -1273,7 +994,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="PopulationType">
         <xs:annotation>
@@ -1292,18 +1012,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-<!--                Redundant with columnType=covariate
-                        <xs:element minOccurs="0" maxOccurs="unbounded" name="Demographic"
-                        type="design:DemographicType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines a property of the individuals in the study that is not a covariate, but is
-                                important in the design of the study.    
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
                     <xs:element name="ColumnMapping" minOccurs="0" maxOccurs="unbounded" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1311,7 +1019,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>                    
-                    
                     <xs:element ref="ds:DataSet">
                         <xs:annotation>
                             <xs:documentation>
@@ -1325,7 +1032,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="ArmsType">
         <xs:annotation>
             <xs:documentation>Type for the definition of arms and their properties.</xs:documentation>
@@ -1333,14 +1039,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
-<!--                    <xs:element name="SimpleParameter" minOccurs="0" maxOccurs="unbounded" type="mdef:SimpleParameterType"/>-->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="CostFunction" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="NumberArms" minOccurs="0" type="design:ArmAttributeType"/>
@@ -1349,7 +1052,6 @@ permissions and limitations under the License.
                     <xs:element name="SameTimes" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="TotalCost" minOccurs="0" type="design:ArmAttributeType"/>
                     <xs:element name="TotalSize" minOccurs="0" type="design:ArmAttributeType"/>
-                    <!-- TEST -->
                     <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1358,15 +1060,12 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
                         type="mdef:CovariateModelType">
                         <xs:annotation>
                             <xs:documentation>A covariate model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1378,9 +1077,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="InterventionsType">
         <xs:annotation>
             <xs:documentation>Type defining the interventions: administrations and acgtions.</xs:documentation>
@@ -1406,9 +1103,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- moved from msteps -->
+
     <xs:complexType name="ObservationsExplicitType">
         <xs:annotation>
             <xs:documentation>
@@ -1448,9 +1143,7 @@ permissions and limitations under the License.
                         </xs:element>
                     </xs:choice>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1521,9 +1214,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1704,50 +1395,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /moved from msteps -->
 
-    <!-- TEST redundant type -->
-<!--    <xs:complexType name="DemographicType">
-        <xs:annotation>
-            <xs:documentation>
-                The type defining a demographic attribute of the subject.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Name"/>
-                    <xs:element ref="ct:VariabilityReference">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the variability level that describes the random variability between
-                                subjects with different values of this demographic attribute. This is typically
-                                use to describe random variability between subjects belonging to different study
-                                centres or countries.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>
-                                A value of this demographic attribute.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ds:ColumnRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the column in the dataset that contains the information to be mapped 
-                                to the individual.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>                    
-                </xs:sequence>
-                <xs:attributeGroup ref="ct:OidDefnGroup"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /TEST -->
     <xs:complexType abstract="true" name="PopulationMappingType">
         <xs:annotation>
             <xs:documentation>
@@ -1808,22 +1456,15 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST -->
                 <xs:choice>
-                    <!-- TEST -->
                     <xs:element ref="ct:Assign"/>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Arrays"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Scalar"/>
-                    <!-- /TEST -->
                 </xs:choice>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="ArmAttributeType">
         <xs:annotation>
             <xs:documentation>
@@ -1852,7 +1493,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     
     <!--
         Attribute Groups
@@ -1901,15 +1541,6 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
-<!--    <xs:element abstract="false" name="Activity" type="design:ActivityType">
-        <xs:annotation>
-            <xs:documentation>
-                Specifies an activity in the trial structure.  
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>-->
-    <!-- /TEST -->
     <xs:element name="Washout" type="design:WashoutType">
         <xs:annotation>
             <xs:documentation>
@@ -1924,25 +1555,6 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST not required -> Occasions -->
-<!--    <xs:element name="ObservationsEvent" type="design:ObservationsType">
-        <xs:annotation>
-            <xs:documentation>
-                Defines an observations event in the study,  
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>-->
-    <!-- /TEST -->
-    <!-- TEST -->
-<!-- ORG   <xs:element name="ObservationsEvent" substitutionGroup="design:StudyEvent"
-        type="design:ObservationsType">
-        <xs:annotation>
-            <xs:documentation>
-                Defines an observations event in the study,  
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>-->
-    <!-- /TEST -->
     
     <xs:element name="TrialDesign" type="design:TrialDesignType">
         <xs:annotation>
@@ -1951,17 +1563,5 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
-<!--    <xs:element abstract="true" name="StudyEvent" type="design:StudyEventType">
-        <xs:annotation>
-            <xs:documentation>
-                An abstract element for all study events. There is only one element inheriting from this so this
-                be superfluous in the future.                        
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>-->
-    <!-- /TEST -->
-    
-<!--    <xs:element name="SampleTime" type="design:TimepointsType"/>-->
     
 </xs:schema>
