@@ -1602,6 +1602,14 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
+                        <xs:annotation>
+                            <xs:documentation>The level of random variability associated with a categorical 
+                                covariate defined in the rtial design.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element> 
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="1" name="Category" type="mdef:CategoryType">
                         <xs:annotation>
                             <xs:documentation>A category of the categorical covariate.</xs:documentation>
@@ -1623,6 +1631,9 @@ permissions and limitations under the License.
                     <xs:documentation>The definition of the probability associated with this category.</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <!-- TEST -->
+            
+            <!-- /TEST -->
         </xs:sequence>
         <xs:attribute name="catId" type="ct:CatIdType" use="required">
             <xs:annotation>
