@@ -684,7 +684,9 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:VariabilityReference"/>
                     <xs:element name="OccasionList" type="design:OccasionListType"/>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
+                    <!-- TEST -->
+<!--                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>-->
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
