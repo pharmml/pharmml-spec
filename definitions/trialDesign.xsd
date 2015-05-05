@@ -517,10 +517,10 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to an amr on which the current arm is based.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="NumberSamples" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="SameTimes" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="ArmSize" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="SameTimes" minOccurs="0" type="ct:StandardTripletType"/>
 
                     <xs:element name="InterventionSegment" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSegmentType">
                         <xs:annotation>
@@ -1044,14 +1044,14 @@ permissions and limitations under the License.
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="ArmSize" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="CostFunction" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="NumberArms" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="NumberSamples" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="SameTimes" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="TotalCost" minOccurs="0" type="design:ArmAttributeType"/>
-                    <xs:element name="TotalSize" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="ArmSize" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="CostFunction" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="NumberArms" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="SameTimes" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="TotalCost" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="TotalSize" minOccurs="0" type="ct:StandardTripletType"/>
                     <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1118,7 +1118,7 @@ permissions and limitations under the License.
                             <xs:documentation>Optoinal reference to an observation already defined.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="NumberTimes" minOccurs="0" type="design:ArmAttributeType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
                     <xs:element name="SampleTimes" minOccurs="0" type="design:TimepointsType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1460,35 +1460,6 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Assign"/>
                     <xs:element ref="ct:Arrays"/>
                     <xs:element ref="ct:Scalar"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
-    <xs:complexType name="ArmAttributeType">
-        <xs:annotation>
-            <xs:documentation>
-                Arm attribute defining type.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>Initialise the name attribute.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>The value of the name attribute.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>                    
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
