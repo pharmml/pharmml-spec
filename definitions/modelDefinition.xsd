@@ -519,10 +519,12 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:choice>
-                        <xs:element minOccurs="0" ref="distrib:AbstractCategoricalUnivariateDistribution">
-                            <xs:annotation>
+                <!-- TEST new elements UncertML/ProbOnto instead od the whole sequence -->
+                <xs:choice>
+                    <xs:element name="UncertML" type="mdef:UncertMLType"/>
+                    <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
+                    <!--                        <xs:element minOccurs="0" ref="distrib:AbstractCategoricalUnivariateDistribution">
+                            <xs:annotation> 
                                 <xs:documentation>
                                     A categorical univariate probability distribution as defined by UncertML. 
                                 </xs:documentation>
@@ -548,9 +550,8 @@ permissions and limitations under the License.
                                     A discrete multivariate probability distribution as defined by UncertML. 
                                 </xs:documentation>
                             </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                </xs:sequence>
+                        </xs:element>-->
+                </xs:choice>
                 <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
                     <xs:annotation>
                         <xs:documentation>Type of the link function applied to the PMF.</xs:documentation>
