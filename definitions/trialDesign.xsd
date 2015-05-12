@@ -559,7 +559,7 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="Observation" type="design:SingleObservationType"/>
+                    <xs:element maxOccurs="unbounded" name="Observations" type="design:SingleObservationType"/>
                     <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -595,7 +595,7 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="Intervention" type="design:SingleInterventionType"/>
+                    <xs:element maxOccurs="unbounded" name="Interventions" type="design:SingleInterventionType"/>
                     <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
