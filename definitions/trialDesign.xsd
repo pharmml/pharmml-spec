@@ -812,7 +812,7 @@ permissions and limitations under the License.
 
     <xs:complexType name="ObservationDataType">
         <xs:annotation>
-            <xs:documentation>Type combining the dataset and explicit observations.</xs:documentation>
+            <xs:documentation>Type combining the individual and explicit observations.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -824,7 +824,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:choice>
                         <xs:element ref="design:LookupTable"/>
-                        <xs:element name="ObservationsDataset" type="design:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="IndividualObservations" type="design:DatasetMappingType" minOccurs="0" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>Defines the observation in a dataset to use in the tasks.</xs:documentation>
                             </xs:annotation>
