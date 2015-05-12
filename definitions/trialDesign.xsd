@@ -1152,7 +1152,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="InterventionsCombination" maxOccurs="unbounded" type="design:InterventionsCombinationType">
+                    <xs:element name="InterventionsCombination" minOccurs="0" maxOccurs="unbounded" type="design:InterventionsCombinationType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines intervention combinations in the study.   
