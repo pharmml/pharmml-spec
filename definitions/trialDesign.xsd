@@ -795,14 +795,15 @@ permissions and limitations under the License.
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
+<!--                         moved to Interventions
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
                                 type="design:IndividualDosingType">
                                 <xs:annotation>
                                     <xs:documentation>
                                         Provides time dependent dosing information for each individual in the study.    
                                     </xs:documentation>
                                 </xs:annotation>
-                            </xs:element>
+                            </xs:element>-->
                         </xs:sequence>
                     </xs:choice>
                 </xs:sequence>
@@ -1094,6 +1095,16 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST moved from TrialDesignType -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
+                        type="design:IndividualDosingType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Provides time dependent dosing information for each individual in the study.    
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="design:ActionType">
                         <xs:annotation>
                             <xs:documentation>
