@@ -1438,7 +1438,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="DistributionName" type="ct:StringValueType"/>
+                    <xs:element name="DistributionName" type="mdef:DistributionNameType"/>
                     <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:ParameterXType"/>
                 </xs:sequence>
             </xs:extension>
@@ -1446,10 +1446,47 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    
+    <!-- TEST -->
+    <xs:complexType name="DistributionNameType">
+        <xs:annotation>
+            <xs:documentation>Type for specifying name of a distribution.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:restriction base="ct:StringValueType">
+                <xs:enumeration value="Bernoulli"/>
+                <xs:enumeration value="Binomial"/>
+                <xs:enumeration value="CategoricalOrdered"/>
+                <xs:enumeration value="CategoricalNonordered"/>
+                <xs:enumeration value="GeneralizedPoisson"/>
+                <xs:enumeration value="Geometric"/>
+                <xs:enumeration value="Hypergeometric"/>
+                <xs:enumeration value="NegativeBinomial1"/>
+                <xs:enumeration value="NegativeBinomial2"/>
+                <xs:enumeration value="Poisson"/>
+                <xs:enumeration value="PoissonWithMarkov"/>
+                <xs:enumeration value="PoissonWithMixture"/>
+                <xs:enumeration value="Uniform1"/>
+                <xs:enumeration value="Uniform2"/>
+                <xs:enumeration value="ZeroInflatedPoisson"/>
+            </xs:restriction>
+        </xs:simpleContent>
+<!--        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="NegativeBinomial1"/>
+                        <xs:enumeration value="NegativeBinomial2"/>
+                    </xs:restriction>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>-->
+    </xs:complexType>
+    
     <!-- TEST -->
     <xs:complexType name="ParameterXType">
         <xs:annotation>
-            <xs:documentation>Type for specifying parameters of distributions.</xs:documentation>
+            <xs:documentation>Type for specifying parameters of a distribution.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
