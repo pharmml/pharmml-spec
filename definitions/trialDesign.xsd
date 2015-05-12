@@ -744,7 +744,7 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the administrations and actions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Observations" minOccurs="0" type="design:ObservationDataType">
+                    <xs:element name="Observations" minOccurs="0" type="design:ObservationsType">
                         <xs:annotation>
                             <xs:documentation>Defines the observation data to use in the tasks.</xs:documentation>
                         </xs:annotation>
@@ -811,7 +811,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="ObservationDataType">
+    <xs:complexType name="ObservationsType">
         <xs:annotation>
             <xs:documentation>Type combining the individual and explicit observations.</xs:documentation>
         </xs:annotation>
