@@ -584,7 +584,46 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+    
+    <!-- TEST -->
+    <xs:complexType name="InterventionsCombinationType">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>
+                    Type defining a combination of interventions.  
+                </xs:documentation>
+            </xs:annotation>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Intervention" type="design:SingleInterventionType"/>
+                    <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="SingleInterventionType">
+        <xs:annotation>
+            <xs:documentation>Signle intervention type as element of InterventionsCombination.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="InterventionRef" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to an Intervention.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:simpleType name="RelativeType">
         <xs:annotation>
             <xs:documentation>Type defining relativity of observations.</xs:documentation>
@@ -1095,12 +1134,12 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST moved from TrialDesignType -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
-                        type="design:IndividualDosingType">
+                    <!-- TEST moved from TrialDesignType and renamed -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualAdministration"
+                        type="design:IndividualAdministrationType">
                         <xs:annotation>
                             <xs:documentation>
-                                Provides time dependent dosing information for each individual in the study.    
+                                Provides time dependent administration information for each individual in the study.    
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
@@ -1112,6 +1151,15 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="InterventionsCombination" maxOccurs="unbounded" type="design:InterventionsCombinationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines intervention combinations in the study.   
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1431,7 +1479,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="IndividualDosingType">
+    <xs:complexType name="IndividualAdministrationType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
