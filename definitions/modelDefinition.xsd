@@ -1454,6 +1454,7 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:simpleContent>
             <xs:restriction base="ct:StringValueType">
+                <!-- Univariate discrete -->
                 <xs:enumeration value="Bernoulli"/>
                 <xs:enumeration value="Binomial"/>
                 <xs:enumeration value="CategoricalOrdered"/>
@@ -1466,9 +1467,49 @@ permissions and limitations under the License.
                 <xs:enumeration value="Poisson"/>
                 <xs:enumeration value="PoissonWithMarkov"/>
                 <xs:enumeration value="PoissonWithMixture"/>
-                <xs:enumeration value="Uniform1"/>
-                <xs:enumeration value="Uniform2"/>
+                <xs:enumeration value="UniformDiscrete1"/>
+                <xs:enumeration value="UniformDiscrete2"/>
                 <xs:enumeration value="ZeroInflatedPoisson"/>
+                <!-- Univariate continuous -->
+                <xs:enumeration value="Beta"/>
+                <xs:enumeration value="Cauchy"/>
+                <xs:enumeration value="ChiSquared"/>
+                <xs:enumeration value="DiracDelta"/>
+                <xs:enumeration value="Exponential"/>
+                <xs:enumeration value="F"/>                     <!-- aka Fisher-Snedecor -->
+                <xs:enumeration value="Gamma"/>
+                <xs:enumeration value="GeneralizedGamma"/>
+                <xs:enumeration value="Gompertz"/>
+                <xs:enumeration value="Gumbel"/>                <!-- aka Extreme Value -->
+                <xs:enumeration value="InverseGamma"/>
+                <xs:enumeration value="Laplace"/>               <!-- aka Double-exponential -->
+                <xs:enumeration value="LogNormal1"/>
+                <xs:enumeration value="LogNormal2"/>
+                <xs:enumeration value="LogNormal3"/>
+                <xs:enumeration value="LogNormal4"/>
+                <xs:enumeration value="LogNormal5"/>
+                <xs:enumeration value="Logistic"/>
+                <xs:enumeration value="Normal1"/>
+                <xs:enumeration value="Normal2"/>
+                <xs:enumeration value="Normal3"/>
+                <xs:enumeration value="NormalInverseGamma"/>
+                <xs:enumeration value="Pareto"/>
+                <xs:enumeration value="Rayleigh"/>
+                <xs:enumeration value="StandardNormal"/>
+                <xs:enumeration value="StandardUniform"/>
+                <xs:enumeration value="StudentT"/>
+                <xs:enumeration value="Uniform"/>
+                <xs:enumeration value="Weibull"/>
+                <!-- Multivariate discrete -->
+                <xs:enumeration value="Multinomial"/>
+                <!-- Multivariate -->
+                <xs:enumeration value="Dirichlet"/>
+                <xs:enumeration value="InverseWishart"/>
+                <xs:enumeration value="MultivariateNormal1"/>
+                <xs:enumeration value="MultivariateNormal2"/>
+                <xs:enumeration value="MultivariateStudentT1"/>
+                <xs:enumeration value="MultivariateStudentT2"/>
+                <xs:enumeration value="Wishart"/>
             </xs:restriction>
         </xs:simpleContent>
 <!--        <xs:complexContent>
