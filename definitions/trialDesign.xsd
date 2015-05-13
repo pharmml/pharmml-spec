@@ -522,24 +522,24 @@ permissions and limitations under the License.
                     <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
                     <xs:element name="SameTimes" minOccurs="0" type="ct:StandardTripletType"/>
 
-                    <xs:element name="InterventionSegment" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSegmentType">
+                    <xs:element name="InterventionSequence" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSequenceType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines a treatment segment of the study.   
+                                Defines a treatment sequence of the study.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="ObservationSegment" minOccurs="0" maxOccurs="unbounded" type="design:ObservationSegmentType">
+                    <xs:element name="ObservationSequence" minOccurs="0" maxOccurs="unbounded" type="design:ObservationSequenceType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines a observation segment of the study.   
+                                Defines a observation sequence of the study.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
+                    <xs:element name="OccasionSequence" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSequenceType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines a occasion segment for the particular arm of the study - alternative 
+                                Defines a occasion sequence for the particular arm of the study - alternative 
                                 to definition holing for all arms.   
                             </xs:documentation>
                         </xs:annotation>
@@ -641,11 +641,11 @@ permissions and limitations under the License.
         </xs:union>
     </xs:simpleType>
 
-    <xs:complexType name="InterventionSegmentType">
+    <xs:complexType name="InterventionSequenceType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
-                    Type defining a treatment segment of the study.  
+                    Type defining a treatment sequence of the study.  
                 </xs:documentation>
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
@@ -678,11 +678,11 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="ObservationSegmentType">
+    <xs:complexType name="ObservationSequenceType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
-                    Type defining a observation segment of the study.  
+                    Type defining a observation sequence of the study.  
                 </xs:documentation>
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
@@ -715,11 +715,11 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="OccasionSegmentType">
+    <xs:complexType name="OccasionSequenceType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
-                    Type defining an occasion segment of the study.  
+                    Type defining an occasion sequence of the study.  
                 </xs:documentation>
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
@@ -1097,10 +1097,10 @@ permissions and limitations under the License.
                     <xs:element name="SameTimes" minOccurs="0" type="ct:StandardTripletType"/>
                     <xs:element name="TotalCost" minOccurs="0" type="ct:StandardTripletType"/>
                     <xs:element name="TotalSize" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="OccasionSegment" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSegmentType">
+                    <xs:element name="OccasionSequence" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSequenceType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines an occasion segment of the study for all arms, alternative such can be
+                                Defines an occasion sequence of the study for all arms, alternative such can be
                                 defined in single arms.   
                             </xs:documentation>
                         </xs:annotation>
