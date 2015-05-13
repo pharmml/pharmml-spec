@@ -617,7 +617,10 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to an Intervention.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
+                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
+                    <!-- TEST -->
+                    <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1127,6 +1130,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
+                        <xs:annotation>
+                            <xs:documentation>A parameter definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="Administration" maxOccurs="unbounded" type="design:AdministrationType">
                         <xs:annotation>
                             <xs:documentation>
