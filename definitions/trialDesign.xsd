@@ -958,42 +958,42 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:choice>
                         <xs:choice>
-                            <xs:element name="ArmSize" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>Arm size to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="DoseAmount" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="DoseAmount" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>Dosing amount to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="DosingTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="DosingTimes" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>Dosing time to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="Duration" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="Duration" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>infusion duration to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="NumberArms" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="NumberArms" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>Number of arms to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="NumberSamples" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>Number of samples to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="NumberTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>Number of sampling times to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="SampleTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
+                            <xs:element name="ObservationTimes" minOccurs="0" type="ct:StandardAssignType">
                                 <xs:annotation>
                                     <xs:documentation>Observation time to be optimized.</xs:documentation>
                                 </xs:annotation>
@@ -1006,35 +1006,6 @@ permissions and limitations under the License.
                         </xs:element>
                     </xs:choice>
                 </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <xs:complexType name="AttributesDesignSpaceType">
-        <xs:annotation>
-            <xs:documentation>
-                The type that specifies short format for dosing variable used in design spaces.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>Initialise the name attribute.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the variable which is assigned to the 'name' attribute.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>The value of the name attribute.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1189,7 +1160,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="SampleTimes" minOccurs="0" type="design:TimepointsType">
+                    <xs:element name="ObservationTimes" minOccurs="0" type="design:TimepointsType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the time-points of the samplings.  
@@ -1528,8 +1499,10 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
                     <xs:element ref="ct:Assign"/>
-                    <xs:element ref="ct:Arrays"/>
-                    <xs:element ref="ct:Scalar"/>
+                    <!-- TEST Assign must be always used -->
+<!--                    <xs:element ref="ct:Arrays"/>
+                    <xs:element ref="ct:Scalar"/>-->
+                    <!-- TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>

@@ -371,6 +371,18 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
+    <xs:complexType name="StandardAssignType">
+        <xs:annotation>
+            <xs:documentation>Type defining one option only: Assign.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Assign"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <xs:complexType name="StandardDupletType">
         <xs:annotation>
             <xs:documentation>Type defining two common assignment options: SymbRef and Assign.</xs:documentation>
