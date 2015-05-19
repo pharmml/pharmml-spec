@@ -383,7 +383,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="StandardDupletType">
+<!--    <xs:complexType name="StandardDupletType">
         <xs:annotation>
             <xs:documentation>Type defining two common assignment options: SymbRef and Assign.</xs:documentation>
         </xs:annotation>
@@ -399,8 +399,8 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="StandardTripletType">
+    </xs:complexType>-->
+<!--    <xs:complexType name="StandardTripletType">
         <xs:annotation>
             <xs:documentation>Type defining three common assignment options: Scalar, SymbRef and Assign.</xs:documentation>
         </xs:annotation>
@@ -421,7 +421,7 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <!-- /TEST -->
     
     <!-- TEST -->
@@ -433,7 +433,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element name="IntervalLength" type="ct:StandardTripletType">
+                    <xs:element name="IntervalLength" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>The dosing period.</xs:documentation>
                         </xs:annotation>
@@ -461,7 +461,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ct:StandardTripletType">
+            <xs:extension base="ct:StandardAssignType">
                 <xs:attribute name="type" default="closed">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">

@@ -517,10 +517,10 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to an amr on which the current arm is based.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="ArmSize" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="SameTimes" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="SameTimes" minOccurs="0" type="ct:StandardAssignType"/>
 
                     <xs:element name="InterventionSequence" minOccurs="0" maxOccurs="unbounded" type="design:InterventionSequenceType">
                         <xs:annotation>
@@ -1059,14 +1059,14 @@ permissions and limitations under the License.
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="ArmSize" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="CostFunction" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="NumberArms" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="SameTimes" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="TotalCost" minOccurs="0" type="ct:StandardTripletType"/>
-                    <xs:element name="TotalSize" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="CostFunction" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="NumberArms" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="SameTimes" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="TotalCost" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="TotalSize" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="OccasionSequence" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSequenceType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1159,7 +1159,7 @@ permissions and limitations under the License.
                             <xs:documentation>Optoinal reference to an sampling already defined.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardTripletType"/>
+                    <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="ObservationTimes" minOccurs="0" type="design:TimepointsType">
                         <xs:annotation>
                             <xs:documentation>
