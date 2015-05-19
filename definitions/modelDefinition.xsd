@@ -521,8 +521,11 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <!-- TEST new elements UncertML/ProbOnto instead od the whole sequence -->
                 <xs:choice>
-                    <xs:element name="UncertML" type="mdef:UncertMLType"/>
-                    <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
+                    <!-- TEST -->
+                    <xs:element name="Distribution" type="mdef:DistributionType"/>
+                    <!-- /TEST instead of the explciti pair -->
+                    <!--                            <xs:element name="UncertML" type="mdef:UncertMLType"/>
+                            <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>-->
                     <!--                        <xs:element minOccurs="0" ref="distrib:AbstractCategoricalUnivariateDistribution">
                             <xs:annotation> 
                                 <xs:documentation>
@@ -1548,11 +1551,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>The symbol id for this parameter.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
                 <xs:attribute use="required" name="order">
                     <xs:simpleType>
                         <xs:restriction base="xs:positiveInteger"/>
