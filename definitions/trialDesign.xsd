@@ -529,7 +529,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="SamplingSequence" minOccurs="0" maxOccurs="unbounded" type="design:SamplingSequenceType">
+                    <xs:element name="ObservationSequence" minOccurs="0" maxOccurs="unbounded" type="design:ObservationSequenceType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a sampling sequence of the study.   
@@ -550,7 +550,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="SamplingsCombinationType">
+    <xs:complexType name="ObservationsCombinationType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
@@ -559,7 +559,7 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="Samplings" type="design:SingleSamplingType"/>
+                    <xs:element maxOccurs="unbounded" name="Observations" type="design:SingleObservationType"/>
                     <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -567,14 +567,14 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="SingleSamplingType">
+    <xs:complexType name="SingleObservationType">
         <xs:annotation>
-            <xs:documentation>Single sampling type as element of SamplingsCombination.</xs:documentation>
+            <xs:documentation>Single sampling type as element of ObservationsCombination.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="SamplingRef" maxOccurs="unbounded" type="ct:OidRefType">
+                    <xs:element name="ObservationRef" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to an sampling.</xs:documentation>
                         </xs:annotation>
@@ -678,7 +678,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="SamplingSequenceType">
+    <xs:complexType name="ObservationSequenceType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
@@ -687,14 +687,14 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="SamplingList" type="design:SamplingListType"/>
+                    <xs:element name="ObservationList" type="design:ObservationListType"/>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="SamplingListType">
+    <xs:complexType name="ObservationListType">
         <xs:complexContent>
             <xs:annotation>
                 <xs:documentation>
@@ -703,7 +703,7 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="SamplingRef" maxOccurs="unbounded" type="ct:OidRefType">
+                    <xs:element name="ObservationRef" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>
                                 Refers to the sampling being instantiated here. 
@@ -786,7 +786,7 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the administrations and actions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Samplings" minOccurs="0" type="design:SamplingsType">
+                    <xs:element name="Observations" minOccurs="0" type="design:ObservationsType">
                         <xs:annotation>
                             <xs:documentation>Defines the sampling data to use in the tasks.</xs:documentation>
                         </xs:annotation>
@@ -853,7 +853,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="SamplingsType">
+    <xs:complexType name="ObservationsType">
         <xs:annotation>
             <xs:documentation>Type combining the individual and explicit samplings.</xs:documentation>
         </xs:annotation>
@@ -867,18 +867,18 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:choice>
                         <xs:element maxOccurs="unbounded" ref="design:LookupTable"/>
-                        <xs:element maxOccurs="unbounded" name="IndividualSamplings" type="design:DatasetMappingType">
+                        <xs:element maxOccurs="unbounded" name="IndividualObservations" type="design:DatasetMappingType">
                             <xs:annotation>
                                 <xs:documentation>Defines the sampling in a dataset to use in the tasks.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element maxOccurs="unbounded" name="Sampling" type="design:SamplingType">
+                        <xs:element maxOccurs="unbounded" name="Observation" type="design:ObservationType">
                             <xs:annotation>
                                 <xs:documentation>The samplings to be generated by the simulation.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
-                    <xs:element name="SamplingsCombination" minOccurs="0" maxOccurs="unbounded" type="design:SamplingsCombinationType">
+                    <xs:element name="ObservationsCombination" minOccurs="0" maxOccurs="unbounded" type="design:ObservationsCombinationType">
                         <xs:annotation>
                             <xs:documentation>Combination of samplings.</xs:documentation>
                         </xs:annotation>
@@ -926,7 +926,7 @@ permissions and limitations under the License.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element name="SamplingRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:element name="ObservationRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                             <xs:annotation>
                                 <xs:documentation>Reference to an sampling.</xs:documentation>
                             </xs:annotation>
@@ -995,7 +995,7 @@ permissions and limitations under the License.
                             </xs:element>
                             <xs:element name="SampleTimes" minOccurs="0" type="design:AttributesDesignSpaceType">
                                 <xs:annotation>
-                                    <xs:documentation>Sampling time to be optimized.</xs:documentation>
+                                    <xs:documentation>Observation time to be optimized.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
                         </xs:choice>
@@ -1174,7 +1174,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="SamplingType">
+    <xs:complexType name="ObservationType">
         <xs:annotation>
             <xs:documentation>
                 Type defining the sampling timepoints.
@@ -1183,7 +1183,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="SamplingRef" minOccurs="0" type="ct:OidRefType">
+                    <xs:element name="ObservationRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Optoinal reference to an sampling already defined.</xs:documentation>
                         </xs:annotation>
@@ -1197,14 +1197,14 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:choice minOccurs="0">
-                        <xs:element name="Continuous" type="design:ContinuousSamplingType">
+                        <xs:element name="Continuous" type="design:ContinuousObservationType">
                             <xs:annotation>
                                 <xs:documentation>
                                     Defines the continuous variable output.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element name="Discrete" type="design:DiscreteSamplingType">
+                        <xs:element name="Discrete" type="design:DiscreteObservationType">
                             <xs:annotation>
                                 <xs:documentation>
                                     Defines the discrete variable output.
@@ -1217,7 +1217,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="ContinuousSamplingType">
+    <xs:complexType name="ContinuousObservationType">
         <xs:annotation>
             <xs:documentation>
                 Type defining the type of a continuous sampling variable to be simulated.
@@ -1238,7 +1238,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="DiscreteSamplingType">
+    <xs:complexType name="DiscreteObservationType">
         <xs:annotation>
             <xs:documentation>
                 Type defining the type of a discrete sampling variable to be simulated.
