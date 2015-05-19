@@ -751,7 +751,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="NumberCounts" type="mdef:CommonDiscreteVariableType">
+                    <xs:element name="NumberCounts" minOccurs="0" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Symbol for the count number - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
