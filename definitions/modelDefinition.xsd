@@ -591,8 +591,11 @@ permissions and limitations under the License.
                     </xs:sequence>
                     <xs:choice>
                         <xs:choice>
-                            <xs:element name="UncertML" type="mdef:UncertMLType"/>
-                            <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
+                            <!-- TEST -->
+                            <xs:element name="Distribution" type="mdef:DistributionType"/>
+                            <!-- /TEST instead of the explciti pair -->
+<!--                            <xs:element name="UncertML" type="mdef:UncertMLType"/>
+                            <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>-->
                         </xs:choice>
 <!--                        <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
                             <xs:annotation>
@@ -744,9 +747,16 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="CountVariable" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
-                            <xs:documentation>Name of the count variable - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
+                            <xs:documentation>Name of the count variable, usually Y.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="NumberCounts" type="mdef:CommonDiscreteVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Symbol for the count number - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="PreviousCountVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
