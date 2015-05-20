@@ -1453,6 +1453,24 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="DistributionName" type="mdef:DistributionNameType"/>
                     <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:ParameterXType"/>
+                    <!-- TEST -->
+                    <xs:element name="MixtureComponent" minOccurs="0" maxOccurs="unbounded" type="mdef:MixtureComponent"/>
+                    <!-- /TEST -->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="MixtureComponent">
+        <xs:annotation>
+            <xs:documentation>Type for ProbOnto distribution mixture component.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="DistributionName" type="mdef:DistributionNameType"/>
+                    <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:ParameterXType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1523,6 +1541,8 @@ permissions and limitations under the License.
                 <xs:enumeration value="MultivariateStudentT1"/>
                 <xs:enumeration value="MultivariateStudentT2"/>
                 <xs:enumeration value="Wishart"/>
+                <!-- Multivariate -->
+                <xs:enumeration value="MixtureModel"/>
             </xs:restriction>
         </xs:simpleContent>
 <!--        <xs:complexContent>
