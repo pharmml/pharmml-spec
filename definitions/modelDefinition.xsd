@@ -1142,9 +1142,10 @@ permissions and limitations under the License.
                                 <xs:complexContent>
                                     <xs:extension base="ct:PharmMLRootType">
                                         <xs:sequence>
-                                            <xs:element name="PopulationParameter">
+                                            <!-- TEST name change -->
+                                            <xs:element name="PopulationValue">
                                                 <xs:annotation>
-                                                    <xs:documentation>The population parameter: psi_pop.</xs:documentation>
+                                                    <xs:documentation>The population/typical value: psi_pop.</xs:documentation>
                                                 </xs:annotation>
                                                 <xs:complexType>
                                                     <xs:complexContent>
