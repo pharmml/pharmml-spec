@@ -1452,8 +1452,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="DistributionName" type="mdef:DistributionNameType"/>
-                    <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:ParameterXType"/>
+                    <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:DistributionParameterType"/>
                     <!-- TEST -->
+                    <xs:element name="TruncationBound" minOccurs="0" maxOccurs="unbounded" type="mdef:DistributionBoundType"/>
                     <xs:element name="MixtureComponent" minOccurs="0" maxOccurs="unbounded" type="mdef:MixtureComponent"/>
                     <!-- /TEST -->
                 </xs:sequence>
@@ -1470,7 +1471,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="DistributionName" type="mdef:DistributionNameType"/>
-                    <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:ParameterXType"/>
+                    <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:DistributionParameterType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1558,18 +1559,14 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
-    <xs:complexType name="ParameterXType">
+    <xs:complexType name="DistributionParameterType">
         <xs:annotation>
             <xs:documentation>Type for specifying parameters of a distribution.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>Initialises the parameter.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
                 </xs:sequence>
                 <xs:attribute use="required" name="order">
                     <xs:simpleType>
@@ -1579,7 +1576,33 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    
+    <xs:complexType name="DistributionBoundType">
+        <xs:annotation>
+            <xs:documentation>Type for specifying truncation bounds of a distribution.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
+                </xs:sequence>
+                <xs:attribute use="required" name="order">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger"/>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="type" default="closed">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="closed"/>
+                            <xs:enumeration value="open"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    <!-- /TEST -->    
     
     <xs:complexType name="CovariateRelationType">
         <xs:annotation>
