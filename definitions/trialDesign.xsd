@@ -1499,13 +1499,22 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="ActivityRef" type="ct:OidRefType">
+                    <!-- TEST -->
+                    <xs:element name="InterventionRef" minOccurs="0" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to a defined intervention for which individual times/amounts will be defined. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
+<!--                    <xs:element name="ActivityRef" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>
                                 Refers to the activity describing the dosing regimen being instantiated here. 
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
