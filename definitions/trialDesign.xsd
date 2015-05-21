@@ -1437,7 +1437,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType abstract="true" name="PopulationMappingType">
+<!--    <xs:complexType abstract="true" name="PopulationMappingType">
         <xs:annotation>
             <xs:documentation>
                 A type defining the mapping from a property of the individual template the the dataset defining each individual.   
@@ -1457,7 +1457,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     <xs:complexType name="IndividualAdministrationType">
         <xs:complexContent>
