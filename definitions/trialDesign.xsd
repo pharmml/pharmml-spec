@@ -791,6 +791,13 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the sampling data to use in the tasks.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="Covariates" minOccurs="0" type="design:CovariatesType">
+                        <xs:annotation>
+                            <xs:documentation>Defines the covariates to be considered in the study.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
                         <xs:annotation>
                             <xs:documentation>Defines the design spaces for optimization.</xs:documentation>
@@ -805,6 +812,33 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
+    <xs:complexType name="CovariatesType">
+        <xs:annotation>
+            <xs:documentation>Type devining the covariates - individual and study-wise</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element name="Population" minOccurs="0" type="design:PopulationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines the covariates of the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
+                        type="mdef:CovariateModelType">
+                        <xs:annotation>
+                            <xs:documentation>A covariate model.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- TEST -->
+    
     <xs:complexType name="TrialDesignType">
         <xs:annotation>
             <xs:documentation>
@@ -830,13 +864,14 @@ permissions and limitations under the License.
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="Population" minOccurs="0" type="design:PopulationType">
+<!--                        to be moved to Covariates
+                                <xs:element name="Population" minOccurs="0" type="design:PopulationType">
                                 <xs:annotation>
                                     <xs:documentation>
                                         Defines the population of the study.
                                     </xs:documentation>
                                 </xs:annotation>
-                            </xs:element>
+                            </xs:element>-->
 <!--                         moved to Interventions
                                 <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
                                 type="design:IndividualDosingType">
@@ -1013,7 +1048,7 @@ permissions and limitations under the License.
     <xs:complexType name="PopulationType">
         <xs:annotation>
             <xs:documentation>
-                Type defining the population of subjects in the study.   
+                Type defining the population of subjects with covariates in the study.   
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -1075,12 +1110,13 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
+<!--                model to Covariates
+                        <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
                         type="mdef:CovariateModelType">
                         <xs:annotation>
                             <xs:documentation>A covariate model.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
                         <xs:annotation>
                             <xs:documentation>
