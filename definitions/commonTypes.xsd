@@ -312,6 +312,9 @@ permissions and limitations under the License.
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element ref="math:Constant"/>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Scalar">
                         <xs:annotation>
                             <xs:documentation>A scalar value.</xs:documentation>
