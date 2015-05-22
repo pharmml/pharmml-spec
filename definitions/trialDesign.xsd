@@ -935,7 +935,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:DesignParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
@@ -973,7 +973,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:DesignParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
@@ -1129,7 +1129,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:DesignParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
