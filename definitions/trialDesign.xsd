@@ -714,7 +714,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+    
     <xs:complexType name="OccasionSequenceType">
         <xs:complexContent>
             <xs:annotation>
@@ -727,12 +727,36 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:VariabilityReference"/>
                     <xs:element name="OccasionList" type="design:OccasionListType"/>
                     <!-- TEST -->
-<!--                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>-->
+                    <!--                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>-->
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="OccasionsType">
+        <xs:complexContent>
+            <xs:annotation>
+                <xs:documentation>
+                    Type defining an occasions of the study.  
+                </xs:documentation>
+            </xs:annotation>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:VariabilityReference"/>
+                    <xs:element name="Occasion" maxOccurs="unbounded" type="design:OccasionType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Refers to the occasion being instantiated here. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
 
     <xs:complexType name="OccasionListType">
         <xs:complexContent>
@@ -821,7 +845,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element name="Population" minOccurs="0" type="design:PopulationType">
+                    <xs:element name="IndividualCovariates" minOccurs="0" type="design:IndividualCovariatesType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the covariates of the study.
@@ -870,16 +894,14 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the covariates to be considered in the study.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-                    <xs:element name="Occasions" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSequenceType">
+                    <xs:element name="Occasions" minOccurs="0" maxOccurs="unbounded" type="design:OccasionsType">
                         <xs:annotation>
                             <xs:documentation>
-                                Defines an occasion sequence of the study for all arms, alternative such can be
+                                Defines an occasions of the study for all arms, alternative such can be
                                 defined in single arms.   
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
                         <xs:annotation>
                             <xs:documentation>Defines the design spaces for optimization.</xs:documentation>
@@ -1062,7 +1084,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="PopulationType">
+    <xs:complexType name="IndividualCovariatesType">
         <xs:annotation>
             <xs:documentation>
                 Type defining the population of subjects with covariates in the study.   
