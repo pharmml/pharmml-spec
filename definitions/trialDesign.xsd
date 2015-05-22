@@ -772,7 +772,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="TrialStructureType">
+<!--  subelements model to main Trial Design
+        <xs:complexType name="TrialStructureType">
         <xs:annotation>
             <xs:documentation>
                 Type that defines the structure of the study.  
@@ -791,13 +792,13 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the sampling data to use in the tasks.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
+                    <!-\- TEST -\->
                     <xs:element name="Covariates" minOccurs="0" type="design:CovariatesType">
                         <xs:annotation>
                             <xs:documentation>Defines the covariates to be considered in the study.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
+                    <!-\- /TEST -\->
                     <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
                         <xs:annotation>
                             <xs:documentation>Defines the design spaces for optimization.</xs:documentation>
@@ -811,7 +812,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <!-- TEST -->
     <xs:complexType name="CovariatesType">
         <xs:annotation>
@@ -849,13 +850,37 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <!-- removed reducnandt chjoice and sequence elements -->
                 <xs:sequence>
-                            <xs:element name="ExternalDataSet" minOccurs="0" maxOccurs="unbounded" type="design:ExternalDataSetType">
-                                <xs:annotation>
-                                    <xs:documentation>Defines the external format datset.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                    
-<!--                    replaced by its subtypes
+                    <xs:element name="ExternalDataSet" minOccurs="0" maxOccurs="unbounded" type="design:ExternalDataSetType">
+                        <xs:annotation>
+                            <xs:documentation>Defines the external format datset.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Interventions" type="design:InterventionsType">
+                        <xs:annotation>
+                            <xs:documentation>Defines the administrations and actions.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Observations" minOccurs="0" type="design:ObservationsType">
+                        <xs:annotation>
+                            <xs:documentation>Defines the sampling data to use in the tasks.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Covariates" minOccurs="0" type="design:CovariatesType">
+                        <xs:annotation>
+                            <xs:documentation>Defines the covariates to be considered in the study.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
+                        <xs:annotation>
+                            <xs:documentation>Defines the design spaces for optimization.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Arms" type="design:ArmsType">
+                        <xs:annotation>
+                            <xs:documentation>Desines the arms in the study and properties applicable to all arms.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!--                    replaced by its subtypes
                             <xs:sequence>
                             <xs:element name="Structure" minOccurs="0" type="design:TrialStructureType"> 
                                 <xs:annotation>
