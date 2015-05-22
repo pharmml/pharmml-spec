@@ -847,16 +847,16 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
+                <!-- removed reducnandt chjoice and sequence elements -->
                 <xs:sequence>
-                    <xs:choice>
-                        <xs:sequence>
                             <xs:element name="ExternalDataSet" minOccurs="0" maxOccurs="unbounded" type="design:ExternalDataSetType">
                                 <xs:annotation>
                                     <xs:documentation>Defines the external format datset.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                        </xs:sequence>
-                        <xs:sequence>
+                    
+<!--                    replaced by its subtypes
+                            <xs:sequence>
                             <xs:element name="Structure" minOccurs="0" type="design:TrialStructureType"> 
                                 <xs:annotation>
                                     <xs:documentation>
@@ -864,8 +864,7 @@ permissions and limitations under the License.
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                        </xs:sequence>
-                    </xs:choice>
+                        </xs:sequence>-->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
