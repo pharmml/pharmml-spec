@@ -1549,7 +1549,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Assign"/>
+                    <xs:element ref="ct:Assign"/>
                 </xs:sequence>
                 <xs:attribute use="required" name="order">
                     <xs:simpleType>
