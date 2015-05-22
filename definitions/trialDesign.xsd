@@ -864,23 +864,6 @@ permissions and limitations under the License.
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-<!--                        to be moved to Covariates
-                                <xs:element name="Population" minOccurs="0" type="design:PopulationType">
-                                <xs:annotation>
-                                    <xs:documentation>
-                                        Defines the population of the study.
-                                    </xs:documentation>
-                                </xs:annotation>
-                            </xs:element>-->
-<!--                         moved to Interventions
-                                <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualDosing"
-                                type="design:IndividualDosingType">
-                                <xs:annotation>
-                                    <xs:documentation>
-                                        Provides time dependent dosing information for each individual in the study.    
-                                    </xs:documentation>
-                                </xs:annotation>
-                            </xs:element>-->
                         </xs:sequence>
                     </xs:choice>
                 </xs:sequence>

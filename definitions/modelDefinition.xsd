@@ -1931,6 +1931,13 @@ permissions and limitations under the License.
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:IndividualParameter">
+                        <xs:annotation>
+                            <xs:documentation>A parameter definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ct:CommonVariable">
                         <xs:annotation>
                             <xs:documentation>A variable definition.</xs:documentation>
