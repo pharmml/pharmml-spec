@@ -556,6 +556,12 @@ permissions and limitations under the License.
                     <xs:enumeration value="ssPeriod"/>
                     <xs:enumeration value="time"/>
                     <xs:enumeration value="undefined"/>
+                    <!-- SO related -->
+                    <xs:enumeration value="indivParameter"/>
+                    <xs:enumeration value="popParameter"/>
+                    <xs:enumeration value="randEffect"/>
+                    <xs:enumeration value="residual"/>
+                    <xs:enumeration value="shrinkage"/>
                 </xs:restriction>
     </xs:simpleType>
     
