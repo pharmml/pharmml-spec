@@ -1748,7 +1748,7 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
-    <xs:element name="NN" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
+    <xs:element name="NA" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
         <xs:annotation>
             <xs:documentation>
                 Element defines not available/missing data.
