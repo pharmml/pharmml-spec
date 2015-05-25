@@ -99,7 +99,9 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="LRHSTransformationType">
+
+<!--  redefined as complex type
+        <xs:simpleType name="LRHSTransformationType">
         <xs:annotation>
             <xs:documentation>
                 A type defining possible transformation functions that may be applied.
@@ -127,11 +129,60 @@ permissions and limitations under the License.
                 </xs:annotation>
             </xs:enumeration>
         </xs:restriction>
-    </xs:simpleType>
-
+    </xs:simpleType>-->
+    
+    
     <!--
         Complex Types
         -->
+    
+    <xs:complexType name="LRHSTransformationType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining possible transformation functions that may be applied.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Lambda" type="ct:StandardAssignType"/>
+                </xs:sequence>
+                <xs:attribute name="type" use="required" type="mdef:transformationType"/>
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+    
+    <xs:simpleType name="transformationType">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="BoxCox">
+                <xs:annotation>
+                    <xs:documentation>BoxCox transformation with parameter lambda.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="identity">
+                <xs:annotation>
+                    <xs:documentation>Identity transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="log">
+                <xs:annotation>
+                    <xs:documentation>Natural log transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="logit">
+                <xs:annotation>
+                    <xs:documentation>Logit transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="probit">
+                <xs:annotation>
+                    <xs:documentation>Probit transformation.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+ 
     <xs:complexType name="VariabilityLevelDefnType">
         <xs:annotation>
             <xs:documentation>Defines the variability level.</xs:documentation>
