@@ -168,6 +168,18 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+    <!-- TEST -->
+    <xs:complexType name="MissingValueType">
+        <xs:annotation>
+            <xs:documentation>String value.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="ct:PharmMLRootType">
+                <xs:attributeGroup ref="ct:RootAttributesGroup"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="BooleanType" abstract="true">
         <xs:annotation>
             <xs:documentation>
@@ -1735,6 +1747,50 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="NN" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
+        <xs:annotation>
+            <xs:documentation>
+                Element defines not available/missing data.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="NaN" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
+        <xs:annotation>
+            <xs:documentation>
+                Element defines a not a number - impossible value (e.g., dividing by zero).
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="plusInf" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
+        <xs:annotation>
+            <xs:documentation>
+                Element defines a not a number.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="minusInf" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
+        <xs:annotation>
+            <xs:documentation>
+                Element defines a not a number.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="BLQ" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
+        <xs:annotation>
+            <xs:documentation>
+                Element defines bellow level of quantification data item.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ALQ" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
+        <xs:annotation>
+            <xs:documentation>
+                Element defines a above level of quantification data item.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="Boolean" type="ct:BooleanType"  substitutionGroup="ct:Scalar" abstract="true">
         <xs:annotation>
             <xs:documentation>
