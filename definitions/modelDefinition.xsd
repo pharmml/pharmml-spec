@@ -145,7 +145,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="Lambda" type="ct:StandardAssignType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" type="ct:StandardAssignType"/>
                 </xs:sequence>
                 <xs:attribute name="type" use="required" type="mdef:transformationType"/>
             </xs:extension>
