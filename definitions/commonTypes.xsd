@@ -1765,14 +1765,14 @@ permissions and limitations under the License.
     <xs:element name="plusInf" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
         <xs:annotation>
             <xs:documentation>
-                Element defines a not a number.
+                Element defines a positive infinity data item.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="minusInf" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
         <xs:annotation>
             <xs:documentation>
-                Element defines a not a number.
+                Element defines a negative infinity data item.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
