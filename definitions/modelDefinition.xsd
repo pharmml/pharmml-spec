@@ -1791,6 +1791,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Interpolation" minOccurs="0"/>
+                    <!-- TEST -->
+                    <xs:element ref="ct:Assign" minOccurs="0"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -2024,7 +2027,8 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
                         <xs:annotation>
-                            <xs:documentation>The definition of parameters in the covariate block. Typically these will define parameters used by the covariate definitions.</xs:documentation>
+                            <xs:documentation>The definition of parameters in the covariate block. 
+                                Typically these will define parameters used by the covariate definitions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element maxOccurs="unbounded" name="Covariate"
