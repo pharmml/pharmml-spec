@@ -316,14 +316,14 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
                     <xs:choice>
-                        <xs:element ref="ct:SymbRef"/>
                         <xs:element name="FullReset"/>
+                        <xs:sequence>
+                            <xs:element ref="ct:SymbRef"/>
+                            <xs:element name="ResetValue" minOccurs="0" type="ct:RealValueType"/>
+                            <xs:element name="ResetTime" minOccurs="0" type="ct:RealValueType"/>
+                        </xs:sequence>
                     </xs:choice>
-                    <xs:element name="ResetValue" minOccurs="0" type="ct:RealValueType"/>
-                    <xs:element name="ResetTime" minOccurs="0" type="ct:RealValueType"/>
-                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
