@@ -356,7 +356,7 @@ permissions and limitations under the License.
     <xs:complexType name="ObservationsReferenceType">
         <xs:annotation>
             <xs:documentation>
-                Type defining reference to an external dataset.
+                Type defining reference to an external dataset or an Observation.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -367,6 +367,23 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="InterventionsReferenceType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining reference to an external dataset or an Intervention.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="ct:OidRef"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <xs:complexType name="OperationPropertyType">
         <xs:annotation>
@@ -658,6 +675,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
+                    <xs:element name="InterventionsReference" minOccurs="0" type="msteps:InterventionsReferenceType"/>
                     <xs:element name="ObservationsReference" minOccurs="0" type="msteps:ObservationsReferenceType"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
