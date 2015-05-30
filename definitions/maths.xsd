@@ -213,10 +213,10 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:Name">
-                    <xs:enumeration value="notanumber"/>
+                    <!-- TEST -->
                     <xs:enumeration value="pi"/>
                     <xs:enumeration value="exponentiale"/>
-                    <xs:enumeration value="infinity"/>
+                    <!-- /TEST -->
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
