@@ -873,8 +873,15 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- removed reducnandt chjoice and sequence elements -->
+                <!-- removed redundant choice and sequence elements -->
                 <xs:sequence minOccurs="1">
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:DesignParameter">
+                        <xs:annotation>
+                            <xs:documentation>A design parameter definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="ExternalDataSet" minOccurs="0" maxOccurs="unbounded" type="design:ExternalDataSetType">
                         <xs:annotation>
                             <xs:documentation>Defines the external format datset.</xs:documentation>
