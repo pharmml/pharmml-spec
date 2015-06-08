@@ -1185,6 +1185,22 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:choice>
+                        <!-- TEST -->
+                        <xs:element name="PopulationValue">
+                            <xs:annotation>
+                                <xs:documentation>The population/typical value: psi_pop.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="ct:PharmMLRootType">
+                                        <xs:sequence>
+                                            <xs:element ref="ct:Assign"/>
+                                        </xs:sequence>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <!-- /TEST -->
                         <xs:element name="LinearCovariate">
                             <xs:annotation>
                                 <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
