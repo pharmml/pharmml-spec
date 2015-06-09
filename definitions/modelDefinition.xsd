@@ -70,7 +70,8 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="LHSTransformationType">
+<!--  redefined as complex type
+        <xs:simpleType name="LHSTransformationType">
         <xs:annotation>
             <xs:documentation>
                 A type defining possible transformation functions that may be applied.
@@ -98,7 +99,7 @@ permissions and limitations under the License.
                 </xs:annotation>
             </xs:enumeration>
         </xs:restriction>
-    </xs:simpleType>
+    </xs:simpleType>-->
 
 <!--  redefined as complex type
         <xs:simpleType name="LRHSTransformationType">
@@ -136,10 +137,11 @@ permissions and limitations under the License.
         Complex Types
         -->
     
-    <xs:complexType name="LRHSTransformationType">
+    <xs:complexType name="LHSTransformationType">
         <xs:annotation>
             <xs:documentation>
-                A type defining possible transformation functions that may be applied.
+                A type defining possible transformation functions that may be applied
+                on left hand side of a model.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -150,7 +152,23 @@ permissions and limitations under the License.
                 <xs:attribute name="type" use="required" type="mdef:transformationType"/>
             </xs:extension>
         </xs:complexContent>
-
+    </xs:complexType>    
+    
+    <xs:complexType name="LRHSTransformationType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining possible transformation functions that may be applied
+                on both sides of a model.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" type="ct:StandardAssignType"/>
+                </xs:sequence>
+                <xs:attribute name="type" use="required" type="mdef:transformationType"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     
     <xs:simpleType name="transformationType">
@@ -1173,7 +1191,7 @@ permissions and limitations under the License.
    <!-- TEST -->
     <xs:complexType name="StructuredModelType">
         <xs:annotation>
-            <xs:documentation>Defines the general structure model type.</xs:documentation>
+            <xs:documentation>Defines the structured model type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
