@@ -1845,7 +1845,7 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>The level of random variability associated with a categorical 
-                                covariate defined in the rtial design.</xs:documentation>
+                                covariate defined in the trial design.</xs:documentation>
                         </xs:annotation>
                     </xs:element> 
                     <!-- /TEST -->
