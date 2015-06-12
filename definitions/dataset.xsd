@@ -562,6 +562,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="randEffect"/>
                     <xs:enumeration value="residual"/>
                     <xs:enumeration value="statPrecision"/>
+                    <xs:enumeration value="strataVariable"/>
                 </xs:restriction>
     </xs:simpleType>
     
