@@ -561,7 +561,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="popParameter"/>
                     <xs:enumeration value="randEffect"/>
                     <xs:enumeration value="residual"/>
-                    <xs:enumeration value="shrinkage"/>
+                    <xs:enumeration value="statPrecision"/>
                 </xs:restriction>
     </xs:simpleType>
     
