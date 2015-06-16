@@ -319,9 +319,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-   
-    <xs:complexType name="ColumnsDefinitionType">
+
+<!--    <xs:complexType name="ColumnsDefinitionType">
         <xs:annotation>
             <xs:documentation>
                 Type specifies all the columns in a dataset.
@@ -340,9 +339,39 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType> -->
+    
+    <!-- TEST based on ColumnsDefinitionType -->
+    <xs:complexType name="HeaderColumnsDefinitionType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifies the headers and columns in a dataset.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Header" type="ds:HeaderDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a header in the dataset.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="Column" type="ds:ColumnDefnType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines a column in the dataset.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
 
-    <xs:complexType name="CommonColumnDefnType">
+<!--    <xs:complexType name="CommonColumnDefnType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:attribute name="columnNum" type="xs:positiveInteger" use="required">
@@ -352,11 +381,11 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     <xs:complexType name="ColumnDefnType">
         <xs:complexContent>
-            <xs:extension base="CommonColumnDefnType">
+            <xs:extension base="ct:PharmMLRootType">
                 
                 <xs:attribute name="columnId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
@@ -375,9 +404,44 @@ permissions and limitations under the License.
                         <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- TEST -->
+                <xs:attribute name="columnNum" type="xs:positiveInteger" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="HeaderDefnType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                
+                <xs:attribute name="headerType" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The type of the header.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                
+                <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The column number in the reosurce to use for this header.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+
+                <xs:attribute name="rowNumber" type="ds:ColumnTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The row number for this header.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="DatasetRowType">
         <xs:annotation>
             <xs:documentation>
@@ -607,10 +671,10 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>    
-    <xs:element name="Definition" type="ColumnsDefinitionType">
+    <xs:element name="Definition" type="HeaderColumnsDefinitionType">
         <xs:annotation>
             <xs:documentation>
-                Defines the columns in a dataset.
+                Defines the headers and columns in a dataset.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
