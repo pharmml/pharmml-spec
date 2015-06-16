@@ -50,6 +50,36 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="HeaderTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying the types of headers. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="ct:SymbolIdType">
+                    <xs:enumeration value="mainHeader">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The main header inthe datafile.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="subHeader">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The sub header inthe datafile.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
 
     <!--
         Complex Types
@@ -420,7 +450,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 
-                <xs:attribute name="headerType" type="ct:SymbolIdType" use="required">
+                <xs:attribute name="headerType" type="ds:HeaderTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The type of the header.</xs:documentation>
                     </xs:annotation>
@@ -432,7 +462,7 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:attribute>
 
-                <xs:attribute name="rowNumber" type="ds:ColumnTypeType" use="required">
+                <xs:attribute name="rowNumber" type="xs:positiveInteger" use="required">
                     <xs:annotation>
                         <xs:documentation>The row number for this header.</xs:documentation>
                     </xs:annotation>
