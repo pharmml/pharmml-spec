@@ -83,9 +83,6 @@ permissions and limitations under the License.
                     </xs:enumeration>
                 </xs:restriction>
             </xs:simpleType>
-            <xs:simpleType>
-                <xs:restriction base="xs:string"/>
-            </xs:simpleType>
         </xs:union>
     </xs:simpleType>
     <!-- /TEST -->
@@ -467,6 +464,12 @@ permissions and limitations under the License.
     <xs:complexType name="HeaderDefnType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
+                
+                <xs:attribute name="name" type="xs:string" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The name of the header.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
                 
                 <xs:attribute name="headerType" type="ds:HeaderTypeType" use="required">
                     <xs:annotation>
