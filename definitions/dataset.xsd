@@ -50,6 +50,7 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>
 
+    <!-- TEST -->
     <xs:simpleType name="HeaderTypeType">
         <xs:annotation>
             <xs:documentation>
@@ -62,14 +63,21 @@ permissions and limitations under the License.
                     <xs:enumeration value="mainHeader">
                         <xs:annotation>
                             <xs:documentation>
-                                The main header inthe datafile.
+                                The main header in the datafile.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:enumeration>
                     <xs:enumeration value="subHeader">
                         <xs:annotation>
                             <xs:documentation>
-                                The sub header inthe datafile.
+                                The sub header in the datafile.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="userDefined">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The user-defined header in the datafile.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:enumeration>
@@ -80,7 +88,8 @@ permissions and limitations under the License.
             </xs:simpleType>
         </xs:union>
     </xs:simpleType>
-
+    <!-- /TEST -->
+    
     <!--
         Complex Types
         -->
@@ -276,6 +285,15 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="HeaderRow" type="ds:HeaderRowType" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>
+                                A header in the dataset.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="Row" type="ds:DatasetRowType" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>
@@ -492,6 +510,24 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
         
+    <xs:complexType name="HeaderRowType">
+        <xs:annotation>
+            <xs:documentation>
+                This type specifies a header in the dataset.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element maxOccurs="1" ref="ct:Scalar">
+                        <xs:annotation>
+                            <xs:documentation>A cell with a scalar value.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     <xs:complexType name="ColumnMappingType">
         <xs:annotation>
