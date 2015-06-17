@@ -464,25 +464,16 @@ permissions and limitations under the License.
     <xs:complexType name="HeaderDefnType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                
                 <xs:attribute name="name" type="xs:string" use="required">
                     <xs:annotation>
                         <xs:documentation>The name of the header.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                
                 <xs:attribute name="headerType" type="ds:HeaderTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The type of the header.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                
-                <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
-                    <xs:annotation>
-                        <xs:documentation>The column number in the reosurce to use for this header.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-
                 <xs:attribute name="rowNumber" type="xs:positiveInteger" use="required">
                     <xs:annotation>
                         <xs:documentation>The row number for this header.</xs:documentation>
