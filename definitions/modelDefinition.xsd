@@ -1577,8 +1577,6 @@ permissions and limitations under the License.
                 <xs:enumeration value="NegativeBinomial1"/>
                 <xs:enumeration value="NegativeBinomial2"/>
                 <xs:enumeration value="Poisson"/>
-                <xs:enumeration value="PoissonWithMarkov"/>
-                <xs:enumeration value="PoissonWithMixture"/>
                 <xs:enumeration value="UniformDiscrete1"/>
                 <xs:enumeration value="UniformDiscrete2"/>
                 <xs:enumeration value="ZeroInflatedPoisson"/>
@@ -1586,7 +1584,6 @@ permissions and limitations under the License.
                 <xs:enumeration value="Beta"/>
                 <xs:enumeration value="Cauchy"/>
                 <xs:enumeration value="ChiSquared"/>
-                <xs:enumeration value="DiracDelta"/>
                 <xs:enumeration value="Exponential"/>
                 <xs:enumeration value="F"/>                     <!-- aka Fisher-Snedecor -->
                 <xs:enumeration value="Gamma"/>
@@ -1594,7 +1591,8 @@ permissions and limitations under the License.
                 <xs:enumeration value="Gompertz"/>
                 <xs:enumeration value="Gumbel"/>                <!-- aka Extreme Value -->
                 <xs:enumeration value="InverseGamma"/>
-                <xs:enumeration value="Laplace"/>               <!-- aka Double-exponential -->
+                <xs:enumeration value="Laplace1"/>               <!-- aka Double-exponential -->
+                <xs:enumeration value="Laplace2"/>               <!-- aka Double-exponential -->
                 <xs:enumeration value="LogNormal1"/>
                 <xs:enumeration value="LogNormal2"/>
                 <xs:enumeration value="LogNormal3"/>
@@ -1611,7 +1609,8 @@ permissions and limitations under the License.
                 <xs:enumeration value="StandardUniform"/>
                 <xs:enumeration value="StudentT"/>
                 <xs:enumeration value="Uniform"/>
-                <xs:enumeration value="Weibull"/>
+                <xs:enumeration value="Weibull1"/>
+                <xs:enumeration value="Weibull2"/>
                 <!-- Multivariate discrete -->
                 <xs:enumeration value="Multinomial"/>
                 <!-- Multivariate -->
@@ -1621,7 +1620,8 @@ permissions and limitations under the License.
                 <xs:enumeration value="MultivariateNormal2"/>
                 <xs:enumeration value="MultivariateStudentT1"/>
                 <xs:enumeration value="MultivariateStudentT2"/>
-                <xs:enumeration value="Wishart"/>
+                <xs:enumeration value="Wishart1"/>
+                <xs:enumeration value="Wishart2"/>
                 <!-- Multivariate -->
                 <xs:enumeration value="MixtureModel"/>
             </xs:restriction>
