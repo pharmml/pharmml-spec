@@ -1576,9 +1576,11 @@ permissions and limitations under the License.
                 <xs:enumeration value="Hypergeometric"/>
                 <xs:enumeration value="NegativeBinomial1"/>
                 <xs:enumeration value="NegativeBinomial2"/>
+<!--                <xs:enumeration value="NegativeBinomial3"/>-->
                 <xs:enumeration value="Poisson"/>
                 <xs:enumeration value="UniformDiscrete1"/>
                 <xs:enumeration value="UniformDiscrete2"/>
+<!--                <xs:enumeration value="ZeroInflatedNegativeBinomial"/>-->
                 <xs:enumeration value="ZeroInflatedPoisson"/>
                 <!-- Univariate continuous -->
                 <xs:enumeration value="Beta"/>
@@ -1623,7 +1625,7 @@ permissions and limitations under the License.
                 <xs:enumeration value="Wishart1"/>
                 <xs:enumeration value="Wishart2"/>
                 <!-- Multivariate -->
-                <xs:enumeration value="MixtureModel"/>
+                <xs:enumeration value="MixtureDistribution"/>
             </xs:restriction>
         </xs:simpleContent>
     </xs:complexType>
