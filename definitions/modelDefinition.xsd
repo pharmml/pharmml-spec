@@ -294,7 +294,6 @@ permissions and limitations under the License.
             <xs:enumeration value="meanLog"/>
             <xs:enumeration value="median"/>
             <xs:enumeration value="minimum"/>
-            <xs:enumeration value="mixingCoefficients"/>
             <xs:enumeration value="numberOfFailures"/>
             <xs:enumeration value="numberOfSuccesses"/>
             <xs:enumeration value="numberOfTrials"/>
@@ -319,6 +318,7 @@ permissions and limitations under the License.
             <xs:enumeration value="tau"/>
             <xs:enumeration value="var"/>
             <xs:enumeration value="varLog"/>
+            <xs:enumeration value="weight"/>
         </xs:restriction>
     </xs:simpleType>
     <!-- /TEST -->
