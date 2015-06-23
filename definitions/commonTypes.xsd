@@ -33,6 +33,20 @@ permissions and limitations under the License.
     <!--
         Simple Types
       -->
+    <xs:simpleType name="MissingDataAttributeType">
+        <xs:annotation>
+            <xs:documentation>Defines the missing data attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="NA"/>
+            <xs:enumeration value="NaN"/>
+            <xs:enumeration value="minusInf"/>
+            <xs:enumeration value="plusInf"/>
+            <xs:enumeration value="ALQ"/>
+            <xs:enumeration value="BLQ"/>
+            <!-- extandable with other type if necessary -->
+        </xs:restriction>
+    </xs:simpleType>    
     <xs:simpleType name="ToolNameType">
         <xs:annotation>
             <xs:documentation>Defines the tool names attribute.</xs:documentation>
@@ -99,6 +113,16 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
+    <!--<!-\- TEST -\->
+    <xs:simpleType name="SymbolNoWhiteType">
+        <xs:annotation>
+            <xs:documentation>Type for data symbols allowing any string without whitespace.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^\s]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-\- /TEST -\->-->
     <!-- TEST -->
     <xs:simpleType name="CategoryIdType">
         <xs:annotation>

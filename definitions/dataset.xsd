@@ -157,6 +157,15 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="MissingData" minOccurs="0" maxOccurs="unbounded" type="MissingDataMapType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The mapping of symbols used in dataset and allowed missing categories.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                 </xs:sequence>         
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -632,11 +641,13 @@ permissions and limitations under the License.
     <xs:complexType name="MapType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="dataSymbol" type="ct:CatIdType" use="optional">
+                <!-- TEST from 'CatIdType' -->
+                <xs:attribute name="dataSymbol" type="xs:string" use="optional">
                     <xs:annotation>
                         <xs:documentation>Symbol in the data set.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- /TEST -->
                 <xs:attribute name="modelSymbol" type="ct:SymbolIdType" use="optional">
                     <xs:annotation>
                         <xs:documentation>ID referencing a Symbol in the model.</xs:documentation>
@@ -720,6 +731,25 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="MissingDataMapType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="dataCode" type="xs:string" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Symbol using in the data set.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="missingDataType" type="ct:MissingDataAttributeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Allowed missing data categories.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <!--
         Elements
