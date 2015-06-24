@@ -649,12 +649,12 @@ permissions and limitations under the License.
                             <xs:documentation>The initial estimate to use.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="LowerBound" type="ct:ScalarRhs">
+                    <xs:element minOccurs="0" name="LowerBound" type="ct:Rhs">
                         <xs:annotation>
                             <xs:documentation>The lower bounds of the estimate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="UpperBound" type="ct:ScalarRhs">
+                    <xs:element minOccurs="0" name="UpperBound" type="ct:Rhs">
                         <xs:annotation>
                             <xs:documentation>The upper bounds of the estimate.</xs:documentation>
                         </xs:annotation>
