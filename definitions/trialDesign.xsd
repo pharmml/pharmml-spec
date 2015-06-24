@@ -854,7 +854,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
-                        type="mdef:CovariateModelType">
+                        type="design:TD_CovariateModelType">
                         <xs:annotation>
                             <xs:documentation>A covariate model.</xs:documentation>
                         </xs:annotation>
@@ -864,6 +864,36 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="TD_CovariateModelType">
+        <xs:annotation>
+            <xs:documentation>
+                A type defining a covariate model - trial design version based on ModelDefinition 
+                without pop parameter, name etc.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="CovariateModelRef" minOccurs="0" type="ct:CovariateModelRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to a covariate model from which the current model
+                                inherits its features.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="Covariate" type="mdef:CovariateDefinitionType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a covariate.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- TEST -->
+    
     
     <xs:complexType name="TrialDesignType">
         <xs:annotation>
