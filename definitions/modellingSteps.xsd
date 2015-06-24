@@ -618,7 +618,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ct:ScalarRhs">
+            <xs:extension base="ct:Rhs">
                 <xs:attribute name="fixed" type="xs:boolean">
                     <xs:annotation>
                         <xs:documentation>Specifies whether the initial estimate is fixed. If it is then this means that this parameter is not estimated, but assigned. If fixed is true then the upper and lower bounds are ignored.</xs:documentation>
