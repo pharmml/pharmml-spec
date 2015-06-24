@@ -2012,7 +2012,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="Probability" type="ct:Rhs">             <!-- CHECK IF Interval/sequence/Vector AVAILABLE -->
+                    <xs:element minOccurs="0" name="Probability" type="ct:Rhs">
                         <xs:annotation>
                             <xs:documentation>The definition of the probability space associated with 
                                 this category.</xs:documentation>

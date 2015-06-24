@@ -1061,11 +1061,14 @@ permissions and limitations under the License.
                                     <xs:documentation>Reference to a covariate model which elements are to be optimised.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <!-- TEST -->
                             <xs:element name="CovariateRef" type="mdef:DSCovariateDefinitionType">
                                 <xs:annotation>
-                                    <xs:documentation>Defines a design space for a covariate.</xs:documentation>
+                                    <xs:documentation>Defines a design space for a covariate (a limited version
+                                        of the more complex element in covariate model).</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <!-- /TEST -->
                         </xs:sequence>
                     </xs:choice>
                     <xs:choice>
