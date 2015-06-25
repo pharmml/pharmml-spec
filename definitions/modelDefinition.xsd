@@ -1660,8 +1660,8 @@ permissions and limitations under the License.
                 <xs:sequence>
 <!--                    <xs:element name="DistributionName" type="mdef:DistributionNameType"/>-->
                     <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:DistributionParameterType"/>
-                    <xs:element name="LowerTruncationBound" minOccurs="0" maxOccurs="unbounded" type="mdef:DistributionBoundType"/>
-                    <xs:element name="UpperTruncationBound" minOccurs="0" maxOccurs="unbounded" type="mdef:DistributionBoundType"/>
+                    <xs:element name="LowerTruncationBound" minOccurs="0" maxOccurs="1" type="mdef:DistributionBoundType"/>
+                    <xs:element name="UpperTruncationBound" minOccurs="0" maxOccurs="1" type="mdef:DistributionBoundType"/>
                     <xs:element name="MixtureComponent" minOccurs="0" maxOccurs="unbounded" type="mdef:MixtureComponent"/>
                 </xs:sequence>
                 <xs:attribute name="name" use="required" type="mdef:DistroNameType"/>
