@@ -88,6 +88,17 @@ permissions and limitations under the License.
             <xs:enumeration value="no"/>
         </xs:restriction>
     </xs:simpleType>
+    <!-- TEST -->
+    <xs:simpleType name="RegressorType">
+        <xs:annotation>
+            <xs:documentation>Defines the type of variable - either common variable or regressor.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="yes"/>
+            <xs:enumeration value="no"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
     <xs:simpleType name="LinkFunctionType">
         <xs:annotation>
             <xs:documentation>Defines the type of link function for discrete data models.</xs:documentation>
@@ -549,6 +560,11 @@ permissions and limitations under the License.
                     </xs:element>
                 </xs:sequence>
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The type of the variable.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="regressor" type="ct:RegressorType" use="optional">
                     <xs:annotation>
                         <xs:documentation>The type of the variable.</xs:documentation>
                     </xs:annotation>
