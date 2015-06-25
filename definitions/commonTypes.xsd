@@ -961,7 +961,7 @@ permissions and limitations under the License.
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element> 
-                    <xs:element name="InterpIndepVar" type="ct:InterpolationIVType"/>
+                    <xs:element name="InterpIndepVar" minOccurs="0" type="ct:InterpolationIVType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
