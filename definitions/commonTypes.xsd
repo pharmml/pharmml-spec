@@ -953,6 +953,11 @@ permissions and limitations under the License.
                                         <xs:documentation>Cubic Polynomial interpolation</xs:documentation>
                                     </xs:annotation>
                                 </xs:enumeration>
+                                <xs:enumeration value="lastValue">
+                                    <xs:annotation>
+                                        <xs:documentation>Last value interpolation</xs:documentation>
+                                    </xs:annotation>
+                                </xs:enumeration>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element> 
