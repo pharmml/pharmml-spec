@@ -262,12 +262,12 @@ permissions and limitations under the License.
     <xs:complexType name="CovariateModelRefType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="blkIdRef" type="ct:BlockIdType">
+                <xs:attribute name="blkIdRef" type="ct:BlockIdType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Type for referencing a covariate model.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="oidRef" type="ct:oidType" use="required"/>
+                <xs:attribute name="oidRef" type="ct:oidType" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
