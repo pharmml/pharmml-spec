@@ -135,7 +135,7 @@ permissions and limitations under the License.
                 <xs:documentation>Defines the OID key.</xs:documentation>
             </xs:annotation>
             <xs:selector    
-                xpath=".//design:Arm|.//design:Action|.//design:Administration|.//design:Individual|.//msteps:SimulationStep|.//msteps:EstimationStep|.//design:ExternalDataSet|.//msteps:TargetTool|.//design:Observation|.//design:ObservationsCombination|.//design:IndividualObservations|.//design:InterventionsCombination"/> <!-- .//design:Epoch| |.//design:ObservationsDataset -->
+                xpath=".//design:Arm|.//design:Action|.//design:Administration|.//design:Individual|.//msteps:SimulationStep|.//msteps:EstimationStep|.//design:ExternalDataSet|.//msteps:TargetTool|.//design:Observation|.//design:ObservationsCombination|.//design:IndividualObservations|.//design:InterventionsCombination"/>
             <xs:field xpath="@oid"/>
         </xs:key>
         <xs:keyref refer="mml:oidKey" name="oidRef">
@@ -143,7 +143,7 @@ permissions and limitations under the License.
                 <xs:documentation>Ensures all treatment Id refs point to valid treatment id. Prevents dangling references.</xs:documentation>
             </xs:annotation>
             <xs:selector
-                xpath=".//design:ObservationRef|.//design:InterventionRef|.//design:ArmRef|.//ct:OidRef"/>  <!-- .//design:EpochRef|.//design:CellRef| -->
+                xpath=".//design:ObservationRef|.//design:InterventionRef|.//design:ArmRef|.//ct:OidRef"/>
             <xs:field xpath="@oidRef"/>
         </xs:keyref>
     </xs:element>

@@ -405,7 +405,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST removed choice -->
                     <xs:element name="InterventionRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>
@@ -413,7 +412,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- choice -->
                     <xs:element minOccurs="0" ref="design:DosingRegimen"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -585,7 +583,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="InterventionsCombinationType">
         <xs:complexContent>
             <xs:annotation>
@@ -602,9 +599,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="SingleInterventionType">
         <xs:annotation>
             <xs:documentation>Signle intervention type as element of InterventionsCombination.</xs:documentation>
@@ -618,14 +613,11 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
-                    <!-- TEST -->
                     <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:simpleType name="RelativeType">
         <xs:annotation>
@@ -725,38 +717,11 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="OccasionList" type="design:OccasionListType"/>
-                    <!-- TEST -->
-                    <!--                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>-->
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <!--<!-\- TEST -\->
-    <xs:complexType name="OccasionsType">
-        <xs:complexContent>
-            <xs:annotation>
-                <xs:documentation>
-                    Type defining an occasions of the study.  
-                </xs:documentation>
-            </xs:annotation>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:VariabilityReference"/>
-                    <xs:element name="Occasion" maxOccurs="unbounded" type="design:OccasionType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the occasion being instantiated here. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-\- /TEST -\->-->
-
     <xs:complexType name="OccasionListType">
         <xs:complexContent>
             <xs:annotation>
@@ -797,48 +762,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-<!--  subelements model to main Trial Design
-        <xs:complexType name="TrialStructureType">
-        <xs:annotation>
-            <xs:documentation>
-                Type that defines the structure of the study.  
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="Interventions" type="design:InterventionsType">
-                        <xs:annotation>
-                            <xs:documentation>Defines the administrations and actions.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="Observations" minOccurs="0" type="design:ObservationsType">
-                        <xs:annotation>
-                            <xs:documentation>Defines the sampling data to use in the tasks.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-\- TEST -\->
-                    <xs:element name="Covariates" minOccurs="0" type="design:CovariatesType">
-                        <xs:annotation>
-                            <xs:documentation>Defines the covariates to be considered in the study.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-\- /TEST -\->
-                    <xs:element name="DesignSpaces" minOccurs="0" type="design:DesignSpacesType">
-                        <xs:annotation>
-                            <xs:documentation>Defines the design spaces for optimization.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="Arms" type="design:ArmsType">
-                        <xs:annotation>
-                            <xs:documentation>Desines the arms in the study and properties applicable to all arms.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- TEST -->
     <xs:complexType name="CovariatesType">
         <xs:annotation>
             <xs:documentation>Type devining the covariates - individual and study-wise</xs:documentation>
@@ -863,9 +786,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="TD_CovariateModelType">
         <xs:annotation>
             <xs:documentation>
@@ -892,8 +813,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
-    
     
     <xs:complexType name="TrialDesignType">
         <xs:annotation>
@@ -903,15 +822,12 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- removed redundant choice and sequence elements -->
                 <xs:sequence minOccurs="1">
-                    <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:DesignParameter">
                         <xs:annotation>
                             <xs:documentation>A design parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="ExternalDataSet" minOccurs="0" maxOccurs="unbounded" type="design:ExternalDataSetType">
                         <xs:annotation>
                             <xs:documentation>Defines the external format datset.</xs:documentation>
@@ -950,16 +866,6 @@ permissions and limitations under the License.
                             <xs:documentation>Desines the arms in the study and properties applicable to all arms.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!--                    replaced by its subtypes
-                            <xs:sequence>
-                            <xs:element name="Structure" minOccurs="0" type="design:TrialStructureType"> 
-                                <xs:annotation>
-                                    <xs:documentation>
-                                        Defines the structure of the study.   
-                                    </xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                        </xs:sequence>-->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1061,14 +967,12 @@ permissions and limitations under the License.
                                     <xs:documentation>Reference to a covariate model which elements are to be optimised.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- TEST -->
                             <xs:element name="CovariateRef" type="mdef:DSCovariateDefinitionType">
                                 <xs:annotation>
                                     <xs:documentation>Defines a design space for a covariate (a limited version
                                         of the more complex element in covariate model).</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- /TEST -->
                         </xs:sequence>
                     </xs:choice>
                     <xs:choice>
@@ -1182,22 +1086,6 @@ permissions and limitations under the License.
                     <xs:element name="SameTimes" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="TotalCost" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="TotalSize" minOccurs="0" type="ct:StandardAssignType"/>
-<!--                moved one level up
-                        <xs:element name="OccasionSequence" minOccurs="0" maxOccurs="unbounded" type="design:OccasionSequenceType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Defines an occasion sequence of the study for all arms, alternative such can be
-                                defined in single arms.   
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-<!--                model to Covariates
-                        <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
-                        type="mdef:CovariateModelType">
-                        <xs:annotation>
-                            <xs:documentation>A covariate model.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
                     <xs:element maxOccurs="unbounded" name="Arm" type="design:ArmDefnType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1217,13 +1105,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:DesignParameter">
                         <xs:annotation>
                             <xs:documentation>A design parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="Administration" maxOccurs="unbounded" type="design:AdministrationType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1231,7 +1117,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST moved from TrialDesignType and renamed -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="IndividualAdministration"
                         type="design:IndividualAdministrationType">
                         <xs:annotation>
@@ -1240,7 +1125,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="design:ActionType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1248,7 +1132,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="InterventionsCombination" minOccurs="0" maxOccurs="unbounded" type="design:InterventionsCombinationType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1256,7 +1139,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1554,33 +1436,10 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-<!--    <xs:complexType abstract="true" name="PopulationMappingType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining the mapping from a property of the individual template the the dataset defining each individual.   
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ds:ColumnRef">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the column in the dataset that contains the information to be mapped 
-                                to the individual.    
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
     <xs:complexType name="IndividualAdministrationType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="InterventionRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1588,14 +1447,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-<!--                    <xs:element name="ActivityRef" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Refers to the activity describing the dosing regimen being instantiated here. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
                     <xs:element name="ColumnMapping" maxOccurs="unbounded" type="ds:ColumnMappingType">
                         <xs:annotation>
                             <xs:documentation>
@@ -1625,10 +1476,6 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
                     <xs:element ref="ct:Assign"/>
-                    <!-- TEST Assign must be always used -->
-<!--                    <xs:element ref="ct:Arrays"/>
-                    <xs:element ref="ct:Scalar"/>-->
-                    <!-- TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
