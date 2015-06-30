@@ -70,68 +70,6 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-<!--  redefined as complex type
-        <xs:simpleType name="LHSTransformationType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining possible transformation functions that may be applied.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:token">
-            <xs:enumeration value="identity">
-                <xs:annotation>
-                    <xs:documentation>Identity transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="log">
-                <xs:annotation>
-                    <xs:documentation>Natural log transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="logit">
-                <xs:annotation>
-                    <xs:documentation>Logit transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="probit">
-                <xs:annotation>
-                    <xs:documentation>Probit transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>
-    </xs:simpleType>-->
-
-<!--  redefined as complex type
-        <xs:simpleType name="LRHSTransformationType">
-        <xs:annotation>
-            <xs:documentation>
-                A type defining possible transformation functions that may be applied.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:token">
-            <xs:enumeration value="identity">
-                <xs:annotation>
-                    <xs:documentation>Identity transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="log">
-                <xs:annotation>
-                    <xs:documentation>Natural log transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="logit">
-                <xs:annotation>
-                    <xs:documentation>Logit transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="probit">
-                <xs:annotation>
-                    <xs:documentation>Probit transformation.</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>
-    </xs:simpleType>-->
-    
     
     <!--
         Complex Types
@@ -201,7 +139,6 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>
     
-    <!-- TEST -->
     <xs:simpleType name="DistroNameType">
         <xs:annotation>
             <xs:documentation>The names of ProbOnto distributions.</xs:documentation>
@@ -269,9 +206,7 @@ permissions and limitations under the License.
             <xs:enumeration value="MixtureDistribution"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:simpleType name="ParameterNameType"> <!-- 42 so far -->
         <xs:annotation>
             <xs:documentation>The names of ProbOnto parameters.</xs:documentation>
@@ -321,7 +256,6 @@ permissions and limitations under the License.
             <xs:enumeration value="weight"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
  
     <xs:complexType name="VariabilityLevelDefnType">
         <xs:annotation>
@@ -392,10 +326,6 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0"
                         ref="mdef:CommonParameterElement"/>
-                    <!-- TEST -->
-<!--                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:Vector"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:Matrix"/>-->
-                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
                         type="mdef:CorrelationType">
                         <xs:annotation>
@@ -528,9 +458,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="mdef:CommonObservationModelType">
                 <xs:sequence>
-                    <!-- TEST - optional since it can be defined with RandomVariable instead -->            <!-- CORRECT!!!! CORRECT!!!! CORRECT!!!! CORRECT!!!! -->
                     <xs:element maxOccurs="1" minOccurs="0" ref="mdef:ObservationError"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -710,41 +638,8 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST new elements UncertML/ProbOnto instead od the whole sequence -->
                 <xs:choice>
-                    <!-- TEST -->
                     <xs:element name="Distribution" type="mdef:DistributionType"/>
-                    <!-- /TEST instead of the explciti pair -->
-                    <!--                            <xs:element name="UncertML" type="mdef:UncertMLType"/>
-                            <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>-->
-                    <!--                        <xs:element minOccurs="0" ref="distrib:AbstractCategoricalUnivariateDistribution">
-                            <xs:annotation> 
-                                <xs:documentation>
-                                    A categorical univariate probability distribution as defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element minOccurs="0" ref="distrib:AbstractCategoricalMultivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A categorical multivariate probability distribution as defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A discrete univariate probability distribution as defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element minOccurs="0" ref="distrib:AbstractDiscreteMultivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A discrete multivariate probability distribution as defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>-->
                 </xs:choice>
                 <xs:attribute name="linkFunction" type="ct:LinkFunctionType" use="required">
                     <xs:annotation>
@@ -785,19 +680,8 @@ permissions and limitations under the License.
                     </xs:sequence>
                     <xs:choice>
                         <xs:choice>
-                            <!-- TEST -->
                             <xs:element name="Distribution" type="mdef:DistributionType"/>
-                            <!-- /TEST instead of the explciti pair -->
-<!--                            <xs:element name="UncertML" type="mdef:UncertMLType"/>
-                            <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>-->
                         </xs:choice>
-<!--                        <xs:element minOccurs="0" ref="distrib:AbstractDiscreteUnivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A discrete univariate probability distribution as defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>-->
                         <xs:element ref="ct:Assign"/>
                     </xs:choice>
                 </xs:sequence>
@@ -944,13 +828,11 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the count variable, usually Y.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="NumberCounts" minOccurs="0" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Symbol for the count number - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="PreviousCountVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
@@ -1159,29 +1041,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
-<!--  ORG  <xs:complexType name="GeneralObsError">
-        <xs:annotation>
-            <xs:documentation>A general form of the residual error, where the error is unstructured and explicit.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="mdef:ObservationErrorType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="Transformation"
-                        type="mdef:LHSTransformationType">
-                        <xs:annotation>
-                            <xs:documentation>Defines a transformation applied to the left-hand-side of the residual error equation.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>This assignment defines the RHS of the residual error.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
     <xs:complexType name="GeneralObsError">
         <xs:annotation>
             <xs:documentation>The general and distribution tyeps of observation errors.
@@ -1226,7 +1085,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType abstract="true" name="CommonParameterType">
         <xs:annotation>
@@ -1245,7 +1103,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST extended for Type 4-->
     <xs:complexType name="IndividualParameterType">
         <xs:annotation>
             <xs:documentation>Describes an individual parameter. Three encodings of a parameter model are available:
@@ -1308,9 +1165,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-   <!-- TEST -->
     <xs:complexType name="StructuredModelType">
         <xs:annotation>
             <xs:documentation>Defines the structured model type.</xs:documentation>
@@ -1325,7 +1180,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:choice>
-                        <!-- TEST -->
                         <xs:element name="PopulationValue">
                             <xs:annotation>
                                 <xs:documentation>The population/typical value: psi_pop.</xs:documentation>
@@ -1340,7 +1194,6 @@ permissions and limitations under the License.
                                 </xs:complexContent>
                             </xs:complexType>
                         </xs:element>
-                        <!-- /TEST -->
                         <xs:element name="LinearCovariate">
                             <xs:annotation>
                                 <xs:documentation>Defines the linear covariate model: h(psi_pop) + beta c_i</xs:documentation>
@@ -1349,7 +1202,6 @@ permissions and limitations under the License.
                                 <xs:complexContent>
                                     <xs:extension base="ct:PharmMLRootType">
                                         <xs:sequence>
-                                            <!-- TEST name change -->
                                             <xs:element name="PopulationValue">
                                                 <xs:annotation>
                                                     <xs:documentation>The population/typical value: psi_pop.</xs:documentation>
@@ -1407,9 +1259,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:complexType name="PopulationParameterType">
         <xs:annotation>
             <xs:documentation>Describes an population parameter.
@@ -1451,9 +1301,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="DesignParameterType">
         <xs:annotation>
             <xs:documentation>
@@ -1472,60 +1320,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    
-<!--    <xs:complexType name="ParameterRandomVariableType">
-        <xs:annotation>
-            <xs:documentation>
-                Type specifies a random variable definition.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="mdef:CommonParameterType">
-                <xs:sequence>
-                    <xs:element ref="ct:VariabilityReference">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The level of random variability that describes this random variable.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element> 
-                    <xs:choice>
-                        <xs:element ref="distrib:AbstractContinuousUnivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A continuous univariate probability distribution, defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element ref="distrib:AbstractContinuousMultivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A continuous multivariate probability distribution, defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A categorical univariate probability distribution, defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element ref="distrib:AbstractCategoricalMultivariateDistribution">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    A categorical multivariate probability distribution, defined by UncertML. 
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- TEST -->
+
     <xs:complexType name="ParameterRandomVariableType">
         <xs:annotation>
             <xs:documentation>
@@ -1552,9 +1348,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="DistributionType">
         <xs:annotation>
             <xs:documentation>Type defining a distribution.</xs:documentation>
@@ -1564,35 +1358,16 @@ permissions and limitations under the License.
                 <xs:choice>
                     <xs:element name="UncertML" type="mdef:UncertMLType"/>
                     <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
-                    <!-- TEST as Parent for possible UncertML or ProbOnto -->
                     <xs:element name="Piecewise" type="math:PiecewiseType">
                         <xs:annotation>
                             <xs:documentation>Defines a piecewise expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
-    <!-- <xs:complexType name="CDFType">
-        <xs:annotation>
-            <xs:documentation>Type defining CDF.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
--->    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="UncertMLType">
         <xs:annotation>
             <xs:documentation>Type for UncertML distributions.</xs:documentation>
@@ -1614,7 +1389,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element ref="distrib:AbstractCategoricalUnivariateDistribution">
                         <xs:annotation> 
                             <xs:documentation>
@@ -1643,14 +1417,11 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="ProbOntoType">
         <xs:annotation>
             <xs:documentation>Type for ProbOnto distributions.</xs:documentation>
@@ -1658,7 +1429,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-<!--                    <xs:element name="DistributionName" type="mdef:DistributionNameType"/>-->
                     <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:DistributionParameterType"/>
                     <xs:element name="LowerTruncationBound" minOccurs="0" maxOccurs="1" type="mdef:DistributionBoundType"/>
                     <xs:element name="UpperTruncationBound" minOccurs="0" maxOccurs="1" type="mdef:DistributionBoundType"/>
@@ -1676,24 +1446,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-<!--                    <xs:element name="DistributionName" type="mdef:DistributionNameType"/>-->
                     <xs:element name="Parameter" maxOccurs="unbounded" type="mdef:DistributionParameterType"/>
                 </xs:sequence>
                 <xs:attribute name="name" use="required" type="mdef:DistroNameType"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-<!--    <xs:complexType name="DistributionNameType">
-        <xs:annotation>
-            <xs:documentation>Type for specifying name of a distribution.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="name" use="required" type="mdef:DistroNameType"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
     
     <xs:complexType name="DistributionParameterType">
         <xs:annotation>
@@ -1728,8 +1486,7 @@ permissions and limitations under the License.
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
-    <!-- /TEST -->    
+    </xs:complexType>      
     
     <xs:complexType name="CovariateRelationType">
         <xs:annotation>
@@ -1743,13 +1500,11 @@ permissions and limitations under the License.
                             <xs:documentation>The covariate to be related.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="FixedEffect" minOccurs="0" maxOccurs="unbounded" type="mdef:FixedEffectRelationType">
                         <xs:annotation>
                             <xs:documentation>The fixed effect relating the parameter and covariate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1844,7 +1599,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- /TEST -->
     <xs:complexType name="CovariateTransformationType">
         <xs:annotation>
             <xs:documentation>Type defines how the covariate is transformed when used.</xs:documentation>
@@ -1875,18 +1629,14 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
-                    <!-- /TEST -->
                     <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>The transformation to be applied when the covariate is used.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Interpolation" minOccurs="0"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Assign" minOccurs="0"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1900,14 +1650,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>The level of random variability associated with a categorical 
                                 covariate defined in the trial design.</xs:documentation>
                         </xs:annotation>
                     </xs:element> 
-                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="1" name="Category" type="mdef:CategoryType">
                         <xs:annotation>
                             <xs:documentation>A category of the categorical covariate.</xs:documentation>
@@ -1929,7 +1677,6 @@ permissions and limitations under the License.
                     <xs:documentation>The definition of the probability associated with this category.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <!-- TEST -->
             <xs:choice>
                 <xs:element name="InterventionRef" minOccurs="0" maxOccurs="1" type="ct:OidRefType">
                     <xs:annotation>
@@ -1947,7 +1694,6 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:element>
             </xs:choice>
-            <!-- /TEST -->
         </xs:sequence>
         <xs:attribute name="catId" type="ct:CatIdType" use="required">
             <xs:annotation>
@@ -1956,7 +1702,6 @@ permissions and limitations under the License.
         </xs:attribute>
     </xs:complexType>
     
-    <!-- TEST Covariate Def type for Design spaces -->
     <xs:complexType name="DSCovariateDefinitionType">
         <xs:annotation>
             <xs:documentation>Type that specifies a covariate definition.</xs:documentation>
@@ -1982,8 +1727,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    <!-- TEST Categorical covariate type for design spaces -->    
+ 
     <xs:complexType name="DSCategoricalCovariateType">
         <xs:annotation>
             <xs:documentation>
@@ -2002,8 +1746,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    <!-- TEST Category type for design spaces -->
+
     <xs:complexType name="DSCategoryType">
         <xs:annotation>
             <xs:documentation>Type for design space definition for probabilities of 
@@ -2027,9 +1770,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST  -->
 
-    <!-- TEST -->
     <xs:complexType name="InterventionSequenceType">
         <xs:annotation>
             <xs:documentation>Type defining a intervention sequence to be treated as covariate.</xs:documentation>
@@ -2046,7 +1787,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
     <xs:complexType name="TransformedCovariateType">
         <xs:annotation>
@@ -2078,13 +1818,11 @@ permissions and limitations under the License.
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:IndividualParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ct:CommonVariable">
                         <xs:annotation>
                             <xs:documentation>A variable definition.</xs:documentation>
@@ -2109,14 +1847,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="CovariateModelRef" minOccurs="0" type="ct:CovariateModelRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to a covariate model from which the current model
                                 inherits its features.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
                         <xs:annotation>
@@ -2716,28 +2452,24 @@ permissions and limitations under the License.
             <xs:documentation>Defines general error model.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
     <xs:element name="DesignParameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:DesignParameterType">
         <xs:annotation>
             <xs:documentation>Defines a design parameter.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     <xs:element name="IndividualParameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:IndividualParameterType">
         <xs:annotation>
             <xs:documentation>Defines an individual parameter.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
     <xs:element name="PopulationParameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:PopulationParameterType">
         <xs:annotation>
             <xs:documentation>Defines an population parameter.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     <xs:element name="RandomVariable" type="mdef:ParameterRandomVariableType"
         substitutionGroup="mdef:CommonParameterElement">
         <xs:annotation>
