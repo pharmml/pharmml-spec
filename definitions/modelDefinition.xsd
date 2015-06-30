@@ -221,7 +221,7 @@ permissions and limitations under the License.
             <xs:enumeration value="Poisson"/>
             <xs:enumeration value="UniformDiscrete1"/>
             <xs:enumeration value="UniformDiscrete2"/>
-            <!--                <xs:enumeration value="ZeroInflatedNegativeBinomial"/>-->
+            <xs:enumeration value="ZeroInflatedNegativeBinomial"/>
             <xs:enumeration value="ZeroInflatedPoisson"/>
             <!-- Univariate continuous -->
             <xs:enumeration value="Beta"/>
