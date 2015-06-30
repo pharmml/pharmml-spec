@@ -162,7 +162,6 @@ permissions and limitations under the License.
                             <xs:enumeration value="arccoth"/>
                             <xs:enumeration value="floor"/>
                             <xs:enumeration value="ceiling"/>
-<!--                            <xs:enumeration value="inverseMatrix"/>-->     <!-- here? -->
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
@@ -170,7 +169,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="MatrixUniOpType">
         <xs:annotation>
             <xs:documentation>
@@ -199,7 +197,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
                         
     <xs:complexType name="ConstantType">
         <xs:annotation>
@@ -213,10 +210,8 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:Name">
-                    <!-- TEST -->
                     <xs:enumeration value="pi"/>
                     <xs:enumeration value="exponentiale"/>
-                    <!-- /TEST -->
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -241,12 +236,10 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="math:ExprType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:choice minOccurs="0">
                         <xs:element name="UncertML" type="mdef:UncertMLType"/>
                         <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
                     </xs:choice>
-                    <!-- /TEST -->
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
@@ -307,12 +300,8 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="math:Constant"/>
                         <xs:element ref="ct:SymbRef"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:CatRef"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
-                        <!-- /TEST -->
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
@@ -332,12 +321,8 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="math:Constant"/>
                         <xs:element ref="ct:SymbRef"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:CatRef"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
-                        <!-- /TEST -->
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
@@ -433,9 +418,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Delay"/>
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
-                    <!-- TEST -->
                     <xs:element ref="math:MatrixUniop"/>
-                    <!-- /TEST -->
                     <xs:element ref="mdef:Probability"/>
                 </xs:choice>
             </xs:extension>
@@ -516,13 +499,11 @@ permissions and limitations under the License.
             <xs:documentation>A unary operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
     <xs:element name="MatrixUniop" type="math:MatrixUniOpType">
         <xs:annotation>
             <xs:documentation>A unary matrix operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     <xs:element name="LogicBinop" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>A logical binary operator used in logical expressions.</xs:documentation>
