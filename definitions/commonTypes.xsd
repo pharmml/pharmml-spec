@@ -88,7 +88,7 @@ permissions and limitations under the License.
             <xs:enumeration value="no"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- TEST -->
+    
     <xs:simpleType name="RegressorType">
         <xs:annotation>
             <xs:documentation>Defines the type of variable - either common variable or regressor.</xs:documentation>
@@ -98,7 +98,7 @@ permissions and limitations under the License.
             <xs:enumeration value="no"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
+
     <xs:simpleType name="LinkFunctionType">
         <xs:annotation>
             <xs:documentation>Defines the type of link function for discrete data models.</xs:documentation>
@@ -124,24 +124,12 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-    <!--<!-\- TEST -\->
-    <xs:simpleType name="SymbolNoWhiteType">
-        <xs:annotation>
-            <xs:documentation>Type for data symbols allowing any string without whitespace.</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:pattern value="[^\s]"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <!-\- /TEST -\->-->
-    <!-- TEST -->
     <xs:simpleType name="CategoryIdType">
         <xs:annotation>
             <xs:documentation>Type for category identifiers.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-    <!-- /TEST -->
     <xs:simpleType name="CatIdType">
         <xs:annotation>
             <xs:documentation>Type for symbols identifiers.</xs:documentation>
@@ -203,7 +191,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
-    <!-- TEST -->
     <xs:complexType name="MissingValueType">
         <xs:annotation>
             <xs:documentation>String value.</xs:documentation>
@@ -214,7 +201,6 @@ permissions and limitations under the License.
             </xs:restriction>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     <xs:complexType name="BooleanType" abstract="true">
         <xs:annotation>
             <xs:documentation>
@@ -273,7 +259,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     <xs:complexType name="CovariateModelRefType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -285,7 +270,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+
     <xs:complexType name="SymbolRefType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -302,7 +287,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
+    
     <xs:complexType name="CategoryRefType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -319,7 +304,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+
     <xs:complexType name="ScalarRhs">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -359,9 +344,9 @@ permissions and limitations under the License.
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
+                    
                     <xs:element ref="math:Constant"/>
-                    <!-- /TEST -->
+                
                     <xs:element ref="ct:Scalar">
                         <xs:annotation>
                             <xs:documentation>A scalar value.</xs:documentation>
@@ -373,9 +358,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:Sequence"/>
-                    <!-- TEST -->
+                    
                     <xs:element ref="ct:Interval"/>
-                    <!-- /TEST -->
+                
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
@@ -420,7 +405,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
+    
     <xs:complexType name="StandardAssignType">
         <xs:annotation>
             <xs:documentation>Type defining one option only: Assign.</xs:documentation>
@@ -433,48 +418,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-<!--    <xs:complexType name="StandardDupletType">
-        <xs:annotation>
-            <xs:documentation>Type defining two common assignment options: SymbRef and Assign.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element minOccurs="0" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to a variable/parameter symbol.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Assign"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-<!--    <xs:complexType name="StandardTripletType">
-        <xs:annotation>
-            <xs:documentation>Type defining three common assignment options: Scalar, SymbRef and Assign.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>Reference to the delay value.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>                    
-                    <xs:element minOccurs="0" ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>Reference to a variable/parameter symbol.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Assign"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="IntervalType">
         <xs:annotation>
             <xs:documentation>The definition of a range of numbers.
@@ -523,7 +467,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+
     
     <xs:complexType name="CommonVariableDefinitionType" abstract="true">
         <xs:annotation>
@@ -791,23 +735,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- ORG
-        <xs:complexType name="LevelReferenceType">
-        <xs:annotation>
-            <xs:documentation>
-                A reference to a variability level.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:SymbRef"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
--->
-    <!-- TEST -->
+    
     <xs:complexType name="LevelReferenceType">
         <xs:annotation>
             <xs:documentation>
@@ -837,7 +765,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+
     <xs:complexType name="SymbolNameType">
         <xs:annotation>
             <xs:documentation>Type defining the name of the symbol in a form suitable for display. Currently this should be plain text and not include any markup.</xs:documentation>
@@ -988,13 +916,13 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:choice minOccurs="0" maxOccurs="unbounded">
-                        <!-- TEST -->
+                        
                         <xs:element name="MatrixColumn" type="ct:MatrixColumnType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>A column in the matrix.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
+                    
                         <xs:element name="MatrixRow" type="ct:MatrixRowType" maxOccurs="unbounded">
                             <xs:annotation>
                                 <xs:documentation>A row in the matrix.</xs:documentation>
@@ -1046,13 +974,6 @@ permissions and limitations under the License.
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <!-- TEST -->
-<!--                <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>The symbol id for this matrix.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>-->
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1148,7 +1069,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
+    
     <xs:complexType name="MatrixColumnType">
         <xs:annotation>
             <xs:documentation>This type specifies a column of values in a matrix. The column can contain 
@@ -1186,7 +1107,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+
     
     <xs:complexType name="MatrixBlockType">
         <xs:annotation>
@@ -1506,13 +1427,6 @@ permissions and limitations under the License.
                         <xs:documentation>Default value of vector - set to 0.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
-<!--                <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>The symbol id for this vector.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>-->
-                <!-- TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1537,13 +1451,13 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:SymbRef"/>
-                    <!-- TEST -->
+                    
                     <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
+                
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -1694,7 +1608,7 @@ permissions and limitations under the License.
             </xs:annotation>
         </xs:attribute>
     </xs:attributeGroup>    
-    <!-- TEST -->
+    
     <xs:attributeGroup name="CovariateAttributeGroup">
         <xs:attribute name="symbIdRef" type="ct:SymbolIdType" use="required">
             <xs:annotation>
@@ -1702,7 +1616,7 @@ permissions and limitations under the License.
             </xs:annotation>
         </xs:attribute>
     </xs:attributeGroup>
-    <!-- /TEST -->
+
     
     
     <!--
@@ -1742,13 +1656,13 @@ permissions and limitations under the License.
             <xs:documentation>Element defines a vector type, scalars and sequences</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
+    
     <xs:element name="Interval" type="ct:IntervalType">
         <xs:annotation>
             <xs:documentation>Element defines an interval with length or endpoints definiton.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
+
     <xs:element name="OidRef" type="ct:OidRefType">
         <xs:annotation>
             <xs:documentation>
@@ -1792,7 +1706,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
+    
     <xs:element name="NA" substitutionGroup="ct:Scalar" type="ct:MissingValueType">
         <xs:annotation>
             <xs:documentation>
@@ -1835,7 +1749,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
+
     <xs:element name="Boolean" type="ct:BooleanType"  substitutionGroup="ct:Scalar" abstract="true">
         <xs:annotation>
             <xs:documentation>
@@ -1867,13 +1781,13 @@ permissions and limitations under the License.
             <xs:documentation>Element references a symbol defined elsewhere in the document.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
+    
     <xs:element name="CatRef" type="ct:CategoryRefType">
         <xs:annotation>
             <xs:documentation>Element references a symbol defined elsewhere in the document.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
+
     <xs:element name="Description" type="ct:AnnotationType">
         <xs:annotation>
             <xs:documentation>Element provides additional documentation about its parent element.</xs:documentation>
