@@ -16,21 +16,21 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->    
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:mdef="http://www.pharmml.org/pharmml/0.6/ModelDefinition"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.6/CommonTypes"
-    xmlns:math="http://www.pharmml.org/pharmml/0.6/Maths" 
+    xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
+    xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths" 
     xmlns:distrib="http://www.uncertml.org/3.0"
-    targetNamespace="http://www.pharmml.org/pharmml/0.6/ModelDefinition" version="0.6"
+    targetNamespace="http://www.pharmml.org/pharmml/0.7/ModelDefinition" version="0.7"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!--
         Imports
         -->
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.6/CommonTypes"
-        schemaLocation="http://www.pharmml.org/pharmml/0.6/CommonTypes"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/CommonTypes"
+        schemaLocation="http://www.pharmml.org/pharmml/0.7/CommonTypes"/>
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.6/Maths"
-        schemaLocation="http://www.pharmml.org/pharmml/0.6/Maths"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/0.7/Maths"/>
     
     <xs:import namespace="http://www.uncertml.org/3.0" 
         schemaLocation="http://www.uncertml.org/3.0"/>
