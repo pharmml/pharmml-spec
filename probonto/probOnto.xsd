@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.pharmml.org/probonto/0.2/ProbOnto"
+    xmlns:po="http://www.pharmml.org/probonto/0.2/ProbOnto"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
+    xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
+    version="0.2">
+
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/CommonTypes"
+        schemaLocation="../definitions/commonTypes.xsd"/>
+    
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Dataset"
+        schemaLocation="../definitions/dataset.xsd"/>
+    
+
+    <xs:simpleType name="DistroNameType">
+        <xs:annotation>
+            <xs:documentation>The names of ProbOnto distributions.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:Name">
+            <!-- Univariate discrete -->
+            <xs:enumeration value="Bernoulli"/>
+            <xs:enumeration value="Binomial"/>
+            <xs:enumeration value="CategoricalOrdered"/>
+            <xs:enumeration value="CategoricalNonordered"/>
+            <xs:enumeration value="GeneralizedPoisson"/>
+            <xs:enumeration value="Geometric"/>
+            <xs:enumeration value="Hypergeometric"/>
+            <xs:enumeration value="NegativeBinomial1"/>
+            <xs:enumeration value="NegativeBinomial2"/>
+            <!--                <xs:enumeration value="NegativeBinomial3"/>-->
+            <xs:enumeration value="Poisson"/>
+            <xs:enumeration value="UniformDiscrete1"/>
+            <xs:enumeration value="UniformDiscrete2"/>
+            <xs:enumeration value="ZeroInflatedNegativeBinomial"/>
+            <xs:enumeration value="ZeroInflatedPoisson"/>
+            <!-- Univariate continuous -->
+            <xs:enumeration value="Beta"/>
+            <xs:enumeration value="Cauchy"/>
+            <xs:enumeration value="ChiSquared"/>
+            <xs:enumeration value="Exponential"/>
+            <xs:enumeration value="F"/>                     <!-- aka Fisher-Snedecor -->
+            <xs:enumeration value="Gamma"/>
+            <xs:enumeration value="GeneralizedGamma"/>
+            <xs:enumeration value="Gompertz"/>
+            <xs:enumeration value="Gumbel"/>                <!-- aka Extreme Value -->
+            <xs:enumeration value="InverseGamma"/>
+            <xs:enumeration value="Laplace1"/>               <!-- aka Double-exponential -->
+            <xs:enumeration value="Laplace2"/>
+            <xs:enumeration value="LogNormal1"/>
+            <xs:enumeration value="LogNormal2"/>
+            <xs:enumeration value="LogNormal3"/>
+            <xs:enumeration value="LogNormal4"/>
+            <xs:enumeration value="LogNormal5"/>
+            <xs:enumeration value="Logistic"/>
+            <xs:enumeration value="Normal1"/>
+            <xs:enumeration value="Normal2"/>
+            <xs:enumeration value="Normal3"/>
+            <xs:enumeration value="NormalInverseGamma"/>
+            <xs:enumeration value="Pareto"/>
+            <xs:enumeration value="Rayleigh"/>
+            <xs:enumeration value="StandardNormal"/>
+            <xs:enumeration value="StandardUniform"/>
+            <xs:enumeration value="StudentT"/>
+            <xs:enumeration value="Uniform"/>
+            <xs:enumeration value="Weibull1"/>
+            <xs:enumeration value="Weibull2"/>
+            <!-- Multivariate discrete -->
+            <xs:enumeration value="Multinomial"/>
+            <!-- Multivariate -->
+            <xs:enumeration value="Dirichlet"/>
+            <xs:enumeration value="InverseWishart"/>
+            <xs:enumeration value="MultivariateNormal1"/>
+            <xs:enumeration value="MultivariateNormal2"/>
+            <xs:enumeration value="MultivariateStudentT1"/>
+            <xs:enumeration value="MultivariateStudentT2"/>
+            <xs:enumeration value="Wishart1"/>
+            <xs:enumeration value="Wishart2"/>
+            <!-- Multivariate -->
+            <xs:enumeration value="MixtureDistribution"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ParameterNameType"> <!-- 42 so far -->
+        <xs:annotation>
+            <xs:documentation>The names of ProbOnto parameters.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:Name">
+            <xs:enumeration value="alpha"/>
+            <xs:enumeration value="beta"/>
+            <xs:enumeration value="categoryProb"/>
+            <xs:enumeration value="coefVar"/>
+            <xs:enumeration value="concentration"/>
+            <xs:enumeration value="covarianceMatrix"/>
+            <xs:enumeration value="degreesOfFreedom"/>
+            <xs:enumeration value="denominator"/>
+            <xs:enumeration value="dispersion"/>
+            <xs:enumeration value="inverseScaleMatrix"/>
+            <xs:enumeration value="lambda"/>
+            <xs:enumeration value="location"/>
+            <xs:enumeration value="maximum"/>
+            <xs:enumeration value="mean"/>
+            <xs:enumeration value="meanLog"/>
+            <xs:enumeration value="median"/>
+            <xs:enumeration value="minimum"/>
+            <xs:enumeration value="numberOfFailures"/>
+            <xs:enumeration value="numberOfSuccesses"/>
+            <xs:enumeration value="numberOfTrials"/>
+            <xs:enumeration value="numberOfValues"/>
+            <xs:enumeration value="numerator"/>
+            <xs:enumeration value="overdispersion"/>
+            <xs:enumeration value="populationSize"/>
+            <xs:enumeration value="precision"/>
+            <xs:enumeration value="precisionMatrix"/>
+            <xs:enumeration value="probability"/>
+            <xs:enumeration value="probabilityOfSuccess"/>
+            <xs:enumeration value="probabilityOfZero"/>
+            <xs:enumeration value="rate"/>
+            <xs:enumeration value="scale"/>
+            <xs:enumeration value="scaleMatrix"/>
+            <xs:enumeration value="shape"/>
+            <xs:enumeration value="shape1"/>
+            <xs:enumeration value="shape2"/>
+            <xs:enumeration value="sizeParameter"/>
+            <xs:enumeration value="stdev"/>
+            <xs:enumeration value="stdevLog"/>
+            <xs:enumeration value="tau"/>
+            <xs:enumeration value="var"/>
+            <xs:enumeration value="varLog"/>
+            <xs:enumeration value="weight"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    <xs:complexType name="ProbOntoType">
+        <xs:annotation>
+            <xs:documentation>Type for ProbOnto distributions.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Parameter" maxOccurs="unbounded" type="po:DistributionParameterType"/>
+                    <xs:element name="LowerTruncationBound" minOccurs="0" maxOccurs="1" type="po:DistributionBoundType"/>
+                    <xs:element name="UpperTruncationBound" minOccurs="0" maxOccurs="1" type="po:DistributionBoundType"/>
+                    <xs:element name="MixtureComponent" minOccurs="0" maxOccurs="unbounded" type="po:MixtureComponent"/>
+                </xs:sequence>
+                <xs:attribute name="name" use="required" type="po:DistroNameType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MixtureComponent">
+        <xs:annotation>
+            <xs:documentation>Type for ProbOnto distribution mixture component.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Parameter" maxOccurs="unbounded" type="po:DistributionParameterType"/>
+                </xs:sequence>
+                <xs:attribute name="name" use="required" type="po:DistroNameType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="DistributionParameterType">
+        <xs:annotation>
+            <xs:documentation>Type for specifying parameters of a distribution.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Assign"/>
+                </xs:sequence>
+                <xs:attribute use="required" name="name" type="po:ParameterNameType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="DistributionBoundType">
+        <xs:annotation>
+            <xs:documentation>Type for specifying truncation bounds of a distribution.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
+                </xs:sequence>
+                <xs:attribute name="type" default="closed">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="closed"/>
+                            <xs:enumeration value="open"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>      
+
+ 
+    <!-- elements -->
+    <xs:element name="ProbOnto" type="po:ProbOntoType">
+        <xs:annotation>
+            <xs:documentation>The main SO element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+
+</xs:schema>
