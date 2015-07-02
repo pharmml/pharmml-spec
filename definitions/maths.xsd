@@ -21,6 +21,7 @@ permissions and limitations under the License.
     attributeFormDefault="unqualified" version="0.7"
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
+    xmlns:po="http://www.pharmml.org/probonto/0.2/ProbOnto"
     xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition">
     
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/ModelDefinition" 
@@ -31,6 +32,9 @@ permissions and limitations under the License.
     
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Dataset"
         schemaLocation="http://www.pharmml.org/pharmml/0.7/Dataset"/>
+    
+    <xs:import namespace="http://www.pharmml.org/probonto/0.2/ProbOnto" 
+        schemaLocation="../probonto/probOnto.xsd"/>
     
     <xs:complexType name="BinopType">
         <xs:annotation>
@@ -238,7 +242,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:choice minOccurs="0">
                         <xs:element name="UncertML" type="mdef:UncertMLType"/>
-                        <xs:element name="ProbOnto" type="mdef:ProbOntoType"/>
+                        <xs:element ref="po:ProbOnto"/>
                     </xs:choice>
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
                     <xs:element ref="math:Condition"/>
