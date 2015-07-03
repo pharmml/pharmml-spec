@@ -8,7 +8,12 @@
     <system
         systemId="http://www.uncertml.org/3.0" 
         uri="../uncertweb/UncertML30.xsd"/>
-
+    
+    <!-- probonto -->
+    <system
+        systemId="http://www.pharmml.org/probonto/0.2/ProbOnto" 
+        uri="../../pharmml-probonto/probOnto.xsd"/>
+    
     <system systemId="http://www.pharmml.org/pharmml/0.7/Dataset" 
         uri="dataset.xsd"/>
 
