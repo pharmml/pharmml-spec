@@ -306,7 +306,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="ScalarRhs">
+<!--    <xs:complexType name="ScalarRhs">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
@@ -328,7 +328,7 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <xs:complexType block="" mixed="false" name="AnnotationType">
         <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -340,11 +340,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element ref="math:Equation">
+<!--                    <xs:element ref="math:Equation">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
                     
                     <xs:element ref="math:Constant"/>
                 
@@ -365,6 +365,23 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
+                    <!-- TEST -->
+                   <xs:element ref="math:Binop"/>
+                    <xs:element ref="math:Uniop"/>
+                    <xs:element name="Piecewise" type="math:PiecewiseType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a piecewise expression.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element ref="math:FunctionCall"/>
+                    <xs:element ref="ct:Sum"/>
+                    <xs:element ref="ct:Product"/>
+                    <xs:element ref="ct:Delay"/>
+                    <xs:element ref="ct:VectorSelector"/>
+                    <xs:element ref="ct:MatrixSelector"/>
+                    <xs:element ref="math:MatrixUniop"/>
+                    <xs:element ref="mdef:Probability"/>
+                    <!-- TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -704,7 +721,7 @@ permissions and limitations under the License.
                             <xs:documentation>The argument (parameter) to the function.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="Definition" type="ct:ScalarRhs">
+                    <xs:element minOccurs="0" name="Definition" type="ct:Rhs">
                         <xs:annotation>
                             <xs:documentation>The body of the function defintion.</xs:documentation>
                         </xs:annotation>
