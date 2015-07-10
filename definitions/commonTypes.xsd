@@ -1038,11 +1038,13 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <xs:element ref="math:Equation">
+                        <!-- TEST -->
+                        <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -1071,11 +1073,13 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <xs:element ref="math:Equation">
+                        <!-- TEST -->
+                        <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="default" type="xs:double" default="0">
@@ -1110,11 +1114,13 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <xs:element ref="math:Equation">
+                        <!-- TEST -->
+                        <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="default" type="xs:double" default="0">
@@ -1251,11 +1257,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element ref="math:Equation">
+                    <!-- TEST -->
+                    <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>
                             <xs:documentation>An integer value.</xs:documentation>
@@ -1315,11 +1323,13 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable reference.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element ref="math:Equation">
+                        <!-- TEST -->
+                        <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
                     <xs:choice>
@@ -1360,11 +1370,13 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable reference.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element ref="math:Equation">
+                        <!-- TEST -->
+                        <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:element name="ProductIndex" type="ct:SumProductIndexType"/>
                     <xs:element name="LowLimit" type="ct:LowUpLimitType">
@@ -1387,11 +1399,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element ref="math:Equation">
+                    <!-- TEST -->
+                    <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>
                             <xs:documentation>An integer value.</xs:documentation>
@@ -1470,12 +1484,14 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:SymbRef"/>
                     
-                    <xs:element ref="math:Equation">
+                    <!-- TEST -->
+                    <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                
+                    <!-- /TEST -->
+                    
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>

@@ -458,7 +458,10 @@ permissions and limitations under the License.
             <xs:element minOccurs="0" ref="ct:Symbol"/>
             <xs:element minOccurs="0" ref="ct:Description"/>
             <xs:choice>
-                <xs:element maxOccurs="1" ref="math:Equation"/>
+                <xs:element ref="ct:Assign"/>
+                <xs:element ref="ct:Scalar"/>
+                <xs:element ref="ct:SymbRef"/>
+<!--                <xs:element maxOccurs="1" ref="math:Equation"/>
                 <xs:element ref="ct:Scalar"/>
                 <xs:element ref="math:Constant"/>
                 <xs:element ref="ct:SymbRef"/>
@@ -466,7 +469,7 @@ permissions and limitations under the License.
                 <xs:element ref="ct:Product"/>
                 <xs:element ref="ct:VectorSelector"/>
                 <xs:element ref="ct:MatrixSelector"/>
-                <xs:element ref="mdef:Probability"/>
+                <xs:element ref="mdef:Probability"/>-->
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
