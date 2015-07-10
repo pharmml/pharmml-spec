@@ -438,12 +438,12 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:choice>
-                        <xs:element name="CorrelationCoefficient" type="ct:ScalarRhs">
+                        <xs:element name="CorrelationCoefficient" type="ct:Rhs">
                             <xs:annotation>
                                 <xs:documentation>The correlation co-efficient variable.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element name="Covariance" type="ct:ScalarRhs">
+                        <xs:element name="Covariance" type="ct:Rhs">
                             <xs:annotation>
                                 <xs:documentation>The covariance for both parameters.</xs:documentation>
                             </xs:annotation>
@@ -1675,7 +1675,7 @@ permissions and limitations under the License.
         <xs:sequence minOccurs="1">
             <xs:element minOccurs="0" ref="ct:Name"/>
             <xs:element minOccurs="0" ref="ct:Description"/>
-            <xs:element minOccurs="0" name="Probability" type="ct:ScalarRhs">
+            <xs:element minOccurs="0" name="Probability" type="ct:Rhs">
                 <xs:annotation>
                     <xs:documentation>The definition of the probability associated with this category.</xs:documentation>
                 </xs:annotation>
