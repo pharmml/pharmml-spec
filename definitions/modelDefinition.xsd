@@ -20,7 +20,7 @@ permissions and limitations under the License.
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths" 
     xmlns:distrib="http://www.uncertml.org/3.0"
-    xmlns:po="http://www.pharmml.org/probonto/0.2/ProbOnto"
+    xmlns:po="http://www.pharmml.org/probonto/ProbOnto"
     targetNamespace="http://www.pharmml.org/pharmml/0.7/ModelDefinition" version="0.7"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
@@ -36,7 +36,7 @@ permissions and limitations under the License.
     <xs:import namespace="http://www.uncertml.org/3.0" 
         schemaLocation="http://www.uncertml.org/3.0"/>
 
-    <xs:import namespace="http://www.pharmml.org/probonto/0.2/ProbOnto" 
+    <xs:import namespace="http://www.pharmml.org/probonto/ProbOnto" 
         schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
 
     <!--

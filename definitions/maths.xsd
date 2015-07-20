@@ -21,7 +21,7 @@ permissions and limitations under the License.
     attributeFormDefault="unqualified" version="0.7"
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
-    xmlns:po="http://www.pharmml.org/probonto/0.2/ProbOnto"
+    xmlns:po="http://www.pharmml.org/probonto/ProbOnto"
     xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition">
     
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/ModelDefinition" 
@@ -33,7 +33,7 @@ permissions and limitations under the License.
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Dataset"
         schemaLocation="http://www.pharmml.org/pharmml/0.7/Dataset"/>
     
-    <xs:import namespace="http://www.pharmml.org/probonto/0.2/ProbOnto" 
+    <xs:import namespace="http://www.pharmml.org/probonto/ProbOnto" 
         schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
     
     <xs:complexType name="BinopType">
