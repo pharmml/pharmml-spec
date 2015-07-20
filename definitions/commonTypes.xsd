@@ -336,43 +336,22 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+    <!-- TEST elements reaordered-->
     <xs:complexType name="Rhs">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-<!--                    <xs:element ref="math:Equation">
-                        <xs:annotation>
-                            <xs:documentation>A mathematical expression.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    
                     <xs:element ref="math:Constant"/>
-                
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>A variable reference.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:element ref="ct:Scalar"/>
+                    <xs:element ref="ct:SymbRef"/>
                     <xs:element ref="ct:Sequence"/>
-                    
                     <xs:element ref="ct:Interval"/>
-                
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
-                    <!-- TEST -->
-                   <xs:element ref="math:Binop"/>
+                    <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
-                    <xs:element name="Piecewise" type="math:PiecewiseType">
-                        <xs:annotation>
-                            <xs:documentation>Defines a piecewise expression.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:element name="Piecewise" type="math:PiecewiseType"/>
                     <xs:element ref="math:FunctionCall"/>
                     <xs:element ref="ct:Sum"/>
                     <xs:element ref="ct:Product"/>
@@ -381,11 +360,11 @@ permissions and limitations under the License.
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="math:MatrixUniop"/>
                     <xs:element ref="mdef:Probability"/>
-                    <!-- TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
     <xs:complexType name="SequenceType">
         <xs:annotation>
             <xs:documentation>The definition of a uniform sequence of numbers. It has two forms

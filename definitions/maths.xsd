@@ -201,7 +201,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-                        
+
     <xs:complexType name="ConstantType">
         <xs:annotation>
             <xs:documentation>
@@ -400,7 +400,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType name="EquationType">
+<!--    <xs:complexType name="EquationType">
         <xs:annotation>
             <xs:documentation>Complex Type that defines a mathematical equation.</xs:documentation>
         </xs:annotation>
@@ -427,7 +427,7 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     <xs:complexType name="FunctionCallType">
         <xs:annotation>
             <xs:documentation>A type defining a function call.</xs:documentation>
