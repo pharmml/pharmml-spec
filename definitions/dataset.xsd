@@ -406,11 +406,15 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:attribute>
                 
-                <xs:attribute name="columnType" type="ds:ColumnTypeType" use="required">
+                <!-- TEST -->
+                <xs:attribute name="columnType" type="ds:ColumnTypeType" use="optional">
                     <xs:annotation>
-                        <xs:documentation>The column type for this column.</xs:documentation>
+                        <xs:documentation>The column type for this column. Optional if mapping of this
+                        column is defined then it is not required. This helps avoiding redundancies or
+                        inconsistencies.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- /TEST -->
                 
                 <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
                     <xs:annotation>
