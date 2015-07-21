@@ -713,7 +713,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:complexType name="CensoringFeatureType">
+<!--    <xs:complexType name="CensoringFeatureType">
         <xs:annotation>
             <xs:documentation>
                 Type for censoring features for TTE data models.
@@ -726,7 +726,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     <xs:complexType name="CensoringType">
         <xs:annotation>
@@ -737,17 +737,17 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="IntervalLength" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
+                    <xs:element name="IntervalLength" minOccurs="0" maxOccurs="unbounded" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>Censoring interval definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="LeftCensoringTime" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
+                    <xs:element name="LeftCensoringTime" minOccurs="0" maxOccurs="unbounded" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>Left censoring time definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="RightCensoringTime" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
+                    <xs:element name="RightCensoringTime" minOccurs="0" maxOccurs="unbounded" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>Left censoring time definition.</xs:documentation>
                         </xs:annotation>
@@ -915,7 +915,7 @@ permissions and limitations under the License.
                             <xs:documentation>Censoring definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="MaximumNumberEvents" minOccurs="0" maxOccurs="unbounded" type="mdef:CensoringFeatureType">
+                    <xs:element name="MaximumNumberEvents" minOccurs="0" maxOccurs="unbounded" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>Maximum number of events definition.</xs:documentation>
                         </xs:annotation>
