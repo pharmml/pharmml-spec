@@ -422,7 +422,7 @@ permissions and limitations under the License.
     <xs:complexType name="ActionType">
         <xs:annotation>
             <xs:documentation>
-                An action that occurs during . 
+                An action that occurs during a trial. 
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
