@@ -700,7 +700,7 @@ permissions and limitations under the License.
                             <xs:documentation>The argument (parameter) to the function.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="Definition" type="ct:Rhs">
+                    <xs:element minOccurs="0" name="Definition" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>The body of the function defintion.</xs:documentation>
                         </xs:annotation>
