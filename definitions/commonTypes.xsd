@@ -369,7 +369,8 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>The definition of a uniform sequence of numbers. It has two forms
                 1. Begin:StepSize:End or
-                2. Begin:StepSize:Repetitions
+                2. Begin:StepSize:StepNumber
+                3. Begin:StepNumber:End
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -380,23 +381,21 @@ permissions and limitations under the License.
                             <xs:documentation>The initial value of the sequence.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="StepSize" type="ct:Rhs">
+                    <xs:element name="StepSize" minOccurs="0" type="ct:Rhs">
                         <xs:annotation>
-                            <xs:documentation>The amount incremented to get the next value in the sequence. The step size can be negative</xs:documentation>
+                            <xs:documentation>The increment between steps. The step size can be negative</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:choice>
-                        <xs:element name="End" type="ct:Rhs">
+                    <xs:element name="StepNumber" minOccurs="0" type="ct:Rhs">
+                        <xs:annotation>
+                            <xs:documentation>The number of steps to occur in the sequence.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="End" minOccurs="0" type="ct:Rhs">
                             <xs:annotation>
                                 <xs:documentation>The maximum possible value of the sequence.</xs:documentation>
                             </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Repetitions" type="ct:Rhs">
-                            <xs:annotation>
-                                <xs:documentation>The number of times to incrememnt the sequence by the step size.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
+                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
