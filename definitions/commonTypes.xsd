@@ -529,7 +529,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
         
-    <xs:complexType name="InitialValueType">
+<!--  REDUNDANT  <xs:complexType name="InitialValueType">
         <xs:annotation>
             <xs:documentation>The initial value of the derivative variable.</xs:documentation>
         </xs:annotation>
@@ -544,9 +544,9 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
 
-    <xs:complexType name="InitialTimeType">
+<!--    <xs:complexType name="InitialTimeType">
         <xs:annotation>
             <xs:documentation>The value of the initial condition time.</xs:documentation>
         </xs:annotation>
@@ -561,8 +561,9 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
+    <!-- TEST -->
     <xs:complexType name="InitialConditionType">
         <xs:annotation>
             <xs:documentation>The initial condition of the derivative variable.</xs:documentation>
@@ -570,13 +571,23 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="InitialValue" type="ct:InitialValueType"/>
-                    <xs:element minOccurs="0" name="InitialTime" type="ct:InitialTimeType"/>
+                    <xs:element minOccurs="0" name="InitialValue" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>The initial value of the ODE</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="InitialTime" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>The value of the initial condition time.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     
+    <!-- TEST -->
     <xs:complexType name="HistoryType">
         <xs:annotation>
             <xs:documentation>The history for DDEs.</xs:documentation>
@@ -584,8 +595,16 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="HistoryValue" type="ct:InitialValueType"/>
-                    <xs:element minOccurs="0" name="HistoryTime" type="ct:InitialTimeType"/>
+                    <xs:element minOccurs="0" name="HistoryValue" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>The history value of the ODE</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="HistoryTime" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>The value of the history value time.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
