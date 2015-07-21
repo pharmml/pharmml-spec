@@ -1676,7 +1676,7 @@ permissions and limitations under the License.
         <xs:sequence minOccurs="1">
             <xs:element minOccurs="0" ref="ct:Name"/>
             <xs:element minOccurs="0" ref="ct:Description"/>
-            <xs:element minOccurs="0" name="Probability" type="ct:StandardAssignType">
+            <xs:element minOccurs="0" name="Probability" type="ct:Rhs">
                 <xs:annotation>
                     <xs:documentation>The definition of the probability associated with this category.</xs:documentation>
                 </xs:annotation>
