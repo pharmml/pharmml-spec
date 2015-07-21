@@ -300,8 +300,8 @@ permissions and limitations under the License.
                 <xs:choice>
                     <xs:element name="VariableToReset" maxOccurs="unbounded" type="design:VariableToResetType"/>
                     <xs:sequence>
-                        <xs:element name="Start" type="design:TimepointsType"/>
-                        <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>
+                        <xs:element name="Start" type="ct:StandardAssignType"/>
+                        <xs:element name="End" minOccurs="0" type="ct:StandardAssignType"/>
                     </xs:sequence>
                 </xs:choice>
             </xs:extension>
@@ -577,7 +577,7 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to an sampling.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
+                    <xs:element name="Start" minOccurs="0" type="ct:StandardAssignType"/>  
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -612,8 +612,8 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to an Intervention.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
-                    <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>
+                    <xs:element name="Start" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="End" minOccurs="0" type="ct:StandardAssignType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -643,7 +643,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="InterventionList" type="design:InterventionListType"/>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
+                    <xs:element name="Start" minOccurs="0" type="ct:StandardAssignType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -680,7 +680,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="ObservationList" type="design:ObservationListType"/>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>
+                    <xs:element name="Start" minOccurs="0" type="ct:StandardAssignType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -754,8 +754,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="Start" minOccurs="0" type="design:TimepointsType"/>  
-                    <xs:element name="End" minOccurs="0" type="design:TimepointsType"/>  
+                    <xs:element name="Start" minOccurs="0" type="ct:StandardAssignType"/>  
+                    <xs:element name="End" minOccurs="0" type="ct:StandardAssignType"/>  
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -1159,7 +1159,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType"/>
-                    <xs:element name="ObservationTimes" minOccurs="0" type="design:TimepointsType">
+                    <xs:element name="ObservationTimes" minOccurs="0" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the time-points of the samplings.  
@@ -1466,7 +1466,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="TimepointsType">
+<!--    <xs:complexType name="TimepointsType">
         <xs:annotation>
             <xs:documentation>
                 Timepoints.
@@ -1479,7 +1479,7 @@ permissions and limitations under the License.
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
+    </xs:complexType>-->
     
     <!--
         Attribute Groups
