@@ -21,7 +21,7 @@ permissions and limitations under the License.
     xmlns:maths="http://www.pharmml.org/pharmml/0.7/Maths"
     xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition"
     xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes" version="0.7"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes" version="0.7.1"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:annotation>
         <xs:documentation>
@@ -1466,21 +1466,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-<!--    <xs:complexType name="TimepointsType">
-        <xs:annotation>
-            <xs:documentation>
-                Timepoints.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element ref="ct:Assign"/>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-    
     <!--
         Attribute Groups
         -->

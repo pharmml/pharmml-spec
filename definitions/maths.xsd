@@ -18,7 +18,7 @@ permissions and limitations under the License.
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://www.pharmml.org/pharmml/0.7/Maths"
     xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths" elementFormDefault="qualified"
-    attributeFormDefault="unqualified" version="0.7"
+    attributeFormDefault="unqualified" version="0.7.1"
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
     xmlns:po="http://www.pharmml.org/probonto/ProbOnto"

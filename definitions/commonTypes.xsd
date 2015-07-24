@@ -21,7 +21,7 @@ permissions and limitations under the License.
     xmlns:distrib="http://www.uncertml.org/3.0"
     xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition"
     xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths"
-    version="0.7" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    version="0.7.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
     
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Maths"
         schemaLocation="http://www.pharmml.org/pharmml/0.7/Maths"/>

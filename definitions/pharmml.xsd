@@ -23,13 +23,14 @@ permissions and limitations under the License.
     xmlns:design="http://www.pharmml.org/pharmml/0.7/TrialDesign"
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:msteps="http://www.pharmml.org/pharmml/0.7/ModellingSteps"
-    xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition" version="0.7"
+    xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition" version="0.7.1"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Maths"
         schemaLocation="http://www.pharmml.org/pharmml/0.7/Maths"/>
     
-    <xs:import namespace="http://www.uncertml.org/3.0" schemaLocation="http://www.uncertml.org/3.0"/>
+    <xs:import namespace="http://www.uncertml.org/3.0" 
+        schemaLocation="http://www.uncertml.org/3.0"/>
 
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/TrialDesign"
         schemaLocation="http://www.pharmml.org/pharmml/0.7/TrialDesign"/>
