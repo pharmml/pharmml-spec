@@ -306,29 +306,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-<!--    <xs:complexType name="ScalarRhs">
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
-                    <xs:element ref="math:Equation">
-                        <xs:annotation>
-                            <xs:documentation>A mathematical expression.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Scalar">
-                        <xs:annotation>
-                            <xs:documentation>A scalar value.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>A variable reference.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:choice>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
     <xs:complexType block="" mixed="false" name="AnnotationType">
         <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -336,7 +313,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
-    <!-- TEST elements reaordered-->
     <xs:complexType name="Rhs">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -364,7 +340,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
+
     <xs:complexType name="SequenceType">
         <xs:annotation>
             <xs:documentation>The definition of a uniform sequence of numbers. It has two forms
@@ -400,7 +376,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="StandardAssignType">
         <xs:annotation>
@@ -528,42 +503,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-        
-<!--  REDUNDANT  <xs:complexType name="InitialValueType">
-        <xs:annotation>
-            <xs:documentation>The initial value of the derivative variable.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>The initial value.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
-
-<!--    <xs:complexType name="InitialTimeType">
-        <xs:annotation>
-            <xs:documentation>The value of the initial condition time.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>The initial time.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>-->
     
-    <!-- TEST -->
     <xs:complexType name="InitialConditionType">
         <xs:annotation>
             <xs:documentation>The initial condition of the derivative variable.</xs:documentation>
@@ -585,9 +525,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="HistoryType">
         <xs:annotation>
             <xs:documentation>The history for DDEs.</xs:documentation>
@@ -1035,13 +973,11 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -1070,13 +1006,11 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="default" type="xs:double" default="0">
@@ -1111,13 +1045,11 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <xs:element ref="ct:SymbRef"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="default" type="xs:double" default="0">
@@ -1254,13 +1186,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <!-- TEST -->
                     <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>
                             <xs:documentation>An integer value.</xs:documentation>
@@ -1320,13 +1250,11 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable reference.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                         <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:element name="SumIndex" type="ct:SumProductIndexType"/>
                     <xs:choice>
@@ -1367,13 +1295,11 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable reference.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- TEST -->
                         <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>A mathematical expression.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:element name="ProductIndex" type="ct:SumProductIndexType"/>
                     <xs:element name="LowLimit" type="ct:LowUpLimitType">
@@ -1396,13 +1322,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <!-- TEST -->
                     <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Int">
                         <xs:annotation>
                             <xs:documentation>An integer value.</xs:documentation>
@@ -1480,15 +1404,11 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element ref="ct:SymbRef"/>
-                    
-                    <!-- TEST -->
                     <xs:element ref="ct:Assign">
                         <xs:annotation>
                             <xs:documentation>A mathematical expression.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
