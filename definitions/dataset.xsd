@@ -406,7 +406,6 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:attribute>
                 
-                <!-- TEST -->
                 <xs:attribute name="columnType" type="ds:ColumnTypeType" use="optional">
                     <xs:annotation>
                         <xs:documentation>The column type for this column. Optional if mapping of this
@@ -414,8 +413,7 @@ permissions and limitations under the License.
                         inconsistencies.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
-                
+
                 <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
