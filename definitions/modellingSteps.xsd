@@ -638,14 +638,14 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
+                <xs:choice>
                     <xs:element ref="ct:Matrix">
                         <xs:annotation>
                             <xs:documentation>Fisher Information Matrix.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="File" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
-                </xs:sequence>
+                    <xs:element name="File" type="ds:ExternalFileType"/>
+                </xs:choice>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
                         <xs:documentation>The symbol id for thei FIM.</xs:documentation>
