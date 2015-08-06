@@ -560,7 +560,7 @@ permissions and limitations under the License.
                         <xs:annotation>
                             <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>                        
+                    </xs:element>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:CommonModellingStep">
                         <xs:annotation>
                             <xs:documentation>
@@ -628,6 +628,46 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
+    <xs:complexType name="FIMType">
+        <xs:annotation>
+            <xs:documentation>Type defining the FIM-atrix.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:Matrix">
+                        <xs:annotation>
+                            <xs:documentation>Fisher Information Matrix.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="EvaluationStepType">
+        <xs:annotation>
+            <xs:documentation>Evaluation task type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="FIM" type="msteps:FIMType"/>
+                    <xs:element name="Criterion"/>
+                    <xs:element name="Cost"/>
+                    <xs:element name="PriorInformation"/>
+                    <xs:element name="Compute"/>
+                    <xs:element name="SoftwareSettings"/>
+                </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     
     <!--
         Elements
@@ -674,5 +714,14 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="EvaluationStep" type="msteps:EvaluationStepType">
+        <xs:annotation>
+            <xs:documentation>
+                An evaluation step.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     
 </xs:schema>
