@@ -1351,7 +1351,7 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
+                <xs:choice minOccurs="0">
                     <xs:element name="VectorElements" type="ct:VectorElementsType">
                         <xs:annotation>
                             <xs:documentation>Basic vector element - numerical value or symbolRef.</xs:documentation>
