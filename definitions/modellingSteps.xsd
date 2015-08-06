@@ -195,6 +195,21 @@ permissions and limitations under the License.
     </xs:simpleType>
     <!-- /TEST -->
     
+    <!-- TEST -->
+    <xs:simpleType name="TypeFIMTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                Type of the FIM to be calculated type. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName">
+            <xs:enumeration value="population"/>
+            <xs:enumeration value="individual"/>
+            <xs:enumeration value="Bayesian"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
+    
     <!--
         Complex types
         -->    
@@ -754,6 +769,11 @@ permissions and limitations under the License.
                             <xs:documentation>FIM approximate algorithm definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="TypeFIM" minOccurs="0" type="msteps:TypeFIMType">
+                        <xs:annotation>
+                            <xs:documentation>FIM type to be computed.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     
                 </xs:sequence>
             </xs:extension>
@@ -763,7 +783,7 @@ permissions and limitations under the License.
     <!-- TEST -->
     <xs:complexType name="CriterionDefType">
         <xs:annotation>
-            <xs:documentation>Criterion type.</xs:documentation>
+            <xs:documentation>Criterion type type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -776,7 +796,7 @@ permissions and limitations under the License.
     <!-- TEST -->
     <xs:complexType name="ComputeFIMType">
         <xs:annotation>
-            <xs:documentation>Compute FIM algorithm type.</xs:documentation>
+            <xs:documentation>Compute FIM algorithm type type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -789,11 +809,24 @@ permissions and limitations under the License.
     <!-- TEST -->
     <xs:complexType name="ApproximateFIMType">
         <xs:annotation>
-            <xs:documentation>FIM approximation algorithm type.</xs:documentation>
+            <xs:documentation>FIM approximation algorithm type type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:attribute name="type" use="required" type="msteps:ApproxAlgoType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="TypeFIMType">
+        <xs:annotation>
+            <xs:documentation>FIM type to be computed type type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="type" use="required" type="msteps:TypeFIMTypeType"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
