@@ -188,10 +188,13 @@ permissions and limitations under the License.
                 </xs:annotation>
                 <xs:attribute name="op" use="required">
                     <xs:annotation>
-                        <xs:documentation>The matrix operator. More detail in the specification.</xs:documentation>
+                        <xs:documentation>The matrix operators.</xs:documentation>
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
+                            <!-- TEST -->
+                            <xs:enumeration value="determinant"/>
+                            <!-- TEST -->
                             <xs:enumeration value="inverse"/>
                             <xs:enumeration value="trace"/>
                             <xs:enumeration value="transpose"/>
@@ -269,6 +272,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:MatrixUniop"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
