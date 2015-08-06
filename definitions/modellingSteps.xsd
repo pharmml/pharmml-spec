@@ -568,6 +568,9 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:EvaluationStep"/>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="StepDependencies" type="msteps:StepDependencyType">
                         <xs:annotation>
                             <xs:documentation>Defines dependencies between steps.</xs:documentation>
