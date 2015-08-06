@@ -1351,6 +1351,7 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
+                <!-- TEST minOccurs="0" -->
                 <xs:choice minOccurs="0">
                     <xs:element name="VectorElements" type="ct:VectorElementsType">
                         <xs:annotation>
@@ -1370,6 +1371,7 @@ permissions and limitations under the License.
                         </xs:element>
                     </xs:choice>
                 </xs:choice>
+                <!-- /TEST -->
                 <xs:attribute name="length" type="xs:integer">
                     <xs:annotation>
                         <xs:documentation>The length of the vector - optional.</xs:documentation>
