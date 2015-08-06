@@ -173,6 +173,28 @@ permissions and limitations under the License.
     </xs:simpleType>
     <!-- /TEST -->
     
+    <!-- TEST -->
+    <xs:simpleType name="ApproxAlgoType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying build-in algorithm to approximate FIM. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName">
+            <xs:enumeration value="full"/>                      <!-- 0 -->
+            <xs:enumeration value="fullParamaterised"/>         <!-- 5 -->
+            <xs:enumeration value="block"/>                     <!-- PFIM -->
+            <xs:enumeration value="reduced"/>                   <!-- 1 -->
+            <xs:enumeration value="reducedWithDerivative"/>     <!-- 4 -->
+            <xs:enumeration value="reducedParamaterised"/>      <!-- 7 -->
+            <xs:enumeration value="locModels"/>                 <!-- 3 -->
+            <xs:enumeration value="switchModels"/>              <!-- 6 -->
+            <xs:enumeration value="weightedModel"/>             <!-- 2 -->
+            <xs:enumeration value="MCMC"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
+    
     <!--
         Complex types
         -->    
@@ -717,9 +739,19 @@ permissions and limitations under the License.
                             <xs:documentation>Criterion selection and FIM fuction definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="FIMfunction" type="msteps:FIMfunctionType">
+                        <xs:annotation>
+                            <xs:documentation>Standard or user-defined FIM functions.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="ComputeFIM" type="msteps:ComputeFIMType">
                         <xs:annotation>
                             <xs:documentation>Compute FIM algorithm definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="ApproximateFIM" type="msteps:ApproximateFIMType">
+                        <xs:annotation>
+                            <xs:documentation>FIM approximate algorithm definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     
@@ -735,9 +767,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="FIMfunction" type="msteps:FIMfunctionType"/>
-                </xs:sequence>
                 <xs:attribute name="type" use="required" type="msteps:CriterionType"/>
             </xs:extension>
         </xs:complexContent>
@@ -756,7 +785,20 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-        
+    
+    <!-- TEST -->
+    <xs:complexType name="ApproximateFIMType">
+        <xs:annotation>
+            <xs:documentation>FIM approximation algorithm type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="type" use="required" type="msteps:ApproxAlgoType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     
     <!-- TEST -->
     <xs:complexType name="FIMfunctionType">
