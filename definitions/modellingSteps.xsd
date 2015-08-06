@@ -734,22 +734,22 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="Criterion" type="msteps:CriterionDefType">
+                    <xs:element name="Criterion" minOccurs="0" type="msteps:CriterionDefType">
                         <xs:annotation>
                             <xs:documentation>Criterion selection and FIM fuction definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="FIMfunction" type="msteps:FIMfunctionType">
+                    <xs:element name="FIMfunction" minOccurs="0" type="msteps:FIMfunctionType">
                         <xs:annotation>
                             <xs:documentation>Standard or user-defined FIM functions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="ComputeFIM" type="msteps:ComputeFIMType">
+                    <xs:element name="ComputeFIM" minOccurs="0" type="msteps:ComputeFIMType">
                         <xs:annotation>
                             <xs:documentation>Compute FIM algorithm definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="ApproximateFIM" type="msteps:ApproximateFIMType">
+                    <xs:element name="ApproximateFIM" minOccurs="0" type="msteps:ApproximateFIMType">
                         <xs:annotation>
                             <xs:documentation>FIM approximate algorithm definition.</xs:documentation>
                         </xs:annotation>
