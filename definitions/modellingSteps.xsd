@@ -639,11 +639,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element ref="ct:Matrix">
-                        <xs:annotation>
-                            <xs:documentation>Fisher Information Matrix.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    <xs:element ref="ct:Matrix"/>
                     <xs:element name="File" type="ds:ExternalFileType"/>
                 </xs:choice>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
@@ -664,7 +660,11 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="FIM" type="msteps:FIMType"/>
+                    <xs:element name="FIM" type="msteps:FIMType">
+                        <xs:annotation>
+                            <xs:documentation>Fisher Information Matrix - either explicit or in file.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="Criterion"/>
                     <xs:element name="Cost"/>
                     <xs:element name="PriorInformation"/>
