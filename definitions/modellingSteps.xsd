@@ -644,6 +644,7 @@ permissions and limitations under the License.
                             <xs:documentation>Fisher Information Matrix.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element name="File" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
                 </xs:sequence>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
                     <xs:annotation>
