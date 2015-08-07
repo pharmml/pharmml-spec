@@ -1019,32 +1019,32 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="FIM" type="msteps:FIMType">
+                    <xs:element name="FIM" minOccurs="0" type="msteps:FIMType">
                         <xs:annotation>
                             <xs:documentation>Fisher Information Matrix - either explicit or in file.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Method" type="msteps:MethodType">
+                    <xs:element name="Method" minOccurs="0" type="msteps:MethodType">
                         <xs:annotation>
                             <xs:documentation>Methods applied.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Cost" type="msteps:CostType">
+                    <xs:element name="Cost" minOccurs="0" type="msteps:CostType">
                         <xs:annotation>
                             <xs:documentation>Cost spoecification or function.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PriorInformation" type="msteps:PriorType">
+                    <xs:element name="PriorInformation" minOccurs="0" type="msteps:PriorType">
                         <xs:annotation>
                             <xs:documentation>Prior information specification.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Compute" type="msteps:ComputeType">
+                    <xs:element name="Compute" minOccurs="0" type="msteps:ComputeType">
                         <xs:annotation>
                             <xs:documentation>Compute info specification.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="SoftwareSettings"/>-->
+                    <xs:element name="SoftwareSettings" minOccurs="0"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
