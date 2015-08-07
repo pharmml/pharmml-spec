@@ -819,7 +819,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element ref="ds:TargetToolData">
+                    <xs:element ref="ds:TargetToolData" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>
                                 Instantiates the individual template defined above with data for each subject within
