@@ -1093,6 +1093,69 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
 
+    <!--        <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>Arm size to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="DoseAmount" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>Dosing amount to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="DosingTimes" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>Dosing time to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="Duration" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>infusion duration to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="NumberArms" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>Number of arms to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>Number of samples to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>Number of sampling times to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="ObservationTimes" minOccurs="0" type="ct:StandardAssignType">
+            <xs:annotation>
+                <xs:documentation>Observation time to be optimized.</xs:documentation>
+            </xs:annotation>
+        </xs:element>-->
+    <!-- TEST -->
+    
+    <xs:complexType name="OptimizeOnType">
+        <xs:annotation>
+            <xs:documentation>Evaluation task type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="ArmSize" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element name="DoseAmount" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element name="DosingTimes" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element name="Duration" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element name="NumberArms" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element name="NumberSamples" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element name="NumberTimes" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element name="ObservationTimes" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <!-- TEST -->
     <xs:complexType name="OptimalDesignStepType">
         <xs:annotation>
@@ -1101,6 +1164,16 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
+                    
+                    <!-- ONLY optimisations tasks  -->
+                    <xs:element name="OptimiseOn" minOccurs="0" type="msteps:OptimizeOnType">
+                        <xs:annotation>
+                            <xs:documentation>Item to be optimised on, overwrite desing spaces.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /ONLY optimisations tasks  -->
+                    
                     <xs:element name="FIM" minOccurs="0" type="msteps:FIMType">
                         <xs:annotation>
                             <xs:documentation>Fisher Information Matrix - either explicit or in file.</xs:documentation>
