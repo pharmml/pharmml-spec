@@ -913,6 +913,21 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
+    <!-- TEST -->
+    <xs:complexType name="CostType">
+        <xs:annotation>
+            <xs:documentation>Type defining the design cost specification.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="TotalCost" type="ct:RealValueType"/>
+                    <xs:element name="CostFunction" type="ct:StandardAssignType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     
     <!-- TEST -->
@@ -930,10 +945,14 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element name="Method" type="msteps:MethodType">
                         <xs:annotation>
-
+                            <xs:documentation>Methods applied.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Cost"/>
+                    <xs:element name="Cost" type="msteps:CostType">
+                        <xs:annotation>
+                            <xs:documentation>Cost spoecification or function.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="PriorInformation"/>
                     <xs:element name="Compute"/>
                     <xs:element name="SoftwareSettings"/>
