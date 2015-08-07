@@ -47,7 +47,7 @@ permissions and limitations under the License.
     <!--
         Simple Types
         -->
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:simpleType name="RelativeBooleanType">
         <xs:annotation>
             <xs:documentation>
@@ -56,7 +56,7 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:boolean"/>
     </xs:simpleType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <xs:simpleType name="DoseInputTargetType">
         <xs:annotation>
