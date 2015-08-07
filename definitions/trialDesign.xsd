@@ -47,7 +47,17 @@ permissions and limitations under the License.
     <!--
         Simple Types
         -->
-
+    <!-- TEST -->
+    <xs:simpleType name="RelativeBooleanType">
+        <xs:annotation>
+            <xs:documentation>
+                The type defining the true/false value for relativity of observations.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <!-- /TEST -->
+    
     <xs:simpleType name="DoseInputTargetType">
         <xs:annotation>
             <xs:documentation>
@@ -558,7 +568,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" name="Observations" type="design:SingleObservationType"/>
+                    <!-- TEST -->
                     <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
+                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -593,7 +605,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" name="Interventions" type="design:SingleInterventionType"/>
+                    <!-- TEST -->
                     <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
+                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -619,20 +633,19 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:simpleType name="RelativeType">
+    <!-- TEST -->
+    <xs:complexType name="RelativeType">
         <xs:annotation>
-            <xs:documentation>Type defining relativity of samplings.</xs:documentation>
+            <xs:documentation>Type defining relativity of samplings/observations.</xs:documentation>
         </xs:annotation>
-        <xs:union>
-            <xs:simpleType>
-                <xs:restriction base="ct:SymbolIdType">
-                    <xs:enumeration value="TRUE"/>
-                    <xs:enumeration value="FALSE"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:union>
-    </xs:simpleType>
-
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="type" use="optional" type="design:RelativeBooleanType"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="InterventionSequenceType">
         <xs:complexContent>
             <xs:annotation>
