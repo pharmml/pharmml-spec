@@ -43,6 +43,36 @@ permissions and limitations under the License.
     <!--
         Simple types
         -->
+    <!-- TEST -->
+    <xs:simpleType name="OptimalDesignOpTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying the types of Optimal Design operation. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="ct:SymbolIdType">
+                    <xs:enumeration value="evaluation">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Evaluate a design.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="optimization">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Optimize a design.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <!-- /TEST -->
+    
     <xs:simpleType name="EstimationOpTypeType">
         <xs:annotation>
             <xs:documentation>
@@ -479,6 +509,52 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="OptimalDesignOperationType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining the optimal design operation.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Name"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="msteps:Property">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Specifies a property of the operation.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Algorithm" type="msteps:AlgorithmType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Specifies the information about the algorithms used.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="order" type="xs:positiveInteger" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Specifies the order of the operation.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="opType" type="msteps:OptimalDesignOpTypeType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Specifies the type of optimal design.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    <!-- /TEST -->
+    
     <xs:complexType name="EstimationOperationType">
         <xs:annotation>
             <xs:documentation>
@@ -521,6 +597,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
 
     <xs:complexType name="SimulationOperationType">
         <xs:annotation>
@@ -1001,7 +1078,21 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-    
+
+    <!-- TEST -->
+    <xs:complexType name="SoftwareSettingsType">
+        <xs:annotation>
+            <xs:documentation>External file with sowtware-typical settings..</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="File" type="ds:ExternalFileType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
 
     <!-- TEST -->
     <xs:complexType name="OptimalDesignStepType">
@@ -1036,7 +1127,16 @@ permissions and limitations under the License.
                             <xs:documentation>Compute info specification.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="SoftwareSettings" minOccurs="0"/>
+                    <xs:element name="SoftwareSettings" minOccurs="0" type="msteps:SoftwareSettingsType"/>
+                    
+                    <xs:element maxOccurs="unbounded" name="Operation" type="msteps:OptimalDesignOperationType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                The estimation operation. 
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
