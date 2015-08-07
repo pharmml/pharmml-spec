@@ -1150,6 +1150,7 @@ permissions and limitations under the License.
                     <xs:element name="NumberSamples" minOccurs="0"  type="ct:StandardExtAssignType"/>
                     <xs:element name="NumberTimes" minOccurs="0"  type="ct:StandardExtAssignType"/>
                     <xs:element name="ObservationTimes" minOccurs="0"  type="ct:StandardExtAssignType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:SymbRef"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
