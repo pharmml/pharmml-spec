@@ -989,27 +989,19 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="GraphOnly" type="msteps:GraphOnlyType"/>
-                </xs:sequence>
+                    <xs:element name="GraphOnly" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="PowerComparison" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="NSubjectComparison" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="PowerEquivalence" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="NSubjectEquivalence" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="EquivalenceRange" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="TypeIError" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="TypeIIError" minOccurs="0" type="ct:StandardAssignType"/>                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
     
-    <!-- TEST -->
-    <xs:complexType name="GraphOnlyType">
-        <xs:annotation>
-            <xs:documentation>
-                Type specifying an initial estimate.                
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="yes" type="xs:boolean"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
 
     <!-- TEST -->
     <xs:complexType name="OptimalDesignStepType">
