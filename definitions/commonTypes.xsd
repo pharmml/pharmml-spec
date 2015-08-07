@@ -390,6 +390,21 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
+    <xs:complexType name="StandardExtAssignType">
+        <xs:annotation>
+            <xs:documentation>Type defining one option only: Assign but can be empty as well.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="IntervalType">
         <xs:annotation>
             <xs:documentation>The definition of a range of numbers.
