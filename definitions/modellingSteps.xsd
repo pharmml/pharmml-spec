@@ -982,6 +982,36 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
     <!-- TEST -->
+    <xs:complexType name="ComputeType">
+        <xs:annotation>
+            <xs:documentation>Type defining the computation detailes.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="GraphOnly" type="msteps:GraphOnlyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
+    <xs:complexType name="GraphOnlyType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying an initial estimate.                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="yes" type="xs:boolean"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+
+    <!-- TEST -->
     <xs:complexType name="OptimalDesignStepType">
         <xs:annotation>
             <xs:documentation>Evaluation task type.</xs:documentation>
@@ -1009,8 +1039,12 @@ permissions and limitations under the License.
                             <xs:documentation>Prior information specification.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Compute"/>
-                    <xs:element name="SoftwareSettings"/>
+                    <xs:element name="Compute" type="msteps:ComputeType">
+                        <xs:annotation>
+                            <xs:documentation>Compute info specification.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+<!--                    <xs:element name="SoftwareSettings"/>-->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
