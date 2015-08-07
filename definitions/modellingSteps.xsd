@@ -1135,9 +1135,9 @@ permissions and limitations under the License.
         </xs:element>-->
     <!-- TEST -->
     
-    <xs:complexType name="OptimizeOnType">
+    <xs:complexType name="OptimiseOnType">
         <xs:annotation>
-            <xs:documentation>Evaluation task type.</xs:documentation>
+            <xs:documentation>Optimise on type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
@@ -1168,7 +1168,7 @@ permissions and limitations under the License.
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     
                     <!-- ONLY optimisations tasks  -->
-                    <xs:element name="OptimiseOn" minOccurs="0" type="msteps:OptimizeOnType">
+                    <xs:element name="OptimiseOn" minOccurs="0" type="msteps:OptimiseOnType">
                         <xs:annotation>
                             <xs:documentation>Item to be optimised on, overwrite desing spaces.</xs:documentation>
                         </xs:annotation>
