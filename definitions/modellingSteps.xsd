@@ -921,8 +921,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="TotalCost" type="ct:RealValueType"/>
-                    <xs:element name="CostFunction" type="ct:StandardAssignType"/>
+                    <xs:element name="TotalCost" minOccurs="0" type="ct:RealValueType"/>
+                    <xs:element name="CostFunction" minOccurs="0" type="ct:StandardAssignType"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
