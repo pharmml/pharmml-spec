@@ -569,7 +569,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" name="Observations" type="design:SingleObservationType"/>
                     <!-- TEST -->
-                    <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
+                    <xs:element name="Relative" minOccurs="0" type="ct:StandardAssignType"/>
                     <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -606,7 +606,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" name="Interventions" type="design:SingleInterventionType"/>
                     <!-- TEST -->
-                    <xs:element name="Relative" minOccurs="0" type="design:RelativeType"/>
+                    <xs:element name="Relative" minOccurs="0" type="ct:StandardAssignType"/>
                     <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -633,7 +633,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="RelativeType">
         <xs:annotation>
             <xs:documentation>Type defining relativity of samplings/observations.</xs:documentation>
@@ -644,7 +644,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <xs:complexType name="InterventionSequenceType">
         <xs:complexContent>
