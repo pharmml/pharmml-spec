@@ -1484,10 +1484,11 @@ permissions and limitations under the License.
         -->
 
     <xs:attributeGroup name="doseVarAttGroup">
-        <xs:attribute name="inputTarget" use="required" type="design:DoseInputTargetType">
+        <xs:attribute name="inputTarget" use="optional" type="design:DoseInputTargetType">
             <xs:annotation>
                 <xs:documentation>
-                    Specifies the type of dosing. Is it assigned to a dose parameter, a variable or is it an input to an ODE.
+                    Specifies the type of dosing. Is it assigned to a dose parameter, 
+                    a variable or is it an input to an ODE.
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
