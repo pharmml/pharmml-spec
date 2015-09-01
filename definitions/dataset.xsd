@@ -21,7 +21,7 @@ permissions and limitations under the License.
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths"
     targetNamespace="http://www.pharmml.org/pharmml/0.7/Dataset" 
-    version="0.7.1" elementFormDefault="qualified">
+    version="0.7.2" elementFormDefault="qualified">
     
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Maths"
         schemaLocation="http://www.pharmml.org/pharmml/0.7/Maths"/>
@@ -653,7 +653,10 @@ permissions and limitations under the License.
             <!-- SO related -->
             <xs:enumeration value="indivParameter"/>
             <xs:enumeration value="popParameter"/>
-            <xs:enumeration value="randEffect"/>
+            <xs:enumeration value="randEffect_stdev"/>
+            <xs:enumeration value="randEffect_var"/>
+            <xs:enumeration value="randEffect_cov"/>
+            <xs:enumeration value="randEffect_cor"/>
             <xs:enumeration value="residual"/>
             <xs:enumeration value="statPrecision"/>
             <xs:enumeration value="strataVariable"/>
