@@ -317,7 +317,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-<!--                    <xs:element ref="math:Constant"/>-->
+                    <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:Scalar"/>
                     <xs:element ref="ct:SymbRef"/>
                     <xs:element ref="ct:Sequence"/>
@@ -325,7 +325,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
-<!--                    <xs:element ref="math:Binop"/>-->
+                    <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element name="Piecewise" type="math:PiecewiseType"/>
                     <xs:element ref="math:FunctionCall"/>
@@ -335,7 +335,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="math:MatrixUniop"/>
-<!--                    <xs:element ref="mdef:Probability"/>-->
+                    <xs:element ref="mdef:Probability"/>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
