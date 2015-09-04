@@ -653,15 +653,15 @@ permissions and limitations under the License.
             <!-- SO related -->
             <xs:enumeration value="indivParameter"/>
             <xs:enumeration value="popParameter"/>
-            <xs:enumeration value="randEffect_stdev"/>
-            <xs:enumeration value="randEffect_var"/>
-            <xs:enumeration value="randEffect_cov"/>
-            <xs:enumeration value="randEffect_cor"/>
+            <xs:enumeration value="randEffect"/>
             <xs:enumeration value="residual"/>
             <xs:enumeration value="statPrecision"/>
             <xs:enumeration value="strataVariable"/>
             <xs:enumeration value="structParameter"/>
-            <xs:enumeration value="varParameter"/>
+            <xs:enumeration value="varParameter_var"/>
+            <xs:enumeration value="varParameter_stdev"/>
+            <xs:enumeration value="varParameter_cov"/>
+            <xs:enumeration value="varParameter_corr"/>
         </xs:restriction>
     </xs:simpleType>
     
