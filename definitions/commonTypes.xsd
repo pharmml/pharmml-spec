@@ -390,7 +390,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="StandardExtAssignType">
         <xs:annotation>
             <xs:documentation>Type defining one option only: Assign but can be empty as well.</xs:documentation>
@@ -403,7 +402,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="IntervalType">
         <xs:annotation>
@@ -1366,7 +1364,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST minOccurs="0" -->
                 <xs:choice minOccurs="0">
                     <xs:element name="VectorElements" type="ct:VectorElementsType">
                         <xs:annotation>
@@ -1386,7 +1383,6 @@ permissions and limitations under the License.
                         </xs:element>
                     </xs:choice>
                 </xs:choice>
-                <!-- /TEST -->
                 <xs:attribute name="length" type="xs:integer">
                     <xs:annotation>
                         <xs:documentation>The length of the vector - optional.</xs:documentation>

@@ -43,7 +43,6 @@ permissions and limitations under the License.
     <!--
         Simple types
         -->
-    <!-- TEST -->
     <xs:simpleType name="OptimalDesignOpTypeType">
         <xs:annotation>
             <xs:documentation>
@@ -71,7 +70,6 @@ permissions and limitations under the License.
             </xs:simpleType>
         </xs:union>
     </xs:simpleType>
-    <!-- /TEST -->
     
     <xs:simpleType name="EstimationOpTypeType">
         <xs:annotation>
@@ -151,7 +149,6 @@ permissions and limitations under the License.
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
     
-    <!-- TEST -->
     <xs:simpleType name="CriterionType">
         <xs:annotation>
             <xs:documentation>
@@ -166,9 +163,7 @@ permissions and limitations under the License.
             <xs:enumeration value="A"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- TEST -->
     
-    <!-- TEST -->
     <xs:simpleType name="builtInFIMfctType">
         <xs:annotation>
             <xs:documentation>
@@ -181,9 +176,7 @@ permissions and limitations under the License.
             <xs:enumeration value="trInv"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:simpleType name="ComputeAlgoType">
         <xs:annotation>
             <xs:documentation>
@@ -201,9 +194,7 @@ permissions and limitations under the License.
             <xs:enumeration value="MCMC"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:simpleType name="ApproxAlgoType">
         <xs:annotation>
             <xs:documentation>
@@ -211,21 +202,19 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:NCName">
-            <xs:enumeration value="full"/>                      <!-- 0 -->
-            <xs:enumeration value="fullParamaterised"/>         <!-- 5 -->
-            <xs:enumeration value="block"/>                     <!-- PFIM -->
-            <xs:enumeration value="reduced"/>                   <!-- 1 -->
-            <xs:enumeration value="reducedWithDerivative"/>     <!-- 4 -->
-            <xs:enumeration value="reducedParamaterised"/>      <!-- 7 -->
-            <xs:enumeration value="locModels"/>                 <!-- 3 -->
-            <xs:enumeration value="switchModels"/>              <!-- 6 -->
-            <xs:enumeration value="weightedModel"/>             <!-- 2 -->
+            <xs:enumeration value="full"/>
+            <xs:enumeration value="fullParamaterised"/>
+            <xs:enumeration value="block"/>
+            <xs:enumeration value="reduced"/>
+            <xs:enumeration value="reducedWithDerivative"/>
+            <xs:enumeration value="reducedParamaterised"/>
+            <xs:enumeration value="locModels"/>
+            <xs:enumeration value="switchModels"/>
+            <xs:enumeration value="weightedModel"/>
             <xs:enumeration value="MCMC"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:simpleType name="TypeFIMTypeType">
         <xs:annotation>
             <xs:documentation>
@@ -238,9 +227,7 @@ permissions and limitations under the License.
             <xs:enumeration value="Bayesian"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:simpleType name="OptimizationType">
         <xs:annotation>
             <xs:documentation>
@@ -252,9 +239,7 @@ permissions and limitations under the License.
             <xs:enumeration value="exact"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:simpleType name="OptimAlgoType">
         <xs:annotation>
             <xs:documentation>
@@ -266,9 +251,7 @@ permissions and limitations under the License.
             <xs:enumeration value="FedorovWynn"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:simpleType name="CostListType">
         <xs:annotation>
             <xs:documentation>
@@ -280,8 +263,6 @@ permissions and limitations under the License.
             <xs:enumeration value="sample"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
-    
     
     
     <!--
@@ -510,7 +491,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="OptimalDesignOperationType">
         <xs:annotation>
             <xs:documentation>
@@ -553,7 +533,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType> 
-    <!-- /TEST -->
     
     <xs:complexType name="EstimationOperationType">
         <xs:annotation>
@@ -778,9 +757,7 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:OptimalDesignStep"/>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="StepDependencies" type="msteps:StepDependencyType">
                         <xs:annotation>
                             <xs:documentation>Defines dependencies between steps.</xs:documentation>
@@ -819,7 +796,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element ref="ds:TargetToolData" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>
@@ -840,7 +816,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="FIMType">
         <xs:annotation>
             <xs:documentation>Type defining the FIM-atrix.</xs:documentation>
@@ -859,9 +834,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="MethodType">
         <xs:annotation>
             <xs:documentation>Method type.</xs:documentation>
@@ -910,7 +883,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="CriterionDefType">
         <xs:annotation>
             <xs:documentation>Criterion type type.</xs:documentation>
@@ -921,9 +893,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="FIMfunctionType">
         <xs:annotation>
             <xs:documentation>Type defining the FIM function.</xs:documentation>
@@ -937,9 +907,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="ComputeFIMType">
         <xs:annotation>
             <xs:documentation>Compute FIM algorithm type type.</xs:documentation>
@@ -950,9 +918,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="ApproximateFIMType">
         <xs:annotation>
             <xs:documentation>FIM approximation algorithm type type.</xs:documentation>
@@ -963,9 +929,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="TypeFIMType">
         <xs:annotation>
             <xs:documentation>FIM type to be computed type type.</xs:documentation>
@@ -976,9 +940,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-    
-    <!-- TEST -->
+
     <xs:complexType name="DesignTypeType">
         <xs:annotation>
             <xs:documentation>Desing type type.</xs:documentation>
@@ -989,9 +951,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="OptimizationAlgorithmType">
         <xs:annotation>
             <xs:documentation>Optimization algorithm type type.</xs:documentation>
@@ -1002,9 +962,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CostType">
         <xs:annotation>
             <xs:documentation>Type defining the design cost specification.</xs:documentation>
@@ -1018,9 +976,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="CostFunctionType">
         <xs:annotation>
             <xs:documentation>Type defining the design cost specification.</xs:documentation>
@@ -1034,9 +990,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="PriorType">
         <xs:annotation>
             <xs:documentation>Type defining the prior.</xs:documentation>
@@ -1055,9 +1009,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="ComputeType">
         <xs:annotation>
             <xs:documentation>Type defining the computation detailes.</xs:documentation>
@@ -1076,9 +1028,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
 
-    <!-- TEST -->
     <xs:complexType name="SoftwareSettingsType">
         <xs:annotation>
             <xs:documentation>External file with sowtware-typical settings..</xs:documentation>
@@ -1091,49 +1041,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
-
-    <!--        <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>Arm size to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>
-        <xs:element name="DoseAmount" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>Dosing amount to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>
-        <xs:element name="DosingTimes" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>Dosing time to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>
-        <xs:element name="Duration" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>infusion duration to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>
-        <xs:element name="NumberArms" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>Number of arms to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>
-        <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>Number of samples to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>
-        <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>Number of sampling times to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>
-        <xs:element name="ObservationTimes" minOccurs="0" type="ct:StandardAssignType">
-            <xs:annotation>
-                <xs:documentation>Observation time to be optimized.</xs:documentation>
-            </xs:annotation>
-        </xs:element>-->
-    <!-- TEST -->
     
     <xs:complexType name="OptimiseOnType">
         <xs:annotation>
@@ -1155,9 +1062,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
-    <!-- TEST -->
     <xs:complexType name="OptimalDesignStepType">
         <xs:annotation>
             <xs:documentation>Evaluation task type.</xs:documentation>
@@ -1167,13 +1072,11 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     
-                    <!-- ONLY optimisations tasks  -->
                     <xs:element name="OptimiseOn" minOccurs="0" type="msteps:OptimiseOnType">
                         <xs:annotation>
                             <xs:documentation>Item to be optimised on, overwrite desing spaces.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /ONLY optimisations tasks  -->
                     
                     <xs:element name="FIM" minOccurs="0" type="msteps:FIMType">
                         <xs:annotation>
@@ -1215,7 +1118,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     
     <!--
@@ -1263,7 +1165,6 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
     <xs:element name="OptimalDesignStep" type="msteps:OptimalDesignStepType">
         <xs:annotation>
             <xs:documentation>
@@ -1271,6 +1172,5 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     
 </xs:schema>
