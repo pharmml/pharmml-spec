@@ -337,8 +337,8 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice maxOccurs="unbounded">
-                    <xs:element maxOccurs="1" name="Column" type="ds:ColumnDefnType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Column" type="ds:ColumnDefnType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines a column in the dataset.
@@ -354,7 +354,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
-                </xs:choice>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
