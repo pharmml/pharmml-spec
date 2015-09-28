@@ -20,7 +20,7 @@ permissions and limitations under the License.
     xmlns:math="http://www.pharmml.org/pharmml/0.6/Maths"
     xmlns:ct="http://www.pharmml.org/pharmml/0.6/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.6/Dataset"
-    targetNamespace="http://www.pharmml.org/pharmml/0.6/ModellingSteps" version="0.6"
+    targetNamespace="http://www.pharmml.org/pharmml/0.6/ModellingSteps" version="0.6.1"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!-- 
