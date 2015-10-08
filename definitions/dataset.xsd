@@ -30,11 +30,19 @@ permissions and limitations under the License.
         schemaLocation="http://www.pharmml.org/pharmml/0.7/CommonTypes"/>
     <xs:annotation>
         <xs:documentation>The schema defines the dataset and it related structures used in a PharmML document.</xs:documentation>
-    </xs:annotation>
-
+    </xs:annotation>    
+   
     <!--
         Simple Types
         -->
+    <!-- TEST -->
+    <xs:simpleType name="IgnoreSymbolType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^\s]{1,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
+    
     <xs:simpleType name="ColumnValueTypeType">
         <xs:annotation>
             <xs:documentation>
@@ -391,10 +399,33 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="IgnoreLine" type="ds:IgnoreLineType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines an ignore character in the dataset.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="IgnoreLineType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="symbol" type="ds:IgnoreSymbolType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The ignore character symbol.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <xs:complexType name="ColumnDefnType">
         <xs:complexContent>
