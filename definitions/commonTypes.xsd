@@ -98,7 +98,23 @@ permissions and limitations under the License.
             <xs:enumeration value="no"/>
         </xs:restriction>
     </xs:simpleType>
-
+    
+    <!-- TEST -->    
+    <xs:simpleType name="PMFtransformType">
+        <xs:annotation>
+            <xs:documentation>Defines the type of optional transform for PMF.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="identity"/>
+            <xs:enumeration value="log"/>
+            <xs:enumeration value="logit"/>
+            <xs:enumeration value="probit"/>
+            <xs:enumeration value="loglog"/>
+            <xs:enumeration value="comploglog"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->    
+    
     <xs:simpleType name="LinkFunctionType">
         <xs:annotation>
             <xs:documentation>Defines the type of link function for discrete data models.</xs:documentation>
