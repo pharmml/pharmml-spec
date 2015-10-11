@@ -1,0 +1,24 @@
+ChangeLog
+
+
+0.7 - 1st July 2015
+- ProbOnto, an ontology and knowledge base of parametric probability distribution, 
+added to PharmML as extension of UncertML providing new distributions and many 
+other features.
+- Hierarchical models & Bayesian inference support.
+- Optimal design support.
+- Many other changes/extensions.
+
+0.7.1 - 24th July 2015
+- ProbOnto - ontology and knowledge base comes with its own schema with 
+extensions plus minor bugs and typos corrections.
+- Element <Equation> has been removed. 
+
+0.7.2 - 4th September 2015
+- Design optimisation and evaluation tasks support added.
+
+0.7.3 - 11th October 2015
+- ‘linkFunction' attribute has been renamed to the (optional) ‘transform’ 
+in the PMF element of the count data block.
+- Support for the specification of ignored records in datasets. 
+
