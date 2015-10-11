@@ -21,7 +21,7 @@ permissions and limitations under the License.
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
     xmlns:design="http://www.pharmml.org/pharmml/0.7/TrialDesign"
-    targetNamespace="http://www.pharmml.org/pharmml/0.7/ModellingSteps" version="0.7.2"
+    targetNamespace="http://www.pharmml.org/pharmml/0.7/ModellingSteps" version="0.7.3"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!-- 

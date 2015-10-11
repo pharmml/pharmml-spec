@@ -21,7 +21,7 @@ permissions and limitations under the License.
     xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
     xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths"
     targetNamespace="http://www.pharmml.org/pharmml/0.7/Dataset" 
-    version="0.7.2" elementFormDefault="qualified">
+    version="0.7.3" elementFormDefault="qualified">
     
     <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Maths"
         schemaLocation="http://www.pharmml.org/pharmml/0.7/Maths"/>

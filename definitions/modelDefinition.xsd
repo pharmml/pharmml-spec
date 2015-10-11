@@ -21,7 +21,7 @@ permissions and limitations under the License.
     xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths" 
     xmlns:distrib="http://www.uncertml.org/3.0"
     xmlns:po="http://www.pharmml.org/probonto/ProbOnto"
-    targetNamespace="http://www.pharmml.org/pharmml/0.7/ModelDefinition" version="0.7.2"
+    targetNamespace="http://www.pharmml.org/pharmml/0.7/ModelDefinition" version="0.7.3"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!--
