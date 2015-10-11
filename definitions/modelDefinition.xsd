@@ -526,13 +526,11 @@ permissions and limitations under the License.
                 <xs:choice>
                     <xs:element name="Distribution" type="mdef:DistributionType"/>
                 </xs:choice>
-                <!-- TEST renaming and optoinal -->
                 <xs:attribute name="transform" type="ct:PMFtransformType" use="optional">
                     <xs:annotation>
                         <xs:documentation>Type of the link function applied to the PMF.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

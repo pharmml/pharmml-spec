@@ -99,7 +99,6 @@ permissions and limitations under the License.
         </xs:restriction>
     </xs:simpleType>
     
-    <!-- TEST -->    
     <xs:simpleType name="PMFtransformType">
         <xs:annotation>
             <xs:documentation>Defines the type of optional transform for PMF.</xs:documentation>
@@ -113,7 +112,6 @@ permissions and limitations under the License.
             <xs:enumeration value="comploglog"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->    
     
     <xs:simpleType name="LinkFunctionType">
         <xs:annotation>
