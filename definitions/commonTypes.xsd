@@ -99,7 +99,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-
     <xs:simpleType name="CatIdType">
         <xs:annotation>
             <xs:documentation>Type for symbols identifiers.</xs:documentation>
@@ -127,10 +126,32 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:restriction base="xs:NCName"/>
     </xs:simpleType>
-        
+    <xs:simpleType name="CategoryIdType">
+        <xs:annotation>
+            <xs:documentation>Type for category identifiers.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
     <!-- 
         Complex Types
      -->
+    <xs:complexType name="CategoryRefType">
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:attribute name="blkIdRef" type="ct:BlockIdType">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Block.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="catIdRef" type="ct:CategoryIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Category.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="IntValueType">
         <xs:annotation>
             <xs:documentation>Integer value.</xs:documentation>
@@ -1405,6 +1426,11 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
+    <xs:element name="CatRef" type="ct:CategoryRefType">
+        <xs:annotation>
+            <xs:documentation>Element references a symbol defined elsewhere in the document.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <xs:element name="Sum" type="ct:SumType">
         <xs:annotation>
             <xs:documentation>Sigma sum element.</xs:documentation>
