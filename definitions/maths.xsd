@@ -335,6 +335,8 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Scalar"/>
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:SymbRef"/>
+                    <xs:element ref="ct:CatRef"/>
+                    <xs:element name="ArmRef" type="ct:OidRefType"/>            <!-- ADDED -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
