@@ -21,7 +21,7 @@ permissions and limitations under the License.
     xmlns:maths="http://www.pharmml.org/pharmml/0.6/Maths"
     xmlns:mdef="http://www.pharmml.org/pharmml/0.6/ModelDefinition"
     xmlns:ds="http://www.pharmml.org/pharmml/0.6/Dataset"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.6/CommonTypes" version="0.6.1"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.6/CommonTypes" version="0.6.2"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:annotation>
         <xs:documentation>
