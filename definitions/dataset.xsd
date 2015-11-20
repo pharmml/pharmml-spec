@@ -516,6 +516,9 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:choice>
                         <xs:sequence>
+                            <!-- TEST -->
+                            <xs:element minOccurs="0" ref="ct:Assign"/>
+                            <!-- /TEST -->
                             <xs:element minOccurs="0" ref="ct:SymbRef">
                                 <xs:annotation>
                                     <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
