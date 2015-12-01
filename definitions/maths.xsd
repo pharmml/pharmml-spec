@@ -467,6 +467,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:CatRef"/>
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Naryop"/>
+                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
@@ -488,6 +491,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:CatRef"/>
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Naryop"/>
+                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
@@ -531,6 +537,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Scalar"/>
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:SymbRef"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:Naryop"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
