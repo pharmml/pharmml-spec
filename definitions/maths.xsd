@@ -256,7 +256,7 @@ permissions and limitations under the License.
     </xs:complexType>
 
 
-    <!-- TEST general conditional -->
+    <!-- TEST general conditionals -->
     <xs:complexType name="ConditionalStatementType">
         <xs:annotation>
             <xs:documentation>The schema type defining a conditional statement.</xs:documentation>
@@ -264,12 +264,17 @@ permissions and limitations under the License.
         <xs:sequence>
             <xs:element name="If" type="math:IfElseIfType">
                 <xs:annotation>
-                    <xs:documentation>Defines statement(s) in the conditional statement.</xs:documentation>
+                    <xs:documentation>Defines 'If' statement in the conditional statement.</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element minOccurs="0" maxOccurs="unbounded" name="ElseIf" type="math:IfElseIfType">
                 <xs:annotation>
-                    <xs:documentation>Defines statement(s) in the piecewise function.</xs:documentation>
+                    <xs:documentation>Defines 'ElseIf' statement(s) in the piecewise function.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Else" type="math:IfElseIfType">
+                <xs:annotation>
+                    <xs:documentation>Defines 'Else' statement in the conditional statement.</xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
