@@ -469,7 +469,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- TEST -->
+    <!--<!-\- TEST -\->
     <xs:complexType name="AssignStatementType">
         <xs:annotation>
             <xs:documentation>
@@ -484,7 +484,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
+    <!-\- /TEST -\->-->
     
     <xs:complexType name="CommonVariableDefinitionType" abstract="true">
         <xs:annotation>
@@ -1634,7 +1634,7 @@ permissions and limitations under the License.
         Elements
         -->
     <!-- TEST -->
-    <xs:element name="AssignStatement" type="ct:AssignStatementType">
+    <xs:element name="AssignStatement" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>
                 Generic assignment statement.
