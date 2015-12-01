@@ -288,6 +288,9 @@ permissions and limitations under the License.
             <xs:extension base="math:ExprType">
                 <xs:sequence>
                     <xs:element ref="math:Condition"/>
+                    <!-- nested conditional -->
+                    <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                    <!-- /nested conditional -->
                     <xs:choice minOccurs="0">
                         <xs:element name="UncertML" type="mdef:UncertMLType"/>
                         <xs:element ref="po:ProbOnto"/>
