@@ -342,6 +342,9 @@ permissions and limitations under the License.
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element name="Piecewise" type="math:PiecewiseType"/>
+                    <!-- TEST -->
+                    <xs:element name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:FunctionCall"/>
                     <xs:element ref="ct:Sum"/>
                     <xs:element ref="ct:Product"/>
