@@ -49,6 +49,7 @@ permissions and limitations under the License.
                         <xs:element ref="ct:SymbRef"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="ct:VectorSelector"/>
+                        <xs:element ref="ct:MatrixSelector"/>
                     </xs:choice>
                 <xs:attribute name="op" use="required">
                     <xs:annotation>
@@ -86,6 +87,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:SymbRef"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Naryop"/>
+                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
@@ -104,6 +108,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:SymbRef"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Naryop"/>
+                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
@@ -366,6 +373,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Scalar"/>
                     <xs:element minOccurs="0" ref="ct:SymbRef"/>
                     <xs:element ref="math:Constant"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:Naryop"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
