@@ -247,7 +247,7 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
                     <!-- TEST nested Piecewise -->
-                    <xs:element name="Piecewise" type="math:PiecewiseType"/>
+                    <xs:element minOccurs="0" name="Piecewise" type="math:PiecewiseType"/>
                     <!-- /TEST -->
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
@@ -282,6 +282,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="math:ExprType">
                 <xs:sequence>
+                    <xs:element ref="math:Condition"/>
                     <xs:choice minOccurs="0">
                         <xs:element name="UncertML" type="mdef:UncertMLType"/>
                         <xs:element ref="po:ProbOnto"/>
@@ -290,7 +291,6 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                     <!-- /TEST -->
-                    <xs:element ref="math:Condition"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
