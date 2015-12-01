@@ -246,6 +246,9 @@ permissions and limitations under the License.
                         <xs:element ref="po:ProbOnto"/>
                     </xs:choice>
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
+                    <!-- TEST nested Piecewise -->
+                    <xs:element name="Piecewise" type="math:PiecewiseType"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
             </xs:extension>
@@ -259,12 +262,12 @@ permissions and limitations under the License.
             <xs:documentation>The schema type defining a conditional statement.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="If" type="math:IfElseIfType">
+            <xs:element name="If" type="math:IfElseIfType">
                 <xs:annotation>
                     <xs:documentation>Defines statement(s) in the conditional statement.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element maxOccurs="unbounded" name="Piece" type="math:IfElseIfType">
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="ElseIf" type="math:IfElseIfType">
                 <xs:annotation>
                     <xs:documentation>Defines statement(s) in the piecewise function.</xs:documentation>
                 </xs:annotation>
@@ -279,14 +282,14 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="math:ExprType">
                 <xs:sequence>
-                    <!-- TEST -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                    <!-- /TEST -->
                     <xs:choice minOccurs="0">
                         <xs:element name="UncertML" type="mdef:UncertMLType"/>
                         <xs:element ref="po:ProbOnto"/>
                     </xs:choice>
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
             </xs:extension>
