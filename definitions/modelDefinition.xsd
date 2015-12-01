@@ -73,6 +73,25 @@ permissions and limitations under the License.
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="CovariateType">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="timeDependent">
+                <xs:annotation>
+                    <xs:documentation>Time-dependent covariate.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="occasionDependent">
+                <xs:annotation>
+                    <xs:documentation>Occasion-dependent covariate.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="constant">
+                <xs:annotation>
+                    <xs:documentation>Constant covariate..</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
     
     <!--
         Complex Types
@@ -1436,6 +1455,9 @@ permissions and limitations under the License.
                     </xs:choice>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>
+                <!-- TEST -->
+                <xs:attribute use="optional" name="type" type="mdef:CovariateType"/>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1498,11 +1520,16 @@ permissions and limitations under the License.
                                 covariate defined in the trial design.</xs:documentation>
                         </xs:annotation>
                     </xs:element> 
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="Category" type="mdef:CategoryType">
+                    <!-- TEST minOccurs="0" -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Category" type="mdef:CategoryType">
                         <xs:annotation>
                             <xs:documentation>A category of the categorical covariate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="ct:Assign" minOccurs="0"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
