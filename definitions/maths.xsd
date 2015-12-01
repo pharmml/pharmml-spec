@@ -36,6 +36,39 @@ permissions and limitations under the License.
     <xs:import namespace="http://www.pharmml.org/probonto/ProbOnto" 
         schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
     
+    <!-- TEST -->
+    <xs:complexType name="NaryopType">
+        <xs:annotation>
+            <xs:documentation>
+                A N-ary operator describing a numerical operation. Takes N operands.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                    <xs:choice>
+                        <xs:element ref="ct:SymbRef"/>
+                        <xs:element ref="ds:ColumnRef"/>
+                        <xs:element ref="ct:VectorSelector"/>
+                    </xs:choice>
+                <xs:attribute name="op" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The binary operator type. See the specification for a more detailed description.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="plus"/>
+                            <xs:enumeration value="times"/>
+                            <xs:enumeration value="min"/>
+                            <xs:enumeration value="max"/>
+                            <xs:enumeration value="gcd"/>
+                            <xs:enumeration value="lcm"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="BinopType">
         <xs:annotation>
             <xs:documentation>
@@ -531,6 +564,11 @@ permissions and limitations under the License.
     <xs:element name="FunctionCall" type="math:FunctionCallType">
         <xs:annotation>
             <xs:documentation>A function call.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Naryop" type="math:NaryopType">
+        <xs:annotation>
+            <xs:documentation>A N-ary operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Binop" type="math:BinopType">
