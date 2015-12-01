@@ -207,17 +207,24 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Name"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0"
-                        ref="mdef:CommonParameterElement"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
-                        type="mdef:CorrelationType">
-                        <xs:annotation>
-                            <xs:documentation>Defines the correlation between the random effects.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
+                <!-- TEST added Choice with maxOccurs="unbounded -->
+                <xs:choice maxOccurs="unbounded">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" ref="ct:Name"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                            ref="mdef:CommonParameterElement"/>
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                        <!-- /TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
+                            type="mdef:CorrelationType">
+                            <xs:annotation>
+                                <xs:documentation>Defines the correlation between the random effects.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:choice>
+                <!-- TEST -->
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
@@ -232,6 +239,9 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0"
                         ref="mdef:CommonParameterElement"/>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                    <!-- /TEST -->
                     <xs:element  minOccurs="0" maxOccurs="unbounded" ref="ct:Variable">
                         <xs:annotation>
                             <xs:documentation>A variable definition.</xs:documentation>
@@ -1637,29 +1647,36 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:Name"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
-                        <xs:annotation>
-                            <xs:documentation>A parameter definition.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:IndividualParameter">
-                        <xs:annotation>
-                            <xs:documentation>A parameter definition.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="ct:CommonVariable">
-                        <xs:annotation>
-                            <xs:documentation>A variable definition.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="PKmacros" minOccurs="0" type="mdef:PKmacroType">
-                        <xs:annotation>
-                            <xs:documentation>A macro definition.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
+                <!-- TEST added Choice with maxOccurs="unbounded -->
+                <xs:choice maxOccurs="unbounded">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" ref="ct:Name"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:PopulationParameter">
+                            <xs:annotation>
+                                <xs:documentation>A parameter definition.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:IndividualParameter">
+                            <xs:annotation>
+                                <xs:documentation>A parameter definition.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" minOccurs="1" ref="ct:CommonVariable">
+                            <xs:annotation>
+                                <xs:documentation>A variable definition.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="PKmacros" minOccurs="0" type="mdef:PKmacroType">
+                            <xs:annotation>
+                                <xs:documentation>A macro definition.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                        <!-- /TEST -->
+                    </xs:sequence>
+                </xs:choice>
+                <!-- /TEST -->
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
