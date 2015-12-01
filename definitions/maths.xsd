@@ -272,7 +272,7 @@ permissions and limitations under the License.
                     <xs:documentation>Defines 'ElseIf' statement(s) in the piecewise function.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element minOccurs="0" name="Else" type="math:IfElseIfType">
+            <xs:element minOccurs="0" name="Else" type="math:ElseType">
                 <xs:annotation>
                     <xs:documentation>Defines 'Else' statement in the conditional statement.</xs:documentation>
                 </xs:annotation>
@@ -296,6 +296,24 @@ permissions and limitations under the License.
                         <xs:element ref="po:ProbOnto"/>
                     </xs:choice>
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                    <!-- /TEST -->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    
+    <xs:complexType name="ElseType">
+        <xs:annotation>
+            <xs:documentation>The schema type defining statement(s) in a conditional statement.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="math:ExprType">
+                <xs:sequence>
+                    <!-- nested conditional -->
+                    <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                    <!-- /nested conditional -->
                     <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                     <!-- /TEST -->
