@@ -37,6 +37,49 @@ permissions and limitations under the License.
         schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
     
     <!-- TEST -->
+    <xs:complexType name="StatsType">
+        <xs:annotation>
+            <xs:documentation>
+                Basic stats operators. Take up to two operands.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element ref="ct:SymbRef"/>
+                        <xs:element ref="ds:ColumnRef"/>
+                        <xs:element ref="ct:VectorSelector"/>
+                        <xs:element ref="ct:MatrixSelector"/>
+                    </xs:choice>
+                    <xs:choice minOccurs="0">
+                        <xs:element ref="ct:SymbRef"/>
+                        <xs:element ref="ds:ColumnRef"/>
+                        <xs:element ref="ct:VectorSelector"/>
+                        <xs:element ref="ct:MatrixSelector"/>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:attribute name="op" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The stats operator type.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="mean"/>
+                            <xs:enumeration value="median"/>
+                            <xs:enumeration value="mode"/>
+                            <xs:enumeration value="stdev"/>
+                            <xs:enumeration value="variance"/>
+                            <xs:enumeration value="corr"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="NaryopType">
         <xs:annotation>
             <xs:documentation>
@@ -45,12 +88,12 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                    <xs:choice>
-                        <xs:element ref="ct:SymbRef"/>
-                        <xs:element ref="ds:ColumnRef"/>
-                        <xs:element ref="ct:VectorSelector"/>
-                        <xs:element ref="ct:MatrixSelector"/>
-                    </xs:choice>
+                <xs:choice>
+                    <xs:element ref="ct:SymbRef"/>
+                    <xs:element ref="ds:ColumnRef"/>
+                    <xs:element ref="ct:VectorSelector"/>
+                    <xs:element ref="ct:MatrixSelector"/>
+                </xs:choice>
                 <xs:attribute name="op" use="required">
                     <xs:annotation>
                         <xs:documentation>The binary operator type. See the specification for a more detailed description.</xs:documentation>
@@ -70,6 +113,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
+    
     <xs:complexType name="BinopType">
         <xs:annotation>
             <xs:documentation>
