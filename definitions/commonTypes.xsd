@@ -466,6 +466,22 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
+    <!-- TEST -->
+    <xs:complexType name="AssignStatementType">
+        <xs:annotation>
+            <xs:documentation>
+                General assignment statement type 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                        <xs:element ref="math:LogicBinop"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     
     <xs:complexType name="CommonVariableDefinitionType" abstract="true">
         <xs:annotation>
@@ -1614,6 +1630,15 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
+    <!-- TEST -->
+    <xs:element name="AssignStatement" type="ct:AssignStatementType">
+        <xs:annotation>
+            <xs:documentation>
+                Generic assignment statement.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="Sum" type="ct:SumType">
         <xs:annotation>
             <xs:documentation>Sigma sum element.</xs:documentation>
