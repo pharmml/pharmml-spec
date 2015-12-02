@@ -340,6 +340,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
                     <!-- TEST -->
+                    <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
                     <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
