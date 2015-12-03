@@ -1247,7 +1247,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:choice>
-                        <xs:element name="Distribution" type="mdef:DistributionType"/>
+                        <!-- TEST -->
+                        <xs:element minOccurs="0" name="Distribution" type="mdef:DistributionType"/>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
