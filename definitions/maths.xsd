@@ -36,6 +36,11 @@ permissions and limitations under the License.
     <xs:import namespace="http://www.pharmml.org/probonto/ProbOnto" 
         schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
     
+    
+    <!-- Probability Fct -->
+    
+    <!-- /Probability Fct -->
+    
     <!-- TEST -->
     <xs:complexType name="StatsopType">
         <xs:annotation>
@@ -54,6 +59,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Vector"/>
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
+                        <xs:element ref="math:Uniop"/>
+                        <xs:element ref="math:Binop"/>
+                        <xs:element ref="math:Naryop"/>
                     </xs:choice>
                     <xs:choice minOccurs="0">
                         <xs:element ref="ct:SymbRef"/>
@@ -63,6 +71,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Vector"/>
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
+                        <xs:element ref="math:Uniop"/>
+                        <xs:element ref="math:Binop"/>
+                        <xs:element ref="math:Naryop"/>
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
