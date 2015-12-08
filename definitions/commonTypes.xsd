@@ -51,12 +51,21 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Defines the tool names attribute.</xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:token">
-            <xs:enumeration value="BUGS"/>
-            <xs:enumeration value="Monolix"/>
-            <xs:enumeration value="NONMEM"/>
-            <!-- extandable with other tool names -->
-        </xs:restriction>
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="BUGS"/>
+                    <xs:enumeration value="Monolix"/>
+                    <xs:enumeration value="NONMEM"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <!-- any string allowed without whitespaces -->
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[^\s]+"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
     </xs:simpleType>    
     <xs:simpleType name="SymbolTypeType">
         <xs:annotation>
