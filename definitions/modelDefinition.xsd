@@ -266,6 +266,9 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <!-- /TEST -->
+                        <!-- nested conditional -->
+                        <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                        <!-- /nested conditional -->
                         <xs:element  minOccurs="0" maxOccurs="unbounded" ref="ct:Variable">
                             <xs:annotation>
                                 <xs:documentation>A variable definition.</xs:documentation>
@@ -1711,6 +1714,9 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <!-- /TEST -->
+                        <!-- nested conditional -->
+                        <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                        <!-- /nested conditional -->
                     </xs:sequence>
                 </xs:choice>
                 <!-- /TEST -->
