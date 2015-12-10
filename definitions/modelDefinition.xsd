@@ -993,7 +993,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+        
     <xs:complexType abstract="true" name="CommonParameterType">
         <xs:annotation>
             <xs:documentation>Abstract type defining the common properties of a parameter definition.</xs:documentation>
@@ -1003,11 +1003,18 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
                 </xs:sequence>
-                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
+                <!-- TEST -->
+                <xs:attribute name="symbId" type="ct:SymbolIdType">
                     <xs:annotation>
                         <xs:documentation>The symbol id for this parameter.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <xs:attribute name="symbIdRef" type="ct:SymbolIdType">
+                    <xs:annotation>
+                        <xs:documentation>The symbol reference for this parameter - used for assignments of previously declared parameters/random variables.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
