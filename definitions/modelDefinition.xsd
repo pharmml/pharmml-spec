@@ -1246,11 +1246,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="mdef:CommonParameterType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" ref="ct:VariabilityReference">
+                    <!-- TEST required for declarations -->
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>The level of random variability that describes this random variable.</xs:documentation>
                         </xs:annotation>
                     </xs:element> 
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
                         <xs:annotation>
                             <xs:documentation>Defines a transformation applied to the left-hand-side.</xs:documentation>
