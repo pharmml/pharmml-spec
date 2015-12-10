@@ -402,6 +402,9 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -419,6 +422,9 @@ permissions and limitations under the License.
                     <!-- /nested conditional -->
                     <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
