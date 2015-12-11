@@ -412,7 +412,12 @@ permissions and limitations under the License.
     <xs:complexType name="IgnoreLineType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="symbol" type="ds:IgnoreSymbolType" use="required">
+                <!-- TEST -->
+                <xs:sequence>
+                    <xs:element ref="math:LogicBinop"/>
+                </xs:sequence>
+                <!-- /TEST -->
+                <xs:attribute name="symbol" type="ds:IgnoreSymbolType" use="optional">
                     <xs:annotation>
                         <xs:documentation>The ignore character symbol.</xs:documentation>
                     </xs:annotation>

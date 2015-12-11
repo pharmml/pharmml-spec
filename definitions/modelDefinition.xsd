@@ -627,6 +627,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element ref="ct:Assign"/>
+                    <!-- Stats functions to be added -->
+                        
+                    <!-- /Stats functions to be added -->
                 </xs:sequence>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
             </xs:extension>
@@ -1576,6 +1579,9 @@ permissions and limitations under the License.
                     <!-- /TEST -->
                     <!-- TEST -->
                     <xs:element ref="ct:Assign" minOccurs="0"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
