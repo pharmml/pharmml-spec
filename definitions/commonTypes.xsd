@@ -151,7 +151,12 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type for category identifiers.</xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:NCName"/>
+<!--    replaced <xs:restriction base="xs:NCName"/> with the following -->
+        <!-- TEST -->
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
+        </xs:restriction>
+        <!-- /TEST -->
     </xs:simpleType>
     <xs:simpleType name="CatIdType">
         <xs:annotation>
