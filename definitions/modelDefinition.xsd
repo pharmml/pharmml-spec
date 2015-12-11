@@ -1286,7 +1286,28 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+    
+    <!-- TEST -->
+    <xs:complexType name="RealisationType">
+        <xs:annotation>
+            <xs:documentation>Type defining a single realisation from a distribution.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:choice>
+                    <xs:element name="UncertML" type="mdef:UncertMLType"/>
+                    <xs:element ref="po:ProbOnto"/>
+                    <xs:element name="Piecewise" type="math:PiecewiseType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a piecewise expression.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="UncertMLType">
         <xs:annotation>
             <xs:documentation>Type for UncertML distributions.</xs:documentation>
@@ -1508,6 +1529,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
+                    <!-- TEST -->
+                    <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
+                    <!-- /TEST -->
                     <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>The transformation to be applied when the covariate is used.</xs:documentation>
