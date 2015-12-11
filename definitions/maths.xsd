@@ -38,7 +38,18 @@ permissions and limitations under the License.
     
     
     <!-- Probability Fct -->
-    
+    <xs:complexType name="ProbabilityFctType">
+        <xs:annotation>
+            <xs:documentation>
+                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence></xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     <!-- /Probability Fct -->
     
     <!-- TEST -->
@@ -106,10 +117,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element ref="ct:SymbRef"/>
                     <xs:element ref="ds:ColumnRef"/>
-                    <xs:element ref="ct:VectorSelector"/>
+                    <xs:element ref="ct:Interval"/>
                     <xs:element ref="ct:MatrixSelector"/>
+                    <xs:element ref="ct:SymbRef"/>
+                    <xs:element ref="ct:Sequence"/>
+                    <xs:element ref="ct:Vector"/>
+                    <xs:element ref="ct:VectorSelector"/>
                 </xs:choice>
                 <xs:attribute name="op" use="required">
                     <xs:annotation>
