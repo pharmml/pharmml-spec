@@ -414,7 +414,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <!-- TEST -->
                 <xs:sequence>
-                    <xs:element ref="math:LogicBinop"/>
+                    <xs:element ref="math:Condition"/>
                 </xs:sequence>
                 <!-- /TEST -->
                 <xs:attribute name="symbol" type="ds:IgnoreSymbolType" use="optional">
