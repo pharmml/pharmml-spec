@@ -33,6 +33,17 @@ permissions and limitations under the License.
     <!--
         Simple Types
       -->
+    <xs:simpleType name="TransitionMatrixType">
+        <xs:annotation>
+            <xs:documentation>Defines the transition matrix type attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="leftStochastic"/>
+            <xs:enumeration value="rightStochastic"/>
+            <xs:enumeration value="doublyStochastic"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="MissingDataAttributeType">
         <xs:annotation>
             <xs:documentation>Defines the missing data attribute.</xs:documentation>
@@ -354,6 +365,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
                     <!-- TEST -->
+                    <xs:element ref="math:ProbabilityFct"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
                     <!-- /TEST -->
