@@ -41,12 +41,26 @@ permissions and limitations under the License.
     <xs:complexType name="ProbabilityFctType">
         <xs:annotation>
             <xs:documentation>
-                
+                The probability function type
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence></xs:sequence>
+                <xs:sequence>
+                    <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
+                    <xs:element ref="ct:Assign"/>
+                </xs:sequence>
+                <xs:attribute name="type" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="CDF"/>
+                            <xs:enumeration value="PDF"/>
+                            <xs:enumeration value="HF"/>
+                            <xs:enumeration value="SF"/>
+                            <xs:enumeration value="CHF"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -157,12 +171,13 @@ permissions and limitations under the License.
                     <xs:choice>
                         <xs:annotation>
                             <xs:documentation>Operand 1</xs:documentation>
-                        </xs:annotation> 
+                        </xs:annotation>
                         <xs:element ref="ct:Scalar"/>
                         <xs:element ref="ct:SymbRef"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
                         <!-- TEST -->
+                        <xs:element ref="math:ProbabilityFct"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -185,6 +200,7 @@ permissions and limitations under the License.
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
                         <!-- TEST -->
+                        <xs:element ref="math:ProbabilityFct"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -457,6 +473,7 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:SymbRef"/>
                     <xs:element ref="math:Constant"/>
                     <!-- TEST -->
+                    <xs:element ref="math:ProbabilityFct"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
                     <!-- /TEST -->
@@ -512,6 +529,7 @@ permissions and limitations under the License.
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <!-- TEST -->
+                        <xs:element ref="math:ProbabilityFct"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -541,6 +559,7 @@ permissions and limitations under the License.
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <!-- TEST -->
+                        <xs:element ref="math:ProbabilityFct"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -592,6 +611,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:SymbRef"/>
                     <!-- TEST -->
+                    <xs:element ref="math:ProbabilityFct"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
                     <!-- /TEST -->
@@ -685,6 +705,11 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
+    <xs:element name="ProbabilityFct" type="math:ProbabilityFctType">
+        <xs:annotation>
+            <xs:documentation>A probability function.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <xs:element name="Statsop" type="math:StatsopType">
         <xs:annotation>
             <xs:documentation>A stats operator.</xs:documentation>
