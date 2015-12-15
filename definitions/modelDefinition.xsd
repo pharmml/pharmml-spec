@@ -1816,6 +1816,12 @@ permissions and limitations under the License.
                                 Typically these will define parameters used by the covariate definitions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                    <!-- /TEST -->
+                    <!-- conditionals -->
+                    <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                    <!-- /conditionals -->
                     <xs:element maxOccurs="unbounded" name="Covariate" type="mdef:CovariateDefinitionType">
                         <xs:annotation>
                             <xs:documentation>Defines a covariate.</xs:documentation>
