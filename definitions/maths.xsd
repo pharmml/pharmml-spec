@@ -425,11 +425,12 @@ permissions and limitations under the License.
                         <!-- nested conditional -->
                         <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
                         <!-- /nested conditional -->
-                        <xs:choice minOccurs="0">
+                        <!-- REQUIRED??????? -->
+<!--                        <xs:choice minOccurs="0">
                             <xs:element name="UncertML" type="mdef:UncertMLType"/>
                             <xs:element ref="po:ProbOnto"/>
                         </xs:choice>
-                        <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
+                        <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>-->
                         <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <!-- /TEST -->
