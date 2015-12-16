@@ -421,20 +421,22 @@ permissions and limitations under the License.
             <xs:extension base="math:ExprType">
                 <xs:sequence>
                     <xs:element ref="math:Condition"/>
-                    <!-- nested conditional -->
-                    <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                    <!-- /nested conditional -->
-                    <xs:choice minOccurs="0">
-                        <xs:element name="UncertML" type="mdef:UncertMLType"/>
-                        <xs:element ref="po:ProbOnto"/>
+                    <xs:choice maxOccurs="unbounded">
+                        <!-- nested conditional -->
+                        <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                        <!-- /nested conditional -->
+                        <xs:choice minOccurs="0">
+                            <xs:element name="UncertML" type="mdef:UncertMLType"/>
+                            <xs:element ref="po:ProbOnto"/>
+                        </xs:choice>
+                        <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
+                        <!-- /TEST -->
                     </xs:choice>
-                    <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
-                    <!-- TEST -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -446,17 +448,19 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="math:ExprType">
-                <xs:sequence>
-                    <!-- nested conditional -->
-                    <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                    <!-- /nested conditional -->
-                    <!-- TEST -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
-                    <!-- /TEST -->
-                </xs:sequence>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:sequence>
+                        <!-- nested conditional -->
+                        <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                        <!-- /nested conditional -->
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
+                        <!-- /TEST -->
+                    </xs:sequence>
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
