@@ -190,6 +190,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
+                        <!-- TEST -->
+                        <xs:element name="Realisation" type="mdef:RealisationType"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -213,6 +216,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
+                        <!-- TEST -->
+                        <xs:element name="Realisation" type="mdef:RealisationType"/>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -478,6 +484,9 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:SymbRef"/>
                     <xs:element ref="math:Constant"/>
                     <!-- TEST -->
+                    <xs:element name="Realisation" type="mdef:RealisationType"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
                     <xs:element ref="math:ProbabilityFct"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
@@ -550,6 +559,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
+                        <!-- TEST -->
+                        <xs:element name="Realisation" type="mdef:RealisationType"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -580,6 +592,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
+                        <!-- TEST -->
+                        <xs:element name="Realisation" type="mdef:RealisationType"/>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -628,6 +643,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
+                    <!-- TEST -->
+                    <xs:element name="Realisation" type="mdef:RealisationType"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>

@@ -1605,6 +1605,9 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

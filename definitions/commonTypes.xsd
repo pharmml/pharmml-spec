@@ -367,6 +367,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
                     <!-- TEST -->
+                    <xs:element name="Realisation" type="mdef:RealisationType"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
                     <xs:element ref="math:ProbabilityFct"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
