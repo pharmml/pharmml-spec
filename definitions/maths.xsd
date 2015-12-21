@@ -40,26 +40,18 @@ permissions and limitations under the License.
     <!-- Probability Fct -->
     <xs:complexType name="ProbabilityFctType">
         <xs:annotation>
-            <xs:documentation>
-                The probability function type
-            </xs:documentation>
+            <xs:documentation>The general probability function type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
+                    <xs:element name="Distribution" type="mdef:DistributionType"/>
                     <xs:element ref="ct:Assign"/>
                 </xs:sequence>
-                <xs:attribute name="type" use="required">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:Name">
-                            <xs:enumeration value="CDF"/>
-                            <xs:enumeration value="PDF"/>
-                            <xs:enumeration value="HF"/>
-                            <xs:enumeration value="SF"/>
-                            <xs:enumeration value="CHF"/>
-                        </xs:restriction>
-                    </xs:simpleType>
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id used to define the function.</xs:documentation>
+                    </xs:annotation>
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
