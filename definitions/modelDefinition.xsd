@@ -625,12 +625,12 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
+                <xs:choice>
+                    <!-- TEST -->
+                    <xs:element name="Distribution" type="mdef:DistributionType"/>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Assign"/>
-                    <!-- Stats functions to be added -->
-                        
-                    <!-- /Stats functions to be added -->
-                </xs:sequence>
+                </xs:choice>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
             </xs:extension>
         </xs:complexContent>
@@ -820,9 +820,6 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the event variable.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-                    <xs:element minOccurs="0" ref="math:ProbabilityFct"/>
-                    <!-- /TEST -->
                     <xs:element name="HazardFunction" minOccurs="0" maxOccurs="unbounded" type="mdef:TTEFunctionType">
                         <xs:annotation>
                             <xs:documentation>Hazard function definition.</xs:documentation>
