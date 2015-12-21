@@ -34,7 +34,7 @@ permissions and limitations under the License.
         Simple Types
       -->
     <!-- TEST -->
-    <xs:simpleType name="TransitionMatrixType">
+    <xs:simpleType name="TransitionMatrixAttrType">
         <xs:annotation>
             <xs:documentation>Defines the transition matrix type attribute.</xs:documentation>
         </xs:annotation>

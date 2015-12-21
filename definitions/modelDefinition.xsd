@@ -858,7 +858,7 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="ct:Matrix"/>
                 </xs:sequence>
-                <xs:attribute name="type" type="ct:TransitionMatrixType"/>
+                <xs:attribute name="type" type="ct:TransitionMatrixAttrType"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
