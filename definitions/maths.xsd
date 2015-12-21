@@ -169,7 +169,10 @@ permissions and limitations under the License.
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
                         <!-- TEST -->
-                        <xs:element ref="math:ProbabilityFct"/>
+                        <xs:element ref="math:PDF"/>
+                        <xs:element ref="math:CDF"/>
+                        <xs:element ref="math:HF"/>
+                        <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -195,7 +198,10 @@ permissions and limitations under the License.
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
                         <!-- TEST -->
-                        <xs:element ref="math:ProbabilityFct"/>
+                        <xs:element ref="math:PDF"/>
+                        <xs:element ref="math:CDF"/>
+                        <xs:element ref="math:HF"/>
+                        <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -479,7 +485,10 @@ permissions and limitations under the License.
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
                     <!-- /TEST -->
                     <!-- TEST -->
-                    <xs:element ref="math:ProbabilityFct"/>
+                    <xs:element ref="math:PDF"/>
+                    <xs:element ref="math:CDF"/>
+                    <xs:element ref="math:HF"/>
+                    <xs:element ref="math:SF"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
                     <!-- /TEST -->
@@ -535,7 +544,10 @@ permissions and limitations under the License.
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <!-- TEST -->
-                        <xs:element ref="math:ProbabilityFct"/>
+                        <xs:element ref="math:PDF"/>
+                        <xs:element ref="math:CDF"/>
+                        <xs:element ref="math:HF"/>
+                        <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -568,7 +580,10 @@ permissions and limitations under the License.
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <!-- TEST -->
-                        <xs:element ref="math:ProbabilityFct"/>
+                        <xs:element ref="math:PDF"/>
+                        <xs:element ref="math:CDF"/>
+                        <xs:element ref="math:HF"/>
+                        <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <!-- /TEST -->
@@ -623,7 +638,10 @@ permissions and limitations under the License.
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:SymbRef"/>
                     <!-- TEST -->
-                    <xs:element ref="math:ProbabilityFct"/>
+                    <xs:element ref="math:PDF"/>
+                    <xs:element ref="math:CDF"/>
+                    <xs:element ref="math:HF"/>
+                    <xs:element ref="math:SF"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
                     <!-- /TEST -->
@@ -720,9 +738,24 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
-    <xs:element name="ProbabilityFct" type="math:ProbabilityFctType">
+    <xs:element name="PDF" type="math:ProbabilityFctType">
         <xs:annotation>
-            <xs:documentation>A probability function.</xs:documentation>
+            <xs:documentation>PDF function.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="CDF" type="math:ProbabilityFctType">
+        <xs:annotation>
+            <xs:documentation>CDF function.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="HF" type="math:ProbabilityFctType">
+        <xs:annotation>
+            <xs:documentation>Hazard function.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="SF" type="math:ProbabilityFctType">
+        <xs:annotation>
+            <xs:documentation>Survival function.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Statsop" type="math:StatsopType">
