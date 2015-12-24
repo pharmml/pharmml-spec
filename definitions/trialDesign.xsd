@@ -869,7 +869,8 @@ permissions and limitations under the License.
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:choice>
+                    <!-- TEST relexed structure - any number/sequence allowed -->
+                    <xs:choice maxOccurs="unbounded">
                         <xs:element maxOccurs="unbounded" ref="design:LookupTable"/>
                         <xs:element maxOccurs="unbounded" name="IndividualObservations" type="design:DatasetMappingType">
                             <xs:annotation>
@@ -882,6 +883,7 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
+                    <!-- /TEST -->
                     <xs:element name="ObservationsCombination" minOccurs="0" maxOccurs="unbounded" type="design:ObservationsCombinationType">
                         <xs:annotation>
                             <xs:documentation>Combination of samplings.</xs:documentation>
