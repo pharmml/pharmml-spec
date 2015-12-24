@@ -321,7 +321,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="Definition"/>
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" ref="Definition"/>
+                    <!-- /TEST -->
                     <xs:choice>
                         <xs:element ref="ds:ExternalFile" maxOccurs="1">
                             <xs:annotation>
