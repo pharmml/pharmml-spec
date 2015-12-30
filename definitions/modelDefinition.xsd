@@ -936,6 +936,8 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- u(y) = u(f) + g*eps -->
     <xs:complexType name="StructuredObsError">
         <xs:annotation>
             <xs:documentation>Structured (e.g. Gaussian) residual error definition. Definition is of the form: u(y) = u(f) + g * eps.

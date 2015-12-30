@@ -1030,7 +1030,7 @@ permissions and limitations under the License.
                         <xs:annotation>
                             <xs:documentation>A variable reference.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>            
+                    </xs:element>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
