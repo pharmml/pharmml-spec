@@ -658,46 +658,52 @@ permissions and limitations under the License.
                 Type for attribute columnType = id, dv, covariate etc.
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:Name">
-            <xs:enumeration value="addl"/>
-            <xs:enumeration value="adm"/>
-            <xs:enumeration value="arm"/>
-            <xs:enumeration value="censoring"/>
-            <xs:enumeration value="cmt"/>
-            <xs:enumeration value="covariate"/>
-            <xs:enumeration value="dose"/>
-            <xs:enumeration value="duration"/>
-            <xs:enumeration value="dv"/>
-            <xs:enumeration value="dvid"/>
-            <xs:enumeration value="epoch"/>
-            <xs:enumeration value="evid"/>
-            <xs:enumeration value="id"/>
-            <xs:enumeration value="idv"/>
-            <xs:enumeration value="ii"/>
-            <xs:enumeration value="limit"/>
-            <xs:enumeration value="mdv"/>
-            <xs:enumeration value="occasion"/>
-            <xs:enumeration value="rate"/>
-            <xs:enumeration value="reg"/>
-            <xs:enumeration value="replicate"/>
-            <xs:enumeration value="ss"/>
-            <xs:enumeration value="ssEndTime"/>
-            <xs:enumeration value="ssPeriod"/>
-            <xs:enumeration value="time"/>
-            <xs:enumeration value="undefined"/>
-            <!-- SO related -->
-            <xs:enumeration value="indivParameter"/>
-            <xs:enumeration value="popParameter"/>
-            <xs:enumeration value="randEffect"/>
-            <xs:enumeration value="residual"/>
-            <xs:enumeration value="statPrecision"/>
-            <xs:enumeration value="strataVariable"/>
-            <xs:enumeration value="structParameter"/>
-            <xs:enumeration value="varParameter_var"/>
-            <xs:enumeration value="varParameter_stdev"/>
-            <xs:enumeration value="varParameter_cov"/>
-            <xs:enumeration value="varParameter_corr"/>
-        </xs:restriction>
+        <!-- TEST added list & simpleType to allow for multiple choice s-->
+        <xs:list>
+            <xs:simpleType>
+                <xs:restriction base="xs:Name">
+                    <xs:enumeration value="addl"/>
+                    <xs:enumeration value="adm"/>
+                    <xs:enumeration value="arm"/>
+                    <xs:enumeration value="censoring"/>
+                    <xs:enumeration value="cmt"/>
+                    <xs:enumeration value="covariate"/>
+                    <xs:enumeration value="dose"/>
+                    <xs:enumeration value="duration"/>
+                    <xs:enumeration value="dv"/>
+                    <xs:enumeration value="dvid"/>
+                    <xs:enumeration value="epoch"/>
+                    <xs:enumeration value="evid"/>
+                    <xs:enumeration value="id"/>
+                    <xs:enumeration value="idv"/>
+                    <xs:enumeration value="ii"/>
+                    <xs:enumeration value="limit"/>
+                    <xs:enumeration value="mdv"/>
+                    <xs:enumeration value="occasion"/>
+                    <xs:enumeration value="rate"/>
+                    <xs:enumeration value="reg"/>
+                    <xs:enumeration value="replicate"/>
+                    <xs:enumeration value="ss"/>
+                    <xs:enumeration value="ssEndTime"/>
+                    <xs:enumeration value="ssPeriod"/>
+                    <xs:enumeration value="time"/>
+                    <xs:enumeration value="undefined"/>
+                    <!-- SO related -->
+                    <xs:enumeration value="indivParameter"/>
+                    <xs:enumeration value="popParameter"/>
+                    <xs:enumeration value="randEffect"/>
+                    <xs:enumeration value="residual"/>
+                    <xs:enumeration value="statPrecision"/>
+                    <xs:enumeration value="strataVariable"/>
+                    <xs:enumeration value="structParameter"/>
+                    <xs:enumeration value="varParameter_var"/>
+                    <xs:enumeration value="varParameter_stdev"/>
+                    <xs:enumeration value="varParameter_cov"/>
+                    <xs:enumeration value="varParameter_corr"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:list>
+        <!-- /TEST -->
     </xs:simpleType>
     
     <xs:complexType name="ColumnTransformationType">
