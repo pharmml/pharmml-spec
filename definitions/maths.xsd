@@ -125,7 +125,7 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
+                <xs:choice maxOccurs="unbounded">
 <!--                    <xs:element ref="ds:ColumnRef"/>-->
                     <xs:element ref="ct:Scalar"/>
                     <xs:element ref="ct:Interval"/>
