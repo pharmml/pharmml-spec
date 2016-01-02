@@ -101,13 +101,23 @@ permissions and limitations under the License.
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
-                            <xs:enumeration value="mean"/>
-                            <xs:enumeration value="median"/>
-                            <xs:enumeration value="mode"/>
-                            <xs:enumeration value="stdev"/>
-                            <xs:enumeration value="correlation"/>
-                            <xs:enumeration value="covariance"/>
-                            <xs:enumeration value="variance"/>
+                            <xs:enumeration value="CentredMoment"/>
+                            <xs:enumeration value="CoefficientOfVariation"/>
+                            <xs:enumeration value="Correlation"/>
+                            <xs:enumeration value="Decile"/>
+                            <xs:enumeration value="GeometricMean"/>
+                            <xs:enumeration value="Kurtosis"/>
+                            <xs:enumeration value="Mean"/>
+                            <xs:enumeration value="Median"/>
+                            <xs:enumeration value="Mode"/>
+                            <xs:enumeration value="Moment"/>
+                            <xs:enumeration value="Percentile"/>
+                            <xs:enumeration value="Quantile"/>
+                            <xs:enumeration value="Quartile"/>
+                            <xs:enumeration value="Range"/>
+                            <xs:enumeration value="Skewness"/>
+                            <xs:enumeration value="StandardDeviation"/>
+                            <xs:enumeration value="Variance"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
@@ -115,7 +125,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-    
+        
     <!-- TEST -->
     <xs:complexType name="NaryopType">
         <xs:annotation>
