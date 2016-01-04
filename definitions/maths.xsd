@@ -93,6 +93,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
+                        <xs:element ref="ct:Scalar"/>
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
