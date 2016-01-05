@@ -46,7 +46,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="Distribution" type="mdef:DistributionType"/>
-                    <xs:element ref="ct:Assign"/>
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
                 </xs:sequence>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="optional">
                     <xs:annotation>
@@ -755,27 +755,27 @@ permissions and limitations under the License.
     <!-- TEST -->
     <xs:element name="PDF" type="math:ProbabilityFctType">
         <xs:annotation>
-            <xs:documentation>PDF function.</xs:documentation>
+            <xs:documentation>Probability density function, PDF.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="CDF" type="math:ProbabilityFctType">
         <xs:annotation>
-            <xs:documentation>CDF function.</xs:documentation>
+            <xs:documentation>Cumulative distribution function, CDF.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="HF" type="math:ProbabilityFctType">
         <xs:annotation>
-            <xs:documentation>Hazard function.</xs:documentation>
+            <xs:documentation>Hazard function, HZ.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="SF" type="math:ProbabilityFctType">
         <xs:annotation>
-            <xs:documentation>Survival function.</xs:documentation>
+            <xs:documentation>Survival function, SF.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Statsop" type="math:StatsopType">
         <xs:annotation>
-            <xs:documentation>A stats operator.</xs:documentation>
+            <xs:documentation>A statistical operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Naryop" type="math:NaryopType">
