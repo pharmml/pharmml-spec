@@ -16,18 +16,18 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->    
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://www.pharmml.org/pharmml/0.7/Dataset"
-    xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes"
-    xmlns:math="http://www.pharmml.org/pharmml/0.7/Maths"
-    targetNamespace="http://www.pharmml.org/pharmml/0.7/Dataset" 
-    version="0.7.3" elementFormDefault="qualified">
+    xmlns="http://www.pharmml.org/pharmml/0.8/Dataset"
+    xmlns:ds="http://www.pharmml.org/pharmml/0.8/Dataset"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes"
+    xmlns:math="http://www.pharmml.org/pharmml/0.8/Maths"
+    targetNamespace="http://www.pharmml.org/pharmml/0.8/Dataset" 
+    version="0.8" elementFormDefault="qualified">
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Maths"
-        schemaLocation="http://www.pharmml.org/pharmml/0.7/Maths"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/0.8/Maths"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/CommonTypes"
-        schemaLocation="http://www.pharmml.org/pharmml/0.7/CommonTypes"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/CommonTypes"
+        schemaLocation="http://www.pharmml.org/pharmml/0.8/CommonTypes"/>
     <xs:annotation>
         <xs:documentation>The schema defines the dataset and it related structures used in a PharmML document.</xs:documentation>
     </xs:annotation>    

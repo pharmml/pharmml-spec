@@ -16,12 +16,12 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.pharmml.org/pharmml/0.7/TrialDesign"
-    xmlns:design="http://www.pharmml.org/pharmml/0.7/TrialDesign"
-    xmlns:maths="http://www.pharmml.org/pharmml/0.7/Maths"
-    xmlns:mdef="http://www.pharmml.org/pharmml/0.7/ModelDefinition"
-    xmlns:ds="http://www.pharmml.org/pharmml/0.7/Dataset"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.7/CommonTypes" version="0.7.3"
+    targetNamespace="http://www.pharmml.org/pharmml/0.8/TrialDesign"
+    xmlns:design="http://www.pharmml.org/pharmml/0.8/TrialDesign"
+    xmlns:maths="http://www.pharmml.org/pharmml/0.8/Maths"
+    xmlns:mdef="http://www.pharmml.org/pharmml/0.8/ModelDefinition"
+    xmlns:ds="http://www.pharmml.org/pharmml/0.8/Dataset"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes" version="0.8"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:annotation>
         <xs:documentation>
@@ -32,17 +32,17 @@ permissions and limitations under the License.
     <!--
         Imports
         -->
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/ModelDefinition"
-        schemaLocation="http://www.pharmml.org/pharmml/0.7/ModelDefinition"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/ModelDefinition"
+        schemaLocation="http://www.pharmml.org/pharmml/0.8/ModelDefinition"/>
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/CommonTypes"
-        schemaLocation="http://www.pharmml.org/pharmml/0.7/CommonTypes"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/CommonTypes"
+        schemaLocation="http://www.pharmml.org/pharmml/0.8/CommonTypes"/>
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Dataset"
-        schemaLocation="http://www.pharmml.org/pharmml/0.7/Dataset"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/Dataset"
+        schemaLocation="http://www.pharmml.org/pharmml/0.8/Dataset"/>
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.7/Maths"
-        schemaLocation="http://www.pharmml.org/pharmml/0.7/Maths"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/0.8/Maths"/>
 
     <!--
         Simple Types
