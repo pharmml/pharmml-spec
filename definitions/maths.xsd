@@ -137,9 +137,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="unbounded">
-<!--                    <xs:element ref="ds:ColumnRef"/>-->
-                    <xs:element ref="ct:Scalar"/>
-                    <xs:element ref="ct:Interval"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="ct:SymbRef"/>
                     <xs:element ref="ct:Sequence"/>
