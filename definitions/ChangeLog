@@ -22,3 +22,15 @@ extensions plus minor bugs and typos corrections.
 in the PMF element of the count data block.
 - Support for the specification of ignored records in datasets. 
 
+
+0.8 - 10th January 2016
+- Conditional statements
+- Nested piecewise statements
+- Probability functions support (PDF, CDF, HZ and SF)
+- Empirical distributions support via Samples
+- Random realisations
+- Markov models - transition matrix
+- N-ary operators
+- Statistical operators
+- SimpleParameter restored
+- 
