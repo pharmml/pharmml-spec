@@ -226,19 +226,14 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST added Choice with maxOccurs="unbounded -->
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:sequence>
-                            <!-- TEST -->
                             <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                            <!-- /TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0"
                                 ref="mdef:CommonParameterElement"/>
-                            <!-- TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                            <!-- /TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
                                 type="mdef:CorrelationType">
                                 <xs:annotation>
@@ -248,7 +243,6 @@ permissions and limitations under the License.
                         </xs:sequence>
                     </xs:choice>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
@@ -259,19 +253,14 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST added Choice with maxOccurs="unbounded -->
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:sequence>
                             <xs:element maxOccurs="unbounded" minOccurs="0"
                                 ref="mdef:CommonParameterElement"/>
-                            <!-- TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                            <!-- /TEST -->
-                            <!-- nested conditional -->
                             <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                            <!-- /nested conditional -->
                             <xs:element  minOccurs="0" maxOccurs="unbounded" ref="ct:Variable">
                                 <xs:annotation>
                                     <xs:documentation>A variable definition.</xs:documentation>
@@ -630,9 +619,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <!-- TEST -->
                     <xs:element name="Distribution" type="mdef:DistributionType"/>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Assign"/>
                 </xs:choice>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
@@ -694,13 +681,11 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the category variable - usually 'y' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="InitialStateVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the initial state - usually 'y_1' or 'yinit' in MLXTRAN.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="PreviousStateVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the previous state - usually 'yp' in MLXTRAN.</xs:documentation>
@@ -711,9 +696,7 @@ permissions and limitations under the License.
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="TransitionMatrix" minOccurs="0" type="mdef:TransitionMatrixType"/>
-                    <!-- /TEST -->
                     <xs:element name="ProbabilityAssignment" minOccurs="0" maxOccurs="unbounded" type="mdef:ProbabilityAssignmentType">
                         <xs:annotation>
                             <xs:documentation>Probability assignment element - provides space for basic probability definitions
@@ -758,13 +741,11 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="InitialCountVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the initial count variable - used in models with Markov dependency.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="Dependance" minOccurs="0" type="mdef:DependanceType">
                         <xs:annotation>
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
@@ -849,7 +830,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="TransitionMatrixType">
         <xs:annotation>
             <xs:documentation>Transition matrix type</xs:documentation>
@@ -868,7 +848,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="DiscreteDataParameterType">
         <xs:annotation>
@@ -1045,7 +1024,6 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="symbId" type="ct:SymbolIdType">
                     <xs:annotation>
                         <xs:documentation>The symbol id for this parameter.</xs:documentation>
@@ -1056,7 +1034,6 @@ permissions and limitations under the License.
                         <xs:documentation>The symbol reference for this parameter - used for assignments of previously declared parameters/random variables.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1278,7 +1255,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="SimpleParameterType">
         <xs:annotation>
             <xs:documentation>
@@ -1297,7 +1273,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST -->
     
     <xs:complexType name="ParameterRandomVariableType">
         <xs:annotation>
@@ -1308,22 +1283,18 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="mdef:CommonParameterType">
                 <xs:sequence>
-                    <!-- TEST required for declarations -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>The level of random variability that describes this random variable.</xs:documentation>
                         </xs:annotation>
                     </xs:element> 
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
                         <xs:annotation>
                             <xs:documentation>Defines a transformation applied to the left-hand-side.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:choice>
-                        <!-- TEST -->
                         <xs:element minOccurs="0" name="Distribution" type="mdef:DistributionType"/>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -1349,7 +1320,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="RealisationType">
         <xs:annotation>
             <xs:documentation>Type defining a single realisation from a distribution.</xs:documentation>
@@ -1368,7 +1338,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="UncertMLType">
         <xs:annotation>
@@ -1552,9 +1521,7 @@ permissions and limitations under the License.
                     </xs:choice>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>
-                <!-- TEST -->
                 <xs:attribute use="optional" name="type" type="mdef:CovariateType"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1591,9 +1558,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
-                    <!-- TEST -->
                     <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
-                    <!-- /TEST -->
                     <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0" maxOccurs="unbounded">
                         <xs:annotation>
                             <xs:documentation>The transformation to be applied when the covariate is used.</xs:documentation>
@@ -1620,22 +1585,14 @@ permissions and limitations under the License.
                                 covariate defined in the trial design.</xs:documentation>
                         </xs:annotation>
                     </xs:element> 
-                    <!-- TEST minOccurs="0" -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="Category" type="mdef:CategoryType">
                         <xs:annotation>
                             <xs:documentation>A category of the categorical covariate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="ct:Assign" minOccurs="0"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1786,7 +1743,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST added Choice with maxOccurs="unbounded -->
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:choice maxOccurs="unbounded">
@@ -1801,35 +1757,26 @@ permissions and limitations under the License.
                                     <xs:documentation>A parameter definition of the individual type.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
                                 <xs:annotation>
                                     <xs:documentation>A parameter definition of the simple type.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- /TEST -->
-                            <!-- TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:CommonVariable">
                                 <xs:annotation>
                                     <xs:documentation>A variable definition.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- /TEST -->
                             <xs:element name="PKmacros" minOccurs="0" type="mdef:PKmacroType">
                                 <xs:annotation>
                                     <xs:documentation>A macro definition.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                            <!-- /TEST -->
-                            <!-- nested conditional -->
                             <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                            <!-- /nested conditional -->
                         </xs:sequence>
                     </xs:choice>
                 </xs:sequence>
-                <!-- /TEST -->
                 <xs:attributeGroup ref="ct:BlockDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
@@ -1856,19 +1803,13 @@ permissions and limitations under the License.
                                 Typically these will define parameters used by the covariate definitions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
                         <xs:annotation>
                             <xs:documentation>A parameter definition of thee simple type.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                    <!-- /TEST -->
-                    <!-- conditionals -->
                     <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                    <!-- /conditionals -->
                     <xs:element maxOccurs="unbounded" name="Covariate" type="mdef:CovariateDefinitionType">
                         <xs:annotation>
                             <xs:documentation>Defines a covariate.</xs:documentation>
@@ -2461,14 +2402,12 @@ permissions and limitations under the License.
             <xs:documentation>Defines general error model.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
     <xs:element name="SimpleParameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:SimpleParameterType">
         <xs:annotation>
             <xs:documentation>Defines a basic parameter with assignment option only.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     <xs:element name="DesignParameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:DesignParameterType">
         <xs:annotation>
