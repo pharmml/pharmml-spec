@@ -321,9 +321,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element minOccurs="0" ref="Definition"/>
-                    <!-- /TEST -->
                     <xs:choice>
                         <xs:element ref="ds:ExternalFile" maxOccurs="1">
                             <xs:annotation>
@@ -414,11 +412,9 @@ permissions and limitations under the License.
     <xs:complexType name="IgnoreLineType">
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST -->
                 <xs:sequence>
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
-                <!-- /TEST -->
                 <xs:attribute name="symbol" type="ds:IgnoreSymbolType" use="optional">
                     <xs:annotation>
                         <xs:documentation>The ignore character symbol.</xs:documentation>
@@ -548,9 +544,7 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:choice>
                         <xs:sequence>
-                            <!-- TEST -->
                             <xs:element minOccurs="0" ref="ct:Assign"/>
-                            <!-- /TEST -->
                             <xs:element minOccurs="0" ref="ct:SymbRef">
                                 <xs:annotation>
                                     <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
@@ -658,7 +652,6 @@ permissions and limitations under the License.
                 Type for attribute columnType = id, dv, covariate etc.
             </xs:documentation>
         </xs:annotation>
-        <!-- TEST added list & simpleType to allow for multiple choice s-->
         <xs:list>
             <xs:simpleType>
                 <xs:restriction base="xs:Name">
@@ -703,7 +696,6 @@ permissions and limitations under the License.
                 </xs:restriction>
             </xs:simpleType>
         </xs:list>
-        <!-- /TEST -->
     </xs:simpleType>
     
     <xs:complexType name="ColumnTransformationType">

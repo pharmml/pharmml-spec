@@ -14,7 +14,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 implied. See the License for the specific language governing
 permissions and limitations under the License.
--->    
+-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes"
     targetNamespace="http://www.pharmml.org/pharmml/0.8/CommonTypes"
@@ -34,7 +34,6 @@ permissions and limitations under the License.
     <!--
         Simple Types
       -->
-    <!-- TEST -->
     <xs:simpleType name="TransitionMatrixAttrType">
         <xs:annotation>
             <xs:documentation>Defines the transition matrix type attribute.</xs:documentation>
@@ -45,7 +44,6 @@ permissions and limitations under the License.
             <xs:enumeration value="doublyStochastic"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- /TEST -->
     
     <xs:simpleType name="MissingDataAttributeType">
         <xs:annotation>
@@ -165,12 +163,9 @@ permissions and limitations under the License.
         <xs:annotation>
             <xs:documentation>Type for category identifiers.</xs:documentation>
         </xs:annotation>
-<!--    replaced <xs:restriction base="xs:NCName"/> with the following -->
-        <!-- TEST -->
         <xs:restriction base="xs:string">
             <xs:pattern value="([a-zA-Z0-9])[a-zA-Z0-9\\_]*"/>
         </xs:restriction>
-        <!-- /TEST -->
     </xs:simpleType>
     <xs:simpleType name="CatIdType">
         <xs:annotation>
@@ -367,17 +362,13 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
                     <xs:element ref="ct:Interpolation"/>
-                    <!-- TEST -->
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="math:PDF"/>
                     <xs:element ref="math:CDF"/>
                     <xs:element ref="math:HF"/>
                     <xs:element ref="math:SF"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
-                    <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element name="Piecewise" type="math:PiecewiseType"/>
@@ -505,22 +496,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
-    <!--<!-\- TEST -\->
-    <xs:complexType name="AssignStatementType">
-        <xs:annotation>
-            <xs:documentation>
-                General assignment statement type 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                        <xs:element ref="math:LogicBinop"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-\- /TEST -\->-->
     
     <xs:complexType name="CommonVariableDefinitionType" abstract="true">
         <xs:annotation>
@@ -1669,15 +1644,13 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-    <!-- TEST -->
-    <xs:element name="AssignStatement" type="math:LogicBinOpType">
+   <xs:element name="AssignStatement" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>
                 Generic assignment statement.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     <xs:element name="Sum" type="ct:SumType">
         <xs:annotation>
             <xs:documentation>Sigma sum element.</xs:documentation>
