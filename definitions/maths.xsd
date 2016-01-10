@@ -37,7 +37,6 @@ permissions and limitations under the License.
         schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
     
     
-    <!-- Probability Fct -->
     <xs:complexType name="ProbabilityFctType">
         <xs:annotation>
             <xs:documentation>The general probability function type.</xs:documentation>
@@ -56,9 +55,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /Probability Fct -->
     
-    <!-- TEST -->
     <xs:complexType name="StatsopType">
         <xs:annotation>
             <xs:documentation>
@@ -125,9 +122,7 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
         
-    <!-- TEST -->
     <xs:complexType name="NaryopType">
         <xs:annotation>
             <xs:documentation>
@@ -161,7 +156,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="BinopType">
         <xs:annotation>
@@ -180,14 +174,12 @@ permissions and limitations under the License.
                         <xs:element ref="ct:SymbRef"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
-                        <!-- TEST -->
                         <xs:element ref="math:PDF"/>
                         <xs:element ref="math:CDF"/>
                         <xs:element ref="math:HF"/>
                         <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
-                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
@@ -197,9 +189,7 @@ permissions and limitations under the License.
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
-                        <!-- TEST -->
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -209,14 +199,12 @@ permissions and limitations under the License.
                         <xs:element ref="ct:SymbRef"/>
                         <xs:element ref="ds:ColumnRef"/>
                         <xs:element ref="math:Constant"/>
-                        <!-- TEST -->
                         <xs:element ref="math:PDF"/>
                         <xs:element ref="math:CDF"/>
                         <xs:element ref="math:HF"/>
                         <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
-                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
@@ -226,9 +214,7 @@ permissions and limitations under the License.
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
-                        <!-- TEST -->
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -395,9 +381,7 @@ permissions and limitations under the License.
                         <xs:element ref="po:ProbOnto"/>
                     </xs:choice>
                     <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>
-                    <!-- TEST nested Piecewise -->
                     <xs:element minOccurs="0" name="Piecewise" type="math:PiecewiseType"/>
-                    <!-- /TEST -->
                     <xs:element ref="math:Condition"/>
                 </xs:sequence>
             </xs:extension>
@@ -405,7 +389,6 @@ permissions and limitations under the License.
     </xs:complexType>
 
 
-    <!-- TEST general conditionals -->
     <xs:complexType name="ConditionalStatementType">
         <xs:annotation>
             <xs:documentation>The schema type defining a conditional statement.</xs:documentation>
@@ -438,21 +421,9 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element ref="math:Condition"/>
                     <xs:choice maxOccurs="unbounded">
-                        <!-- nested conditional -->
                         <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                        <!-- /nested conditional -->
-                        <!-- REQUIRED??????? -->
-<!--                        <xs:choice minOccurs="0">
-                            <xs:element name="UncertML" type="mdef:UncertMLType"/>
-                            <xs:element ref="po:ProbOnto"/>
-                        </xs:choice>
-                        <xs:element name="CategoryMapping" minOccurs="0" type="ds:CategoryMappingType"/>-->
-                        <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -467,21 +438,14 @@ permissions and limitations under the License.
             <xs:extension base="math:ExprType">
                 <xs:choice maxOccurs="unbounded">
                     <xs:sequence>
-                        <!-- nested conditional -->
                         <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
-                        <!-- /nested conditional -->
-                        <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                        <!-- /TEST -->
-                        <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
-                        <!-- /TEST -->
                     </xs:sequence>
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="ExprType">
         <xs:annotation>
@@ -493,26 +457,20 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Scalar"/>
                     <xs:element minOccurs="0" ref="ct:SymbRef"/>
                     <xs:element ref="math:Constant"/>
-                    <!-- TEST -->
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="math:PDF"/>
                     <xs:element ref="math:CDF"/>
                     <xs:element ref="math:HF"/>
                     <xs:element ref="math:SF"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
-                    <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
                     <xs:element ref="ct:Sum"/>
                     <xs:element ref="ct:Product"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:Vector"/>
                     <xs:element ref="ct:Matrix"/>
-                    <!-- /TEST -->
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
@@ -555,29 +513,23 @@ permissions and limitations under the License.
                         <xs:element ref="ct:CatRef"/>
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
-                        <!-- TEST -->
                         <xs:element ref="math:PDF"/>
                         <xs:element ref="math:CDF"/>
                         <xs:element ref="math:HF"/>
                         <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
-                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
                         <xs:element ref="ct:Sum"/>
                         <xs:element ref="ct:Product"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Vector"/>
                         <xs:element ref="ct:Matrix"/>
-                        <!-- /TEST -->
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
-                        <!-- TEST -->
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
-                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -591,29 +543,23 @@ permissions and limitations under the License.
                         <xs:element ref="ct:CatRef"/>
                         <xs:element name="ArmRef" type="ct:OidRefType"/>
                         <xs:element ref="ds:ColumnRef"/>
-                        <!-- TEST -->
                         <xs:element ref="math:PDF"/>
                         <xs:element ref="math:CDF"/>
                         <xs:element ref="math:HF"/>
                         <xs:element ref="math:SF"/>
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
-                        <!-- /TEST -->
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Uniop"/>
                         <xs:element ref="math:FunctionCall"/>
                         <xs:element ref="ct:Sum"/>
                         <xs:element ref="ct:Product"/>
-                        <!-- TEST -->
                         <xs:element ref="ct:Vector"/>
                         <xs:element ref="ct:Matrix"/>
-                        <!-- /TEST -->
                         <xs:element ref="ct:VectorSelector"/>
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
-                        <!-- TEST -->
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
-                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -649,14 +595,12 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Scalar"/>
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:SymbRef"/>
-                    <!-- TEST -->
                     <xs:element ref="math:PDF"/>
                     <xs:element ref="math:CDF"/>
                     <xs:element ref="math:HF"/>
                     <xs:element ref="math:SF"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
-                    <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:FunctionCall"/>
@@ -665,9 +609,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
-                    <!-- TEST -->
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -749,7 +691,6 @@ permissions and limitations under the License.
             <xs:documentation>A function call.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
     <xs:element name="PDF" type="math:ProbabilityFctType">
         <xs:annotation>
             <xs:documentation>Probability density function, PDF.</xs:documentation>
@@ -780,7 +721,6 @@ permissions and limitations under the License.
             <xs:documentation>A N-ary operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     <xs:element name="Binop" type="math:BinopType">
         <xs:annotation>
             <xs:documentation>A binary operator.</xs:documentation>
