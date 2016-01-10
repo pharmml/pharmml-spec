@@ -67,8 +67,10 @@ permissions and limitations under the License.
             <xs:sequence>
                 <xs:element ref="ct:Name"/>
                 <xs:element minOccurs="0" ref="ct:Description"/>
-                <xs:element minOccurs="0" name="IndependentVariable"
+                <!-- TEST -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="IndependentVariable"
                     type="mml:IndependentVariableType"> </xs:element>
+                <!-- /TEST -->
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:FunctionDefinition">
                     <xs:annotation>
                         <xs:documentation>The definition of a symbol. Essentially as a function.</xs:documentation>
