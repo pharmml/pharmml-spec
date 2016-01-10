@@ -1279,7 +1279,7 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
-    <xs:complexType name="BasicParameterType">
+    <xs:complexType name="SimpleParameterType">
         <xs:annotation>
             <xs:documentation>
                 This defines a design parameter.
@@ -1802,9 +1802,9 @@ permissions and limitations under the License.
                                 </xs:annotation>
                             </xs:element>
                             <!-- TEST -->
-                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:Parameter">
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
                                 <xs:annotation>
-                                    <xs:documentation>A parameter definition of the basic type.</xs:documentation>
+                                    <xs:documentation>A parameter definition of the simple type.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
                             <!-- /TEST -->
@@ -1857,9 +1857,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:Parameter">
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
                         <xs:annotation>
-                            <xs:documentation>A parameter definition of thee basic type.</xs:documentation>
+                            <xs:documentation>A parameter definition of thee simple type.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
@@ -2462,8 +2462,8 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
-    <xs:element name="Parameter" substitutionGroup="mdef:CommonParameterElement"
-        type="mdef:BasicParameterType">
+    <xs:element name="SimpleParameter" substitutionGroup="mdef:CommonParameterElement"
+        type="mdef:SimpleParameterType">
         <xs:annotation>
             <xs:documentation>Defines a basic parameter with assignment option only.</xs:documentation>
         </xs:annotation>
