@@ -413,7 +413,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="math:Condition"/>
+                    <xs:element minOccurs="0" ref="math:Condition"/>
                 </xs:sequence>
                 <xs:attribute name="symbol" type="ds:IgnoreSymbolType" use="optional">
                     <xs:annotation>
