@@ -1757,9 +1757,9 @@ permissions and limitations under the License.
                                     <xs:documentation>A parameter definition of the individual type.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:Parameter">
                                 <xs:annotation>
-                                    <xs:documentation>A parameter definition of the simple type.</xs:documentation>
+                                    <xs:documentation>A parameter definition of the basic type.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:CommonVariable">
@@ -1803,9 +1803,9 @@ permissions and limitations under the License.
                                 Typically these will define parameters used by the covariate definitions.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:SimpleParameter">
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:Parameter">
                         <xs:annotation>
-                            <xs:documentation>A parameter definition of thee simple type.</xs:documentation>
+                            <xs:documentation>A parameter definition of the basic type.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
@@ -2402,10 +2402,10 @@ permissions and limitations under the License.
             <xs:documentation>Defines general error model.</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="SimpleParameter" substitutionGroup="mdef:CommonParameterElement"
+    <xs:element name="Parameter" substitutionGroup="mdef:CommonParameterElement"
         type="mdef:SimpleParameterType">
         <xs:annotation>
-            <xs:documentation>Defines a basic parameter with assignment option only.</xs:documentation>
+            <xs:documentation>Defines a basic parameter with assignment only.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="DesignParameter" substitutionGroup="mdef:CommonParameterElement"
