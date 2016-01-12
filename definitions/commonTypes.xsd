@@ -46,8 +46,9 @@ permissions and limitations under the License.
             <xs:enumeration value="BLQ"/>
             <!-- extandable with other type if necessary -->
         </xs:restriction>
-    </xs:simpleType>    
-    <xs:simpleType name="ToolNameType">
+    </xs:simpleType>
+    <!-- TEST -->
+    <!--    <xs:simpleType name="ToolNameType">
         <xs:annotation>
             <xs:documentation>Defines the tool names attribute.</xs:documentation>
         </xs:annotation>
@@ -55,9 +56,10 @@ permissions and limitations under the License.
             <xs:enumeration value="BUGS"/>
             <xs:enumeration value="Monolix"/>
             <xs:enumeration value="NONMEM"/>
-            <!-- extandable with other tool names -->
+            <!-\- extandable with other tool names -\->
         </xs:restriction>
-    </xs:simpleType>    
+    </xs:simpleType>-->
+    <!-- /TEST -->
     <xs:simpleType name="SymbolTypeType">
         <xs:annotation>
             <xs:documentation>Defines the symbol types. Restricted to the available types.</xs:documentation>
