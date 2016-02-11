@@ -725,6 +725,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="SoftwareSettings" minOccurs="0" maxOccurs="unbounded" type="msteps:SoftwareSettingsType"/>
+                    <!-- /TEST -->
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
                     <xs:element name="InterventionsReference" minOccurs="0" type="msteps:InterventionsReferenceType"/>
