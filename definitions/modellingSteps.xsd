@@ -1103,7 +1103,7 @@ permissions and limitations under the License.
                             <xs:documentation>Compute info specification.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="SoftwareSettings" minOccurs="0" type="msteps:SoftwareSettingsType"/>
+                    <xs:element name="SoftwareSettings" minOccurs="0" maxOccurs="unbounded" type="msteps:SoftwareSettingsType"/>
                     
                     <xs:element maxOccurs="unbounded" name="Operation" type="msteps:OptimalDesignOperationType">
                         <xs:annotation>
