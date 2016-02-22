@@ -1075,6 +1075,15 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     
+                    <!-- TEST -->
+                    <xs:element maxOccurs="1" minOccurs="1" name="ParametersToEstimate"
+                        type="msteps:ToEstimateType">
+                        <xs:annotation>
+                            <xs:documentation>Specified the parameters of the model to be estimated.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
+                    
                     <xs:element name="OptimiseOn" minOccurs="0" type="msteps:OptimiseOnType">
                         <xs:annotation>
                             <xs:documentation>Item to be optimised on, overwrite desing spaces.</xs:documentation>
