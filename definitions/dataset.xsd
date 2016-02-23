@@ -681,6 +681,9 @@ permissions and limitations under the License.
                     <xs:enumeration value="ssPeriod"/>
                     <xs:enumeration value="time"/>
                     <xs:enumeration value="undefined"/>
+                    <!-- TEST -->
+                    <xs:enumeration value="varLevel"/>
+                    <!-- /TEST -->
                     <!-- SO related -->
                     <xs:enumeration value="indivParameter"/>
                     <xs:enumeration value="popParameter"/>
@@ -689,10 +692,13 @@ permissions and limitations under the License.
                     <xs:enumeration value="statPrecision"/>
                     <xs:enumeration value="strataVariable"/>
                     <xs:enumeration value="structParameter"/>
-                    <xs:enumeration value="varParameter_var"/>
-                    <xs:enumeration value="varParameter_stdev"/>
-                    <xs:enumeration value="varParameter_cov"/>
-                    <xs:enumeration value="varParameter_corr"/>
+                    <!-- TEST -->
+                    <xs:enumeration value="varParameter"/>
+                    <xs:enumeration value="variance"/>
+                    <xs:enumeration value="stdev"/>
+                    <xs:enumeration value="covariance"/>
+                    <xs:enumeration value="correlation"/>
+                    <!-- /TEST -->
                 </xs:restriction>
             </xs:simpleType>
         </xs:list>
