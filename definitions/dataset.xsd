@@ -441,7 +441,15 @@ permissions and limitations under the License.
                         inconsistencies.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-
+                
+                <!-- TEST -->
+                <xs:attribute name="level" type="xs:string" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>Optional attribute to identify var level in SO.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
+                
                 <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
