@@ -43,6 +43,25 @@ permissions and limitations under the License.
     <!--
         Simple types
         -->
+    <!-- TEST -->
+    <xs:simpleType name="FIMtypeType">
+        <xs:annotation>
+            <xs:documentation>
+                Type specifying the types of FIM. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="ct:SymbolIdType">
+                    <xs:enumeration value="P"/>
+                    <xs:enumeration value="I"/>
+                    <xs:enumeration value="B"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <!-- /TEST -->
+    
     <xs:simpleType name="OptimalDesignOpTypeType">
         <xs:annotation>
             <xs:documentation>
@@ -819,24 +838,26 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
     <xs:complexType name="FIMType">
         <xs:annotation>
             <xs:documentation>Type defining the FIM-atrix.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:choice>
+                <!--<xs:choice>
                     <xs:element ref="ct:Matrix"/>
                     <xs:element name="File" type="ds:ExternalFileType"/>
-                </xs:choice>
-                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
+                </xs:choice>-->
+                <xs:attribute name="type" type="msteps:FIMtypeType" use="required">
                     <xs:annotation>
-                        <xs:documentation>The symbol id for thei FIM.</xs:documentation>
+                        <xs:documentation>The type of FIM.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     
     <xs:complexType name="MethodType">
         <xs:annotation>
@@ -1076,8 +1097,7 @@ permissions and limitations under the License.
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     
                     <!-- TEST -->
-                    <xs:element maxOccurs="1" minOccurs="1" name="ParametersToEstimate"
-                        type="msteps:ToEstimateType">
+                    <xs:element name="ParametersToEstimate" minOccurs="0" type="msteps:ToEstimateType">
                         <xs:annotation>
                             <xs:documentation>Specified the parameters of the model to be estimated.</xs:documentation>
                         </xs:annotation>
@@ -1115,7 +1135,6 @@ permissions and limitations under the License.
                             <xs:documentation>Compute info specification.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="SoftwareSettings" minOccurs="0" maxOccurs="unbounded" type="msteps:SoftwareSettingsType"/>
                     
                     <xs:element maxOccurs="unbounded" name="Operation" type="msteps:OptimalDesignOperationType">
                         <xs:annotation>
@@ -1124,6 +1143,8 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    
+                    <xs:element name="SoftwareSettings" minOccurs="0" maxOccurs="unbounded" type="msteps:SoftwareSettingsType"/>
                     
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
