@@ -198,16 +198,18 @@ permissions and limitations under the License.
     <!-- 
         Complex Types
      -->
+    <!-- TEST -->
     <xs:complexType name="IntValueType">
         <xs:annotation>
             <xs:documentation>Integer value.</xs:documentation>
         </xs:annotation>
         <xs:simpleContent>
-            <xs:extension base="xs:integer">
+            <xs:extension base="xs:int">
                 <xs:attributeGroup ref="ct:RootAttributesGroup"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="RealValueType">
         <xs:annotation>
             <xs:documentation>Real value.</xs:documentation>
@@ -371,7 +373,9 @@ permissions and limitations under the License.
                     <xs:element ref="math:Naryop"/>
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
-                    <xs:element name="Piecewise" type="math:PiecewiseType"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:Piecewise"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:FunctionCall"/>
                     <xs:element ref="ct:Sum"/>
                     <xs:element ref="ct:Product"/>
