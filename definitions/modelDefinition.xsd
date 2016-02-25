@@ -37,7 +37,7 @@ permissions and limitations under the License.
         schemaLocation="http://www.uncertml.org/3.0"/>
 
     <xs:import namespace="http://www.pharmml.org/probonto/ProbOnto" 
-        schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
+        schemaLocation="http://www.pharmml.org/probonto/ProbOnto"/>
 
     <!--
         Simple Types
