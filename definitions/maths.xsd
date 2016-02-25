@@ -21,6 +21,7 @@ permissions and limitations under the License.
     attributeFormDefault="unqualified" version="0.8"
     xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.8/Dataset"
+    xmlns:design="http://www.pharmml.org/pharmml/0.8/TrialDesign"
     xmlns:po="http://www.pharmml.org/probonto/ProbOnto"
     xmlns:mdef="http://www.pharmml.org/pharmml/0.8/ModelDefinition">
     
@@ -34,7 +35,10 @@ permissions and limitations under the License.
         schemaLocation="http://www.pharmml.org/pharmml/0.8/Dataset"/>
     
     <xs:import namespace="http://www.pharmml.org/probonto/ProbOnto" 
-        schemaLocation="../../pharmml-probonto/probOnto.xsd"/>
+        schemaLocation="http://www.pharmml.org/probonto/ProbOnto"/>
+    
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/TrialDesign"
+        schemaLocation="http://www.pharmml.org/pharmml/0.8/TrialDesign"/>
     
     
     <xs:complexType name="ProbabilityFctType">
@@ -535,7 +539,7 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
-                        <xs:element ref="math:Stage"/>
+                        <xs:element ref="design:Stage"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
@@ -568,7 +572,7 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
-                        <xs:element ref="math:Stage"/>
+                        <xs:element ref="design:Stage"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -686,9 +690,6 @@ permissions and limitations under the License.
     
     
     <!-- elements -->
-    <!-- TEST -->
-    <xs:element name="Stage"/>
-    <!-- /TEST -->
     <xs:element name="Otherwise">
         <xs:annotation>
             <xs:documentation>The otherwise case in a piecewise function.</xs:documentation>
@@ -769,4 +770,7 @@ permissions and limitations under the License.
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="Piecewise" type="math:PiecewiseType"/>
+    <!-- /TEST -->
 </xs:schema>

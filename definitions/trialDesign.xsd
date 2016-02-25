@@ -1488,7 +1488,10 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-
+    <!-- TEST -->
+    <xs:element name="Stage"/>
+    <!-- /TEST -->
+    
     <xs:element abstract="true" name="DosingRegimen" type="design:DosingRegimenType">
         <xs:annotation>
             <xs:documentation>
