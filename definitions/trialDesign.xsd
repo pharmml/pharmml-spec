@@ -1010,6 +1010,22 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
+                    <!-- TEST -->
+                    <xs:element name="StageDefinition" minOccurs="0" type="design:StageDefinitionType"/>
+                    <!-- /TEST -->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="StageDefinitionType">
+        <xs:annotation>
+            <xs:documentation>Stage definition type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="maths:LogicBinop"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
