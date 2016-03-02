@@ -18,7 +18,7 @@ permissions and limitations under the License.
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://www.pharmml.org/pharmml/0.8/Maths"
     xmlns:math="http://www.pharmml.org/pharmml/0.8/Maths" elementFormDefault="qualified"
-    attributeFormDefault="unqualified" version="0.8"
+    attributeFormDefault="unqualified" version="0.8.1"
     xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes"
     xmlns:ds="http://www.pharmml.org/pharmml/0.8/Dataset"
     xmlns:design="http://www.pharmml.org/pharmml/0.8/TrialDesign"

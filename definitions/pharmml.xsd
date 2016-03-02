@@ -24,7 +24,7 @@ permissions and limitations under the License.
     xmlns:design="http://www.pharmml.org/pharmml/0.8/TrialDesign"
     xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes"
     xmlns:msteps="http://www.pharmml.org/pharmml/0.8/ModellingSteps"
-    xmlns:mdef="http://www.pharmml.org/pharmml/0.8/ModelDefinition" version="0.8"
+    xmlns:mdef="http://www.pharmml.org/pharmml/0.8/ModelDefinition" version="0.8.1"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <xs:import namespace="http://www.pharmml.org/pharmml/0.8/Maths"
