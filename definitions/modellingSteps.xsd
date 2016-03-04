@@ -772,6 +772,9 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="OutputFile" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:CommonModellingStep">
                         <xs:annotation>
                             <xs:documentation>
