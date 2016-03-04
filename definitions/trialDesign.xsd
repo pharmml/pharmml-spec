@@ -755,13 +755,15 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <xs:element name="IndividualCovariates" minOccurs="0" type="design:IndividualCovariatesType">
+                    <!-- TEST -->
+                    <xs:element name="IndividualCovariates" minOccurs="0" maxOccurs="unbounded" type="design:IndividualCovariatesType">
                         <xs:annotation>
                             <xs:documentation>
                                 Defines the covariates of the study.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
                         type="design:TD_CovariateModelType">
                         <xs:annotation>
