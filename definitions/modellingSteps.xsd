@@ -535,13 +535,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="order" type="xs:positiveInteger" use="required">
+                <!-- TEST -->
+                <xs:attribute name="order" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>
                             Specifies the order of the operation.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- /TEST -->
                 <xs:attribute name="opType" type="msteps:OptimalDesignOpTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -578,13 +580,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="order" type="xs:positiveInteger" use="required">
+                <!-- TEST -->
+                <xs:attribute name="order" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>
                             Specifies the order of the operation.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- /TEST -->
                 <xs:attribute name="opType" type="msteps:EstimationOpTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -622,13 +626,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="order" type="xs:positiveInteger" use="required">
+                <!-- TEST -->
+                <xs:attribute name="order" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>
                             Specifies the order of the operation.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- /TEST -->
                 <xs:attribute name="opType" type="msteps:SimulationOpTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>

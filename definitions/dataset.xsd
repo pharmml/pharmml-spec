@@ -455,7 +455,7 @@ permissions and limitations under the License.
                         <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="columnNum" type="xs:positiveInteger" use="required">
+                <xs:attribute name="columnNum" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>The column number in the reosurce to use for this column.</xs:documentation>
                     </xs:annotation>
@@ -477,7 +477,7 @@ permissions and limitations under the License.
                         <xs:documentation>The type of the header.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="rowNumber" type="xs:positiveInteger" use="required">
+                <xs:attribute name="rowNumber" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>The row number for this header.</xs:documentation>
                     </xs:annotation>
@@ -521,7 +521,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:choice>
-                <xs:attribute name="order" type="xs:positiveInteger" use="required">
+                <xs:attribute name="order" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>
                             Specifies the order of the header rows.
@@ -645,11 +645,13 @@ permissions and limitations under the License.
                         <xs:documentation>ID referencing a Symbol in the model.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="admNumber" type="xs:integer" use="optional">
+                <!-- TEST -->
+                <xs:attribute name="admNumber" type="xs:int" use="optional">
                     <xs:annotation>
                         <xs:documentation>Number referencing adm/type macro attribute.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
