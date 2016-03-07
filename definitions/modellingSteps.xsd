@@ -753,6 +753,9 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element name="SoftwareSettings" minOccurs="0" maxOccurs="unbounded" type="msteps:SoftwareSettingsType"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element name="OutputFile" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
+                    <!-- /TEST -->
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
                     <xs:element name="InterventionsReference" minOccurs="0" type="msteps:InterventionsReferenceType"/>
@@ -778,9 +781,6 @@ permissions and limitations under the License.
                             <xs:documentation>Defines the target tool dataset and its mapping with optional code injection.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-                    <xs:element name="OutputFile" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="msteps:CommonModellingStep">
                         <xs:annotation>
                             <xs:documentation>
@@ -1154,6 +1154,10 @@ permissions and limitations under the License.
                     </xs:element>
                     
                     <xs:element name="SoftwareSettings" minOccurs="0" maxOccurs="unbounded" type="msteps:SoftwareSettingsType"/>
+                    
+                    <!-- TEST -->
+                    <xs:element name="OutputFile" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
+                    <!-- /TEST -->
                     
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
