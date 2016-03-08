@@ -514,11 +514,18 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
                 </xs:sequence>
-                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required">
+                <xs:attribute name="symbId" type="ct:SymbolIdType">
                     <xs:annotation>
                         <xs:documentation>The symbol id used to define the variable.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- TEST -->
+                <xs:attribute name="symbIdRef" type="ct:SymbolIdType">
+                    <xs:annotation>
+                        <xs:documentation>The symbol reference for this variable - used for assignments of previously declared (derivative) variables.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
