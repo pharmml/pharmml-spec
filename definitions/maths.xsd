@@ -454,6 +454,13 @@ permissions and limitations under the License.
             <!-- TEST -->
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="unbounded">
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:CommonVariable">
+                        <xs:annotation>
+                            <xs:documentation>A variable definition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:sequence>
                         <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
