@@ -424,7 +424,8 @@ permissions and limitations under the License.
             <xs:documentation>The schema type defining statement(s) in a conditional statement.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="math:ExprType">
+            <!-- TEST new extension base -->
+            <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element ref="math:Condition"/>
                     <xs:choice maxOccurs="unbounded">
@@ -441,6 +442,7 @@ permissions and limitations under the License.
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
+            <!-- /TEST -->
         </xs:complexContent>
     </xs:complexType>    
     
@@ -449,7 +451,8 @@ permissions and limitations under the License.
             <xs:documentation>The schema type defining statement(s) in a conditional statement.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="math:ExprType">
+            <!-- TEST -->
+            <xs:extension base="ct:PharmMLRootType">
                 <xs:choice maxOccurs="unbounded">
                     <xs:sequence>
                         <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
@@ -458,6 +461,7 @@ permissions and limitations under the License.
                     </xs:sequence>
                 </xs:choice>
             </xs:extension>
+            <!-- /TEST -->
         </xs:complexContent>
     </xs:complexType>
     
