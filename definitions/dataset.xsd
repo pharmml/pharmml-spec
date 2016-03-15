@@ -558,11 +558,13 @@ permissions and limitations under the License.
                                     <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="Piecewise" minOccurs="0" type="math:PiecewiseType">
+                            <!-- TEST -->
+                            <xs:element minOccurs="0" ref="math:Piecewise">
                                 <xs:annotation>
                                     <xs:documentation>Defines a piecewise expression - for conditional mapping.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <!-- TEST -->
                             <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
                                 <xs:annotation>
                                     <xs:documentation>
