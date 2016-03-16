@@ -755,7 +755,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
-                    <!-- TEST -->
                     <xs:element name="IndividualCovariates" minOccurs="0" maxOccurs="unbounded" type="design:IndividualCovariatesType">
                         <xs:annotation>
                             <xs:documentation>
@@ -763,7 +762,6 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
                         type="design:TD_CovariateModelType">
                         <xs:annotation>
@@ -1012,9 +1010,7 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
-                    <!-- TEST -->
                     <xs:element name="StageDefinition" minOccurs="0" type="design:StageDefinitionType"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1490,10 +1486,7 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-    <!-- TEST -->
     <xs:element name="Stage"/>
-    <!-- /TEST -->
-    
     <xs:element abstract="true" name="DosingRegimen" type="design:DosingRegimenType">
         <xs:annotation>
             <xs:documentation>

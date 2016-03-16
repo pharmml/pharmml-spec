@@ -147,14 +147,12 @@ permissions and limitations under the License.
             <xs:enumeration value="comploglog"/>
         </xs:restriction>
     </xs:simpleType>
-    <!-- TEST -->
     <xs:simpleType name="MarkovOrderType">
         <xs:annotation>
             <xs:documentation>Defines the Markov order attribute type.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:int"/>        
     </xs:simpleType>
-    <!-- /TEST -->
     <xs:simpleType name="SymbolIdType">
         <xs:annotation>
             <xs:documentation>Type for symbols identifiers.</xs:documentation>
@@ -200,7 +198,6 @@ permissions and limitations under the License.
     <!-- 
         Complex Types
      -->
-    <!-- TEST -->
     <xs:complexType name="IntValueType">
         <xs:annotation>
             <xs:documentation>Integer value.</xs:documentation>
@@ -211,7 +208,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
-    <!-- /TEST -->
     <xs:complexType name="RealValueType">
         <xs:annotation>
             <xs:documentation>Real value.</xs:documentation>
@@ -375,9 +371,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:Naryop"/>
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
-                    <!-- TEST -->
                     <xs:element ref="math:Piecewise"/>
-                    <!-- /TEST -->
                     <xs:element ref="math:FunctionCall"/>
                     <xs:element ref="ct:Sum"/>
                     <xs:element ref="ct:Product"/>
@@ -519,13 +513,11 @@ permissions and limitations under the License.
                         <xs:documentation>The symbol id used to define the variable.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
                 <xs:attribute name="symbIdRef" type="ct:SymbolIdType">
                     <xs:annotation>
                         <xs:documentation>The symbol reference for this variable - used for assignments of previously declared (derivative) variables.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -544,13 +536,11 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="optional">
                     <xs:annotation>
                         <xs:documentation>The type of the variable.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 <xs:attribute name="regressor" type="ct:RegressorType" use="optional">
                     <xs:annotation>
                         <xs:documentation>The type of the variable.</xs:documentation>
@@ -705,13 +695,11 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="optional" fixed="real">
                     <xs:annotation>
                         <xs:documentation>The symbol type of a derivative variable is always set to be a real.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -977,20 +965,16 @@ permissions and limitations under the License.
                         <xs:documentation>The default off-diagonal value.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
                 <xs:attribute name="numbCols" type="xs:int">
                     <xs:annotation>
                         <xs:documentation>The number of columns.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
-                <!-- TEST -->
                 <xs:attribute name="numbRows" type="xs:int">
                     <xs:annotation>
                         <xs:documentation>The number of rows.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 <xs:attribute name="matrixType" use="required">
                     <xs:annotation>
                         <xs:documentation>Mathematical type of the matrix.</xs:documentation>
@@ -1182,20 +1166,16 @@ permissions and limitations under the License.
                         <xs:documentation>The default off-diagonal value.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
                 <xs:attribute name="numbCols" type="xs:int">
                     <xs:annotation>
                         <xs:documentation>The number of columns.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
-                <!-- TEST -->
                 <xs:attribute name="numbRows" type="xs:int">
                     <xs:annotation>
                         <xs:documentation>The number of rows.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1452,13 +1432,11 @@ permissions and limitations under the License.
                         </xs:element>
                     </xs:choice>
                 </xs:choice>
-                <!-- TEST -->
                 <xs:attribute name="length" type="xs:int">
                     <xs:annotation>
                         <xs:documentation>The length of the vector - optional.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 <xs:attribute name="default" type="xs:double" default="0">
                     <xs:annotation>
                         <xs:documentation>Default value of vector - set to 0.</xs:documentation>

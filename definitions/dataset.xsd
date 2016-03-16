@@ -442,13 +442,11 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:attribute>
                 
-                <!-- TEST -->
                 <xs:attribute name="level" type="xs:string" use="optional">
                     <xs:annotation>
                         <xs:documentation>Optional attribute to identify var level in SO.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 
                 <xs:attribute name="valueType" type="ds:ColumnValueTypeType" use="required">
                     <xs:annotation>
@@ -558,13 +556,11 @@ permissions and limitations under the License.
                                     <xs:documentation>Reference to the symbol to map the column data to.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- TEST -->
                             <xs:element minOccurs="0" ref="math:Piecewise">
                                 <xs:annotation>
                                     <xs:documentation>Defines a piecewise expression - for conditional mapping.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <!-- TEST -->
                             <xs:element name="CategoryMapping" minOccurs="0" maxOccurs="unbounded" type="ds:CategoryMappingType">
                                 <xs:annotation>
                                     <xs:documentation>
@@ -647,13 +643,11 @@ permissions and limitations under the License.
                         <xs:documentation>ID referencing a Symbol in the model.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
                 <xs:attribute name="admNumber" type="xs:int" use="optional">
                     <xs:annotation>
                         <xs:documentation>Number referencing adm/type macro attribute.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -693,9 +687,7 @@ permissions and limitations under the License.
                     <xs:enumeration value="ssPeriod"/>
                     <xs:enumeration value="time"/>
                     <xs:enumeration value="undefined"/>
-                    <!-- TEST -->
                     <xs:enumeration value="varLevel"/>
-                    <!-- /TEST -->
                     <!-- SO related -->
                     <xs:enumeration value="indivParameter"/>
                     <xs:enumeration value="popParameter"/>
@@ -704,13 +696,11 @@ permissions and limitations under the License.
                     <xs:enumeration value="statPrecision"/>
                     <xs:enumeration value="strataVariable"/>
                     <xs:enumeration value="structParameter"/>
-                    <!-- TEST -->
                     <xs:enumeration value="varParameter"/>
                     <xs:enumeration value="variance"/>
                     <xs:enumeration value="stdev"/>
                     <xs:enumeration value="covariance"/>
                     <xs:enumeration value="correlation"/>
-                    <!-- /TEST -->
                 </xs:restriction>
             </xs:simpleType>
         </xs:list>

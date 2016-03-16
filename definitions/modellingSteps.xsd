@@ -43,7 +43,6 @@ permissions and limitations under the License.
     <!--
         Simple types
         -->
-    <!-- TEST -->
     <xs:simpleType name="FIMtypeType">
         <xs:annotation>
             <xs:documentation>
@@ -60,7 +59,6 @@ permissions and limitations under the License.
             </xs:simpleType>
         </xs:union>
     </xs:simpleType>
-    <!-- /TEST -->
     
     <xs:simpleType name="OptimalDesignOpTypeType">
         <xs:annotation>
@@ -535,7 +533,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="order" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -543,7 +540,6 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 <xs:attribute name="opType" type="msteps:OptimalDesignOpTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -580,7 +576,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="order" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -588,7 +583,6 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 <xs:attribute name="opType" type="msteps:EstimationOpTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -626,7 +620,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="order" type="xs:int" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -634,7 +627,6 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 <xs:attribute name="opType" type="msteps:SimulationOpTypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>
@@ -750,12 +742,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="SoftwareSettings" minOccurs="0" maxOccurs="unbounded" type="msteps:SoftwareSettingsType"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element name="OutputFile" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
-                    <!-- /TEST -->
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
                     <xs:element name="InterventionsReference" minOccurs="0" type="msteps:InterventionsReferenceType"/>
@@ -847,17 +835,12 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="FIMType">
         <xs:annotation>
             <xs:documentation>Type defining the FIM-atrix.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!--<xs:choice>
-                    <xs:element ref="ct:Matrix"/>
-                    <xs:element name="File" type="ds:ExternalFileType"/>
-                </xs:choice>-->
                 <xs:attribute name="type" type="msteps:FIMtypeType" use="required">
                     <xs:annotation>
                         <xs:documentation>The type of FIM.</xs:documentation>
@@ -866,7 +849,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="MethodType">
         <xs:annotation>
@@ -1105,13 +1087,11 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
                     
-                    <!-- TEST -->
                     <xs:element name="ParametersToEstimate" minOccurs="0" type="msteps:ToEstimateType">
                         <xs:annotation>
                             <xs:documentation>Specified the parameters of the model to be estimated.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     
                     <xs:element name="OptimiseOn" minOccurs="0" type="msteps:OptimiseOnType">
                         <xs:annotation>
@@ -1155,9 +1135,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     
-                    <!-- TEST -->
                     <xs:element name="OutputFile" minOccurs="0" maxOccurs="unbounded" type="ds:ExternalFileType"/>
-                    <!-- /TEST -->
                     
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
