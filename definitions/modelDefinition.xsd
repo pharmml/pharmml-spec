@@ -1065,36 +1065,40 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                         <!-- types 1 & 4 -->
-                        <xs:choice>
-                            <xs:element minOccurs="1" ref="ct:Assign">
+                        <!-- TEST LHSTransformation can apply to both type 1 & 4 -->
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
                                 <xs:annotation>
-                                    <xs:documentation>
-                                        The explicit, type 1, definition of an individual parameter. This defines H and can 
-                                        contain references to one or more random variables.
-                                    </xs:documentation>
+                                    <xs:documentation>Defines a transformation applied to the left-hand-side.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:sequence>
-                                <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
-                                    <xs:annotation>
-                                        <xs:documentation>Defines a transformation applied to the left-hand-side.</xs:documentation>
-                                    </xs:annotation>
-                                </xs:element>
-                                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
-                                    <xs:annotation>
-                                        <xs:documentation>The level of random variability and its connection
-                                            to variance/stdev as defined when using the distribution.</xs:documentation>
-                                    </xs:annotation>
-                                </xs:element> 
-                                <xs:element name="Distribution" type="mdef:DistributionType">
+                            <xs:choice>
+                                <xs:element minOccurs="1" ref="ct:Assign">
                                     <xs:annotation>
                                         <xs:documentation>
-                                            Distribution definition using either UncertML or ProbOnto.
+                                            The explicit, type 1, definition of an individual parameter. This defines H and can 
+                                            contain references to one or more random variables.
                                         </xs:documentation>
                                     </xs:annotation>
                                 </xs:element>
-                            </xs:sequence>
-                        </xs:choice>
+                                <xs:sequence>
+                                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:VariabilityReference">
+                                        <xs:annotation>
+                                            <xs:documentation>The level of random variability and its connection
+                                                to variance/stdev as defined when using the distribution.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element> 
+                                    <xs:element name="Distribution" type="mdef:DistributionType">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Distribution definition using either UncertML or ProbOnto.
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:choice>
+                        </xs:sequence>
+                        <!-- TEST -->
                     </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -1183,12 +1187,14 @@ permissions and limitations under the License.
                             </xs:complexType>
                         </xs:element>
                     </xs:choice>
-                    <xs:element name="RandomEffects" minOccurs="1" maxOccurs="unbounded"
+                    <!-- TEST -->
+                    <xs:element name="RandomEffects" minOccurs="0" maxOccurs="unbounded"
                         type="mdef:ParameterRandomEffectType">
                         <xs:annotation>
                             <xs:documentation>The random effects (eta) used in the gaussian parameter model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
