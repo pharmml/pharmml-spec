@@ -1585,6 +1585,29 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
+    <!-- TEST -->
+    <xs:complexType name="DifferentialEquationType">
+        <xs:annotation>
+            <xs:documentation>Basic type for DEs</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="math:LogicBinOpType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="InitialCondition" type="ct:InitialConditionType">
+                        <xs:annotation>
+                            <xs:documentation>The definition of the initial condition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="History" type="ct:HistoryType">
+                        <xs:annotation>
+                            <xs:documentation>The definition of the history for delay differential equations.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
 
     <!--
         Attribute Groups
