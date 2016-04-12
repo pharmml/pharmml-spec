@@ -1675,7 +1675,16 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-   <xs:element name="AssignStatement" type="math:LogicBinOpType">
+    <!-- TEST -->
+    <xs:element name="DE" type="ct:DifferentialEquationType">
+        <xs:annotation>
+            <xs:documentation>
+                Generic DE type.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    <xs:element name="AssignStatement" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>
                 Generic assignment statement.
