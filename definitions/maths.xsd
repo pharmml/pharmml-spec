@@ -382,6 +382,16 @@ permissions and limitations under the License.
                             <xs:documentation>Argument variable of the differentiation operator.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <xs:element minOccurs="0" name="InitialCondition" type="ct:InitialConditionType">
+                        <xs:annotation>
+                            <xs:documentation>The definition of the initial condition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="History" type="ct:HistoryType">
+                        <xs:annotation>
+                            <xs:documentation>The definition of the history for delay differential equations.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
