@@ -343,6 +343,37 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
 
+    <!-- TEST -->
+    <xs:complexType name="DiffOpType">
+        <xs:annotation>
+            <xs:documentation>
+                A type describing differential operators.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Degree" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>Degree of the operator - must be positive.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="diffVariable" type="ct:SymbolIdType">
+                        <xs:annotation>
+                            <xs:documentation>Differentiation variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="argumentVariable" type="ct:SymbolIdType">
+                        <xs:annotation>
+                            <xs:documentation>Argument variable of the diff operator.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="ConstantType">
         <xs:annotation>
             <xs:documentation>
