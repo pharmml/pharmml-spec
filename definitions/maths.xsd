@@ -81,6 +81,9 @@ permissions and limitations under the License.
                         <xs:element ref="math:Binop"/>
                         <xs:element ref="math:Naryop"/>
                         <xs:element ref="math:Statsop"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Diff"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice minOccurs="0">
                         <xs:element ref="ct:SymbRef"/>
@@ -95,6 +98,9 @@ permissions and limitations under the License.
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <xs:element ref="ct:Scalar"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Diff"/>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -194,6 +200,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Diff"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -219,6 +228,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Diff"/>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -521,6 +533,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
                     <xs:element ref="math:MatrixUniop"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:Diff"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -577,6 +592,9 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <xs:element ref="design:Stage"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Diff"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -608,6 +626,9 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <xs:element ref="design:Stage"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:Diff"/>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
                 <xs:attribute name="op" use="required">
@@ -658,6 +679,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:Diff"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>

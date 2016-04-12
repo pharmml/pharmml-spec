@@ -380,6 +380,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="math:MatrixUniop"/>
                     <xs:element ref="mdef:Probability"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:Diff"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
