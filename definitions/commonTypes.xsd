@@ -1591,8 +1591,10 @@ permissions and limitations under the License.
             <xs:documentation>Basic type for DEs</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="math:LogicBinOpType">
+            <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <xs:element name="LHS" type="math:ExprType"/>
+                    <xs:element name="RHS" type="math:ExprType"/>
                     <xs:element minOccurs="0" name="InitialCondition" type="ct:InitialConditionType">
                         <xs:annotation>
                             <xs:documentation>The definition of the initial condition.</xs:documentation>
