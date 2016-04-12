@@ -1780,6 +1780,9 @@ permissions and limitations under the License.
                             </xs:element>
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                             <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                            <!-- TEST -->
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:DE"/>
+                            <!-- /TEST -->
                         </xs:sequence>
                     </xs:choice>
                 </xs:sequence>
