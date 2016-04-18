@@ -382,6 +382,7 @@ permissions and limitations under the License.
                     <xs:element ref="mdef:Probability"/>
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
+                    <xs:element ref="math:PartialDiff"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>

@@ -83,6 +83,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Statsop"/>
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
+                        <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice minOccurs="0">
@@ -100,6 +101,7 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Scalar"/>
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
+                        <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -202,6 +204,7 @@ permissions and limitations under the License.
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
+                        <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
@@ -230,6 +233,7 @@ permissions and limitations under the License.
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
+                        <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -584,6 +588,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:MatrixUniop"/>
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
+                    <xs:element ref="math:PartialDiff"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
@@ -643,6 +648,7 @@ permissions and limitations under the License.
                         <xs:element ref="design:Stage"/>
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
+                        <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
@@ -677,6 +683,7 @@ permissions and limitations under the License.
                         <xs:element ref="design:Stage"/>
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
+                        <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -730,6 +737,7 @@ permissions and limitations under the License.
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
+                    <xs:element ref="math:PartialDiff"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
@@ -801,6 +809,13 @@ permissions and limitations under the License.
     <xs:element name="Diff" type="math:DiffOpType">
         <xs:annotation>
             <xs:documentation>Differentiation operator for functions or expressions of a single variable.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:element name="PartialDiff" type="math:PartDiffOpType">
+        <xs:annotation>
+            <xs:documentation>Partial differentiation operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
