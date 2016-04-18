@@ -371,15 +371,62 @@ permissions and limitations under the License.
                                 Default equal 1.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="DiffVariable" minOccurs="0" type="ct:StandardAssignType">
+                    <xs:element name="DiffVariable" minOccurs="0" type="math:DiffVariableType">
                         <xs:annotation>
-                            <xs:documentation>Differentiation variable. 
-                                Default equal independent variable.</xs:documentation>
+                            <xs:documentation>Differentiation variable and its order.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="ArgumentVariable" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>Argument variable of the differentiation operator.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="PartDiffOpType">
+        <xs:annotation>
+            <xs:documentation>
+                A type describing partial differentiation operator.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="Degree" minOccurs="0" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>Total degree of the operator - must be positive and
+                            equals the sum of all partial differentation variable degrees.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DiffVariable" minOccurs="0" maxOccurs="unbounded" type="math:DiffVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Differentiation variables and their order.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="ArgumentVariable" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>Argument variable of the differentiation operator.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="DiffVariableType">
+        <xs:annotation>
+            <xs:documentation>Partial differentiation variable and its order.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef"/>
+                    <xs:element name="Degree" minOccurs="0" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>Degree of partial differentation variable.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
