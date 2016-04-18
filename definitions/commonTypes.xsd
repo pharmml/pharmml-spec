@@ -614,6 +614,27 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
+    <xs:complexType name="BoundaryConditionType">
+        <xs:annotation>
+            <xs:documentation>Boundary condition type for DEs</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="BoundaryValue" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>The boundary value condition equation.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="LHS" type="math:ExprType"/>
+                    <xs:element name="RHS" type="math:ExprType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
     <xs:complexType name="DelayType">
         <xs:annotation>
             <xs:documentation>
@@ -1589,19 +1610,26 @@ permissions and limitations under the License.
     <!-- TEST -->
     <xs:complexType name="DifferentialEquationType">
         <xs:annotation>
-            <xs:documentation>Basic type for DEs</xs:documentation>
+            <xs:documentation>Generic type for DEs</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="LHS" type="math:ExprType"/>
                     <xs:element name="RHS" type="math:ExprType"/>
-                    <xs:element minOccurs="0" name="InitialCondition" type="ct:InitialConditionType">
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="InitialCondition" type="ct:InitialConditionType">
                         <xs:annotation>
                             <xs:documentation>The definition of the initial condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element minOccurs="0" name="History" type="ct:HistoryType">
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="BoundaryConditionCondition" type="ct:BoundaryConditionType">
+                        <xs:annotation>
+                            <xs:documentation>The definition of the initial condition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="History" type="ct:HistoryType">
                         <xs:annotation>
                             <xs:documentation>The definition of the history for delay differential equations.</xs:documentation>
                         </xs:annotation>
