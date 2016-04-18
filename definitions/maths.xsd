@@ -358,6 +358,39 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <!-- TEST -->
+    <xs:complexType name="MatrixCalcOpType">
+        <xs:annotation>
+            <xs:documentation>
+                An operator describing a matrix/vecotr calculus operation.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="math:ExprType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Extends the expression which is in effect the operand.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:attribute name="op" use="required">
+                    <xs:annotation>
+                        <xs:documentation>The matrix operators.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="divergence"/>
+                            <xs:enumeration value="gradient"/>
+                            <xs:enumeration value="curl"/>
+                            <xs:enumeration value="laplacian"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
 
     <!-- TEST -->
     <xs:complexType name="DiffOpType">
@@ -438,6 +471,8 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
+    
+    
     
     <xs:complexType name="ConstantType">
         <xs:annotation>
@@ -585,6 +620,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:MatrixCalcOp"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:MatrixUniop"/>
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
@@ -879,6 +917,13 @@ permissions and limitations under the License.
             <xs:documentation>A unary matrix operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="MatrixCalcOp" type="math:MatrixUniOpType">
+        <xs:annotation>
+            <xs:documentation>A matrix calculus operator.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <xs:element name="LogicBinop" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>A logical binary operator used in logical expressions.</xs:documentation>
