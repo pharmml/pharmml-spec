@@ -752,13 +752,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="required">
+                <!-- TEST -->
+                <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="optional">
                     <xs:annotation>
                         <xs:documentation>
                             The type of the function definition.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
