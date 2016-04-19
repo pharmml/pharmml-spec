@@ -203,6 +203,9 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
+                        <xs:element ref="math:MatrixCalcOp"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
@@ -231,6 +234,9 @@ permissions and limitations under the License.
                         <xs:element ref="ct:MatrixSelector"/>
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:MatrixCalcOp"/>
+                        <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
@@ -375,7 +381,7 @@ permissions and limitations under the License.
                 </xs:annotation>
                 <xs:attribute name="op" use="required">
                     <xs:annotation>
-                        <xs:documentation>The matrix operators.</xs:documentation>
+                        <xs:documentation>The matrix calculus operators.</xs:documentation>
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
@@ -685,6 +691,9 @@ permissions and limitations under the License.
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <xs:element ref="design:Stage"/>
                         <!-- TEST -->
+                        <xs:element ref="math:MatrixCalcOp"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <!-- /TEST -->
@@ -719,6 +728,9 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <xs:element ref="design:Stage"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:MatrixCalcOp"/>
+                        <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
@@ -773,6 +785,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:MatrixCalcOp"/>
+                    <!-- /TEST -->
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
@@ -918,7 +933,7 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
-    <xs:element name="MatrixCalcOp" type="math:MatrixUniOpType">
+    <xs:element name="MatrixCalcOp" type="math:MatrixCalcOpType">
         <xs:annotation>
             <xs:documentation>A matrix calculus operator.</xs:documentation>
         </xs:annotation>
