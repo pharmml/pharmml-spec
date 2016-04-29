@@ -518,7 +518,7 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element name="CovariateModelRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
-                            <xs:documentation>Reference to a covariate model.</xs:documentation>
+                            <xs:documentation>Reference to a covariate model(s).</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
