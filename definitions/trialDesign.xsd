@@ -1499,6 +1499,9 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
+    <!-- TEST -->
+    <xs:element name="StudyArm"/>
+    <!-- /TEST -->
     <xs:element name="Stage"/>
     <xs:element abstract="true" name="DosingRegimen" type="design:DosingRegimenType">
         <xs:annotation>

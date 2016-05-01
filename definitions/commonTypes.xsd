@@ -357,6 +357,9 @@ permissions and limitations under the License.
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:Scalar"/>
                     <xs:element ref="ct:SymbRef"/>
+                    <!-- TEST -->
+                    <xs:element ref="ct:CatRef"/>
+                    <!-- /TEST -->
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Interval"/>
                     <xs:element ref="ct:Vector"/>
