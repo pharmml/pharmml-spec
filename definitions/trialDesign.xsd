@@ -1051,6 +1051,22 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:sequence minOccurs="0">
+                        <xs:element name="CovariateModelRef" type="ct:CovariateModelRefType">
+                            <xs:annotation>
+                                <xs:documentation>Reference to a covariate model for which 
+                                    individual cov values are to be specified.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="CovariateRef" type="mdef:DSCovariateDefinitionType">
+                            <xs:annotation>
+                                <xs:documentation>Reference to a covariate for which 
+                                    individual values are to be specified.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>
