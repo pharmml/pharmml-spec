@@ -43,6 +43,15 @@ permissions and limitations under the License.
         Simple Types
         -->
     <!-- TEST -->
+    <xs:simpleType name="ReferenceCategoryType">
+        <xs:annotation>
+            <xs:documentation>
+                The type defining the reference category in the covariate model.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <!-- /TEST -->
     <xs:simpleType name="ReferenceLevelType">
         <xs:annotation>
             <xs:documentation>
@@ -1639,8 +1648,14 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:element>
+                <!-- TEST -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ct:CatRef"/>
+                <!-- /TEST -->
             </xs:choice>
         </xs:sequence>
+        <!-- TEST -->
+        <xs:attribute name="referenceCategory" type="mdef:ReferenceCategoryType"/>
+        <!-- /TEST -->
         <xs:attribute name="catId" type="ct:CatIdType" use="required">
             <xs:annotation>
                 <xs:documentation>The identifier of the category.</xs:documentation>
