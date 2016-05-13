@@ -42,6 +42,7 @@ permissions and limitations under the License.
     <!--
         Simple Types
         -->
+    <!-- TEST -->
     <xs:simpleType name="ReferenceLevelType">
         <xs:annotation>
             <xs:documentation>
@@ -1599,6 +1600,13 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Assign" minOccurs="0"/>
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
                     <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
+                    <!-- TEST -->
+                    <xs:element name="Transformation" type="mdef:CovariateTransformationType" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>The transformation to be applied when the covariate is used.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
