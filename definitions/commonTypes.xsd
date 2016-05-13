@@ -334,6 +334,13 @@ permissions and limitations under the License.
                         <xs:documentation>ID referencing a Block.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- TEST -->
+                <xs:attribute name="symbIdRef" type="ct:SymbolIdType" use="required">
+                    <xs:annotation>
+                        <xs:documentation>ID referencing a Symbol.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
                 <xs:attribute name="catIdRef" type="ct:CategoryIdType" use="required">
                     <xs:annotation>
                         <xs:documentation>ID referencing a Category.</xs:documentation>
