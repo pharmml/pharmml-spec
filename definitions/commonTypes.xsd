@@ -335,7 +335,7 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:attribute>
                 <!-- TEST -->
-                <xs:attribute name="symbIdRef" type="ct:SymbolIdType" use="required">
+                <xs:attribute name="symbIdRef" type="ct:SymbolIdType">
                     <xs:annotation>
                         <xs:documentation>ID referencing a Symbol.</xs:documentation>
                     </xs:annotation>
