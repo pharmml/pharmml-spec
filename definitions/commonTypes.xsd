@@ -640,8 +640,9 @@ permissions and limitations under the License.
                             <xs:documentation>The boundary value condition equation.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="LHS" type="math:ExprType"/>
-                    <xs:element name="RHS" type="math:ExprType"/>
+<!--                    <xs:element name="LHS" type="math:ExprType"/>
+                    <xs:element name="RHS" type="math:ExprType"/>-->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
