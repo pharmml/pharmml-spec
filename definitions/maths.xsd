@@ -610,6 +610,7 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:SymbRef"/>
                     <!-- TEST -->
                     <xs:element ref="ct:CatRef"/>
+                    <xs:element ref="ct:OidRef"/>
                     <!-- /TEST -->
                     <xs:element ref="math:Constant"/>
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
@@ -694,6 +695,7 @@ permissions and limitations under the License.
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
                         <xs:element ref="design:StudyArm"/>
+                        <xs:element ref="ct:OidRef"/>
                         <!-- /TEST -->
                         <xs:element ref="design:Stage"/>
                         <!-- TEST -->
@@ -735,6 +737,7 @@ permissions and limitations under the License.
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
                         <xs:element ref="design:StudyArm"/>
+                        <xs:element ref="ct:OidRef"/>
                         <!-- /TEST -->
                         <xs:element ref="design:Stage"/>
                         <!-- TEST -->
