@@ -642,7 +642,7 @@ permissions and limitations under the License.
                     </xs:element>
 <!--                    <xs:element name="LHS" type="math:ExprType"/>
                     <xs:element name="RHS" type="math:ExprType"/>-->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
+                    <xs:element ref="ct:AssignStatement"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1633,8 +1633,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element name="LHS" type="math:ExprType"/>
-                    <xs:element name="RHS" type="math:ExprType"/>
+<!--                    <xs:element name="LHS" type="math:ExprType"/>
+                    <xs:element name="RHS" type="math:ExprType"/>-->
+                    <xs:element ref="ct:AssignStatement"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="InitialCondition" type="ct:InitialConditionType">
                         <xs:annotation>
                             <xs:documentation>The definition of the initial condition.</xs:documentation>
