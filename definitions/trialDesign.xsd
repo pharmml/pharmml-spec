@@ -1029,6 +1029,7 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:element name="StageDefinition" minOccurs="0" type="design:StageDefinitionType"/>
                 </xs:sequence>
+                <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
