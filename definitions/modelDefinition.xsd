@@ -384,7 +384,9 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="mdef:CommonObservationModelType">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="mdef:ObservationError"/>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:ObservationError"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
