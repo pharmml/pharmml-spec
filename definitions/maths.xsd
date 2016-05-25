@@ -568,7 +568,10 @@ permissions and limitations under the License.
                                 <xs:documentation>A variable definition.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="math:ConditionalStatement"/>
+                        <!-- /TEST -->
+<!--                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>-->                            <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
                         <!-- TEST -->
@@ -593,7 +596,10 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="math:ConditionalStatement"/>
+                        <!-- /TEST -->
+<!--                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>-->                            <!-- TEST -->
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
                         <!-- TEST -->
@@ -876,6 +882,13 @@ permissions and limitations under the License.
     
     
     <!-- elements -->
+    <!-- TEST -->
+    <xs:element name="ConditionalStatement" type="math:ConditionalStatementType">
+        <xs:annotation>
+            <xs:documentation>Conditional statement element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <!-- TEST -->
     <xs:element name="Diff" type="math:DiffOpType">
         <xs:annotation>

@@ -240,7 +240,10 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:sequence>
-                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                            <!-- TEST -->
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="math:ConditionalStatement"/>
+                            <!-- /TEST -->
+<!--                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>-->                            <!-- TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0"
                                 ref="mdef:CommonParameterElement"/>
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
@@ -270,7 +273,10 @@ permissions and limitations under the License.
                             <xs:element maxOccurs="unbounded" minOccurs="0"
                                 ref="mdef:CommonParameterElement"/>
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                            <!-- TEST -->
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="math:ConditionalStatement"/>
+                            <!-- /TEST -->
+<!--                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>-->                            <!-- TEST -->
                             <xs:element  minOccurs="0" maxOccurs="unbounded" ref="ct:Variable">
                                 <xs:annotation>
                                     <xs:documentation>A variable definition.</xs:documentation>
@@ -1836,8 +1842,10 @@ permissions and limitations under the License.
                                 </xs:annotation>
                             </xs:element>
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
                             <!-- TEST -->
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="math:ConditionalStatement"/>
+                            <!-- /TEST -->
+<!--                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>-->                            <!-- TEST -->
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:DE"/>
                             <!-- /TEST -->
                         </xs:sequence>
@@ -1875,7 +1883,10 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                    <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="math:ConditionalStatement"/>
+                    <!-- /TEST -->
+<!--                    <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>-->
                     <xs:element maxOccurs="unbounded" name="Covariate" type="mdef:CovariateDefinitionType">
                         <xs:annotation>
                             <xs:documentation>Defines a covariate.</xs:documentation>
