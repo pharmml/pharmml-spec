@@ -571,6 +571,9 @@ permissions and limitations under the License.
                         <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:ObservationError"/>
+                        <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
@@ -593,6 +596,9 @@ permissions and limitations under the License.
                         <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
+                        <!-- TEST -->
+                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:ObservationError"/>
+                        <!-- /TEST -->
                     </xs:sequence>
                 </xs:choice>
             </xs:extension>
