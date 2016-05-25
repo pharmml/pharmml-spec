@@ -324,6 +324,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element ref="ct:VariabilityReference"/>
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
+                    <!-- /TEST -->
                     <xs:choice>
                         <xs:element name="Pairwise" type="mdef:PairwiseType"/>
                         <xs:element name="Matrix" type="ct:MatrixType"/>
