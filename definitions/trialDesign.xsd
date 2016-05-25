@@ -1201,6 +1201,11 @@ permissions and limitations under the License.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="DeltaTime" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="BLQ" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="UQL" minOccurs="0" type="ct:StandardAssignType"/>
+                    <!-- /TEST -->
                     <xs:choice minOccurs="0">
                         <xs:element name="Continuous" type="design:ContinuousObservationType">
                             <xs:annotation>
