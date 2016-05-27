@@ -148,6 +148,13 @@ permissions and limitations under the License.
                     <xs:documentation>BoxCox transformation with parameter lambda.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+            <!-- TEST -->
+            <xs:enumeration value="BoxCox2">
+                <xs:annotation>
+                    <xs:documentation>BoxCox transformation with parameter lambda1, lambda2.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <!-- /TEST -->
             <xs:enumeration value="identity">
                 <xs:annotation>
                     <xs:documentation>Identity transformation.</xs:documentation>
