@@ -1203,7 +1203,7 @@ permissions and limitations under the License.
                     </xs:element>
                     <!-- TEST -->
                     <xs:element name="DeltaTime" minOccurs="0" type="ct:StandardAssignType"/>
-                    <xs:element name="BLQ" minOccurs="0" type="ct:StandardAssignType"/>
+                    <xs:element name="BQL" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="UQL" minOccurs="0" type="ct:StandardAssignType"/>
                     <!-- /TEST -->
                     <xs:choice minOccurs="0">
