@@ -994,6 +994,7 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
+    <!-- TEST -->
     <xs:complexType name="GeneralObsError">
         <xs:annotation>
             <xs:documentation>The general and distribution tyeps of observation errors.
@@ -1013,31 +1014,30 @@ permissions and limitations under the License.
                                 to variance/stdev as defined when using the distribution.</xs:documentation>
                         </xs:annotation>
                     </xs:element> 
+                    <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
+                        <xs:annotation>
+                            <xs:documentation>Defines a left-hand-side transformation.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:choice>
                         <xs:element ref="ct:Assign">
                             <xs:annotation>
                                 <xs:documentation>This assignment defines the RHS of the residual error.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="LHSTransformation" type="mdef:LHSTransformationType">
-                                <xs:annotation>
-                                    <xs:documentation>Defines a left-hand-side transformation.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element name="Distribution" type="mdef:DistributionType">
-                                <xs:annotation>
-                                    <xs:documentation>
-                                        Definition using a distribution.
-                                    </xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                        </xs:sequence>
+                        <xs:element name="Distribution" type="mdef:DistributionType">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Definition using a distribution.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
                     </xs:choice>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
         
     <xs:complexType abstract="true" name="CommonParameterType">
         <xs:annotation>
