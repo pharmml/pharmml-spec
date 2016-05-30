@@ -619,6 +619,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="DiffVariable" minOccurs="0" type="math:DiffVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Differentiation variable for the condition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="InitialValue" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>The initial value of the ODE</xs:documentation>
@@ -664,6 +671,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
+                    <!-- TEST -->
+                    <xs:element name="DiffVariable" minOccurs="0" type="math:DiffVariableType">
+                        <xs:annotation>
+                            <xs:documentation>Differentiation variable for the condition.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="BoundaryValue" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>The boundary value condition equation.</xs:documentation>
