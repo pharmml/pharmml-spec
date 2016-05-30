@@ -59,6 +59,7 @@ permissions and limitations under the License.
             <xs:enumeration value="pdeElliptic"/>
             <xs:enumeration value="pdeHyperbolic"/>
             <xs:enumeration value="pdeParabolic"/>
+            <xs:enumeration value="pdeMixed"/>
         </xs:restriction>
     </xs:simpleType>
     

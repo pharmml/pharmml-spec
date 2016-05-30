@@ -441,7 +441,7 @@ permissions and limitations under the License.
                     <xs:element name="Degree" minOccurs="0" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>Total degree of the operator - must be positive and
-                            equals the sum of all partial differentation variable degrees.</xs:documentation>
+                                equals the sum of all partial differentiation variable degrees.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="DiffVariable" minOccurs="0" maxOccurs="unbounded" type="math:DiffVariableType">
