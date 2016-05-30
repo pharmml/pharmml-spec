@@ -1676,7 +1676,7 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="BoundaryCondition" type="ct:BoundaryConditionType">
                         <xs:annotation>
-                            <xs:documentation>The definition of the initial condition.</xs:documentation>
+                            <xs:documentation>The definition of the boundary condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
