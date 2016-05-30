@@ -34,6 +34,19 @@ permissions and limitations under the License.
     <!--
         Simple Types
       -->
+    <xs:simpleType name="BCType">
+        <xs:annotation>
+            <xs:documentation>Defines the boundary condition type attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="Cauchy"/>
+            <xs:enumeration value="Dirichlet"/>
+            <xs:enumeration value="Neumann"/>
+            <xs:enumeration value="Robin"/>
+            <xs:enumeration value="Mixed"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="DEType">
         <xs:annotation>
             <xs:documentation>Defines the transition matrix type attribute.</xs:documentation>
@@ -659,6 +672,9 @@ permissions and limitations under the License.
                     <xs:element name="RHS" type="math:ExprType"/>-->
                     <xs:element ref="ct:AssignStatement"/>
                 </xs:sequence>
+                <!-- TEST -->
+                <xs:attribute name="type" type="ct:BCType" use="optional"/>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
