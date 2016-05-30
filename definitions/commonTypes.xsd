@@ -34,6 +34,21 @@ permissions and limitations under the License.
     <!--
         Simple Types
       -->
+    <xs:simpleType name="DEType">
+        <xs:annotation>
+            <xs:documentation>Defines the transition matrix type attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ode"/>
+            <xs:enumeration value="odeStiff"/>
+            <xs:enumeration value="odeLinear"/>
+            <xs:enumeration value="pde"/>
+            <xs:enumeration value="pdeElliptic"/>
+            <xs:enumeration value="pdeHyperbolic"/>
+            <xs:enumeration value="pdeParabolic"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="TransitionMatrixAttrType">
         <xs:annotation>
             <xs:documentation>Defines the transition matrix type attribute.</xs:documentation>
@@ -1654,6 +1669,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
+                <!-- TEST -->
+                <xs:attribute name="type" type="ct:DEType" use="optional"/>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
