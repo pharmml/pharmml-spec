@@ -449,9 +449,9 @@ permissions and limitations under the License.
                             <xs:documentation>Differentiation variables and their order.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PartDiffOpArgument" type="ct:StandardAssignType">
+                    <xs:element name="DiffOpArgument" type="ct:StandardAssignType">
                         <xs:annotation>
-                            <xs:documentation>Argument of the differentiation operator.</xs:documentation>
+                            <xs:documentation>Argument   of the differentiation operator.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
