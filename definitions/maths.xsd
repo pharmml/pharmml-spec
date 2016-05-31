@@ -494,6 +494,9 @@ permissions and limitations under the License.
                 <xs:restriction base="xs:Name">
                     <xs:enumeration value="pi"/>
                     <xs:enumeration value="exponentiale"/>
+                    <!-- TEST -->
+                    <xs:enumeration value="imaginaryi"/>
+                    <!-- /TEST -->
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
