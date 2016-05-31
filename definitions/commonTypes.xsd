@@ -418,13 +418,14 @@ permissions and limitations under the License.
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
                     <!-- TEST -->
-                    <xs:element ref="math:MatrixCalcOp"/>
+                    <xs:element ref="math:VectorCalcOp"/>
                     <!-- /TEST -->
                     <xs:element ref="math:MatrixUniop"/>
                     <xs:element ref="mdef:Probability"/>
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
+                    <xs:element ref="math:Integral"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>

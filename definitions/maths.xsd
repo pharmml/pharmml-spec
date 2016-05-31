@@ -84,6 +84,7 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
+                        <xs:element ref="math:Integral"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice minOccurs="0">
@@ -102,6 +103,7 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
+                        <xs:element ref="math:Integral"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -203,11 +205,12 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
-                        <xs:element ref="math:MatrixCalcOp"/>
+                        <xs:element ref="math:VectorCalcOp"/>
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
+                        <xs:element ref="math:Integral"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
@@ -235,11 +238,12 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
-                        <xs:element ref="math:MatrixCalcOp"/>
+                        <xs:element ref="math:VectorCalcOp"/>
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
+                        <xs:element ref="math:Integral"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -366,10 +370,10 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
-    <xs:complexType name="MatrixCalcOpType">
+    <xs:complexType name="VectorCalcOpType">
         <xs:annotation>
             <xs:documentation>
-                An operator describing a matrix/vecotr calculus operation.
+                An operator describing a vector calculus operation.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -381,7 +385,7 @@ permissions and limitations under the License.
                 </xs:annotation>
                 <xs:attribute name="op" use="required">
                     <xs:annotation>
-                        <xs:documentation>The matrix calculus operators.</xs:documentation>
+                        <xs:documentation>The vector calculus operators.</xs:documentation>
                     </xs:annotation>
                     <xs:simpleType>
                         <xs:restriction base="xs:Name">
@@ -398,6 +402,44 @@ permissions and limitations under the License.
     <!-- /TEST -->
     
 
+    <!-- TEST -->
+    <xs:complexType name="IntegralType">
+        <xs:annotation>
+            <xs:documentation>
+                A type describing integral.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:sequence>
+                        <xs:element name="LowLimit" type="ct:LowUpLimitType">
+                            <xs:annotation>
+                                <xs:documentation>Defining first index in the integral.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="UpLimit" type="ct:LowUpLimitType">
+                            <xs:annotation>
+                                <xs:documentation>Defining last index in the integral.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:element name="IntegrationVariable" minOccurs="0" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>Integration variable.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="IntegralArgument" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>Argument of the integration operator.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    <!-- /TEST -->
+    
     <!-- TEST -->
     <xs:complexType name="DiffOpType">
         <xs:annotation>
@@ -646,7 +688,7 @@ permissions and limitations under the License.
                     <xs:element ref="ct:MatrixSelector"/>
                     <xs:element ref="mdef:Probability"/>
                     <!-- TEST -->
-                    <xs:element ref="math:MatrixCalcOp"/>
+                    <xs:element ref="math:VectorCalcOp"/>
                     <!-- /TEST -->
                     <xs:element ref="math:MatrixUniop"/>
                     <!-- TEST -->
@@ -714,7 +756,7 @@ permissions and limitations under the License.
                         <!-- /TEST -->
                         <xs:element ref="design:Stage"/>
                         <!-- TEST -->
-                        <xs:element ref="math:MatrixCalcOp"/>
+                        <xs:element ref="math:VectorCalcOp"/>
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
@@ -756,7 +798,7 @@ permissions and limitations under the License.
                         <!-- /TEST -->
                         <xs:element ref="design:Stage"/>
                         <!-- TEST -->
-                        <xs:element ref="math:MatrixCalcOp"/>
+                        <xs:element ref="math:VectorCalcOp"/>
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
@@ -813,7 +855,7 @@ permissions and limitations under the License.
                     <xs:element ref="mdef:Probability"/>
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
                     <!-- TEST -->
-                    <xs:element ref="math:MatrixCalcOp"/>
+                    <xs:element ref="math:VectorCalcOp"/>
                     <!-- /TEST -->
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
@@ -893,6 +935,13 @@ permissions and limitations under the License.
     </xs:element>
     <!-- /TEST -->
     <!-- TEST -->
+    <xs:element name="Integral" type="math:IntegralType">
+        <xs:annotation>
+            <xs:documentation>Integral for functions or expressions of a single variable.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    <!-- TEST -->
     <xs:element name="Diff" type="math:DiffOpType">
         <xs:annotation>
             <xs:documentation>Differentiation operator for functions or expressions of a single variable.</xs:documentation>
@@ -967,9 +1016,9 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
-    <xs:element name="MatrixCalcOp" type="math:MatrixCalcOpType">
+    <xs:element name="VectorCalcOp" type="math:VectorCalcOpType">
         <xs:annotation>
-            <xs:documentation>A matrix calculus operator.</xs:documentation>
+            <xs:documentation>A vector calculus operator.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
