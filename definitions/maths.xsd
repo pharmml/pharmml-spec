@@ -401,7 +401,6 @@ permissions and limitations under the License.
     </xs:complexType>
     <!-- /TEST -->
     
-
     <!-- TEST -->
     <xs:complexType name="IntegralType">
         <xs:annotation>
@@ -437,7 +436,7 @@ permissions and limitations under the License.
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>    
+    </xs:complexType>
     <!-- /TEST -->
     
     <!-- TEST -->
@@ -470,7 +469,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     
+    <!-- TEST -->
     <xs:complexType name="PartDiffOpType">
         <xs:annotation>
             <xs:documentation>
@@ -500,7 +501,9 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- /TEST -->
     
+    <!-- TEST -->
     <xs:complexType name="DiffVariableType">
         <xs:annotation>
             <xs:documentation>Partial differentiation variable and its order.</xs:documentation>
