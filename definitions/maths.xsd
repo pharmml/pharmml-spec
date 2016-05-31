@@ -373,7 +373,7 @@ permissions and limitations under the License.
     <xs:complexType name="VectorCalcOpType">
         <xs:annotation>
             <xs:documentation>
-                An operator describing a vector calculus operation.
+                An operator describing a vector differential calculus operation.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -383,6 +383,15 @@ permissions and limitations under the License.
                         Extends the expression which is in effect the operand.
                     </xs:documentation>
                 </xs:annotation>
+                <!-- TEST -->
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="DiffVariables" type="ct:StandardAssignType">
+                        <xs:annotation>
+                            <xs:documentation>Differential variable(s).</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <!-- /TEST -->
                 <xs:attribute name="op" use="required">
                     <xs:annotation>
                         <xs:documentation>The vector calculus operators.</xs:documentation>
