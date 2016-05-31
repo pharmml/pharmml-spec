@@ -454,6 +454,23 @@ permissions and limitations under the License.
     </xs:complexType>
     
     <!-- TEST -->
+    <xs:complexType name="CovariatesReferenceType">
+        <xs:annotation>
+            <xs:documentation>
+                Type defining reference to individual covariates or covariate model(s).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" ref="ct:OidRef"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    
+    <!-- TEST -->
     <xs:complexType name="DesignSpaceReferenceType">
         <xs:annotation>
             <xs:documentation>
@@ -764,6 +781,9 @@ permissions and limitations under the License.
                     <xs:element name="ExternalDataSetReference" minOccurs="0" type="msteps:ExternalDataSetReferenceType"/>
                     <xs:element name="InterventionsReference" minOccurs="0" type="msteps:InterventionsReferenceType"/>
                     <xs:element name="ObservationsReference" minOccurs="0" type="msteps:ObservationsReferenceType"/>
+                    <!-- TEST -->
+                    <xs:element name="CovariatesReference" minOccurs="0" type="msteps:CovariatesReferenceType"/>
+                    <!-- /TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
@@ -1105,6 +1125,9 @@ permissions and limitations under the License.
                     <xs:element name="DesignSpaceReference" minOccurs="0" type="msteps:DesignSpaceReferenceType"/>
                     <xs:element name="InterventionsReference" minOccurs="0" type="msteps:InterventionsReferenceType"/>
                     <xs:element name="ObservationsReference" minOccurs="0" type="msteps:ObservationsReferenceType"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element name="CovariatesReference" minOccurs="0" type="msteps:CovariatesReferenceType"/>
                     <!-- /TEST -->
                     
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
