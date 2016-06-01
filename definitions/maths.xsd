@@ -712,6 +712,7 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
+                    <xs:element ref="math:Integral"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
@@ -779,6 +780,7 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
+                        <xs:element ref="math:Integral"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
@@ -821,6 +823,7 @@ permissions and limitations under the License.
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
+                        <xs:element ref="math:Integral"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -878,6 +881,7 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
+                    <xs:element ref="math:Integral"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
