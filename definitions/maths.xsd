@@ -1044,10 +1044,6 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- /TEST -->
-    <!-- TEST -->
-    <xs:element name="firstElement"/>
-    <xs:element name="lastElement"/>
-    <!-- /TEST -->
     <xs:element name="LogicBinop" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>A logical binary operator used in logical expressions.</xs:documentation>

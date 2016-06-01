@@ -1660,8 +1660,8 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                     <!-- TEST -->
-                    <xs:element ref="math:firstElement"/>
-                    <xs:element ref="math:lastElement"/>
+                    <xs:element minOccurs="0" ref="ct:firstElement"/>
+                    <xs:element minOccurs="0" ref="ct:lastElement"/>
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
@@ -1815,6 +1815,10 @@ permissions and limitations under the License.
             <xs:documentation>Element defines a vector type, scalars and sequences</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!-- TEST -->
+    <xs:element name="firstElement"/>
+    <xs:element name="lastElement"/>
+    <!-- /TEST -->
     
     <xs:element name="Interval" type="ct:IntervalType">
         <xs:annotation>
