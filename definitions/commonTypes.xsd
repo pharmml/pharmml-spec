@@ -1659,6 +1659,10 @@ permissions and limitations under the License.
                         <xs:element name="Segment" minOccurs="0" maxOccurs="unbounded" type="ct:VectorSegmentSelectorType"/>                            
                     </xs:choice>
                     <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:firstElement"/>
+                    <xs:element ref="math:lastElement"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
