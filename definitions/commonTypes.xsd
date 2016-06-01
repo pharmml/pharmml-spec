@@ -1660,8 +1660,8 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                     <!-- TEST -->
-                    <xs:element minOccurs="0" ref="ct:firstElement"/>
-                    <xs:element minOccurs="0" ref="ct:lastElement"/>
+                    <xs:element minOccurs="0" ref="ct:startIndex"/>
+                    <xs:element minOccurs="0" ref="ct:endIndex"/>
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
@@ -1816,8 +1816,8 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     <!-- TEST -->
-    <xs:element name="firstElement"/>
-    <xs:element name="lastElement"/>
+    <xs:element name="startIndex"/>
+    <xs:element name="endIndex"/>
     <!-- /TEST -->
     
     <xs:element name="Interval" type="ct:IntervalType">
