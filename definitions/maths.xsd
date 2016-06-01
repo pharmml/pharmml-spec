@@ -428,12 +428,12 @@ permissions and limitations under the License.
                     <xs:sequence>
                         <xs:element name="LowLimit" minOccurs="0" type="ct:LowUpLimitType">
                             <xs:annotation>
-                                <xs:documentation>Defining first index in the integral.</xs:documentation>
+                                <xs:documentation>Defining llwer limit in the integral.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
                         <xs:element name="UpLimit" minOccurs="0" type="ct:LowUpLimitType">
                             <xs:annotation>
-                                <xs:documentation>Defining last index in the integral.</xs:documentation>
+                                <xs:documentation>Defining uppper limit in the integral.</xs:documentation>
                             </xs:annotation>
                         </xs:element>
                     </xs:sequence>
