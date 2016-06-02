@@ -1668,7 +1668,7 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                     <!-- TEST -->
-<!--                    <xs:element minOccurs="0" ref="ct:EndIndex"/>--> <!-- can do with Tail[LastIndex] -->
+                    <xs:element minOccurs="0" ref="ct:EndIndex"/>
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
