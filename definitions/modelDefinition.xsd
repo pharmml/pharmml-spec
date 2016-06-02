@@ -1542,18 +1542,13 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST from sequence to choice -->
-                <xs:choice>
-                    <xs:element ref="ct:SymbRef">
-                        <xs:annotation>
-                            <xs:documentation>The reference to the Random Variable.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                <!-- TEST -->
+                <xs:sequence>
                     <!-- TEST -->
                     <xs:element ref="ct:Assign"/>
                     <!-- /TEST -->
-                </xs:choice>
-                <!-- /TEST from sequence to choice -->
+                </xs:sequence>
+                <!-- /TEST  -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
