@@ -956,7 +956,18 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <xs:element minOccurs="0" ref="ct:Symbol"/>
                 </xs:sequence>
-                <xs:attributeGroup ref="ct:SymbolDefinitionGroup"/>
+                <!-- TEST -->
+                <xs:attribute name="symbId" type="ct:SymbolIdType">
+                    <xs:annotation>
+                        <xs:documentation>The symbol id for this observation model.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="symbIdRef" type="ct:SymbolIdType">
+                    <xs:annotation>
+                        <xs:documentation>The symbol reference for this observation - used for assignments of previously declared variables.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
