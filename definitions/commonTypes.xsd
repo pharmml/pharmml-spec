@@ -1353,6 +1353,9 @@ permissions and limitations under the License.
                             <xs:documentation>A variable reference.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element ref="ct:EndIndex"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -1665,7 +1668,7 @@ permissions and limitations under the License.
                     </xs:choice>
                     <xs:element name="Tail" minOccurs="0" type="ct:MatrixVectorIndexType"/>
                     <!-- TEST -->
-                    <xs:element minOccurs="0" ref="ct:EndIndex"/>
+<!--                    <xs:element minOccurs="0" ref="ct:EndIndex"/>--> <!-- can do with Tail[LastIndex] -->
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
