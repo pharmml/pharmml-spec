@@ -767,25 +767,23 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST: combination of seq and choice -->
-                <xs:sequence>
-                    <xs:choice maxOccurs="unbounded">
-                        <xs:element name="IndividualCovariates" minOccurs="0" maxOccurs="unbounded" type="design:IndividualCovariatesType">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Defines the covariates of the study.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
-                            type="design:TD_CovariateModelType">
-                            <xs:annotation>
-                                <xs:documentation>A covariate model.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:choice>
-                </xs:sequence>
-                <!-- /TEST: seq and choice -->
+                <!-- TEST -->
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element name="IndividualCovariates" minOccurs="0" maxOccurs="unbounded" type="design:IndividualCovariatesType">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines the covariates of the study.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CovariateModel" maxOccurs="unbounded"
+                        type="design:TD_CovariateModelType">
+                        <xs:annotation>
+                            <xs:documentation>A covariate model.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
