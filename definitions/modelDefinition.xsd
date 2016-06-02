@@ -136,7 +136,7 @@ permissions and limitations under the License.
                 <!-- TEST -->
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" type="ct:StandardAssignType"/>
-                    <xs:element ref="math:FunctionCall"/>
+                    <xs:element minOccurs="0" ref="math:FunctionCall"/>
                 </xs:sequence>
                 <!-- TEST -->
                 <xs:attribute name="type" use="required" type="mdef:transformationType"/>
