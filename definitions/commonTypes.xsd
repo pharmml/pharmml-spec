@@ -1637,7 +1637,12 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
                     <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
-                    <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>
+                    <!-- TEST additional choice -->
+                    <xs:choice>
+                        <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>
+                        <xs:element ref="ct:endIndex"/>
+                    </xs:choice>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
