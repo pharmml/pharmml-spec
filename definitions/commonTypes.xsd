@@ -621,9 +621,10 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element name="DiffVariable" minOccurs="0" type="math:DiffVariableType">
+                    <xs:element name="ConditionVariable" minOccurs="0" type="ct:ConditionVariableType">
                         <xs:annotation>
-                            <xs:documentation>Differentiation variable for the condition.</xs:documentation>
+                            <xs:documentation>Variable for the condition. Defaults to independent 
+                            variable if not specified otherwise.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
@@ -673,9 +674,9 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element name="DiffVariable" minOccurs="0" type="math:DiffVariableType">
+                    <xs:element name="ConditionVariable" minOccurs="0" type="ct:ConditionVariableType">
                         <xs:annotation>
-                            <xs:documentation>Differentiation variable for the condition.</xs:documentation>
+                            <xs:documentation>Variable for the condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
@@ -695,6 +696,25 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
+    
+    <xs:complexType name="ConditionVariableType">
+        <xs:annotation>
+            <xs:documentation>
+                Condition variable type
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:SymbRef">
+                        <xs:annotation>
+                            <xs:documentation>Reference to the condition variabel.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
     
     <xs:complexType name="DelayType">
         <xs:annotation>
