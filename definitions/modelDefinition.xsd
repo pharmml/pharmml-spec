@@ -1614,32 +1614,6 @@ permissions and limitations under the License.
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- TEST based on CovariateTransformationType -->
-    <xs:complexType name="CatCovariateTransformationType">
-        <xs:annotation>
-            <xs:documentation>Type defines how the categorical covariate is transformed.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="TransformedCovariate" type="mdef:TransformedCovariateType">
-                        <xs:annotation>
-                            <xs:documentation>Name of the transformed covariate.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element ref="ct:Assign">
-                        <xs:annotation>
-                            <xs:documentation>
-                                The transformation is defined as an expression that must include 
-                                a reference to the covariate variable, defined by the parent of this element.  
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
     <xs:complexType name="ContinuousCovariateType">
         <xs:annotation>
             <xs:documentation>Type defines a continuous covariate.</xs:documentation>
@@ -1683,13 +1657,6 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Assign" minOccurs="0"/>
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
                     <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
-                    <!-- TEST -->
-                    <xs:element name="Transformation" type="mdef:CatCovariateTransformationType" minOccurs="0" maxOccurs="unbounded">
-                        <xs:annotation>
-                            <xs:documentation>The transformation to be applied on the categorical covariate.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <!-- TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
