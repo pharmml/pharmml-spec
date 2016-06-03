@@ -816,7 +816,9 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ct:CommonVariableDefinitionType">
+            <!-- TEST -->
+            <xs:extension base="ct:PharmMLRootType">
+                <!-- /TEST -->
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="FunctionArgument"
                         type="ct:FuncParameterDefinitionType">
@@ -838,6 +840,7 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
                 <!-- TEST -->
             </xs:extension>
         </xs:complexContent>
@@ -847,7 +850,8 @@ permissions and limitations under the License.
             <xs:documentation>Defines a function argument defintion type. The function argument has a symbol identifier, an optional name and a type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="ct:CommonVariableDefinitionType">
+            <!-- TEST -->
+            <xs:extension base="ct:PharmMLRootType">
                 <!-- TEST optional instead of required -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="optional">
                     <xs:annotation>
@@ -856,6 +860,9 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <!-- /TEST -->
+                <!-- TEST -->
+                <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
                 <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
