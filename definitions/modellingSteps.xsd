@@ -566,6 +566,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
+                <!-- TEST -->
+                <xs:attribute name="tool" type="ct:ToolNameType" use="optional"/>
+                <!-- /TEST -->
                 <xs:attribute name="order" type="xs:int" use="optional">
                     <xs:annotation>
                         <xs:documentation>
@@ -656,6 +659,9 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
+                <!-- TEST -->
+                <xs:attribute name="tool" type="ct:ToolNameType" use="optional"/>
+                <!-- /TEST -->
                 <xs:attribute name="order" type="xs:int" use="optional">
                     <xs:annotation>
                         <xs:documentation>
