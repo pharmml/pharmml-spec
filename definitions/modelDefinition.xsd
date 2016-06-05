@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright 2013 European Molecular Biology Laboratory, Heidelberg,
+Copyright 2013-2016 European Molecular Biology Laboratory, Heidelberg,
 Germany and Novo Nordisk A/S, Bagsvaerd, Denmark.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you
@@ -16,22 +16,22 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->    
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:mdef="http://www.pharmml.org/pharmml/0.8/ModelDefinition"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes"
-    xmlns:math="http://www.pharmml.org/pharmml/0.8/Maths" 
+    xmlns:mdef="http://www.pharmml.org/pharmml/0.9/ModelDefinition"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.9/CommonTypes"
+    xmlns:math="http://www.pharmml.org/pharmml/0.9/Maths" 
     xmlns:distrib="http://www.uncertml.org/3.0"
     xmlns:po="http://www.pharmml.org/probonto/ProbOnto"
-    targetNamespace="http://www.pharmml.org/pharmml/0.8/ModelDefinition" version="0.9"
+    targetNamespace="http://www.pharmml.org/pharmml/0.9/ModelDefinition" version="0.9"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!--
         Imports
         -->
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/CommonTypes"
-        schemaLocation="http://www.pharmml.org/pharmml/0.8/CommonTypes"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/CommonTypes"
+        schemaLocation="http://www.pharmml.org/pharmml/0.9/CommonTypes"/>
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/Maths"
-        schemaLocation="http://www.pharmml.org/pharmml/0.8/Maths"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/0.9/Maths"/>
     
     <xs:import namespace="http://www.uncertml.org/3.0" 
         schemaLocation="http://www.uncertml.org/3.0"/>

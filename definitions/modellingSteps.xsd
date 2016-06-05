@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright 2013 European Molecular Biology Laboratory, Heidelberg,
+Copyright 2013-2016 European Molecular Biology Laboratory, Heidelberg,
 Germany and Novo Nordisk A/S, Bagsvaerd, Denmark.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you
@@ -16,29 +16,29 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->    
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:msteps="http://www.pharmml.org/pharmml/0.8/ModellingSteps"
-    xmlns:math="http://www.pharmml.org/pharmml/0.8/Maths"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.8/CommonTypes"
-    xmlns:ds="http://www.pharmml.org/pharmml/0.8/Dataset"
-    xmlns:design="http://www.pharmml.org/pharmml/0.8/TrialDesign"
-    targetNamespace="http://www.pharmml.org/pharmml/0.8/ModellingSteps" version="0.8.1"
+    xmlns:msteps="http://www.pharmml.org/pharmml/0.9/ModellingSteps"
+    xmlns:math="http://www.pharmml.org/pharmml/0.9/Maths"
+    xmlns:ct="http://www.pharmml.org/pharmml/0.9/CommonTypes"
+    xmlns:ds="http://www.pharmml.org/pharmml/0.9/Dataset"
+    xmlns:design="http://www.pharmml.org/pharmml/0.9/TrialDesign"
+    targetNamespace="http://www.pharmml.org/pharmml/0.9/ModellingSteps" version="0.9"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!-- 
         Imports
         -->
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/CommonTypes"
-        schemaLocation="http://www.pharmml.org/pharmml/0.8/CommonTypes"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/CommonTypes"
+        schemaLocation="http://www.pharmml.org/pharmml/0.9/CommonTypes"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/Maths"
-        schemaLocation="http://www.pharmml.org/pharmml/0.8/Maths"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/0.9/Maths"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/Dataset"
-        schemaLocation="http://www.pharmml.org/pharmml/0.8/Dataset"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/Dataset"
+        schemaLocation="http://www.pharmml.org/pharmml/0.9/Dataset"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.8/TrialDesign"
-        schemaLocation="http://www.pharmml.org/pharmml/0.8/TrialDesign"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/TrialDesign"
+        schemaLocation="http://www.pharmml.org/pharmml/0.9/TrialDesign"/>
 
     <!--
         Simple types
