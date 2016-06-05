@@ -396,7 +396,7 @@ permissions and limitations under the License.
                             <xs:documentation>Differentiation variable(s).</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="Argument" type="ct:StandardAssignType">
+                    <xs:element name="DiffOpArgument" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>Argument of the operator.</xs:documentation>
                         </xs:annotation>
