@@ -82,6 +82,9 @@ permissions and limitations under the License.
                         <xs:element ref="math:Naryop"/>
                         <xs:element ref="math:Statsop"/>
                         <!-- TEST -->
+                        <xs:element ref="math:VectorCalcOp"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
@@ -100,6 +103,9 @@ permissions and limitations under the License.
                         <xs:element ref="math:Statsop"/>
                         <xs:element ref="math:Naryop"/>
                         <xs:element ref="ct:Scalar"/>
+                        <!-- TEST -->
+                        <xs:element ref="math:VectorCalcOp"/>
+                        <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
