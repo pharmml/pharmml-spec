@@ -693,6 +693,9 @@ permissions and limitations under the License.
                     <xs:element ref="ct:CatRef"/>
                     <xs:element ref="ct:OidRef"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="ct:Delay"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:Constant"/>
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
                     <xs:element ref="math:PDF"/>
@@ -788,6 +791,9 @@ permissions and limitations under the License.
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
                         <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element ref="ct:Delay"/>
+                        <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
                         <xs:annotation>
@@ -830,6 +836,9 @@ permissions and limitations under the License.
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
+                        <!-- /TEST -->
+                        <!-- TEST -->
+                        <xs:element ref="ct:Delay"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -888,6 +897,9 @@ permissions and limitations under the License.
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
                     <xs:element ref="math:Integral"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="ct:Delay"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
