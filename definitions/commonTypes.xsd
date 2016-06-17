@@ -1855,6 +1855,13 @@ permissions and limitations under the License.
         Elements
         -->
     <!-- TEST -->
+    <xs:element name="Autocorrelation" type="ct:AutocorrelationType">
+        <xs:annotation>
+            <xs:documentation>Autocorrelation element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    <!-- TEST -->
     <xs:element name="DE" type="ct:DifferentialEquationType">
         <xs:annotation>
             <xs:documentation>

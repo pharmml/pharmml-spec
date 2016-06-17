@@ -305,6 +305,13 @@ permissions and limitations under the License.
                                     <xs:documentation>Defines the correlation between the random effects.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <!-- TEST -->
+                            <xs:element ref="ct:Autocorrelation">
+                                <xs:annotation>
+                                    <xs:documentation>Definition of the autocorrelation model.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <!-- /TEST -->
                         </xs:sequence>
                     </xs:choice>
                 </xs:sequence>
