@@ -33,26 +33,7 @@ permissions and limitations under the License.
     
     <!--
         Simple Types
-      -->
-    <!-- TEST -->
-    <xs:simpleType name="AutoCorrModelType">
-        <xs:annotation>
-            <xs:documentation>Defines autocorrelation model type attribute.</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:token">
-            <xs:enumeration value="independent"/>
-            <xs:enumeration value="unstructured"/>
-            <xs:enumeration value="exchangeable"/>
-            <xs:enumeration value="oneDependent1"/>
-            <xs:enumeration value="oneDependent2"/>
-            <xs:enumeration value="twoDependent"/>
-            <xs:enumeration value="AR1"/>
-            <xs:enumeration value="exponential"/>
-            <xs:enumeration value="gaussian"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <!-- /TEST -->
-    
+      -->    
     <xs:simpleType name="BCType">
         <xs:annotation>
             <xs:documentation>Defines the boundary condition type attribute.</xs:documentation>
@@ -1762,31 +1743,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
-
-    <!-- TEST -->
-    <xs:complexType name="AutocorrelationType">
-        <xs:annotation>
-            <xs:documentation>Autocorrelation type for use wth residual errors.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="ct:PharmMLRootType">
-                <xs:sequence>
-                    <xs:element name="TimeStepNumber" minOccurs="0" type="ct:StandardAssignType">
-                        <xs:annotation>
-                            <xs:documentation>The nmber of time steps.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="Coefficients" minOccurs="0" type="ct:StandardAssignType">
-                        <xs:annotation>
-                            <xs:documentation>The parameters of the model.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                </xs:sequence>
-                <xs:attribute name="type" type="ct:AutoCorrModelType" use="required"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <!-- /TEST -->
     
     <!--
         Attribute Groups
@@ -1854,13 +1810,6 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-    <!-- TEST -->
-    <xs:element name="Autocorrelation" type="ct:AutocorrelationType">
-        <xs:annotation>
-            <xs:documentation>Autocorrelation element.</xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <!-- /TEST -->
     <!-- TEST -->
     <xs:element name="DE" type="ct:DifferentialEquationType">
         <xs:annotation>
