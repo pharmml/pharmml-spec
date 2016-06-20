@@ -21,6 +21,7 @@ permissions and limitations under the License.
     xmlns:distrib="http://www.uncertml.org/3.0"
     xmlns:mdef="http://www.pharmml.org/pharmml/0.9/ModelDefinition"
     xmlns:math="http://www.pharmml.org/pharmml/0.9/Maths"
+    xmlns:design="http://www.pharmml.org/pharmml/0.9/TrialDesign"
     version="0.9" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     
@@ -29,6 +30,9 @@ permissions and limitations under the License.
     
     <xs:import namespace="http://www.pharmml.org/pharmml/0.9/ModelDefinition"
         schemaLocation="http://www.pharmml.org/pharmml/0.9/ModelDefinition"/>
+    
+    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/TrialDesign"
+        schemaLocation="http://www.pharmml.org/pharmml/0.9/TrialDesign"/>
     
     
     <!--
@@ -395,6 +399,15 @@ permissions and limitations under the License.
                     <xs:element ref="ct:SymbRef"/>
                     <!-- TEST -->
                     <xs:element ref="ct:CatRef"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="design:Action"/>
+                    <xs:element ref="design:Combination"/>
+                    <xs:element ref="design:Intervention"/>
+                    <xs:element ref="design:Observation"/>
+                    <xs:element ref="design:Occasion"/>
+                    <xs:element ref="design:StudyArm"/>
+                    <xs:element ref="ct:OidRef"/>
                     <!-- /TEST -->
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Interval"/>

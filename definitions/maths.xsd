@@ -696,6 +696,14 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:element ref="ct:Delay"/>
                     <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="design:Action"/>
+                    <xs:element ref="design:Combination"/>
+                    <xs:element ref="design:Intervention"/>
+                    <xs:element ref="design:Observation"/>
+                    <xs:element ref="design:Occasion"/>
+                    <xs:element ref="design:StudyArm"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:Constant"/>
                     <xs:element name="Realisation" type="mdef:RealisationType"/>
                     <xs:element ref="math:PDF"/>
@@ -779,6 +787,11 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
+                        <xs:element ref="design:Action"/>
+                        <xs:element ref="design:Combination"/>
+                        <xs:element ref="design:Intervention"/>
+                        <xs:element ref="design:Observation"/>
+                        <xs:element ref="design:Occasion"/>
                         <xs:element ref="design:StudyArm"/>
                         <xs:element ref="ct:OidRef"/>
                         <!-- /TEST -->
@@ -825,6 +838,11 @@ permissions and limitations under the License.
                         <xs:element ref="mdef:Probability"/>
                         <xs:element name="Realisation" type="mdef:RealisationType"/>
                         <!-- TEST -->
+                        <xs:element ref="design:Action"/>
+                        <xs:element ref="design:Combination"/>
+                        <xs:element ref="design:Intervention"/>
+                        <xs:element ref="design:Observation"/>
+                        <xs:element ref="design:Occasion"/>
                         <xs:element ref="design:StudyArm"/>
                         <xs:element ref="ct:OidRef"/>
                         <!-- /TEST -->
@@ -900,6 +918,15 @@ permissions and limitations under the License.
                     <!-- /TEST -->
                     <!-- TEST -->
                     <xs:element ref="ct:Delay"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element ref="design:Action"/>
+                    <xs:element ref="design:Combination"/>
+                    <xs:element ref="design:Intervention"/>
+                    <xs:element ref="design:Observation"/>
+                    <xs:element ref="design:Occasion"/>
+                    <xs:element ref="design:StudyArm"/>
+                    <xs:element ref="ct:OidRef"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
