@@ -1530,6 +1530,13 @@ permissions and limitations under the License.
         Elements
         -->
     <!-- TEST -->
+    <xs:element name="Action"/>
+    <xs:element name="Combination"/>
+    <xs:element name="Intervention"/>
+    <xs:element name="Observation"/>
+    <xs:element name="Occasion"/>
+    <!-- /TEST -->
+    <!-- TEST -->
     <xs:element name="StudyArm"/>
     <!-- /TEST -->
     <xs:element name="Stage"/>
