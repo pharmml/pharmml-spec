@@ -1566,14 +1566,16 @@ permissions and limitations under the License.
                         <xs:element ref="ct:Assign"/>
                         <!-- /TEST -->
                     </xs:choice>
-                    <xs:element minOccurs="0" name="Category" type="mdef:CategoricalRelationType">
+                    <!-- TEST -->
+<!--                    <xs:element minOccurs="0" name="Category" type="mdef:CategoricalRelationType">
                         <xs:annotation>
                             <xs:documentation>
                                 Specifies the category value of the covariate that must apply when this fixed effect is to be used in the parameter equation. 
                                 This is equivalent to specifying the following: 1_cov=cat . beta. 
                             </xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <!-- TEST -->
                     <xs:element minOccurs="0" ref="ct:CatRef"/>
                     <!-- /TEST -->
