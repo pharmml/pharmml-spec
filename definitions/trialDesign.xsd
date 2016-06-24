@@ -716,10 +716,10 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <!-- TEST -->
-                    <xs:element name="InterventionRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
+                    <xs:element name="OccasionListRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>
-                                Refers to the intervention describing the dosing regimen being instantiated here. 
+                                Refers to the occasion list(s) defined for alll arms.
                             </xs:documentation>
                         </xs:annotation>
                     </xs:element>
