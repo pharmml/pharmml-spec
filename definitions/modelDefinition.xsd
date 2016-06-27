@@ -43,6 +43,18 @@ permissions and limitations under the License.
         Simple Types
         -->
     <!-- TEST -->
+    <xs:simpleType name="MixtureModelTypeType">
+        <xs:annotation>
+            <xs:documentation>Defines mixture model type attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="wsmm"/>
+            <xs:enumeration value="bsmmSupervised"/>
+            <xs:enumeration value="bsmmUnsupervised"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- /TEST -->
+    <!-- TEST -->
     <xs:simpleType name="AutoCorrModelType">
         <xs:annotation>
             <xs:documentation>Defines autocorrelation model type attribute.</xs:documentation>
@@ -438,16 +450,38 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
                     <xs:element name="StructuralModels" type="mdef:StructuralModelsType"/>
+                    <xs:choice>
+                        <xs:element name="Proportions" type="mdef:ProportionsType"/>
+                        <xs:element name="GroupLabel" type="ct:StandardAssignType"/>
+                        <xs:element name="GroupProbabilities" type="mdef:GroupProbabilitiesType"/>
+                    </xs:choice>
                 </xs:sequence>
+                <xs:attribute name="type" use="optional" type="mdef:MixtureModelTypeType"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="StructuralModelsType">
         <xs:annotation>
-            <xs:documentation>Structural models type</xs:documentation>
+            <xs:documentation>Structural models type.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="Model" type="ct:StandardAssignType"/>
+            <xs:element name="Model" maxOccurs="unbounded" type="ct:StandardAssignType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProportionsType">
+        <xs:annotation>
+            <xs:documentation>Proportions type.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Proportion" maxOccurs="unbounded" type="ct:StandardAssignType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GroupProbabilitiesType">
+        <xs:annotation>
+            <xs:documentation>Group probabilities type.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="GroupProbability" maxOccurs="unbounded" type="ct:StandardAssignType"/>
         </xs:sequence>
     </xs:complexType>
     <!-- /TEST -->
