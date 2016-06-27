@@ -331,6 +331,13 @@ permissions and limitations under the License.
                                 </xs:annotation>
                             </xs:element>
                             <!-- /TEST -->
+                            <!-- TEST -->
+                            <xs:element minOccurs="0" ref="mdef:MixtureModel">
+                                <xs:annotation>
+                                    <xs:documentation>Definition of a mixture of structural models.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <!-- /TEST -->
                         </xs:sequence>
                     </xs:choice>
                 </xs:sequence>
@@ -420,6 +427,28 @@ permissions and limitations under the License.
                 <xs:attribute name="type" type="mdef:AutoCorrModelType" use="required"/>
             </xs:extension>
         </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
+    <!-- TEST -->
+    <xs:complexType name="MixtureModelType">
+        <xs:annotation>
+            <xs:documentation>Mixture model type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element name="StructuralModels" type="mdef:StructuralModelsType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="StructuralModelsType">
+        <xs:annotation>
+            <xs:documentation>Structural models type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Model" type="ct:StandardAssignType"/>
+        </xs:sequence>
     </xs:complexType>
     <!-- /TEST -->
     
@@ -2516,6 +2545,13 @@ permissions and limitations under the License.
     <!--
         Elements 
         -->
+    <!-- TEST -->
+    <xs:element name="MixtureModel" type="mdef:MixtureModelType">
+        <xs:annotation>
+            <xs:documentation>Structural mixture model.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
     <!-- TEST -->
     <xs:element name="Autocorrelation" type="mdef:AutocorrelationType">
         <xs:annotation>
