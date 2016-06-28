@@ -128,9 +128,16 @@ permissions and limitations under the License.
             </xs:enumeration>
             <xs:enumeration value="constant">
                 <xs:annotation>
-                    <xs:documentation>Constant covariate..</xs:documentation>
+                    <xs:documentation>Constant covariate.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+            <!-- TEST -->
+            <xs:enumeration value="latent">
+                <xs:annotation>
+                    <xs:documentation>Latent covariate.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <!-- /TEST -->
         </xs:restriction>
     </xs:simpleType>
     
@@ -495,7 +502,7 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <xs:attribute name="symbId" type="ct:SymbolIdType">
+                <xs:attribute name="symbId" use="required" type="ct:SymbolIdType">
                     <xs:annotation>
                         <xs:documentation>The symbol id used to define the label.</xs:documentation>
                     </xs:annotation>
@@ -858,11 +865,13 @@ permissions and limitations under the License.
                             <xs:documentation>List of categories in the data set.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="CategoryVariable" type="mdef:CommonDiscreteVariableType">
+                    <!-- TEST -->
+                    <xs:element name="CategoryVariable" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the category variable - usually 'y' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="InitialStateVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the initial state - usually 'y_1' or 'yinit' in MLXTRAN.</xs:documentation>
@@ -908,11 +917,13 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="mdef:CommonObservationModelType">
                 <xs:sequence>
-                    <xs:element name="CountVariable" type="mdef:CommonDiscreteVariableType">
+                    <!-- TEST -->
+                    <xs:element name="CountVariable" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the count variable, usually Y.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="NumberCounts" minOccurs="0" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Symbol for the count number - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
@@ -964,12 +975,14 @@ permissions and limitations under the License.
                                 can be defined in the parameter model or as standard parameter in the observation model as well.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="PMF" maxOccurs="unbounded" type="mdef:CountPMFType">
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" ref="mdef:PMF">
                         <xs:annotation>
-                            <xs:documentation>UncertML defined PMF for categories - it can be one of the discrete uni/multi-variate
-                                or categorical uni/multi-variate PMFs as provided by UncertML.</xs:documentation>
+                            <xs:documentation>PMF declaration.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1802,6 +1815,9 @@ permissions and limitations under the License.
                     <!-- /TEST -->
                     <xs:element name="Distribution" minOccurs="0" type="mdef:DistributionType"/>
                     <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
+                    <!-- TEST -->
+                    <xs:element name="NumberOfCategories" minOccurs="0" type="ct:StandardAssignType"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -2606,6 +2622,14 @@ permissions and limitations under the License.
     <!--
         Elements 
         -->
+    <!-- TEST -->
+    <xs:element name="PMF" type="mdef:CountPMFType">
+        <xs:annotation>
+            <xs:documentation>PMF declaration.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <!-- /TEST -->
+    
     <!-- TEST -->
     <xs:element name="MixtureModel" type="mdef:MixtureModelType">
         <xs:annotation>
