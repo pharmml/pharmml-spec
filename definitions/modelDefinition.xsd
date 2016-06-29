@@ -909,12 +909,12 @@ permissions and limitations under the License.
                             <xs:documentation>Name of the count variable, usually Y.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <xs:element name="NumberCounts" minOccurs="0" type="mdef:CommonDiscreteVariableType">
+                    <xs:element name="NumberCounts" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Symbol for the count number - usually 'k' in MLXTRAN and 'DV' in NMTRAN</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="PreviousCountVariable" minOccurs="0" maxOccurs="unbounded" type="mdef:CommonDiscreteVariableType">
                         <xs:annotation>
                             <xs:documentation>Name of the previous count variable - used in models with Markov dependency.</xs:documentation>
@@ -930,7 +930,8 @@ permissions and limitations under the License.
                             <xs:documentation>Type of dependency, discrete or continuous Markov.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="IntensityParameter" minOccurs="0" maxOccurs="unbounded" type="mdef:DiscreteDataParameterType">
+                    <!-- TEST -->
+<!--                    <xs:element name="IntensityParameter" minOccurs="0" maxOccurs="unbounded" type="mdef:DiscreteDataParameterType">
                         <xs:annotation>
                             <xs:documentation>(Optional) Definition of 'Lambda' the Poisson intensity parameter
                                 - can be defined more then once, for Markov dependency. Lambda can be defined
@@ -960,7 +961,8 @@ permissions and limitations under the License.
                             <xs:documentation>(Optional) Definition of mixture probability parameter, usualy 'pi', for PMIX models.
                                 can be defined in the parameter model or as standard parameter in the observation model as well.</xs:documentation>
                         </xs:annotation>
-                    </xs:element>
+                    </xs:element>-->
+                    <!-- /TEST -->
                     <!-- TEST replaced type by ref -->
                     <xs:element maxOccurs="unbounded" ref="mdef:PMF">
                         <xs:annotation>
