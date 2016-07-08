@@ -1142,7 +1142,11 @@ permissions and limitations under the License.
                     <!-- /TEST -->
                     
                     <xs:element name="TargetToolReference" minOccurs="0" type="msteps:TargetToolReferenceType"/>
-                                        
+                    
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:VariableAssignment"/>
+                    <!-- /TEST -->
+                    
                     <xs:element name="ParametersToEstimate" minOccurs="0" type="msteps:ToEstimateType">
                         <xs:annotation>
                             <xs:documentation>Specified the parameters of the model to be estimated.</xs:documentation>
