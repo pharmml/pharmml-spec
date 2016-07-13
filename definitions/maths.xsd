@@ -51,7 +51,7 @@ permissions and limitations under the License.
                     <!-- TEST -->
                     <xs:choice>
                         <xs:element name="Distribution" type="mdef:DistributionType"/>
-                        <xs:element name="UserDefDistribution" type="math:UserDefDistributionType"/>
+<!--                        <xs:element name="UserDefDistribution" type="math:UserDefDistributionType"/>-->
                     </xs:choice>
                     <!-- TEST -->
                     <xs:element minOccurs="0" ref="ct:Assign"/>
@@ -77,6 +77,7 @@ permissions and limitations under the License.
                 <xs:restriction base="ct:SymbolIdType">
                     <xs:enumeration value="CDF"/>
                     <xs:enumeration value="PDF"/>
+                    <xs:enumeration value="PMF"/>
                     <xs:enumeration value="HF"/>
                     <xs:enumeration value="SF"/>
                 </xs:restriction>
@@ -90,7 +91,14 @@ permissions and limitations under the License.
                 Any user-defined distribution is allowed.
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="distFct" type="math:distFctType"/>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="ct:Assign"/>
+                </xs:sequence>
+                <xs:attribute name="type" use="required" type="math:distFctType"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     <!-- /TEST -->
     
