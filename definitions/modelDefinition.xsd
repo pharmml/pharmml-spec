@@ -1515,6 +1515,12 @@ permissions and limitations under the License.
                             <xs:documentation>Defines a piecewise expression - for conditional mapping.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element ref="math:CDF"/>
+                    <xs:element ref="math:PDF"/>
+                    <xs:element ref="math:HF"/>
+                    <xs:element ref="math:SF"/>
+                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
