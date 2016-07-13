@@ -1516,10 +1516,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element ref="math:CDF"/>
-                    <xs:element ref="math:PDF"/>
-                    <xs:element ref="math:HF"/>
-                    <xs:element ref="math:SF"/>
+                    <xs:element name="UserDefDistribution" type="ct:StandardAssignType"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
