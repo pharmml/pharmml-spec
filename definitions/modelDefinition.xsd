@@ -1516,7 +1516,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="UserDefDistribution" type="ct:StandardAssignType"/>
+                    <xs:element name="UserDefDistribution" type="math:UserDefDistributionType"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
