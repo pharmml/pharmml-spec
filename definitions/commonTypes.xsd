@@ -641,11 +641,13 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
-                    <xs:element minOccurs="0" name="InitialValue" type="ct:StandardAssignType">
+                    <!-- TEST -->
+                    <xs:element minOccurs="0" ref="ct:InitialValue">
                         <xs:annotation>
                             <xs:documentation>The initial value of the ODE</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="InitialTime" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>The value of the initial condition time.</xs:documentation>
@@ -1824,6 +1826,12 @@ permissions and limitations under the License.
         Elements
         -->
     <!-- TEST -->
+    <xs:element name="InitialValue" type="ct:StandardAssignType">
+        <xs:annotation>
+            <xs:documentation>Element allowing specification or access to the initial value
+                of a ODE-defined variable.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <xs:element name="DE" type="ct:DifferentialEquationType">
         <xs:annotation>
             <xs:documentation>
