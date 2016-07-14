@@ -820,11 +820,13 @@ permissions and limitations under the License.
                                 inherits its features.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" name="Covariate" type="mdef:CovariateDefinitionType">
+                    <!-- TEST -->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Covariate" type="mdef:CovariateDefinitionType">
                         <xs:annotation>
                             <xs:documentation>Defines a covariate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -1130,6 +1132,12 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
+                    <xs:element name="CovariateModelRef" minOccurs="0" type="ct:CovariateModelRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to a covariate model from which the current model
+                                inherits its features.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
                     <xs:element name="IndividualCovariateRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to individual covariates.</xs:documentation>
