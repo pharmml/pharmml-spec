@@ -516,6 +516,13 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
+                    <xs:element name="IndividualCovariateRef" minOccurs="0" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to individual covariates.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
+                    <!-- TEST -->
                     <xs:element name="CovariateModelRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to a covariate model.</xs:documentation>
@@ -1122,6 +1129,13 @@ permissions and limitations under the License.
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
+                    <!-- TEST -->
+                    <xs:element name="IndividualCovariateRef" minOccurs="0" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to individual covariates.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!-- /TEST -->
                     <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="CostFunction" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="NumberArms" minOccurs="0" type="ct:StandardAssignType"/>
