@@ -516,7 +516,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="IndividualCovariateRef" minOccurs="0" type="ct:OidRefType">
+                    <xs:element name="IndividualCovariatesRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to individual covariates.</xs:documentation>
                         </xs:annotation>
@@ -1138,7 +1138,7 @@ permissions and limitations under the License.
                                 inherits its features.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <xs:element name="IndividualCovariateRef" minOccurs="0" type="ct:OidRefType">
+                    <xs:element name="IndividualCovariatesRef" minOccurs="0" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to individual covariates.</xs:documentation>
                         </xs:annotation>
