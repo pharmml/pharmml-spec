@@ -1829,7 +1829,7 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element ref="ct:AssignStatement"/>
+                    <xs:element ref="math:LogicBinop"/>
                 </xs:sequence>
                 <xs:attribute name="type" use="required">
                     <xs:annotation>
