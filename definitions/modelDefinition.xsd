@@ -1814,10 +1814,38 @@ permissions and limitations under the License.
                     </xs:element>
                     <xs:element ref="ct:Interpolation" minOccurs="0"/>
                     <xs:element ref="ct:Assign" minOccurs="0"/>
+                    <!-- TEST -->
+                    <xs:element name="Criteria" minOccurs="0" maxOccurs="unbounded" type="mdef:CovariateCriteriaType"/>
+                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- TEST -->
+    <xs:complexType name="CovariateCriteriaType">
+        <xs:annotation>
+            <xs:documentation>General covariate criteria declaration type.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ct:PharmMLRootType">
+                <xs:sequence>
+                    <xs:element ref="ct:AssignStatement"/>
+                </xs:sequence>
+                <xs:attribute name="type" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Exclusive or inclusive criterium type attribute.</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:Name">
+                            <xs:enumeration value="exclusive"/>
+                            <xs:enumeration value="inclusive"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <!-- /TEST -->
     <xs:complexType name="CategoricalCovariateType">
         <xs:annotation>
             <xs:documentation>
@@ -1845,6 +1873,9 @@ permissions and limitations under the License.
                     <xs:element name="Realisation" minOccurs="0" type="mdef:RealisationType"/>
                     <!-- TEST -->
                     <xs:element name="NumberOfCategories" minOccurs="0" type="ct:StandardAssignType"/>
+                    <!-- /TEST -->
+                    <!-- TEST -->
+                    <xs:element name="Criteria" minOccurs="0" maxOccurs="unbounded" type="mdef:CovariateCriteriaType"/>
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
