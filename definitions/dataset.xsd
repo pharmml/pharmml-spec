@@ -667,6 +667,12 @@ permissions and limitations under the License.
                     <xs:enumeration value="censoring"/>
                     <xs:enumeration value="cmt"/>
                     <xs:enumeration value="covariate"/>
+                    <!-- TEST -->
+                    <xs:enumeration value="date"/>
+                    <xs:enumeration value="dat1"/>
+                    <xs:enumeration value="dat2"/>
+                    <xs:enumeration value="dat3"/>
+                    <!-- /TEST -->
                     <xs:enumeration value="dose"/>
                     <xs:enumeration value="duration"/>
                     <xs:enumeration value="dv"/>
@@ -688,6 +694,9 @@ permissions and limitations under the License.
                     <xs:enumeration value="time"/>
                     <xs:enumeration value="undefined"/>
                     <xs:enumeration value="varLevel"/>
+                    <!-- TEST -->
+                    <xs:enumeration value="ytype"/>
+                    <!-- /TEST -->
                     <!-- SO related -->
                     <xs:enumeration value="indivParameter"/>
                     <xs:enumeration value="popParameter"/>
