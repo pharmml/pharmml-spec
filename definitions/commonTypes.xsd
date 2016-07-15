@@ -439,6 +439,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
                     <xs:element ref="math:Integral"/>
+                    <xs:element ref="ct:InitialValue"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>

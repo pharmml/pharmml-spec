@@ -90,6 +90,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
+                        <xs:element ref="ct:InitialValue"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice minOccurs="0">
@@ -112,6 +113,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
+                        <xs:element ref="ct:InitialValue"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -219,6 +221,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
+                        <xs:element ref="ct:InitialValue"/>
                         <!-- /TEST -->
                     </xs:choice>
                     <xs:choice>
@@ -252,6 +255,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
+                        <xs:element ref="ct:InitialValue"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
@@ -732,6 +736,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
                     <xs:element ref="math:Integral"/>
+                    <xs:element ref="ct:InitialValue"/>
                     <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
@@ -805,6 +810,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
+                        <xs:element ref="ct:InitialValue"/>
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="ct:Delay"/>
@@ -856,6 +862,7 @@ permissions and limitations under the License.
                         <xs:element ref="math:Diff"/>
                         <xs:element ref="math:PartialDiff"/>
                         <xs:element ref="math:Integral"/>
+                        <xs:element ref="ct:InitialValue"/>
                         <!-- /TEST -->
                         <!-- TEST -->
                         <xs:element ref="ct:Delay"/>
@@ -917,6 +924,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
                     <xs:element ref="math:Integral"/>
+                    <xs:element ref="ct:InitialValue"/>
                     <!-- /TEST -->
                     <!-- TEST -->
                     <xs:element ref="ct:Delay"/>
