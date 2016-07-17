@@ -295,14 +295,13 @@ permissions and limitations under the License.
                     <xs:element minOccurs="0" ref="ct:Name"/>
                     <xs:choice maxOccurs="unbounded">
                         <xs:sequence>
-                            <!-- TEST -->
-                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="math:ConditionalStatement"/>
+                            <!-- TEST maxOccurs="unbounded" removed -->
+                            <xs:element minOccurs="0" ref="math:ConditionalStatement"/>
                             <!-- /TEST -->
 <!--                            <xs:element minOccurs="0" name="ConditionalStatement" type="math:ConditionalStatementType"/>-->                            <!-- TEST -->
-                            <xs:element maxOccurs="unbounded" minOccurs="0"
-                                ref="mdef:CommonParameterElement"/>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="Correlation"
+                            <xs:element minOccurs="0" ref="mdef:CommonParameterElement"/>
+                            <xs:element minOccurs="0" ref="ct:AssignStatement"/>
+                            <xs:element minOccurs="0" name="Correlation"
                                 type="mdef:CorrelationType">
                                 <xs:annotation>
                                     <xs:documentation>Defines the correlation between the random effects.</xs:documentation>
@@ -1685,18 +1684,6 @@ permissions and limitations under the License.
                 <xs:sequence>
                     <!-- TEST -->
                     <xs:element ref="ct:Assign"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
-<!--                    <xs:element minOccurs="0" name="Category" type="mdef:CategoricalRelationType">
-                        <xs:annotation>
-                            <xs:documentation>
-                                Specifies the category value of the covariate that must apply when this fixed effect is to be used in the parameter equation. 
-                                This is equivalent to specifying the following: 1_cov=cat . beta. 
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>-->
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element minOccurs="0" ref="ct:CatRef"/>
                     <!-- /TEST -->
                 </xs:sequence>

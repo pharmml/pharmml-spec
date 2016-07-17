@@ -650,7 +650,7 @@ permissions and limitations under the License.
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="ct:AssignStatement"/>
                         <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:CommonParameterElement"/>
                         <!-- TEST -->
-                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="mdef:ObservationError"/>
+                        <xs:element minOccurs="0" ref="mdef:ObservationError"/>
                         <!-- /TEST -->
                     </xs:choice>
                 </xs:sequence>
