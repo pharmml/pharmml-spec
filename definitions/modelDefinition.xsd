@@ -378,13 +378,12 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" ref="ct:SymbRef">
+                    <!-- TEST -->
+                    <xs:element ref="ct:Assign">
                         <xs:annotation>
-                            <xs:documentation>Reference to the random variable.</xs:documentation>
+                            <xs:documentation>Reference to the (transformed) random variable.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
-                    <xs:element minOccurs="0" ref="ct:Assign"/>
                     <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
