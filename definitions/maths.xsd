@@ -198,6 +198,7 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:choice>
                     <xs:element ref="ct:MatrixSelector"/>
+                    <xs:element ref="ct:OidRef"/>
                     <xs:element ref="ct:SymbRef"/>
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Vector"/>
