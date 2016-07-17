@@ -784,7 +784,8 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <!-- TEST -->
-                <xs:choice maxOccurs="unbounded">
+                <!-- maxOccurs="unbounded" removed - TEST -->
+                <xs:choice>
                     <xs:element name="IndividualCovariates" minOccurs="0" maxOccurs="unbounded" type="design:IndividualCovariatesType">
                         <xs:annotation>
                             <xs:documentation>
