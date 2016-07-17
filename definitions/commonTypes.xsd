@@ -421,6 +421,9 @@ permissions and limitations under the License.
                     <xs:element ref="math:SF"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
+                    <!-- TEST -->
+                    <xs:element ref="math:ArrayDim"/>
+                    <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:Piecewise"/>
