@@ -516,14 +516,14 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="IndividualCovariatesRef" minOccurs="0" type="ct:OidRefType">
+                    <xs:element name="IndividualCovariatesRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to individual covariates.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
                     <!-- TEST -->
-                    <xs:element name="CovariateModelRef" minOccurs="0" type="ct:OidRefType">
+                    <xs:element name="CovariateModelRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to a covariate model.</xs:documentation>
                         </xs:annotation>
@@ -1133,15 +1133,15 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <!-- TEST -->
-                    <xs:element name="CovariateModelRef" minOccurs="0" type="ct:CovariateModelRefType">
+                    <xs:element name="IndividualCovariatesRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
+                        <xs:annotation>
+                            <xs:documentation>Reference to individual covariates.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="CovariateModelRef" minOccurs="0" maxOccurs="unbounded" type="ct:CovariateModelRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to a covariate model from which the current model
                                 inherits its features.</xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
-                    <xs:element name="IndividualCovariatesRef" minOccurs="0" type="ct:OidRefType">
-                        <xs:annotation>
-                            <xs:documentation>Reference to individual covariates.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <!-- /TEST -->
@@ -1267,7 +1267,7 @@ permissions and limitations under the License.
     <xs:complexType name="ContinuousObservationType">
         <xs:annotation>
             <xs:documentation>
-                Type defining the type of a continuous sampling variable to be simulated.
+                Type defining a continuous variable output.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
