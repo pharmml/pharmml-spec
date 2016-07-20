@@ -7,7 +7,7 @@ Specification for PharmML: Pharmacometrics Markup Language
 
 README.md - this file
 
-ChangeLog - see "Pharmacometrics Markup Language (PharmML), Language Specification for Version 0.6" on pharmml.org website
+ChangeLog - change log file
 
 trialDesign.xsd - Defines the trial design section
 

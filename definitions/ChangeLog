@@ -32,4 +32,18 @@ in the PMF element of the count data block.
 - N-ary operators
 - Statistical operators
 - SimpleParameter restored
-- 
+
+0.9 - 20th July 2016
+- Mixture models 
+* mixtures of distributions
+* mixtures of structural models (wsmm, bsmm)
+- New DE notation - encodable are ODEs, DDEs & PDEs with boundary and initial conditions
+- Autocorrelation models of residual errors
+- BoxCox2 & user-defined transformations
+- User-defined distributions
+- Updated covariates, occasions and design spaces handling in TD
+- Exclusion and inclusion criteria for covariates
+- Categorical covariates building (clustering)
+- Observation model extensions - multiple models and models in conditionals permitted
+- Tool-specific settings support
+- Other minor extensions
