@@ -367,13 +367,11 @@ permissions and limitations under the License.
                         <xs:documentation>ID referencing a Block.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- TEST -->
                 <xs:attribute name="symbIdRef" type="ct:SymbolIdType">
                     <xs:annotation>
                         <xs:documentation>ID referencing a Symbol.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
                 <xs:attribute name="catIdRef" type="ct:CategoryIdType" use="required">
                     <xs:annotation>
                         <xs:documentation>ID referencing a Category.</xs:documentation>
@@ -397,10 +395,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:Constant"/>
                     <xs:element ref="ct:Scalar"/>
                     <xs:element ref="ct:SymbRef"/>
-                    <!-- TEST -->
                     <xs:element ref="ct:CatRef"/>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element ref="design:Action"/>
                     <xs:element ref="design:Combination"/>
                     <xs:element ref="design:Intervention"/>
@@ -408,7 +403,6 @@ permissions and limitations under the License.
                     <xs:element ref="design:Occasion"/>
                     <xs:element ref="design:StudyArm"/>
                     <xs:element ref="ct:OidRef"/>
-                    <!-- /TEST -->
                     <xs:element ref="ct:Sequence"/>
                     <xs:element ref="ct:Interval"/>
                     <xs:element ref="ct:Vector"/>
@@ -421,9 +415,7 @@ permissions and limitations under the License.
                     <xs:element ref="math:SF"/>
                     <xs:element ref="math:Statsop"/>
                     <xs:element ref="math:Naryop"/>
-                    <!-- TEST -->
                     <xs:element ref="math:ArrayDim"/>
-                    <!-- /TEST -->
                     <xs:element ref="math:Binop"/>
                     <xs:element ref="math:Uniop"/>
                     <xs:element ref="math:Piecewise"/>
@@ -433,17 +425,13 @@ permissions and limitations under the License.
                     <xs:element ref="ct:Delay"/>
                     <xs:element ref="ct:VectorSelector"/>
                     <xs:element ref="ct:MatrixSelector"/>
-                    <!-- TEST -->
                     <xs:element ref="math:VectorCalcOp"/>
-                    <!-- /TEST -->
                     <xs:element ref="math:MatrixUniop"/>
                     <xs:element ref="mdef:Probability"/>
-                    <!-- TEST -->
                     <xs:element ref="math:Diff"/>
                     <xs:element ref="math:PartialDiff"/>
                     <xs:element ref="math:Integral"/>
                     <xs:element ref="ct:InitialValue"/>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -637,21 +625,17 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="ConditionVariable" minOccurs="0" type="ct:ConditionVariableType">
                         <xs:annotation>
                             <xs:documentation>Variable for the condition. Defaults to independent 
                             variable if not specified otherwise.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element minOccurs="0" ref="ct:InitialValue">
                         <xs:annotation>
                             <xs:documentation>The initial value of the ODE</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="InitialTime" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>The value of the initial condition time.</xs:documentation>
@@ -684,7 +668,6 @@ permissions and limitations under the License.
         </xs:complexContent>
     </xs:complexType>
     
-    <!-- TEST -->
     <xs:complexType name="BoundaryConditionType">
         <xs:annotation>
             <xs:documentation>Boundary condition type for DEs</xs:documentation>
@@ -692,29 +675,22 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="ConditionVariable" minOccurs="0" type="ct:ConditionVariableType">
                         <xs:annotation>
                             <xs:documentation>Variable for the condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" name="BoundaryValue" type="ct:StandardAssignType">
                         <xs:annotation>
                             <xs:documentation>The boundary value condition equation.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-<!--                    <xs:element name="LHS" type="math:ExprType"/>
-                    <xs:element name="RHS" type="math:ExprType"/>-->
                     <xs:element ref="ct:AssignStatement"/>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="type" type="ct:BCType" use="optional"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <xs:complexType name="ConditionVariableType">
         <xs:annotation>
@@ -835,9 +811,7 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <!-- TEST -->
             <xs:extension base="ct:PharmMLRootType">
-                <!-- /TEST -->
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="FunctionArgument"
                         type="ct:FuncParameterDefinitionType">
@@ -851,7 +825,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST optional instead of required -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="optional">
                     <xs:annotation>
                         <xs:documentation>
@@ -860,7 +833,6 @@ permissions and limitations under the License.
                     </xs:annotation>
                 </xs:attribute>
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
-                <!-- TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -869,9 +841,7 @@ permissions and limitations under the License.
             <xs:documentation>Defines a function argument defintion type. The function argument has a symbol identifier, an optional name and a type.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <!-- TEST -->
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST optional instead of required -->
                 <xs:attribute name="symbolType" type="ct:SymbolTypeType" use="optional">
                     <xs:annotation>
                         <xs:documentation>
@@ -879,10 +849,7 @@ permissions and limitations under the License.
                         </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <!-- /TEST -->
-                <!-- TEST -->
                 <xs:attribute name="symbId" type="ct:SymbolIdType" use="required"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1399,9 +1366,7 @@ permissions and limitations under the License.
                             <xs:documentation>A variable reference.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element ref="ct:EndIndex"/>
-                    <!-- /TEST -->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -1686,12 +1651,10 @@ permissions and limitations under the License.
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence maxOccurs="unbounded">
                     <xs:element name="StartIndex" type="ct:MatrixVectorIndexType"/>
-                    <!-- TEST additional choice -->
                     <xs:choice>
                         <xs:element name="SegmentLength" type="ct:MatrixVectorIndexType"/>
                         <xs:element ref="ct:EndIndex"/>
                     </xs:choice>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -1726,7 +1689,6 @@ permissions and limitations under the License.
         </xs:annotation>
     </xs:element>
     
-    <!-- TEST -->
     <xs:complexType name="DifferentialEquationType">
         <xs:annotation>
             <xs:documentation>Generic type for DEs</xs:documentation>
@@ -1734,34 +1696,27 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-<!--                    <xs:element name="LHS" type="math:ExprType"/>
-                    <xs:element name="RHS" type="math:ExprType"/>-->
                     <xs:element ref="ct:AssignStatement"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="InitialCondition" type="ct:InitialConditionType">
                         <xs:annotation>
                             <xs:documentation>The definition of the initial condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="BoundaryCondition" type="ct:BoundaryConditionType">
                         <xs:annotation>
                             <xs:documentation>The definition of the boundary condition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="History" type="ct:HistoryType">
                         <xs:annotation>
                             <xs:documentation>The definition of the history for delay differential equations.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attribute name="type" type="ct:DEType" use="optional"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <!-- /TEST -->
     
     <!--
         Attribute Groups
@@ -1829,7 +1784,6 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-    <!-- TEST -->
     <xs:element name="InitialValue" type="ct:StandardAssignType">
         <xs:annotation>
             <xs:documentation>Element allowing specification or access to the initial value
@@ -1843,7 +1797,6 @@ permissions and limitations under the License.
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- /TEST -->
     <xs:element name="AssignStatement" type="math:LogicBinOpType">
         <xs:annotation>
             <xs:documentation>
@@ -1871,9 +1824,7 @@ permissions and limitations under the License.
             <xs:documentation>Element defines a vector type, scalars and sequences</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <!-- TEST -->
     <xs:element name="EndIndex"/>
-    <!-- /TEST -->
     
     <xs:element name="Interval" type="ct:IntervalType">
         <xs:annotation>
