@@ -56,6 +56,7 @@ permissions and limitations under the License.
             <xs:documentation>Defines the transition matrix type attribute.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:token">
+            <xs:enumeration value="dde"/>
             <xs:enumeration value="ode"/>
             <xs:enumeration value="odeStiff"/>
             <xs:enumeration value="odeLinear"/>
