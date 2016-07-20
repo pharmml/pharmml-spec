@@ -515,14 +515,11 @@ permissions and limitations under the License.
                             <xs:documentation>Reference to an amr on which the current arm is based.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="IndividualCovariatesRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to individual covariates.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
-                    <!-- TEST -->
                     <xs:element name="CovariateModelRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to a covariate model.</xs:documentation>
@@ -534,7 +531,6 @@ permissions and limitations under the License.
                             <xs:documentation>An arm specific covariate model.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="NumberSamples" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType"/>
@@ -722,7 +718,6 @@ permissions and limitations under the License.
             </xs:annotation>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:element name="OccasionListRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>
@@ -731,7 +726,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                     <xs:element name="OccasionList" minOccurs="0" maxOccurs="unbounded" type="design:OccasionListType"/>
-                    <!-- /TEST -->
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -783,8 +777,6 @@ permissions and limitations under the License.
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
-                <!-- TEST -->
-                <!-- maxOccurs="unbounded" removed - TEST -->
                 <xs:sequence>
                     <xs:element name="IndividualCovariates" minOccurs="0" maxOccurs="unbounded" type="design:IndividualCovariatesType">
                         <xs:annotation>
@@ -800,7 +792,6 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -821,13 +812,11 @@ permissions and limitations under the License.
                                 inherits its features.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="Covariate" type="mdef:CovariateDefinitionType">
                         <xs:annotation>
                             <xs:documentation>Defines a covariate.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                 </xs:sequence>
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
             </xs:extension>
@@ -1073,7 +1062,6 @@ permissions and limitations under the License.
         <xs:complexContent>
             <xs:extension base="ct:PharmMLRootType">
                 <xs:sequence>
-                    <!-- TEST -->
                     <xs:sequence minOccurs="0">
                         <xs:element name="CovariateModelRef" type="ct:CovariateModelRefType">
                             <xs:annotation>
@@ -1088,7 +1076,6 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:sequence>
-                    <!-- /TEST -->
                     <xs:element minOccurs="0" ref="ct:VariabilityReference">
                         <xs:annotation>
                             <xs:documentation>
@@ -1113,9 +1100,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1132,7 +1117,6 @@ permissions and limitations under the License.
                             <xs:documentation>A parameter definition.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- TEST -->
                     <xs:element name="IndividualCovariatesRef" minOccurs="0" maxOccurs="unbounded" type="ct:OidRefType">
                         <xs:annotation>
                             <xs:documentation>Reference to individual covariates.</xs:documentation>
@@ -1144,7 +1128,6 @@ permissions and limitations under the License.
                                 inherits its features.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- /TEST -->
                     <xs:element name="ArmSize" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="CostFunction" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="NumberArms" minOccurs="0" type="ct:StandardAssignType"/>
@@ -1226,7 +1209,6 @@ permissions and limitations under the License.
                             <xs:documentation>Optoinal reference to an sampling already defined.</xs:documentation>
                         </xs:annotation>
                     </xs:element>
-                    <!-- new choice -->
                     <xs:choice>
                         <xs:element name="NumberTimes" minOccurs="0" type="ct:StandardAssignType"/>
                         <xs:element name="ObservationTimes" minOccurs="0" type="ct:StandardAssignType">
@@ -1237,12 +1219,9 @@ permissions and limitations under the License.
                             </xs:annotation>
                         </xs:element>
                     </xs:choice>
-                    <!-- /new choice -->
-                    <!-- TEST -->
                     <xs:element name="DeltaTime" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="BQL" minOccurs="0" type="ct:StandardAssignType"/>
                     <xs:element name="UQL" minOccurs="0" type="ct:StandardAssignType"/>
-                    <!-- /TEST -->
                     <xs:choice minOccurs="0">
                         <xs:element name="Continuous" type="design:ContinuousObservationType">
                             <xs:annotation>
@@ -1539,9 +1518,7 @@ permissions and limitations under the License.
                         </xs:annotation>
                     </xs:element>
                 </xs:sequence>
-                <!-- TEST -->
                 <xs:attributeGroup ref="ct:OidDefnGroup"/>
-                <!-- /TEST -->
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1565,16 +1542,12 @@ permissions and limitations under the License.
     <!--
         Elements
         -->
-    <!-- TEST -->
     <xs:element name="Action"/>
     <xs:element name="Combination"/>
     <xs:element name="Intervention"/>
     <xs:element name="Observation"/>
     <xs:element name="Occasion"/>
-    <!-- /TEST -->
-    <!-- TEST -->
     <xs:element name="StudyArm"/>
-    <!-- /TEST -->
     <xs:element name="Stage"/>
     <xs:element abstract="true" name="DosingRegimen" type="design:DosingRegimenType">
         <xs:annotation>
