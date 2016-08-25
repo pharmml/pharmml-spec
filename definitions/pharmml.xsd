@@ -16,34 +16,34 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->    
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.pharmml.org/pharmml/0.9/PharmML"
-    xmlns:mml="http://www.pharmml.org/pharmml/0.9/PharmML"
-    xmlns:math="http://www.pharmml.org/pharmml/0.9/Maths" 
+    targetNamespace="http://www.pharmml.org/pharmml/1.0/PharmML"
+    xmlns:mml="http://www.pharmml.org/pharmml/1.0/PharmML"
+    xmlns:math="http://www.pharmml.org/pharmml/1.0/Maths" 
     xmlns:distrib="http://www.uncertml.org/3.0"
     xmlns:po="http://www.pharmml.org/probonto/ProbOnto"
-    xmlns:design="http://www.pharmml.org/pharmml/0.9/TrialDesign"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.9/CommonTypes"
-    xmlns:msteps="http://www.pharmml.org/pharmml/0.9/ModellingSteps"
-    xmlns:mdef="http://www.pharmml.org/pharmml/0.9/ModelDefinition" version="0.9"
+    xmlns:design="http://www.pharmml.org/pharmml/1.0/TrialDesign"
+    xmlns:ct="http://www.pharmml.org/pharmml/1.0/CommonTypes"
+    xmlns:msteps="http://www.pharmml.org/pharmml/1.0/ModellingSteps"
+    xmlns:mdef="http://www.pharmml.org/pharmml/1.0/ModelDefinition" version="1.0"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/Maths"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/Maths"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/Maths"/>
     
     <xs:import namespace="http://www.uncertml.org/3.0" 
         schemaLocation="http://www.uncertml.org/3.0"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/TrialDesign"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/TrialDesign"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/TrialDesign"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/TrialDesign"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/ModellingSteps"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/ModellingSteps"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/ModellingSteps"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/ModellingSteps"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/CommonTypes"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/CommonTypes"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/CommonTypes"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/CommonTypes"/>
 
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/ModelDefinition"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/ModelDefinition"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/ModelDefinition"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/ModelDefinition"/>
     
     <xs:complexType name="IndependentVariableType">
         <xs:annotation>

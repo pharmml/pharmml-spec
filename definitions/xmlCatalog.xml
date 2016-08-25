@@ -2,7 +2,7 @@
       
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
     
-    <system systemId="http://www.pharmml.org/pharmml/0.9/Maths" 
+    <system systemId="http://www.pharmml.org/pharmml/1.0/Maths" 
         uri="maths.xsd"/>
     
     <system
@@ -14,30 +14,30 @@
         systemId="http://www.pharmml.org/probonto/ProbOnto" 
         uri="../../pharmml-probonto/probOnto.xsd"/>
     
-    <system systemId="http://www.pharmml.org/pharmml/0.9/Dataset" 
+    <system systemId="http://www.pharmml.org/pharmml/1.0/Dataset" 
         uri="dataset.xsd"/>
 
     <system
-        systemId="http://www.pharmml.org/pharmml/0.9/PharmML" 
+        systemId="http://www.pharmml.org/pharmml/1.0/PharmML" 
         uri="pharmml.xsd"/>
 
     <uri
-        name="http://www.pharmml.org/pharmml/0.9/PharmML" 
+        name="http://www.pharmml.org/pharmml/1.0/PharmML" 
         uri="pharmml.xsd"/>
     
     <system
-        systemId="http://www.pharmml.org/pharmml/0.9/TrialDesign" 
+        systemId="http://www.pharmml.org/pharmml/1.0/TrialDesign" 
         uri="trialDesign.xsd"/>
 
     <system
-        systemId="http://www.pharmml.org/pharmml/0.9/CommonTypes" 
+        systemId="http://www.pharmml.org/pharmml/1.0/CommonTypes" 
         uri="commonTypes.xsd"/>
     
     <system
-        systemId="http://www.pharmml.org/pharmml/0.9/ModellingSteps"
+        systemId="http://www.pharmml.org/pharmml/1.0/ModellingSteps"
         uri="modellingSteps.xsd"/>
     
-    <system systemId="http://www.pharmml.org/pharmml/0.9/ModelDefinition"
+    <system systemId="http://www.pharmml.org/pharmml/1.0/ModelDefinition"
         uri="modelDefinition.xsd"/>
     
 </catalog>

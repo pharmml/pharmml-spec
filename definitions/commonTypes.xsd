@@ -16,23 +16,23 @@ implied. See the License for the specific language governing
 permissions and limitations under the License.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:ct="http://www.pharmml.org/pharmml/0.9/CommonTypes"
-    targetNamespace="http://www.pharmml.org/pharmml/0.9/CommonTypes"
+    xmlns:ct="http://www.pharmml.org/pharmml/1.0/CommonTypes"
+    targetNamespace="http://www.pharmml.org/pharmml/1.0/CommonTypes"
     xmlns:distrib="http://www.uncertml.org/3.0"
-    xmlns:mdef="http://www.pharmml.org/pharmml/0.9/ModelDefinition"
-    xmlns:math="http://www.pharmml.org/pharmml/0.9/Maths"
-    xmlns:design="http://www.pharmml.org/pharmml/0.9/TrialDesign"
-    version="0.9" 
+    xmlns:mdef="http://www.pharmml.org/pharmml/1.0/ModelDefinition"
+    xmlns:math="http://www.pharmml.org/pharmml/1.0/Maths"
+    xmlns:design="http://www.pharmml.org/pharmml/1.0/TrialDesign"
+    version="1.0" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/Maths"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/Maths"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/Maths"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/Maths"/>
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/ModelDefinition"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/ModelDefinition"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/ModelDefinition"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/ModelDefinition"/>
     
-    <xs:import namespace="http://www.pharmml.org/pharmml/0.9/TrialDesign"
-        schemaLocation="http://www.pharmml.org/pharmml/0.9/TrialDesign"/>
+    <xs:import namespace="http://www.pharmml.org/pharmml/1.0/TrialDesign"
+        schemaLocation="http://www.pharmml.org/pharmml/1.0/TrialDesign"/>
     
     
     <!--

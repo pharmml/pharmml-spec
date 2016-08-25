@@ -47,3 +47,6 @@ in the PMF element of the count data block.
 - Observation model extensions - multiple models and models in conditionals permitted
 - Tool-specific settings support
 - Other minor extensions
+
+1.0 - 25th August 2016
+- Change of namespaces
